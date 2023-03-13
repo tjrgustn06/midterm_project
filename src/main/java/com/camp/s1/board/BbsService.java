@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface BbsService {
 
 	//list
-	//Pager 클래스 구현 후 매개변수로 추가해야함
+	//Pager 
 	public List<BbsDTO> getBoardList() throws Exception; 
 	
 	//insert(add)

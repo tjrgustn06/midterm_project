@@ -7,11 +7,11 @@ public interface BbsDAO {
 	
 	
 	//totalCount
-	//Pager Å¬·¡½º ±¸ÇöÈÄ ¸Å°³º¯¼ö·Î Ãß°¡ÇØ¾ßÇÔ
+	//Pager í´ë˜ìŠ¤ êµ¬í˜„í›„ ë§¤ê°œë³€ìˆ˜ë¡œ ì¶”ê°€í•´ì•¼í•¨
 	public Long getTotalCount() throws Exception;
 	
 	//list
-	//Pager Å¬·¡½º ±¸ÇöÈÄ ¸Å°³º¯¼ö·Î Ãß°¡ÇØ¾ßÇÔ
+	//Pager í´ë˜ìŠ¤ êµ¬í˜„í›„ ë§¤ê°œë³€ìˆ˜ë¡œ ì¶”ê°€í•´ì•¼í•¨
 	public List<BbsDTO> getBoardList() throws Exception;
 	
 	//insert(add)

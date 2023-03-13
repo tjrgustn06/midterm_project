@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface BbsService {
 
 	//list
-	//Pager Å¬·¡½º ±¸Çö ÈÄ ¸Å°³º¯¼ö·Î Ãß°¡ÇØ¾ßÇÔ
+	//Pager í´ë˜ìŠ¤ êµ¬í˜„í›„ ë§¤ê°œë³€ìˆ˜ë¡œ ì¶”ê°€í•´ì•¼í•¨
 	public List<BbsDTO> getBoardList() throws Exception; 
 	
 	//insert(add)

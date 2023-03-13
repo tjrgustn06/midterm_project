@@ -2,16 +2,15 @@ package com.camp.s1.product;
 
 public class ProductDTO {
 	
-	private Double productNum;
+	private Long productNum;
 	private String name;
 	private String contents;
 	private String status;
 	
-	
-	public Double getProductNum() {
+	public Long getProductNum() {
 		return productNum;
 	}
-	public void setProductNum(Double productNum) {
+	public void setProductNum(Long productNum) {
 		this.productNum = productNum;
 	}
 	public String getName() {

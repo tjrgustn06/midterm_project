@@ -20,4 +20,22 @@ public class ProductDAO {
 		return sqlSession.selectList(NAMESPACE+"getProductList");
 	}
 	
+	// Detail 상세페이지 출력
+	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"getProductDetail", productDTO);
+	}
+	
+	// Add 물품 추가
+	public int setProductAdd(ProductDTO productDTO) throws Exception {
+		
+		return sqlSession.insert(NAMESPACE+"setProductAdd", productDTO);
+	}
+	
+	// Update 물품 수정
+	public int setProductUpdate(ProductDTO productDTO) throws Exception {
+		
+		return sqlSession.update(NAMESPACE+"setProductUpdate", productDTO);
+	}
+	
 }

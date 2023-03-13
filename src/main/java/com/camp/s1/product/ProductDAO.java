@@ -38,4 +38,10 @@ public class ProductDAO {
 		return sqlSession.update(NAMESPACE+"setProductUpdate", productDTO);
 	}
 	
+	// Delete 물품 삭제
+	public int setProductDelete(ProductDTO productDTO) throws Exception {
+		
+		return sqlSession.delete(NAMESPACE+"setProductDelete", productDTO);
+	}
+	
 }

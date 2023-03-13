@@ -23,7 +23,7 @@ public class ProductDAOTest extends MyTestCase {
 	@Test
 	public void getProductDetailTest() throws Exception {
 		ProductDTO productDTO = new ProductDTO();
-		productDTO.setProductNum(1L);
+		productDTO.setProductNum(2L);
 		productDTO = productDAO.getProductDetail(productDTO);
 		assertNotNull(productDTO);
 	}
@@ -40,10 +40,18 @@ public class ProductDAOTest extends MyTestCase {
 	@Test
 	public void setProductUpdate() throws Exception {
 		ProductDTO productDTO = new ProductDTO();
-		productDTO.setProductNum(21L);
+		productDTO.setProductNum(2L);
 		productDTO.setName("대형 탠트");
 		productDTO.setContents("어디서든 펼칠수 있는 튼튼한 탠트");
 		int result = productDAO.setProductUpdate(productDTO);
+		assertNotEquals(0, result);
+	}
+	
+	@Test
+	public void setProductDelete() throws Exception {
+		ProductDTO productDTO = new ProductDTO();
+		productDTO.setProductNum(1L);
+		int result = productDAO.setProductDelete(productDTO);
 		assertNotEquals(0, result);
 	}
 	

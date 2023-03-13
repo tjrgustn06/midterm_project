@@ -30,5 +30,9 @@ public class ProductService {
 	public int setProductUpdate(ProductDTO productDTO) throws Exception {
 		return productDAO.setProductUpdate(productDTO);
 	}
+	
+	public int setProductDelete(ProductDTO productDTO) throws Exception {
+		return productDAO.setProductDelete(productDTO);
+	}
 
 }

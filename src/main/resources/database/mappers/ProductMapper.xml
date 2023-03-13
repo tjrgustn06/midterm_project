@@ -32,7 +32,7 @@
   	
   	<!-- Delete 물품 삭제 -->
   	<delete id="setProductDelete" parameterType="ProductDTO">
-  		DELETE 
+  		DELETE PRODUCT WHERE PRODUCTNUM=#{productNum}
   	</delete>
   
   

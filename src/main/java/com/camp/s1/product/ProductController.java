@@ -78,7 +78,8 @@ public class ProductController {
 	@PostMapping("delete")
 	public ModelAndView setProductDelete(ProductDTO productDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		int result = productService.setProductDelete(productDTO);
+		mv.setViewName("redirect:list");
 		return mv;
 	}
 	

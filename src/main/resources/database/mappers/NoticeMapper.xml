@@ -10,5 +10,11 @@
   		SELECT * FROM NOTICE
   		ORDER BY NUM DESC  		
   	</select>
+  	
+  	<insert id="setBoardAdd" parameterType="BbsDTO">
+  		INSERT INTO NOTICE(NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT) 
+  		VALUES (BOARDSEQ.NEXTVAL, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  		
+  	</insert>
   		
   </mapper>

@@ -11,7 +11,6 @@
 		<typeAlias type="com.camp.s1.board.BoardFileDTO" alias="BoardFileDTO"/>
 		
 		<typeAlias type="com.camp.s1.board.notice.NoticeDTO" alias="NoticeDTO"/>
-		<typeAlias type="com.camp.s1.product.ProductDTO" alias="ProductDTO"/>
 		
 		<typeAlias type="com.camp.s1.product.ProductDTO" alias="ProductDTO"/>
 		

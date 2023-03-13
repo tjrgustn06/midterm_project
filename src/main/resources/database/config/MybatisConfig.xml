@@ -4,5 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 
   <configuration>
-
+	<typeAliases>
+		<typeAlias type="com.camp.s1.board.BbsDTO" alias="BbsDTO"/>
+		<typeAlias type="com.camp.s1.board.BoardDTO" alias="BoardDTO"/>
+		<typeAlias type="com.camp.s1.board.FileDTO" alias="FileDTO"/>
+		<typeAlias type="com.camp.s1.board.BoardFileDTO" alias="BoardFileDTO"/>
+		<typeAlias type="com.camp.s1.board.notice.NoticeDTO" alias="NoticeDTO"/>
+		
+		<typeAlias type="java.lang.Long" alias="Long"/>
+	</typeAliases>
   </configuration>

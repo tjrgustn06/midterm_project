@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.camp.s1.MyTestCase;
+import com.camp.s1.util.Pager;
 
 public class CampDAOTest extends MyTestCase{
 	
@@ -18,8 +19,14 @@ public class CampDAOTest extends MyTestCase{
 	//@Test
 	public void getCampListTest() throws Exception{
 		//나중에 페이저 추가되면 페이저까지
+		Pager pager = new Pager();
+		pager.setNum(3L);
 		
-		List<CampDTO> ar = campDAO.getCampList();
+		pager.setKind("name");
+		pager.setSearch("i");
+		pager.makeRow();
+		
+		List<CampDTO> ar = campDAO.getCampList(pager);
 		assertNotEquals(0, ar.size());
 	}
 	

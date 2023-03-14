@@ -10,6 +10,15 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileManager {
 	
+	//File을 HDD에서 삭제
+	public boolean fileDelete(String path, String fileName) throws Exception {
+		//1. 파일 객체 생성
+		File file = new File(path, fileName);
+		
+		//2. 파일 삭제
+		return file.delete();
+	}
+	
 	public String fileSave(MultipartFile multipartFile, String path) throws Exception {
 		//1. 저장경로 매개변수(path) 
 		//resources/upload/notice/...

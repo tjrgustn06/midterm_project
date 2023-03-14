@@ -6,18 +6,34 @@
 
   <mapper namespace="com.camp.s1.board.notice.NoticeDAO">
   	
+  	<sql id="searchCondition">
+  		<where>
+  			<if test="kind == 'title'">
+  				TITLE LIKE '%' || #{search} || '%'
+  			</if>
+  			<if test="kind == 'contents'">
+  				CONTENTS LIKE '%' || #{search} || '%'
+  			</if>
+  		</where>
+  	</sql>
+  	
   	<select id="getBoardList" parameterType="Pager" resultType="NoticeDTO">
   		SELECT * FROM
 			(SELECT ROWNUM R, N.* FROM
 				(SELECT NUM, WRITER, TITLE, REGDATE, HIT FROM NOTICE
+				<include refid="searchCondition"></include>
 				ORDER BY NUM DESC) 
 			N)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}	
   	</select>
   	
   	<insert id="setBoardAdd" parameterType="BbsDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT BOARDSEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  	
   		INSERT INTO NOTICE(NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT) 
-  		VALUES (BOARDSEQ.NEXTVAL, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  		VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
   		
   	</insert>
   	
@@ -38,6 +54,7 @@
   	
   	<select id="getTotalCount" parameterType="Pager" resultType="Long">
   		SELECT COUNT(NUM) FROM NOTICE
+  		<include refid="searchCondition"></include>
 	</select>
 	
 

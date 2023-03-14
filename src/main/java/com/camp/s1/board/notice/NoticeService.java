@@ -12,6 +12,7 @@ import com.camp.s1.board.BbsDTO;
 import com.camp.s1.board.BoardDTO;
 import com.camp.s1.board.BoardFileDTO;
 import com.camp.s1.board.BoardService;
+import com.camp.s1.util.FileManager;
 import com.camp.s1.util.Pager;
 
 @Service
@@ -19,6 +20,9 @@ public class NoticeService implements BoardService {
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
+	
+	@Autowired
+	private FileManager fileManager;
 
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
@@ -40,7 +44,28 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile[] files, HttpSession session) throws Exception {
-		return noticeDAO.setBoardAdd(bbsDTO);
+		int result =  noticeDAO.setBoardAdd(bbsDTO);
+		
+		//file HDD에 저장
+		String realPath = session.getServletContext().getRealPath("resources/upload/notice");
+		
+		System.out.println(realPath);
+		
+		for (MultipartFile multipartFile : files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(multipartFile, realPath);
+			
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setNum(null)
+			
+			noticeDAO.setBoardFileAdd(null);
+		}
+		
+		
+		return result;
 	}
 
 	@Override

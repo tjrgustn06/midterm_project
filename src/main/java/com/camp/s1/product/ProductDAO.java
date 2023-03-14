@@ -23,8 +23,8 @@ public class ProductDAO {
 	}
 	
 	// 총 갯수 출력
-	public Long getProductCount(Pager pager) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"getProductCount", pager);
+	public Long getTotalCount(Pager pager) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
 	}
 	
 	// Detail 상세페이지 출력

@@ -28,8 +28,9 @@
   	</select>
   	
   	<!-- 총 갯수 출력 -->
-  	<select id="getProductCount" parameterType="Pager" resultType="Long">
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
   		SELECT COUNT(PRODUCTNUM) FROM PRODUCT
+  		<include refid="searchCondition"></include>
   	</select>
   	
   	<!-- Detail 상세페이지 출력 -->

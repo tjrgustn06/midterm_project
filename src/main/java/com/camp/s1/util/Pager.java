@@ -105,6 +105,7 @@ public class Pager {
 			this.before=true;
 		}
 		if(curBlock==totalBock) {
+			lastNum=totalPage;
 			this.after=true;
 		}
 		

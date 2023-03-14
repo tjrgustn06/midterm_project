@@ -10,6 +10,7 @@ import com.camp.s1.board.BbsDTO;
 import com.camp.s1.board.BoardDAO;
 import com.camp.s1.board.BoardDTO;
 import com.camp.s1.board.BoardFileDTO;
+import com.camp.s1.util.Pager;
 
 @Repository
 public class NoticeDAO implements BoardDAO{
@@ -20,14 +21,13 @@ public class NoticeDAO implements BoardDAO{
 	private final String NAMESPACE = "com.camp.s1.board.notice.NoticeDAO.";
 
 	@Override
-	public Long getTotalCount() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Long getTotalCount(Pager pager) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getTotalCount", pager);
 	}
 
 	@Override
-	public List<BbsDTO> getBoardList() throws Exception {
-		return sqlSession.selectList(NAMESPACE+"getBoardList");
+	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getBoardList", pager);
 	}
 
 	@Override
@@ -37,8 +37,7 @@ public class NoticeDAO implements BoardDAO{
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE + "setBoardUpdate", bbsDTO);
 	}
 
 	@Override

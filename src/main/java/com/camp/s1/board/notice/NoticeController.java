@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.s1.board.BoardDTO;
+import com.camp.s1.util.Pager;
 
 @Controller
 @RequestMapping(value = "/notice/*")
@@ -25,10 +26,11 @@ public class NoticeController {
 	}
 	
 	@GetMapping("list")
-	public ModelAndView getBoardList() throws Exception{
+	public ModelAndView getBoardList(Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		mv.addObject("list", noticeService.getBoardList());
+		mv.addObject("list", noticeService.getBoardList(pager));
+		mv.addObject("pager", pager);
 		mv.setViewName("/board/list");
 		
 		return mv;
@@ -103,8 +105,18 @@ public class NoticeController {
 	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("board/update");
-		mv.addObject("dto", noticeService.getBoardDetail(noticeDTO));
+		int result = noticeService.setBoardUpdate(noticeDTO, null, session, null);
+			
+		String msg = "수정 실패";
+		if(result > 0) {
+			msg = "수정이 완료되었습니다!";
+		}
+		
+		
+		
+		mv.setViewName("common/result");
+		mv.addObject("result", msg);
+		mv.addObject("url", "./detail?num="+noticeDTO.getNum());
 		return mv;
 	}
 	

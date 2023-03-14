@@ -12,6 +12,7 @@ import com.camp.s1.board.BbsDTO;
 import com.camp.s1.board.BoardDTO;
 import com.camp.s1.board.BoardFileDTO;
 import com.camp.s1.board.BoardService;
+import com.camp.s1.util.Pager;
 
 @Service
 public class NoticeService implements BoardService {
@@ -20,8 +21,21 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 
 	@Override
-	public List<BbsDTO> getBoardList() throws Exception {
-		return noticeDAO.getBoardList();
+	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
+			
+			Long totalCount = noticeDAO.getTotalCount(pager);
+			
+			
+			
+			pager.makeNum(totalCount);
+			
+			
+			pager.makeRow();
+			
+			
+		
+				
+		return noticeDAO.getBoardList(pager);		
 	}
 
 	@Override
@@ -54,8 +68,7 @@ public class NoticeService implements BoardService {
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session, Long[] fileNum)
 			throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return noticeDAO.setBoardUpdate(bbsDTO);
 	}
 	
 	

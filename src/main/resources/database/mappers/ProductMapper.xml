@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.product.ProductDAO">
+  	
+  	<!-- List 출력 -->
+  	<select id="getProductList" resultType="ProductDTO">
+  		SELECT * FROM PRODUCT ORDER BY NAME DESC
+  	</select>
+  	
+  	<!-- Detail 상세페이지 출력 -->
+  	<select id="getProductDetail" parameterType="ProductDTO" resultType="ProductDTO">
+  		SELECT * FROM PRODUCT
+  		WHERE PRODUCTNUM = #{productNum}
+  		
+  	</select>
+  	
+  	<!-- Add 물품 추가 -->
+  	<insert id="setProductAdd" parameterType="ProductDTO">
+  		INSERT INTO PRODUCT
+  		VALUES (PRODUCTSEQ.NEXTVAL, #{name}, #{contents}, '대여가능')
+  	</insert>
+  	
+  	<!-- Update 물품 수정 -->
+  	<update id="setProductUpdate" parameterType="ProductDTO">
+  		UPDATE PRODUCT SET NAME=#{name}, CONTENTS=#{contents}
+  		WHERE PRODUCTNUM=#{productNum}
+  	</update>
+  	
+  	<!-- Delete 물품 삭제 -->
+  	<delete id="setProductDelete" parameterType="ProductDTO">
+  		DELETE PRODUCT WHERE PRODUCTNUM=#{productNum}
+  	</delete>
+  
+  
+  </mapper>

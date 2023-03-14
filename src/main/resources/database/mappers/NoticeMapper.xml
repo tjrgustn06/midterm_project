@@ -6,9 +6,13 @@
 
   <mapper namespace="com.camp.s1.board.notice.NoticeDAO">
   	
-  	<select id="getBoardList" resultType="NoticeDTO">
-  		SELECT * FROM NOTICE
-  		ORDER BY NUM DESC  		
+  	<select id="getBoardList" parameterType="Pager" resultType="NoticeDTO">
+  		SELECT * FROM
+			(SELECT ROWNUM R, N.* FROM
+				(SELECT NUM, WRITER, TITLE, REGDATE, HIT FROM NOTICE
+				ORDER BY NUM DESC) 
+			N)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}	
   	</select>
   	
   	<insert id="setBoardAdd" parameterType="BbsDTO">
@@ -26,5 +30,15 @@
   		DELETE NOTICE
   		WHERE NUM = #{num}
   	</delete>
-  		
+  	
+  	<update id="setBoardUpdate" parameterType="BbsDTO">
+  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}
+  		WHERE NUM = #{num}
+  	</update>
+  	
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(NUM) FROM NOTICE
+	</select>
+	
+
   </mapper>

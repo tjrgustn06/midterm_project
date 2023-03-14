@@ -1,5 +1,7 @@
 package com.camp.s1.board.notice;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,10 +63,50 @@ public class NoticeController {
 		mv.addObject("url", "./list");
 				
 				
-		
-		
 		mv.setViewName("common/result");
 		return mv;
 		
 	}
+	
+	@GetMapping("detail")
+	public ModelAndView getBoardDetail(NoticeDTO noticeDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/board/detail");
+		mv.addObject("dto", noticeService.getBoardDetail(noticeDTO));
+		
+		return mv;
+	}
+	
+	@PostMapping("delete")
+	public ModelAndView setBoardDelete(NoticeDTO noticeDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", noticeService.setBoardDelete(noticeDTO, null));
+		
+		
+		return mv;
+	}
+	
+	@GetMapping("update")
+	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("board/update");
+		mv.addObject("dto", noticeService.getBoardDetail(noticeDTO));
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("board/update");
+		mv.addObject("dto", noticeService.getBoardDetail(noticeDTO));
+		return mv;
+	}
+	
+	
 }

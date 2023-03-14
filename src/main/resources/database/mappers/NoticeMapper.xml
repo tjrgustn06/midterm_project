@@ -16,5 +16,15 @@
   		VALUES (BOARDSEQ.NEXTVAL, #{writer}, #{title}, #{contents}, SYSDATE, 0)
   		
   	</insert>
+  	
+  	<select id="getBoardDetail" parameterType="BoardDTO" resultType="NoticeDTO">  	
+  		SELECT * FROM NOTICE
+  		WHERE NUM = #{num}
+  	</select>
+  	
+  	<delete id="setBoardDelete" parameterType="BbsDTO">
+  		DELETE NOTICE
+  		WHERE NUM = #{num}
+  	</delete>
   		
   </mapper>

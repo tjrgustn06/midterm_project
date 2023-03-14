@@ -6,7 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <c:import url="../template/common_css.jsp"></c:import>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( ".datepicker" ).datepicker();
+  } );
+</script>
 </head>
 <body>
 	<h1>Detail Page</h1>
@@ -19,7 +27,7 @@
 	    			<p>${dto.summary}</p>
 	   			</div>
 				<div class="order-info">
-					<form action="./productOrder">
+					<form action="./productOrder" method="post">
 					<div class="input-group mb-3">
 	  					<div class="input-group-prepend">
 	    					<span class="input-group-text" >주문자 이름</span>
@@ -33,29 +41,31 @@
 						<select class="custom-select">
 			    			<option selected>--옵션을 선택하세요--</option>
 	  					<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
-			    			<option value="1">${detail.dto.gradeName}</option>
+			    			<option value="1">${gradeDTO.gradeName}</option>
 			    		</c:forEach>
 			  			</select>
 					</div>
 			    	<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="inputGroupSelect01">수량</label>
+							<label class="input-group-text" for="inputGroupSelect01">재고</label>
 						</div>
 						<select class="custom-select" id="inputGroupSelect01">
 				    		<option selected>--수량을 선택하세요--</option>
-				    		<option value="1">1개</option>
-				    		<option value="2">2개</option>
-				  			<option value="3">3개</option>
+				    		<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
+				    			<option value="1"></option>
+				    		</c:forEach>
 				  		</select>
 					</div>
-			    	<div class="input-group mb-3">
-				  		<div class="input-group-prepend">
-				    		<span class="input-group-text" >전화번호</span>
-				  		</div>
-			  			<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-			   		</div>
+					<div class="input-group mb-3">
+						<div class="row">
+						<p>사용시작날짜: <input type="text" class="datepicker" name="startDate"></p>
+						</div>
+						<div class="row">
+						<p>사용종료날짜: <input type="text" class="datepicker" name="lastDate"></p>
+						</div>
+					</div>
 					<div>
-						<button type="button" onclick="ok()" class="btn btn-outline-info">주문하기</button>
+						<button type="submit" class="btn btn-outline-info">주문하기</button>
 					</div>
 					</form>
 				</div>

@@ -11,12 +11,12 @@
 <body>
 	<h1>Detail Page</h1>
 	<div class="container-fluid">
-		<c:if test="${not empty detail.productNum}">
+		<c:if test="${not empty dto.productNum}">
 			<div class="row col-6 mx-auto">
 				<img class="card-img-top" src="../resources/images/iuPhoto.jpg" alt="Card image cap">
 	   			<div class="item-line">
-	    			<h1>${detail.name}</h1>
-	    			<p>${detail.summary}</p>
+	    			<h1>${dto.name}</h1>
+	    			<p>${dto.summary}</p>
 	   			</div>
 				<div class="order-info">
 					<form action="./productOrder">
@@ -32,9 +32,9 @@
 	  					</div>
 						<select class="custom-select">
 			    			<option selected>--옵션을 선택하세요--</option>
+	  					<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
 			    			<option value="1">${detail.dto.gradeName}</option>
-			    			<option value="2">B급</option>
-			    			<option value="3">C급</option>
+			    		</c:forEach>
 			  			</select>
 					</div>
 			    	<div class="input-group mb-3">

@@ -1,5 +1,6 @@
 package com.camp.s1.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,16 @@ public class ProductController {
 	public ModelAndView getProductDetail(ProductDTO productDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		productDTO = productService.getProductDetail(productDTO);
+		ArrayList<ProductGradeDTO> ar = new ArrayList<ProductGradeDTO>();
 		ProductGradeDTO productGradeDTO = new ProductGradeDTO();
 		productGradeDTO.setGradeName("A급");
-		mv.addObject("detail", productDTO);
+		ar.add(productGradeDTO);
+		productGradeDTO.setGradeName("B급");
+		ar.add(productGradeDTO);
+		productGradeDTO.setGradeName("C급");
+		ar.add(productGradeDTO);
+		productDTO.setProductGradeDTOs(ar);
+		mv.addObject("dto", productDTO);
 		mv.setViewName("product/detail");
 		
 		return mv;

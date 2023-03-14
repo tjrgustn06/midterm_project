@@ -50,6 +50,7 @@ public class NoticeController {
 	@PostMapping("add")
 	public ModelAndView setBoardAdd(NoticeDTO noticeDTO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+	
 		
 		
 		

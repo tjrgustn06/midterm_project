@@ -51,6 +51,8 @@ public class NoticeService implements BoardService {
 		
 		System.out.println(realPath);
 		
+
+		
 		for (MultipartFile multipartFile : files) {
 			if(multipartFile.isEmpty()) {
 				continue;
@@ -59,9 +61,11 @@ public class NoticeService implements BoardService {
 			String fileName = fileManager.fileSave(multipartFile, realPath);
 			
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
-			boardFileDTO.setNum(null)
+			boardFileDTO.setNum(bbsDTO.getNum());
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
 			
-			noticeDAO.setBoardFileAdd(null);
+			result = noticeDAO.setBoardFileAdd(boardFileDTO);
 		}
 		
 		

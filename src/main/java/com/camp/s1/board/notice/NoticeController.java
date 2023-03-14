@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.camp.s1.board.BoardDTO;
+
 @Controller
 @RequestMapping(value = "/notice/*")
 public class NoticeController {
@@ -36,7 +38,7 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		
 		
-		mv.setViewName("/board/add");
+		mv.setViewName("board/add");
 		return mv;
 		
 	}
@@ -45,16 +47,23 @@ public class NoticeController {
 	public ModelAndView setBoardAdd(NoticeDTO noticeDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("Writer : " + noticeDTO.getWriter());
-		System.out.println("Writer : " + noticeDTO.getTitle());
-		System.out.println("Writer : " + noticeDTO.getContents());
 		
 		
 		int result = noticeService.setBoardAdd(noticeDTO, null, null);
+		
+		String msg = "등록 실패";
+		
+		if(result > 0) {
+			msg =  "등록 성공";
+		}
+		
+		mv.addObject("result", msg);
+		mv.addObject("url", "./list");
+				
 				
 		
 		
-		mv.setViewName("/board/add");
+		mv.setViewName("common/result");
 		return mv;
 		
 	}

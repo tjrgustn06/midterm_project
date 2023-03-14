@@ -25,7 +25,7 @@
 			  	<c:forEach items="${list}" var="dto">
 				    <tr>
 				      <th scope="row">${dto.num}</th>
-				      <td>${dto.title}</td>
+				      <td><a href="./detail?num=${dto.num}">${dto.title}</a></td>
 				      <td>${dto.writer}</td>
 				      <td>${dto.regDate}</td>
 				    </tr>

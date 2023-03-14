@@ -3,9 +3,11 @@ package com.camp.s1.util;
 import java.io.File;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
 public class FileManager {
 	
 	public String fileSave(MultipartFile multipartFile, String path) throws Exception {

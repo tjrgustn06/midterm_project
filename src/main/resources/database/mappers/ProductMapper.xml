@@ -7,8 +7,17 @@
   <mapper namespace="com.camp.s1.product.ProductDAO">
   	
   	<!-- List 출력 -->
-  	<select id="getProductList" resultType="ProductDTO">
-  		SELECT * FROM PRODUCT ORDER BY NAME DESC
+  	<select id="getProductList" parameterType="Pager" resultType="ProductDTO">
+  		SELECT * FROM(
+			SELECT ROWNUM R, P.* FROM(
+				SELECT * FROM PRODUCT ORDER BY NAME DESC
+			) P
+		) WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<!-- 총 갯수 출력 -->
+  	<select id="getProductCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(PRODUCTNUM) FROM PRODUCT
   	</select>
   	
   	<!-- Detail 상세페이지 출력 -->

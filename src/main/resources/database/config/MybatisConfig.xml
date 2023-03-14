@@ -22,6 +22,7 @@
 		<typeAlias type="com.camp.s1.camping.CampSiteDTO" alias="CampSiteDTO"/> -->
 		
 		<typeAlias type="java.lang.Long" alias="Long"/>
+		<typeAlias type="com.camp.s1.util.Pager" alias="Pager"/>
   		
   	</typeAliases>
   </configuration>

@@ -11,6 +11,32 @@
   		SELECT * FROM CAMPINFO ORDER BY CAMPNUM DESC
   	</select>
   
+  	<!-- detail -->
+  	<select id="getCampDetail" resultType="CampDTO" parameterType="CampDTO">
+  		SELECT * FROM CAMPINFO
+  		WHERE CAMPNUM=#{campNum}
+  	</select>
+  
+	<!-- add -->
+	<insert id="setCampAdd" parameterType="CampDTO">
+		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, CONTENTS)
+		VALUES(#{campNum}, #{name}, #{phone}, #{address}, #{contents})
+	</insert>
+	
+	<!-- delete -->
+	<delete id="setCampDelete" parameterType="CampDTO">
+		DELETE CAMPINFO WHERE CAMPNUM=#{campNum}
+	</delete>
+	
+	<!-- update -->
+	<update id="setCampUpdate" parameterType="CampDTO">
+		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}, CONTENTS=#{contents}
+		WHERE CAMPNUM=#{campNum}
+	</update>
+  
   
   
   </mapper>

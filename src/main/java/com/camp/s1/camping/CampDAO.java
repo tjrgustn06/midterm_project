@@ -15,9 +15,31 @@ public class CampDAO {
 	
 	//list
 	public List<CampDTO> getCampList() throws Exception{
-		System.out.println("Dao:"+sqlSession.selectList(NAMESPACE+"getCampList").size());
 		return sqlSession.selectList(NAMESPACE+"getCampList");
 	}
+	
+	//detail
+	public CampDTO getCampDetail(CampDTO campDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCampDetail", campDTO);
+	}
+	
+	//add
+	public int setCampAdd(CampDTO campDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCampAdd", campDTO);
+	}
+	
+	//delete
+	public int setCampDelete(CampDTO campDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setCampDelete", campDTO);
+	}
+	
+	//update
+	public int setCampUpdate(CampDTO campDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setCampUpdate", campDTO);
+	}
+	
+	//site(option)
+	
 	
 	
 }

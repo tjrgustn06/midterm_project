@@ -35,7 +35,9 @@ public class ProductController {
 	public ModelAndView getProductDetail(ProductDTO productDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		productDTO = productService.getProductDetail(productDTO);
-		mv.addObject("dto", productDTO);
+		ProductGradeDTO productGradeDTO = new ProductGradeDTO();
+		productGradeDTO.setGradeName("A급");
+		mv.addObject("detail", productDTO);
 		mv.setViewName("product/detail");
 		
 		return mv;

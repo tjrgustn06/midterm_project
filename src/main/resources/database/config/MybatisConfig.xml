@@ -18,8 +18,8 @@
 		
 		<typeAlias type="com.camp.s1.member.MemberDTO" alias="MemberDTO"/> -->
 		
-		<typeAlias type="com.camp.s1.camping.CampDTO" alias="CampDTO"/>
-		<typeAlias type="com.camp.s1.camping.CampSiteDTO" alias="CampSiteDTO"/>
+<!-- 		<typeAlias type="com.camp.s1.camping.CampDTO" alias="CampDTO"/>
+		<typeAlias type="com.camp.s1.camping.CampSiteDTO" alias="CampSiteDTO"/> -->
 		
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="com.camp.s1.util.Pager" alias="Pager"/>

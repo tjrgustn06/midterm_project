@@ -21,6 +21,7 @@ public class ProductController {
 	// List 출력
 	@GetMapping("list")
 	public ModelAndView getProductList(Pager pager) throws Exception {
+		System.out.println(pager.getNum());
 		ModelAndView mv = new ModelAndView();
 		List<ProductDTO> ar = productService.getProductList(pager);
 		mv.addObject("list", ar);

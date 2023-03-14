@@ -57,5 +57,10 @@
   		<include refid="searchCondition"></include>
 	</select>
 	
+	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+		INSERT INTO NOTICEFILES (FILENUM, NUM, FILENAME, ORINAME) 
+		VALUES(BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
+	
 
   </mapper>

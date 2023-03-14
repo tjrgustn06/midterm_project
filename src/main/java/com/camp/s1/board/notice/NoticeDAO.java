@@ -52,8 +52,7 @@ public class NoticeDAO implements BoardDAO{
 
 	@Override
 	public int setBoardFileAdd(BoardFileDTO boardFileDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE + "setBoardFileAdd", boardFileDTO);
 	}
 
 	@Override

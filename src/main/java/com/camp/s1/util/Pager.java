@@ -7,7 +7,7 @@ public class Pager {
 	// 검색을 위한 num
 	private Long num;
 	
-	// 검색종류(사용할 colunm
+	// 검색종류(사용할 colunm)
 	private String kind;
 	// 검색어
 	private String search;

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.camp.s1.util.Pager;
+
 @Controller
 @RequestMapping("/camp/*")
 public class CampController {
@@ -24,9 +26,9 @@ public class CampController {
 	
 	//list
 	@GetMapping("list")
-	public ModelAndView getCampList() throws Exception{
+	public ModelAndView getCampList(Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<CampDTO> ar = campService.getCampList();
+		List<CampDTO> ar = campService.getCampList(pager);
 		
 		mv.addObject("list", ar);
 		mv.setViewName("camp/list");

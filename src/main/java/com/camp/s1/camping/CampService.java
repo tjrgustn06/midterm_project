@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camp.s1.util.Pager;
+
 @Service
 public class CampService {
 
@@ -12,8 +14,13 @@ public class CampService {
 	private CampDAO campDAO;
 	
 	//list
-	public List<CampDTO> getCampList() throws Exception{
-		List<CampDTO> ar = campDAO.getCampList();
+	public List<CampDTO> getCampList(Pager pager) throws Exception{
+		//pagination
+		pager.makeRow();
+		Long count = campDAO.getTotalCount(pager);
+		pager.makeNum(count);
+		
+		List<CampDTO> ar = campDAO.getCampList(pager);
 		return ar;
 	}
 	

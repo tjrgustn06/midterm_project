@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.camp.s1.util.Pager;
+
 @Repository
 public class CampDAO {
 	
@@ -13,9 +15,14 @@ public class CampDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.camp.s1.camping.CampDAO.";
 	
+	//totalCount
+	public Long getTotalCount(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
+	}
+	
 	//list
-	public List<CampDTO> getCampList() throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getCampList");
+	public List<CampDTO> getCampList(Pager pager) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getCampList", pager);
 	}
 	
 	//detail

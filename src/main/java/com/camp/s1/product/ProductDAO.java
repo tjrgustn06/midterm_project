@@ -33,6 +33,11 @@ public class ProductDAO {
 		return sqlSession.selectOne(NAMESPACE+"getProductDetail", productDTO);
 	}
 	
+	// 상품의 Grade 출력
+	public List<ProductGradeDTO> getProductGrade(ProductDTO productDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getProductGrade", productDTO);
+	}
+	
 	// Add 물품 추가
 	public int setProductAdd(ProductDTO productDTO) throws Exception {
 		

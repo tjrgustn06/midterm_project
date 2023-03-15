@@ -40,6 +40,12 @@
   		
   	</select>
   	
+  	<!--상품에따른 Grade 출력 -->
+  	<select id="getProductGrade" parameterType="productDTO" resultType="productGradeDTO">
+  		SELECT * FROM PRODUCTGRADE WHERE PRODUCTNUM = #{productNum}
+  		ORDER BY GRADENAME ASC
+  	</select>
+  	
   	<!-- Add 물품 추가 -->
   	<insert id="setProductAdd" parameterType="ProductDTO">
   		INSERT INTO PRODUCT

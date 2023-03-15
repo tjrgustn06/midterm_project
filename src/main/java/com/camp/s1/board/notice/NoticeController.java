@@ -109,7 +109,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO, HttpSession session) throws Exception {
+	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO,MultipartFile [] files, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = noticeService.setBoardUpdate(noticeDTO, null, session, null);
@@ -139,8 +139,11 @@ public class NoticeController {
 	}
 	
 	@PostMapping("boardFileDelete")
-	public ModelAndView setBoardFileDelete(BoardFileDTO boardFileDTO) throws Exception {
+	public ModelAndView setBoardFileDelete(Long fileNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("result", noticeService.setBoardFileDelete(fileNum));
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}

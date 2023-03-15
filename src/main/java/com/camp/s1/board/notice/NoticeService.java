@@ -116,6 +116,13 @@ public class NoticeService implements BoardService {
 			throws Exception {
 		return noticeDAO.setBoardUpdate(bbsDTO);
 	}
+
+	@Override
+	public int setBoardFileDelete(Long fileNum) throws Exception {
+		return noticeDAO.setBoardFileDelete(fileNum);
+	}
+	
+	
 	
 	
 	

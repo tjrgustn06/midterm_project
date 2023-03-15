@@ -68,8 +68,7 @@ public class NoticeDAO implements BoardDAO{
 
 	@Override
 	public int setBoardFileDelete(Long fileNum) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE + "setBoardFileDelete", fileNum);
 	}
 	
 	

@@ -13,5 +13,5 @@ public interface BoardService extends BbsService {
 	//update
 	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile [] multipartFiles, HttpSession session, Long [] fileNum) throws Exception;
 	
-
+	public int setBoardFileDelete(Long fileNum) throws Exception;
 }

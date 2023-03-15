@@ -85,6 +85,11 @@
 		WHERE NUM = #{num}
 	</select>
 	
+	<delete id="setBoardFileDelete" parameterType="Long">
+		DELETE NOTICEFILES 
+		WHERE FILENUM = #{fileNum}
+	</delete>
+	
 	
 
   </mapper>

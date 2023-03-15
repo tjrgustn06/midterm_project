@@ -1,5 +1,9 @@
 package com.camp.s1.member;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +56,18 @@ public class MemberService {
 	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
 		return memberDAO.setMemberDelete(memberDTO);
 	}
-	
+
+//비밀 번호 변경
+	public int setmemberPwChange(MemberDTO memberDTO, HttpServletResponse response)throws Exception{
+		String oldPw = new String();
+		
+		PrintWriter out = response.getWriter();
+		
+		//if(oldPw.equals(memberDAO.getMemberLogin(memberDTO.getPw()))) {
+			
+		//}
+		
+		return memberDAO.setMemberUpdate(memberDTO);
+	}
+
 }

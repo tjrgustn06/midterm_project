@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.board.notice.NoticeDAO">
+  	
+  	<sql id="searchCondition">
+  		<where>
+  			<if test="kind == 'title'">
+  				TITLE LIKE '%' || #{search} || '%'
+  			</if>
+  			<if test="kind == 'contents'">
+  				CONTENTS LIKE '%' || #{search} || '%'
+  			</if>
+  		</where>
+  	</sql>
+  	
+  	<select id="getBoardList" parameterType="Pager" resultType="NoticeDTO">
+  		SELECT * FROM
+			(SELECT ROWNUM R, N.* FROM
+				(SELECT NUM, WRITER, TITLE, REGDATE, HIT FROM NOTICE
+				<include refid="searchCondition"></include>
+				ORDER BY NUM DESC) 
+			N)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}	
+  	</select>
+  	
+  	<insert id="setBoardAdd" parameterType="BbsDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT BOARDSEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  	
+  		INSERT INTO NOTICE(NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT) 
+  		VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  		
+  	</insert>
+  	
+  	<select id="getBoardDetail" parameterType="BoardDTO" resultType="NoticeDTO">  	
+  		SELECT * FROM NOTICE
+  		WHERE NUM = #{num}
+  	</select>
+  	
+  	<delete id="setBoardDelete" parameterType="BbsDTO">
+  		DELETE NOTICE
+  		WHERE NUM = #{num}
+  	</delete>
+  	
+  	<update id="setBoardUpdate" parameterType="BbsDTO">
+  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}
+  		WHERE NUM = #{num}
+  	</update>
+  	
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(NUM) FROM NOTICE
+  		<include refid="searchCondition"></include>
+	</select>
+	
+	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+		INSERT INTO NOTICEFILES (FILENUM, NUM, FILENAME, ORINAME) 
+		VALUES(BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
+	
+
+  </mapper>

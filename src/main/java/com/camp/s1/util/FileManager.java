@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileManager {
+	
 	//File을 HDD에서 삭제
 	public boolean fileDelete(String path, String fileName) throws Exception {
 		//1. 파일 객체 생성
@@ -54,5 +55,14 @@ public class FileManager {
 		
 		//저장을 마치고 DB에 저장할 파일이름을 리턴 
 		return name;
+		
+		
+		
+				
+		
+		
+		
+		
+		
 	}
 }

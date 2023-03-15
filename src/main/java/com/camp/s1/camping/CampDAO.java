@@ -30,14 +30,14 @@ public class CampDAO {
 		return sqlSession.selectOne(NAMESPACE+"getCampDetail", campDTO);
 	}
 	
-	//add
-	public int setCampAdd(CampDTO campDTO) throws Exception{
-		return sqlSession.insert(NAMESPACE+"setCampAdd", campDTO);
-	}
-	
 	//delete
 	public int setCampDelete(CampDTO campDTO) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setCampDelete", campDTO);
+	}
+	
+	//add
+	public int setCampAdd(CampDTO campDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCampAdd", campDTO);
 	}
 	
 	//update

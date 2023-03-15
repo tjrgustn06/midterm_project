@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,6 +44,17 @@ public class CampController {
 		
 		mv.addObject("dto", campDTO);
 		mv.setViewName("camp/detail");
+		return mv;
+	}
+	
+	//delete
+	@PostMapping("delete")
+	public ModelAndView setCampDelete(CampDTO campDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = campService.setCampDelete(campDTO);
+		
+		
+		
 		return mv;
 	}
 	

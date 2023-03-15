@@ -29,16 +29,17 @@ public class CampService {
 		return campDAO.getCampDetail(campDTO);
 	}
 	
+	//delete
+	public int setCampDelete(CampDTO campDTO) throws Exception{
+		//나중에 파일추가되면 파일도 삭제하는 기능 필요
+		return campDAO.setCampDelete(campDTO);
+	}
+	
 	//add
 	public int setCampAdd(CampDTO campDTO) throws Exception{
 		return campDAO.setCampAdd(campDTO);
 	}
-	
-	//delete
-	public int setCampDelete(CampDTO campDTO) throws Exception{
-		return campDAO.setCampDelete(campDTO);
-	}
-	
+		
 	//update
 	public int setCampUpdate(CampDTO campDTO) throws Exception{
 		return campDAO.setCampUpdate(campDTO);

@@ -41,7 +41,7 @@
 						<select class="custom-select">
 			    			<option selected>--옵션을 선택하세요--</option>
 	  					<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
-			    			<option value="1">${gradeDTO.gradeName}</option>
+			    			<option value="${gradeDTO.gradeName}">${gradeDTO.gradeName}---남은수량 : ${gradeDTO.gradeStock}</option>
 			    		</c:forEach>
 			  			</select>
 					</div>
@@ -51,9 +51,9 @@
 						</div>
 						<select class="custom-select" id="inputGroupSelect01">
 				    		<option selected>--수량을 선택하세요--</option>
-				    		<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
-				    			<option value="1"></option>
-				    		</c:forEach>
+				    		<option value="1">1개</option>
+				    		<option value="2">2개</option>
+				    		<option value="3">3개</option>
 				  		</select>
 					</div>
 					<div class="input-group mb-3">

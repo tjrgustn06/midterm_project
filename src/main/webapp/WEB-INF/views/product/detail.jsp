@@ -64,11 +64,17 @@
 						<p>사용종료날짜: <input type="text" class="datepicker" name="lastDate"></p>
 						</div>
 					</div>
+					<div class="row">
+						<input type="hidden" name="indexCode" value="2">
+					</div>
 					<div>
 						<button type="submit" class="btn btn-outline-info">주문하기</button>
 					</div>
 					</form>
 				</div>
+			</div>
+			<div class="row col-6 mx-auto">
+				<h1>${dto.contents}</h1>
 			</div>
 		</c:if>
 	</div>

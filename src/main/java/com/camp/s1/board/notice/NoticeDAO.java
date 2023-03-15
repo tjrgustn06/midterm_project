@@ -57,8 +57,7 @@ public class NoticeDAO implements BoardDAO{
 
 	@Override
 	public List<BoardFileDTO> getBoardFileList(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(NAMESPACE + "getBoardFileList", bbsDTO);
 	}
 
 	@Override

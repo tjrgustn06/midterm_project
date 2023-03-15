@@ -36,11 +36,7 @@
   		VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
   		
   	</insert>
-  	
-	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
-		INSERT INTO NOTICEFILES (FILENUM, NUM, FILENAME, ORINAME) 
-		VALUES(BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
-	</insert>
+ 
   	
   	<select id="getBoardDetail" parameterType="BoardDTO" resultMap="NoticeDetailResult">  	
   		SELECT * FROM NOTICE
@@ -77,6 +73,16 @@
   	<select id="getTotalCount" parameterType="Pager" resultType="Long">
   		SELECT COUNT(NUM) FROM NOTICE
   		<include refid="searchCondition"></include>
+	</select>
+	
+	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+		INSERT INTO NOTICEFILES (FILENUM, NUM, FILENAME, ORINAME) 
+		VALUES(BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
+	
+	<select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+		SELECT * FROM NOTICEFILES
+		WHERE NUM = #{num}
 	</select>
 	
 	

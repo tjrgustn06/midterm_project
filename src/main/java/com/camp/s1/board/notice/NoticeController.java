@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.s1.board.BoardDTO;
+import com.camp.s1.board.BoardFileDTO;
 import com.camp.s1.util.Pager;
 
 @Controller
@@ -87,12 +88,12 @@ public class NoticeController {
 	}
 	
 	@PostMapping("delete")
-	public ModelAndView setBoardDelete(NoticeDTO noticeDTO) throws Exception {
+	public ModelAndView setBoardDelete(NoticeDTO noticeDTO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		
 		mv.setViewName("common/ajaxResult");
-		mv.addObject("result", noticeService.setBoardDelete(noticeDTO, null));
+		mv.addObject("result", noticeService.setBoardDelete(noticeDTO, session));
 		
 		
 		return mv;
@@ -123,6 +124,24 @@ public class NoticeController {
 		mv.setViewName("common/result");
 		mv.addObject("result", msg);
 		mv.addObject("url", "./detail?num="+noticeDTO.getNum());
+		return mv;
+	}
+	
+	@GetMapping("fileDown")
+	public ModelAndView getFileDown(BoardFileDTO boardFileDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		mv.setViewName("fileDownView");
+		
+		
+		return mv;
+	}
+	
+	@PostMapping("boardFileDelete")
+	public ModelAndView setBoardFileDelete(BoardFileDTO boardFileDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
 		return mv;
 	}
 	

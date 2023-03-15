@@ -49,6 +49,8 @@ public class NoticeService implements BoardService {
 		//file HDD에 저장
 		String realPath = session.getServletContext().getRealPath("resources/upload/notice");
 		
+		System.out.println(session == null);
+		
 		System.out.println(realPath);
 		
 
@@ -80,7 +82,22 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception {
-		return noticeDAO.setBoardDelete(bbsDTO);
+		
+		
+		List<BoardFileDTO> ar = noticeDAO.getBoardFileList(bbsDTO);
+		int result = noticeDAO.setBoardDelete(bbsDTO);
+	
+		//HDD에서 삭제
+		if(result>0) {
+			String realPath = session.getServletContext().getRealPath("resources/upload/notice");
+				boolean check = false;
+			for (BoardFileDTO boardFileDTO : ar) {
+				check = fileManager.fileDelete(realPath, boardFileDTO.getFileName());
+			}
+			
+		}
+		
+		return result;
 	}
 
 	@Override

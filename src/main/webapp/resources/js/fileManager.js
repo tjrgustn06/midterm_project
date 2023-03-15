@@ -12,6 +12,10 @@ function setMax(m) {
     max = m;
 }
 
+function setCount(c) {
+    count = c;
+}
+
 $('#addBtn').click(function(){
 
     if(count >= max) {
@@ -19,13 +23,12 @@ $('#addBtn').click(function(){
         return;
     }
     child = '<div class="row mb-2" id="d'+idx+'">';
-    child = child + '<label for="" class="col-sm-1 col-form-label">Image</label>';
-    child = child + '<div class="input-group mb-2 col-sm-10">';
+    child = child + '<div class="input-group mb-2 col-sm-">';
     child = child + '<input type="file" class="form-control" name="'+param+'">'
     child = child + '<button class="dels btn btn-outline-danger" type="button" data-delete-id="'+idx+'">X</button>';
     child = child + '</div></div>'
 
-    $('#fileList').append(child);
+    $('#fileList').prepend(child);
 
     idx++;
     count++;
@@ -35,4 +38,31 @@ $('#fileList').on('click', '.dels', function(){
     let fileId = $(this).attr('data-delete-id');
     $('#d'+fileId).remove();
     count--;
+})
+
+$('.deleteCheck').click(function(){
+    let result = confirm("확인 클릭시 복구할 수 없습니다");
+    let ch = $(this);
+
+    if(result) {
+        let fileNum = ch.val();
+
+        $.ajax({
+            type : 'POST',
+            url : './boardFileDelete',
+            data : {
+                fileNum : fileNum
+            },
+            success : function(response){
+                if(response.trim()>0) {
+                    ch.parent().parent().remove();
+                    count--;
+                    alert('삭제되었습니다');
+                }
+            }
+
+            
+
+        })
+    }
 })

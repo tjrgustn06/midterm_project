@@ -35,16 +35,18 @@
 				  </div>
 				</div>
 				
-				<div id="fileList" class="my-5">
-					<button class="btn btn-primary my-3" type="button" id="button" >Add</button>
+				<div id="fileList" class="my-5">					
 					<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
 						<div class="input-group mb-3">
-						  <div class="input-group-text">
-						    <input class="form-check-input mt-0 deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
-						  </div>
-						  <input type="text" disabled value="${fileDTO.oriName}" class="form-control" aria-label="Text input with checkbox">
+						<div class="input-group-text">
+							<input class="form-check-input mt-0 deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+						</div>
+						<input type="text" disabled value="${fileDTO.oriName}" class="form-control" aria-label="Text input with checkbox">
 						</div>
 					</c:forEach>
+					<button class="btn btn-primary col-md-1 offset-md-11 my-2" type="button" id="addBtn" >Add</button>
+
+
 					
 					
 				</div> 
@@ -69,8 +71,8 @@
 	<script>
 		 setMax(5); 
 		 setCount('${dto.boardFileDTOs.size()}');
-		 setParam("addFiles")
-		 $('#contents').summernote();
+		 setParam("files")
+		//  $('#contents').summernote();
 	</script>
 
 	<c:import url="../template/common_js.jsp"></c:import>	

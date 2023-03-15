@@ -36,15 +36,15 @@
 				  </div>
 				</div>
 				
-				<div id="fileList" class="my-5">
-					<!-- <div class="row mb-2" id="d+idx">
-						<label for="" class="col-sm-1 col-form-label">Image</label>
-						<div class="input-group mb-2 col-sm-10">
-							<input type="file" class="form-control" name="param">
-							<button class="dels btn btn-outline-danger" type="button" data-delete-id="idx">X</button>
-						</div>
-					</div>	 -->
-					<button class="btn btn-primary" type="button" id="addBtn">Add</button>
+				<div id="fileList" class="row my-3">
+						<!-- <div class="row mb-2" id="d+idx">
+							<label for="" class="col-sm-1 col-form-label">Image</label>
+							<div class="input-group mb-2 col-sm-10">
+								<input type="file" class="form-control" name="param">
+								<button class="dels btn btn-outline-danger" type="button" data-delete-id="idx">X</button>
+							</div>
+						</div>	 -->
+						<button class="col-md-1 offset-md-11 btn btn-primary" type="button" id="addBtn">Add</button>
 				</div> 
 				
 				

@@ -1,5 +1,8 @@
 package com.camp.s1.board.notice;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,14 +77,45 @@ public class NoticeController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getBoardDetail(NoticeDTO noticeDTO) throws Exception {
+	public ModelAndView getBoardDetail(NoticeDTO noticeDTO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
 		
 		
 		mv.setViewName("/board/detail");
 		mv.addObject("dto", noticeService.getBoardDetail(noticeDTO));
 		
-		noticeDTO = (NoticeDTO)noticeService.getBoardDetail(noticeDTO);
+		//조회수 로직
+		
+		Cookie oldCookie = null;
+		Cookie [] cookies = request.getCookies();
+		
+		if(cookies != null) {
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals("boardView")) {
+					oldCookie = cookie;
+				}
+			}
+		}
+		
+		if(oldCookie != null) {
+			if(!oldCookie.getValue().contains("[" + noticeDTO.getNum() + "]")) {
+				oldCookie.setValue("[" + noticeDTO.getNum() + "]");
+				oldCookie.setMaxAge(60*60*24);
+				oldCookie.setPath("/");
+				noticeService.setBoardHitCount(noticeDTO);
+				response.addCookie(oldCookie);
+			}
+		}
+		else {
+			Cookie newCookie = new Cookie("boardView", "[" + noticeDTO.getNum() + "]");
+			newCookie.setMaxAge(60*60*24);
+			newCookie.setPath("/");
+			noticeService.setBoardHitCount(noticeDTO);
+			response.addCookie(newCookie);
+		}
+		
+		
 		
 		
 		return mv;

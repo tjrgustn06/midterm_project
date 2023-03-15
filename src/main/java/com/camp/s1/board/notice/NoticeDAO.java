@@ -69,6 +69,14 @@ public class NoticeDAO implements BoardDAO{
 	public int setBoardFileDelete(Long fileNum) throws Exception {
 		return sqlSession.delete(NAMESPACE + "setBoardFileDelete", fileNum);
 	}
+
+	@Override
+	public int setBoardHitCount(BoardDTO boardDTO) throws Exception {
+
+		return sqlSession.update(NAMESPACE + "setBoardHitCount", boardDTO);
+	}
+	
+	
 	
 	
 }

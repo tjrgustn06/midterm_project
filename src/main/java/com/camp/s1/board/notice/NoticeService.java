@@ -148,6 +148,13 @@ public class NoticeService implements BoardService {
 	public int setBoardFileDelete(Long fileNum) throws Exception {
 		return noticeDAO.setBoardFileDelete(fileNum);
 	}
+
+	@Override
+	public int setBoardHitCount(BoardDTO boardDTO) throws Exception {
+		return noticeDAO.setBoardHitCount(boardDTO);
+	}
+	
+	
 	
 	
 	

@@ -19,6 +19,7 @@
 			      <th scope="col">글제목</th>
 			      <th scope="col">작성자</th>
 			      <th scope="col">작성일</th>
+			      <th scope="col">조회수</th>
 			    </tr>
 			  </thead>
 			  <tbody class="table-group-divider">
@@ -30,6 +31,7 @@
 						      <td><a href="./detail?num=${dto.num}">${dto.title}</a></td>
 						      <td>${dto.writer}</td>
 						      <td>${dto.regDate}</td>
+						      <td>${dto.hit}</td>
 						    </tr>
 					  	</c:forEach>
 				  	</c:when>

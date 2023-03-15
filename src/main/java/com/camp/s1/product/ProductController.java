@@ -1,5 +1,6 @@
 package com.camp.s1.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.camp.s1.util.Pager;
 
 @Controller
 @RequestMapping("/product/*")
@@ -18,10 +21,11 @@ public class ProductController {
 	
 	// List 출력
 	@GetMapping("list")
-	public ModelAndView getProductList() throws Exception {
+	public ModelAndView getProductList(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<ProductDTO> ar = productService.getProductList();
+		List<ProductDTO> ar = productService.getProductList(pager);
 		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
 		mv.setViewName("product/list");
 		return mv;
 	}
@@ -31,6 +35,17 @@ public class ProductController {
 	public ModelAndView getProductDetail(ProductDTO productDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		productDTO = productService.getProductDetail(productDTO);
+		ArrayList<ProductGradeDTO> ar = new ArrayList<ProductGradeDTO>();
+		ProductGradeDTO productGradeDTO1 = new ProductGradeDTO();
+		productGradeDTO1.setGradeName("A급");
+		ar.add(productGradeDTO1);
+		ProductGradeDTO productGradeDTO2 = new ProductGradeDTO();
+		productGradeDTO2.setGradeName("B급");
+		ar.add(productGradeDTO2);
+		ProductGradeDTO productGradeDTO3 = new ProductGradeDTO();
+		productGradeDTO3.setGradeName("C급");
+		ar.add(productGradeDTO3);
+		productDTO.setProductGradeDTOs(ar);
 		mv.addObject("dto", productDTO);
 		mv.setViewName("product/detail");
 		

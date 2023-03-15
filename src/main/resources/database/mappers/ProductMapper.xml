@@ -5,10 +5,32 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   <mapper namespace="com.camp.s1.product.ProductDAO">
+  
+  	<!-- 검색을 위한 조건 -->
+  	<sql id="searchCondition">
+  		<if test="kind == 'contents'">
+  			WHERE CONTENTS LIKE '%' || #{search} || '%'
+  		</if>
+  		<if test="kind == 'name'">
+  			WHERE NAME LIKE '%' || #{search} || '%'
+  		</if>
+  	</sql>
   	
   	<!-- List 출력 -->
-  	<select id="getProductList" resultType="ProductDTO">
-  		SELECT * FROM PRODUCT ORDER BY NAME DESC
+  	<select id="getProductList" parameterType="Pager" resultType="ProductDTO">
+  		SELECT * FROM(
+			SELECT ROWNUM R, P.* FROM(
+				SELECT * FROM PRODUCT 
+				<include refid="searchCondition"></include>
+				ORDER BY NAME DESC
+			) P
+		) WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<!-- 총 갯수 출력 -->
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(PRODUCTNUM) FROM PRODUCT
+  		<include refid="searchCondition"></include>
   	</select>
   	
   	<!-- Detail 상세페이지 출력 -->

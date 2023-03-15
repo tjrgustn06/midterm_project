@@ -37,14 +37,14 @@
 				</div>
 				
 				<div id="fileList" class="my-5">
-<!-- 					<div class="row mb-3">
-							<label for="files" class="col-sm-1 col-form-label">Image </label>
-							<div class="col-sm-10">
-								<input type="file" class="form-control" name="pic" id="files">
-								<button type="button">X</button>
+					<!-- <div class="row mb-2" id="d+idx">
+						<label for="" class="col-sm-1 col-form-label">Image</label>
+						<div class="input-group mb-2 col-sm-10">
+							<input type="file" class="form-control" name="param">
+							<button class="dels btn btn-outline-danger" type="button" data-delete-id="idx">X</button>
 						</div>
-					</div>   -->
-					<button class="btn btn-primary" type="button" id="button" >Add</button>
+					</div>	 -->
+					<button class="btn btn-primary" type="button" id="addBtn">Add</button>
 				</div> 
 				
 				
@@ -64,7 +64,11 @@
 
 
 
-
+	<script src="../resources/js/fileManager.js"></script>
+	<script>
+		setParam('files');
+		setMax(5);
+	</script>
 	<c:import url="../template/common_js.jsp"></c:import>	
 	
 	

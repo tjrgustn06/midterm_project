@@ -37,10 +37,32 @@
   		
   	</insert>
   	
-  	<select id="getBoardDetail" parameterType="BoardDTO" resultType="NoticeDTO">  	
+	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+		INSERT INTO NOTICEFILES (FILENUM, NUM, FILENAME, ORINAME) 
+		VALUES(BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
+  	
+  	<select id="getBoardDetail" parameterType="BoardDTO" resultMap="NoticeDetailResult">  	
   		SELECT * FROM NOTICE
+  		LEFT JOIN
+  		NOTICEFILES
+  		USING (NUM)
   		WHERE NUM = #{num}
   	</select>
+  	
+  	<resultMap type="NoticeDTO" id="NoticeDetailResult">
+  		<id column="NUM" property="num"/>
+  		<result column="WRITER" property="writer"/>
+  		<result column="TITLE" property="title"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="HIT" property="hit"/>
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
   	
   	<delete id="setBoardDelete" parameterType="BbsDTO">
   		DELETE NOTICE
@@ -57,10 +79,6 @@
   		<include refid="searchCondition"></include>
 	</select>
 	
-	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
-		INSERT INTO NOTICEFILES (FILENUM, NUM, FILENAME, ORINAME) 
-		VALUES(BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
-	</insert>
 	
 
   </mapper>

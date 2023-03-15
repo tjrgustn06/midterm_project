@@ -21,7 +21,7 @@
 	<div class="container-fluid">
 		<c:if test="${not empty dto.productNum}">
 			<div class="row col-6 mx-auto">
-				<img class="card-img-top" src="../resources/images/iuPhoto.jpg" alt="Card image cap">
+				<img class="card-img-top" src="../resources/images/Gaviscon_Kim.jpeg" alt="Card image cap">
 	   			<div class="item-line">
 	    			<h1>${dto.name}</h1>
 	    			<p>${dto.summary}</p>
@@ -38,7 +38,7 @@
 	  					<div class="input-group-prepend">
 	    					<label class="input-group-text" for="inputGroupSelect01">옵션</label>
 	  					</div>
-						<select class="custom-select">
+						<select class="custom-select" name="amount">
 			    			<option selected>--옵션을 선택하세요--</option>
 	  					<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
 			    			<option value="${gradeDTO.gradeName}">${gradeDTO.gradeName}---남은수량 : ${gradeDTO.gradeStock}</option>
@@ -49,7 +49,7 @@
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="inputGroupSelect01">재고</label>
 						</div>
-						<select class="custom-select" id="inputGroupSelect01">
+						<select class="custom-select" name="amount" id="inputGroupSelect01">
 				    		<option selected>--수량을 선택하세요--</option>
 				    		<option value="1">1개</option>
 				    		<option value="2">2개</option>
@@ -66,6 +66,7 @@
 					</div>
 					<div class="row">
 						<input type="hidden" name="indexCode" value="2">
+						<input type="hidden" name="productNum" value="${dto.productNum}">
 					</div>
 					<div>
 						<button type="submit" class="btn btn-outline-info">주문하기</button>

@@ -1,11 +1,17 @@
-package com.camp.s1.productOrder;
+package com.camp.s1.product;
 
 import java.sql.Date;
 
 public class ProductOrderDTO {
 	
 	private Long num;
-	private Long productNum;
+	private Long gradeNum;
+	public Long getGradeNum() {
+		return gradeNum;
+	}
+	public void setGradeNum(Long gradeNum) {
+		this.gradeNum = gradeNum;
+	}
 	private String id;
 	private Long indexCode;
 	private Long orderNum;
@@ -24,12 +30,7 @@ public class ProductOrderDTO {
 	public void setNum(Long num) {
 		this.num = num;
 	}
-	public Long getProductNum() {
-		return productNum;
-	}
-	public void setProductNum(Long productNum) {
-		this.productNum = productNum;
-	}
+	
 	public String getId() {
 		return id;
 	}

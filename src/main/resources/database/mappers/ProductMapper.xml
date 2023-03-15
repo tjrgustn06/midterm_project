@@ -48,8 +48,11 @@
   	
   	<!-- Add 물품 추가 -->
   	<insert id="setProductAdd" parameterType="ProductDTO">
+  		<selectKey	keyProperty="productNum" resultType="Long" order="BEFORE">
+  			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
+  		</selectKey>
   		INSERT INTO PRODUCT
-  		VALUES (PRODUCTSEQ.NEXTVAL, #{name}, #{contents}, '대여가능')
+  		VALUES (#{productNum}, #{name}, #{contents}, '대여가능')
   	</insert>
   	
   	<!-- Update 물품 수정 -->

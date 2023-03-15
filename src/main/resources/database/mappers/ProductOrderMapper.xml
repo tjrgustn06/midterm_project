@@ -4,6 +4,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="SampleMapper">
-  
+  <mapper namespace="com.camp.s1.product.ProductOrderDAO">
+  	
+  	<!-- Add 주문하기 -->
+  	<insert id="setProductOrderAdd" parameterType="ProductOrderDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PRODUCTORDER
+  		VALUSE (#{num}, #{gradeNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, SYSDATE, 
+  		#{startDate}, #{lastDate}, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer})
+  		
+  	</insert>
+  	
   </mapper>

@@ -14,6 +14,7 @@
 		
 		<typeAlias type="com.camp.s1.product.ProductDTO" alias="ProductDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductGradeDTO" alias="ProductGradeDTO"/>
+		<typeAlias type="com.camp.s1.product.ProductOrderDTO" alias="ProductOrderDTO"/>
 		
 		<typeAlias type="com.camp.s1.board.CommentDTO" alias="CommentDTO"/>
 		

@@ -63,5 +63,13 @@ public class CampController {
 		return mv;
 	}
 	
+	//add
+	@GetMapping("add")
+	public ModelAndView setCampAdd(CampDTO campDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
+	
 	
 }

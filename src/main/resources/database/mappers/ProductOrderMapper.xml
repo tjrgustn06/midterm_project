@@ -12,9 +12,20 @@
   			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
   		</selectKey>
   		INSERT INTO PRODUCTORDER
-  		VALUSE (#{num}, #{gradeNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, SYSDATE, 
-  		SYSDATE, SYSDATE, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer})
+  		VALUES (#{num}, #{gradeNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, SYSDATE, 
+  		#{startDate}, #{lastDate}, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer})
   		
   	</insert>
+  	
+  	<!-- 주문번호 생성 -->
+  	<select id="getOrderNum" resultType="Long">
+  		SELECT PAYMENTSEQ.NEXTVAL FROM DUAL
+  	</select>
+  	
+  	<!-- ProductNum과 GradeName으로 GradeNum 출력 -->
+  	<select id="getGradeNum" parameterType="ProductGradeDTO" resultType="Long">
+  		SELECT GRADENUM FROM PRODUCTGRADE
+  		WHERE PRODUCTNUM=#{productNum} AND GRADENAME=#{gradeName}
+  	</select>
   	
   </mapper>

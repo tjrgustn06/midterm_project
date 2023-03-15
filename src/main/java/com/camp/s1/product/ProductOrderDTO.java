@@ -6,18 +6,13 @@ public class ProductOrderDTO {
 	
 	private Long num;
 	private Long gradeNum;
-	public Long getGradeNum() {
-		return gradeNum;
-	}
-	public void setGradeNum(Long gradeNum) {
-		this.gradeNum = gradeNum;
-	}
 	private String id;
 	private Long indexCode;
 	private Long orderNum;
 	private Long price;
-	private Date startDate;
-	private Date lastDate;
+	private Date regDate;
+	private String startDate;
+	private String lastDate;
 	private String account;
 	private Long amount;
 	private String address;
@@ -30,7 +25,12 @@ public class ProductOrderDTO {
 	public void setNum(Long num) {
 		this.num = num;
 	}
-	
+	public Long getGradeNum() {
+		return gradeNum;
+	}
+	public void setGradeNum(Long gradeNum) {
+		this.gradeNum = gradeNum;
+	}
 	public String getId() {
 		return id;
 	}
@@ -55,16 +55,22 @@ public class ProductOrderDTO {
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	public Date getStartDate() {
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public Date getLastDate() {
+	public String getLastDate() {
 		return lastDate;
 	}
-	public void setLastDate(Date lastDate) {
+	public void setLastDate(String lastDate) {
 		this.lastDate = lastDate;
 	}
 	public String getAccount() {
@@ -97,6 +103,7 @@ public class ProductOrderDTO {
 	public void setOrderer(String orderer) {
 		this.orderer = orderer;
 	}
+	
 	
 	
 

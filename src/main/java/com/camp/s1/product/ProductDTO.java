@@ -1,12 +1,29 @@
 package com.camp.s1.product;
 
+import java.util.List;
+
 public class ProductDTO {
 	
 	private Long productNum;
 	private String name;
 	private String contents;
 	private String status;
+	private String summary;
 	
+	private List<ProductGradeDTO> productGradeDTOs;
+	
+	public List<ProductGradeDTO> getProductGradeDTOs() {
+		return productGradeDTOs;
+	}
+	public void setProductGradeDTOs(List<ProductGradeDTO> productGradeDTOs) {
+		this.productGradeDTOs = productGradeDTOs;
+	}
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 	public Long getProductNum() {
 		return productNum;
 	}

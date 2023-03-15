@@ -1,13 +1,13 @@
 package com.camp.s1.util;
 
 public class Pager {
-
+	
 	// 검색
 	
 	// 검색을 위한 num
 	private Long num;
 	
-	// 검색종류(사용할 colunm
+	// 검색종류(사용할 colunm)
 	private String kind;
 	// 검색어
 	private String search;
@@ -87,9 +87,9 @@ public class Pager {
 		}
 		// 3. 한 블럭에 출력할 번호의 갯수
 		// 4. 총 블럭의 수 구하기
-		Long totalBock = totalPage/this.getPerBlock();
+		Long totalBlock = totalPage/this.getPerBlock();
 		if(totalPage%getPerBlock()!=0) {
-			totalBock++;
+			totalBlock++;
 		}
 		// 5. page 번호로 현재 블럭 번호 구하기
 		Long curBlock = this.getPage()/this.getPerBlock();
@@ -104,7 +104,7 @@ public class Pager {
 		if(curBlock==1) {
 			this.before=true;
 		}
-		if(curBlock==totalBock) {
+		if(curBlock==totalBlock) {
 			lastNum=totalPage;
 			this.after=true;
 		}

@@ -34,9 +34,9 @@
 	  					</div>
 						<select class="custom-select" name="gradeName" id="gradeName">
 			    			<option selected>--옵션을 선택하세요--</option>
-		  					<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
-				    			<option value="${gradeDTO.gradeName}">${gradeDTO.gradeName}---남은수량 : ${gradeDTO.gradeStock}</option>
-				    		</c:forEach>
+				    		<option value="A급">A급</option>
+				    		<option value="B급">B급</option>
+				    		<option value="C급">C급</option>
 			  			</select>
 					</div>
 			    	<div class="input-group mb-3">
@@ -55,9 +55,9 @@
 					</div>
 					<div class="input-group mb-3" id="priceXamount">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="price">금액</label>
+							<label class="input-group-text">금액</label>
 						</div>
-						<div>
+						<div id="totalPrice">
 							
 						</div>
 					</div>
@@ -78,6 +78,7 @@
 					</div>
 					</form>
 				</div>
+				
 			</div>
 			<div class="row col-6 mx-auto">
 				<h1>${dto.contents}</h1>
@@ -98,6 +99,7 @@
 
 		$('.datepicker').datepicker();
 	</script>
+	
 	<script src="../resources/js/productDetail.js"></script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>

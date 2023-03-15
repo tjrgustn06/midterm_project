@@ -1,5 +1,7 @@
 package com.camp.s1.member;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +58,16 @@ public class MemberService {
 	}
 
 //비밀 번호 변경
-	public MemberDTO memberPwChange(MemberDTO memberDTO, String oldPw, HttpServletResponse response)throws Exception{
+	public int setmemberPwChange(MemberDTO memberDTO, HttpServletResponse response)throws Exception{
+		String oldPw = new String();
 		
-		response.setContentType("text/html;charset=utf-8\");
+		PrintWriter out = response.getWriter();
+		
+		//if(oldPw.equals(memberDAO.getMemberLogin(memberDTO.getPw()))) {
+			
+		//}
+		
+		return memberDAO.setMemberUpdate(memberDTO);
 	}
 
 }

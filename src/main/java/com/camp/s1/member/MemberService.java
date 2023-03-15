@@ -1,5 +1,7 @@
 package com.camp.s1.member;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +54,11 @@ public class MemberService {
 	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
 		return memberDAO.setMemberDelete(memberDTO);
 	}
-	
+
+//비밀 번호 변경
+	public MemberDTO memberPwChange(MemberDTO memberDTO, String oldPw, HttpServletResponse response)throws Exception{
+		
+		response.setContentType("text/html;charset=utf-8\");
+	}
+
 }

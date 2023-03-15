@@ -1,5 +1,7 @@
 package com.camp.s1.member;
 
+import java.util.Random;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -122,6 +124,10 @@ public class MemberController {
 		return mv;
 	}
 	
+	//비밀번호 변경
+	
+	
+	
 	@GetMapping("memberDelete")
 	public ModelAndView setMemberDelete(MemberDTO memberDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -132,7 +138,32 @@ public class MemberController {
 		return mv;
 	}
 	
-	
+	//이메일로 인증번호 발송
+	@PostMapping("memberFindPw")
+	public ModelAndView setMemberFindPw(HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		String email = (String)request.getParameter("email");
+		String name = (String)request.getParameter("name");
+		
+		MemberDTO memberDTO = memberService.getMemberPage(memberDTO.getEmail());
+		
+		if(memberDTO != null) {
+			Random r = new Random();
+			int num = r.nextInt(10);
+		
+		if(memberDTO.getName().equals(name)) {
+			session.setAttribute("email", memberDTO.getEmail());
+			String setfrom = ""; // naver 
+			String tomail = email; //받는사람
+			String title = "비밀번호변경 인증 이메일 입니다"; 
+			String content = "회원님의 인증번호는"+num+"입니다";
+		}
+		}
+		
+		return mv;
+		
+	}
 	
 	
 	

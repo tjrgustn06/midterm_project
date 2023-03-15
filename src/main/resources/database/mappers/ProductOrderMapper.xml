@@ -13,7 +13,7 @@
   		</selectKey>
   		INSERT INTO PRODUCTORDER
   		VALUSE (#{num}, #{gradeNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, SYSDATE, 
-  		#{startDate}, #{lastDate}, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer})
+  		SYSDATE, SYSDATE, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer})
   		
   	</insert>
   	

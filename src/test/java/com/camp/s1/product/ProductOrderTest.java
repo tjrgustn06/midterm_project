@@ -15,7 +15,12 @@ public class ProductOrderTest extends MyTestCase{
 	@Test
 	public void productOrderAddTest() throws Exception {
 		ProductOrderDTO productOrderDTO = new ProductOrderDTO();
-		productOrderDTO.set
+		productOrderDTO.setGradeNum(42L);
+		productOrderDTO.setId("test");
+		productOrderDTO.setIndexCode(2L);
+		productOrderDTO.setOrderNum(1L);
+		productOrderDTO.setPrice(5000L);
+		ProductOrderDTO.setamo
 	}
 
 }

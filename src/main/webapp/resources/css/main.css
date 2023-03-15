@@ -1,0 +1,67 @@
+header{
+    background-image: url("/resources/images/header_bg.png");
+    background-repeat: repeat-x;
+    width: 100%;
+    height: 67px;
+}
+
+.header_wrap{
+    width: 70%;
+    height: 100%;
+    
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header_logo{
+    
+    height: 100%;
+    padding: 13px 0;
+    
+    box-sizing: border-box;
+}
+
+.header_nav{
+    width: 50%;
+    height: 100%;
+    
+}
+
+.header_nav > ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.header_nav > ul > li > a{
+    line-height: 67px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.header_nav > ul > li > a:hover {
+    color: red;
+}
+
+.header_sub{
+    width: 17%;
+    height: 100%;
+    
+}
+
+.header_sub > ul{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.header_sub > ul > li > a {
+    line-height: 67px;
+    color: rgb(243, 242, 201);
+    font-size: 0.5rem;
+}
+
+.header_sub > ul > li > a:hover {
+    color: white;
+}

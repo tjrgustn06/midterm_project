@@ -37,7 +37,7 @@ public class CampService {
 	
 	//delete
 	public int setCampDelete(CampDTO campDTO) throws Exception{
-		//나중에 파일추가되면 파일도 삭제하는 기능 필요
+		//나중에 파일추가되면 파일도 삭제하는 기능 필요 - ON DELETE CASCADE 걸었음
 		int result = campDAO.setCampDelete(campDTO);
 		return result;
 	}
@@ -47,7 +47,7 @@ public class CampService {
 		//캠프장 하나 추가
 		int result = campDAO.setCampAdd(campDTO);
 		
-		//파일추가
+		//1.HDD에 file 저장('어디'에 '무슨'이름으로)
 		String realPath = session.getServletContext().getRealPath("resources/upload/notice");
 		System.out.println(realPath); //확인용
 		
@@ -60,14 +60,13 @@ public class CampService {
 			
 			//2.DB에 insert
 			//객체 만들고, 이 객체에 추가할 파일 정보를 db로부터 조회해서 집어넣기
-//			BoardFileDTO boardFileDTO = new BoardFileDTO();
-//			boardFileDTO.setNum(bbsDTO.getNum());
-//			boardFileDTO.setFileName(fileName);
-//			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
-//			
-//			result = noticeDAO.setBoardFileAdd(boardFileDTO);
+			CampFileDTO campFileDTO = new CampFileDTO();
+			campFileDTO.setCampNum(campDTO.getCampNum());
+			campFileDTO.setFileName(fileName);
+			campFileDTO.setOriName(multipartFile.getOriginalFilename());
+			
+			result = campDAO.setCampFileAdd(campFileDTO);
 		}
-		
 		
 		return result;
 	}

@@ -39,15 +39,34 @@
 			(SELECT ROWNUM R, C.* FROM
 				(SELECT * FROM CAMPINFO
 				<include refid="searchCondition"></include>
-			ORDER BY CAMPNUM DESC) C)
+			ORDER BY CAMPNUM ASC) C)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}  		
   	</select>
   
   	<!-- detail -->
-  	<select id="getCampDetail" parameterType="CampDTO" resultType="CampDTO">
-  		SELECT * FROM CAMPINFO
-  		WHERE CAMPNUM=#{campNum}
+  	<select id="getCampDetail" parameterType="CampDTO" resultMap="getCampFileDetail">
+  		<!-- SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum} -->
+  		SELECT * FROM CAMPINFO CI
+			LEFT OUTER JOIN
+			CAMPFILES CF
+			ON(CI.CAMPNUM=CF.CAMPNUM)
+		WHERE CI.CAMPNUM=#{campNum}
   	</select>
+  	
+  	<!-- detail-file 연결 --> <!-- 이부분은 CampDTO 수정되면 수정되어야할 부분 -->
+  	<resultMap type="CampDTO" id="getCampFileDetail">
+  		<id column="CAMPNUM" property="campNum"/>
+  		<result column="NAME" property="name"/>
+  		<result column="PHONE" property="phone"/>
+  		<result column="ADDRESS" property="address"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
   
 	<!-- add -->
 	<insert id="setCampAdd" parameterType="CampDTO">
@@ -56,6 +75,12 @@
 		</selectKey>
 		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, CONTENTS)
 		VALUES(#{campNum}, #{name}, #{phone}, #{address}, #{contents})
+	</insert>
+	
+	<!-- add-file -->
+	<insert id="setCampFileAdd" parameterType="CampFileDTO">
+		INSERT INTO CAMPFILES (FILENUM, CAMPNUM, FILENAME, ORINAME)
+		VALUES(CAMPSEQ_NEXTVAL, #{campNum}, #{fileName}, #{oriName})
 	</insert>
 	
 	<!-- delete -->

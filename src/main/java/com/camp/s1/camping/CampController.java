@@ -79,7 +79,16 @@ public class CampController {
 	public ModelAndView setCampAdd(CampDTO campDTO, MultipartFile [] files, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		campService.setCampAdd(campDTO);
+		int result = campService.setCampAdd(campDTO, files, session);
+		String message = "캠프장 등록 실패<br>관리자에게 문의하세요";
+		if(result>0) {
+			message = "캠프장이 등록되었습니다";
+		}
+		
+		mv.addObject("result", message);
+		mv.addObject("url", "./list");
+		mv.setViewName("common/result");
+		return mv;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.camp.s1.camping;
 
+import java.util.List;
+
 public class CampDTO {
 	
 	private Long campNum;
@@ -7,6 +9,7 @@ public class CampDTO {
 	private String phone;
 	private String address;
 	private String contents;
+	private List<CampFileDTO> campFileDTOs;
 	
 	public CampDTO() {
 		
@@ -52,6 +55,13 @@ public class CampDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	
+
+	public List<CampFileDTO> getCampFileDTOs() {
+		return campFileDTOs;
+	}
+
+	public void setCampFileDTOs(List<CampFileDTO> campFileDTOs) {
+		this.campFileDTOs = campFileDTOs;
+	}
 	
 }

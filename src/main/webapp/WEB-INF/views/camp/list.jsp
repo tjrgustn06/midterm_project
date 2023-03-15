@@ -97,6 +97,11 @@
 			</div>
 		</form>
 	</div>
+	
+	<!-- 캠프장 등록 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
+	<div class="row col-2 mx-auto">
+		<a class="btn btn-success" href="./add">캠프장 등록</a>
+	</div>
 
 
 

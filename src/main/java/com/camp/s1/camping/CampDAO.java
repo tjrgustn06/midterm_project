@@ -40,6 +40,11 @@ public class CampDAO {
 		return sqlSession.insert(NAMESPACE+"setCampAdd", campDTO);
 	}
 	
+	//add-files
+	public int setCampFileAdd(CampFileDTO campFileDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCampFileAdd", campFileDTO);
+	}
+	
 	//update
 	public int setCampUpdate(CampDTO campDTO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setCampUpdate", campDTO);

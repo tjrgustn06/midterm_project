@@ -9,24 +9,22 @@
 <c:import url="../template/common_css.jsp"></c:import>
 </head>
 <body>
-<div class="container-fluid my-5">
-	<div class="row my-5">
+<div class="container-fluid">
+	<div class="row my-3">
 		<h1>${dto.name}</h1>
 	</div>
 	
+	<hr>
+	
 	<div class="row mb-5">
-		<table>
-			<tr>
-				<div class="col-3"><th>캠핑장 전화번호</th></div>
-				<div class="col-3"><th>캠핑장 주소</th></div>
-				<div class="col-6"><th>상세내용</th></div>
-			</tr>
-			<tr>
-				<div class="col-3"><td>${dto.phone}</td></div>
-				<div class="col-3"><td>${dto.address}</td></div>
-				<div class="col-6"><td>${dto.contents}</td></div>
-			</tr>
-		</table>
+		<h5>캠핑장 전화번호 : ${dto.phone}</h5>
+		<h5>캠핑장 주소 : ${dto.address}</h5>
+		<h5>상세내용 : ${dto.contents}</h5>
+		
+		<!-- file -->
+		<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
+			<a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a>
+		</c:forEach>
 	</div>
 	
 	<!-- 버튼 -->
@@ -39,6 +37,7 @@
 			<button id="delete" type="button" class="btn btn-danger">DELETE</button>
 		</form>
 	</div>
+	
 
 </div>
 

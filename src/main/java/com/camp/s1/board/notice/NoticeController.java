@@ -109,10 +109,10 @@ public class NoticeController {
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO,MultipartFile [] files, HttpSession session) throws Exception {
+	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO, MultipartFile [] files, HttpSession session, Long [] fileNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = noticeService.setBoardUpdate(noticeDTO, null, session, null);
+		int result = noticeService.setBoardUpdate(noticeDTO, files, session);
 			
 		String msg = "수정 실패";
 		if(result > 0) {
@@ -131,7 +131,7 @@ public class NoticeController {
 	public ModelAndView getFileDown(BoardFileDTO boardFileDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		
+		mv.addObject("boardFile", noticeService.getBoardFileDetail(boardFileDTO));
 		mv.setViewName("fileDownView");
 		
 		

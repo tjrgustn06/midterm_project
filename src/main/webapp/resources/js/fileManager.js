@@ -41,7 +41,7 @@ $('#fileList').on('click', '.dels', function(){
 })
 
 $('.deleteCheck').click(function(){
-    let result = confirm("확인 클릭시 복구할 수 없습니다");
+    let result = confirm("파일이 영구삭제 됩니다\n삭제하시겠습니까?");
     let ch = $(this);
 
     if(result) {

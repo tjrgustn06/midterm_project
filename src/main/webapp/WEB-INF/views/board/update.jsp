@@ -59,7 +59,7 @@
 				
 				
 				<div class="row mt-5 mb-3 col-md-2 offset-md-10">
-					<button class="btn btn-primary " type="submit">글 쓰기</button>
+					<button class="btn btn-primary " type="submit">글 수정</button>
 				</div>
 			
 			</form>

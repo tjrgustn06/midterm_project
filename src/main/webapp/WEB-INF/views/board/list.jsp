@@ -22,14 +22,23 @@
 			    </tr>
 			  </thead>
 			  <tbody class="table-group-divider">
-			  	<c:forEach items="${list}" var="dto">
-				    <tr>
-				      <th scope="row">${dto.num}</th>
-				      <td><a href="./detail?num=${dto.num}">${dto.title}</a></td>
-				      <td>${dto.writer}</td>
-				      <td>${dto.regDate}</td>
-				    </tr>
-			  	</c:forEach>
+			  	<c:choose>
+			  		<c:when test="${not empty list}">
+					  	<c:forEach items="${list}" var="dto">
+						    <tr>
+						      <th scope="row">${dto.num}</th>
+						      <td><a href="./detail?num=${dto.num}">${dto.title}</a></td>
+						      <td>${dto.writer}</td>
+						      <td>${dto.regDate}</td>
+						    </tr>
+					  	</c:forEach>
+				  	</c:when>
+				 	<c:otherwise>
+				 		<tr height="200px">
+				 			<td class="align-middle text-center" colspan="20">검색 결과가 없습니다.</td>
+				 		</tr>
+				 	</c:otherwise>
+			  	</c:choose>
 			  </tbody>
 			</table>
 		</div>

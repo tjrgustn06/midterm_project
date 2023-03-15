@@ -90,6 +90,12 @@
 		WHERE FILENUM = #{fileNum}
 	</delete>
 	
+	<select id="getBoardFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+		SELECT * FROM NOTICEFILES
+		WHERE FILENUM = #{fileNum}
+		
+	</select>
+	
 	
 
   </mapper>

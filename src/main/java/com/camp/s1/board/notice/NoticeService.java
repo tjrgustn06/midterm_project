@@ -49,8 +49,7 @@ public class NoticeService implements BoardService {
 		//file HDD에 저장
 		String realPath = session.getServletContext().getRealPath("resources/upload/notice");
 		
-		System.out.println(session == null);
-		
+
 		System.out.println(realPath);
 		
 
@@ -107,14 +106,42 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public BoardFileDTO getBoardFileDetail(BoardFileDTO boardFileDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return noticeDAO.getBoardFileDetail(boardFileDTO);
 	}
 
 	@Override
-	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session, Long[] fileNum)
+	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session)
 			throws Exception {
-		return noticeDAO.setBoardUpdate(bbsDTO);
+		int result = noticeDAO.setBoardUpdate(bbsDTO);
+		
+		if(result > 0) {
+
+			
+			//file HDD에 저장
+			String realPath = session.getServletContext().getRealPath("resources/upload/notice");
+			
+
+			System.out.println(realPath);
+			
+
+			
+			for (MultipartFile multipartFile : multipartFiles) {
+				if(multipartFile.isEmpty()) {
+					continue;
+				}
+				
+				String fileName = fileManager.fileSave(multipartFile, realPath);
+				
+				BoardFileDTO boardFileDTO = new BoardFileDTO();
+				boardFileDTO.setNum(bbsDTO.getNum());
+				boardFileDTO.setFileName(fileName);
+				boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+				
+				result = noticeDAO.setBoardFileAdd(boardFileDTO);
+			}
+		}
+		
+		return result;
 	}
 
 	@Override

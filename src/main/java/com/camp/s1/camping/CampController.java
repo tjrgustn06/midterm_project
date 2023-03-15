@@ -52,9 +52,14 @@ public class CampController {
 	public ModelAndView setCampDelete(CampDTO campDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = campService.setCampDelete(campDTO);
+		String message = "삭제 실패";
+		if(result>0) {
+			message = "삭제 성공";
+		}
 		
-		
-		
+		mv.setViewName("common/result");
+		mv.addObject("result", message);
+		mv.addObject("url", "./list");
 		return mv;
 	}
 	

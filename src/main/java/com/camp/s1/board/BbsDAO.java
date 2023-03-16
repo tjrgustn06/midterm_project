@@ -2,17 +2,19 @@ package com.camp.s1.board;
 
 import java.util.List;
 
+import com.camp.s1.util.Pager;
+
 
 public interface BbsDAO {
 	
 	
 	//totalCount
 	//Pager 클래스 구현후 매개변수로 추가해야함
-	public Long getTotalCount() throws Exception;
+	public Long getTotalCount(Pager pager) throws Exception;
 	
 	//list
 	//Pager 클래스 구현후 매개변수로 추가해야함
-	public List<BbsDTO> getBoardList() throws Exception;
+	public List<BbsDTO> getBoardList(Pager pager) throws Exception;
 	
 	//insert(add)
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception;

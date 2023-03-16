@@ -1,7 +1,11 @@
 package com.camp.s1.product;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.camp.s1.util.Pager;
 
 @Service
 public class ProductOrderService {
@@ -19,6 +23,16 @@ public class ProductOrderService {
 		productOrderDTO.setPrice(8000L);
 		productOrderDTO.setAddress("");
 		return productOrderDAO.setProductOrderAdd(productOrderDTO);
+	}
+	
+	// Order List 출력
+	public List<ProductOrderDTO> getProductOrderList(Pager pager) throws Exception {
+		pager.setPerPage(10L);
+		pager.makeRow();
+		pager.makeNum(productOrderDAO.getTotalCount(pager));
+		return productOrderDAO.getProductOrderList(pager);
+		
+		
 	}
 
 }

@@ -34,18 +34,18 @@
 	  					</div>
 						<select class="custom-select" name="gradeName" id="gradeName">
 			    			<option selected>--옵션을 선택하세요--</option>
-				    		<option value="A급">A급</option>
-				    		<option value="B급">B급</option>
-				    		<option value="C급">C급</option>
+							<option value="A급">A급</option>
+							<option value="B급">B급</option>
+							<option value="C급">C급</option>
 			  			</select>
+			  			
 					</div>
 			    	<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="amount">재고</label>
 						</div>
 						<select class="custom-select" name="amount" id="amount">
-				    		<option selected>--수량을 선택하세요--</option>
-				    		<option value="1">1개</option>
+				    		<option value="1" selected>1개</option>
 				    		<option value="2">2개</option>
 				    		<option value="3">3개</option>
 				    		<option value="4">4개</option>
@@ -56,9 +56,9 @@
 					<div class="input-group mb-3" id="priceXamount">
 						<div class="input-group-prepend">
 							<label class="input-group-text">금액</label>
-						</div>
-						<div id="totalPrice">
 							
+						</div>
+						<div class="row my-auto" id="totalPrice">
 						</div>
 					</div>
 					<div class="input-group mb-3">
@@ -71,7 +71,7 @@
 					</div>
 					<div class="row">
 						<input type="hidden" name="indexCode" value="2">
-						<input type="hidden" name="productNum" value="${dto.productNum}">
+						<input id="gradeNum" type="hidden" name="gradeNum" value="">
 					</div>
 					<div>
 						<button type="submit" class="btn btn-outline-info">주문하기</button>
@@ -85,6 +85,27 @@
 			</div>
 		</c:if>
 	</div>
+	<script>
+		let price = 0;
+		let totalPrice = 0;
+		$('#gradeName').change(function(){
+			<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
+				$('#amount')
+				if($('#gradeName').val()=="${gradeDTO.gradeName}") {
+					console.log('${gradeDTO.gradeName}')
+					price = ${gradeDTO.price}
+				}
+			</c:forEach>
+			price = price*$('#amount').val();
+			$('#totalPrice').html(price+'원')
+		})
+		
+		$('#amount').change(function(){
+			totalPrice =price*$('#amount').val()+'원';
+			$('#totalPrice').html(totalPrice)
+			
+		})
+	</script>
 	<script>
 		$.datepicker.setDefaults({
 			dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],

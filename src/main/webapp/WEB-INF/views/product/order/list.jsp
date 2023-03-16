@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Order Page</h1>
+	<h1>Order List Page</h1>
 </body>
 </html>

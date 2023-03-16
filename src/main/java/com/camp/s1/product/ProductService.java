@@ -15,7 +15,7 @@ public class ProductService {
 	
 	// List출력
 	public List<ProductDTO> getProductList(Pager pager) throws Exception {
-		pager.setPerPage(15L);
+		pager.setPerPage(30L);
 		pager.makeRow();
 		
 		

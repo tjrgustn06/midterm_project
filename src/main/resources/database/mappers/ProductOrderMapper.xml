@@ -28,4 +28,19 @@
   		WHERE PRODUCTNUM=#{productNum} AND GRADENAME=#{gradeName}
   	</select>
   	
+  	<!-- Order List 출력 -->
+  	<select id="getProductOrderList" parameterType="Pager" resultType="ProductOrderDTO">
+  		SELECT * FROM(
+  			SELECT ROWNUM R, PO.* FROM(
+  				SELECT * FROM PRODUCTORDER
+  				ORDER BY NUM ASC
+  			) PO
+  		) WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<!-- 총 갯수 출력 -->
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(NUM) FROM PRODUCTORDER
+  	</select>
+  	
   </mapper>

@@ -32,7 +32,7 @@
 	  					<div class="input-group-prepend">
 	    					<label class="input-group-text" for="gradeName">옵션</label>
 	  					</div>
-						<select class="custom-select" name="gradeName" id="gradeName">
+						<select class="custom-select" id="gradeName">
 			    			<option selected>--옵션을 선택하세요--</option>
 							<option value="A급">A급</option>
 							<option value="B급">B급</option>
@@ -89,18 +89,20 @@
 		let price = 0;
 		let totalPrice = 0;
 		$('#gradeName').change(function(){
+			
 			<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
 				$('#amount')
 				if($('#gradeName').val()=="${gradeDTO.gradeName}") {
-					console.log('${gradeDTO.gradeName}')
 					price = ${gradeDTO.price}
 				}
 			</c:forEach>
 			price = price*$('#amount').val();
 			$('#totalPrice').html(price+'원')
+			
 		})
 		
 		$('#amount').change(function(){
+			console.log($('#amount').val())
 			totalPrice =price*$('#amount').val()+'원';
 			$('#totalPrice').html(totalPrice)
 			

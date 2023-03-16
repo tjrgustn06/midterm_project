@@ -86,9 +86,7 @@ public class CampService {
 			
 			//확인용
 			System.out.println("fileNum: "+campFileDTO.getFileNum());
-			
 		}
-		
 		return result;
 	}
 		
@@ -97,7 +95,7 @@ public class CampService {
 		//1.업데이트 -> 글 내용 + 업데이트 되는 파일은 2.지우고 3.다시 넣기
 		
 		//1.
-		List<CampFileDTO> ar = campDAO.getCampFileList(campDTO); //업데이트 하기전에 묶인 파일 조회
+		List<CampFileDTO> ar = campDAO.getCampFileList(campDTO); //업데이트 하기전에 캠핑장에 묶인 파일리스트 조회
 		int result = campDAO.setCampUpdate(campDTO);
 		
 		//파일처리 - DB의 파일정보 지우기. cascade라서 안해도 될거같음

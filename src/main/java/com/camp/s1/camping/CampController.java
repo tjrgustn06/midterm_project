@@ -33,7 +33,7 @@ public class CampController {
 	public ModelAndView getCampList(Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<CampDTO> ar = campService.getCampList(pager);
-		
+
 		mv.addObject("list", ar);
 		mv.setViewName("camp/list");
 		return mv;
@@ -91,4 +91,23 @@ public class CampController {
 		return mv;
 	}
 	
+	//update-get
+	@GetMapping("update")
+	public ModelAndView setCampUpdate(CampDTO campDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		campDTO = campService.getCampDetail(campDTO);
+		
+		mv.addObject("dto", campDTO);
+		mv.setViewName("camp/update");
+		return mv;
+	}
+	
+	//update-post
+	@PostMapping("update")
+	public ModelAndView setCampUpdate(CampDTO campDTO, MultipartFile[] files, HttpSession session, Long[] fileNum) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		for(Long fn : fileNum) {System.out.println(fn);}
+		return mv;
+	}
 }

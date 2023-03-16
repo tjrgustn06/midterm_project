@@ -17,7 +17,7 @@
 	<div class="row justify-content-center">
 	<!-- insert form이 필요할듯 -->
 	<form action="./update" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="campNum" value="${dto.campNum}">
+	<input type="hidden" name="campNum" value="${dto.campNum}" id="detailCampNum">
 	
 		<!-- 수정 필요 -->
 		<div class="mb-3">
@@ -47,7 +47,7 @@
 				<input type="file" id="campFiles" name="files" class="form-control">
 			</div>
 			
-			<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">		
+			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">		
 				<div class="input-group my-3">
 					<div class="input-group-text">
 						<input class="form-check-input deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
@@ -66,9 +66,9 @@
 			<!-- <button type="button" id="fileAdd">추가 사진 등록</button> -->
 		</div>
 		
-		<div class="row col-3 mx-auto">
-			<button class="btn btn-outline-success" type="submit">수정하기</button>
-			<button class="btn btn-outline-danger" type="submit">취소하기</button>
+		<div class="row col-4 mx-auto">
+			<button class="btn btn-outline-success col-5" type="submit">수정하기</button>
+			<button class="btn btn-outline-danger col-5" type="button" id="cancel">취소하기</button>
 		</div>
 	</form>
 	
@@ -78,5 +78,6 @@
 </div>
 
 <c:import url="../template/common_js.jsp"></c:import>
+<script src="../resources/js/camp/crud.js"></script>
 </body>
 </html>

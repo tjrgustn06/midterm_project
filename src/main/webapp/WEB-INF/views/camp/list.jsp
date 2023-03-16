@@ -62,12 +62,15 @@
 	
 	
 	<!-- 카드형식 div -->
-	<c:forEach items="${list}" var="dto">
-
+	<c:forEach items="${list}" var="dto"> <!-- dto는 캠프정보 한개 -->
 		<div class="row campOne my-3">
 			<div class="row pic col-5">
-				<c:if test="${not empty dto.campFileDTOs}">
+<%-- 			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
 					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+				</c:forEach> --%>
+				
+				<c:if test="${not empty dto.campFileDTOs}">
+					<img alt="" src="../resources/upload/camp/${dto.campFileDTOs.get(0).fileName}">
 				</c:if>
 			</div>
 

@@ -64,6 +64,6 @@
 
 
 <c:import url="../template/common_js.jsp"></c:import>
-<script src="../resources/js/camp/form.js"></script>
+<script src="../resources/js/camp/crud.js"></script>
 </body>
 </html>

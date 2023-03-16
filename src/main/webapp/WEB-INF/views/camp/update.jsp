@@ -42,11 +42,13 @@
 		</div>
 		
 		<div id="fileList" class="my-5">
+			<!-- 새로운 파일을 추가 -->
 			<div class="mb-3">
 				<label for="campFiles" class="form-label">대표 사진 등록</label>
 				<input type="file" id="campFiles" name="files" class="form-control">
 			</div>
 			
+			<!-- 이미 가지고있는 파일을 표시 -->
 			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">		
 				<div class="input-group my-3">
 					<div class="input-group-text">

@@ -107,7 +107,12 @@ public class CampController {
 	public ModelAndView setCampUpdate(CampDTO campDTO, MultipartFile[] files, HttpSession session, Long[] fileNum) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println(fileNum);
 		for(Long fn : fileNum) {System.out.println(fn);}
+		
+		
 		return mv;
+		
+		
 	}
 }

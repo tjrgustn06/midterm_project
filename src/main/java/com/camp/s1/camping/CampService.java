@@ -103,12 +103,12 @@ public class CampService {
 		
 		int result = campDAO.setCampUpdate(campDTO);
 		
-		//파일처리 - DB의 파일정보 지우기. cascade라서 안해도 될거같음
-//		if(fileNums != null) {
-//			for(Long fileNum : fileNums) {
-//				campDAO.setCampFileDelete(fileNum);
-//			}
-//		}
+		//파일처리 - DB의 파일정보 지우기.
+		if(fileNums != null) {
+			for(Long fileNum : fileNums) {
+				campDAO.setCampFileDelete(fileNum);
+			}
+		}
 		
 		//2.업데이트 성공하면 파일 지우기(이름, 경로 필요) - CampDelete에서 file delete와 동일
 		if(result>0) {

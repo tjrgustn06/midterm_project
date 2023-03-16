@@ -107,12 +107,21 @@ public class CampController {
 	public ModelAndView setCampUpdate(CampDTO campDTO, MultipartFile[] files, HttpSession session, Long[] fileNum) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println(fileNum);
-		for(Long fn : fileNum) {System.out.println(fn);}
+		if(fileNum != null) {
+			System.out.println(fileNum);
+			for(Long fn : fileNum) {System.out.println(fn);}
+		}
 		
+		int result = campService.setCampUpdate(campDTO, files, session, fileNum);
+		String message ="수정 실패";
+		if(result>0) {
+			message ="수정 성공";
+		}
+		
+		mv.addObject("result", message);
+		mv.addObject("url", "./detail?campNum="+campDTO.getCampNum());
+		mv.setViewName("common/result");
 		
 		return mv;
-		
-		
 	}
 }

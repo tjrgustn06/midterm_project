@@ -15,5 +15,4 @@ $('#cancel').click(function(){
     if(check){
         location.href="./detail?campNum="+$('#detailCampNum').val();
     }
-
 })

@@ -69,7 +69,7 @@
 		</div>
 		
 		<div class="row col-4 mx-auto">
-			<button class="btn btn-outline-success col-5" type="submit">수정하기</button>
+			<button class="btn btn-outline-success col-5" type="submit" id="update">수정하기</button>
 			<button class="btn btn-outline-danger col-5" type="button" id="cancel">취소하기</button>
 		</div>
 	</form>

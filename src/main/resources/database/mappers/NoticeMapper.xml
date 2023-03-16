@@ -19,11 +19,15 @@
   	
   	<select id="getBoardList" parameterType="Pager" resultType="NoticeDTO">
   		SELECT * FROM
-			(SELECT ROWNUM R, N.* FROM
-				(SELECT NUM, WRITER, TITLE, REGDATE, HIT FROM NOTICE
+			(
+			SELECT ROWNUM R, N.* FROM
+				(
+				SELECT NUM, WRITER, TITLE, REGDATE, HIT FROM NOTICE
 				<include refid="searchCondition"></include>
-				ORDER BY NUM DESC) 
-			N)
+				ORDER BY NUM DESC
+				) 
+			N
+			)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}	
   	</select>
   	

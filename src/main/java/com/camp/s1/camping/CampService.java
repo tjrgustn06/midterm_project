@@ -96,6 +96,11 @@ public class CampService {
 		
 		//1.
 		List<CampFileDTO> ar = campDAO.getCampFileList(campDTO); //업데이트 하기전에 캠핑장에 묶인 파일리스트 조회
+		
+		for(CampFileDTO campFileDTO : ar) { //확인용
+			System.out.println("fileNum: "+campFileDTO.getFileNum());
+		}
+		
 		int result = campDAO.setCampUpdate(campDTO);
 		
 		//파일처리 - DB의 파일정보 지우기. cascade라서 안해도 될거같음

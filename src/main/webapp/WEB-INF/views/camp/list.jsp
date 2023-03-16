@@ -12,15 +12,79 @@
 		color: black;
 		text-decoration: none;
 	}
+	
+	.pic{
+		width: 40%;
+		height: 200px;
+	}
+
+	.campOne{
+		border: black, solid, 1px;
+		border-radius: 5%;
+	}
 </style>
 </head>
 <body>
 <div class="container-fluid my-5">
-	<div class="row my-5">
+	<div class="row my-3">
 		<h1>CampList Page</h1>
 	</div>
+
+	<!-- search -->
+	<!-- 만들어뒀던거 쓸수는 있는데 select의 option 태그를 좀 바꿔야함 -->
+	<div class="row col-7 mx-auto">
+		<form class="row g-3" action="./list" method="get" id="searchForm">
+			<input type="hidden" name="page" value="1" id="page">
+			<div class="col-3">
+				<label for="kind" class="visually-hidden">Kind</label>
+				<select class="form-select" name="kind" id="kind" aria-label="Default select example">
+					<option value="name" ${pager.kind eq 'name'? 'selected':''}>캠핑장명</option>
+					<option value="phone" ${pager.kind eq 'phone'? 'selected':''}>전화번호</option>
+					<option value="address" ${pager.kind eq 'address'? 'selected':''}>주소</option>
+					<option value="contents" ${pager.kind eq 'contents'? 'selected':''}>상세내용</option>
+				</select>
+			</div>
+			<div class="col-6">
+				<label for="search" class="visually-hidden">Search</label>
+				<input type="text" class="form-control" name="search" value="${pager.search}" id="search" placeholder="검색어를 입력하세요">
+			</div>
+			<div class="col-3">
+				<button type="submit" class="btn btn-outline-primary mb-3">검색</button>
+			</div>
+		</form>	
+	</div>
 	
-	<div class="row mb-5">
+	
+	<!-- 캠프장 등록 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
+	<div class="row col-1">
+		<a class="btn btn-outline-success" href="./add">등록</a>
+	</div>
+	
+	
+	<!-- 카드형식 div -->
+	<c:forEach items="${list}" var="dto">
+
+		<div class="row campOne my-3">
+			<div class="row pic col-5">
+				<c:if test="${not empty dto.campFileDTOs}">
+					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+				</c:if>
+			</div>
+
+			<div class="row discription col-7">
+				<h5 class="campName"><a href="./detail?campNum=${dto.campNum}">${dto.name}</a></h5>
+				캠핑장 주소 : ${dto.address}<br>
+				전화번호 : ${dto.phone}<br>
+				서비스 목록 입력하기
+			</div>
+		</div>
+	</c:forEach>
+	
+	
+	
+	
+	<!-- table div -->
+	<!-- <div class="row my-3">
 		<table>
 			<tr>
 				<th>캠핑장 이름</th>
@@ -35,7 +99,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</div>
+	</div> -->
 
 	<!-- Pager -->
 	<div class="row col-3 mx-auto">
@@ -74,34 +138,9 @@
 		</nav>
 	</div>
 
-	<!-- search -->
-	<!-- 만들어뒀던거 쓸수는 있는데 select의 option 태그를 좀 바꿔야함 -->
-	<div class="row col-7 mx-auto">
-		<form class="row g-3" action="./list" method="get" id="searchForm">
-			<input type="hidden" name="page" value="1" id="page">
-			<div class="col-3">
-				<label for="kind" class="visually-hidden">Kind</label>
-				<select class="form-select" name="kind" id="kind" aria-label="Default select example">
-					<option value="name" ${pager.kind eq 'name'? 'selected':''}>캠핑장명</option>
-					<option value="phone" ${pager.kind eq 'phone'? 'selected':''}>전화번호</option>
-					<option value="address" ${pager.kind eq 'address'? 'selected':''}>주소</option>
-					<option value="contents" ${pager.kind eq 'contents'? 'selected':''}>상세내용</option>
-				</select>
-			</div>
-			<div class="col-6">
-				<label for="search" class="visually-hidden">Search</label>
-				<input type="text" class="form-control" name="search" value="${pager.search}" id="search" placeholder="검색어를 입력하세요">
-			</div>
-			<div class="col-3">
-				<button type="submit" class="btn btn-primary mb-3">검색</button>
-			</div>
-		</form>
-	</div>
+
 	
-	<!-- 캠프장 등록 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
-	<div class="row col-2 mx-auto">
-		<a class="btn btn-success" href="./add">캠프장 등록</a>
-	</div>
+
 
 
 

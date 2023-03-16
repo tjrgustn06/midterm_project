@@ -60,13 +60,13 @@
   		<result column="PHONE" property="phone"/>
   		<result column="ADDRESS" property="address"/>
   		<result column="CONTENTS" property="contents"/>
+  		
   		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="FILENAME" property="fileName"/>
   			<result column="ORINAME" property="oriName"/>
   		</collection>
   	</resultMap>
-  	
   
 	<!-- add -->
 	<insert id="setCampAdd" parameterType="CampDTO">
@@ -75,12 +75,6 @@
 		</selectKey>
 		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, CONTENTS)
 		VALUES(#{campNum}, #{name}, #{phone}, #{address}, #{contents})
-	</insert>
-	
-	<!-- add-file -->
-	<insert id="setCampFileAdd" parameterType="CampFileDTO">
-		INSERT INTO CAMPFILES (FILENUM, CAMPNUM, FILENAME, ORINAME)
-		VALUES(CAMPSEQ_NEXTVAL, #{campNum}, #{fileName}, #{oriName})
 	</insert>
 	
 	<!-- delete -->
@@ -93,7 +87,23 @@
 		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}, CONTENTS=#{contents}
 		WHERE CAMPNUM=#{campNum}
 	</update>
+	
+	<!-- file -->
+	<!-- fileList -->
+	<select id="getCampFileList" parameterType="CampDTO" resultType="CampFileDTO">
+		SELECT * FROM CAMPFILES WHERE CAMPNUM=#{campNum}
+	</select>
+	
   
-  
+	<!-- fileAdd -->
+	<insert id="setCampFileAdd" parameterType="CampFileDTO">
+		INSERT INTO CAMPFILES (FILENUM, CAMPNUM, FILENAME, ORINAME)
+		VALUES(CAMPSEQ.NEXTVAL, #{campNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<!-- fileDelete/CASCADE에서는 필요없을듯 -->
+	<delete id="setCampFileDelete" parameterType="Long">
+		DELETE CAMPFILES WHERE FILENUM=#{fileNum}
+	</delete>
   
   </mapper>

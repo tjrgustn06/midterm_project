@@ -52,9 +52,9 @@ public class CampController {
 	
 	//delete
 	@PostMapping("delete")
-	public ModelAndView setCampDelete(CampDTO campDTO) throws Exception{
+	public ModelAndView setCampDelete(CampDTO campDTO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = campService.setCampDelete(campDTO);
+		int result = campService.setCampDelete(campDTO, session);
 		String message = "삭제 실패";
 		if(result>0) {
 			message = "삭제 성공";

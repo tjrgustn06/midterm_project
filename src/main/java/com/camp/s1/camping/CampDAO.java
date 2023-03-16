@@ -39,15 +39,26 @@ public class CampDAO {
 	public int setCampAdd(CampDTO campDTO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"setCampAdd", campDTO);
 	}
+		
+	//update
+	public int setCampUpdate(CampDTO campDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setCampUpdate", campDTO);
+	}
+	
+	//files
+	//List-files
+	public List<CampFileDTO> getCampFileList(CampDTO campDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getCampFileList", campDTO);
+	}
 	
 	//add-files
 	public int setCampFileAdd(CampFileDTO campFileDTO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"setCampFileAdd", campFileDTO);
 	}
 	
-	//update
-	public int setCampUpdate(CampDTO campDTO) throws Exception{
-		return sqlSession.update(NAMESPACE+"setCampUpdate", campDTO);
+	//delete-files
+	public int setCampFileDelete(Long fileNum) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setCampFileDelete", fileNum);
 	}
 	
 	//site(option)

@@ -16,15 +16,36 @@
 	
 	<hr>
 	
-	<div class="row mb-5">
-		<h5>캠핑장 전화번호 : ${dto.phone}</h5>
-		<h5>캠핑장 주소 : ${dto.address}</h5>
-		<h5>상세내용 : ${dto.contents}</h5>
+	<!-- 사진+설명 div -->
+	<div class="row my-3">
+		<div class="row col-7">
+			<c:if test="${not empty dto.campFileDTOs}">
+				<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
+					<!-- 파일이 보이게 -->
+					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+				</c:forEach>
+			</c:if>
+			
+		</div>
 		
-		<!-- file -->
-		<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-			<a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a>
-		</c:forEach>
+		<div class="row col-5 my-auto">
+			<h5>캠핑장 전화번호 : ${dto.phone}</h5>
+			<h5>캠핑장 주소 : ${dto.address}</h5>
+			<h5>상세내용 : ${dto.contents}</h5>	
+		</div>
+	</div>
+	
+	
+	<!-- file -->
+	<div>
+		<c:if test="${not empty dto.campFileDTOs}">
+			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
+				<!-- 파일이 보이게 -->
+				<%-- <a href="../resources/upload/camp/${fileDTO.fileName}">${fileDTO.oriName}</a> --%>
+				<!-- 파일다운추가되면 주소입력 -->
+				<%-- <a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a> --%>
+			</c:forEach>
+		</c:if>
 	</div>
 	
 	<!-- 버튼 -->
@@ -33,8 +54,8 @@
 		<form action="./update" id="frm" method="get">
 			<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 			<input type="hidden" name="campNum" value="${dto.campNum}">
-			<button id="update" type="submit" class="btn btn-info">UPDATE</button>
-			<button id="delete" type="button" class="btn btn-danger">DELETE</button>
+			<button id="update" type="submit" class="btn btn-outline-success">UPDATE</button>
+			<button id="delete" type="button" class="btn btn-outline-danger">DELETE</button>
 		</form>
 	</div>
 	

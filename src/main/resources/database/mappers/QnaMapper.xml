@@ -38,4 +38,9 @@
   		SELECT COUNT(NUM) FROM QNA
   		<include refid="searchCondition"></include>
   	</select>
+  	
+  	<select id="getBoardDetail" parameterType="BoardDTO" resultType="QnaDTO">
+  		SELECT * FROM QNA
+  		WHERE NUM = #{num}
+  	</select>
   </mapper>

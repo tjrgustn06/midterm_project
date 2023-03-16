@@ -11,6 +11,10 @@
 <body>
 	<div class="container-fluid">
 	
+		<div class="row my-5">
+			<h1>${boardName} Page</h1>
+		</div>
+	
 		<div class="row my-6">
 			<table class="table table-striped">
 			  <thead>

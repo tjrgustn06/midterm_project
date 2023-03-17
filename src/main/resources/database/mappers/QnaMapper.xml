@@ -20,6 +20,14 @@
   	</sql>
   		
   	
+  	
+  	<!-- BoardList Page -->
+  	
+ 	 <select id="getTotalCount" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(NUM) FROM QNA
+  		<include refid="searchCondition"></include>
+  	</select>
+  	
   	<select id="getBoardList" resultType="QnaDTO" parameterType="Pager">
   		SELECT * FROM 
 	  		(
@@ -34,13 +42,84 @@
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
-  	<select id="getTotalCount" resultType="Long" parameterType="Pager">
-  		SELECT COUNT(NUM) FROM QNA
-  		<include refid="searchCondition"></include>
-  	</select>
+  	<!-- BoardAdd Page -->	
   	
-  	<select id="getBoardDetail" parameterType="BoardDTO" resultType="QnaDTO">
+	<insert id="setBoardAdd" parameterType="BbsDTO">	
+		<selectKey keyProperty="num" resultType="Long" order="BEFORE">	
+				SELECT BOARDSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+  		INSERT INTO QNA (NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT)
+  		VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  	</insert> 
+  	
+  	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+  		INSERT INTO QNAFILES (FILENUM, NUM, FILENAME, ORINAME) 
+  		VALUES (BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+  	</insert>
+
+	
+	<!-- BoardDetail Page -->
+  	
+  	<select id="getBoardDetail" parameterType="BoardDTO" resultMap="QnaDetailResult">
   		SELECT * FROM QNA
+  		LEFT JOIN
+  		QNAFILES
+  		USING (NUM)
   		WHERE NUM = #{num}
   	</select>
+  	
+  	<resultMap type="QnaDTO" id="QnaDetailResult">
+  		<id column="NUM" property="num"/>
+  		<result column="WRITER" property="writer"/>
+  		<result column="TITLE" property="title"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="HIT" property="hit"/>
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
+  	<select id="getBoardFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+  		SELECT * FROM QNAFILES
+  		WHERE FILENUM = #{fileNum}
+  	</select>
+  	
+  	<update id="setBoardHitCount" parameterType="BoardDTO">
+  		UPDATE QNA SET HIT = HIT + 1
+  		WHERE NUM = #{num}
+  	</update>
+  	
+  	<!-- BoardUpdate Page-->
+  	
+  
+  	<update id="setBoardUpdate" parameterType="BbsDTO">
+  		UPDATE QNA SET TITLE = #{title}, CONTENTS = #{contents}
+  		WHERE NUM = #{num}
+  	</update>
+  	
+  	<delete id="setBoardFileDelete" parameterType="Long">
+  		DELETE QNAFILES WHERE FILENUM = #{fileNum}
+  	</delete>
+  	
+  	
+  	
+  	
+  	
+  	<!-- BoardDelete Page -->
+  	
+  	<delete id="setBoardDelete" parameterType="BbsDTO">
+  		DELETE QNA WHERE NUM = #{num}
+  	</delete>
+  	
+  	<select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+  		SELECT * FROM QNAFILES
+  		WHERE NUM = #{num}
+  	</select>
+  	
+  	
+  	
+  	
   </mapper>

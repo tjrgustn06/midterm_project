@@ -28,6 +28,7 @@
 			
 			<c:if test="${!empty dto.boardFileDTOs}">
 				<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
+					<img src="../resources/upload/qna/${fileDTO.boardFileDTOs.fileName}">
 					<a href="./fileDown?fileNum=${fileDTO.fileNum}">${fileDTO.oriName}</a>
 				</c:forEach>
 			</c:if>
@@ -48,6 +49,17 @@
 			</div>
 	</div>
 
+	<div class="my-5">
+	  
+		<div class="row col-md-10 offset-md-1" id="commentList">
+  
+		</div>
+		<div class="mb-3">
+		  <textarea class="form-control" id="replyContents" rows="3" name="contents" ></textarea>
+		</div>
+		<div class="mb-3">
+		  <button class="btn btn-primary" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
+	</div>
 
 
 
@@ -57,6 +69,7 @@
 				<form action="./update" id="frm" method="GET">
 					<input type="hidden" name="num" value="${dto.num}">
 						
+					<!-- delete시엔 post방식 update시엔 get -->
 					<button type="submit" class="btn btn-primary col-md-2 mx-2" id="update">글 수정</button>
 					
 					<button type="button" class="btn btn-primary col-md-2 mx-2" id="delete" data-delete="${dto.num}">글 삭제</button>
@@ -66,10 +79,8 @@
 		
 		<a href="./list" class="btn btn-primary col-md-2 mx-1">목록으로</a>	
 		
-		<!-- delete시엔 post방식 update시엔 get -->
-		<div>
 
-		</div>
+
 	</div>
 </div>
 	<script type="text/javascript" src="../resources/js/boardForm.js"></script>

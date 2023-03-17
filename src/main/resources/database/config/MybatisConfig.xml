@@ -11,6 +11,7 @@
 		<typeAlias type="com.camp.s1.board.BoardFileDTO" alias="BoardFileDTO"/>
 		
 		<typeAlias type="com.camp.s1.board.notice.NoticeDTO" alias="NoticeDTO"/>
+		<typeAlias type="com.camp.s1.board.qna.QnaDTO" alias="QnaDTO"/>
 		
 		<typeAlias type="com.camp.s1.product.ProductDTO" alias="ProductDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductGradeDTO" alias="ProductGradeDTO"/>
@@ -18,9 +19,10 @@
 		
 		<typeAlias type="com.camp.s1.board.CommentDTO" alias="CommentDTO"/>
 		
-		<typeAlias type="com.camp.s1.member.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="com.camp.s1.member.MemberDTO" alias="MemberDTO"/> 
 		
 		<typeAlias type="com.camp.s1.camping.CampDTO" alias="CampDTO"/>
+		<typeAlias type="com.camp.s1.camping.CampFileDTO" alias="CampFileDTO"/>
 		<typeAlias type="com.camp.s1.camping.CampSiteDTO" alias="CampSiteDTO"/>
 		
 		<typeAlias type="java.lang.Long" alias="Long"/>

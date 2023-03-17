@@ -26,14 +26,25 @@ public class ProductOrderDAO {
 		return sqlSession.selectOne(NAMESPACE+"getOrderNum");
 	}
 	
-	// GradeNum 출력
-	public Long getGradeNum(ProductGradeDTO productGradeDTO) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"getGradeNum", productGradeDTO);
+	// 주문번호 입력
+	public int setOrderNum(ProductOrderDTO productOrderDTO) throws Exception {
+		System.out.println(productOrderDTO.getOrderNum());
+		return sqlSession.insert(NAMESPACE+"setOrderNum", productOrderDTO);
 	}
 	
 	// Order List 출력
 	public List<ProductOrderDTO> getProductOrderList(Pager pager) throws Exception {
 		return sqlSession.selectList(NAMESPACE+"getProductOrderList", pager);
+	}
+	
+	// Detail 주문 페이지
+	public ProductOrderDTO getProductOrderDetail(ProductOrderDTO productOrderDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getProductOrderDetail", productOrderDTO);
+	}
+	
+	// Payment 주문 결제
+	public int setProductOrderPayment(ProductOrderDTO productOrderDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setProductOrderPayment", productOrderDTO);
 	}
 	
 	// 총 갯수 출력

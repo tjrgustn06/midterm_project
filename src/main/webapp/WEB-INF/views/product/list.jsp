@@ -56,7 +56,7 @@
 			  </ul>
 			</nav>
 		</div>
-			<div class="row col-md-7 mx-auto">
+		<div class="row col-md-7 mx-auto">
 			<form class="row g-3" action="./list" method="get">
 				<div class="col-auto">
 					<label for="kind" class="visually-hidden">Kind</label>
@@ -72,8 +72,8 @@
 				<div class="col-auto">
 					<button type="submit" id="btn" class="btn btn-primary mb-3">검색</button>
 				</div>
-				</form>
-			</div>
+			</form>
+		</div>
 	</div>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>

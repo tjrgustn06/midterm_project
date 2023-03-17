@@ -18,7 +18,14 @@ public class ProductOrderDTO {
 	private String address;
 	private String status;
 	private String orderer;
+	private String name;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Long getNum() {
 		return num;
 	}

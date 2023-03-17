@@ -13,8 +13,7 @@
   		</selectKey>
   		INSERT INTO PRODUCTORDER
   		VALUES (#{num}, #{gradeNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, SYSDATE, 
-  		#{startDate}, #{lastDate}, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer})
-  		
+  		#{startDate}, #{lastDate}, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer}, #{name})
   	</insert>
   	
   	<!-- 주문번호 생성 -->
@@ -22,11 +21,11 @@
   		SELECT PAYMENTSEQ.NEXTVAL FROM DUAL
   	</select>
   	
-  	<!-- ProductNum과 GradeName으로 GradeNum 출력 -->
-  	<select id="getGradeNum" parameterType="ProductGradeDTO" resultType="Long">
-  		SELECT GRADENUM FROM PRODUCTGRADE
-  		WHERE PRODUCTNUM=#{productNum} AND GRADENAME=#{gradeName}
-  	</select>
+  	<!-- 주문번호 입력 -->
+  	<insert id="setOrderNum" parameterType="ProductOrderDTO">
+  		INSERT INTO ORDERS VALUES (#{orderNum})
+  	</insert>
+  	
   	
   	<!-- Order List 출력 -->
   	<select id="getProductOrderList" parameterType="Pager" resultType="ProductOrderDTO">
@@ -37,6 +36,18 @@
   			) PO
   		) WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
+  	
+  	<!-- Detail 주문 페이지 -->
+  	<select id="getProductOrderDetail" parameterType="ProductOrderDTO" resultType="ProductOrderDTO">
+  		SELECT * FROM PRODUCTORDER
+  		WHERE NUM=#{num}
+  	</select>
+  	
+  	<!-- Payment 주문 결제 -->
+  	<update id="setProductOrderPayment" parameterType="ProductOrderDTO">
+  		UPDATE PRODUCTORDER SET ADDRESS=#{address}, STATUS=#{status}
+  		WHERE NUM=#{num}
+  	</update>
   	
   	<!-- 총 갯수 출력 -->
   	<select id="getTotalCount" parameterType="Pager" resultType="Long">

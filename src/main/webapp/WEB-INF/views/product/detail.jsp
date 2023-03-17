@@ -38,6 +38,7 @@
 							<option value="B급">B급</option>
 							<option value="C급">C급</option>
 			  			</select>
+						
 			  			
 					</div>
 			    	<div class="input-group mb-3">
@@ -53,12 +54,15 @@
 				  		</select>
 
 					</div>
-					<div class="input-group mb-3" id="priceXamount">
+					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text">금액</label>
 							
 						</div>
 						<div class="row my-auto" id="totalPrice">
+						</div>
+						<div class="row">
+							<p class="my-auto">원</p>
 						</div>
 					</div>
 					<div class="input-group mb-3">
@@ -71,7 +75,9 @@
 					</div>
 					<div class="row">
 						<input type="hidden" name="indexCode" value="2">
-						<input id="gradeNum" type="hidden" name="gradeNum" value="">
+						<input id="gradeNum" type="hidden" name="gradeNum">
+						<input id="price" type="hidden" name="price">
+						<input id="name" type="hidden" name="name">
 					</div>
 					<div>
 						<button type="submit" class="btn btn-outline-info">주문하기</button>
@@ -88,24 +94,28 @@
 	<script>
 		let price = 0;
 		let totalPrice = 0;
+		let gradeNum='';
 		$('#gradeName').change(function(){
 			
 			<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
 				$('#amount')
 				if($('#gradeName').val()=="${gradeDTO.gradeName}") {
 					price = ${gradeDTO.price}
+					gradeNum=${gradeDTO.gradeNum}
 				}
 			</c:forEach>
 			price = price*$('#amount').val();
-			$('#totalPrice').html(price+'원')
-			
+			$('#totalPrice').html(price)
+			$('#price').val($('#totalPrice').html())
+			$('#gradeNum').val(gradeNum)
+			$('#name').val('${dto.name}'+" "+$('#gradeName').val())
 		})
 		
 		$('#amount').change(function(){
-			console.log($('#amount').val())
-			totalPrice =price*$('#amount').val()+'원';
+			console.log('amount change : '+price)
+			totalPrice =price*$('#amount').val();
 			$('#totalPrice').html(totalPrice)
-			
+			$('#price').val($('#totalPrice').html())
 		})
 	</script>
 	<script>

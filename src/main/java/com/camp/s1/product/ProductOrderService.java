@@ -14,13 +14,11 @@ public class ProductOrderService {
 	private ProductOrderDAO productOrderDAO;
 	
 	// Add 물품 예약 정보 입력
-	public int setProductOrderAdd(ProductOrderDTO productOrderDTO, ProductGradeDTO productGradeDTO) throws Exception {
+	public int setProductOrderAdd(ProductOrderDTO productOrderDTO) throws Exception {
 		productOrderDTO.setOrderNum(productOrderDAO.getOrderNum());
-		productOrderDTO.setGradeNum(productOrderDAO.getGradeNum(productGradeDTO));
+		int result = productOrderDAO.setOrderNum(productOrderDTO);
 		// session에서 id 뺴오기
-		productOrderDTO.setId("user02");
-		// grade의 금액*수량한값 넣기
-		productOrderDTO.setPrice(8000L);
+		productOrderDTO.setId("user01");
 		productOrderDTO.setAddress("");
 		return productOrderDAO.setProductOrderAdd(productOrderDTO);
 	}
@@ -35,4 +33,14 @@ public class ProductOrderService {
 		
 	}
 
+	// Detail 주문 페이지
+	public ProductOrderDTO getProductOrderDetail(ProductOrderDTO productOrderDTO) throws Exception {
+		return productOrderDAO.getProductOrderDetail(productOrderDTO);
+	}
+	
+	// payment 주문 결제
+	public int setProductOrderPayment(ProductOrderDTO productOrderDTO) throws Exception {
+		return productOrderDAO.setProductOrderPayment(productOrderDTO);
+	}
+	
 }

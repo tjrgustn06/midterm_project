@@ -30,13 +30,32 @@ public class ProductOrderController {
 		
 	}
 	
+	// Detail 주문 페이지
+	@GetMapping("detail")
+	public ModelAndView getProductOrderDetail(ProductOrderDTO productOrderDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		productOrderDTO = productOrderService.getProductOrderDetail(productOrderDTO);
+		mv.addObject("dto", productOrderDTO);
+		mv.setViewName("product/order/detail");
+		return mv;
+	}
+	
 	//Add 주문 정보 입력
 	@PostMapping("order")
-	public ModelAndView setProductOrderAdd(ProductOrderDTO productOrderDTO, ProductGradeDTO productGradeDTO) throws Exception {
+	public ModelAndView setProductOrderAdd(ProductOrderDTO productOrderDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		
-		//int result = productOrderService.setProductOrderAdd(productOrderDTO, productGradeDTO);
+		int result = productOrderService.setProductOrderAdd(productOrderDTO);
+		mv.setViewName("redirect:list");
+		return mv;
+	}
+	
+	// Payment 주문 결제
+	@PostMapping("payment")
+	public ModelAndView setProductOrderPayment(ProductOrderDTO productOrderDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = productOrderService.setProductOrderPayment(productOrderDTO);
 		mv.setViewName("redirect:list");
 		return mv;
 	}

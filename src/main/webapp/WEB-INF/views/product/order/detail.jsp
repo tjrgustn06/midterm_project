@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="../../template/common_css.jsp"></c:import>
+<c:import url="/WEB-INF/views/template/common_css.jsp"></c:import>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -67,12 +68,36 @@
 					<input type="hidden" name="num" value="${dto.num}">
 				</div>
 				<div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="button" id="payment" class="btn btn-primary">결제하기</button>
+				
 				</div>
 			</form>
 		</div>
 	</div>
+	<script>
+		IMP.init("imp15251423");
 	
+		$('#payment').click(() => {
+			IMP.request_pay({
+			pg: "kcp.{store-1a4d0a88-5a69-4922-90ac-3481b3919218}",
+			pay_method: "card",
+			merchant_uid: "ORD20180131-0000011",   // 주문번호
+			name: "노르웨이 회전 의자",
+			amount: 64900,                         // 숫자 타입
+			buyer_email: "gildong@gmail.com",
+			buyer_name: "홍길동",
+			buyer_tel: "010-4242-4242",
+			buyer_addr: "서울특별시 강남구 신사동",
+			buyer_postcode: "01181"
+			}, function (rsp) { // callback
+			if (rsp.success) {
+				// 결제 성공 시 로직
+			} else {
+				// 결제 실패 시 로직
+			}
+			});
+		})
+	</script>
 	<c:import url="../../template/common_js.jsp"></c:import>
 </body>
 </html>

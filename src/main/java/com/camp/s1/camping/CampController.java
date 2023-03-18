@@ -124,4 +124,17 @@ public class CampController {
 		
 		return mv;
 	}
+	
+	//update-ajaxFileDelete
+	@PostMapping("campFileDelete")
+	public ModelAndView setCampFileDelete(Long fileNum, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = campService.setCampFileDelete(fileNum, session);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
+	}
+	
 }

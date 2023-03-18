@@ -22,7 +22,6 @@
 		<div class="mb-3">
 		  <label for="campName" class="form-label">캠핑장 이름</label>
 		  <input type="text" id="campName" name="name" class="form-control" placeholder="insert campName here">
-<%-- <input type="text" name="campName" readonly value="${member.id}" class="form-control" id="campName"> --%>
 		</div>
 		
 		<div class="mb-3">
@@ -40,10 +39,14 @@
 		  <textarea id="contents" name="contents" class="form-control" placeholder="insert contents here" rows="5"></textarea>
 		</div>
 		
-		<div id="fileList" class="my-5">
-			<div class="mb-3">
+		<div id="fileList" class="row my-5">
+			<div class="row mb-3">
 				<label for="campFiles" class="form-label">대표 사진 등록</label>
 				<input type="file" id="campFiles" name="files" class="form-control">
+			</div>
+			
+			<div class="row col-2 mb-3">
+				<button id="fileAdd" class="btn btn-outline-success" type="button">추가 사진 등록</button>
 			</div>
 			
 <!-- 			<div class="mb-3">
@@ -65,6 +68,12 @@
 	
 	
 </div>
+<script src="../resources/js/camp/fileManager.js"></script>
+<script>
+	setMax(5);
+	setParam('files');
+	setCount(1);
+</script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

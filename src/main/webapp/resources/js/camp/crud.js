@@ -16,3 +16,8 @@ $('#cancel').click(function(){
         location.href="./detail?campNum="+$('#detailCampNum').val();
     }
 })
+
+//리스트로 - detail.jsp
+$('#list').click(function(){
+    location.href="./list";
+})

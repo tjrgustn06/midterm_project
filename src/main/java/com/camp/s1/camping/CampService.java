@@ -93,31 +93,32 @@ public class CampService {
 	//update
 	public int setCampUpdate(CampDTO campDTO, MultipartFile[] files, HttpSession session, Long[] fileNums) throws Exception{
 		//1.업데이트 -> 글 내용 + 업데이트 되는 파일은 2.지우고 3.다시 넣기
+		//ajax로 파일처리하면 파일추가만 하면 될듯
 		
 		//1.
-		List<CampFileDTO> ar = campDAO.getCampFileList(campDTO); //업데이트 하기전에 캠핑장에 묶인 파일리스트 조회
-		
-		for(CampFileDTO campFileDTO : ar) { //확인용
-			System.out.println("fileNum: "+campFileDTO.getFileNum());
-		}
+//		List<CampFileDTO> ar = campDAO.getCampFileList(campDTO); //업데이트 하기전에 캠핑장에 묶인 파일리스트 조회
+//		
+//		for(CampFileDTO campFileDTO : ar) { //확인용
+//			System.out.println("fileNum: "+campFileDTO.getFileNum());
+//		}
 		
 		int result = campDAO.setCampUpdate(campDTO);
 		
-		//파일처리 - DB의 파일정보 지우기.
-		if(fileNums != null) {
-			for(Long fileNum : fileNums) {
-				campDAO.setCampFileDelete(fileNum);
-			}
-		}
-		
-		//2.업데이트 성공하면 파일 지우기(이름, 경로 필요) - CampDelete에서 file delete와 동일
+//		//파일처리 - DB의 파일정보 지우기.
+//		if(fileNums != null) {
+//			for(Long fileNum : fileNums) {
+//				campDAO.setCampFileDelete(fileNum);
+//			}
+//		}
+//		
+//		//2.업데이트 성공하면 파일 지우기(이름, 경로 필요) - CampDelete에서 file delete와 동일
 		if(result>0) {
 			String realPath = session.getServletContext().getRealPath("resources/upload/camp");
-			
-			for(CampFileDTO campFileDTO : ar) {
-				fileManager.fileDelete(realPath, campFileDTO.getFileName());
-			}
-		
+//			
+//			for(CampFileDTO campFileDTO : ar) {
+//				fileManager.fileDelete(realPath, campFileDTO.getFileName());
+//			}
+//		
 		//3.업데이트 성공하고 파일지우면, 새로 넣기 - CampAdd에서 file Insert와 동일
 			//반복저장
 			for(MultipartFile multipartFile : files) {
@@ -132,6 +133,36 @@ public class CampService {
 				campFileDTO.setOriName(multipartFile.getOriginalFilename());
 						
 				result = campDAO.setCampFileAdd(campFileDTO);
+			}
+		}
+		return result;
+	}
+	
+	//파일 삭제할때 필요한 FileDetail
+	public CampFileDTO getCampFileDetail(CampFileDTO campFileDTO) throws Exception{
+		return campDAO.getCampFileDetail(campFileDTO);
+	}
+	
+	
+	//update-Ajax(fileDelete)
+	public int setCampFileDelete(Long fileNum, HttpSession session) throws Exception{
+		//메서드 호출이 되면 db에서 정보삭제 + hdd에서 파일삭제(하나씩)
+		System.out.println("serv: "+fileNum);
+		CampFileDTO campFileDTO = new CampFileDTO();
+		campFileDTO.setFileNum(fileNum);
+		campFileDTO = campDAO.getCampFileDetail(campFileDTO);
+		System.out.println("fileNum: "+campFileDTO.getFileName());
+		
+		int result = campDAO.setCampFileDelete(fileNum);
+		
+		if(result>0) {
+			String realPath = session.getServletContext().getRealPath("resources/upload/camp");
+			System.out.println(realPath);
+			boolean check = fileManager.fileDelete(realPath, campFileDTO.getFileName());
+			if(check) {
+				result = 1;
+			}else {
+				result = 0;
 			}
 		}
 		return result;

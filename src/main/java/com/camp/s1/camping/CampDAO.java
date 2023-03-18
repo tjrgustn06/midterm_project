@@ -56,6 +56,11 @@ public class CampDAO {
 		return sqlSession.insert(NAMESPACE+"setCampFileAdd", campFileDTO);
 	}
 	
+	//fileDetail
+	public CampFileDTO getCampFileDetail(CampFileDTO campFileDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCampFileDetail", campFileDTO);
+	}
+	
 	//fileDelete
 	public int setCampFileDelete(Long fileNum) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setCampFileDelete", fileNum);

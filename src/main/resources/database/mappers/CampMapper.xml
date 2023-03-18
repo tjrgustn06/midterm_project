@@ -128,6 +128,11 @@
 		VALUES(CAMPSEQ.NEXTVAL, #{campNum}, #{fileName}, #{oriName})
 	</insert>
 	
+	<!-- fileDetail -->
+	<select id="getCampFileDetail" parameterType="CampFileDTO" resultType="CampFileDTO">
+		SELECT * FROM CAMPFILES WHERE FILENUM=#{fileNum}
+	</select>
+	
 	<!-- fileDelete/CASCADE에서는 필요없을듯 -->
 	<delete id="setCampFileDelete" parameterType="Long">
 		DELETE CAMPFILES WHERE FILENUM=#{fileNum}

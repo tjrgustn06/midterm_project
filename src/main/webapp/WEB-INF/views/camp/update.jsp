@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UpdateCamp - The Camping</title>
+<title>Update ${dto.name} - The Camping</title>
 <c:import url="../template/common_css.jsp"></c:import>
 </head>
 <body>
@@ -41,13 +41,39 @@
 		  <textarea id="campContents" name="contents" class="form-control" rows="5">${dto.contents}</textarea>
 		</div>
 		
-		<div id="fileList" class="my-5">
+		<div id="fileList" class="row my-5">
 			<!-- 새로운 파일을 추가 -->
-			<div class="mb-3">
-				<label for="campFiles" class="form-label">대표 사진 등록</label>
-				<input type="file" id="campFiles" name="files" class="form-control">
+			<div class="row col-2 mb-3">
+				<button class="btn btn-outline-success" type="button" id="fileAdd">추가 사진 등록</button>
+<!-- 				<label for="campFiles" class="form-label">대표 사진 등록</label>
+				<input type="file" id="campFiles" name="files" class="form-control"> -->
 			</div>
 			
+			<!--  -->
+			<!-- add버튼 눌러서 추가되는 div구조 -->
+			<!-- <div class="input-group-text my-2" id="del'+idx+'">
+				<div class="col-1">
+					<input class="form-check-input titleCheck" type="radio" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+				</div>
+				<input type="file" class="form-control" name="param">
+				<button type="button" class="dels btn btn-outline-secondary" data-del-idx="del"+idx>파일 삭제</button>
+			</div>
+
+			<div class="input-group-text my-2" id="del'+idx+'">
+				<input class="form-check-input titleCheck" type="radio" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+				<input type="file" class="form-control" name="param">
+				<button type="button" class="dels btn btn-outline-secondary" data-del-idx="del"+idx>파일 삭제</button>
+			</div>
+
+			<div class="input-group-text my-2" id="del'+idx+'">
+				<input class="form-check-input titleCheck" type="radio" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+				<input type="file" class="form-control" name="param">
+				<button type="button" class="dels btn btn-outline-secondary" data-del-idx="del"+idx>파일 삭제</button>
+			</div> -->
+
+
+			<!--  -->
+
 			<!-- 이미 가지고있는 파일을 표시 -->
 			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">		
 				<div class="input-group my-3">
@@ -58,14 +84,6 @@
 				</div>
 			</c:forEach>
 			
-			
-<!-- 			<div class="mb-3">
-				<label for="files" class="form-label">이미지</label>
-				<input type="file" class="form-control" id="files" name="files">
-				<button type="button" id="del01~">X</button>
-			</div> -->
-			
-			<!-- <button type="button" id="fileAdd">추가 사진 등록</button> -->
 		</div>
 		
 		<div class="row col-4 mx-auto">
@@ -79,7 +97,13 @@
 	
 </div>
 
-<c:import url="../template/common_js.jsp"></c:import>
 <script src="../resources/js/camp/crud.js"></script>
+<script src="../resources/js/camp/fileManager.js"></script>
+<script>
+	setMax(5);
+	setParam('files');
+	setCount('${dto.campFileDTOs.size()}');
+</script>
+<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

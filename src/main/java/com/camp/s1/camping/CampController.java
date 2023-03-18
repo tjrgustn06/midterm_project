@@ -80,9 +80,9 @@ public class CampController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = campService.setCampAdd(campDTO, files, session);
-		String message = "캠프장 등록 실패<br>관리자에게 문의하세요";
+		String message = "캠핑장 등록 실패. 관리자에게 문의하세요";
 		if(result>0) {
-			message = "캠프장이 등록되었습니다";
+			message = "캠핑장이 등록되었습니다";
 		}
 		
 		mv.addObject("result", message);

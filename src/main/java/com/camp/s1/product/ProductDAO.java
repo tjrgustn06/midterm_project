@@ -44,6 +44,11 @@ public class ProductDAO {
 		return sqlSession.insert(NAMESPACE+"setProductAdd", productDTO);
 	}
 	
+	// productFile 추가
+	public int setProductFileAdd(ProductFileDTO productFileDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setProductFileAdd", productFileDTO);
+	}
+	
 	// Update 물품 수정
 	public int setProductUpdate(ProductDTO productDTO) throws Exception {
 		

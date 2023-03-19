@@ -34,11 +34,26 @@
   	</select>
   	
   	<!-- Detail 상세페이지 출력 -->
-  	<select id="getProductDetail" parameterType="ProductDTO" resultType="ProductDTO">
+  	<select id="getProductDetail" parameterType="ProductDTO" resultMap="productDetailResult">
   		SELECT * FROM PRODUCT
+  		LEFT JOIN
+  		PRODUCTFILES
+  		USING (PRODUCTNUM)
   		WHERE PRODUCTNUM = #{productNum}
-  		
   	</select>
+  	
+  	<resultMap type="productDTO" id="productDetailResult">
+  		<id column="PRODUCTNUM" property="productNum"/>
+  		<result column="NAME" property="name"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="STATUS" property="status"/>
+  		<result column="SUMMARY" property="summary"/>
+  		<collection property="productFileDTOs" javaType="List" ofType="ProductFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
   	
   	<!--상품에따른 Grade 출력 -->
   	<select id="getProductGrade" parameterType="productDTO" resultType="productGradeDTO">
@@ -51,8 +66,14 @@
   		<selectKey	keyProperty="productNum" resultType="Long" order="BEFORE">
   			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
   		</selectKey>
-  		INSERT INTO PRODUCT
-  		VALUES (#{productNum}, #{name}, #{contents}, '대여가능')
+  		INSERT INTO PRODUCT (PRODUCTNUM, NAME, CONTENTS, STATUS, SUMMARY)
+  		VALUES (#{productNum}, #{name}, #{contents}, '대여가능', #{summary})
+  	</insert>
+  	
+  	<!-- ProductFile 추가 -->
+  	<insert id="setProductFileAdd" parameterType="ProductFileDTO">
+  		INSERT INTO PRODUCTFILES (FILENUM, PRODUCTNUM, FILENAME, ORINAME)
+  		VALUES (PRODUCTSEQ.NEXTVAL, #{productNum}, #{fileName}, #{oriName})
   	</insert>
   	
   	<!-- Update 물품 수정 -->

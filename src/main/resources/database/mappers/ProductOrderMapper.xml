@@ -11,7 +11,8 @@
   		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
   			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
   		</selectKey>
-  		INSERT INTO PRODUCTORDER
+  		INSERT INTO PRODUCTORDER (NUM, GRADENUM, ID, INDEXCODE, ORDERNUM, PRICE, REGDATE, 
+  		STARTDATE, LASTDATE, ACCOUNT, AMOUNT, ADDRESS, STATUS, ORDERER)
   		VALUES (#{num}, #{gradeNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, SYSDATE, 
   		#{startDate}, #{lastDate}, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer}, #{name})
   	</insert>
@@ -23,7 +24,7 @@
   	
   	<!-- 주문번호 입력 -->
   	<insert id="setOrderNum" parameterType="ProductOrderDTO">
-  		INSERT INTO ORDERS VALUES (#{orderNum})
+  		INSERT INTO ORDERS (ORDERNUM) VALUES (#{orderNum})
   	</insert>
   	
   	

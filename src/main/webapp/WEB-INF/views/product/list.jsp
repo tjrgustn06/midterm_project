@@ -26,7 +26,7 @@
 			</div>
 		</c:forEach>
 		<!-- paging -->
-		<div class="row">
+		<div class="row col-6 mx-auto">
 			<nav aria-label="Page navigation example">
 			  <ul class="pagination">
 			  	<li class="page-item">
@@ -73,6 +73,9 @@
 					<button type="submit" id="btn" class="btn btn-primary mb-3">검색</button>
 				</div>
 			</form>
+		</div>
+		<div class="row">
+			<a href="./add" class="btn btn-primary mb-3" role="button">상품추가</a>
 		</div>
 	</div>
 	<c:import url="../template/common_js.jsp"></c:import>

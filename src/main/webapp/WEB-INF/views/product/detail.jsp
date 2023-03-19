@@ -87,7 +87,13 @@
 				
 			</div>
 			<div class="row col-6 mx-auto">
-				<h1>${dto.contents}</h1>
+				<h3>${dto.contents}</h1>
+				<c:if test="${not empty dto.productFileDTOs}">
+					<h3>fileCheck</h3>
+					<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
+						<img src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+					</c:forEach>
+				</c:if>
 			</div>
 		</c:if>
 	</div>

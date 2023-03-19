@@ -70,6 +70,12 @@
   		VALUES (#{productNum}, #{name}, #{contents}, '대여가능', #{summary})
   	</insert>
   	
+  	<!-- Grade 추가 -->
+  	<insert id="setProductGradeAdd">
+  		INSERT INTO PRODUCTGRADE (GRADENUM, PRODUCTNUM, GRADESTOCK, GRADENAME, PRICE)
+  		VALUES (PRODUCTSEQ.NEXTVAL, #{productNum}, #{gradeStock}, #{gradeName}, #{price})
+  	</insert>
+  	
   	<!-- ProductFile 추가 -->
   	<insert id="setProductFileAdd" parameterType="ProductFileDTO">
   		INSERT INTO PRODUCTFILES (FILENUM, PRODUCTNUM, FILENAME, ORINAME)
@@ -85,6 +91,17 @@
   	<!-- Delete 물품 삭제 -->
   	<delete id="setProductDelete" parameterType="ProductDTO">
   		DELETE PRODUCT WHERE PRODUCTNUM=#{productNum}
+  	</delete>
+  	
+  	<select id="getProductFileList" parameterType="ProductDTO" resultType="productFileDTO">
+  		SELECT * FROM PRODUCTFILES
+  		WHERE PRODUCTNUM=#{productNum}
+  	</select>
+  	
+  	<!-- ProducrFile 삭제 -->
+  	<delete id="setProductFileDelete" parameterType="productFileDTO">
+  		DELETE PRODUCTfILES
+  		WHERE FILENUM=#{fileNum}
   	</delete>
   
   

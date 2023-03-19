@@ -53,10 +53,19 @@ public class ProductController {
 	
 	// Add 상품 추가 POST
 	@PostMapping("add")
-	public ModelAndView setProductAdd(ProductDTO productDTO, MultipartFile [] files, HttpSession session) throws Exception {
+	public ModelAndView setProductAdd(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] addFiles, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = productService.setProductAdd(productDTO, files, session);
-		mv.setViewName("redirect:list");
+		int result = productService.setProductAdd(productDTO, productGradeDTO, addFiles, session);
+		
+		String msg = "등록 성공";
+		
+		if(result>0) {
+			msg = "등록 성공";
+		}
+		
+		mv.addObject("result", msg);
+		mv.addObject("url", "./list");
+		mv.setViewName("common/result");
 		
 		return mv;
 	}
@@ -82,10 +91,10 @@ public class ProductController {
 	
 	// Delete 상품 삭제
 	@PostMapping("delete")
-	public ModelAndView setProductDelete(ProductDTO productDTO) throws Exception {
+	public ModelAndView setProductDelete(ProductDTO productDTO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = productService.setProductDelete(productDTO);
-		mv.setViewName("redirect:list");
+		 mv.setViewName("common/ajaxResult");
+		 mv.addObject("result", productService.setProductDelete(productDTO, session));
 		return mv;
 	}
 	

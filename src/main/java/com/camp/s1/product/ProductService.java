@@ -27,7 +27,13 @@ public class ProductService {
 		
 		
 		pager.makeNum(productDAO.getTotalCount(pager));
-		return productDAO.getProductList(pager);
+		List<ProductDTO> ar = productDAO.getProductList(pager);
+		
+		for(ProductDTO productDTO:ar) {
+			productDTO.setProductFileDTOs(productDAO.getProductDetail(productDTO).getProductFileDTOs());
+		}
+		
+		return ar;
 	}
 	
 	// Detail 상세페이지 출력
@@ -38,8 +44,11 @@ public class ProductService {
 	}
 	
 	// Add 물품 추가
-	public int setProductAdd(ProductDTO productDTO, MultipartFile [] files, HttpSession session) throws Exception {
+	public int setProductAdd(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] files, HttpSession session) throws Exception {
 		int result = productDAO.setProductAdd(productDTO);
+		productGradeDTO.setProductNum(productDTO.getProductNum());
+		
+		result = productDAO.setProductGradeAdd(productGradeDTO);
 		
 		//file HDD에 저장
 		String realPath = session.getServletContext().getRealPath("resources/upload/product");
@@ -70,8 +79,21 @@ public class ProductService {
 		return productDAO.setProductUpdate(productDTO);
 	}
 	
-	public int setProductDelete(ProductDTO productDTO) throws Exception {
-		return productDAO.setProductDelete(productDTO);
+	// Delete 물품 삭제
+	public int setProductDelete(ProductDTO productDTO, HttpSession session) throws Exception {
+		
+		List<ProductFileDTO> ar = productDAO.getProductFileList(productDTO);
+		int result = productDAO.setProductDelete(productDTO);
+		
+		//HDD에서 삭제
+		if(result>0) {
+			String realPath = session.getServletContext().getRealPath("resources/upload/product");
+			boolean check = false;
+			for(ProductFileDTO productFileDTO : ar) {
+				check = fileManager.fileDelete(realPath, productFileDTO.getFileName());
+			}
+		}
+		return result;
 	}
 
 }

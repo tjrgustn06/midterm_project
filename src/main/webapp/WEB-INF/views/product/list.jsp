@@ -16,7 +16,9 @@
 	<div class="container-fluid col-6">
 		<c:forEach items="${list}" var="dto">
 			<div class="card" style="width: 18rem">
-				<img src="/resources/images/Gaviscon_Kim.jpeg" class="card-img-top" alt="...">
+				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
+					<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+				</c:forEach>
 				
 				<div class="card-body">
 				  <h5 class="card-title">${dto.name}</h5>

@@ -15,7 +15,9 @@
 	<div class="container-fluid">
 		<c:if test="${not empty dto.productNum}">
 			<div class="row col-6 mx-auto">
-				<img class="card-img-top" src="../resources/images/Gaviscon_Kim.jpeg" alt="Card image cap">
+				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
+					<img src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+				</c:forEach>
 	   			<div class="item-line">
 	    			<h1>${dto.name}</h1>
 	    			<p>${dto.summary}</p>
@@ -84,16 +86,27 @@
 					</div>
 					</form>
 				</div>
-				
+			</div>
+			<div class="row">
+			<%-- <c:if test="${member.id eq dto.writer}"> --%>
+				<div class="col-md-3">
+					<form action="./update" id="frm" method="GET">
+						<input type="hidden" name="productNum" value="${dto.productNum}">
+							
+						<button type="submit" class="btn btn-primary mx-2" id="update">글 수정</button>
+						
+						<button type="button" class="btn btn-primary mx-2" id="delete" data-delete="${dto.productNum}">글 삭제</button>
+					</form>
+				</div>
+				<div class="col-md-3">
+					<a href="./list" class="btn btn-primary mx-2">목록으로</a>	
+				</div>
+			<%-- </c:if> --%>
+			
+			<!-- delete시엔 post방식 update시엔 get -->
 			</div>
 			<div class="row col-6 mx-auto">
 				<h3>${dto.contents}</h1>
-				<c:if test="${not empty dto.productFileDTOs}">
-					<h3>fileCheck</h3>
-					<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
-						<img src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
-					</c:forEach>
-				</c:if>
 			</div>
 		</c:if>
 	</div>

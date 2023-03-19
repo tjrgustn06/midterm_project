@@ -82,10 +82,27 @@ public class ProductController {
 	
 	// Update 상품 수정 POST
 	@PostMapping("update")
-	public ModelAndView setProductUpdate(ProductDTO productDTO, ModelAndView mv) throws Exception {
-		int result = productService.setProductUpdate(productDTO);
-		mv.setViewName("product/detail?productNum="+productDTO.getProductNum());
+	public ModelAndView setProductUpdate(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] addFiles, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = productService.setProductUpdate(productDTO, productGradeDTO, addFiles, session);
 		
+		String msg = "수정 실패";
+		if(result > 0) {
+			msg = "수정이 완료되었습니다";
+		}
+		mv.setViewName("common/result");
+		mv.addObject("result", msg);
+		mv.addObject("url", "./detail?productNum="+productDTO.getProductNum());
+		
+		return mv;
+	}
+	
+	@PostMapping("boardFileDelete")
+	public ModelAndView setProductFileDelete(Long fileNum) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("result", productService.setProductFileDelete(fileNum));
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

@@ -13,10 +13,11 @@
 <body>
 	<div class="container-fluid">
 		<div class="row md-7">
-			<h1 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">Product Add Page</h1>
+			<h1 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">Product Update Page</h1>
 		</div>
 		<div class="row justify-content-center">
-			<form class="col-md-7" action="./add" method="post" enctype="multipart/form-data">
+			<form class="col-md-7" action="./update" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="productNum" value="${dto.productNum}">
 				<div class="mb-3">
 					<label for="name" class="form-label">상품명</label>
 					<input name="name" type="text" class="form-control" id="name" placeholder="물품명을 입력해주세요." value="${dto.name}">
@@ -56,15 +57,19 @@
 				</div>
 				<div class="mb-3">
 		  			<label for="contents" class="form-label">상세정보</label>
-		 			<textarea name="contents" class="form-control" id="contents" rows="7"></textarea>
+		 			<textarea name="contents" class="form-control" id="contents" rows="7">${dto.contents}</textarea>
 				</div>
 				
 				<div id="fileList">
-					<!-- <div class="mb-3">
-						<label for="files" class="form-label">Image</label>
-						<input type="file" class="form-control" id="files" name="pic">
-					</div> -->
-					<button type="button" id="addBtn" class="col-md-1 offset-md-11 btn btn-primary">사진추가</button>
+					<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
+						<div class="input-group mb-3">
+							<div class="input-group-text">
+								<input class="form-check-input mt-0 deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" disabled value="${fileDTO.oriName}" class="form-control" aria-label="Text input with checkbox">
+						</div>
+					</c:forEach>
+					<button type="button" id="addBtn" class="col-md-1 offset-md-11 btn btn-primary">ADD</button>
 				</div>
 				<div class="mt-5">
 					<button class="btn btn-secondary" type="submit">상품등록</button>
@@ -76,6 +81,7 @@
 	<script>
 		setParam('addFiles')
 		setMax(1);
+		setCount('${dto.productFileDTOs.size()}');
 		$('#contents').summernote()
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>

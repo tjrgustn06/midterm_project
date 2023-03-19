@@ -1,4 +1,4 @@
-package com.camp.s1.product;
+package com.camp.s1.product.order;
 
 import java.sql.Date;
 

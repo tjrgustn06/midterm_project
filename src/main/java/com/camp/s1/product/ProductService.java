@@ -75,8 +75,37 @@ public class ProductService {
 	}
 	
 	// Update 물품 수정
-	public int setProductUpdate(ProductDTO productDTO) throws Exception {
-		return productDAO.setProductUpdate(productDTO);
+	public int setProductUpdate(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] files, HttpSession session) throws Exception {
+		int result = productDAO.setProductUpdate(productDTO);
+		
+		productGradeDTO.setProductNum(productDTO.getProductNum());
+		
+		result = productDAO.setProductGradeUpdate(productGradeDTO);
+		
+		String realPath = session.getServletContext().getRealPath("resources/upload/product");
+		
+		System.out.println(realPath);
+		
+		for (MultipartFile multipartFile : files) {
+			
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(multipartFile, realPath);
+			
+			ProductFileDTO productFileDTO = new ProductFileDTO();
+			productFileDTO.setProductNum(productDTO.getProductNum());
+			productFileDTO.setFileName(fileName);
+			productFileDTO.setOriName(multipartFile.getOriginalFilename());
+			
+			result = productDAO.setProductFileAdd(productFileDTO);
+		}
+		return result;
+	}
+	
+	public int setProductFileDelete(Long fileNum) throws Exception {
+		return productDAO.setproductFileDelete(fileNum);
 	}
 	
 	// Delete 물품 삭제

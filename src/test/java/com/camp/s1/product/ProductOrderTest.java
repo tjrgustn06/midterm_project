@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.camp.s1.MyTestCase;
+import com.camp.s1.product.order.ProductOrderDAO;
+import com.camp.s1.product.order.ProductOrderDTO;
 
 public class ProductOrderTest extends MyTestCase{
 

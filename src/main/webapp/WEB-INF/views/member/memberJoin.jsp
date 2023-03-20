@@ -44,6 +44,7 @@
 		<div class="mb-3">
 			<label for="name" class="form-label fw-bold">이름</label> 
 			<input type="text" name="name" class="form-control" id="na" placeholder="이름 입력">
+			<input type="text" name="name" class="form-control" id="name" placeholder="이름 입력">
 			<div id="namekResult"></div>
 		</div>
 		

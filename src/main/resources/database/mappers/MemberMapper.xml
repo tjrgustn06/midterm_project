@@ -10,10 +10,30 @@
 	
 </insert>
 
-<select id="getMemberLogin" parameterType="MemberDTO">
-	SELECT * FROM MEMBER
-	WHERE ID=#{id}
-</select>
+  	<select id="getMemberLogin" parameterType="MemberDTO" resultMap="getMemberResult">
+  		SELECT M.*, A.* 
+  		FROM MEMBER M
+	    LEFT OUTER JOIN
+	      ADDRESS A
+	      ON (M.ID = A.ID)
+      WHERE M.ID = #{id}
+     </select>
+     
+      <resultMap type="MemberDTO" id="getMemberResult">
+        <id column="ID" property="id"/>
+        <result column="PW" property="pw"/>
+        <result column="NAME" property="name"/>
+        <result column="PHONE" property="phone"/>
+        <result column="EMAIL" property="email"/>
+        <result column="ADDRESS" property="address"/>
+        <association javaType="AddressDTO" property="addressDTO">
+           <id column="ADDRESSNUM" property="addressNum"/>
+           <result column="ADDRESSNAME" property="addressName"/>
+           <result column="ADDRESS" property="address"/>
+           <result column="ADDRESSDTAIL" property="addressDetail"/>
+           <result column="POSTCODE" property="postCode"/>
+        </association>
+     </resultMap>
 
 <update id="setMemberUpdate" parameterType="MemberDTO">
 	UPDATE M.*, MI.*

@@ -58,14 +58,14 @@
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="amount">대여수량</label>
 						</div>
-						<div class="row">
-							<select class="form-select" aria-label="Default select example" name="amount" id="amount">
+						<div class="row" id="amountChange">
+							<!-- <select class="form-select" aria-label="Default select example" name="amount" id="amount">
 					    		<option value="1" selected>1개</option>
 					    		<option value="2">2개</option>
 					    		<option value="3">3개</option>
 					    		<option value="4">4개</option>
 					    		<option value="5">5개</option>
-					  		</select>
+					  		</select> -->
 						</div>
 					</div>
 					<div class="input-group mb-3">
@@ -137,6 +137,10 @@
 				}
 			</c:forEach>
 
+			$('#amountChange').empty();
+
+			getAmount()
+
 			price = price*$('#amount').val();
 			$('#totalPrice').html(price)
 			$('#price').val($('#totalPrice').html())
@@ -145,7 +149,8 @@
 			$('#gradeStock').html(gradeStock);
 		})
 		
-		$('#amount').change(function(){
+		$('#amountChange').change(function(){
+			console.log('check')
 			console.log('amount change : '+price)
 			totalPrice =price*$('#amount').val();
 			$('#totalPrice').html(totalPrice)

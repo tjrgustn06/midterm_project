@@ -28,19 +28,17 @@ $('#delete').click(function(){
         })
     }
 })
-{/* <select class="form-select" aria-label="Default select example" name="amount" id="amount">
-	<option value="1" selected>1개</option>
-	<option value="2">2개</option>
-	<option value="3">3개</option>
-	<option value="4">4개</option>
-	<option value="5">5개</option>
-</select> */}
+
+getAmount();
+
 function getAmount(){
-    child='<select class="form-select" aria-label="Default select example" name="amount" id="amount"'
+    child='<select class="form-select" aria-label="Default select example" name="amount" id="amount">'
     child=child+'<option value="1" selected>1개</option>'
     child=child+'<option value="2">2개</option>'
     child=child+'<option value="3">3개</option>'
     child=child+'<option value="4">4개</option>'
     child=child+'<option value="5">5개</option>'
     child=child+'</select>'
+
+    $('#amountChange').append(child);
 }

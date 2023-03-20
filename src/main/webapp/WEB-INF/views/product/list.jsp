@@ -16,7 +16,9 @@
 	<div class="container-fluid col-6">
 		<c:forEach items="${list}" var="dto">
 			<div class="card" style="width: 18rem">
-				<img src="/resources/images/iuPhoto.jpg" class="card-img-top" alt="...">
+				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
+					<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+				</c:forEach>
 				
 				<div class="card-body">
 				  <h5 class="card-title">${dto.name}</h5>
@@ -26,7 +28,7 @@
 			</div>
 		</c:forEach>
 		<!-- paging -->
-		<div class="row">
+		<div class="row col-6 mx-auto">
 			<nav aria-label="Page navigation example">
 			  <ul class="pagination">
 			  	<li class="page-item">
@@ -56,7 +58,7 @@
 			  </ul>
 			</nav>
 		</div>
-			<div class="row col-md-7 mx-auto">
+		<div class="row col-md-7 mx-auto">
 			<form class="row g-3" action="./list" method="get">
 				<div class="col-auto">
 					<label for="kind" class="visually-hidden">Kind</label>
@@ -72,8 +74,11 @@
 				<div class="col-auto">
 					<button type="submit" id="btn" class="btn btn-primary mb-3">검색</button>
 				</div>
-				</form>
-			</div>
+			</form>
+		</div>
+		<div class="row">
+			<a href="./add" class="btn btn-primary mb-3" role="button">상품추가</a>
+		</div>
 	</div>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>

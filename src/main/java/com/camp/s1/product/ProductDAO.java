@@ -44,6 +44,16 @@ public class ProductDAO {
 		return sqlSession.insert(NAMESPACE+"setProductAdd", productDTO);
 	}
 	
+	// Grade 추가
+	public int setProductGradeAdd(ProductGradeDTO productGradeDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setProductGradeAdd", productGradeDTO);
+	}
+	
+	// productFile 추가
+	public int setProductFileAdd(ProductFileDTO productFileDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setProductFileAdd", productFileDTO);
+	}
+	
 	// Update 물품 수정
 	public int setProductUpdate(ProductDTO productDTO) throws Exception {
 		
@@ -54,6 +64,10 @@ public class ProductDAO {
 	public int setProductDelete(ProductDTO productDTO) throws Exception {
 		
 		return sqlSession.delete(NAMESPACE+"setProductDelete", productDTO);
+	}
+	
+	public List<ProductFileDTO> getProductFileList(ProductDTO productDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getProductFileList", productDTO);
 	}
 	
 }

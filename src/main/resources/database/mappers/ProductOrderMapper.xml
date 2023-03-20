@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.product.ProductOrderDAO">
+  	
+  	<!-- Add 주문하기 -->
+  	<insert id="setProductOrderAdd" parameterType="ProductOrderDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PRODUCTORDER (NUM, GRADENUM, ID, INDEXCODE, ORDERNUM, PRICE, REGDATE, 
+  		STARTDATE, LASTDATE, ACCOUNT, AMOUNT, ADDRESS, STATUS, ORDERER)
+  		VALUES (#{num}, #{gradeNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, SYSDATE, 
+  		#{startDate}, #{lastDate}, '12345-67890', #{amount}, #{address}, '입금대기', #{orderer}, #{name})
+  	</insert>
+  	
+  	<!-- 주문번호 생성 -->
+  	<select id="getOrderNum" resultType="Long">
+  		SELECT PAYMENTSEQ.NEXTVAL FROM DUAL
+  	</select>
+  	
+  	<!-- 주문번호 입력 -->
+  	<insert id="setOrderNum" parameterType="ProductOrderDTO">
+  		INSERT INTO ORDERS (ORDERNUM) VALUES (#{orderNum})
+  	</insert>
+  	
+  	
+  	<!-- Order List 출력 -->
+  	<select id="getProductOrderList" parameterType="Pager" resultType="ProductOrderDTO">
+  		SELECT * FROM(
+  			SELECT ROWNUM R, PO.* FROM(
+  				SELECT * FROM PRODUCTORDER
+  				ORDER BY NUM ASC
+  			) PO
+  		) WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<!-- Detail 주문 페이지 -->
+  	<select id="getProductOrderDetail" parameterType="ProductOrderDTO" resultType="ProductOrderDTO">
+  		SELECT * FROM PRODUCTORDER
+  		WHERE NUM=#{num}
+  	</select>
+  	
+  	<!-- Payment 주문 결제 -->
+  	<update id="setProductOrderPayment" parameterType="ProductOrderDTO">
+  		UPDATE PRODUCTORDER SET ADDRESS=#{address}, STATUS=#{status}
+  		WHERE NUM=#{num}
+  	</update>
+  	
+  	<!-- 총 갯수 출력 -->
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(NUM) FROM PRODUCTORDER
+  	</select>
+  	
+  </mapper>

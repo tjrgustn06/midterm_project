@@ -12,6 +12,7 @@
 </style>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 	<h3>List Page</h3>
 	<div class="container-fluid col-6">
 		<c:forEach items="${list}" var="dto">

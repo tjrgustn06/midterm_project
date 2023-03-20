@@ -10,6 +10,7 @@
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <body>
+<c:import url="../../template/header.jsp"></c:import>
 	<div class="container-fluid">
 		<div class="row">
 			<h1>Order Detail</h1>

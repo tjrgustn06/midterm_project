@@ -11,6 +11,7 @@
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 	<h1>Detail Page</h1>
 	<div class="container-fluid">
 		<c:if test="${not empty dto.productNum}">

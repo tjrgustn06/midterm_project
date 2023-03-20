@@ -28,17 +28,11 @@
 			
 			<c:if test="${!empty dto.boardFileDTOs}">
 				<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
-					<img src="../resources/upload/qna/${fileDTO.boardFileDTOs.fileName}">
+					<img src="../resources/upload/${boardName}/${fileDTO.fileName}">
 					<a href="./fileDown?fileNum=${fileDTO.fileNum}">${fileDTO.oriName}</a>
 				</c:forEach>
 			</c:if>
 			
-			
-<%-- 		<c:if test="${not empty dto.bankBookImgDTO}">
-			<div>
-				<img href="../resources/upload/bankBook/${bankBookDTO.bankBookImgDTO.fileName}"></a>
-			</div>
-		</c:if> --%>
 			
 			<div class="row">
 				<div class="col-md-8">
@@ -49,17 +43,21 @@
 			</div>
 	</div>
 
-	<div class="my-5">
+	<c:if test="${boardName ne 'notice'}">
+		<div class="my-5">
 	  
-		<div class="row col-md-10 offset-md-1" id="commentList">
-  
+			<div class="row col-md-10 offset-md-1" id="commentList">
+	  
+			</div>
+			<div class="mb-3">
+			  <textarea class="form-control" id="replyContents" rows="3" name="contents" ></textarea>
+			</div>
+			<div class="mb-3">
+			  <button class="btn btn-primary" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
+			</div>
 		</div>
-		<div class="mb-3">
-		  <textarea class="form-control" id="replyContents" rows="3" name="contents" ></textarea>
-		</div>
-		<div class="mb-3">
-		  <button class="btn btn-primary" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
-	</div>
+	</c:if>
+	
 
 
 

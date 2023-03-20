@@ -26,32 +26,54 @@
 					<input name="summary" type="text" class="form-control" id="summary" placeholder="한줄설명을 입력해주세요." value="${dto.summary}">
 				</div>
 				<div class="input-group mb-3">
-	  					<div class="input-group-prepend">
-	    					<label class="input-group-text" for="gradeName">옵션</label>
-	  					</div>
-	  					<div class="input-group-prepend">
-							<select class="custom-select" id="gradeName" name="gradeName">
-				    			<option selected>--옵션을 선택하세요--</option>
-								<option value="A급">A급</option>
-								<option value="B급">B급</option>
-								<option value="C급">C급</option>
-				  			</select>
-			  			</div>
-					</div>
+	  				<div class="input-group-prepend">
+	    				<label class="input-group-text" for="gradeName">A급 수량</label>
+		  				<input type="hidden" name="gradeName" value="A급">
+	  				</div>
+	  				<div class="input-group-prepend">
+						<input class="form-control" name="gradeStock" value="0">
+			  		</div>
+				</div>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-	    				<label class="input-group-text" for="gradeStock">수량</label>
+	    				<label class="input-group-text" for="price">A급 금액</label>
 	  				</div>
 					<div class="input-group-prepend">
-					<input name="gradeStock" type="text" class="form-control" id="gradeStock" placeholder="수량을 입력해주세요.">
+						<input name="price" type="text" class="form-control" id="price" value="0">
 					</div>
 				</div>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-	    				<label class="input-group-text" for="price">금액</label>
+	    				<label class="input-group-text" for="gradeName">B급 수량</label>
+		  				<input type="hidden" name="gradeName" value="B급">
 	  				</div>
 					<div class="input-group-prepend">
-						<input name="price" type="text" class="form-control" id="price" placeholder="금액을 입력해주세요.">
+					  <input class="form-control" name="gradeStock" value="0">
+					</div>
+			  	</div>
+			  	<div class="input-group mb-3">
+					<div class="input-group-prepend">
+	    				<label class="input-group-text" for="price">B급 금액</label>
+	  				</div>
+					<div class="input-group-prepend">
+						<input name="price" type="text" class="form-control" id="price" value="0">
+					</div>
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+	    				<label class="input-group-text" for="gradeName">C급 수량</label>
+		  				<input type="hidden" name="gradeName" value="C급">
+	  				</div>
+					<div class="input-group-prepend">
+					  <input class="form-control" name="gradeStock" value="0">
+					</div>
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+	    				<label class="input-group-text" for="price">C급 금액</label>
+	  				</div>
+					<div class="input-group-prepend">
+						<input name="price" type="text" class="form-control" id="price" value="0">
 					</div>
 				</div>
 				<div class="mb-3">

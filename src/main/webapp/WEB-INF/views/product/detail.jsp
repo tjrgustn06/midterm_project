@@ -34,27 +34,39 @@
 	  					<div class="input-group-prepend">
 	    					<label class="input-group-text" for="gradeName">옵션</label>
 	  					</div>
-						<select class="custom-select" id="gradeName">
-			    			<option selected>--옵션을 선택하세요--</option>
-							<option value="A급">A급</option>
-							<option value="B급">B급</option>
-							<option value="C급">C급</option>
-			  			</select>
-						
+	  					<div class="row">
+							<select class="form-select" aria-label="Default select example" id="gradeName">
+				    			<option selected>--옵션을 선택하세요--</option>
+								<option value="A급">A급</option>
+								<option value="B급">B급</option>
+								<option value="C급">C급</option>
+				  			</select>
+						</div>
 			  			
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="gradeStock">재고</label>
+						</div>
+						<div class="row my-auto" id="gradeStock">
+						</div>
+						<div class="row">
+							<p class="my-auto">개</p>
+						</div>
 					</div>
 			    	<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="amount">재고</label>
+							<label class="input-group-text" for="amount">대여수량</label>
 						</div>
-						<select class="custom-select" name="amount" id="amount">
-				    		<option value="1" selected>1개</option>
-				    		<option value="2">2개</option>
-				    		<option value="3">3개</option>
-				    		<option value="4">4개</option>
-				    		<option value="5">5개</option>
-				  		</select>
-
+						<div class="row">
+							<select class="form-select" aria-label="Default select example" name="amount" id="amount">
+					    		<option value="1" selected>1개</option>
+					    		<option value="2">2개</option>
+					    		<option value="3">3개</option>
+					    		<option value="4">4개</option>
+					    		<option value="5">5개</option>
+					  		</select>
+						</div>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -114,20 +126,23 @@
 		let price = 0;
 		let totalPrice = 0;
 		let gradeNum='';
+		let gradeStock='';
 		$('#gradeName').change(function(){
 			
 			<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
-				$('#amount')
 				if($('#gradeName').val()=="${gradeDTO.gradeName}") {
 					price = ${gradeDTO.price}
 					gradeNum=${gradeDTO.gradeNum}
+					gradeStock=${gradeDTO.gradeStock}
 				}
 			</c:forEach>
+
 			price = price*$('#amount').val();
 			$('#totalPrice').html(price)
 			$('#price').val($('#totalPrice').html())
 			$('#gradeNum').val(gradeNum)
 			$('#name').val('${dto.name}'+" "+$('#gradeName').val())
+			$('#gradeStock').html(gradeStock);
 		})
 		
 		$('#amount').change(function(){

@@ -44,11 +44,15 @@ public class ProductService {
 	}
 	
 	// Add 물품 추가
-	public int setProductAdd(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] files, HttpSession session) throws Exception {
+	public int setProductAdd(ProductDTO productDTO, MultipartFile [] files, HttpSession session) throws Exception {
 		int result = productDAO.setProductAdd(productDTO);
-		productGradeDTO.setProductNum(productDTO.getProductNum());
 		
-		result = productDAO.setProductGradeAdd(productGradeDTO);
+		for(ProductGradeDTO productGradeDTO:productDTO.getProductGradeDTOs()) {
+			productGradeDTO.setProductNum(productDTO.getProductNum());
+			result = productDAO.setProductGradeAdd(productGradeDTO);
+			
+		}
+		
 		
 		//file HDD에 저장
 		String realPath = session.getServletContext().getRealPath("resources/upload/product");

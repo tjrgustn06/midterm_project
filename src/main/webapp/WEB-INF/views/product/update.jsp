@@ -72,7 +72,7 @@
 					<button type="button" id="addBtn" class="col-md-1 offset-md-11 btn btn-primary">ADD</button>
 				</div>
 				<div class="mt-5">
-					<button class="btn btn-secondary" type="submit">상품등록</button>
+					<button class="btn btn-secondary" type="submit">상품수정</button>
 				</div>
 			</form>
 		</div>
@@ -83,6 +83,13 @@
 		setMax(1);
 		setCount('${dto.productFileDTOs.size()}');
 		$('#contents').summernote()
+	</script>
+	<script>
+		$('#gradeName').change(()=>{
+			<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
+				$('#price').val(${gradeDTO.price})
+			</c:forEach>
+		})
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>

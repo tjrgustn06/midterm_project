@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>${dto.name} Order - The Camping</title>
-<c:import url="../template/common_css.jsp"></c:import>
+<c:import url="../../template/common_css.jsp"></c:import>
 </head>
 <body>
+<c:import url="../../template/header.jsp"></c:import>
 <div class="container-fluid">
 	<div class="row my-3">
 		<h1>${dto.name} Order</h1>
@@ -137,6 +138,6 @@
 </div>
 
 
-<c:import url="../template/common_js.jsp"></c:import>
+<c:import url="../../template/common_js.jsp"></c:import>
 </body>
 </html>

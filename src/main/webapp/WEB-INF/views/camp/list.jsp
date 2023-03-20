@@ -7,24 +7,25 @@
 <meta charset="UTF-8">
 <title>CampList - The Camping</title>
 <c:import url="../template/common_css.jsp"></c:import>
-<style>
-	a{
-		color: black;
-		text-decoration: none;
-	}
+	<style>
+		a{
+			color: black;
+			text-decoration: none;
+		}
+		
+		.pic{
+			width: 40%;
+			height: 200px;
+		}
 	
-	.pic{
-		width: 40%;
-		height: 200px;
-	}
-
-	.campOne{
-		border: black, solid, 1px;
-		border-radius: 5%;
-	}
-</style>
+		.campOne{
+			border: black, solid, 1px;
+			border-radius: 5%;
+		}
+	</style>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid my-5">
 	<div class="row my-3">
 		<h1>CampList Page</h1>

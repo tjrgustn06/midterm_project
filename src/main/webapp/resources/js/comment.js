@@ -9,21 +9,34 @@ getList();
 
 $('#replyAdd').click(function(){
 
-    console.log('boardNum : ' + $('#replyAdd').attr('data-board-num'))
-    console.log('Contents : ' + $('#replyContents').val())
+  
 
-    // $.ajax({
-    //     type : 'POST',
-    //     url : boardName + 'Comment/add',
-    //     data : {
-    //         num : $('#replyAdd').attr('data-board-num'),
-    //         contents : $('#replyContents').val(),
-    //     }
+    $.ajax({
+        type : 'POST',
+        url : boardName + 'Comment/add',
+        data : {
+            num : $('#replyAdd').attr('data-board-num'),
+            contents : $('#replyContents').val(),
+        },
+        success : function(response) {
+            if(response.trim() == 1) {
+                alert('댓글이 등록되었습니다');
+                $('#replyContents').val('');
+                getList();
+            }
+            else {
+                alert('댓글 등록 실패');
+            }
+        },
+
+        error : ()=> {
+            alert("댓글 등록 실패. 관리자에게 문의하세요");
+        }
 
         
         
         
-    // })
+    })
 })
 
 

@@ -3,6 +3,7 @@ package com.camp.s1.board.qna;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,5 +27,17 @@ public class QnaCommentController {
 		return mv;
 		
 	}
+	
+	@PostMapping("add")
+	public ModelAndView setCommentAdd(QnaCommentDTO commentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+//		mv.addObject("result", qnaCommentService.)
+		mv.setViewName("common/ajaxResult");
+		
+		
+		return mv;
+	}
+	
 	
 }

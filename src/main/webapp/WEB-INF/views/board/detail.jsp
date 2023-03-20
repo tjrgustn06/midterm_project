@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid">
 	<div class="row">
 			<h1> ${boardName} Detail Page</h1>
@@ -82,6 +82,7 @@
 	</div>
 </div>
 	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
+	<script type="text/javascript" src="../resources/js/comment.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

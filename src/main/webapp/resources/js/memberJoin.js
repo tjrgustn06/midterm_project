@@ -7,6 +7,8 @@ const pwResult = document.getElementById("pwResult");
 const pwCheck = document.getElementById("pwCheck");
 const pwCheckResult = document.getElementById("pwCheckResult");
 
+const na = document.getElementById("name");
+const nameCResult = document.getElementById("nameResult");
 const na = document.getElementById("na");
 const nameCResult = document.getElementById("nameResult");
 

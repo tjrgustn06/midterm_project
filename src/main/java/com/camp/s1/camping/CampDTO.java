@@ -10,6 +10,7 @@ public class CampDTO {
 	private String address;
 	private String contents;
 	private List<CampFileDTO> campFileDTOs;
+	private List<CampSiteDTO> campSiteDTOs;
 	
 	public CampDTO() {
 		
@@ -62,6 +63,14 @@ public class CampDTO {
 
 	public void setCampFileDTOs(List<CampFileDTO> campFileDTOs) {
 		this.campFileDTOs = campFileDTOs;
+	}
+
+	public List<CampSiteDTO> getCampSiteDTOs() {
+		return campSiteDTOs;
+	}
+
+	public void setCampSiteDTOs(List<CampSiteDTO> campSiteDTOs) {
+		this.campSiteDTOs = campSiteDTOs;
 	}
 	
 }

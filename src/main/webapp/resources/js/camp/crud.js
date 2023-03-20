@@ -21,3 +21,9 @@ $('#cancel').click(function(){
 $('#list').click(function(){
     location.href="./list";
 })
+
+//캠핑장 예약버튼 작동 - detail.jsp
+$('#reserve').click(function(){
+    //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
+    //location.href='';
+})

@@ -22,7 +22,7 @@ public class CampController {
 	@Autowired
 	private CampService campService;
 	
-	//만약에 product랑 jsp 같이 쓸거면 필요한데 안그럴거같음
+	//만약에 product랑 jsp 같이 쓸거면 필요한데 안그럴거같음, 쓰게되면 수정
 //	@ModelAttribute("boardName")
 //	public String getBoardName() {
 //		return "BankBookComment";

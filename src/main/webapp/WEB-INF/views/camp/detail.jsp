@@ -22,7 +22,7 @@
 		<form action="./update" id="frm" method="get">
 			<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 			<input type="hidden" name="campNum" value="${dto.campNum}">
-			<button id="reserve" type="button" class="btn btn-outline-light">Reservation</button>
+			<button id="reserve" type="button" class="btn btn-outline-primary">Reservation</button>
 			<button id="list" type="button" class="btn btn-outline-secondary">go to List</button>
 			<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
 			<button id="update" type="submit" class="btn btn-outline-success">UPDATE</button>

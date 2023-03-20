@@ -32,6 +32,7 @@
   		<include refid="searchCondition"></include>
   	</select>
   
+  
   	<!-- list -->
   	<!-- <select id="getCampList" parameterType="Pager" resultType="CampDTO"> -->
  	<select id="getCampList" parameterType="Pager" resultMap="getCampFileList">
@@ -52,8 +53,7 @@
 			ORDER BY CAMPNUM ASC) C)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}  		
   	</select>
-  	
-  	<!--  -->
+  	<!-- List-file -->
   	<resultMap type="CampDTO" id="getCampFileList">
   		<id column="CAMPNUM" property="campNum"/>
   		<result column="NAME" property="name"/>
@@ -69,8 +69,7 @@
   	</resultMap>
   	
   	
-  
-  	<!-- detail -->
+  	<!-- detail-file -->
   	<select id="getCampDetail" parameterType="CampDTO" resultMap="getCampFileDetail">
   		<!-- SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum} -->
   		SELECT * FROM CAMPINFO CI
@@ -79,7 +78,6 @@
 			ON(CI.CAMPNUM=CF.CAMPNUM)
 		WHERE CI.CAMPNUM=#{campNum}
   	</select>
-  	
   	<!-- detail-file 연결 --> <!-- 이부분은 CampDTO 수정되면 수정되어야할 부분 -->
   	<resultMap type="CampDTO" id="getCampFileDetail">
   		<id column="CAMPNUM" property="campNum"/>
@@ -94,6 +92,32 @@
   			<result column="ORINAME" property="oriName"/>
   		</collection>
   	</resultMap>
+  	
+  	
+  	<!-- detail-site(option) -->
+  	<select id="getCampSiteList" parameterType="CampDTO" resultMap="getCampSiteDetail">
+  		SELECT * FROM CAMPINFO CI
+			LEFT OUTER JOIN
+			CAMPSITE CS 
+			USING(CAMPNUM)
+		WHERE CAMPNUM=#{campNum}
+  	</select>
+  	<resultMap type="CampSiteDTO" id="getCampSiteDetail">
+  		<id column="CAMPNUM" property="campNum"/>
+  		<result column="NAME" property="name"/>
+  		<result column="PHONE" property="phone"/>
+  		<result column="ADDRESS" property="address"/>
+  		<result column="CONTENTS" property="contents"/>
+  		
+  		<collection property="campSiteDTOs" javaType="List" ofType="CampSiteDTO">
+  			<id column="AREANUM" property="areaNum"/>
+  			<result column="SIZEINFO" property="sizeInfo"/>
+  			<result column="PRICE" property="price"/>
+  			<result column="STATUS" property="status"/>
+  			<result column="SITENAME" property="siteName"/>
+  		</collection>
+  	</resultMap>
+  
   
 	<!-- add -->
 	<insert id="setCampAdd" parameterType="CampDTO">
@@ -114,6 +138,7 @@
 		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}, CONTENTS=#{contents}
 		WHERE CAMPNUM=#{campNum}
 	</update>
+	
 	
 	<!-- file -->
 	<!-- fileList -->

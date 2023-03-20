@@ -78,4 +78,19 @@ public class CampDAOTest extends MyTestCase{
 		assertEquals(1, result);
 	}
 	
+	//옵션까지 불러오는 테스트 가능한가? 55번 기준
+	@Test
+	public void getCampSiteListTest() throws Exception{
+		CampDTO campDTO = new CampDTO();
+		campDTO.setCampNum(55L);
+		List<CampSiteDTO> ar = campDAO.getCampSiteList(campDTO);
+		if(ar.size()!=0) {
+			for(CampSiteDTO campSiteDTO : ar) {
+				System.out.println(campSiteDTO.getSiteName());
+				System.out.println(campSiteDTO.getPrice());
+			}
+			assertNotEquals(0, ar.size());
+		}
+	}
+	
 }

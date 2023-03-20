@@ -7,7 +7,7 @@ const pwResult = document.getElementById("pwResult");
 const pwCheck = document.getElementById("pwCheck");
 const pwCheckResult = document.getElementById("pwCheckResult");
 
-const na = document.getElementById("na");
+const na = document.getElementById("name");
 const nameCResult = document.getElementById("nameCResult");
 
 const address = document.getElementById("address");
@@ -188,9 +188,10 @@ btn.addEventListener("click", function(){
         // }else{
         //     alert("필수 사항을 입력하세요")
         // }
+        console.log("btn check");
         if (!checks.includes(false)) {
             alert('회원가입 성공');
         } else {
             alert("필수 사항을 입력하세요");
         }
-    });
+});

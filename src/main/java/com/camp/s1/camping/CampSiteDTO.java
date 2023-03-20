@@ -7,6 +7,7 @@ public class CampSiteDTO {
 	private String sizeInfo;
 	private Long price;
 	private String status;
+	private String siteName;
 	
 	public CampSiteDTO() {
 		
@@ -51,6 +52,13 @@ public class CampSiteDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+	public String getSiteName() {
+		return siteName;
+	}
+
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
+	}
 	
 }

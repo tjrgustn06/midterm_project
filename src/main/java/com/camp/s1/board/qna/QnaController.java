@@ -69,7 +69,7 @@ public class QnaController {
 		}
 		
 		//쿠키가 존재할 때
-		//쿠키의 값중에 글번호를 포함하고 있지 않을 때
+		//쿠키의 값 중에 글번호를 포함하고 있지 않을 때
 		if(oldCookie != null) {
 			if(!oldCookie.getValue().contains("["+qnaDTO.getNum()+"]")) {
 				oldCookie.setValue("[" + qnaDTO.getNum() + "]");
@@ -82,6 +82,7 @@ public class QnaController {
 		
 		//쿠키가 존재하지 않을 때
 		//boardView란 이름의 쿠키 새로 생성
+		//값은 [글번호]
 		else {
 			Cookie newCookie = new Cookie("boardView", "[" + qnaDTO.getNum() + "]");
 			newCookie.setMaxAge(60*60*24);

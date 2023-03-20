@@ -1,4 +1,4 @@
-let boardName;
+let boardName = '';
 
 function setBoardName(b) {
     boardName = b;
@@ -9,11 +9,11 @@ getList();
 
 $('#replyAdd').click(function(){
 
-  
+    console.log(boardName);
 
     $.ajax({
         type : 'POST',
-        url : boardName + 'Comment/add',
+        url : '../'+ boardName + 'Comment/add',
         data : {
             num : $('#replyAdd').attr('data-board-num'),
             contents : $('#replyContents').val(),
@@ -47,7 +47,7 @@ function getList() {
 
     $.ajax({
         type : 'GET',
-        url : boardName + 'Comment/list?num=' + $('#replyAdd').attr('data-board-num'),
+        url : '../'+boardName + 'Comment/list?num=' + $('#replyAdd').attr('data-board-num'),
         success : function(response) {
             $('#commentList').html(response);                                                                         
         }

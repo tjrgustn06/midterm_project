@@ -31,8 +31,8 @@ public class QnaCommentController {
 	@PostMapping("add")
 	public ModelAndView setCommentAdd(QnaCommentDTO commentDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-//		mv.addObject("result", qnaCommentService.)
+		commentDTO.setWriter("qwdfd1");
+		mv.addObject("result", qnaCommentService.setBoardAdd(commentDTO));
 		mv.setViewName("common/ajaxResult");
 		
 		

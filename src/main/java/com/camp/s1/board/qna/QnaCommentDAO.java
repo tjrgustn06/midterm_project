@@ -6,12 +6,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.camp.s1.board.BbsDAO;
 import com.camp.s1.board.BbsDTO;
+import com.camp.s1.board.CommentDAO;
 import com.camp.s1.util.Pager;
 
 @Repository
-public class QnaCommentDAO implements BbsDAO{
+public class QnaCommentDAO implements CommentDAO{
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -30,8 +30,7 @@ public class QnaCommentDAO implements BbsDAO{
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE + "setBoardAdd", bbsDTO);
 	}
 
 	@Override
@@ -45,6 +44,8 @@ public class QnaCommentDAO implements BbsDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
 	
 	
 

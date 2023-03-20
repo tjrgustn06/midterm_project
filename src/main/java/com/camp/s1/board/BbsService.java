@@ -15,12 +15,7 @@ public interface BbsService {
 	//Pager 클래스 구현후 매개변수로 추가해야함
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception; 
 	
-	//insert(add)
-	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile [] files, HttpSession session) throws Exception;
+
 	
-	//update
-	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception;
-	
-	//delete
-	public int setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception;
+
 }

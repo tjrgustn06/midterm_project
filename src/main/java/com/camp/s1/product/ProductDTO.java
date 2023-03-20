@@ -11,7 +11,14 @@ public class ProductDTO {
 	private String summary;
 	
 	private List<ProductGradeDTO> productGradeDTOs;
+	private List<ProductFileDTO> productFileDTOs;
 	
+	public List<ProductFileDTO> getProductFileDTOs() {
+		return productFileDTOs;
+	}
+	public void setProductFileDTOs(List<ProductFileDTO> productFileDTOs) {
+		this.productFileDTOs = productFileDTOs;
+	}
 	public List<ProductGradeDTO> getProductGradeDTOs() {
 		return productGradeDTOs;
 	}

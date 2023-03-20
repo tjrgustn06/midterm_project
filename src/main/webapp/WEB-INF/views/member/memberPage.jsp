@@ -22,6 +22,12 @@
 			<h3>RoleName  : ${dto.roleName}</h3>
 			<h3>Address	 : ${dto.addressDTO.address}</h3>
 			<h3>AddressDetail : ${dto.addressDTO.addressDetail}</h3>
+			<div>
+		<c:if test="${not empty dto.memberImgDTO}">
+			<img src="../resources/upload/member/${dto.memberImgDTO.fileName}">
+			<h3>프로필 이미지 변경</h3>
+		</c:if>
+	</div>
 			<a href="./memberUpdate" class="btn btn-info">정보수정</a>
 			<a href="./memberDelete" class="btn btn-danger">회원탈퇴</a>
 		</div>

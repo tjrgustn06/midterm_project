@@ -9,6 +9,8 @@ public class MemberDTO {
 	private String email;
 	private String roleName;
 	private AddressDTO addressDTO;
+	private MemberImgDTO memberImgDTO;
+
 	
 	public String getId() {
 		return id;
@@ -54,6 +56,13 @@ public class MemberDTO {
 	}
 	
 	
+	public MemberImgDTO getMemberImgDTO() {
+		return memberImgDTO;
+	}
+	public void setMemberImgDTO(MemberImgDTO memberImgDTO) {
+		this.memberImgDTO = memberImgDTO;
+	}
+
 	
 	
 }

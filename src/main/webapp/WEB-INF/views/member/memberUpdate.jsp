@@ -22,7 +22,6 @@
 					<label for="name" class="form-label fw-bold">이름</label> 
 					<input type="text" name="name" class="form-control" id="name" value="${dto.name}">
 				</div>
-			
 				<div class="mb-3">
 					<label for="phone" class="form-label fw-bold">전화번호</label> 
 					<input type="tel" name="phone" class="form-control" id="phone" value="${dto.phone}">
@@ -32,15 +31,21 @@
 					<label for="email" class="form-label fw-bold ">이메일</label> 
 					<input type="email" name="email" class="form-control" id="email" value="${dto.email}">
 				</div>
+				 
+				 <div class="mb-3">
+				<label for="files" class="form-label">Image 수정</label>
+				<input type="file" class="form-control" id="file" name="pic" value="${dto.MemberImgDTO}">
+				</div>
 				
 				<div class="mb-3">
-				<button class="btn btn-outline-success fw-bold" type="submit">확인</button>
 				<a href="./memberPwUpdate" class="btn btn-warning">비밀번호 수정</a>
+				<button class="btn btn-outline-success fw-bold" type="submit">확인</button>
 			</div>
 				
 			</form>		
 		</div>
 	</div>
-
+<script src="../resources/js/fileManger.js"></script>
+<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

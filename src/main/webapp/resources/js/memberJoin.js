@@ -8,7 +8,7 @@ const pwCheck = document.getElementById("pwCheck");
 const pwCheckResult = document.getElementById("pwCheckResult");
 
 const na = document.getElementById("na");
-const nameCResult = document.getElementById("nameCResult");
+const nameCResult = document.getElementById("nameResult");
 
 const address = document.getElementById("address");
 const addressResult =document.getElementById("addressResult");
@@ -45,7 +45,7 @@ id.addEventListener("blur", function(){
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     //요청 발생 POST일 경우 parmater 전송
-    xhttp.send("id="+id.value);
+    xhttp.send("id= " + id.value);
 
     //응답 처리
     xhttp.addEventListener("readystatechange", function(){
@@ -69,7 +69,7 @@ id.addEventListener("blur", function(){
         idResult.classList.remove("redResult");
     }else {
         console.log("비어 있음")
-        idResult.innerHTML="ID는 필수 사항 입니다"
+        idResult.innerHTML="ID는 필수 사항 입니다";
         //idCheck=false;
         checks[0] = false; 
         idResult.classList.add("redResult");
@@ -85,7 +85,7 @@ pw.addEventListener("keyup",function(){
         pwResult.classList.add("blueResult");
         pwResult.classList.remove("redResult");
     }else{
-        pwResult.innerHTML='비번은 6자 이상 12자 이하여야 합니다'
+        pwResult.innerHTML='비번은 6자 이상 12자 이하여야 합니다';
         checks[1] = false;
         pwResult.classList.add("redResult");
         pwResult.classList.remove("blueResult");
@@ -99,7 +99,7 @@ pw.addEventListener("blur",function(){
         pwNullCheck.classList.add("blueResult");
         pwNullCheck.classList.remove("redResult");
     }else{
-        pwResult.innerHTML='비밀 번호는 필수 입니다';   
+        pwResult.innerHTML="비밀 번호는 필수 입니다";   
         checks[2] = false; 
         pwNullCheck.classList.add("redResult");
         pwNullCheck.classList.remove("blueResult");
@@ -130,17 +130,17 @@ pwCheck.addEventListener("blur",function(){
 
 na.addEventListener("blur",function(){
     if(na.value.length !=0){
-        nameCResult.innerHTML='';
+        nameResult.innerHTML='';
         //nameCheck=true;
         checks[4] = true;
-        nameCResult.classList.add("blueResult");
-        nameCResult.classList.remove("redResult");
+        nameResult.classList.add("blueResult");
+        nameResult.classList.remove("redResult");
     }else{
         console.log("비어 있음")
-        nameCResult.innerHTML='이름은 필수 입니다'
+        nameResult.innerHTML='이름은 필수 입니다';
         checks[4] = false;
-        nameCResult.classList.add("redResult");
-        nameCResult.classList.remove("blueResult");
+        nameResult.classList.add("redResult");
+        nameResult.classList.remove("blueResult");
     }
 })
 
@@ -151,7 +151,7 @@ address.addEventListener("blur",function(){
         checks[5] = true;
     }else{
         console.log("비어 있음")
-        addressResult.innerHTML='주소는 필수 입니다'
+        addressResult.innerHTML='주소는 필수 입니다';
         checks[5] = false;
     }
 })
@@ -163,7 +163,7 @@ phone.addEventListener("blur",function(){
         checks[6] = true;
     }else{
         console.log("비어 있음")
-        phoneResult.innerHTML='전화번호는 필수 입니다'
+        phoneResult.innerHTML='전화번호는 필수 입니다';
         checks[6] = false;
     }
 });
@@ -175,7 +175,7 @@ email.addEventListener("blur",function(){
         checks[7] = true;
     }else{
         console.log("비어 있음")
-        emailResult.innerHTML='이메일은 필수 입니다'
+        emailResult.innerHTML='이메일은 필수 입니다';
         checks[7] = false;
     }
 });

@@ -33,4 +33,16 @@ public class MemberDAO {
 		return sqlSession.delete(NAMESPACE+"setMemberDelete", memberDTO);
 	}
 	
+	public String findId(String email)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"findId", email);
+	}
+		//pw변경
+	public int setMemberPwUpdate(MemberDTO memberDTO)throws Exception{
+		return sqlSession.update(NAMESPACE+"setMemberPwUpdate", memberDTO);
+	}
+	
+	public int setMemberUpdateImg(MemberImgDTO memberImgDTO)throws Exception{
+		return sqlSession.update(NAMESPACE+"setMemberUpdateImg", memberImgDTO);
+	}
+
 }

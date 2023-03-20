@@ -8,10 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/member/**")
@@ -72,8 +78,10 @@ public class MemberController {
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
+		
 		memberDTO = memberService.getMemberLogin(memberDTO);
 		
+		System.out.println("3333333333");
 		if(memberDTO !=null) {
 		HttpSession session = request.getSession();
 		session.setAttribute("member", memberDTO);
@@ -125,7 +133,7 @@ public class MemberController {
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
 		
-		int result = memberService.setMemberUpdate(memberDTO);
+		int result = memberService.setMemberUpdate(memberDTO, null);
 		mv.setViewName("redirect:./memberPage");
 		
 		return mv;
@@ -144,34 +152,45 @@ public class MemberController {
 		mv.setViewName("redirect:../");
 		return mv;
 	}
+		
+	//ID 확인 폼
+	@RequestMapping(value = "findIdForm")
+	public String setMemberFindId()throws Exception{
+		return "/member/findIdForm";
+	}
 	
-//	//이메일로 인증번호 발송
-//	@PostMapping("memberFindPw")
-//	public ModelAndView setMemberFindPw(HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception{
-//		ModelAndView mv = new ModelAndView();
-//		
-//		String email = (String)request.getParameter("email");
-//		String name = (String)request.getParameter("name");
-//		
-//		MemberDTO memberDTO = memberService.getMemberPage(memberDTO.getEmail());
-//		
-//		if(memberDTO != null) {
-//			Random r = new Random();
-//			int num = r.nextInt(10);
-//		
-//		if(memberDTO.getName().equals(name)) {
-//			session.setAttribute("email", memberDTO.getEmail());
-//			String setfrom = ""; // naver 
-//			String tomail = email; //받는사람
-//			String title = "비밀번호변경 인증 이메일 입니다"; 
-//			String content = "회원님의 인증번호는"+num+"입니다";
-//		}
-//		}
-//		
-//		return mv;
-//		
-//	}
+	//Id 찾기
+	@PostMapping("findId")
+	public String findId(HttpServletResponse response, String email, Model md)throws Exception{
+		
+		md.addAttribute("id", memberService.findId(response, email));
+		
+		return "/member/findId";
+	}
 	
+	//pw 찾기 폼
+	@RequestMapping(value = "findPwForm")
+	public String findPwForm()throws Exception{
+		return "/member/findPwForm";
+	}
+	//Pw찾기
+	@PostMapping("findPw")
+	public void findPw(@ModelAttribute MemberDTO memberDTO, HttpServletResponse response)throws Exception{
+		memberService.findPw(response, memberDTO);
+	}
+	
+	//Pw변경
+	@PostMapping("memberPwUpdate")
+	public String setmemberPwUpdate(MemberDTO memberDTO, String oldPw, HttpSession session,
+			HttpServletResponse response, RedirectAttributes attr)throws Exception{
+		
+		session.setAttribute("member", memberService.setMemberPwUpdate(memberDTO, oldPw, response));
+		
+		attr.addFlashAttribute("msg", "비밀번호 수정 완료");
+		
+		return "redirect:/member/memberPage";
+		
+	}
 	
 	
 	

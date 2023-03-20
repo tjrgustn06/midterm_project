@@ -6,7 +6,8 @@
 
 <insert id="setMemberJoin" parameterType="MemberDTO">
 	INSERT INTO MEMBER
-	VALUES(#(id), #(pw), #(name), #(phone), #(email), #(roleName))
+	VALUES(#(id), #(pw), #(name), #(phone), #(email), #(roleName), #(addressDTO), #(memberImgDTO))
+	
 </insert>
 
 <select id="getMemberLogin" parameterType="MemberDTO">
@@ -15,12 +16,24 @@
 </select>
 
 <update id="setMemberUpdate" parameterType="MemberDTO">
-	UPDATE MEMBER SET NAME=#{name},PHONE=#{phone},EMAIL=#{email},ROLENAME=#{roleName}
-	WHERE ID =#{id}
+	UPDATE M.*, MI.*
+	FROM MEMBER B
+		LEFT OUTER JOIN
+		MEMBERIMG MI
+		ON (M.ID = MI.ID)
+	WHERE N.ID=#{id}
 </update>
 
 <delete id="setMemberDelete" parameterType="MemberDTO">
 	DELETE MEMBER WHERE ID=#{id}, PW=#{pw}
 </delete>
+
+<select id="findId" parameterType="String" resultType="MemberDTO">
+	SELECT ID FROM MEMBER WHERE EMAIL=#{email}
+</select>
+
+<update id="updatePw" parameterType="MemberDTO">
+	UPDATE MEMBER SET PW=#{pw} WHERE ID=#{id}
+</update>
 
 </mapper>

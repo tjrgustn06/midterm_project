@@ -43,22 +43,26 @@
 		
 		<div class="mb-3">
 			<label for="name" class="form-label fw-bold">이름</label> 
-			<input type="text" name="name" class="form-control" id="name" placeholder="이름 입력">
+			<input type="text" name="name" class="form-control" id="na" placeholder="이름 입력">
+			<div id="namekResult"></div>
 		</div>
 		
 		<div class="mb-3">
 			<label for="phone" class="form-label fw-bold">전화번호</label> 
 			<input type="tel" name="phone" class="form-control" id="phone" placeholder="010-OOOO-OOOO">
+			<div id="phoneResult"></div>
 		</div>
 		
 			<div class="mb-3">
 			<label for="id" class="form-label fw-bold">주소지 입력</label> 
 			<input type="text" name="address" class="form-control" id="address" placeholder="주소지 입력">
+			<div id="addressResult"></div>
 		</div>
 		
 		<div class="mb-3">
 			<label for="email" class="form-label fw-bold ">이메일</label> 
 			<input type="email" name="email" class="form-control" id="email" placeholder="example@gmail.com">
+			<div id="emailResult"></div>
 		</div>
 		
 		<div class="mb-3">

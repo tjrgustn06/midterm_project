@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 페이지</title>
 <c:import url="../template/common_css.jsp"></c:import>
 </head>
 <body>
@@ -27,11 +27,16 @@
 			  	<input type="checkbox" name="remember" value="remember" class="form-check-input" id="remember">
 			  	<label class="form-check-label" for="remember">ID 기억하기</label>
 			</div>
-	  		<button type="submit" class="btn btn-primary">로그인</button>
+					
+	 		<button type="submit" class="btn btn-primary">로그인</button>
 	  		<a href="./memberJoin" class="btn btn-info">회원 가입</a>
 		</form>
 	</div>
 </div>
 
 </body>
+<div class="mb-3 form-check">
+<a href="./findIdForm" id="find_id" class="btn btn-warning">아이디 찾기</a>
+<a href="./findPwForm" id="find_pw" class="btn btn-dark">비밀번호 찾기</a>
+</div>
 </html>

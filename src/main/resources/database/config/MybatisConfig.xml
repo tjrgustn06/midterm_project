@@ -15,10 +15,14 @@
 		
 		<typeAlias type="com.camp.s1.product.ProductDTO" alias="ProductDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductGradeDTO" alias="ProductGradeDTO"/>
+		<typeAlias type="com.camp.s1.product.ProductOrderDTO" alias="ProductOrderDTO"/>
+		<typeAlias type="com.camp.s1.product.ProductFileDTO" alias="ProductFileDTO"/>
 		
 		<typeAlias type="com.camp.s1.board.CommentDTO" alias="CommentDTO"/>
 		
-		<typeAlias type="com.camp.s1.member.MemberDTO" alias="MemberDTO"/> 
+		<typeAlias type="com.camp.s1.member.MemberDTO" alias="MemberDTO"/>
+		
+		<typeAlias type="com.camp.s1.member.AddressDTO" alias="AddressDTO"/>
 		
 		<typeAlias type="com.camp.s1.camping.CampDTO" alias="CampDTO"/>
 		<typeAlias type="com.camp.s1.camping.CampFileDTO" alias="CampFileDTO"/>

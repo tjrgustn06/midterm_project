@@ -67,7 +67,7 @@
 		</form>
 	</div>
 </div>
-<c:import url="../template/common_js.jsp"></c:import>
-<script src="../resources/js/memberJoin.js"></script>
+	<c:import url="../template/common_js.jsp"></c:import>
+	<script src="../resources/js/memberJoin.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.camp.s1.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -53,11 +54,20 @@ public class ProductController {
 	
 	// Add 상품 추가 POST
 	@PostMapping("add")
-	public ModelAndView setProductAdd(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] addFiles, HttpSession session) throws Exception {
+	public ModelAndView setProductAdd(ProductDTO productDTO, String [] gradeName, Integer [] gradeStock, Long [] price, MultipartFile [] addFiles, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = productService.setProductAdd(productDTO, productGradeDTO, addFiles, session);
+		ArrayList<ProductGradeDTO> productGradeDTOs = new ArrayList<ProductGradeDTO>();
+		for (int i = 0;i<gradeName.length;i++) {
+			ProductGradeDTO productGradeDTO = new ProductGradeDTO();
+			productGradeDTO.setGradeName(gradeName[i]);
+			productGradeDTO.setGradeStock(gradeStock[i]);
+			productGradeDTO.setPrice(price[i]);
+			productGradeDTOs.add(productGradeDTO);
+		}
+		productDTO.setProductGradeDTOs(productGradeDTOs);
+		int result = productService.setProductAdd(productDTO, addFiles, session);
 		
-		String msg = "등록 성공";
+		String msg = "등록 실패";
 		
 		if(result>0) {
 			msg = "등록 성공";
@@ -82,10 +92,27 @@ public class ProductController {
 	
 	// Update 상품 수정 POST
 	@PostMapping("update")
-	public ModelAndView setProductUpdate(ProductDTO productDTO, ModelAndView mv) throws Exception {
-		int result = productService.setProductUpdate(productDTO);
-		mv.setViewName("product/detail?productNum="+productDTO.getProductNum());
+	public ModelAndView setProductUpdate(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] addFiles, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = productService.setProductUpdate(productDTO, productGradeDTO, addFiles, session);
 		
+		String msg = "수정 실패";
+		if(result > 0) {
+			msg = "수정이 완료되었습니다";
+		}
+		mv.setViewName("common/result");
+		mv.addObject("result", msg);
+		mv.addObject("url", "./detail?productNum="+productDTO.getProductNum());
+		
+		return mv;
+	}
+	
+	@PostMapping("boardFileDelete")
+	public ModelAndView setProductFileDelete(Long fileNum) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("result", productService.setProductFileDelete(fileNum));
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

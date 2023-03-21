@@ -38,6 +38,18 @@
   		) WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
+  	<!-- 특정GradeStock 변경을 위한 grade 출력 -->
+  	<select id="getGradeStock" parameterType="ProductGradeDTO" resultType="ProductGradeDTO">
+  		SELECT GRADESTOCK FROM PRODUCTGRADE
+  		WHERE GRADENUM=#{gradeNum} AND GRADENAME=#{gradeName}
+  	</select>
+  	
+  	<!-- 예약후 gradeStock 변화 -->
+  	<update id="setGradeStockUpdate" parameterType="ProductGradeDTO">
+  		UPDATE PRODUCTGRADE SET GRADESTOCK=#{gradeStock}
+  		WHERE GRADENUM=#{gradeNum} AND GRADENAME=#{gradeName}
+  	</update>
+  	
   	<!-- Detail 주문 페이지 -->
   	<select id="getProductOrderDetail" parameterType="ProductOrderDTO" resultType="ProductOrderDTO">
   		SELECT * FROM PRODUCTORDER

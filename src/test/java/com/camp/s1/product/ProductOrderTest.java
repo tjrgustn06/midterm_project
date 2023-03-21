@@ -22,7 +22,7 @@ public class ProductOrderTest extends MyTestCase{
 		productOrderDTO.setIndexCode(2L);
 		productOrderDTO.setOrderNum(1L);
 		productOrderDTO.setPrice(5000L);
-		productOrderDTO.setAmount(1L);
+		productOrderDTO.setAmount(1);
 		productOrderDTO.setAddress("우리집");
 		productOrderDTO.setOrderer("나");
 		int result =productOrderDAO.setProductOrderAdd(productOrderDTO);

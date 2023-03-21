@@ -28,8 +28,9 @@ public class ProductOrderService {
 		ProductGradeDTO productGradeDTO = new ProductGradeDTO();
 		productGradeDTO.setGradeName(gradeName);
 		productGradeDTO.setGradeNum(productOrderDTO.getGradeNum());
-		
-		return productOrderDAO.setProductOrderAdd(productOrderDTO);
+		productGradeDTO.setGradeStock(productOrderDAO.getGradeStock(productGradeDTO).getGradeStock()-productOrderDTO.getAmount());
+		result = productOrderDAO.setGradeStockUpdate(productGradeDTO);
+		return result;
 	}
 	
 	// Order List 출력

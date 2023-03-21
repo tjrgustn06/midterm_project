@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.camp.s1.product.ProductGradeDTO;
 import com.camp.s1.util.Pager;
 
 @Repository
@@ -35,6 +36,16 @@ public class ProductOrderDAO {
 	// Order List 출력
 	public List<ProductOrderDTO> getProductOrderList(Pager pager) throws Exception {
 		return sqlSession.selectList(NAMESPACE+"getProductOrderList", pager);
+	}
+	
+	// 특정 gradeStock변경을 위한 grade 출력
+	public ProductGradeDTO getGradeStock(ProductGradeDTO productGradeDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getGradeStock", productGradeDTO);
+	}
+	
+	// 예약 후 gradeStock 변화
+	public int setGradeStockUpdate(ProductGradeDTO productGradeDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setGradeStockUpdate", productGradeDTO);
 	}
 	
 	// Detail 주문 페이지

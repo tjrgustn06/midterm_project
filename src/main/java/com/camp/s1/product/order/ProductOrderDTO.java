@@ -14,7 +14,7 @@ public class ProductOrderDTO {
 	private String startDate;
 	private String lastDate;
 	private String account;
-	private Long amount;
+	private Integer amount;
 	private String address;
 	private String status;
 	private String orderer;
@@ -86,10 +86,11 @@ public class ProductOrderDTO {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public Long getAmount() {
+	
+	public Integer getAmount() {
 		return amount;
 	}
-	public void setAmount(Long amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 	public String getAddress() {

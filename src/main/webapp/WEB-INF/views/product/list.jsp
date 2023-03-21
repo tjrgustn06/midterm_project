@@ -23,7 +23,7 @@
 				
 				<div class="card-body">
 				  <h5 class="card-title">${dto.name}</h5>
-				  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				  <p class="card-text">${dto.summary}</p>
 				  <a href="./detail?productNum=${dto.productNum}" class="btn btn-primary">상세보기</a>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 package com.camp.s1.member;
 
+import java.util.List;
+
 public class MemberDTO {
 
 	private String id;
@@ -8,8 +10,15 @@ public class MemberDTO {
 	private String phone;
 	private String email;
 	private String roleName;
-	private AddressDTO addressDTO;
+	private List<AddressDTO> addressDTOs;
 	
+	
+	public List<AddressDTO> getAddressDTOs() {
+		return addressDTOs;
+	}
+	public void setAddressDTOs(List<AddressDTO> addressDTOs) {
+		this.addressDTOs = addressDTOs;
+	}
 	public String getId() {
 		return id;
 	}
@@ -46,12 +55,7 @@ public class MemberDTO {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	public AddressDTO getAddressDTO() {
-		return addressDTO;
-	}
-	public void setAddressDTO(AddressDTO addressDTO) {
-		this.addressDTO = addressDTO;
-	}
+
 	
 	
 	

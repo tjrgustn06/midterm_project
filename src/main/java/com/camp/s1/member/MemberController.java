@@ -75,15 +75,15 @@ public class MemberController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		if(remember!=null && remember.equals("remember")) {
-			Cookie cookie = new Cookie("rememberId", memberDTO.getId());
-			cookie.setMaxAge(-1);//초단위
-			response.addCookie(cookie);	
-		}else {
-			Cookie cookie = new Cookie("rememberId", "");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
-	}
+//		if(remember!=null && remember.equals("remember")) {
+//			Cookie cookie = new Cookie("rememberId", memberDTO.getId());
+//			cookie.setMaxAge(-1);//초단위
+//			response.addCookie(cookie);	
+//		}else {
+//			Cookie cookie = new Cookie("rememberId", "");
+//			cookie.setMaxAge(0);
+//			response.addCookie(cookie);
+//		}
 		memberDTO = memberService.getMemberLogin(memberDTO);
 		if(memberDTO != null) {
 				session = request.getSession();

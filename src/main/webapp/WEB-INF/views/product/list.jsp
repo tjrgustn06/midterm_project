@@ -78,7 +78,7 @@
 			</form>
 		</div>
 		<div class="row">
-			<c:if test="${member.roleName ne 'MEMBER'}">
+			<c:if test="${not empty member.roleName and member.roleName ne 'MEMBER'}">
 				<a href="./add" class="btn btn-primary mb-3" role="button">상품추가</a>
 			</c:if>
 		</div>

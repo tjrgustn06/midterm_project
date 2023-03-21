@@ -8,7 +8,7 @@ public class MemberDTO {
 	private String phone;
 	private String email;
 	private String roleName;
-	private AddressDTO addressDTO;
+	
 	
 	public String getId() {
 		return id;
@@ -46,14 +46,6 @@ public class MemberDTO {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	public AddressDTO getAddressDTO() {
-		return addressDTO;
-	}
-	public void setAddressDTO(AddressDTO addressDTO) {
-		this.addressDTO = addressDTO;
-	}
-	
-	
 	
 	
 }

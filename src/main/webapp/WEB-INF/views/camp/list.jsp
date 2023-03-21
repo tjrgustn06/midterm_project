@@ -42,7 +42,7 @@
 					<option value="name" ${pager.kind eq 'name'? 'selected':''}>캠핑장명</option>
 					<option value="phone" ${pager.kind eq 'phone'? 'selected':''}>전화번호</option>
 					<option value="address" ${pager.kind eq 'address'? 'selected':''}>주소</option>
-					<option value="contents" ${pager.kind eq 'contents'? 'selected':''}>상세내용</option>
+					<%-- <option value="contents" ${pager.kind eq 'contents'? 'selected':''}>상세내용</option> --%>
 				</select>
 			</div>
 			<div class="col-6">
@@ -70,8 +70,14 @@
 					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
 				</c:forEach> --%>
 				
-				<c:if test="${not empty dto.campFileDTOs}">
+				<!-- filedto에서 꺼내기 -->
+<%-- 				<c:if test="${not empty dto.campFileDTOs}">
 					<img alt="" src="../resources/upload/camp/${dto.campFileDTOs.get(0).fileName}">
+				</c:if> --%>
+				
+				<!-- thumbnail에서 꺼내기 -->
+				<c:if test="${not empty dto.thumbnail}">
+					<img alt="" src="${dto.thumbnail}">
 				</c:if>
 			</div>
 

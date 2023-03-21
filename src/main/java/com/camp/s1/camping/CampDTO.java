@@ -1,6 +1,5 @@
 package com.camp.s1.camping;
 
-import java.sql.Date;
 import java.util.List;
 
 public class CampDTO {
@@ -24,8 +23,8 @@ public class CampDTO {
 	private String theme;
 	private String petAllow;
 	private String thumbnail;
-	private Date regDate;
-	private Date modiDate;
+	private String regDate; //date
+	private String modiDate; //date
 	private List<CampFileDTO> campFileDTOs;
 	private List<CampSiteDTO> campSiteDTOs;
 	
@@ -185,19 +184,19 @@ public class CampDTO {
 		this.thumbnail = thumbnail;
 	}
 
-	public Date getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(Date regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 
-	public Date getModiDate() {
+	public String getModiDate() {
 		return modiDate;
 	}
 
-	public void setModiDate(Date modiDate) {
+	public void setModiDate(String modiDate) {
 		this.modiDate = modiDate;
 	}
 

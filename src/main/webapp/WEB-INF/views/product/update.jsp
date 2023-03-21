@@ -27,35 +27,25 @@
 					<label for="summary" class="form-label">한줄설명</label>
 					<input name="summary" type="text" class="form-control" id="summary" placeholder="한줄설명을 입력해주세요." value="${dto.summary}">
 				</div>
-				<div class="input-group mb-3">
-	  					<div class="input-group-prepend">
-	    					<label class="input-group-text" for="gradeName">옵션</label>
-	  					</div>
-	  					<div class="input-group-prepend">
-							<select class="custom-select" id="gradeName" name="gradeName">
-				    			<option selected>--옵션을 선택하세요--</option>
-								<option value="A급">A급</option>
-								<option value="B급">B급</option>
-								<option value="C급">C급</option>
-				  			</select>
-			  			</div>
+				<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="gradeName">${gradeDTO.gradeName} 수량</label>
+							<input type="hidden" name="gradeName" value="${gradeDTO.gradeName}">
+						</div>
+						<div class="input-group-prepend">
+							<input class="form-control" name="gradeStock" value="${gradeDTO.gradeStock}">
+						</div>
 					</div>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-	    				<label class="input-group-text" for="gradeStock">수량</label>
-	  				</div>
-					<div class="input-group-prepend">
-					<input name="gradeStock" type="text" class="form-control" id="gradeStock" placeholder="수량을 입력해주세요.">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="price">${gradeDTO.gradeName} 금액</label>
+						</div>
+						<div class="input-group-prepend">
+							<input name="price" type="text" class="form-control" id="price" value="${gradeDTO.price}">
+						</div>
 					</div>
-				</div>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-	    				<label class="input-group-text" for="price">금액</label>
-	  				</div>
-					<div class="input-group-prepend">
-						<input name="price" type="text" class="form-control" id="price" placeholder="금액을 입력해주세요.">
-					</div>
-				</div>
+				</c:forEach>
 				<div class="mb-3">
 		  			<label for="contents" class="form-label">상세정보</label>
 		 			<textarea name="contents" class="form-control" id="contents" rows="7">${dto.contents}</textarea>
@@ -84,13 +74,6 @@
 		setMax(1);
 		setCount('${dto.productFileDTOs.size()}');
 		$('#contents').summernote()
-	</script>
-	<script>
-		$('#gradeName').change(()=>{
-			<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
-				$('#price').val(${gradeDTO.price})
-			</c:forEach>
-		})
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>

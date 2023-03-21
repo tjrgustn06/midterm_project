@@ -18,12 +18,12 @@
   	</insert>
   	
   	<!-- 주문번호 생성 -->
-  	<select id="getOrderNum" resultType="Long">
+  	<select id="getOrderNumber" resultType="Long">
   		SELECT PAYMENTSEQ.NEXTVAL FROM DUAL
   	</select>
   	
   	<!-- 주문번호 입력 -->
-  	<insert id="setOrderNum" parameterType="ProductOrderDTO">
+  	<insert id="setOrderNumber" parameterType="ProductOrderDTO">
   		INSERT INTO ORDERS (ORDERNUM) VALUES (#{orderNum})
   	</insert>
   	

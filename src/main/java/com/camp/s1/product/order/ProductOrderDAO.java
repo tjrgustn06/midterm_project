@@ -23,14 +23,13 @@ public class ProductOrderDAO {
 	}
 	
 	// 주문번호 생성
-	public Long getOrderNum() throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"getOrderNum");
+	public Long getOrderNumber() throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getOrderNumber");
 	}
 	
 	// 주문번호 입력
-	public int setOrderNum(ProductOrderDTO productOrderDTO) throws Exception {
-		System.out.println(productOrderDTO.getOrderNum());
-		return sqlSession.insert(NAMESPACE+"setOrderNum", productOrderDTO);
+	public int setOrderNumber(ProductOrderDTO productOrderDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setOrderNumber", productOrderDTO);
 	}
 	
 	// Order List 출력

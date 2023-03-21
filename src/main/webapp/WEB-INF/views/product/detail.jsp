@@ -127,7 +127,7 @@
 		let price = 0;
 		let totalPrice = 0;
 		let gradeNum='';
-		let gradeStock='';
+		let gradeStock=0;
 		$('#gradeName').change(function(){
 			
 			<c:forEach items="${dto.productGradeDTOs}" var="gradeDTO">
@@ -139,8 +139,8 @@
 			</c:forEach>
 
 			$('#amountChange').empty();
-
-			getAmount()
+			
+			getAmount(gradeStock)
 
 			price = price*$('#amount').val();
 			$('#totalPrice').html(price)

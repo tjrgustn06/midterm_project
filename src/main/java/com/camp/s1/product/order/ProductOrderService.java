@@ -17,12 +17,12 @@ public class ProductOrderService {
 	// Add 물품 예약 정보 입력
 	public int setProductOrderAdd(ProductOrderDTO productOrderDTO) throws Exception {
 		// 주문번호 생성
-		productOrderDTO.setOrderNum(productOrderDAO.getOrderNum());
-		
-		int result = productOrderDAO.setOrderNum(productOrderDTO);
+		productOrderDTO.setOrderNum(productOrderDAO.getOrderNumber());
+		int result = productOrderDAO.setOrderNumber(productOrderDTO);
 		// session에서 id 뺴오기
 		productOrderDTO.setId("user01");
 		productOrderDTO.setAddress("");
+		result =productOrderDAO.setProductOrderAdd(productOrderDTO);
 		String gradeName=productOrderDTO.getName();
 		gradeName=gradeName.substring(gradeName.lastIndexOf("급")-1);
 		ProductGradeDTO productGradeDTO = new ProductGradeDTO();

@@ -1,3 +1,4 @@
+
 $('#delete').click(function(){
     console.log('check')
     let check = window.confirm("삭제하시겠습니까?");
@@ -31,13 +32,11 @@ $('#delete').click(function(){
 
 getAmount();
 
-function getAmount(){
+function getAmount(amount){
     child='<select class="form-select" aria-label="Default select example" name="amount" id="amount">'
-    child=child+'<option value="1" selected>1개</option>'
-    child=child+'<option value="2">2개</option>'
-    child=child+'<option value="3">3개</option>'
-    child=child+'<option value="4">4개</option>'
-    child=child+'<option value="5">5개</option>'
+    for(let i=1;i<=amount;i++){
+    child=child+'<option value="'+i+'">'+i+'개</option>'
+    }
     child=child+'</select>'
 
     $('#amountChange').append(child);

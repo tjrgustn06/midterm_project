@@ -7,41 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../../template/common_css.jsp"></c:import>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<script>
-	
-	IMP.init("imp15251423");
 
-	function requestPay(){
-
-		IMP.request_pay({
-			pg : 'kcp.{T0000}',
-			pay_method : 'card',
-			merchant_uid : "${dto.orderNum}",
-			name : '${dto.name}',
-			amount : ${dto.price},
-			buyer_name : '${dto.orderer}',
-			buyer_tel : '010-1234-5678',
-			buyer_addr : '서울특별시 강남구 삼성동'
-		}, rsp => {
-			if(rsp.success) {
-				axios({
-					url: "/pay/complete",
-					method: "post",
-					headers: { "Content-Type": "application/json" },
-					data: {
-					imp_uid: rsp.imp_uid,
-					merchant_uid: rsp.merchant_uid
-					}
-				}).then((data) => {
-				alert('결제성공')
-				})
-				} else {
-				alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-				}
-		});
-	}
-</script>
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
@@ -110,7 +76,7 @@
 				</div>
 				<div>
 					<c:if test="${dto.status eq '입금대기'}">
-						<button type="button" class="btn btn-primary" onclick="requestPay()">결제하기</button>
+						<button type="button" class="btn btn-primary">결제하기</button>
 					</c:if>
 				</div>
 			</form>

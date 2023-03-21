@@ -47,8 +47,7 @@ public class QnaCommentService implements CommentService {
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return qnaCommentDAO.setBoardDelete(bbsDTO);
 	}
 	
 	

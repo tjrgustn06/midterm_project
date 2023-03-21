@@ -7,36 +7,42 @@
 		<tbody >
 			<c:forEach var="dto" items="${commentList}">
 				<tr>
-					<td class="col-md-2">${dto.writer}</td>
-					<td class="col-md-5" id="contents${dto.num}">${dto.contents}</td>
+					 <td class="col-md-2">${dto.writer}</td>
+					<td class="col-md-5" id="contents${dto.commentNum}">${dto.contents}</td>
 					<!-- <td><textarea class="form-control" name="contents" id="updateContents" cols="30" rows="1">${dto.contents}</textarea></td> -->
 					<td class="col-md-2">${dto.regDate}</td>
 					<td class="col-md-1">
 						<%-- <c:if test="${member.id eq dto.writer}"> --%>
-							<button class="btn btn-outline-danger del" data-board-num='${dto.num}'>X</button>
+							<button class="btn btn-outline-danger del" data-comment-num='${dto.commentNum}'>X</button>
 						<%-- </c:if> --%>
 					</td>
 					<td class="col-md-1">
 						<%-- <c:if test="${member.id eq dto.writer}"> --%>
-							<button class="btn btn-outline-primary update" data-board-num='${dto.num}' data-bs-toggle="modal" data-bs-target="#contentsModal">Update</button>
+							<button class="btn btn-outline-primary update" data-comment-num='${dto.commentNum}' data-bs-toggle="modal" data-bs-target="#contentsModal">Update</button>
 						<%-- </c:if> --%>
-					</td>
-					<td style="float : right;">
+					</td> 
+					 <td style="float : right;">
 						<button class="btnToggle" style="border : 0px;" data-comment-num="${dto.commentNum}">
 							<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
 						</button>
-						<div id="commentMenu${dto.commentNum}">
-							<ul>
-								<li>삭제</li>
-								<li>수정</li>
-								<li>신고</li>
-							</ul>
-						</div>
+						<span class="commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
+							<div class="list-group" >
+								<button type="button" class="list-group-item list-group-item-action update" data-comment-num='${dto.commentNum}'aria-current="true">
+									수정
+								</button>
+								<button type="button" class="list-group-item list-group-item-action delete" data-comment-num='${dto.commentNum}'>삭제</button>
+								<button type="button" class="list-group-item list-group-item-action accuse" data-comment-num='${dto.commentNum}'>신고하기</button>
+							</div>
 					</td>
-				</tr>
+				</tr> 
+
+
+			</div>
+
 			</c:forEach>
 		</tbody>
 	</table>
+	
 
 			<!-- 페이징 -->
 			<div class="replyList">

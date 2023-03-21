@@ -64,7 +64,7 @@
   	<!-- BoardDelete Page -->
   	
   	<delete id="setBoardDelete" parameterType="BbsDTO">
-  		DELETE QNA WHERE NUM = #{num}
+  		DELETE QNACOMMENT WHERE COMMENTNUM = #{commentNum}
   	</delete>
   	
   	

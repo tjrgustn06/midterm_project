@@ -39,5 +39,16 @@ public class QnaCommentController {
 		return mv;
 	}
 	
+	@PostMapping("delete")
+	public ModelAndView setCommentDelete(QnaCommentDTO commentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("result", qnaCommentService.setBoardDelete(commentDTO));
+		mv.setViewName("common/ajaxResult");
+		
+		
+		return mv;
+	}
+	
 	
 }

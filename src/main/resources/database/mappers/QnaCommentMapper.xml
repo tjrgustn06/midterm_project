@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.board.qna.QnaCommentDAO">
+
+  		
+  	
+  	
+  	<!-- BoardList Page -->
+  	
+ 	 <select id="getTotalCount" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(NUM) FROM QNACOMMENT
+  	</select>
+  	
+  	<select id="getBoardList" resultType="QnaCommentDTO" parameterType="Pager">
+  		SELECT * FROM 
+	  		(
+	  		SELECT ROWNUM R, QC.* FROM  
+			 	(
+		  		SELECT * FROM QNACOMMENT
+		  		ORDER BY COMMENTNUM DESC, REF ASC
+				) 
+			QC
+			)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<!-- BoardAdd Page -->	
+  	
+	<insert id="setBoardAdd" parameterType="BbsDTO">	
+		<selectKey keyProperty="commentNum" resultType="Long" order="BEFORE">	
+				SELECT BOARDSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+  		INSERT INTO QNACOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
+  		VALUES (#{commentNum}, #{num}, #{writer}, #{contents}, SYSDATE, #{commentNum}, 0, 0)
+  	</insert> 
+  	
+
+	
+	<!-- BoardDetail Page -->
+  	
+  	<select id="getBoardDetail" parameterType="BoardDTO" resultType="BbsDTO">
+  		SELECT * FROM QNACOMMENT
+  		
+  	</select>
+
+  
+  	
+  	<!-- BoardUpdate Page-->
+  	
+  
+  	<update id="setBoardUpdate" parameterType="BbsDTO">
+  		UPDATE QNA SET TITLE = #{title}, CONTENTS = #{contents}
+  		WHERE NUM = #{num}
+  	</update>
+  	
+  	
+  	
+  	
+  	
+  	<!-- BoardDelete Page -->
+  	
+  	<delete id="setBoardDelete" parameterType="BbsDTO">
+  		DELETE QNA WHERE NUM = #{num}
+  	</delete>
+  	
+  	
+  	
+  	
+  	
+  </mapper>

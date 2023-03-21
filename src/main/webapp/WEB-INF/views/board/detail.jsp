@@ -9,10 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid">
 	<div class="row">
-			<h1> ${boardName} Detail Page</h1>
+			<div class="row" id="boardName" data-board-name="${boardName}">
+				<h1> ${boardName} Detail Page</h1>
+			</div>
 			
 			<h3>제목 : ${dto.title}</h3>
 			<c:choose>
@@ -28,16 +30,11 @@
 			
 			<c:if test="${!empty dto.boardFileDTOs}">
 				<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
+					<img src="../resources/upload/${boardName}/${fileDTO.fileName}">
 					<a href="./fileDown?fileNum=${fileDTO.fileNum}">${fileDTO.oriName}</a>
 				</c:forEach>
 			</c:if>
 			
-			
-<%-- 		<c:if test="${not empty dto.bankBookImgDTO}">
-			<div>
-				<img href="../resources/upload/bankBook/${bankBookDTO.bankBookImgDTO.fileName}"></a>
-			</div>
-		</c:if> --%>
 			
 			<div class="row">
 				<div class="col-md-8">
@@ -48,6 +45,21 @@
 			</div>
 	</div>
 
+	<c:if test="${boardName ne 'notice'}">
+		<div class="my-5">
+	  
+			
+			<div class="mb-3">
+				<textarea class="form-control" id="replyContents" rows="3" name="contents" ></textarea>
+			</div>
+			<div class="mb-3">
+					<button class="btn btn-primary col-md-2 offset-md-10" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
+			</div>
+			<div class="row col-md-10 offset-md-1" id="commentList">
+			</div>
+		</div>
+	</c:if>
+	
 
 
 
@@ -57,6 +69,7 @@
 				<form action="./update" id="frm" method="GET">
 					<input type="hidden" name="num" value="${dto.num}">
 						
+					<!-- delete시엔 post방식 update시엔 get -->
 					<button type="submit" class="btn btn-primary col-md-2 mx-2" id="update">글 수정</button>
 					
 					<button type="button" class="btn btn-primary col-md-2 mx-2" id="delete" data-delete="${dto.num}">글 삭제</button>
@@ -66,13 +79,16 @@
 		
 		<a href="./list" class="btn btn-primary col-md-2 mx-1">목록으로</a>	
 		
-		<!-- delete시엔 post방식 update시엔 get -->
-		<div>
 
-		</div>
+
 	</div>
 </div>
 	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
+	<script type="text/javascript" src="../resources/js/comment.js"></script>
+	<script>
+		// setBoardName('${boardName}');
+
+	</script>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

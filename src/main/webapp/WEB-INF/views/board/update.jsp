@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<c:import url="../template/header.jsp"></c:import>
 	<div class="container-fluid my-3">
 		
 		<div class="row mb-4 border-bottom border-info">
@@ -35,15 +35,17 @@
 				  </div>
 				</div>
 				
-				<div id="fileList" class="my-5">					
-					<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
-						<div class="input-group mb-3">
-						<div class="input-group-text">
-							<input class="form-check-input mt-0 deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
-						</div>
-						<input type="text" disabled value="${fileDTO.oriName}" class="form-control" aria-label="Text input with checkbox">
-						</div>
-					</c:forEach>
+				<div id="fileList" class="my-5">		
+	
+						<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
+							<div class="input-group mb-3">
+							<div class="input-group-text">
+								<input class="form-check-input mt-0 deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+							</div>
+							<input type="text" disabled value="${fileDTO.oriName}" class="form-control" aria-label="Text input with checkbox">
+							</div>
+						</c:forEach>
+
 					<button class="btn btn-primary col-md-1 offset-md-11 my-2" type="button" id="addBtn" >Add</button>
 
 
@@ -61,9 +63,13 @@
 				<div class="row mt-5 mb-3 col-md-2 offset-md-10">
 					<button class="btn btn-primary " type="submit">글 수정</button>
 				</div>
-			
 			</form>
+			
+
 		</div>
+			<div class="row mt-5 mb-3 col-md-1 offset-md-9">
+				<a href="./detail?num=${dto.num}" class="btn btn-primary">취소</a>
+			</div>
 	</div>
 
 

@@ -45,7 +45,7 @@ public class FileManager {
 		System.out.println(name);
 		
 		//5. 파일 저장
-		//정보 준비 - File타입 생성자의 매개변수로 경로정보를 담은 file객체와 파일명 정보가 담긴 name변수를 넘겨줌 
+		//정보 준비 - File타입 생성자의 인자값으로 경로정보를 담은 file객체와 파일명이 담긴 name변수를 넘겨줌 
 		file = new File(file, name);
 		
 		//1) Spring API FileCopyUtils 객체의 copy 메서드 사용

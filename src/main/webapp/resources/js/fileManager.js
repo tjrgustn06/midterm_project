@@ -59,6 +59,9 @@ $('.deleteCheck').click(function(){
                     count--;
                     alert('삭제되었습니다');
                 }
+                else {
+                    alert('삭제 실패');
+                }
             }
 
             

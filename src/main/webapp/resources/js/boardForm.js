@@ -18,7 +18,7 @@ $('#delete').click(function(){
             },
             success : function(response){
                 if(response.trim() > 0) {
-                    alert('삭제되었습니다')
+                    alert('글이 삭제되었습니다')
                     location.href = "./list"
                 }
                 else {

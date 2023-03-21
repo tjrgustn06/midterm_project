@@ -34,37 +34,32 @@
 					<a href="./fileDown?fileNum=${fileDTO.fileNum}">${fileDTO.oriName}</a>
 				</c:forEach>
 			</c:if>
-			
-			
-			<div class="row">
-				<div class="col-md-8">
-					<c:if test="${boardName ne 'notice'}">		
-						<a href="./reply?num=${dto.num}" class="btn btn-primary col-md-2 mx-2 my-2">답글</a>
-					</c:if>
-				</div>		 
+				 
 			</div>
 	</div>
 
 	<c:if test="${boardName ne 'notice'}">
 		<div class="my-5">
-	  
-			
-			<section class="mb-5">
-				<div class="card bg-light">
+	  	
+			<section class="mb-5 mx-2">
+				<div class="card bg-light mx-auto col-md-9">
+
 					<div class="card-body">
 						<!-- Comment form-->
-						<textarea class="form-control mb-3" rows="3" id="replyContents" name="contents" placeholder="Join the discussion and leave a comment!"></textarea>
+						<textarea class="form-control mb-3" rows="3" id="replyContents" name="contents" placeholder="댓글 입력"></textarea>
+					</div>
+					<div class="mb-3">
+						<button class="btn btn-primary col-auto offset-md-11" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
 					</div>
 				</div>
+
 			</section>
-			<div class="mb-3">
-					<button class="btn btn-primary col-md-2 offset-md-10" data-comment-num="${dto.num}" id="replyAdd">댓글 작성</button>
-			</div>
+
 
 		
 
 			
-			<div class="row col-md-10 offset-md-1" id="commentList">
+			<div class="row col-md-12 offset-md-1" id="commentList">
 			</div>
 		</div>
 	</c:if>

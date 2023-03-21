@@ -1,6 +1,6 @@
 let boardName = $('#boardName').attr('data-board-name');
-let commentNum;
-
+let commentNum = 0;
+let page = 0;
 
 getList(1);
 
@@ -40,7 +40,7 @@ function getList(page) {
 
     $.ajax({
         type : 'GET',
-        url : '../'+boardName + 'Comment/list?num=' + $('#replyAdd').attr('data-comment-num') + '&page=' + page,
+        url : '../'+boardName + 'Comment/list?num=' + $('#replyAdd').attr('data-board-num') + '&page=' + page,
         success : function(response) {
             $('#commentList').html(response);                                                                         
         }
@@ -50,7 +50,7 @@ function getList(page) {
 
 //페이징
 $('#commentList').on('click','.page-link', function(e){
-    let page = $(this).attr('data-board-page');
+    page = $(this).attr('data-board-page');
     getList(page);
 
     e.preventDefault();
@@ -60,10 +60,13 @@ $('#commentList').on('click','.page-link', function(e){
 
 
 //댓글 메뉴 토글
+//commentNum에 값이 새로 대입되는것을 방지하기위해 
+//탐색 선택자를 이용해서 요소를 선택해서 토글
 $('#commentList').on('click', '.btnToggle', function(){
 
-    commentNum = $(this).attr('data-comment-num');
-    $('#commentMenu'+commentNum).slideToggle();
+    // commentNum = $(this).attr('data-comment-num');
+    // $('#commentMenu'+commentNum).slideToggle();
+   $(this).parent().next().slideToggle();
 })
 
 //댓글 삭제
@@ -81,7 +84,7 @@ $('#commentList').on('click', '.delete', function(){
             success : function(response){
                 if(response.trim() > 0) {
                     alert("댓글이 삭제되었습니다.");
-                    getList(1);
+                    getList(page);
                 }
                 else {
                     alert("삭제 실패");
@@ -97,12 +100,53 @@ $('#commentList').on('click', '.delete', function(){
 
 //댓글 수정 
 $('#commentList').on('click', '.update', function(){
-    let commentNum = $(this).attr('data-comment-num');
+    // getList(1);
+    setResetForm(commentNum);
+    commentNum = $(this).attr('data-comment-num');
+    getUpdateForm(commentNum);
+
+})
+
+$('#commentList').on('click', '.commentCancle', function(){
+    commentNum = $(this).attr('data-comment-num');
+    setResetForm(commentNum);
+})
+
+function getUpdateForm(commentNum) {
+    // setResetForm(commentNum);
     $('#commentMenu'+commentNum).hide();
     let text = $('#contents'+commentNum).text();
 
-    let htmls =  '<td class="col-md-5">';
-    htmls += '<textarea class="form-control" name="contents" id="updateContents" cols="20" rows="1">'+text+'</textarea></td>';
+    console.log('UpdateFormNum : ' + commentNum);
+
+    let htmls = '<section class="mb-5 mx-2" id="updateForm'+commentNum+'">';
+    htmls += '<div class="card bg-light">';
+    htmls += '<div class="d-flex">';
+    htmls += '<span class="me-auto p-2 fw-bold">qwdfd';
+    htmls += '</span>';
+    htmls += '<span class="p-2">';
+    htmls += '<button class="btn btn-outline-danger commentCancle" data-comment-num="'+commentNum+'">취소</button>';
+    htmls += '</span>';
+    htmls += '</div>';
+        
+    
+
+    htmls += '<div class="card-body">'
+    htmls += '<textarea class="form-control mb-3" rows="3" id="replyContents'+commentNum+'" name="contents" placeholder="댓글 입력">'+text+'</textarea>' ;
+    htmls += '</div>';
+    htmls += '<div class="mb-3">';
+    htmls += '<button class="btn btn-outline-primary col-auto offset-md-11" data-comment-num="'+commentNum+'" id="replyUpdate">수정</button>';
+    htmls += '</div></section>';
+            
+
     $('#contents'+commentNum).replaceWith(htmls);
-})
+}
+
+function setResetForm(commentNum) {
+    console.log('ResetFormNum' + commentNum);
+    let htmls = '<div id="contents'+commentNum+'">'+$('#replyContents'+commentNum).text()+'';
+    htmls += '</div>'
+
+    $('#updateForm'+commentNum).replaceWith(htmls);
+}
 

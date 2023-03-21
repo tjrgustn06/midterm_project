@@ -38,12 +38,12 @@
 				</tr>  --> 
 
 							<!-- Comment with nested comments-->
-							<div class="d-flex mb-4">
+							<div class="d-flex mb-4 offset-md-1">
 								<!-- Parent comment-->
 								<div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-								<div class="">
+								<div class="ms-2 col-md-7">
 									<div class="d-flex">
-										<span class="me-auto p-2fw-bold">
+										<span class="me-auto p-2 fw-bold">
 											${dto.writer}
 										</span>
 										<span class="p-2">
@@ -54,7 +54,7 @@
 												<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
 											</button>
 										</span>
-										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
+										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">asdfsfd
 											<div class="list-group">
 												<button type="button" class="list-group-item list-group-item-action update" data-comment-num='${dto.commentNum}'aria-current="true">
 													수정
@@ -64,8 +64,7 @@
 											</div>
 										</span>
 									</div>
-									<div id="contents${dto.commentNum}">
-										${dto.contents}
+									<div id="contents${dto.commentNum}">${dto.contents}
 									</div>
 									<!-- Child comment 1-->
 									<c:forEach begin="1" end="${dto.depth}" varStatus="s">
@@ -100,37 +99,39 @@
 			<!-- 페이징 -->
 			<div class="replyList">
 				<div class="row">
-					<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item ${pager.before ?'disabled':''}">
-						<a class="page-link" href="#" aria-label="Previous" data-board-page="1">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-						</li>
-					
-						<li class="page-item ${pager.before ?'disabled':''}">
-						<a class="page-link" href="#" aria-label="Previous" data-board-page="${pager.startNum-1}">
-							<span aria-hidden="true">&lsaquo;</span>
-						</a>
-						</li>
+					<div class="d-flex justify-content-center">
+						<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item ${pager.before ?'disabled':''}">
+							<a class="page-link" href="#" aria-label="Previous" data-board-page="1">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+							</li>
 						
-						<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-							<li class="page-item"><a class="page-link" href="#" data-board-page="${i}">${i}</a></li>	
-						</c:forEach>
-						
-						<li class="page-item ${pager.after eq false ? 'disabled':''}">
-						<a class="page-link" href="#"  aria-label="Next" data-board-page="${pager.lastNum+1}">
-							<span aria-hidden="true">&rsaquo;</span>
-						</a>
-						</li>
-						
-						<li class="page-item ${pager.after eq false ? 'disabled':''}">
-						<a class="page-link" href="#"  aria-label="Next" data-board-page="${pager.totalPage}">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-						</li>
-					</ul>
-					</nav>
+							<li class="page-item ${pager.before ?'disabled':''}">
+							<a class="page-link" href="#" aria-label="Previous" data-board-page="${pager.startNum-1}">
+								<span aria-hidden="true">&lsaquo;</span>
+							</a>
+							</li>
+							
+							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+								<li class="page-item"><a class="page-link" href="#" data-board-page="${i}">${i}</a></li>	
+							</c:forEach>
+							
+							<li class="page-item ${pager.after eq false ? 'disabled':''}">
+							<a class="page-link" href="#"  aria-label="Next" data-board-page="${pager.lastNum+1}">
+								<span aria-hidden="true">&rsaquo;</span>
+							</a>
+							</li>
+							
+							<li class="page-item ${pager.after eq false ? 'disabled':''}">
+							<a class="page-link" href="#"  aria-label="Next" data-board-page="${pager.totalPage}">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+							</li>
+						</ul>
+						</nav>
+					</div>
 				</div>
 			</div>
 

@@ -24,6 +24,12 @@ public class MemberService {
 	public int setMemberJoin(MemberDTO memberDTO)throws Exception{
 		
 		int result = memberDAO.setMemberJoin(memberDTO);
+		
+		for(AddressDTO addressDTO:memberDTO.getAddressDTOs()) {
+			addressDTO.setId(memberDTO.getId());
+			result = memberDAO.getAddressJoin(addressDTO);
+		}
+		
 		return result;
 	}
 	
@@ -34,6 +40,7 @@ public class MemberService {
 		if(result != null && memberDTO.getPw().equals(result.getPw())) {
 			
 			memberDTO.setPw(null);
+			memberDTO.setRoleName(result.getRoleName());
 			return memberDTO;
 			
 		}else {

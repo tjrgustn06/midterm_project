@@ -5,7 +5,7 @@
 	
 	<table class="table table-striped">
 		<tbody >
-			<c:forEach var="dto" items="${list}">
+			<c:forEach var="dto" items="${commentList}">
 				<tr>
 					<td class="col-md-2">${dto.writer}</td>
 					<td class="col-md-5" id="contents${dto.num}">${dto.contents}</td>
@@ -20,6 +20,18 @@
 						<%-- <c:if test="${member.id eq dto.writer}"> --%>
 							<button class="btn btn-outline-primary update" data-board-num='${dto.num}' data-bs-toggle="modal" data-bs-target="#contentsModal">Update</button>
 						<%-- </c:if> --%>
+					</td>
+					<td style="float : right;">
+						<button class="btnToggle" style="border : 0px;" data-comment-num="${dto.commentNum}">
+							<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
+						</button>
+						<div id="commentMenu${dto.commentNum}">
+							<ul>
+								<li>삭제</li>
+								<li>수정</li>
+								<li>신고</li>
+							</ul>
+						</div>
 					</td>
 				</tr>
 			</c:forEach>

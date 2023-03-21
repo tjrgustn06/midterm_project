@@ -20,7 +20,7 @@ public class QnaCommentController {
 	public ModelAndView getCommentList(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.addObject("list", qnaCommentService.getBoardList(pager));
+		mv.addObject("commentList", qnaCommentService.getBoardList(pager));
 		mv.setViewName("common/commentList");
 		
 		

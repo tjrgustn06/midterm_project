@@ -22,6 +22,7 @@ public class QnaCommentService implements CommentService {
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
 
+		pager.setPerPage(5L);
 		pager.makeNum(qnaCommentDAO.getTotalCount(pager));
 		
 		pager.makeRow();

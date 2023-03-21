@@ -15,13 +15,13 @@
   		SELECT COUNT(NUM) FROM QNACOMMENT
   	</select>
   	
-  	<select id="getBoardList" resultType="QnaDTO" parameterType="Pager">
+  	<select id="getBoardList" resultType="QnaCommentDTO" parameterType="Pager">
   		SELECT * FROM 
 	  		(
 	  		SELECT ROWNUM R, QC.* FROM  
 			 	(
 		  		SELECT * FROM QNACOMMENT
-		  		ORDER BY NUM DESC
+		  		ORDER BY COMMENTNUM DESC, REF ASC
 				) 
 			QC
 			)
@@ -35,7 +35,7 @@
 				SELECT BOARDSEQ.NEXTVAL FROM DUAL
 		</selectKey>
   		INSERT INTO QNACOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
-  		VALUES (#{commentNum}, #{num}, #{writer}, #{contents}, SYSDATE, 0, 0, 0)
+  		VALUES (#{commentNum}, #{num}, #{writer}, #{contents}, SYSDATE, #{commentNum}, 0, 0)
   	</insert> 
   	
 

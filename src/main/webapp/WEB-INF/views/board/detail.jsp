@@ -12,7 +12,9 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid">
 	<div class="row">
-			<h1> ${boardName} Detail Page</h1>
+			<div class="row" id="boardName" data-board-name="${boardName}">
+				<h1> ${boardName} Detail Page</h1>
+			</div>
 			
 			<h3>제목 : ${dto.title}</h3>
 			<c:choose>
@@ -46,14 +48,14 @@
 	<c:if test="${boardName ne 'notice'}">
 		<div class="my-5">
 	  
+			
+			<div class="mb-3">
+				<textarea class="form-control" id="replyContents" rows="3" name="contents" ></textarea>
+			</div>
+			<div class="mb-3">
+					<button class="btn btn-primary col-md-2 offset-md-10" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
+			</div>
 			<div class="row col-md-10 offset-md-1" id="commentList">
-	  
-			</div>
-			<div class="mb-3">
-			  <textarea class="form-control" id="replyContents" rows="3" name="contents" ></textarea>
-			</div>
-			<div class="mb-3">
-			  <button class="btn btn-primary" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
 			</div>
 		</div>
 	</c:if>
@@ -84,7 +86,8 @@
 	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 	<script type="text/javascript" src="../resources/js/comment.js"></script>
 	<script>
-		setBoardName('${boardName}');
+		// setBoardName('${boardName}');
+
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>

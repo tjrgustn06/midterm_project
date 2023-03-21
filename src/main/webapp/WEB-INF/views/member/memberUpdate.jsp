@@ -32,6 +32,9 @@
 					<label for="email" class="form-label fw-bold ">이메일</label> 
 					<input type="email" name="email" class="form-control" id="email" value="${dto.email}">
 				</div>
+				<label for="email" class="form-label fw-bold ">주소</label> 
+					<input type="email" name="email" class="form-control" id="email" value="${addressDTOs.address}">
+				</div>
 				
 				<div class="mb-3">
 				<button class="btn btn-outline-success fw-bold" type="submit">확인</button>

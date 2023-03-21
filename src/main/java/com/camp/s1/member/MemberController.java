@@ -21,9 +21,10 @@ public class MemberController {
 	
 	@PostMapping("memberIdCheck")
 	public ModelAndView getMemberIdCheck(ModelAndView mv, MemberDTO memberDTO)throws Exception{
-	
-		boolean check = memberService.getMemberIdCheck(memberDTO);
 		
+		
+		boolean check = memberService.getMemberIdCheck(memberDTO);
+		System.out.println(check);
 		mv.addObject("result", check);
 		mv.setViewName("common/ajaxResult");
 		return mv;

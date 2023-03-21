@@ -12,10 +12,11 @@
 		
 		<typeAlias type="com.camp.s1.board.notice.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="com.camp.s1.board.qna.QnaDTO" alias="QnaDTO"/>
+		<typeAlias type="com.camp.s1.board.qna.QnaCommentDTO" alias="QnaCommentDTO"/>
 		
 		<typeAlias type="com.camp.s1.product.ProductDTO" alias="ProductDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductGradeDTO" alias="ProductGradeDTO"/>
-		<typeAlias type="com.camp.s1.product.ProductOrderDTO" alias="ProductOrderDTO"/>
+		<typeAlias type="com.camp.s1.product.order.ProductOrderDTO" alias="ProductOrderDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductFileDTO" alias="ProductFileDTO"/>
 		
 		<typeAlias type="com.camp.s1.board.CommentDTO" alias="CommentDTO"/>

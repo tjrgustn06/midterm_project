@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.camp.s1.MyTestCase;
+import com.camp.s1.product.order.ProductOrderDAO;
+import com.camp.s1.product.order.ProductOrderDTO;
 
 public class ProductOrderTest extends MyTestCase{
 
@@ -20,7 +22,7 @@ public class ProductOrderTest extends MyTestCase{
 		productOrderDTO.setIndexCode(2L);
 		productOrderDTO.setOrderNum(1L);
 		productOrderDTO.setPrice(5000L);
-		productOrderDTO.setAmount(1L);
+		productOrderDTO.setAmount(1);
 		productOrderDTO.setAddress("우리집");
 		productOrderDTO.setOrderer("나");
 		int result =productOrderDAO.setProductOrderAdd(productOrderDTO);

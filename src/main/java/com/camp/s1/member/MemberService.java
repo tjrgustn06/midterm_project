@@ -24,6 +24,12 @@ public class MemberService {
 	public int setMemberJoin(MemberDTO memberDTO)throws Exception{
 		
 		int result = memberDAO.setMemberJoin(memberDTO);
+		
+		for(AddressDTO addressDTO:memberDTO.getAddressDTOs()) {
+			addressDTO.setId(memberDTO.getId());
+			result = memberDAO.getAddressJoin(addressDTO);
+		}
+		
 		return result;
 	}
 	

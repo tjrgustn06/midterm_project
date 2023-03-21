@@ -48,23 +48,23 @@
 	<c:if test="${boardName ne 'notice'}">
 		<div class="my-5">
 	  
-			<div class="row col-md-10 offset-md-1" id="commentList">
+			
+			<section class="mb-5">
+				<div class="card bg-light">
+					<div class="card-body">
+						<!-- Comment form-->
+						<textarea class="form-control mb-3" rows="3" id="replyContents" name="contents" placeholder="Join the discussion and leave a comment!"></textarea>
+					</div>
+				</div>
+			</section>
+			<div class="mb-3">
+					<button class="btn btn-primary col-md-2 offset-md-10" data-comment-num="${dto.num}" id="replyAdd">댓글 작성</button>
 			</div>
 
-				<div class="card mb-2">
-					<div class="card-header bg-light">
-							<i class="fa fa-comment fa"></i> REPLY
-					</div>
-					<div class="card-body">
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">
-							<textarea class="form-control" id="commentsContents" rows="3" name="contents"></textarea>
-							<button type="button" class="btn btn-primary mt-3 col-md-2 offset-md-10" data-board-num="${dto.num}" id="replyAdd">post reply</button>
-							</li>
-						</ul>
-					</div>
+		
 
-				
+			
+			<div class="row col-md-10 offset-md-1" id="commentList">
 			</div>
 		</div>
 	</c:if>

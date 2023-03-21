@@ -13,12 +13,12 @@ $('#replyAdd').click(function(){
         url : '../'+ boardName + 'Comment/add',
         data : {
             num : $('#replyAdd').attr('data-board-num'),
-            contents : $('#commentsContents').val(),
+            contents : $('#replyContents').val(),
         },
         success : function(response) {
             if(response.trim() == 1) {
                 alert('댓글이 등록되었습니다');
-                $('#commentsContents').val('');
+                $('#replyContents').val('');
                 getList(1);
             }
             else {
@@ -40,7 +40,7 @@ function getList(page) {
 
     $.ajax({
         type : 'GET',
-        url : '../'+boardName + 'Comment/list?num=' + $('#replyAdd').attr('data-board-num') + '&page=' + page,
+        url : '../'+boardName + 'Comment/list?num=' + $('#replyAdd').attr('data-comment-num') + '&page=' + page,
         success : function(response) {
             $('#commentList').html(response);                                                                         
         }

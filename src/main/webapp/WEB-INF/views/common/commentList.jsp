@@ -6,38 +6,91 @@
 	<table class="table table-striped">
 		<tbody >
 			<c:forEach var="dto" items="${commentList}">
-				<tr>
+				<!-- <tr>
 					 <td class="col-md-2">${dto.writer}</td>
-					<td class="col-md-5" id="contents${dto.commentNum}">${dto.contents}</td>
-					<!-- <td><textarea class="form-control" name="contents" id="updateContents" cols="30" rows="1">${dto.contents}</textarea></td> -->
-					<td class="col-md-2">${dto.regDate}</td>
+					<td class="col-md-5" id="contents${dto.commentNum}">${dto.contents}</td> -->
+					 <!-- <td><textarea class="form-control" name="contents" id="updateContents" cols="30" rows="1">${dto.contents}</textarea></td>  -->
+					<!-- <td class="col-md-2">${dto.regDate}</td>
 					<td class="col-md-1">
-						<%-- <c:if test="${member.id eq dto.writer}"> --%>
+						 <c:if test="${member.id eq dto.writer}"> 
 							<button class="btn btn-outline-danger del" data-comment-num='${dto.commentNum}'>X</button>
-						<%-- </c:if> --%>
+						</c:if> 
 					</td>
 					<td class="col-md-1">
-						<%-- <c:if test="${member.id eq dto.writer}"> --%>
+						 <c:if test="${member.id eq dto.writer}"> 
 							<button class="btn btn-outline-primary update" data-comment-num='${dto.commentNum}' data-bs-toggle="modal" data-bs-target="#contentsModal">Update</button>
-						<%-- </c:if> --%>
+						 </c:if> 
 					</td> 
 					 <td style="float : right;">
 						<button class="btnToggle" style="border : 0px;" data-comment-num="${dto.commentNum}">
 							<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
 						</button>
 						<span class="commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
-							<div class="list-group" >
+							<div class="list-group">
 								<button type="button" class="list-group-item list-group-item-action update" data-comment-num='${dto.commentNum}'aria-current="true">
 									수정
 								</button>
 								<button type="button" class="list-group-item list-group-item-action delete" data-comment-num='${dto.commentNum}'>삭제</button>
 								<button type="button" class="list-group-item list-group-item-action accuse" data-comment-num='${dto.commentNum}'>신고하기</button>
 							</div>
+						</span>
 					</td>
-				</tr> 
+				</tr>  --> 
+
+							<!-- Comment with nested comments-->
+							<div class="d-flex mb-4">
+								<!-- Parent comment-->
+								<div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+								<div class="">
+									<div class="d-flex">
+										<span class="me-auto p-2fw-bold">
+											${dto.writer}
+										</span>
+										<span class="p-2">
+											${dto.regDate}
+										</span>
+										<span class="p-2">
+											<button class="btnToggle" style="border : 0px; background-color: transparent;" data-comment-num="${dto.commentNum}">
+												<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
+											</button>
+										</span>
+										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
+											<div class="list-group">
+												<button type="button" class="list-group-item list-group-item-action update" data-comment-num='${dto.commentNum}'aria-current="true">
+													수정
+												</button>
+												<button type="button" class="list-group-item list-group-item-action delete" data-comment-num='${dto.commentNum}'>삭제</button>
+												<button type="button" class="list-group-item list-group-item-action accuse" data-comment-num='${dto.commentNum}'>신고하기</button>
+											</div>
+										</span>
+									</div>
+									<div id="contents${dto.commentNum}">
+										${dto.contents}
+									</div>
+									<!-- Child comment 1-->
+									<c:forEach begin="1" end="${dto.depth}" varStatus="s">
+										<c:if test="${s.last}">
+											<div class="d-flex mt-4">
+												<div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+												<div class="ms-3">
+													<div class="fw-bold">Commenter Name</div>
+													And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+												</div>
+											</div>
+										</c:if>
+									</c:forEach>
+
+						
+								</div>
+							</div>
 
 
-			</div>
+
+
+			   
+
+
+
 
 			</c:forEach>
 		</tbody>

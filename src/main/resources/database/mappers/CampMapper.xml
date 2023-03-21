@@ -9,7 +9,7 @@
     <!-- 공통부분 - 검색 -->
   	<sql id="searchCondition">
   		<where>
-  			<!-- CAMPNUM = #{campNum} AND / site 옵션 쓸 때 써야함-->
+  			<!-- CAMPNUM = #{campNum} AND / site 옵션 쓸 때 써야하려나 -->
 	  		<if test="kind=='name'">
 	  			NAME LIKE '%' || #{search} || '%'
 	  		</if>
@@ -18,9 +18,6 @@
 	  		</if>
 	  		<if test="kind=='address'">
 	  			ADDRESS LIKE '%' || #{search} || '%'
-	  		</if>
-	  		<if test="kind=='contents'">
-	  			CONTENTS LIKE '%' || #{search} || '%'
 	  		</if>
   		</where>
   	</sql>
@@ -53,13 +50,29 @@
 			ORDER BY CAMPNUM ASC) C)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}  		
   	</select>
-  	<!-- List-file -->
+  	<!-- List-file/이게 필요한지 싶음 - list에서 불러올것은 thumbnail에 있어서 -->
   	<resultMap type="CampDTO" id="getCampFileList">
   		<id column="CAMPNUM" property="campNum"/>
   		<result column="NAME" property="name"/>
   		<result column="PHONE" property="phone"/>
   		<result column="ADDRESS" property="address"/>
-  		<result column="CONTENTS" property="contents"/>
+  		<result column="LINEINTRO" property="lineIntro"/>
+  		<result column="INTRO" property="intro"/>
+  		<result column="FEATURE" property="feature"/>
+  		<result column="INDUTY" property="induty"/>
+  		<result column="DONAME" property="doName"/>
+  		<result column="SIGUNGUNAME" property="sigunguName"/>
+  		<result column="MAPX" property="mapX"/>
+  		<result column="MAPY" property="mapY"/>
+  		<result column="GLAMPFACILITY" property="glampFacility"/>
+  		<result column="CARAVFACILITY" property="caravFacility"/>
+  		<result column="SERVICE" property="service"/>
+  		<result column="POSBLFACILITY" property="posblFacility"/>
+  		<result column="THEME" property="theme"/>
+  		<result column="PETALLOW" property="petAllow"/>
+  		<result column="THUMBNAIL" property="thumbnail"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MODIDATE" property="modiDate"/>
   		
   		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">
   			<id column="FILENUM" property="fileNum"/>
@@ -69,33 +82,60 @@
   	</resultMap>
   	
   	
-  	<!-- detail-file -->
+  	<!-- detail-file, site 한번에 가져오기 -->
   	<select id="getCampDetail" parameterType="CampDTO" resultMap="getCampFileDetail">
   		<!-- SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum} -->
   		SELECT * FROM CAMPINFO CI
 			LEFT OUTER JOIN
 			CAMPFILES CF
-			ON(CI.CAMPNUM=CF.CAMPNUM)
-		WHERE CI.CAMPNUM=#{campNum}
+			USING(CAMPNUM)
+			LEFT OUTER JOIN
+			CAMPSITE CS
+			USING(CAMPNUM)
+		WHERE CAMPNUM=#{campNum}
   	</select>
-  	<!-- detail-file 연결 --> <!-- 이부분은 CampDTO 수정되면 수정되어야할 부분 -->
+  	<!-- detail-file/site 연결 -->
   	<resultMap type="CampDTO" id="getCampFileDetail">
   		<id column="CAMPNUM" property="campNum"/>
   		<result column="NAME" property="name"/>
   		<result column="PHONE" property="phone"/>
   		<result column="ADDRESS" property="address"/>
-  		<result column="CONTENTS" property="contents"/>
+  		<result column="LINEINTRO" property="lineIntro"/>
+  		<result column="INTRO" property="intro"/>
+  		<result column="FEATURE" property="feature"/>
+  		<result column="INDUTY" property="induty"/>
+  		<result column="DONAME" property="doName"/>
+  		<result column="SIGUNGUNAME" property="sigunguName"/>
+  		<result column="MAPX" property="mapX"/>
+  		<result column="MAPY" property="mapY"/>
+  		<result column="GLAMPFACILITY" property="glampFacility"/>
+  		<result column="CARAVFACILITY" property="caravFacility"/>
+  		<result column="SERVICE" property="service"/>
+  		<result column="POSBLFACILITY" property="posblFacility"/>
+  		<result column="THEME" property="theme"/>
+  		<result column="PETALLOW" property="petAllow"/>
+  		<result column="THUMBNAIL" property="thumbnail"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MODIDATE" property="modiDate"/>
   		
   		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="FILENAME" property="fileName"/>
   			<result column="ORINAME" property="oriName"/>
   		</collection>
+  		
+  		<collection property="campSiteDTOs" javaType="List" ofType="CampSiteDTO">
+  			<id column="AREANUM" property="areaNum"/>
+  			<result column="SIZEINFO" property="sizeInfo"/>
+  			<result column="PRICE" property="price"/>
+  			<result column="STATUS" property="status"/>
+  			<result column="SITENAME" property="siteName"/>
+  		</collection>
   	</resultMap>
   	
   	
   	<!-- detail-site(option) -->
-  	<select id="getCampSiteList" parameterType="CampDTO" resultMap="getCampSiteDetail">
+<!--   	<select id="getCampSiteList" parameterType="CampDTO" resultMap="getCampSiteDetail">
   		SELECT * FROM CAMPINFO CI
 			LEFT OUTER JOIN
 			CAMPSITE CS 
@@ -116,7 +156,7 @@
   			<result column="STATUS" property="status"/>
   			<result column="SITENAME" property="siteName"/>
   		</collection>
-  	</resultMap>
+  	</resultMap> -->
   
   
 	<!-- add -->

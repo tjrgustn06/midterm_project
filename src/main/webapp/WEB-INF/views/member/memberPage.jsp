@@ -20,8 +20,8 @@
 			<h3>Phone : ${dto.phone}</h3>
 			<h3>Email : ${dto.email}</h3>
 			<h3>RoleName  : ${dto.roleName}</h3>
-			<h3>Address	 : ${dto.addressDTO.address}</h3>
-			<h3>AddressDetail : ${dto.addressDTO.addressDetail}</h3>
+			<h3>Address	 : ${addressDTOs.address}</h3>
+			<h3>AddressDetail : ${addressDTOs.addressDetail}</h3> 
 			<a href="./memberUpdate" class="btn btn-info">정보수정</a>
 			<a href="./memberDelete" class="btn btn-danger">회원탈퇴</a>
 		</div>

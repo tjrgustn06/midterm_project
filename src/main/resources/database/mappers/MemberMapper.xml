@@ -9,10 +9,29 @@
 	VALUES(#(id), #(pw), #(name), #(phone), #(email), #(roleName))
 </insert>
 
-<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberDTO">
+<select id="getMemberLogin" parameterType="MemberDTO" resultMap="MemberResult">
 	SELECT * FROM MEMBER
+	LEFT JOIN
+	ADDRESS
+	USING(ID)
 	WHERE ID=#{id}
 </select>
+
+<resultMap type="MemberDTO" id="MemberResult">
+<id column="ID" property="id"/>
+<result column="PW" property="pw"/>
+<result column="NAME" property="name"/>
+<result column="PHONE" property="phone"/>
+<result column="EMAIL" property="email"/>
+<result column="ROLENAME" property="roleName"/>
+<collection property="addressDTOs" javaType="List" ofType="AddressDTO">
+<id column="ADDRESSNUM" property="addressNum"/>
+<result column="ADDRESSNAME" property="addressName"/>
+<result column="ADDRESS" property="address"/>
+<result column="ADDRESSDETAIL" property="addressDetail"/>
+<result column="POSTCODE" property="postCode"/>
+</collection>
+</resultMap>
 
 <update id="setMemberUpdate" parameterType="MemberDTO">
 	UPDATE MEMBER SET NAME=#{name},PHONE=#{phone},EMAIL=#{email},ROLENAME=#{roleName}

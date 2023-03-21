@@ -60,6 +60,14 @@ public class ProductDAO {
 		return sqlSession.update(NAMESPACE+"setProductUpdate", productDTO);
 	}
 	
+	public int setProductGradeUpdate(ProductGradeDTO productGradeDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setProductGradeUpdate", productGradeDTO);
+	}
+	
+	public int setproductFileDelete(Long fileNum) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setProductFileDelete", fileNum);
+	}
+	
 	// Delete 물품 삭제
 	public int setProductDelete(ProductDTO productDTO) throws Exception {
 		

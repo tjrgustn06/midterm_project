@@ -4,7 +4,7 @@ public class ProductGradeDTO {
 
 	private Long gradeNum;
 	private Long productNum;
-	private String gradeStock;
+	private Integer gradeStock;
 	private String gradeName;
 	private Long price;
 	
@@ -26,10 +26,11 @@ public class ProductGradeDTO {
 	public void setProductNum(Long productNum) {
 		this.productNum = productNum;
 	}
-	public String getGradeStock() {
+	
+	public Integer getGradeStock() {
 		return gradeStock;
 	}
-	public void setGradeStock(String gradeStock) {
+	public void setGradeStock(Integer gradeStock) {
 		this.gradeStock = gradeStock;
 	}
 	public String getGradeName() {

@@ -29,3 +29,15 @@ $('#delete').click(function(){
         })
     }
 })
+
+getAmount();
+
+function getAmount(amount){
+    child='<select class="form-select" aria-label="Default select example" name="amount" id="amount">'
+    for(let i=1;i<=amount;i++){
+    child=child+'<option value="'+i+'">'+i+'개</option>'
+    }
+    child=child+'</select>'
+
+    $('#amountChange').append(child);
+}

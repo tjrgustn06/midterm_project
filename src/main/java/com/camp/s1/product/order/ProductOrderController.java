@@ -1,4 +1,4 @@
-package com.camp.s1.product;
+package com.camp.s1.product.order;
 
 import java.util.List;
 
@@ -44,10 +44,14 @@ public class ProductOrderController {
 	@PostMapping("order")
 	public ModelAndView setProductOrderAdd(ProductOrderDTO productOrderDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-		
 		int result = productOrderService.setProductOrderAdd(productOrderDTO);
-		mv.setViewName("redirect:list");
+		String msg = "주문 실패";
+		if(result>0) {
+			msg = "주문 성공";
+		}
+		mv.addObject("result", msg);
+		mv.addObject("url", "./list");
+		mv.setViewName("common/result");
 		return mv;
 	}
 	

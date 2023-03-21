@@ -88,6 +88,16 @@
   		WHERE PRODUCTNUM=#{productNum}
   	</update>
   	
+  	<update id="setProductGradeUpdate" parameterType="ProductGradeDTO">
+  		UPDATE PRODUCTGRADE SET GRADESTOCK=#{gradeStock}, PRICE=#{price}
+  		WHERE PRODUCTNUM = #{productNum} AND GRADENAME=#{gradeName}
+  	</update>
+  	
+  	<delete id="setProductFileDelete" parameterType="Long">
+  		DELETE PRODUCTfILES
+  		WHERE FILENUM=#{fileNum}
+  	</delete>
+  	
   	<!-- Delete 물품 삭제 -->
   	<delete id="setProductDelete" parameterType="ProductDTO">
   		DELETE PRODUCT WHERE PRODUCTNUM=#{productNum}
@@ -98,11 +108,7 @@
   		WHERE PRODUCTNUM=#{productNum}
   	</select>
   	
-  	<!-- ProducrFile 삭제 -->
-  	<delete id="setProductFileDelete" parameterType="productFileDTO">
-  		DELETE PRODUCTfILES
-  		WHERE FILENUM=#{fileNum}
-  	</delete>
+  	
   
   
   </mapper>

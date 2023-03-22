@@ -1,5 +1,7 @@
 package com.camp.s1.member;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,10 +47,16 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberJoin")
-	public ModelAndView setMemberJoin(ModelAndView mv, MemberDTO memberDTO)throws Exception{
-
-		int result = memberService.setMemberJoin(memberDTO);
+	public ModelAndView setMemberJoin(ModelAndView mv, MemberDTO memberDTO, String [] id)throws Exception{
+		ArrayList<AddressDTO> addressDTOs = new ArrayList<AddressDTO>();
 		
+		memberDTO.setAddressDTOs(addressDTOs);
+		int result = memberService.setMemberJoin(memberDTO);
+		String msg ="가입 실패";
+		
+		if(result>0){
+			msg="가입 성공";
+		}
 		mv.setViewName("redirect:../");
 		return mv;
 	}

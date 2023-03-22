@@ -35,7 +35,7 @@ public class ProductReviewDAO implements BoardDAO {
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setBoardAdd", bbsDTO);
 	}
 
 	@Override
@@ -51,15 +51,15 @@ public class ProductReviewDAO implements BoardDAO {
 	}
 
 	@Override
-	public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception {
+	public BoardDTO getBoardDetail(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE+"getBoardDetail", boardDTO);
+		return sqlSession.selectOne(NAMESPACE+"getBoardDetail", bbsDTO);
 	}
 
 	@Override
 	public int setBoardFileAdd(BoardFileDTO boardFileDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setBoardFileAdd", boardFileDTO);
 	}
 
 	@Override

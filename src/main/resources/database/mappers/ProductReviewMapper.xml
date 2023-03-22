@@ -37,8 +37,8 @@
   	</select>
   	
   	<!-- Detail -->
-  	<select id="getBoardDetail" parameterType="BoardDTO" resultMap="ProductReviewDetailResult">
-  		SELECT * FROM PRODUCTREIVEW
+  	<select id="getBoardDetail" parameterType="BbsDTO" resultMap="ProductReviewDetailResult">
+  		SELECT * FROM PRODUCTREVIEW
   		LEFT JOIN
   		PRODUCTREVIEWFILES
   		USING (NUM)
@@ -66,6 +66,18 @@
   	</update>
   	
   	<!-- Add -->
+  	<insert id="setBoardAdd" parameterType="BbsDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PRODUCTREVIEW (NUM, PRODUCTNUM, WRITER, TITLE, CONTENTS, REGDATE, HIT)
+  		VALUES (#{num}, #{productNum}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  	</insert>
+  	
+  	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+  		INSERT INTO PRODUCTREVIEWFILES (FILENUM, NUM, FILENAME, ORINAME)
+  		VALUES (PRODUCTSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+  	</insert>
   	
   	<!-- Update -->
   	

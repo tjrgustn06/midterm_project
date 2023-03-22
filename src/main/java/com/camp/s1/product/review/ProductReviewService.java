@@ -37,13 +37,33 @@ public class ProductReviewService implements BoardService {
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		int result = productReviewDAO.setBoardAdd(bbsDTO);
+		
+		String realPath = session.getServletContext().getRealPath("resources/upload/product/review");
+		
+		System.out.println(realPath);
+		
+		for (MultipartFile multipartFile : files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(multipartFile, realPath);
+			
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setNum(bbsDTO.getNum());
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			result = productReviewDAO.setBoardFileAdd(boardFileDTO);
+		}
+		
+		return result;
 	}
 
 	@Override
-	public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception {
+	public BoardDTO getBoardDetail(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return productReviewDAO.getBoardDetail(boardDTO);
+		return productReviewDAO.getBoardDetail(bbsDTO);
 	}
 
 	@Override

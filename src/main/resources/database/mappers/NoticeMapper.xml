@@ -42,7 +42,7 @@
   	</insert>
  
   	
-  	<select id="getBoardDetail" parameterType="BoardDTO" resultMap="NoticeDetailResult">  	
+  	<select id="getBoardDetail" parameterType="BbsDTO" resultMap="NoticeDetailResult">  	
   		SELECT * FROM NOTICE
   		LEFT JOIN
   		NOTICEFILES

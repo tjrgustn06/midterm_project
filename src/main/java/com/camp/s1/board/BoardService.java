@@ -8,7 +8,7 @@ public interface BoardService extends BbsService {
 	//insert(add) board
 	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile [] files, HttpSession session) throws Exception;
 	
-	public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception;
+	public BoardDTO getBoardDetail(BbsDTO bbsDTO) throws Exception;
 	
 	public BoardFileDTO getBoardFileDetail(BoardFileDTO boardFileDTO) throws Exception;
 	

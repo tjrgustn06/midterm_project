@@ -25,6 +25,7 @@ public class CampDTO {
 	private String thumbnail;
 	private String regDate; //date
 	private String modiDate; //date
+	private Long hit;
 	private List<CampFileDTO> campFileDTOs;
 	private List<CampSiteDTO> campSiteDTOs;
 	
@@ -198,6 +199,17 @@ public class CampDTO {
 
 	public void setModiDate(String modiDate) {
 		this.modiDate = modiDate;
+	}
+
+	public Long getHit() {
+		if(this.hit==null) {
+			this.hit = 0L;
+		}
+		return hit;
+	}
+
+	public void setHit(Long hit) {
+		this.hit = hit;
 	}
 
 	public List<CampFileDTO> getCampFileDTOs() {

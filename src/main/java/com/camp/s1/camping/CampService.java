@@ -1,6 +1,8 @@
 package com.camp.s1.camping;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +30,32 @@ public class CampService {
 		
 		List<CampDTO> ar = campDAO.getCampList(pager);
 		return ar;
+	}
+	
+	//list에서 아이콘 작업을 위해 문자열을 parsing
+//	public static void main(String[] ar){
+//		String str="this-=string-includes=delims";
+//		StringTokenizer stk=new StringTokenizer(str,"-=");
+//		System.out.println(str);
+//		System.out.println();
+//			
+//		System.out.println("total tokens:"+stk.countTokens());
+//		System.out.println("================tokens==================");
+//		while(stk.hasMoreTokens()){
+//			System.out.println(stk.nextToken());
+//		}
+//		System.out.println("total tokens:"+stk.countTokens());
+//	}
+	public List<String> getCampServiceIcon(CampDTO campDTO) throws Exception{
+		List<String> service = new ArrayList<String>();
+		String str = campDAO.getCampDetail(campDTO).getService();
+		StringTokenizer stk = new StringTokenizer(str, ",");
+		
+		while(stk.hasMoreTokens()) {
+			//System.out.println(stk.nextToken());
+			service.add(stk.nextToken());
+		}
+		return service;
 	}
 	
 	//detail

@@ -48,7 +48,6 @@
 		<div class="row col-5 my-auto">
 			<h5>캠핑장 전화번호 : ${dto.phone}</h5>
 			<h5>캠핑장 주소 : ${dto.address}</h5>
-			<h5>상세내용 : ${dto.contents}</h5>
 			<p>옵션<br>
 			
 			</p>

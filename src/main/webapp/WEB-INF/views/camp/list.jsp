@@ -22,7 +22,28 @@
 			border: black, solid, 1px;
 			border-radius: 5%;
 		}
+		
+		.lineIntro{
+			font-weight: bold;
+		}
+		
+		.introBox{
+			/* 말줄임(...) */
+			width: auto;
+
+			white-space: normal;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+
+		ul, ol, li{
+			list-style: none;
+			font-size: 0.9rem;
+		}
 	</style>
+	<script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -62,9 +83,9 @@
 	</div>
 	
 	
-	<!-- 카드형식 div -->
-	<c:forEach items="${list}" var="dto"> <!-- dto는 캠프정보 한개 -->
-		<div class="row campOne my-3">
+	<!-- 카드형식 div / dto는 캠프정보 한개 -->
+	<c:forEach items="${list}" var="dto">
+		<div class="d-flex row campOne my-3">
 			<div class="row pic col-5">
 <%-- 			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
 					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
@@ -82,10 +103,28 @@
 			</div>
 
 			<div class="row discription col-7">
-				<h5 class="campName"><a href="./detail?campNum=${dto.campNum}">${dto.name}</a></h5>
-				캠핑장 주소 : ${dto.address}<br>
-				전화번호 : ${dto.phone}<br>
-				서비스 목록 입력하기
+				<ul>
+					<li class="row-2 campName"><h5><a href="./detail?campNum=${dto.campNum}">[${dto.doName} ${dto.sigunguName}] ${dto.name}</a></h5></li>
+					<hr class="my-1">
+					<li class="mb-1 lineIntro">${dto.lineIntro}</li>
+					<li class="mb-1 introBox">${dto.intro}</li>
+					<li class="my-1 loca">
+						<i class="fa-solid fa-location-dot fa-sm"></i>
+						${dto.address}
+					</li>
+					<li class="my-1 tel">
+						<i class="fa-solid fa-phone fa-sm"></i>
+						${dto.phone}
+					</li>
+				</ul>
+			</div>
+
+			<!-- Service 아이콘 나오는 부분 -->
+<%-- 			<div class="row service justify-content-center">
+				${dto.service}
+			</div> --%>
+			<div class="row service" id="serviceIcon+${dto.campNum}" data-camp-num="${dto.campNum}">
+
 			</div>
 		</div>
 	</c:forEach>
@@ -159,5 +198,9 @@
 </div>
 	
 <c:import url="../template/common_js.jsp"></c:import>
+<script src="../resources/js/camp/crud.js"></script>
+<script>
+	setService(${iconList})
+</script>
 </body>
 </html>

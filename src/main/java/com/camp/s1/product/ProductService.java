@@ -39,7 +39,6 @@ public class ProductService {
 	// Detail 상세페이지 출력
 	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception {
 		productDTO = productDAO.getProductDetail(productDTO);
-		productDTO.setProductGradeDTOs(productDAO.getProductGrade(productDTO));
 		return productDTO;
 	}
 	

@@ -52,14 +52,11 @@
 		</div>
 		
 			<div class="mb-3">
-		  <tr>
-				<td align="center">주소</td> <!-- onclick은 무조건 javascript와 연결. 굳이 javascript 안 적어줘도 됨 -->
-				<td><input type="text" id="postcode" name="zipcode" size="5" readonly>
-				<input type="button" value="우편번호검색" onclick="checkPost()"><br>
-				<input type="text" id="address" name="addr1" size="50" placeholder="주소" readonly><br>
-				<input type="text" id="addressDetail" name="addr2" size="50" placeholder="상세주소"></td>
-  		</tr>
-		</div>
+				<input type="text" id="postcode" placeholder="우편번호">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="address" placeholder="주소"><br>
+				<input type="text" id="addressDetail" placeholder="상세주소">
+			</div>
 
 		<div class="mb-3">
 			<label for="email" class="form-label fw-bold ">이메일</label> 

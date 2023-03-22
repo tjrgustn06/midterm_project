@@ -9,6 +9,11 @@
 	VALUES(#(id), #(pw), #(name), #(phone), #(email), #(roleName))
 </insert>
 
+<insert id="getAddressJoin" parameterType="AddressDTO">
+	INSERT INTO ADDRESS(ADDRESSNUM, ID, ADDRESSNAME, ADDRESSDETAIL, POSTCODE)
+	VALUES(ADDRESSSEQ.NEXTVAL, #{id}, #{addressName}, #{addressDetail}, #{postCode})
+</insert>
+
 <select id="getMemberLogin" parameterType="MemberDTO" resultMap="MemberResult">
 	SELECT * FROM MEMBER
 	LEFT JOIN

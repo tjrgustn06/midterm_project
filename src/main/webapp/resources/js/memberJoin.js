@@ -11,7 +11,7 @@ const pwCheckResult = document.getElementById("pwCheckResult");
 const na = document.getElementById("name");
 const nameResult = document.getElementById("nameResult");
 
-const address = document.getElementById("address");
+const address = document.getElementById("sample6_address");
 const addressResult = document.getElementById("addressResult");
 
 const phone = document.getElementById("phone");

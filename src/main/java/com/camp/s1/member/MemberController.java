@@ -134,6 +134,7 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
+		System.out.println(memberDTO.getId());
 		memberDTO.setId(sessionMemberDTO.getId());
 		
 		int result = memberService.setMemberUpdate(addressDTO, sessionMemberDTO);
@@ -162,6 +163,12 @@ public class MemberController {
 		}
 		mv.setViewName("redirect:/list");
 		return mv;
+	}
+	
+	@RequestMapping("/addr")
+	public String addr(){
+		
+		return "addr";
 	}
 	
 }

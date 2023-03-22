@@ -54,7 +54,7 @@
 												<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
 											</button>
 										</span>
-										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">asdfsfd
+										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
 											<div class="list-group">
 												<button type="button" class="list-group-item list-group-item-action update" data-comment-num='${dto.commentNum}'aria-current="true">
 													수정

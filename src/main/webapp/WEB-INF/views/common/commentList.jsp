@@ -9,6 +9,11 @@
 
 							<!-- Comment with nested comments-->
 							<div class="d-flex mb-4 offset-md-1">
+							<c:forEach begin="1" end="${dto.depth}" varStatus="s">
+											<div class="d-flex mt-2">
+												<div class="flex-shrink-0" style="width: 50px; height: 50px;"></div>
+											</div>
+									</c:forEach> 
 								<!-- Parent comment-->
 								<div class="flex-shrink-0" id="comments${dto.commentNum}"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
 								<div class="ms-2 col-md-7">
@@ -38,7 +43,7 @@
 									<div id="contents${dto.commentNum}">${dto.contents}
 									</div>
 									<!-- Child comment 1-->
-									<c:forEach begin="1" end="${dto.depth}" varStatus="s">
+									<!-- <c:forEach begin="1" end="${dto.depth}" varStatus="s">
 										<c:if test="${s.last}">
 											<div class="d-flex mt-4">
 												<div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
@@ -48,7 +53,7 @@
 												</div>
 											</div>
 										</c:if>
-									</c:forEach>
+									</c:forEach> -->
 
 						
 								</div>

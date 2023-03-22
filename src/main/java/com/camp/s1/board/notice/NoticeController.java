@@ -53,13 +53,13 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(NoticeDTO noticeDTO, MultipartFile [] files, HttpSession session) throws Exception {
+	public ModelAndView setBoardAdd(NoticeDTO noticeDTO, MultipartFile [] addFiles, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 	
 		
 		
 		
-		int result = noticeService.setBoardAdd(noticeDTO, files, session);
+		int result = noticeService.setBoardAdd(noticeDTO, addFiles, session);
 		
 		String msg = "등록 실패";
 		
@@ -143,10 +143,10 @@ public class NoticeController {
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO, MultipartFile [] files, HttpSession session, Long [] fileNum) throws Exception {
+	public ModelAndView setBoardUpdate(NoticeDTO noticeDTO, MultipartFile [] addFiles, HttpSession session, Long [] fileNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = noticeService.setBoardUpdate(noticeDTO, files, session);
+		int result = noticeService.setBoardUpdate(noticeDTO, addFiles, session);
 			
 		String msg = "수정 실패";
 		if(result > 0) {

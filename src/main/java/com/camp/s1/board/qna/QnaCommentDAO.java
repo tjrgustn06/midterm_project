@@ -46,8 +46,7 @@ public class QnaCommentDAO implements CommentDAO{
 
 	@Override
 	public int setStepUpdate(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE + "setStepUpdate", bbsDTO);
 	}
 
 	@Override
@@ -57,8 +56,7 @@ public class QnaCommentDAO implements CommentDAO{
 
 	@Override
 	public int setSubCommentAdd(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE + "setSubCommentAdd", bbsDTO);
 	}
 	
 	

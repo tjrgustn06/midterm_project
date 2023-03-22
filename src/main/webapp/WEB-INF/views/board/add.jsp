@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/common_css.jsp"></c:import>
-<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> 
 <title>Insert title here</title>
 </head>
 <body>
@@ -66,8 +66,9 @@
 
 	<script src="../resources/js/fileManager.js"></script>
 	<script>
-		setParam('files');
+		setParam('addFiles');
 		setMax(5);
+		$("#contents").summernote();
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>	
 	

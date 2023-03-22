@@ -6,10 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.camp.s1.board.BbsDTO;
-import com.camp.s1.board.BbsService;
 import com.camp.s1.board.CommentDTO;
 import com.camp.s1.board.CommentService;
 import com.camp.s1.util.Pager;
@@ -25,6 +24,7 @@ public class QnaCommentService implements CommentService {
 
 		pager.setPerPage(5L);
 		pager.makeNum(qnaCommentDAO.getTotalCount(pager));
+		
 		
 		pager.makeRow();
 
@@ -58,17 +58,19 @@ public class QnaCommentService implements CommentService {
 		
 		System.out.println(parent.getRef());
 		
+		commentDTO.setNum(parent.getNum());
+		
 		commentDTO.setRef(parent.getRef());
 		
 		commentDTO.setStep(parent.getStep()+1);
 		
 		commentDTO.setDepth(parent.getDepth()+1);
 		
-		int result = qnaCommentDAO.setStepUpdate(commentDTO);
+		int result = qnaCommentDAO.setStepUpdate(parent);
 		
 		result = qnaCommentDAO.setSubCommentAdd(commentDTO);
 		
-		return 0;
+		return result;
 	}
 	
 	

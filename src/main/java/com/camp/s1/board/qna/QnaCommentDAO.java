@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.camp.s1.board.BbsDTO;
+import com.camp.s1.board.BoardDTO;
 import com.camp.s1.board.CommentDAO;
 import com.camp.s1.util.Pager;
 
@@ -35,14 +36,34 @@ public class QnaCommentDAO implements CommentDAO{
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE + "setBoardUpdate", bbsDTO);
 	}
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
 		return sqlSession.delete(NAMESPACE + "setBoardDelete", bbsDTO);
 	}
+
+	@Override
+	public int setStepUpdate(BbsDTO bbsDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public BbsDTO getBoardDetail(BbsDTO bbsDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getBoardDetail", bbsDTO);
+	}
+
+	@Override
+	public int setSubCommentAdd(BbsDTO bbsDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	
+	
 	
 	
 	

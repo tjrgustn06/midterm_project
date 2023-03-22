@@ -60,7 +60,7 @@
 	
 	<!-- BoardDetail Page -->
   	
-  	<select id="getBoardDetail" parameterType="BoardDTO" resultMap="QnaDetailResult">
+  	<select id="getBoardDetail" parameterType="BbsDTO" resultMap="QnaDetailResult">
   		SELECT * FROM QNA
   		LEFT JOIN
   		QNAFILES

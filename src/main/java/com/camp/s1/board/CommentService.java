@@ -12,4 +12,7 @@ public interface CommentService extends BbsService {
 	
 	//delete
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception;
+	
+	//subCommentAdd
+	public int setSubCommentAdd(CommentDTO commentDTO) throws Exception;
 }

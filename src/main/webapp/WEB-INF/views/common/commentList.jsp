@@ -6,41 +6,11 @@
 	<table class="table table-striped">
 		<tbody >
 			<c:forEach var="dto" items="${commentList}">
-				<!-- <tr>
-					 <td class="col-md-2">${dto.writer}</td>
-					<td class="col-md-5" id="contents${dto.commentNum}">${dto.contents}</td> -->
-					 <!-- <td><textarea class="form-control" name="contents" id="updateContents" cols="30" rows="1">${dto.contents}</textarea></td>  -->
-					<!-- <td class="col-md-2">${dto.regDate}</td>
-					<td class="col-md-1">
-						 <c:if test="${member.id eq dto.writer}"> 
-							<button class="btn btn-outline-danger del" data-comment-num='${dto.commentNum}'>X</button>
-						</c:if> 
-					</td>
-					<td class="col-md-1">
-						 <c:if test="${member.id eq dto.writer}"> 
-							<button class="btn btn-outline-primary update" data-comment-num='${dto.commentNum}' data-bs-toggle="modal" data-bs-target="#contentsModal">Update</button>
-						 </c:if> 
-					</td> 
-					 <td style="float : right;">
-						<button class="btnToggle" style="border : 0px;" data-comment-num="${dto.commentNum}">
-							<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
-						</button>
-						<span class="commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
-							<div class="list-group">
-								<button type="button" class="list-group-item list-group-item-action update" data-comment-num='${dto.commentNum}'aria-current="true">
-									수정
-								</button>
-								<button type="button" class="list-group-item list-group-item-action delete" data-comment-num='${dto.commentNum}'>삭제</button>
-								<button type="button" class="list-group-item list-group-item-action accuse" data-comment-num='${dto.commentNum}'>신고하기</button>
-							</div>
-						</span>
-					</td>
-				</tr>  --> 
 
 							<!-- Comment with nested comments-->
 							<div class="d-flex mb-4 offset-md-1">
 								<!-- Parent comment-->
-								<div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+								<div class="flex-shrink-0" id="comments${dto.commentNum}"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
 								<div class="ms-2 col-md-7">
 									<div class="d-flex">
 										<span class="me-auto p-2 fw-bold">
@@ -56,11 +26,12 @@
 										</span>
 										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
 											<div class="list-group">
-												<button type="button" class="list-group-item list-group-item-action update" data-comment-num='${dto.commentNum}'aria-current="true">
+												<button type="button" class="list-group-item list-group-item-action updateMenu" data-comment-num='${dto.commentNum}'aria-current="true">
 													수정
 												</button>
-												<button type="button" class="list-group-item list-group-item-action delete" data-comment-num='${dto.commentNum}'>삭제</button>
-												<button type="button" class="list-group-item list-group-item-action accuse" data-comment-num='${dto.commentNum}'>신고하기</button>
+												<button type="button" class="list-group-item list-group-item-action deleteMenu" data-comment-num='${dto.commentNum}'>삭제</button>
+												<button type="button" class="list-group-item list-group-item-action accuseMenu" data-comment-num='${dto.commentNum}'>신고하기</button>
+												<button type="button" class="list-group-item list-group-item-action subCommentMenu" data-comment-num='${dto.commentNum}'>답글달기</button>
 											</div>
 										</span>
 									</div>

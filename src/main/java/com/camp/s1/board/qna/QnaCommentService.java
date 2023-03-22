@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.camp.s1.board.BbsDTO;
 import com.camp.s1.board.BbsService;
+import com.camp.s1.board.CommentDTO;
 import com.camp.s1.board.CommentService;
 import com.camp.s1.util.Pager;
 
@@ -41,14 +42,36 @@ public class QnaCommentService implements CommentService {
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return qnaCommentDAO.setBoardUpdate(bbsDTO);
 	}
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
 		return qnaCommentDAO.setBoardDelete(bbsDTO);
 	}
+
+
+
+	@Override
+	public int setSubCommentAdd(CommentDTO commentDTO) throws Exception {
+		QnaCommentDTO parent =(QnaCommentDTO)qnaCommentDAO.getBoardDetail(commentDTO);
+		
+		System.out.println(parent.getRef());
+		
+		commentDTO.setRef(parent.getRef());
+		
+		commentDTO.setStep(parent.getStep()+1);
+		
+		commentDTO.setDepth(parent.getDepth()+1);
+		
+		int result = qnaCommentDAO.setStepUpdate(commentDTO);
+		
+		result = qnaCommentDAO.setSubCommentAdd(commentDTO);
+		
+		return 0;
+	}
+	
+	
 	
 	
 

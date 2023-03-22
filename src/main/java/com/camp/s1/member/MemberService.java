@@ -9,6 +9,7 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	
+	//IDCheck
 	public boolean getMemberIdCheck(MemberDTO memberDTO)throws Exception{
 		
 		memberDTO = memberDAO.getMemberLogin(memberDTO);
@@ -21,6 +22,7 @@ public class MemberService {
 		return check;
 	}
 	
+	//Join
 	public int setMemberJoin(MemberDTO memberDTO)throws Exception{
 		
 		int result = memberDAO.setMemberJoin(memberDTO);
@@ -33,6 +35,7 @@ public class MemberService {
 		return result;
 	}
 	
+	//Login
 	public MemberDTO getMemberLogin(MemberDTO memberDTO)throws Exception{
 
 		MemberDTO result = memberDAO.getMemberLogin(memberDTO);
@@ -49,14 +52,32 @@ public class MemberService {
 		}	
 	}
 	
+	//MemberPage
 	public MemberDTO getMemberPage(MemberDTO memberDTO)throws Exception{
 		
 		return memberDAO.getMemberLogin(memberDTO);
 	}
 	
-	public int setMemberUpdate(MemberDTO memberDTO)throws Exception {
+	//Update
+	public int setMemberUpdate(AddressDTO addressDTO, MemberDTO memberDTO)throws Exception {
 		
-		return memberDAO.setMemberUpdate(memberDTO);
+		int result = memberDAO.setMemberUpdate(memberDTO);
+			
+		addressDTO.setId(memberDTO.getId());
+		
+		result = memberDAO.setAddressUpdate(addressDTO);
+
+		return result;
 	}
+	
+	//Delete
+	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
+		
+		int result = memberDAO.setMemberDelete(memberDTO);
+		
+		return result;
+	}
+	
+
 	
 }

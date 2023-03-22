@@ -52,10 +52,15 @@
 		</div>
 		
 			<div class="mb-3">
-			<label for="id" class="form-label fw-bold">주소지 입력</label> 
-			<input type="text" name="address" class="form-control" id="address" placeholder="주소지 입력">
+		  <tr>
+				<td align="center">주소</td> <!-- onclick은 무조건 javascript와 연결. 굳이 javascript 안 적어줘도 됨 -->
+				<td><input type="text" id="postcode" name="zipcode" size="5" readonly>
+				<input type="button" value="우편번호검색" onclick="checkPost()"><br>
+				<input type="text" id="address" name="addr1" size="50" placeholder="주소" readonly><br>
+				<input type="text" id="addressDetail" name="addr2" size="50" placeholder="상세주소"></td>
+  		</tr>
 		</div>
-		
+
 		<div class="mb-3">
 			<label for="email" class="form-label fw-bold ">이메일</label> 
 			<input type="email" name="email" class="form-control" id="email" placeholder="example@gmail.com">
@@ -69,5 +74,7 @@
 </div>
 	<c:import url="../template/common_js.jsp"></c:import>
 	<script src="../resources/js/memberJoin.js"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="../resources/js/address.js"></script>
 </body>
 </html>

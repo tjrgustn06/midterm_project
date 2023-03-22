@@ -38,6 +38,11 @@
 	WHERE ID =#{id}
 </update>
 
+<update id="setAddressUpdate" parameterType="AddressDTO">
+	UPDATE ADDRESS SET ADDRESSNAME=#{addressName}, ADDRESS=#{address}, ADDRESSDETAIL=#{addressDetail}, POSTCODE=#{postCode}
+	WHERE  ID=#{id}
+</update>
+
 <delete id="setMemberDelete" parameterType="MemberDTO">
 	DELETE MEMBER WHERE ID=#{id}, PW=#{pw}
 </delete>

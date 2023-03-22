@@ -130,15 +130,37 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberUpdate")
-	public ModelAndView getMemberUpdate(HttpSession session, MemberDTO memberDTO)throws Exception{
+	public ModelAndView getMemberUpdate(AddressDTO addressDTO, HttpSession session, MemberDTO memberDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
 		
-		int result = memberService.setMemberUpdate(sessionMemberDTO);
+		int result = memberService.setMemberUpdate(addressDTO, sessionMemberDTO);
+		
+		String msg="수정 실패";
+		
+		if(result>0) {
+			msg="수정이 완료되었습니다";
+		}
+	
 		mv.setViewName("redirect:./memberPage");
 		
+		return mv;
+	}
+	
+	@PostMapping("memberDelete")
+	public ModelAndView setMemberDelete(MemberDTO memberDTO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = memberService.setMemberDelete(memberDTO);
+		
+		String msg="삭제 실패";
+		
+		if(result>0){
+			msg="삭제 성공";
+		}
+		mv.setViewName("redirect:/list");
 		return mv;
 	}
 	

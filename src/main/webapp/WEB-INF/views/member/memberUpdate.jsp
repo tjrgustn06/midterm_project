@@ -35,6 +35,7 @@
 				<div class="mb-3">
 					<label for="address" class="form-label fw-bold">주소</label> 
 					<input type="tel" name="address" class="form-control" id="address" value="${addressDTOs.address}">
+					<input type="tel" name="addressDetail" class="form-control" id="addressDetail" value="${addressDTOs.addressDetail}">
 				</div>
 				
 				<div class="mb-3">

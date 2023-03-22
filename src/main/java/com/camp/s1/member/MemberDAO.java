@@ -13,6 +13,7 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.camp.s1.member.MemberDAO.";
 	
+	// Join
 	public int getAddressJoin(AddressDTO addressDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"getAddressJoin", addressDTO);
 	}
@@ -26,10 +27,20 @@ public class MemberDAO {
 		
 		return sqlSession.selectOne(NAMESPACE+"getMemberLogin", memberDTO);
 	}
-	
+	//Update
 	public int setMemberUpdate(MemberDTO memberDTO)throws Exception{
 		
 		return sqlSession.update(NAMESPACE+"setMemberUpdate", memberDTO);
+	}
+	
+	public int setAddressUpdate(AddressDTO addressDTO)throws Exception{
+		
+		return sqlSession.update(NAMESPACE+"setAddressUpdate", addressDTO);
+	}
+	
+	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
+		
+		return sqlSession.delete(NAMESPACE+"setMemberDelete", memberDTO);
 	}
 	
 }

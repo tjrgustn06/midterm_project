@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.product.review.ProductReviewDAO">
+  
+  	<!-- 검색을 위한 조건 -->
+  	<sql id="searchCondition">
+  		<if test="kind == 'title'">
+  			WHERE TITLE LIKE '%' || #{search} || '%'
+  		</if>
+  		<if test="kind == 'contents'">
+  			WHERE CONTENTS LIKE '%' || #{search} || '%'
+  		</if>
+  		<if test="kind == 'writer'">
+  			WHERE WRITER LIKE '%' || #{search} || '%'
+  		</if>
+  	</sql>
+  	
+  	<!-- List -->
+  	<select id="getBoardList" parameterType="Pager" resultType="ProductReviewDTO">
+  		SELECT * FROM(
+  			SELECT ROWNUM R, PR.* FROM(
+  				SELECT * FROM PRODUCTREVIEW
+  				<include refid="searchCondition"></include>
+  				ORDER BY NUM DESC
+  			) PR
+  		) WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<!-- 총 갯수 출력 -->
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(NUM) FROM PRODUCTREVIEW
+  		<include refid="searchCondition"></include>
+  	</select>
+  	
+  	<!-- Detail -->
+  	<select id="getBoardDetail" parameterType="BoardDTO" resultMap="ProductReviewDetailResult">
+  		SELECT * FROM PRODUCTREIVEW
+  		LEFT JOIN
+  		PRODUCTREVIEWFILES
+  		USING (NUM)
+  		WHERE NUM=#{num}
+  	</select>
+  	
+  	<resultMap type="ProductReviewDTO" id="ProductReviewDetailResult">
+  		<id column="NUM" property="num"/>
+  		<result column="PRODUCTNUM" property="productNum"/>
+  		<result column="WRITER" property="writer"/>
+  		<result column="TITLE" property="title"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="HIT" property="hit"/>
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
+  	<update id="setBoardHitCount" parameterType="BoardDTO">
+  		UPDATE PRODUCTREVIEW SET HIT = HIT + 1
+  		WHERE NUM = #{num}
+  	</update>
+  	
+  	<!-- Add -->
+  	
+  	<!-- Update -->
+  	
+  	<!-- Delete -->
+  
+  </mapper>

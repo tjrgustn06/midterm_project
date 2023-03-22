@@ -2,9 +2,12 @@ package com.camp.s1.product.order;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camp.s1.member.MemberDTO;
 import com.camp.s1.product.ProductGradeDTO;
 import com.camp.s1.util.Pager;
 
@@ -19,8 +22,6 @@ public class ProductOrderService {
 		// 주문번호 생성
 		productOrderDTO.setOrderNum(productOrderDAO.getOrderNumber());
 		int result = productOrderDAO.setOrderNumber(productOrderDTO);
-		// session에서 id 뺴오기
-		productOrderDTO.setId("user01");
 		productOrderDTO.setAddress("");
 		result =productOrderDAO.setProductOrderAdd(productOrderDTO);
 		String gradeName=productOrderDTO.getName();

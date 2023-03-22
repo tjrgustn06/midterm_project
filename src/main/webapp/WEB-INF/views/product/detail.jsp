@@ -24,80 +24,74 @@
 	    			<p>${dto.summary}</p>
 	   			</div>
 				<div class="order-info">
-					<form action="./order/order" method="post">
-					<div class="input-group mb-3">
-	  					<div class="input-group-prepend">
-	    					<span class="input-group-text" >주문자 이름</span>
-	 					</div>
-	  					<input type="text" name="orderer" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-					</div>
-	    			<div class="input-group mb-3">
-	  					<div class="input-group-prepend">
-	    					<label class="input-group-text" for="gradeName">옵션</label>
-	  					</div>
-	  					<div class="row">
-							<select class="form-select" aria-label="Default select example" id="gradeName">
-				    			<option selected>--옵션을 선택하세요--</option>
-								<option value="A급">A급</option>
-								<option value="B급">B급</option>
-								<option value="C급">C급</option>
-				  			</select>
-						</div>
-			  			
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="gradeStock">재고</label>
-						</div>
-						<div class="row my-auto" id="gradeStock">
-						</div>
-						<div class="row">
-							<p class="my-auto">개</p>
-						</div>
-					</div>
-			    	<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="amount">대여수량</label>
-						</div>
-						<div class="row" id="amountChange">
-							<!-- <select class="form-select" aria-label="Default select example" name="amount" id="amount">
-					    		<option value="1" selected>1개</option>
-					    		<option value="2">2개</option>
-					    		<option value="3">3개</option>
-					    		<option value="4">4개</option>
-					    		<option value="5">5개</option>
-					  		</select> -->
-						</div>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text">금액</label>
-							
-						</div>
-						<div class="row my-auto" id="totalPrice">
-						</div>
-						<div class="row">
-							<p class="my-auto">원</p>
-						</div>
-					</div>
-					<div class="input-group mb-3">
-						<div class="row">
-						<p>사용시작날짜: <input type="text" class="datepicker" name="startDate"></p>
-						</div>
-						<div class="row">
-						<p>사용종료날짜: <input type="text" class="datepicker" name="lastDate"></p>
-						</div>
-					</div>
-					<div class="row">
-						<input type="hidden" name="indexCode" value="2">
-						<input id="gradeNum" type="hidden" name="gradeNum">
-						<input id="price" type="hidden" name="price">
-						<input id="name" type="hidden" name="name">
-					</div>
-					<div>
-						<button type="submit" class="btn btn-outline-info">주문하기</button>
-					</div>
-					</form>
+					<c:if test="${not empty member}">
+						<form action="./order/order" method="post">
+							<div class="input-group mb-3">
+			  					<div class="input-group-prepend">
+			    					<span class="input-group-text" >주문자 이름</span>
+			 					</div>
+			  					<input type="text" name="orderer" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+							</div>
+			    			<div class="input-group mb-3">
+			  					<div class="input-group-prepend">
+			    					<label class="input-group-text" for="gradeName">옵션</label>
+			  					</div>
+			  					<div class="row">
+									<select class="form-select" aria-label="Default select example" id="gradeName">
+						    			<option selected>--옵션을 선택하세요--</option>
+										<option value="A급">A급</option>
+										<option value="B급">B급</option>
+										<option value="C급">C급</option>
+						  			</select>
+								</div>
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="gradeStock">재고</label>
+								</div>
+								<div class="row my-auto" id="gradeStock">
+								</div>
+								<div class="row">
+									<p class="my-auto">개</p>
+								</div>
+							</div>
+					    	<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="amount">대여수량</label>
+								</div>
+								<div class="row" id="amountChange">
+								</div>
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text">금액</label>
+									
+								</div>
+								<div class="row my-auto" id="totalPrice">
+								</div>
+								<div class="row">
+									<p class="my-auto">원</p>
+								</div>
+							</div>
+							<div class="input-group mb-3">
+								<div class="row">
+								<p>사용시작날짜: <input type="text" class="datepicker" name="startDate"></p>
+								</div>
+								<div class="row">
+								<p>사용종료날짜: <input type="text" class="datepicker" name="lastDate"></p>
+								</div>
+							</div>
+							<div class="row">
+								<input type="hidden" name="indexCode" value="2">
+								<input id="gradeNum" type="hidden" name="gradeNum">
+								<input id="price" type="hidden" name="price">
+								<input id="name" type="hidden" name="name">
+							</div>
+							<div>
+								<button type="submit" class="btn btn-outline-info">주문하기</button>
+							</div>
+						</form>
+					</c:if>
 				</div>
 			</div>
 			<div class="row">
@@ -105,10 +99,10 @@
 				<div class="col-md-3">
 					<form action="./update" id="frm" method="GET">
 						<input type="hidden" name="productNum" value="${dto.productNum}">
-							
-						<button type="submit" class="btn btn-primary mx-2" id="update">글 수정</button>
-						
-						<button type="button" class="btn btn-primary mx-2" id="delete" data-delete="${dto.productNum}">글 삭제</button>
+						<c:if test="${not empty member.roleName and member.roleName ne 'MEMBER'}">
+							<button type="submit" class="btn btn-primary mx-2" id="update">글 수정</button>
+							<button type="button" class="btn btn-primary mx-2" id="delete" data-delete="${dto.productNum}">글 삭제</button>
+						</c:if>
 					</form>
 				</div>
 				<div class="col-md-3">

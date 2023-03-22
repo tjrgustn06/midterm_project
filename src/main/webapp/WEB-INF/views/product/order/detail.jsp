@@ -7,16 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../../template/common_css.jsp"></c:import>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
 	<div class="container-fluid">
-		<div class="row">
-			<h1>Order Detail</h1>
+		<div class="row md-7">
+			<h1 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">Order Detail</h1>
 		</div>
-		<div class="row">
-			<form action="./payment" method="post">
+		<div class="row justify-content-center">
+			<form class="col-md-7" action="./payment" method="post">
 				<div class="row input-group mb-3">
 				<div class="input-group-prepend">
 					<label for="orderNum" class="form-label">주문번호</label>
@@ -62,7 +62,12 @@
 				<div class="row input-group mb-3">
 				<div class="input-group-prepend">
 					<label for="address" class="form-label">배송지 주소</label>
-					<input type="text" class="form-control" id="address" name="address" value="${dto.address}" placeholder="배송될 주소를 입력해주세요.">
+					<c:if test="${dto.status eq '입금대기'}">
+						<input type="text" class="form-control" id="address" name="address" placeholder="배송될 주소를 입력해주세요.">
+					</c:if>
+					<c:if test="${dto.status eq '결제완료'}">
+						<input type="text" class="form-control" id="address" name="address" value="${dto.address}" readonly>
+					</c:if>
 				</div>
 				</div>
 				<div>
@@ -70,35 +75,14 @@
 					<input type="hidden" name="num" value="${dto.num}">
 				</div>
 				<div>
-				<button type="button" id="payment" class="btn btn-primary">결제하기</button>
-				
+					<c:if test="${dto.status eq '입금대기'}">
+						<button type="button" class="btn btn-primary">결제하기</button>
+					</c:if>
 				</div>
 			</form>
 		</div>
 	</div>
-	<script>
-		IMP.init("imp15251423");
 	
-		$('#payment').click(() => {
-			IMP.request_pay({
-			pg: "kcp.{T0000}",
-			pay_method: "card",
-			merchant_uid: "${dto.orderNum}",   // 주문번호
-			name: "${dto.name}",
-			amount: ${dto.price},                         // 숫자 타입
-			buyer_name: "${dto.orderer}",
-			buyer_addr: "${dto.address}",
-			}, function (rsp) { // callback
-			if (rsp.success) {
-				alert('물품대여가 완료되었습니다')
-				submit()
-			} else {
-				alert('결제에 실패하였습니다')
-
-			}
-			});
-		})
-	</script>
 	<c:import url="../../template/common_js.jsp"></c:import>
 </body>
 </html>

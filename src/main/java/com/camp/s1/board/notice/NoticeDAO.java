@@ -16,7 +16,7 @@ import com.camp.s1.util.Pager;
 public class NoticeDAO implements BoardDAO{
 
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	private final String NAMESPACE = "com.camp.s1.board.notice.NoticeDAO.";
 
@@ -46,8 +46,8 @@ public class NoticeDAO implements BoardDAO{
 	}
 
 	@Override
-	public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getBoardDetail", boardDTO);
+	public BoardDTO getBoardDetail(BbsDTO bbsDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getBoardDetail", bbsDTO);
 	}
 
 	@Override

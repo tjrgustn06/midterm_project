@@ -83,7 +83,7 @@ public class MemberController {
 			Cookie cookie = new Cookie("rememberId", "");
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
-	}
+		}
 		memberDTO = memberService.getMemberLogin(memberDTO);
 		if(memberDTO != null) {
 				session = request.getSession();

@@ -39,6 +39,9 @@
   		LEFT JOIN
   		PRODUCTFILES
   		USING (PRODUCTNUM)
+  		LEFT JOIN
+  		PRODUCTGRADE
+  		USING (PRODUCTNUM)
   		WHERE PRODUCTNUM = #{productNum}
   	</select>
   	
@@ -53,13 +56,14 @@
   			<result column="FILENAME" property="fileName"/>
   			<result column="ORINAME" property="oriName"/>
   		</collection>
+  		<collection property="productGradeDTOs" javaType="List" ofType="ProductGradeDTO">
+  			<id column="GRADENUM" property="gradeNum"/>
+  			<result column="GRADESTOCK" property="gradeStock"/>
+  			<result column="GRADENAME" property="gradeName"/>
+  			<result column="PRICE" property="price"/>
+  		</collection>
+  		
   	</resultMap>
-  	
-  	<!--상품에따른 Grade 출력 -->
-  	<select id="getProductGrade" parameterType="productDTO" resultType="productGradeDTO">
-  		SELECT * FROM PRODUCTGRADE WHERE PRODUCTNUM = #{productNum}
-  		ORDER BY GRADENAME ASC
-  	</select>
   	
   	<!-- Add 물품 추가 -->
   	<insert id="setProductAdd" parameterType="ProductDTO">
@@ -71,7 +75,7 @@
   	</insert>
   	
   	<!-- Grade 추가 -->
-  	<insert id="setProductGradeAdd">
+  	<insert id="setProductGradeAdd" parameterType="ProductGradeDTO">
   		INSERT INTO PRODUCTGRADE (GRADENUM, PRODUCTNUM, GRADESTOCK, GRADENAME, PRICE)
   		VALUES (PRODUCTSEQ.NEXTVAL, #{productNum}, #{gradeStock}, #{gradeName}, #{price})
   	</insert>

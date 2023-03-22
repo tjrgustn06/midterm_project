@@ -7,6 +7,12 @@
   <mapper namespace="com.camp.s1.board.qna.QnaCommentDAO">
 
   		
+  	<!-- CommentDetail  -->
+  	<select id="getBoardDetail" parameterType="BbsDTO" resultType="QnaCommentDTO">
+  		SELECT * FROM QNACOMMENT
+  		WHERE COMMENTNUM = #{commentNum} 
+  		
+  	</select>
   	
   	
   	<!-- BoardList Page -->
@@ -39,22 +45,14 @@
   	</insert> 
   	
 
-	
-	<!-- BoardDetail Page -->
-  	
-  	<select id="getBoardDetail" parameterType="BoardDTO" resultType="BbsDTO">
-  		SELECT * FROM QNACOMMENT
-  		
-  	</select>
-
   
   	
   	<!-- BoardUpdate Page-->
   	
   
   	<update id="setBoardUpdate" parameterType="BbsDTO">
-  		UPDATE QNA SET TITLE = #{title}, CONTENTS = #{contents}
-  		WHERE NUM = #{num}
+  		UPDATE QNACOMMENT SET CONTENTS = #{contents}
+  		WHERE COMMENTNUM = #{commentNum}
   	</update>
   	
   	
@@ -64,7 +62,7 @@
   	<!-- BoardDelete Page -->
   	
   	<delete id="setBoardDelete" parameterType="BbsDTO">
-  		DELETE QNA WHERE NUM = #{num}
+  		DELETE QNACOMMENT WHERE COMMENTNUM = #{commentNum}
   	</delete>
   	
   	

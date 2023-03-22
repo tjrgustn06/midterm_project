@@ -12,6 +12,10 @@ public interface BbsDAO {
 	//Pager 클래스 구현후 매개변수로 추가해야함
 	public Long getTotalCount(Pager pager) throws Exception;
 	
+	//detail
+	public BbsDTO getBoardDetail(BbsDTO bbsDTO) throws Exception;
+	
+	
 	//list
 	//Pager 클래스 구현후 매개변수로 추가해야함
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception;

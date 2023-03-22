@@ -39,5 +39,38 @@ public class QnaCommentController {
 		return mv;
 	}
 	
+	@PostMapping("delete")
+	public ModelAndView setCommentDelete(QnaCommentDTO commentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("result", qnaCommentService.setBoardDelete(commentDTO));
+		mv.setViewName("common/ajaxResult");
+		
+		
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setCommentUpdate(QnaCommentDTO commentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("result", qnaCommentService.setBoardUpdate(commentDTO));
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
+	}
+	
+	
+	@PostMapping("subCommentAdd")
+	public ModelAndView setSubCommentAdd(QnaCommentDTO commentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("result", qnaCommentService.setSubCommentAdd(commentDTO));
+		mv.setViewName("common/ajaxResult");
+		
+		
+		
+		return mv;
+	}
 	
 }

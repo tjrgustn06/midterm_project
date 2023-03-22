@@ -7,10 +7,46 @@
 <meta charset="UTF-8">
 <title>${dto.name} - The Camping</title>
 <c:import url="../template/common_css.jsp"></c:import>
+	<style>
+		a{
+			color: black;
+			text-decoration: none;
+		}
+		
+		.pic{
+			width: 80%;
+			height: 80%;
+		}
+	
+		.campOne{
+			border: black, solid, 1px;
+			border-radius: 5%;
+		}
+		
+		.lineIntro{
+			font-weight: bold;
+		}
+		
+		.introBox{
+			/* 말줄임(...) */
+			width: auto;
+
+			white-space: normal;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+
+		ul, ol, li{
+			list-style: none;
+			font-size: 0.9rem;
+		}
+	</style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container-fluid">
+<div class="container-fluid my-5">
 	<div class="row my-3">
 		<h1>${dto.name}</h1>
 	</div>
@@ -33,19 +69,26 @@
 	
 	
 	<!-- 대표사진 + 설명 div -->
-	<div class="row my-3">
-		<div class="row col-7 mb-3">
-			<c:if test="${not empty dto.campFileDTOs}">
+	<div class="d-flex row my-3">
+		<div class="row pic my-3 mx-auto">
+<%-- 			<c:if test="${not empty dto.campFileDTOs}">
 				<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="i">
 					<!-- 파일이 보이게 -->
 					<c:if test="${pageScope.i.first}">
 						<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
 					</c:if>
 				</c:forEach>
-			</c:if>
+			</c:if> --%>
+			<c:catch var="er">
+				<c:if test="${not empty dto.thumbnail}">
+					<img alt="" src="${dto.thumbnail}">
+				</c:if>
+			</c:catch>
 		</div>
 		
-		<div class="row col-5 my-auto">
+		<hr class="my-2">
+		
+		<div class="row discription my-auto">
 			<h5>캠핑장 전화번호 : ${dto.phone}</h5>
 			<h5>캠핑장 주소 : ${dto.address}</h5>
 			<p>옵션<br>

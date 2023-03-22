@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>CampList - The Camping</title>
 <c:import url="../template/common_css.jsp"></c:import>
+	<script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 	<style>
 		a{
 			color: black;
@@ -15,7 +17,7 @@
 		
 		.pic{
 			width: 40%;
-			height: 200px;
+			height: 30%;
 		}
 	
 		.campOne{
@@ -43,7 +45,6 @@
 			font-size: 0.9rem;
 		}
 	</style>
-	<script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -97,9 +98,11 @@
 				</c:if> --%>
 				
 				<!-- thumbnail에서 꺼내기 -->
-				<c:if test="${not empty dto.thumbnail}">
-					<img alt="" src="${dto.thumbnail}">
-				</c:if>
+				<c:catch var="er">
+					<c:if test="${not empty dto.thumbnail}">
+						<img alt="" src="${dto.thumbnail}">
+					</c:if>
+				</c:catch>
 			</div>
 
 			<div class="row discription col-7">
@@ -120,16 +123,23 @@
 			</div>
 
 			<!-- Service 아이콘 나오는 부분 -->
-<%-- 			<div class="row service justify-content-center">
-				${dto.service}
-			</div> --%>
-			<div class="row service" id="serviceIcon+${dto.campNum}" data-camp-num="${dto.campNum}">
-
+			<div class="my-3">
+				<!-- ${dto.service} -->
+				<c:set var="service" value="${dto.service}"></c:set>
+					<c:if test="${fn:contains(service, '전기')}"><i class="fa-solid fa-bolt fa-sm"><span>전기</span></i></c:if>
+					<c:if test="${fn:contains(service, '무선인터넷')}"><i class="fa-solid fa-wifi fa-sm"><span>와이파이</span></i></c:if>
+					<c:if test="${fn:contains(service, '장작판매')}"><i class="fa-solid fa-campfire fa-sm"><span>장작판매</span></i></c:if>
+					<c:if test="${fn:contains(service, '온수')}"><i class="fa-solid fa-heat fa-sm"><span>온수</span></i></c:if>
+					<c:if test="${fn:contains(service, '트렘폴린')}"><i class="fa-solid fa-hockey-puck fa-sm"><span>트렘폴린</span></i></c:if>
+					<c:if test="${fn:contains(service, '물놀이장')}"><i class="fa-solid fa-person-swimming fa-sm"><span>물놀이장</span></i></c:if>
+					<c:if test="${fn:contains(service, '놀이터')}"><i class="fa-solid fa-volleyball fa-sm"><span>놀이터</span></i></c:if>
+					<c:if test="${fn:contains(service, '산책로')}"><i class="fa-solid fa-person-walking fa-sm"><span>산책로</span></i></c:if>
+					<c:if test="${fn:contains(service, '운동장')}"><i class="fa-solid fa-mound"><span>운동장</span></i></c:if>
+					<c:if test="${fn:contains(service, '운동시설')}"><i class="fa-solid fa-goal-net fa-sm"><span>운동시설</span></i></c:if>
+					<c:if test="${fn:contains(service, '마트.편의점')}"><i class="fa-solid fa-shop fa-sm"><span>마트.편의점</span></i></c:if>
 			</div>
 		</div>
 	</c:forEach>
-	
-	
 	
 	
 	<!-- table div -->
@@ -198,9 +208,7 @@
 </div>
 	
 <c:import url="../template/common_js.jsp"></c:import>
-<script src="../resources/js/camp/crud.js"></script>
-<script>
-	setService(${iconList})
-</script>
+<!-- <script src="../resources/js/camp/crud.js"></script> -->
+<!-- <script src="../resources/js/camp/test.js"></script> -->
 </body>
 </html>

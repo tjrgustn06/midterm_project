@@ -1,5 +1,6 @@
 package com.camp.s1.camping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -33,16 +34,18 @@ public class CampController {
 	public ModelAndView getCampList(Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<CampDTO> ar = campService.getCampList(pager);
+		List<ArrayList<String>> serviceIcon = new ArrayList<ArrayList<String>>();
 		
 		//service 아이콘 작업을 위한 StringTokenizer 사용
 		for(CampDTO campDTO : ar) {
 			if(campDTO.getService()!=null) {
-				List<String> service = campService.getCampServiceIcon(campDTO);
+				ArrayList<String> service = (ArrayList<String>)(campService.getCampServiceIcon(campDTO));
 //				System.out.println(service); //만든 service를 확인하고, ModelAndView에 입력
-				mv.addObject("iconList", service);
+				serviceIcon.add(service);
 			}
 		}
 
+		mv.addObject("iconList", serviceIcon);
 		mv.addObject("list", ar);
 		mv.setViewName("camp/list");
 		return mv;

@@ -1,7 +1,3 @@
-function setService(i){
-
-}
-
 //캠핑장 글삭제 - detail.jsp
 $('#delete').click(function(){
     let check = confirm("정말 삭제하시겠습니까?");
@@ -31,6 +27,3 @@ $('#reserve').click(function(){
     //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
     //location.href='';
 })
-
-//캠핑장 리스트 아이콘 출력 - list.jsp
-$('#serviceIcon'+)

@@ -4,11 +4,18 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.camp.s1.member.MemberDAO">
 
+<!-- Join -->
 <insert id="setMemberJoin" parameterType="MemberDTO">
 	INSERT INTO MEMBER
-	VALUES(#(id), #(pw), #(name), #(phone), #(email), #(roleName))
+	VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email}, 'MEMBER')
 </insert>
 
+<insert id="getAddressJoin" parameterType="AddressDTO">
+	INSERT INTO ADDRESS(ADDRESSNUM, ID, ADDRESSNAME, ADDRESSDETAIL, POSTCODE)
+	VALUES(ADDRESSSEQ.NEXTVAL, #{id}, #{addressName}, #{addressDetail}, #{postCode})
+</insert>
+
+<!-- Login -->
 <select id="getMemberLogin" parameterType="MemberDTO" resultMap="MemberResult">
 	SELECT * FROM MEMBER
 	LEFT JOIN
@@ -33,13 +40,26 @@
 </collection>
 </resultMap>
 
+<!-- Update -->
 <update id="setMemberUpdate" parameterType="MemberDTO">
 	UPDATE MEMBER SET NAME=#{name},PHONE=#{phone},EMAIL=#{email},ROLENAME=#{roleName}
 	WHERE ID =#{id}
 </update>
 
+<update id="setAddressUpdate" parameterType="AddressDTO">
+	UPDATE ADDRESS SET ADDRESSNAME=#{addressName}, ADDRESS=#{address}, ADDRESSDETAIL=#{addressDetail}, POSTCODE=#{postCode}
+	WHERE  ID=#{id}
+</update>
+
+<!-- Delete -->
 <delete id="setMemberDelete" parameterType="MemberDTO">
-	DELETE MEMBER WHERE ID=#{id}, PW=#{pw}
+	DELETE * FROM MEMBER
+	WHERE ID=#{id} AND PW=#{pw}
+</delete>
+
+<delete id="setAddressDelete" parameterType="AddressDTO">
+	DELETE * FROM ADDRESS
+	WHERE ID=#{id}
 </delete>
 
 </mapper>

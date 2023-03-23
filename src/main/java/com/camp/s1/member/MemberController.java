@@ -57,7 +57,9 @@ public class MemberController {
 		if(result>0){
 			msg="가입 성공";
 		}
-		mv.setViewName("redirect:../");
+		
+		System.out.println("MSG + " + msg);
+		mv.setViewName("redirect:./memberLogin");
 		return mv;
 	}
 	
@@ -118,7 +120,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("memberUpdate")
-	public ModelAndView getMemberUpdate(HttpSession session)throws Exception{
+	public ModelAndView setMemberUpdate(HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
@@ -130,15 +132,34 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberUpdate")
-	public ModelAndView getMemberUpdate(HttpSession session, MemberDTO memberDTO)throws Exception{
+	public ModelAndView setMemberUpdate(AddressDTO addressDTO, HttpSession session, MemberDTO memberDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		int result = memberService.setMemberUpdate(addressDTO, memberDTO);
+		
+		System.out.println(memberDTO.getId());
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
 		
-		int result = memberService.setMemberUpdate(sessionMemberDTO);
+		
+		String msg="수정 실패";
+		
+		if(result>0) {
+			msg="수정이 완료되었습니다";
+		}
+	
 		mv.setViewName("redirect:./memberPage");
 		
+		return mv;
+	}
+	
+	//Delete
+	@PostMapping("memberDelete")
+	public ModelAndView setMemberDelete(MemberDTO memberDTO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("result",memberService.setMemberDelete(memberDTO));
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

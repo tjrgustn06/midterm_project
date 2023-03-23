@@ -17,6 +17,7 @@
 </style>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid my-5">
 	<div class="row justify-content-center">
 		<h1 class="col-md-6 text-center fw-bold">MemberJoin Page</h1>
@@ -44,11 +45,13 @@
 		<div class="mb-3">
 			<label for="name" class="form-label fw-bold">이름</label> 
 			<input type="text" name="name" class="form-control" id="name" placeholder="이름 입력">
+			<div id="nameResult"></div>
 		</div>
 		
 		<div class="mb-3">
 			<label for="phone" class="form-label fw-bold">전화번호</label> 
 			<input type="tel" name="phone" class="form-control" id="phone" placeholder="010-OOOO-OOOO">
+			<div id="phoneResult"></div>
 		</div>
 		
 			<div class="mb-3">
@@ -56,11 +59,13 @@
 				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 				<input type="text" id="address" placeholder="주소"><br>
 				<input type="text" id="addressDetail" placeholder="상세주소">
+				<div id="addressResult"></div>
 			</div>
 
 		<div class="mb-3">
 			<label for="email" class="form-label fw-bold ">이메일</label> 
 			<input type="email" name="email" class="form-control" id="email" placeholder="example@gmail.com">
+			<div id="emailResult"></div>
 		</div>
 		
 		<div class="mb-3">

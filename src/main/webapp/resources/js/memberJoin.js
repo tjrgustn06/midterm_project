@@ -11,7 +11,7 @@ const pwCheckResult = document.getElementById("pwCheckResult");
 const na = document.getElementById("name");
 const nameResult = document.getElementById("nameResult");
 
-const address = document.getElementById("sample6_address");
+const address = document.getElementById("address");
 const addressResult = document.getElementById("addressResult");
 
 const phone = document.getElementById("phone");
@@ -52,6 +52,7 @@ id.addEventListener("blur", function(){
                 idResult.innerHTML = '사용 가능한 아이디';
                 idResult.classList.add("greenResult");
                 idResult.classList.remove("redResult");
+               
             }
             else{
                 idResult.innerHTML = '중복 아이디';
@@ -62,6 +63,7 @@ id.addEventListener("blur", function(){
         // if(this.readyState == 4 && this.status != 200){
 
         // }
+        console.log(checks)
     })
 
 //     if(id.value.length != 0){
@@ -87,6 +89,7 @@ pw.addEventListener("keyup", function(){
         checks[1] = true;
         pwResult.classList.add("greenResult");
         pwResult.classList.remove("redResult");
+       
     }
     else{
         pwResult.innerHTML = '비밀번호은 6글자 이상 12자 이하';
@@ -94,19 +97,23 @@ pw.addEventListener("keyup", function(){
         pwResult.classList.add("redResult");
         pwResult.classList.remove("greenResult");
     }
+    console.log(checks)
 })
 
 pw.addEventListener("blur", function(){
     if(pw.value.length != 0){
         // pwNullCheck = true;
         checks[2] = true;
+      
     }
     else{
         pwResult.innerHTML = '비밀번호는 필수 입력';
         checks[2] = false;
         pwResult.classList.add("redResult");
         pwResult.classList.remove("greenResult");
+        
     }
+    console.log(checks)
 })
 
 pw.addEventListener("change", function(){
@@ -114,6 +121,7 @@ pw.addEventListener("change", function(){
     pwCheck.value = '';
     pwCheckResult.innerHTML = '비밀번호 불일치';
     pwResult.classList.add("redResult");
+   
 })
 
 pwCheck.addEventListener("blur", function(){
@@ -123,6 +131,7 @@ pwCheck.addEventListener("blur", function(){
         checks[3] = true;
         pwCheckResult.classList.add("greenResult");
         pwCheckResult.classList.remove("redResult");
+        
     }
     else{
         pwCheckResult.innerHTML = "불일치 비밀번호";
@@ -130,11 +139,13 @@ pwCheck.addEventListener("blur", function(){
         pwCheckResult.classList.add("redResult");
         pwCheckResult.classList.remove("greenResult");
     }
+    console.log(checks)
 })
 
 na.addEventListener("blur", function(){
     if(na.value.length != 0){
         checks[4] = true;
+       
     }
     else{
         nameResult.innerHTML = "이름은 필수 입력";
@@ -142,11 +153,13 @@ na.addEventListener("blur", function(){
         nameResult.classList.add("redResult");
         nameResult.classList.remove("greenResult");
     }
+    console.log(checks)
 })
 
 address.addEventListener("blur", function(){
     if(address.value.length != 0){
        checks[5] = true;
+       
     }
     else{
         addressResult.innerHTML = "주소는 필수 입력";
@@ -154,11 +167,13 @@ address.addEventListener("blur", function(){
         addressResult.classList.add("redResult");
         addressResult.classList.remove("greenResult");
     }
+    console.log(checks)
 })
 
 phone.addEventListener("blur", function(){
     if(phone.value.length != 0){
        checks[6] = true;
+       
     }
     else{
         phoneResult.innerHTML = "전화번호는 필수 입력";
@@ -166,11 +181,13 @@ phone.addEventListener("blur", function(){
         phoneResult.classList.add("redResult");
         phoneResult.classList.remove("greenResult");
     }
+    console.log(checks)
 })
 
 email.addEventListener("blur", function(){
     if(email.value.length != 0){
        checks[7] = true;
+       
     }
     else{
         emailResult.innerHTML = "이메일은 필수 입력";
@@ -178,6 +195,7 @@ email.addEventListener("blur", function(){
         emailResult.classList.add("redResult");
         emailResult.classList.remove("greenResult");
     }
+    console.log(checks)
 })
 
 //form 전송

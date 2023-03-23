@@ -74,7 +74,13 @@
   		WHERE REF = #{ref} AND STEP > #{step}
   	</update>
   	
+  	<select id="getStepMax" parameterType="BbsDTO" resultType="Long">
+  		SELECT MAX(STEP) FROM QNACOMMENT
+  		WHERE REF = #{ref}
+  	</select>
+  	
   	<insert id="setSubCommentAdd" parameterType="BbsDTO">
+
   		INSERT INTO QNACOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
   		VALUES (BOARDSEQ.NEXTVAL, #{num}, #{writer}, #{contents}, SYSDATE, #{ref}, #{step}, #{depth})
   	</insert>

@@ -51,7 +51,6 @@ public class QnaController {
 		
 		mv.setViewName("/board/detail");
 		mv.addObject("dto", qnaService.getBoardDetail(qnaDTO));
-//		System.out.println(((QnaDTO)qnaService.getBoardDetail(qnaDTO)).getBoardFileDTOs().size());
 		
 		
 		//조회수 로직
@@ -117,10 +116,10 @@ public class QnaController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(QnaDTO qnaDTO, MultipartFile [] addFiles, HttpSession session) throws Exception {
+	public ModelAndView setBoardAdd(QnaDTO qnaDTO, MultipartFile [] files, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int result = qnaService.setBoardAdd(qnaDTO, addFiles, session);
+		int result = qnaService.setBoardAdd(qnaDTO, files, session);
 		
 		String msg = "등록 실패";
 		if(result > 0) {
@@ -162,9 +161,9 @@ public class QnaController {
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setBoardUpdate(QnaDTO qnaDTO, MultipartFile [] addFiles, HttpSession session) throws Exception {
+	public ModelAndView setBoardUpdate(QnaDTO qnaDTO, MultipartFile [] files, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = qnaService.setBoardUpdate(qnaDTO, addFiles, session);
+		int result = qnaService.setBoardUpdate(qnaDTO, files, session);
 		
 		String msg = "수정 실패";
 		if(result > 0) {

@@ -48,6 +48,13 @@ public class QnaCommentDAO implements CommentDAO{
 	public int setStepUpdate(BbsDTO bbsDTO) throws Exception {
 		return sqlSession.update(NAMESPACE + "setStepUpdate", bbsDTO);
 	}
+	
+	
+
+	@Override
+	public Long getStepMax(BbsDTO bbsDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getStepMax", bbsDTO);
+	}
 
 	@Override
 	public BbsDTO getBoardDetail(BbsDTO bbsDTO) throws Exception {

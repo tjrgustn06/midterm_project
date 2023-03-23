@@ -66,9 +66,8 @@
 
 	<script src="../resources/js/fileManager.js"></script>
 	<script>
-		setParam('addFiles');
+		setParam('files');
 		setMax(5);
-		$("#contents").summernote();
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>	
 	

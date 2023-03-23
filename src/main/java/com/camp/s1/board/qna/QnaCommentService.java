@@ -62,13 +62,13 @@ public class QnaCommentService implements CommentService {
 		
 		commentDTO.setRef(parent.getRef());
 		
-		commentDTO.setStep(parent.getStep()+1);
+		commentDTO.setStep(qnaCommentDAO.getStepMax(parent)+1);
 		
 		commentDTO.setDepth(parent.getDepth()+1);
 		
-		int result = qnaCommentDAO.setStepUpdate(parent);
+
 		
-		result = qnaCommentDAO.setSubCommentAdd(commentDTO);
+		int result = qnaCommentDAO.setSubCommentAdd(commentDTO);
 		
 		return result;
 	}

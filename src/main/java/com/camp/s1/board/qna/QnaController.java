@@ -51,7 +51,6 @@ public class QnaController {
 		
 		mv.setViewName("/board/detail");
 		mv.addObject("dto", qnaService.getBoardDetail(qnaDTO));
-//		System.out.println(((QnaDTO)qnaService.getBoardDetail(qnaDTO)).getBoardFileDTOs().size());
 		
 		
 		//조회수 로직

@@ -9,6 +9,11 @@
 
 							<!-- Comment with nested comments-->
 							<div class="d-flex mb-4 offset-md-1">
+							<c:forEach begin="1" end="${dto.depth}" varStatus="s">
+											<div class="d-flex mt-2">
+												<div class="flex-shrink-0" style="width: 50px; height: 50px;"></div>
+											</div>
+									</c:forEach> 
 								<!-- Parent comment-->
 								<div class="flex-shrink-0" id="comments${dto.commentNum}"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
 								<div class="ms-2 col-md-7">
@@ -19,11 +24,13 @@
 										<span class="p-2">
 											${dto.regDate}
 										</span>
-										<span class="p-2">
-											<button class="btnToggle" style="border : 0px; background-color: transparent;" data-comment-num="${dto.commentNum}">
-												<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
-											</button>
-										</span>
+										<c:if test="${dto.depth eq 0}">
+											<span class="p-2">
+												<button class="btnToggle" style="border : 0px; background-color: transparent;" data-comment-num="${dto.commentNum}">
+													<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
+												</button>
+											</span>
+										</c:if>
 										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
 											<div class="list-group">
 												<button type="button" class="list-group-item list-group-item-action updateMenu" data-comment-num='${dto.commentNum}'aria-current="true">
@@ -38,7 +45,7 @@
 									<div id="contents${dto.commentNum}">${dto.contents}
 									</div>
 									<!-- Child comment 1-->
-									<c:forEach begin="1" end="${dto.depth}" varStatus="s">
+									<!-- <c:forEach begin="1" end="${dto.depth}" varStatus="s">
 										<c:if test="${s.last}">
 											<div class="d-flex mt-4">
 												<div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
@@ -48,7 +55,7 @@
 												</div>
 											</div>
 										</c:if>
-									</c:forEach>
+									</c:forEach> -->
 
 						
 								</div>

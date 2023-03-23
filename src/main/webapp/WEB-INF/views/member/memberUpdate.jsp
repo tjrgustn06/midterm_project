@@ -35,7 +35,16 @@
 				<div class="mb-3">
 					<label for="address" class="form-label fw-bold">주소</label> 
 					<input type="tel" name="address" class="form-control" id="address" value="${addressDTOs.address}">
+					<input type="tel" name="addressDetail" class="form-control" id="addressDetail" value="${addressDTOs.addressDetail}">
 				</div>
+				
+							<div class="mb-3">
+				<input type="text" id="postcode" placeholder="우편번호">
+				<input type="button" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="address" placeholder="주소"><br>
+				<input type="text"  id="addressDetail" placeholder="상세주소">
+				<div id="addrResult"></div>
+			</div>
 				
 				<div class="mb-3">
 				<button class="btn btn-outline-success fw-bold" type="submit">확인</button>
@@ -45,6 +54,7 @@
 			</form>		
 		</div>
 	</div>
-
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="../resources/js/address.js"></script>
 </body>
 </html>

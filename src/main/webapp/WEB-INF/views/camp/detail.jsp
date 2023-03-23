@@ -49,6 +49,15 @@
 			list-style: none;
 			font-size: 0.9rem;
 		}
+
+		.infoNotice{
+			font-size: 0.8rem;
+			font-weight: bold;
+		}
+
+		.infoRed{
+			color: red;
+		}
 	</style>
 </head>
 <body>
@@ -59,21 +68,6 @@
 	</div>
 	
 	<hr>
-	
-	<!-- 버튼 -->
-	<div>
-		<!-- update도 delete도 모두 DTO의 num이 필요하다 -->
-		<form action="./update" id="frm" method="get">
-			<!-- name은 파라미터 이름, value는 파라미터의 값 -->
-			<input type="hidden" name="campNum" value="${dto.campNum}">
-			<button id="reserve" type="button" class="btn btn-outline-primary">Reservation</button>
-			<button id="list" type="button" class="btn btn-outline-secondary">go to List</button>
-			<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
-			<button id="update" type="submit" class="btn btn-outline-success">UPDATE</button>
-			<button id="delete" type="button" class="btn btn-outline-danger">DELETE</button>
-		</form>
-	</div>
-	
 	
 	<!-- 대표사진 + 설명 div -->
 	<div class="d-flex row my-3">
@@ -135,7 +129,22 @@
 		</div>
 	</div>
 	
+	<!-- 버튼 - update/delete 모두 campNum이 필요 -->
+	<div class="d-flex">
+		<div class="mx-auto mb-3">
+			<form action="./update" id="frm" method="get">
+				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
+				<input type="hidden" name="campNum" value="${dto.campNum}">
+				<button id="reserve" type="button" class="btn btn-outline-primary">Reservation</button>
+				<button id="list" type="button" class="btn btn-outline-secondary">go to List</button>
+				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
+				<button id="update" type="submit" class="btn btn-outline-success">UPDATE</button>
+				<button id="delete" type="button" class="btn btn-outline-danger">DELETE</button>
+			</form>
+		</div>
+	</div>
 	
+
 	<!-- contents 내용 시작 -->
 	<hr>
 	<div id="contents">
@@ -196,8 +205,8 @@
 					<hr>
 					
 					<!-- 서비스 내용 출력 -->
-					<h3><i class="fa-solid fa-gears fa-sm"></i> 캠핑장 시설정보</h3>
-					<div class="my-2">
+					<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 캠핑장 시설정보</h5>
+					<div class="mb-2">
 						<c:set var="service" value="${dto.service}"></c:set>
 						<ul>
 							<c:if test="${fn:contains(service, '전기')}"><i class="fa-solid fa-bolt fa-sm"><span>전기</span></i></c:if>
@@ -214,117 +223,77 @@
 						</ul>
 					</div>
 
-					<h3><i class="fa-solid fa-gears fa-sm"></i> 기타 주요시설</h3>
-					<section id="table_type03">
-					<h2 class="skip">기타 주요시설 안내 테이블입니다.</h2>
-					<div class="table_w">
-						<table class="table_t4 camp_etc_tb">
-							<caption>
-								<strong>기타 주요시설 안내 테이블</strong>
-								<p>주요시설, 사이트간격, 바닥형태, 편의시설, 캠핑장비대여, 반려동물출입, 화로대로 나뉘어 설명합니다.</p>
-							</caption>
+					<hr>
 
-							<tbody class="t_c">
-								<tr>
-									<th scope="col">주요시설</th>
-									<td>
-										<ul class="table_ul05">
-											<li>자동차야영장사이트(28면)</li>
-											</ul>
-									</td>
-								</tr>
-								<tr>
-									<th scope="col">기타 정보</th>
-									<td>
-										<ul class="table_ul05">
-											<li>개인 트레일러 입장가능</li>
-											<li>
-												반려동물 동반 불가능</li>
-										</ul>
-										<br/>
-										<br/>
-										(※ 실제 결과는 현장사정 및 계절에 따라 달라질 수 있으니 캠핑장 사업주에 직접 확인 후 이용바랍니다.)
-									</td>
-								</tr>
-								<tr>
-										<th scope="col">기타 부대시설</th>
-										<td>
-											<ul class="table_ul05">
-												<li>카페에는 간단한 캠핑에 필요한 물품과소모품, 그리고  커피,음료. 팥빙수, 장작등 판매
-			해상 바지선에서 낚시를 할수 있음.</li>
-											</ul>
-										</td>
-									</tr>
-								<tr>
-										<th scope="col">사이트 간격</th>
-										<td>
-											<ul class="table_ul05">
-												<li>3M</li>
-											</ul>
-										</td>
-									</tr>
-								<tr>
-										<th scope="col">바닥형태 (단위:면)</th>
-										<td>
-											<ul class="table_ul05">
-												<li>파쇄석 (24)</li>
-												<li>테크 (4)</li>
-												</ul>
-										</td>
-									</tr>
-								<tr>
+
+					<!-- 기타 주요시설 출력 -->
+					<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 기타 주요시설</h5>
+					<section id="table_type03">
+						<div class="table_w">
+							<table class="table_t4 camp_etc_tb my-3">
+								<!-- <caption>사이트 크기(옵션), 글램핑/카라반 내부시설, 동물동반여부, 추가사진등록</caption> -->
+								<colgroup>
+									<col style="width: 20%;" />
+									<col style="width: 80%;" />
+								</colgroup>
+								<tbody class="t_c">
+									<tr>
 										<th scope="col">사이트 크기</th>
-										<td>
-											<ul class="table_ul05">
-												<li>4 X 6 : 28개</li>
-												</ul>
-										</td>
+										<c:if test="${not empty dto.campSiteDTOs}">
+											<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
+												<td>
+													<!-- 일단 사이트 이름, 크기만 출력 -->
+													<ul>
+														<li>${siteDTO.siteName}</li>
+														<li>${siteDTO.sizeInfo}</li>
+													</ul> 
+												</td>
+											</c:forEach>
+										</c:if>
 									</tr>
-								<tr>
-										<th scope="col">캠핑장비대여</th>
-										<td>
-											<ul class="table_ul05">
-												<li>릴선</li>
-													<li>화로대</li>
-													</ul>
-										</td>
+									<tr>
+										<th scope="col">글램핑 내부시설</th>
+										<c:if test="${not empty dto.glampFacility}">
+											<td>
+												<ul><li>${dto.glampFacility}</li></ul> 
+											</td>
+										</c:if>
 									</tr>
-								<!--
-								<tr>
-									<th scope="col">반려동물 출입</th>
-									<td class="etc_type">불가능</td>
-								</tr>
-								-->
-								<tr>
-									<th scope="col">화로대</th>
-									<td class="etc_type">개별</td>
-								</tr>
-								<tr>
-									<th scope="col">안전시설현황</th>
-									<td>
-										<ul class="table_ul05">
-										<li>소화기 (20)</li>
-										<li>방화수 (10)</li>
-										</ul>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				<p class="camp_intro_txt">
-					<span class="info_notice">
-						&nbsp;* 고캠핑에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span class="info_f_red">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다.
-					</span> 
-				</p>
-			</section>
-			<h3 class="icon_h3 mt_50">청보리오토캠핑장</h3>
-				<!-- 인트로 이미지 3장을 제외한 나머지 이미지 -->
-				<div class="box_photo">
-					<div id="gallery" style="display: none;">
-						<h3>나머지 이미지</h3>
+									<tr>
+										<th scope="col">카라반 내부시설</th>
+										<c:if test="${not empty dto.caravFacility}">
+											<td>
+												<ul><li>${dto.caravFacility}</li></ul> 
+											</td>
+										</c:if>
+									</tr>
+									<tr>
+										<th scope="col">동물 동반여부</th>
+										<c:if test="${not empty dto.petAllow}">
+											<td class="etc_type">${dto.petAllow}</td>
+										</c:if>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<hr>
+
+						<!-- 경고 안내사항 -->
+						<p class="campIntroTxt">
+							<span class="infoNotice">
+								&nbsp;* TheCamping에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span class="infoRed">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다.
+							</span> 
+						</p>
+					</section>
+
+					<hr>
+
+					<!-- 인트로 이미지 3장을 제외한 나머지 이미지 -->
+					<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.name}</h5>
+					<div class="otherImage">
 						<c:if test="${not empty dto.campFileDTOs}">
 							<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="j">
-								<!-- 나머지 이미지만 보이게 -->
 								<c:if test="${j.index ge 3}">
 								<div class="otherImage">
 									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
@@ -332,38 +301,16 @@
 								</c:if>
 							</c:forEach>
 						</c:if>
-
-
-						<!-- <a href="https://gocamping.or.kr"> <img alt="청보리오토캠핑장"
-									src="https://gocamping.or.kr/upload/camp/6946/thumb/thumb_1000_5948GD4bLCqilo82inB3cl5N.jpg"
-									data-image="https://gocamping.or.kr/upload/camp/6946/thumb/thumb_1000_5948GD4bLCqilo82inB3cl5N.jpg" data-description="청보리오토캠핑장" style="display: none">
-								</a> -->
-						
 					</div>
-				</div>
-				<div style="margin-top: -30px; margin-bottom: 30px;">
-					※ 모든 컨텐츠의 저작권은 고캠핑에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
-				</div>
-				<!-- 		<button type="button" class="btn_grey_M">더보기</button> -->
-				<script>
-					$(document).ready(function() {
-						$("#gallery").unitegallery();
-					});
-				</script>
+
+					<!-- 저작권 안내 -->
+					<div style="margin-top: -30px; margin-bottom: 30px;">
+						※ 모든 컨텐츠의 저작권은 TheCamping에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
+					</div>
+				</div> 
 			</div>
 		</div>
-							</div>
-						</div>
-						<!--//내용종료-->
-					</div>
-					<!--//콘텐츠박스-->
-				</section>
-			</div>
-	
-	
-	
-	
-	
+	</div>
 	<!-- contents 내용 끝 -->
 	
 	
@@ -373,7 +320,6 @@
 		<h3>나머지 사진 테스트</h3>
 		<c:if test="${not empty dto.campFileDTOs}">
 			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<!-- 파일이 보이게 -->
 				<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
 			</c:forEach>
 		</c:if>

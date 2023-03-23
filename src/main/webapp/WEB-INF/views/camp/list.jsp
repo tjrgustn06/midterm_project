@@ -123,7 +123,7 @@
 			</div>
 
 			<!-- Service 아이콘 나오는 부분 -->
-			<div class="my-2">
+			<div class="mb-2">
 				<!-- ${dto.service} -->
 				<c:set var="service" value="${dto.service}"></c:set>
 					<c:if test="${fn:contains(service, '전기')}"><i class="fa-solid fa-bolt fa-sm"><span>전기</span></i></c:if>

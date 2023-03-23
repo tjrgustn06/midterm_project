@@ -31,6 +31,12 @@
 				</div>
 			</div>
 		</c:forEach>
+
+		<div class="row">
+			<div class="col-md-8" style="width: 75%; height : 70px; bottom: 0px; position: fixed; left: 50%; transform: translateX(-50%)">
+				<a href="./add" class="btn btn-primary btn-lg col-md-12" style="height: 100%">스토리 쓰기</a>
+			</div>
+		</div>
 	
 	</div>
 	

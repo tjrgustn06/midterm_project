@@ -31,5 +31,13 @@ public class StoryController {
 		
 	}
 	
+	@GetMapping("add")
+	public ModelAndView setBoardAdd() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("./add");
+		return mv;
+	}
+	
 	
 }

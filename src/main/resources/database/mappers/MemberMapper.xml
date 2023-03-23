@@ -7,7 +7,7 @@
 <!-- Join -->
 <insert id="setMemberJoin" parameterType="MemberDTO">
 	INSERT INTO MEMBER
-	VALUES(#(id), #(pw), #(name), #(phone), #(email), #(roleName))
+	VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email}, 'MEMBER')
 </insert>
 
 <insert id="getAddressJoin" parameterType="AddressDTO">

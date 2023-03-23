@@ -56,10 +56,10 @@
 		
 			<div class="mb-3">
 				<input type="text" id="postcode" placeholder="우편번호">
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="button" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 				<input type="text" id="address" placeholder="주소"><br>
-				<input type="text" id="addressDetail" placeholder="상세주소">
-				<div id="addressResult"></div>
+				<input type="text"  id="addressDetail" placeholder="상세주소">
+				<div id="addrResult"></div>
 			</div>
 
 		<div class="mb-3">

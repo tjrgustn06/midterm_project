@@ -11,11 +11,11 @@ const pwCheckResult = document.getElementById("pwCheckResult");
 const na = document.getElementById("name");
 const nameResult = document.getElementById("nameResult");
 
-const address = document.getElementById("address");
-const addressResult = document.getElementById("addressResult");
-
 const phone = document.getElementById("phone");
 const phoneResult = document.getElementById("phoneResult");
+
+const addr = document.getElementById("addr");
+const addrResult = document.getElementById("addrResult");
 
 const email = document.getElementById("email");
 const emailResult = document.getElementById("emailResult");
@@ -44,26 +44,28 @@ id.addEventListener("blur", function(){
 
     //요청 발생 post일 경우 parameter 전송
     xhttp.send("id=" + id.value);
-  
+
+
     //응답 처리
     xhttp.addEventListener("readystatechange", function(){
         if(this.readyState == 4 && this.status == 200){
+            console.log("idCheck : "+this.responseText.trim());
             if(this.responseText.trim() == 'true'){
                 idResult.innerHTML = '사용 가능한 아이디';
-                idResult.classList.add("greenResult");
+                checks[0] = true;
+                idResult.classList.add("blueResult");
                 idResult.classList.remove("redResult");
-               
+                
             }
             else{
                 idResult.innerHTML = '중복 아이디';
+                checks[0] = false;
                 idResult.classList.add("redResult");
-                idResult.classList.remove("greenResult");
+                idResult.classList.remove("blueResult");
+                
             }
         }
-        // if(this.readyState == 4 && this.status != 200){
-
-        // }
-        console.log(checks)
+        
     })
 
 //     if(id.value.length != 0){
@@ -87,7 +89,7 @@ pw.addEventListener("keyup", function(){
         pwResult.innerHTML = '정상 비밀번호';
         // pwLengthCheck = true;
         checks[1] = true;
-        pwResult.classList.add("greenResult");
+        pwResult.classList.add("blueResult");
         pwResult.classList.remove("redResult");
        
     }
@@ -95,7 +97,7 @@ pw.addEventListener("keyup", function(){
         pwResult.innerHTML = '비밀번호은 6글자 이상 12자 이하';
         checks[1] = false;
         pwResult.classList.add("redResult");
-        pwResult.classList.remove("greenResult");
+        pwResult.classList.remove("blueResult");
     }
     console.log(checks)
 })
@@ -110,7 +112,7 @@ pw.addEventListener("blur", function(){
         pwResult.innerHTML = '비밀번호는 필수 입력';
         checks[2] = false;
         pwResult.classList.add("redResult");
-        pwResult.classList.remove("greenResult");
+        pwResult.classList.remove("blueResult");
         
     }
     console.log(checks)
@@ -129,7 +131,7 @@ pwCheck.addEventListener("blur", function(){
         pwCheckResult.innerHTML = "동일한 비밀번호";
         // pwEqualCheck = true;
         checks[3] = true;
-        pwCheckResult.classList.add("greenResult");
+        pwCheckResult.classList.add("blueResult");
         pwCheckResult.classList.remove("redResult");
         
     }
@@ -137,63 +139,70 @@ pwCheck.addEventListener("blur", function(){
         pwCheckResult.innerHTML = "불일치 비밀번호";
         checks[3] = false;
         pwCheckResult.classList.add("redResult");
-        pwCheckResult.classList.remove("greenResult");
+        pwCheckResult.classList.remove("blueResult");
     }
     console.log(checks)
 })
 
 na.addEventListener("blur", function(){
     if(na.value.length != 0){
+        nameResult.innerHTML = "";
         checks[4] = true;
-       
     }
     else{
-        nameResult.innerHTML = "이름은 필수 입력";
+        nameResult.innerHTML = "이름은 필수  입니다";
         checks[4] = false;
         nameResult.classList.add("redResult");
-        nameResult.classList.remove("greenResult");
+        nameResult.classList.remove("blueResult");
     }
     console.log(checks)
 })
-
-address.addEventListener("blur", function(){
-    if(address.value.length != 0){
-       checks[5] = true;
-       
+na.addEventListener("focus", function(){
+    if(na.value.length != 0){
+        checks[4] = true;
+        nameResult.classList.add("blueResult");
+        nameResult.classList.remove("redResult");
     }
-    else{
-        addressResult.innerHTML = "주소는 필수 입력";
-        checks[5] = false;
-        addressResult.classList.add("redResult");
-        addressResult.classList.remove("greenResult");
-    }
-    console.log(checks)
 })
 
 phone.addEventListener("blur", function(){
     if(phone.value.length != 0){
-       checks[6] = true;
-       
+        phoneResult.innerHTML = "";
+        checks[5] = true;
     }
     else{
-        phoneResult.innerHTML = "전화번호는 필수 입력";
-        checks[6] = false;
+        phoneResult.innerHTML = "전화번호는 필수  입니다";
+        checks[5] = false;
         phoneResult.classList.add("redResult");
-        phoneResult.classList.remove("greenResult");
+        phoneResult.classList.remove("blueResult");
+    }
+    console.log(checks)
+})
+
+addr.addEventListener("blur", function(){
+    if(addr.value.length != 0){
+        addrResult.innerHTML ="";
+        checks[6] = true;
+    }
+    else{
+        addrResult.innerHTML = "주소는 필수  입니다";
+        checks[6] = false;
+        addrResult.classList.add("redResult");
+        addrResult.classList.remove("blueResult");
     }
     console.log(checks)
 })
 
 email.addEventListener("blur", function(){
     if(email.value.length != 0){
+        emailResult.innerHTML =""
        checks[7] = true;
-       
     }
     else{
-        emailResult.innerHTML = "이메일은 필수 입력";
+        emailResult.innerHTML = "이메일은 필수 입니다";
         checks[7] = false;
         emailResult.classList.add("redResult");
-        emailResult.classList.remove("greenResult");
+        emailResult.classList.remove("blueResult");
     }
     console.log(checks)
 })
@@ -202,12 +211,12 @@ email.addEventListener("blur", function(){
 btn.addEventListener("click", function(){
     //if(idCheck && pwCheck && pwLengthCheck && pwNullCheck && pwEqualCheck){
     if(!checks.includes(false)){
-        // frm.submit();
+        frm.submit();
         // location.href = "./";
-        alert('성공');
+        alert('회원 가입을 축하드립니다');
     }  
     else{
-        alert('필수 사항 입력');
+        alert('필수 사항에 입력 바랍니다');
     }  
 
 })

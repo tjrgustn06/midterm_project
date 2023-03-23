@@ -57,7 +57,9 @@ public class MemberController {
 		if(result>0){
 			msg="가입 성공";
 		}
-		mv.setViewName("redirect:../");
+		
+		System.out.println("MSG + " + msg);
+		mv.setViewName("redirect:./memberLogin");
 		return mv;
 	}
 	

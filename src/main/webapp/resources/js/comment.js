@@ -2,6 +2,11 @@ let boardName = $('#boardName').attr('data-board-name');
 let commentNum = 0;
 let page = 1;
 let writer = '';
+let num = 0;
+
+function setNum(n) {
+    num = n;
+}
 
 getList(1);
 
@@ -217,6 +222,8 @@ $('#commentList').on('click','.subCommentAdd', function(){
     commentNum = $(this).attr('data-comment-num');
     contents = $('#subCommentContents'+commentNum).val();
     writer = "qwdfd1";
+
+    console.log('Num : ' + num);
 
     $.ajax({
         type : 'POST',

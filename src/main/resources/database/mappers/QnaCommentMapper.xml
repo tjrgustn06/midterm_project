@@ -7,18 +7,14 @@
   <mapper namespace="com.camp.s1.board.qna.QnaCommentDAO">
 
   		
-  	<!-- CommentDetail  -->
-  	<select id="getBoardDetail" parameterType="BbsDTO" resultType="QnaCommentDTO">
-  		SELECT * FROM QNACOMMENT
-  		WHERE COMMENTNUM = #{commentNum} 
-  		
-  	</select>
+  
   	
   	
   	<!-- BoardList Page -->
   	
  	 <select id="getTotalCount" resultType="Long" parameterType="Pager">
-  		SELECT COUNT(NUM) FROM QNACOMMENT
+  		SELECT COUNT(COMMENTNUM) FROM QNACOMMENT
+  		WHERE NUM = #{num}
   	</select>
   	
   	<select id="getBoardList" resultType="QnaCommentDTO" parameterType="Pager">
@@ -27,7 +23,8 @@
 	  		SELECT ROWNUM R, QC.* FROM  
 			 	(
 		  		SELECT * FROM QNACOMMENT
-		  		ORDER BY COMMENTNUM DESC, REF ASC
+		  		WHERE NUM = #{num}
+		  		ORDER BY REF DESC, STEP ASC
 				) 
 			QC
 			)
@@ -64,6 +61,29 @@
   	<delete id="setBoardDelete" parameterType="BbsDTO">
   		DELETE QNACOMMENT WHERE COMMENTNUM = #{commentNum}
   	</delete>
+  	
+  		<!-- CommentDetail  -->
+  	<select id="getBoardDetail" parameterType="BbsDTO" resultType="QnaCommentDTO">
+  		SELECT * FROM QNACOMMENT
+  		WHERE COMMENTNUM = #{commentNum} 
+  		
+  	</select>
+  	
+  	<update id="setStepUpdate" parameterType="BbsDTO">
+  		UPDATE QNACOMMENT SET STEP = STEP + 1
+  		WHERE REF = #{ref} AND STEP > #{step}
+  	</update>
+  	
+  	<select id="getStepMax" parameterType="BbsDTO" resultType="Long">
+  		SELECT MAX(STEP) FROM QNACOMMENT
+  		WHERE REF = #{ref}
+  	</select>
+  	
+  	<insert id="setSubCommentAdd" parameterType="BbsDTO">
+
+  		INSERT INTO QNACOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
+  		VALUES (BOARDSEQ.NEXTVAL, #{num}, #{writer}, #{contents}, SYSDATE, #{ref}, #{step}, #{depth})
+  	</insert>
   	
   	
   	

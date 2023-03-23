@@ -22,8 +22,8 @@ $('#addPic').click(function(){
         return;
     }
     child = '<div class="row mb-2" id="d'+idx+'">';
-    child = child + '<div class="input-group mb-2 col-sm-">';
-    child = child + '<input type="file" if="pics" class="form-control" name="'+param+'">'
+    child = child + '<div class="input-group mb-2 col-sm-2">';
+    child = child + '<input type="file" class="form-control" name="'+param+'">'
     child = child + '<button class="dels btn btn-outline-danger" type="button" data-delete-id="'+idx+'">X</button>';
     child = child + '</div></div>'
 
@@ -72,7 +72,6 @@ $('.deleteCheck').click(function(){
 // 댓글 등록
 $('#addReview').click(()=>{
     const form1 = new FormData();
-
     let inputFile = $('input[name="pics"]');
     let files = inputFile[0].files;
     form1.append('productNum',$('#reviewProductNum').val())
@@ -81,7 +80,6 @@ $('#addReview').click(()=>{
     for(let i=0;i<files.length;i++){
         form1.append('pics', files[i])
     }
-
     $.ajax({
         type : 'POST',
         url : '/product/review/add',
@@ -91,10 +89,17 @@ $('#addReview').click(()=>{
         success : function(response){
             if(response.trim()>0) {
                 alert('리뷰가 등록되었습니다')
+                $('#addPicDiv').prev().remove()
+                count=0;
+                idx=0;
+                $('#reviewContents').val('');
             }
             else {
                 alert('리뷰 등록 실패')
             }
+        },
+        error : ()=>{
+            alert('댓글 등록 실패. 관리자에게 문의하세요');
         }
     })
 })

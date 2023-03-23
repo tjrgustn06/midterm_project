@@ -48,7 +48,7 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container-fluid my-5">
+<div class="container-fluid col-lg-9 my-5">
 	<div class="row my-3">
 		<h1>CampList Page</h1>
 	</div>

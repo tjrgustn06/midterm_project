@@ -37,10 +37,10 @@
 		  <input type="text" id="campAddress" name="address" value="${dto.address}" class="form-control"">
 		</div>
 	
-		<div class="mb-3">
+<%-- 		<div class="mb-3">
 		  <label for="campContents" class="form-label">캠핑장 소개내용</label>
 		  <textarea id="campContents" name="contents" class="form-control" rows="5">${dto.contents}</textarea>
-		</div>
+		</div> --%>
 		
 		<div id="fileList" class="row my-5">
 			<!-- 새로운 파일을 추가 -->

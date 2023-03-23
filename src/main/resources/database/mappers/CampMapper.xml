@@ -70,6 +70,7 @@
   		<result column="POSBLFACILITY" property="posblFacility"/>
   		<result column="THEME" property="theme"/>
   		<result column="PETALLOW" property="petAllow"/>
+  		<result column="HOMEPAGE" property="homePage"/>
   		<result column="THUMBNAIL" property="thumbnail"/>
   		<result column="REGDATE" property="regDate"/>
   		<result column="MODIDATE" property="modiDate"/>
@@ -114,6 +115,7 @@
   		<result column="POSBLFACILITY" property="posblFacility"/>
   		<result column="THEME" property="theme"/>
   		<result column="PETALLOW" property="petAllow"/>
+  		<result column="HOMEPAGE" property="homePage"/>
   		<result column="THUMBNAIL" property="thumbnail"/>
   		<result column="REGDATE" property="regDate"/>
   		<result column="MODIDATE" property="modiDate"/>
@@ -164,8 +166,8 @@
 		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, CONTENTS)
-		VALUES(#{campNum}, #{name}, #{phone}, #{address}, #{contents})
+		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS)
+		VALUES(#{campNum}, #{name}, #{phone}, #{address})
 	</insert>
 	
 	<!-- delete -->
@@ -175,7 +177,7 @@
 	
 	<!-- update -->
 	<update id="setCampUpdate" parameterType="CampDTO">
-		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}, CONTENTS=#{contents}
+		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}
 		WHERE CAMPNUM=#{campNum}
 	</update>
 	

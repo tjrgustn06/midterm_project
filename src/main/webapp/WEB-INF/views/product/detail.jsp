@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <c:import url="../template/common_css.jsp"></c:import>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<style>
+	textarea{resize:none;}
+</style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -117,16 +120,42 @@
 					<p>${dto.contents}</p>
 				</div>
 			</div>
-			<div class="row col-6 mx-auto my-3" id="review" style="display: none;">
-				<textarea></textarea>
+			<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
+				<form id="reviewForm">
+					<input type="hidden" name="productNum" value="${dto.productNum}">
+					<div class="input-group mb-3">
+			  			<div class="input-group-prepend">
+			    			<span class="input-group-text" >작성자</span>
+			 			</div>
+			  			<input type="text" name="writer" value="${member.id}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+					</div>			
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="gradeStock">내용</label>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<textarea id=reviewContents class="form-control" name="contents" style="height: 200px"></textarea>
+					</div>
+					<div id="picList">
+						<!-- <div class="mb-3">
+							<label for="pics" class="form-label">Image</label>
+							<input type="file" class="form-control" id="pics" name="pic">
+						</div> -->
+						<button type="button" id="addPic" class="offset-md-10 btn btn-primary">사진추가</button>
+					</div>
+					<div>
+						<button id="addReview" type="button" class="btn btn-outline-info">리뷰작성</button>
+					</div>
+				</form>
 			</div>
 			<div class="row col-6 mx-auto my-3">
 				<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
 				<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
-			</div>
-			<div>asdasdasd</div>
+			
 		</c:if>
 	</div>
+	<script src="../resources/js/productReview.js"></script>
 	<script>
 		let price = 0;
 		let totalPrice = 0;
@@ -161,6 +190,8 @@
 			$('#totalPrice').html(totalPrice)
 			$('#price').val($('#totalPrice').html())
 		})
+		setParam('pics')
+		setMax(5);
 	</script>
 	<script>
 		$.datepicker.setDefaults({

@@ -36,47 +36,14 @@
   		<include refid="searchCondition"></include>
   	</select>
   	
-  	<!-- Detail -->
-  	<select id="getBoardDetail" parameterType="BbsDTO" resultMap="ProductReviewDetailResult">
-  		SELECT * FROM PRODUCTREVIEW
-  		LEFT JOIN
-  		PRODUCTREVIEWFILES
-  		USING (NUM)
-  		WHERE NUM=#{num}
-  	</select>
-  	
-  	<resultMap type="ProductReviewDTO" id="ProductReviewDetailResult">
-  		<id column="NUM" property="num"/>
-  		<result column="PRODUCTNUM" property="productNum"/>
-  		<result column="WRITER" property="writer"/>
-  		<result column="TITLE" property="title"/>
-  		<result column="CONTENTS" property="contents"/>
-  		<result column="REGDATE" property="regDate"/>
-  		<result column="HIT" property="hit"/>
-  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
-  			<id column="FILENUM" property="fileNum"/>
-  			<result column="FILENAME" property="fileName"/>
-  			<result column="ORINAME" property="oriName"/>
-  		</collection>
-  	</resultMap>
-  	
-  	<update id="setBoardHitCount" parameterType="BoardDTO">
-  		UPDATE PRODUCTREVIEW SET HIT = HIT + 1
-  		WHERE NUM = #{num}
-  	</update>
   	
   	<!-- Add -->
   	<insert id="setBoardAdd" parameterType="BbsDTO">
   		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
   			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
   		</selectKey>
-  		INSERT INTO PRODUCTREVIEW (NUM, PRODUCTNUM, WRITER, TITLE, CONTENTS, REGDATE, HIT)
-  		VALUES (#{num}, #{productNum}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
-  	</insert>
-  	
-  	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
-  		INSERT INTO PRODUCTREVIEWFILES (FILENUM, NUM, FILENAME, ORINAME)
-  		VALUES (PRODUCTSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+  		INSERT INTO REVIEW (NUM, PRODUCTNUM, WRITER, CONTENTS, REGDATE)
+  		VALUES (#num, #productNum, #contents, SYSDATE)
   	</insert>
   	
   	<!-- Update -->

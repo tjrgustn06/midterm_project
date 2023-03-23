@@ -43,7 +43,6 @@ function getAmount(amount){
 }
 
 $('#reviewAdd').click(function(){
-    console.log('check')
     $('#review').slideDown("slow")
 })
 $('#reviewCancle').click(function(){

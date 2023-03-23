@@ -121,13 +121,13 @@
 				</div>
 			</div>
 			<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
-				<form id="reviewForm">
-					<input type="hidden" name="productNum" value="${dto.productNum}">
+
+					<input id="reviewProductNum" type="hidden" value="${dto.productNum}">
 					<div class="input-group mb-3">
 			  			<div class="input-group-prepend">
 			    			<span class="input-group-text" >작성자</span>
 			 			</div>
-			  			<input type="text" name="writer" value="${member.id}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+			  			<input id="reviewWriter" type="text" value="${member.id}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
 					</div>			
 					<div class="input-group">
 						<div class="input-group-prepend">
@@ -135,19 +135,19 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<textarea id=reviewContents class="form-control" name="contents" style="height: 200px"></textarea>
+						<textarea id=reviewContents class="form-control" style="height: 200px"></textarea>
 					</div>
 					<div id="picList">
 						<!-- <div class="mb-3">
 							<label for="pics" class="form-label">Image</label>
-							<input type="file" class="form-control" id="pics" name="pic">
+							<input type="file" class="form-control" id="pics" name="pics">
 						</div> -->
 						<button type="button" id="addPic" class="offset-md-10 btn btn-primary">사진추가</button>
 					</div>
 					<div>
-						<button id="addReview" type="button" class="btn btn-outline-info">리뷰작성</button>
+						<button type="button" id="addReview" class="btn btn-outline-info">리뷰작성</button>
 					</div>
-				</form>
+				
 			</div>
 			<div class="row col-6 mx-auto my-3">
 				<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>

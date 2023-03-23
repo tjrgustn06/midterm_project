@@ -23,7 +23,7 @@ $('#addPic').click(function(){
     }
     child = '<div class="row mb-2" id="d'+idx+'">';
     child = child + '<div class="input-group mb-2 col-sm-">';
-    child = child + '<input type="file" class="form-control" name="'+param+'">'
+    child = child + '<input type="file" if="pics" class="form-control" name="'+param+'">'
     child = child + '<button class="dels btn btn-outline-danger" type="button" data-delete-id="'+idx+'">X</button>';
     child = child + '</div></div>'
 
@@ -71,21 +71,30 @@ $('.deleteCheck').click(function(){
 
 // 댓글 등록
 $('#addReview').click(()=>{
-    let form=$('#reviewForm').serialize();
-    console.log(form)
+    const form1 = new FormData();
+
+    let inputFile = $('input[name="pics"]');
+    let files = inputFile[0].files;
+    form1.append('productNum',$('#reviewProductNum').val())
+    form1.append('writer', $('#reviewWriter').val())
+    form1.append('contents', $('#reviewContents').val())
+    for(let i=0;i<files.length;i++){
+        form1.append('pics', files[i])
+    }
+
     $.ajax({
         type : 'POST',
-        url : '../product/review/add',
-        data : form,
-        success : function(){
-            if(response.trim() == 1) {
-                alert('리뷰가 등록되었습니다');
-            } else {
-                alert('리뷰 등록 실패');
+        url : '/product/review/add',
+        processData : false,
+        contentType : false,
+        data : form1,
+        success : function(response){
+            if(response.trim()>0) {
+                alert('리뷰가 등록되었습니다')
             }
-        },
-        error : ()=>{
-            alert('댓글 등록 실패, 관리자에게 문의하세요')
+            else {
+                alert('리뷰 등록 실패')
+            }
         }
     })
 })

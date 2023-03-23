@@ -17,7 +17,7 @@ public class ProductReviewDAO implements ReviewDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private final String 
+	private final String NAMESPACE="com.camp.s1.product.review.ProductReviewDAO.";
 
 	@Override
 	public Long getTotalCount(Pager pager) throws Exception {
@@ -40,7 +40,7 @@ public class ProductReviewDAO implements ReviewDAO {
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setBoardAdd", bbsDTO);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class ProductReviewDAO implements ReviewDAO {
 	@Override
 	public int setBoardFileAdd(BoardFileDTO boardFileDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setBoardFileAdd", boardFileDTO);
 	}
 
 	@Override

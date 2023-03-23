@@ -26,7 +26,10 @@ public class ProductReviewService implements ReviewService {
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		pager.makeRow();
+		pager.makeNum(productReviewDAO.getTotalCount(pager));
+		
+		return productReviewDAO.getBoardList(pager);
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class ProductReviewDAO implements ReviewDAO {
 	@Override
 	public Long getTotalCount(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class ProductReviewDAO implements ReviewDAO {
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(NAMESPACE+"getBoardList", pager);
 	}
 
 	@Override

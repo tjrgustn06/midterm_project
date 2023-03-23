@@ -2,7 +2,8 @@ let count = 0;
 let max = 0;
 let idx = 0;
 let param = '';
-
+let page = 1;
+let reviewName=$('#review').attr('data-review-name');
 function setParam (p) {
     param = p;
 }
@@ -15,6 +16,7 @@ function setCount(c) {
     count = c;
 }
 
+// 리뷰파일 추가
 $('#addPic').click(function(){
 
     if(count >= max) {
@@ -69,17 +71,12 @@ $('.deleteCheck').click(function(){
     }
 })
 
-// 댓글 등록
+getList(1);
+
+// 리뷰 등록
 $('#addReview').click(()=>{
-    const form1 = new FormData();
-    let inputFile = $('input[name="pics"]');
-    let files = inputFile[0].files;
-    form1.append('productNum',$('#reviewProductNum').val())
-    form1.append('writer', $('#reviewWriter').val())
-    form1.append('contents', $('#reviewContents').val())
-    for(let i=0;i<files.length;i++){
-        form1.append('pics', files[i])
-    }
+    let form=$('#reviewForm')[0];
+    const form1= new FormData(form);
     $.ajax({
         type : 'POST',
         url : '/product/review/add',
@@ -89,10 +86,11 @@ $('#addReview').click(()=>{
         success : function(response){
             if(response.trim()>0) {
                 alert('리뷰가 등록되었습니다')
-                $('#addPicDiv').prev().remove()
+                $('#addPicDiv').prevAll().remove()
                 count=0;
                 idx=0;
                 $('#reviewContents').val('');
+                getList(1);
             }
             else {
                 alert('리뷰 등록 실패')
@@ -102,4 +100,25 @@ $('#addReview').click(()=>{
             alert('댓글 등록 실패. 관리자에게 문의하세요');
         }
     })
+})
+
+// 리스트 가져오기
+function getList(page) {
+    console.log('reviewName : '+reviewName)
+    $.ajax({
+        type : 'GET',
+        url : './review/list?num='+$('#addReview').attr('data-review-num')+'&page='+page,
+        success : (response) =>{
+            $('#reviewList').html(response);
+        }
+    })
+}
+
+// 페이징
+$('#reviewList').on('click','.page-link', function(e){
+    page=$(this).attr('data-review-page');
+    getList(page);
+
+    e.preventDefault();
+    
 })

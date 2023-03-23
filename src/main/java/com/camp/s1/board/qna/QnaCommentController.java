@@ -23,7 +23,6 @@ public class QnaCommentController {
 		mv.addObject("commentList", qnaCommentService.getBoardList(pager));
 		mv.setViewName("common/commentList");
 		
-		
 		return mv;
 		
 	}

@@ -7,7 +7,7 @@
   <mapper namespace="com.camp.s1.product.review.ProductReviewDAO">
   
   	<!-- 검색을 위한 조건 -->
-  	<sql id="searchCondition">
+  	<!-- <sql id="searchCondition">
   		<if test="kind == 'title'">
   			WHERE TITLE LIKE '%' || #{search} || '%'
   		</if>
@@ -17,14 +17,14 @@
   		<if test="kind == 'writer'">
   			WHERE WRITER LIKE '%' || #{search} || '%'
   		</if>
-  	</sql>
+  	</sql> -->
   	
   	<!-- List -->
   	<select id="getBoardList" parameterType="Pager" resultType="ProductReviewDTO">
   		SELECT * FROM(
   			SELECT ROWNUM R, PR.* FROM(
   				SELECT * FROM PRODUCTREVIEW
-  				<include refid="searchCondition"></include>
+  				<!-- <include refid="searchCondition"></include> -->
   				ORDER BY NUM DESC
   			) PR
   		) WHERE R BETWEEN #{startRow} AND #{lastRow}
@@ -33,7 +33,7 @@
   	<!-- 총 갯수 출력 -->
   	<select id="getTotalCount" parameterType="Pager" resultType="Long">
   		SELECT COUNT(NUM) FROM PRODUCTREVIEW
-  		<include refid="searchCondition"></include>
+  		<!-- <include refid="searchCondition"></include> -->
   	</select>
   	
   	

@@ -27,7 +27,7 @@ public class ProductReviewController {
 	
 	@ModelAttribute("boardName")
 	public String getBoardName() {
-		return "ProductReview";
+		return "productReview";
 	}
 	
 	@GetMapping("list")
@@ -101,7 +101,15 @@ public class ProductReviewController {
 	public ModelAndView setBoardAdd(ProductReviewDTO productReviewDTO, MultipartFile [] files, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		int result = productReviewService.setBoardAdd(productReviewDTO, files, session);
 		
+		String msg = "등록 실패";
+		if(result > 0) {
+			msg = "글이 등록되었습니다.";
+		}
+		mv.setViewName("common/result");
+		mv.addObject("result", msg);
+		mv.addObject("url", "./list");
 		
 		return mv;
 	}

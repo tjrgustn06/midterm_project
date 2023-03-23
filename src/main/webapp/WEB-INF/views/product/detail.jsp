@@ -112,9 +112,19 @@
 			
 			<!-- delete시엔 post방식 update시엔 get -->
 			</div>
-			<div class="row col-6 mx-auto">
-				<h3>${dto.contents}</h1>
+			<div class="row">
+				<div class="row col-6 mx-auto">
+					<p>${dto.contents}</p>
+				</div>
 			</div>
+			<div class="row col-6 mx-auto my-3" id="review" style="display: none;">
+				<textarea></textarea>
+			</div>
+			<div class="row col-6 mx-auto my-3">
+				<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
+				<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
+			</div>
+			<div>asdasdasd</div>
 		</c:if>
 	</div>
 	<script>

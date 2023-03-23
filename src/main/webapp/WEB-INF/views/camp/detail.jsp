@@ -89,18 +89,44 @@
 		<hr class="my-2">
 		
 		<div class="row discription my-auto">
-			<h5>캠핑장 전화번호 : ${dto.phone}</h5>
-			<h5>캠핑장 주소 : ${dto.address}</h5>
-			<p>옵션<br>
-			
-			</p>
+		
+			<table class="table">
+				<%-- <caption>캠핑장 기본정보입니다. 주소, 문의처, 캠핑장 유형, 찾아오시는길로 나뉘어 설명합니다.</caption> --%>
+				<colgroup>
+					<col style="width: 30%;" />
+					<col style="width: 70%;" />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th scope="col">주소</th>
+						<td>${dto.address}</td>
+					</tr>
+					<tr class="camp_call_pcVer">
+						<th scope="col">문의처</th>
+						<td>${dto.phone}</td>
+					</tr>
+					<tr>
+						<th scope="col">캠핑장 유형</th>
+						<td>${dto.induty}</td>
+					</tr>
+<!-- 					<tr>
+						<th scope="col">홈페이지</th>
+						<td><a href="http://pf.kakao.com/_nxaVBxj" target="_BLANK" title="새창열림">홈페이지 바로가기</a>
+											<i class="ico_link"><span class="skip">새창으로</span></i></td>
+					</tr> -->
+					<tr>
+						<th scope="col">주변이용가능시설</th>
+						<td>${dto.posblFacility}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	
 	
 	<!-- 나머지사진 다보이게 -->
 	<div class="row col-7 mb-3">
-		<h3>나머지 사진이에요</h3>
+		<h3>나머지 사진 테스트</h3>
 		<c:if test="${not empty dto.campFileDTOs}">
 			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
 				<!-- 파일이 보이게 -->

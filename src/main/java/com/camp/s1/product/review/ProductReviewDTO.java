@@ -8,7 +8,16 @@ import com.camp.s1.board.BoardFileDTO;
 public class ProductReviewDTO extends BbsDTO {
 	
 	private Long productNum;
+	private Long mark;
 	
+	public Long getMark() {
+		return mark;
+	}
+
+	public void setMark(Long mark) {
+		this.mark = mark;
+	}
+
 	private List<BoardFileDTO> boardFileDTOs;
 
 	public List<BoardFileDTO> getBoardFileDTOs() {

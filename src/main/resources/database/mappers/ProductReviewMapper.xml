@@ -51,6 +51,7 @@
   		<result column="WRITER" property="writer"/>
   		<result column="CONTENTS" property="contents"/>
   		<result column="REGDATE" property="regDate"/>
+  		<result column="MARK" property="mark"/>
   		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="FILENAME" property="fileName"/>

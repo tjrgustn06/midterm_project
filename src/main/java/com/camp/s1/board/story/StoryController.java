@@ -18,11 +18,24 @@ public class StoryController {
 	private StoryService storyService;
 	
 	@GetMapping("list")
-	public ModelAndView getBoardList(Pager pager) throws Exception {
+	public ModelAndView getListPage(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		
 		mv.setViewName("/story/list");
+		mv.addObject("list", storyService.getBoardList(pager));
+		
+		
+		return mv;
+		
+	}
+	
+	@GetMapping("listPage")
+	public ModelAndView getBoardList(Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		mv.setViewName("common/storyList");
 		mv.addObject("list", storyService.getBoardList(pager));
 		
 		

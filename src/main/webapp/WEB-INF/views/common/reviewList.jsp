@@ -12,6 +12,7 @@
 						    <div class="row">
 						    	<p>${dto.writer}</p>
 						    	<p>${dto.regDate}</p>
+						    	<p>${dto.mark}
 						    </div>
 							<div class="row">
 								<td>${dto.contents}</td>

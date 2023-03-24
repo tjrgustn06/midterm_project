@@ -128,7 +128,7 @@ $('.star').each((index, item)=>{
         rating(index);
     })
 })
-
+let rate = 0;
 function rating(score){
     console.log('click')
     $('.star').each((index,item)=>{
@@ -137,9 +137,7 @@ function rating(score){
         } else {
             $(item).removeAttr('style');
         }
+        rate = score+1;
+        $('#mark').val(rate);
     })
-}
-
-function setStar(point){
-    $('#point').val(point)
 }

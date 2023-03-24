@@ -135,13 +135,13 @@
 						</div>
 						<div>
 							<div class="starRate" id="star">
-								<span class="star" onclick="setStar(1)">★</span>
-								<span class="star" onclick="setStar(2)">★</span>
-								<span class="star" onclick="setStar(3)">★</span>
-								<span class="star" onclick="setStar(4)">★</span>
-								<span class="star" onclick="setStar(5)">★</span>
+								<span class="star">★</span>
+								<span class="star">★</span>
+								<span class="star">★</span>
+								<span class="star">★</span>
+								<span class="star">★</span>
 							</div>
-							<input id="point" type="hidden" name="point">
+							<input id="mark" type="hidden" name="mark">
 						</div>
 				</div>			
 					<div class="input-group">

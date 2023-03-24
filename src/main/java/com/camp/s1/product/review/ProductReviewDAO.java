@@ -28,7 +28,7 @@ public class ProductReviewDAO implements ReviewDAO {
 	@Override
 	public BbsDTO getBoardDetail(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"getBoardDetail", bbsDTO);
 	}
 
 	@Override
@@ -64,6 +64,7 @@ public class ProductReviewDAO implements ReviewDAO {
 	@Override
 	public List<BoardFileDTO> getBoardFileList(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

@@ -36,6 +36,27 @@
   		<!-- <include refid="searchCondition"></include> -->
   	</select>
   	
+  	<!-- List에 file값을 넣기위한 쿼리 -->
+  	<select id="getBoardDetail" parameterType="BbsDTO" resultMap="ProductReviewFileResult">
+  		SELECT * FROM PRODUCTREVIEW
+  		LEFT JOIN
+  		PRODUCTREVIEWFILES
+  		USING (NUM)
+  		WHERE NUM=#{num}
+  	</select>
+  	
+  	<resultMap type="ProductReviewDTO" id="ProductReviewFileResult">
+  		<id column="NUM" property="num"/>
+  		<result column="PRODUCTNUM" property="productNum"/>
+  		<result column="WRITER" property="writer"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
   	
   	<!-- Add -->
   	<insert id="setBoardAdd" parameterType="BbsDTO">

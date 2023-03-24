@@ -1,5 +1,6 @@
 package com.camp.s1.product.review;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -26,10 +27,17 @@ public class ProductReviewService implements ReviewService {
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
+		pager.setPerPage(5L);
 		pager.makeRow();
 		pager.makeNum(productReviewDAO.getTotalCount(pager));
+		List<BbsDTO> ar = productReviewDAO.getBoardList(pager);
+		ArrayList<BbsDTO> result = new ArrayList<BbsDTO>();
+		for(BbsDTO bbsDTO:ar) {
+			bbsDTO = productReviewDAO.getBoardDetail(bbsDTO);
+			result.add(bbsDTO);
+		}
 		
-		return productReviewDAO.getBoardList(pager);
+		return result;
 	}
 
 	@Override

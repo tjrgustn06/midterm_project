@@ -124,11 +124,26 @@
 				<form id="reviewForm" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="productNum" value="${dto.productNum}">
 					<div class="input-group mb-3">
-							<div class="input-group-prepend">
+						<div class="input-group-prepend">
 							<span class="input-group-text" >작성자</span>
+						</div>
+						<input type="text" name="writer" value="${member.id}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+						<span class="input-group-text" >평점</span>
+						</div>
+						<div>
+							<div class="starRate" id="star">
+								<span class="star" onclick="setStar(1)">★</span>
+								<span class="star" onclick="setStar(2)">★</span>
+								<span class="star" onclick="setStar(3)">★</span>
+								<span class="star" onclick="setStar(4)">★</span>
+								<span class="star" onclick="setStar(5)">★</span>
 							</div>
-							<input type="text" name="writer" value="${member.id}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
-					</div>			
+							<input id="point" type="hidden" name="point">
+						</div>
+				</div>			
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="gradeStock">내용</label>

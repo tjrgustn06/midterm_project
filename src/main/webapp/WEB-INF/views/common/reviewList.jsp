@@ -2,25 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>글번호</th>
-				<th>작성자</th>
-				<th>글내용</th>
-				<th>작성일</th>
-			</tr>
-		</thead>
-		<tbody>
+<div class="col-6 offset-md-3">
+		
+		
 			<c:choose>
 			  		<c:when test="${not empty reviewList}">
 					  	<c:forEach items="${reviewList}" var="dto">
-						    <tr>
-						      <th>${dto.num}</th>
-						      <td>${dto.writer}</td>
-						      <td>${dto.contents}</td>
-						      <td>${dto.regDate}</td>
-						    </tr>
+						    
+						    <div class="row">
+						    	<p>${dto.writer}</p>
+						    	<p>${dto.regDate}</p>
+						    </div>
+							<div class="row">
+								<td>${dto.contents}</td>
+							</div>
+							<div class="row">
+						    <c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
+						    	<img style="width: 30%; height: 30%;" alt="" src="../resources/upload/product/review/${fileDTO.fileName}">
+						    </c:forEach>
+							</div>
 					  	</c:forEach>
 				  	</c:when>
 				 	<c:otherwise>
@@ -29,9 +29,8 @@
 				 		</tr>
 				 	</c:otherwise>
 			  	</c:choose>
-		</tbody>
-	</table>
-	
+		
+</div>
 
 	<!-- 페이징 -->
 	<div class="reviewList">

@@ -104,7 +104,6 @@ $('#addReview').click(()=>{
 
 // 리스트 가져오기
 function getList(page) {
-    console.log('reviewName : '+reviewName)
     $.ajax({
         type : 'GET',
         url : './review/list?num='+$('#addReview').attr('data-review-num')+'&page='+page,
@@ -122,3 +121,25 @@ $('#reviewList').on('click','.page-link', function(e){
     e.preventDefault();
     
 })
+
+// 별점 입력
+$('.star').each((index, item)=>{
+    $(item).on('click',()=>{
+        rating(index);
+    })
+})
+
+function rating(score){
+    console.log('click')
+    $('.star').each((index,item)=>{
+        if(index<=score){
+            $(item).attr('style','color: red;')
+        } else {
+            $(item).removeAttr('style');
+        }
+    })
+}
+
+function setStar(point){
+    $('#point').val(point)
+}

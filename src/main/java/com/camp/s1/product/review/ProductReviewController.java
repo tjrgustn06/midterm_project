@@ -1,5 +1,7 @@
 package com.camp.s1.product.review;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.camp.s1.board.BbsDTO;
 import com.camp.s1.member.MemberDTO;
 import com.camp.s1.util.Pager;
 

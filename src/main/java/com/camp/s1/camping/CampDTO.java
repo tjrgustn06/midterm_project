@@ -22,6 +22,7 @@ public class CampDTO {
 	private String posblFacility;
 	private String theme;
 	private String petAllow;
+	private String useInfo;
 	private String homePage;
 	private String thumbnail;
 	private String regDate; //date
@@ -176,6 +177,14 @@ public class CampDTO {
 
 	public void setPetAllow(String petAllow) {
 		this.petAllow = petAllow;
+	}
+
+	public String getUseInfo() {
+		return useInfo;
+	}
+
+	public void setUseInfo(String useInfo) {
+		this.useInfo = useInfo;
 	}
 
 	public String getHomePage() {

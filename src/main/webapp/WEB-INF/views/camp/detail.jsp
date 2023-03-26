@@ -58,6 +58,10 @@
 		.infoRed{
 			color: red;
 		}
+
+		.gray{
+			background-color: gray;
+		}
 	</style>
 </head>
 <body>
@@ -143,34 +147,39 @@
 			</form>
 		</div>
 	</div>
+	<hr>
 	
 
 	<!-- contents 내용 시작 -->
-	<hr>
 	<div id="contents">
-		<div class="camp_cont_w">
-			<!-- 캠핑장 이용안내 -->
+		<div class="campContent">
+			<!-- 탭 선택 버튼 -->
 			<div class="layout">
 				<!-- 탭영역 - 다단 라인 -->
+				<div id="viewType" data-viewType="${viewType}"></div>
 				<ul class="nav nav-pills nav-fill">
 					<li class="nav-item" id="c_intro">
-						<a class="nav-link camp_intro active" aria-current="page" href="#">캠핑장소개</a>
+						<a class="nav-link camp camp_intro active" aria-current="page" href="./detail?campNum=${dto.campNum}&viewType=1#contents">캠핑장소개</a>
+						<!-- data-camp-campNum="${dto.campNum}"" -->
 					</li>
 					<li class="nav-item" id="c_guide">
-						<a class="nav-link camp_guide" href="#">이용안내</a>
+						<a class="nav-link camp camp_guide" href="./detail?campNum=${dto.campNum}&viewType=2#contents">이용안내</a>
 					</li>
 					<li class="nav-item" id="c_map">
-						<a class="nav-link camp_map" href="#">위치정보</a>
+						<a class="nav-link camp camp_map" href="./detail?campNum=${dto.campNum}&viewType=3#contents">위치정보</a>
 					</li>
 					<li class="nav-item" id="c_review">
-						<a class="nav-link camp_review" href="#">후기</a>
+						<a class="nav-link camp camp_review" href="./detail?campNum=${dto.campNum}&viewType=4#contents">후기</a>
 					</li>
 				</ul>
 
-				<!-- js로 내용마다 바뀌게 해야할거같음. 캠핑장소개 / 이용안내 / 위치정보(지도) / 후기 -->
 
-				<!-- 캠핑장소개 -->
-				<div class="camp_intro my-3">
+
+				<!-- 탭 아래 내용 - 캠핑장소개 / 이용안내 / 위치정보(지도) / 후기 -->
+
+				<c:if test="${viewType eq 1}">
+				<!-- 캠핑장소개 영역 -->
+				<div class="campIntro my-3" id="campIntro">
 					<!-- 인트로 이미지 3장까지만 출력 -->
 					<div class="row mb-3">
 						<c:if test="${not empty dto.campFileDTOs}">
@@ -307,10 +316,146 @@
 					<div style="margin-top: -30px; margin-bottom: 30px;">
 						※ 모든 컨텐츠의 저작권은 TheCamping에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
 					</div>
-				</div> 
+				</div> <!-- 캠핑장 소개 영역 종료 -->
+				</c:if>
+
+				<c:if test="${viewType eq 2}">
+				<!-- 이용안내 영역 -->
+				<div class="useInfo my-3" id="useInfo">
+					<!-- 이용안내 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 이용안내사항</h5>
+						<c:choose>
+							<c:when test="${not empty dto.useInfo}">
+								<div class="useInfomation my-3">
+									<ul>
+										<li>${dto.useInfo}</li>
+									</ul>
+								</div>	
+							</c:when>
+							<c:otherwise><li>*안내사항이 없습니다.</li></c:otherwise>
+						</c:choose>
+					<hr>
+						
+					<!-- 요금구분 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 요금 안내</h5>
+					<div class="table_w">
+						<table class="table camp_info_tb">
+							<!-- <caption>캠핑 구분에 따른 요금 테이블. 평상시의 주중, 주말과 성수기의 주중, 주말로 나뉘어 설명합니다.</caption> -->
+							<colgroup>
+								<col style="width: 20%">
+								<col style="width: 20%">
+								<col style="width: 20%">
+								<col style="width: 20%">
+								<col style="width: 20%">
+							</colgroup>
+							<thead>
+								<tr>
+									<th rowspan="2" scope="col">구분</th>
+									<th colspan="2" scope="colgroup">평상시</th>
+									<th colspan="2" scope="colgroup">성수기</th>
+								</tr>
+
+								<tr>
+									<th scope="col" class="gray">주중</th>
+									<th scope="col" class="gray">주말</th>
+									<th scope="col" class="gray">주중</th>
+									<th scope="col" class="gray">주말</th>
+								</tr>
+							</thead>
+							<tbody class="t_c">
+								<tr>
+									<th scope="col">일반캠핑</th>
+									<td data-cell-header="평상시 주중：">30,000</td>
+									<td data-cell-header="평상시 주말：">40,000</td>
+									<td data-cell-header="성수기 주중：">30,000</td>
+									<td data-cell-header="성수기 주말：">40,000</td>
+								</tr>
+
+								<tr>
+									<th scope="col">오토캠핑</th>
+									<td data-cell-header="평상시 주중：">30,000</td>
+									<td data-cell-header="평상시 주말：">40,000</td>
+									<td data-cell-header="성수기 주중：">30,000</td>
+									<td data-cell-header="성수기 주말：">40,000</td>
+								</tr>
+
+								<tr>
+									<th scope="col">글램핑</th>
+									<td data-cell-header="평상시 주중：">69,000~99,000</td>
+									<td data-cell-header="평상시 주말：">129,000~159,000</td>
+									<td data-cell-header="성수기 주중：">69,000~99,000</td>
+									<td data-cell-header="성수기 주말：">129,000~159,000</td>
+								</tr>
+
+								<tr>
+									<th scope="col">카라반</th>
+									<td data-cell-header="평상시 주중：">109,000</td>
+									<td data-cell-header="평상시 주말：">169,000</td>
+									<td data-cell-header="성수기 주중：">109,000</td>
+									<td data-cell-header="성수기 주말：">169,000</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr>
+
+					<!-- 시설배치도 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+						<!-- 임시로 막아놓고 나중에 추가해보기 ㅠㅠ -->
+						<!-- <div class="row mb-3">
+							<c:if test="${not empty dto.campFileDTOs}">
+								<div class="facilityImage">
+									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+								</div>
+							</c:if>
+						</div> -->
+					<hr>
+				</div> <!-- 이용안내 영역 종료 -->
+				</c:if>
+
+				<c:if test="${viewType eq 3}">
+				<!-- 위치정보 영역 -->
+				<div class="campMap" id="campMap">
+					<!-- 찾아오시는 길 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5>
+						<!-- 지도 넣기 -->
+				</div>
+				</c:if>
+
+
+				<c:if test="${viewType eq 4}">
+				<!-- 후기 영역 -->
+				<div class="campReview" id="campReview">
+					<!-- 캠핑/여행 후기 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
+						<!-- 후기 넣기 -->
+				</div>
+				</c:if>
+
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- contents 내용 끝 -->
 	
 	
@@ -343,6 +488,6 @@
 
 
 <c:import url="../template/common_js.jsp"></c:import>
-<script src="../resources/js/camp/crud.js"></script>
+<script src="../resources/js/camp/campDetail.js"></script>
 </body>
 </html>

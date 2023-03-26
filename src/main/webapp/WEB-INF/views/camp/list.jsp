@@ -107,7 +107,7 @@
 
 			<div class="row discription col-7">
 				<ul>
-					<li class="row-2 campName"><h5><a href="./detail?campNum=${dto.campNum}">[${dto.doName} ${dto.sigunguName}] ${dto.name}</a></h5></li>
+					<li class="row-2 campName"><h5><a href="./detail?campNum=${dto.campNum}&viewType=1">[${dto.doName} ${dto.sigunguName}] ${dto.name}</a></h5></li>
 					<hr class="my-1">
 					<li class="mb-1 lineIntro">${dto.lineIntro}</li>
 					<li class="mb-1 introBox">${dto.intro}</li>
@@ -208,7 +208,5 @@
 </div>
 	
 <c:import url="../template/common_js.jsp"></c:import>
-<!-- <script src="../resources/js/camp/crud.js"></script> -->
-<!-- <script src="../resources/js/camp/test.js"></script> -->
 </body>
 </html>

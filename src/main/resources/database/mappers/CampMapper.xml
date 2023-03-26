@@ -70,6 +70,7 @@
   		<result column="POSBLFACILITY" property="posblFacility"/>
   		<result column="THEME" property="theme"/>
   		<result column="PETALLOW" property="petAllow"/>
+  		<result column="USEINFO" property="useInfo"/>
   		<result column="HOMEPAGE" property="homePage"/>
   		<result column="THUMBNAIL" property="thumbnail"/>
   		<result column="REGDATE" property="regDate"/>
@@ -115,6 +116,7 @@
   		<result column="POSBLFACILITY" property="posblFacility"/>
   		<result column="THEME" property="theme"/>
   		<result column="PETALLOW" property="petAllow"/>
+  		<result column="USEINFO" property="useInfo"/>
   		<result column="HOMEPAGE" property="homePage"/>
   		<result column="THUMBNAIL" property="thumbnail"/>
   		<result column="REGDATE" property="regDate"/>

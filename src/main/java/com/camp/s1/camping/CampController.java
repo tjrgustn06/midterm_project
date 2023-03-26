@@ -53,10 +53,12 @@ public class CampController {
 	
 	//detail
 	@GetMapping("detail")
-	public ModelAndView getCampDetail(CampDTO campDTO) throws Exception{
+	public ModelAndView getCampDetail(CampDTO campDTO, Long viewType) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		campDTO = campService.getCampDetail(campDTO);
+		System.out.println("conViewType: "+viewType);
 		
+		mv.addObject("viewType", viewType);
 		mv.addObject("dto", campDTO);
 		mv.setViewName("camp/detail");
 		return mv;

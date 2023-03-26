@@ -64,8 +64,8 @@
   		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
   			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
   		</selectKey>
-  		INSERT INTO PRODUCTREVIEW (NUM, PRODUCTNUM, WRITER, CONTENTS, REGDATE)
-  		VALUES (#{num}, #{productNum},#{writer}, #{contents}, SYSDATE)
+  		INSERT INTO PRODUCTREVIEW (NUM, PRODUCTNUM, WRITER, CONTENTS, REGDATE, MARK)
+  		VALUES (#{num}, #{productNum},#{writer}, #{contents}, SYSDATE, #{mark})
   	</insert>
   	
   	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">

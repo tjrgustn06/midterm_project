@@ -130,7 +130,6 @@ $('.star').each((index, item)=>{
 })
 let rate = 0;
 function rating(score){
-    console.log('click')
     $('.star').each((index,item)=>{
         if(index<=score){
             $(item).attr('style','color: red;')

@@ -28,7 +28,7 @@
 	   			</div>
 				<div class="order-info">
 					<c:if test="${not empty member}">
-						<form action="./order/order" method="post">
+						<form method="post">
 							<div class="input-group mb-3">
 			  					<div class="input-group-prepend">
 			    					<span class="input-group-text" >주문자 이름</span>
@@ -91,7 +91,7 @@
 								<input id="name" type="hidden" name="name">
 							</div>
 							<div>
-								<button type="submit" class="btn btn-outline-info">주문하기</button>
+								<button type="submit" class="btn btn-outline-info" formaction="./order/order">주문하기</button>
 							</div>
 						</form>
 					</c:if>

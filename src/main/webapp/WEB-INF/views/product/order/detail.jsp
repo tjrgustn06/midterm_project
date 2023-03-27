@@ -80,6 +80,10 @@
 					</c:if>
 				</div>
 			</form>
+			<form id="deleteForm" class="col-md-7" action="./delete" method="post">
+				<input type="hidden" name="num" value="${dto.num}">
+				<button id="delete" type="submit" class="btn btn-primary">주문취소</button>
+			</form>
 		</div>
 	</div>
 	<script>

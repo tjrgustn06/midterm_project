@@ -130,10 +130,13 @@
   		
   		<collection property="campSiteDTOs" javaType="List" ofType="CampSiteDTO">
   			<id column="AREANUM" property="areaNum"/>
-  			<result column="SIZEINFO" property="sizeInfo"/>
-  			<result column="PRICE" property="price"/>
-  			<result column="STATUS" property="status"/>
   			<result column="SITENAME" property="siteName"/>
+  			<result column="SITESIZE" property="siteSize"/>
+  			<result column="OFFWEEKDAYSPRICE" property="offWeekdaysPrice"/>
+  			<result column="OFFWEEKENDSPRICE" property="offWeekendsPrice"/>
+  			<result column="PEAKWEEKDAYSPRICE" property="peakWeekdaysPrice"/>
+  			<result column="PEAKWEEKENDSPRICE" property="peakWeekendsPrice"/>
+  			<result column="STATUS" property="status"/>
   		</collection>
   	</resultMap>
   	
@@ -164,13 +167,25 @@
   
   
 	<!-- add -->
-	<insert id="setCampAdd" parameterType="CampDTO">
+	<!-- <insert id="setCampAdd" parameterType="CampDTO">
 		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS)
 		VALUES(#{campNum}, #{name}, #{phone}, #{address})
+	</insert> -->
+	
+	<!-- DONAME, SIGUNGUNAME, MAPX, MAPY, THEME, THUMBNAIL, LAYOUT, REGDATE 나중에 -->
+	<insert id="setCampAdd" parameterType="CampDTO">
+		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, MODIDATE, HIT)
+		VALUES(#{campNum}, #{name}, #{phone}, #{address}, #{lineIntro}, #{intro}, #{feature}, #{induty}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, 0)
 	</insert>
+	
+	<!-- CampSiteAdd -->
+	
 	
 	<!-- delete -->
 	<delete id="setCampDelete" parameterType="CampDTO">

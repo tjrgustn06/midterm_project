@@ -68,6 +68,8 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid col-lg-9 my-5">
 	<div class="row my-3">
+		<!-- 파라미터 넘어가는거 확인용 -->
+		--${param}--
 		<h1>${dto.name}</h1>
 	</div>
 	
@@ -139,11 +141,11 @@
 			<form action="./update" id="frm" method="get">
 				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 				<input type="hidden" name="campNum" value="${dto.campNum}">
-				<button id="reserve" type="button" class="btn btn-outline-primary">Reservation</button>
-				<button id="list" type="button" class="btn btn-outline-secondary">go to List</button>
+				<button id="detReserve" type="button" class="btn btn-outline-primary">Reservation</button>
+				<button id="detList" type="button" class="btn btn-outline-secondary">go to List</button>
 				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
-				<button id="update" type="submit" class="btn btn-outline-success">UPDATE</button>
-				<button id="delete" type="button" class="btn btn-outline-danger">DELETE</button>
+				<button id="detUpdate" type="submit" class="btn btn-outline-success">UPDATE</button>
+				<button id="detDelete" type="button" class="btn btn-outline-danger">DELETE</button>
 			</form>
 		</div>
 	</div>
@@ -237,31 +239,36 @@
 
 					<!-- 기타 주요시설 출력 -->
 					<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 기타 주요시설</h5>
-					<section id="table_type03">
-						<div class="table_w">
-							<table class="table_t4 camp_etc_tb my-3">
+					<section>
+						<div>
+							<table class="my-3">
 								<!-- <caption>사이트 크기(옵션), 글램핑/카라반 내부시설, 동물동반여부, 추가사진등록</caption> -->
 								<colgroup>
-									<col style="width: 20%;" />
-									<col style="width: 80%;" />
+									<col style="width: 30%;"/>
+									<col style="width: 70%;"/>
 								</colgroup>
-								<tbody class="t_c">
+								<tbody>
 									<tr>
-										<th scope="col">사이트 크기</th>
+										<th scope="col my-auto">사이트 크기</th>
 										<c:if test="${not empty dto.campSiteDTOs}">
 											<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
 												<td>
 													<!-- 일단 사이트 이름, 크기만 출력 -->
-													<ul>
-														<li>${siteDTO.siteName}</li>
-														<li>${siteDTO.sizeInfo}</li>
-													</ul> 
+													<ul><li>${siteDTO.siteName}: ${siteDTO.sizeInfo}</li></ul> 
 												</td>
 											</c:forEach>
 										</c:if>
 									</tr>
 									<tr>
-										<th scope="col">글램핑 내부시설</th>
+										<th scope="col my-auto">특징</th>
+										<c:if test="${not empty dto.feature}">
+											<td>
+												<ul><li>${dto.feature}</li></ul> 
+											</td>
+										</c:if>
+									</tr>
+									<tr>
+										<th scope="col my-auto">글램핑 내부시설</th>
 										<c:if test="${not empty dto.glampFacility}">
 											<td>
 												<ul><li>${dto.glampFacility}</li></ul> 
@@ -269,7 +276,7 @@
 										</c:if>
 									</tr>
 									<tr>
-										<th scope="col">카라반 내부시설</th>
+										<th scope="col my-auto">카라반 내부시설</th>
 										<c:if test="${not empty dto.caravFacility}">
 											<td>
 												<ul><li>${dto.caravFacility}</li></ul> 
@@ -277,9 +284,11 @@
 										</c:if>
 									</tr>
 									<tr>
-										<th scope="col">동물 동반여부</th>
+										<th scope="col my-auto">동물 동반여부</th>
 										<c:if test="${not empty dto.petAllow}">
-											<td class="etc_type">${dto.petAllow}</td>
+											<td>
+												<ul><li>${dto.petAllow}</li></ul>
+											</td>
 										</c:if>
 									</tr>
 								</tbody>
@@ -337,9 +346,9 @@
 					<hr>
 						
 					<!-- 요금구분 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 요금 안내</h5>
-					<div class="table_w">
-						<table class="table camp_info_tb">
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트별 요금 안내</h5>
+					<div class="tablePrice">
+						<table class="table priceInfo">
 							<!-- <caption>캠핑 구분에 따른 요금 테이블. 평상시의 주중, 주말과 성수기의 주중, 주말로 나뉘어 설명합니다.</caption> -->
 							<colgroup>
 								<col style="width: 20%">
@@ -362,8 +371,22 @@
 									<th scope="col" class="gray">주말</th>
 								</tr>
 							</thead>
-							<tbody class="t_c">
-								<tr>
+							<tbody class="sitePriceOption">
+								<!-- siteDTO가 있으면 있는대로 테이블 만들기 -->
+								<c:if test="${not empty dto.campSiteDTOs}">
+									<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
+										<tr>
+											<th scope="col">${siteDTO.siteName}: ${siteDTO.siteSize}</th>
+											<td data-cell-header="평상시 주중：">${siteDTO.offWeekdaysPrice}</td>
+											<td data-cell-header="평상시 주말：">${siteDTO.offWeekendsPrice}</td>
+											<td data-cell-header="성수기 주중：">${siteDTO.peakWeekdaysPrice}</td>
+											<td data-cell-header="성수기 주말：">${siteDTO.peakWeekendsPrice}</td>
+										</tr>
+									</c:forEach>
+								</c:if>
+								
+								<!-- 옵션 완성되면 지울 부분 -->
+								<!-- <tr>
 									<th scope="col">일반캠핑</th>
 									<td data-cell-header="평상시 주중：">30,000</td>
 									<td data-cell-header="평상시 주말：">40,000</td>
@@ -393,7 +416,9 @@
 									<td data-cell-header="평상시 주말：">169,000</td>
 									<td data-cell-header="성수기 주중：">109,000</td>
 									<td data-cell-header="성수기 주말：">169,000</td>
-								</tr>
+								</tr> -->
+								<!-- 지울 부분 끝 -->
+
 							</tbody>
 						</table>
 					</div>
@@ -477,9 +502,9 @@
 		<c:if test="${not empty dto.campFileDTOs}">
 			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
 				<!-- 파일이 보이게 -->
-				<%-- <a href="../resources/upload/camp/${fileDTO.fileName}">${fileDTO.oriName}</a> --%>
+				<!-- <a href="../resources/upload/camp/${fileDTO.fileName}">${fileDTO.oriName}</a> -->
 				<!-- 파일다운추가되면 주소입력 -->
-				<%-- <a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a> --%>
+				<!-- <a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a> -->
 			</c:forEach>
 		</c:if>
 	</div>
@@ -488,6 +513,6 @@
 
 
 <c:import url="../template/common_js.jsp"></c:import>
-<script src="../resources/js/camp/campDetail.js"></script>
+<script src="../resources/js/camp/campCRUD.js"></script>
 </body>
 </html>

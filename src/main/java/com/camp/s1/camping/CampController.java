@@ -1,16 +1,20 @@
 package com.camp.s1.camping;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +23,8 @@ import com.camp.s1.util.Pager;
 @Controller
 @RequestMapping("/camp/*")
 public class CampController {
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private CampService campService;
@@ -53,10 +59,12 @@ public class CampController {
 	
 	//detail
 	@GetMapping("detail")
-	public ModelAndView getCampDetail(CampDTO campDTO, Long viewType) throws Exception{
+	public ModelAndView getCampDetail(@RequestParam HashMap<String, String> params, CampDTO campDTO, Long viewType) throws Exception{
+		//requestparam 파라미터 확인용
 		ModelAndView mv = new ModelAndView();
 		campDTO = campService.getCampDetail(campDTO);
-		System.out.println("conViewType: "+viewType);
+		logger.info("param: "+params); //sysout과 유사한 역할, 확인하고 싶은 내용을 찍어보자.
+//		System.out.println("param: "+params);
 		
 		mv.addObject("viewType", viewType);
 		mv.addObject("dto", campDTO);
@@ -66,9 +74,10 @@ public class CampController {
 	
 	//delete
 	@PostMapping("delete")
-	public ModelAndView setCampDelete(CampDTO campDTO, HttpSession session) throws Exception{
+	public ModelAndView setCampDelete(@RequestParam HashMap<String, String> params, CampDTO campDTO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = campService.setCampDelete(campDTO, session);
+		logger.info("param: "+params);
 		String message = "삭제 실패";
 		if(result>0) {
 			message = "삭제 성공";
@@ -90,10 +99,12 @@ public class CampController {
 	
 	//add-post
 	@PostMapping("add")
-	public ModelAndView setCampAdd(CampDTO campDTO, MultipartFile [] files, HttpSession session) throws Exception{
+	public ModelAndView setCampAdd(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		int result = campService.setCampAdd(campDTO, files, session);
+		logger.info("param: "+params);
+		
 		String message = "캠핑장 등록 실패. 관리자에게 문의하세요";
 		if(result>0) {
 			message = "캠핑장이 등록되었습니다";

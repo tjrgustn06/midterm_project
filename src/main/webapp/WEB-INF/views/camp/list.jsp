@@ -99,9 +99,14 @@
 				
 				<!-- thumbnail에서 꺼내기 -->
 				<c:catch var="er">
-					<c:if test="${not empty dto.thumbnail}">
-						<img alt="" src="${dto.thumbnail}">
-					</c:if>
+					<c:choose>
+						<c:when test="${not empty dto.thumbnail}">
+							<img alt="" src="${dto.thumbnail}">
+						</c:when>
+						<c:otherwise>
+							<img alt="" src="../resources/images/empty.jpg">
+						</c:otherwise>
+					</c:choose>
 				</c:catch>
 			</div>
 
@@ -141,24 +146,6 @@
 		</div>
 	</c:forEach>
 	
-	
-	<!-- table div -->
-	<!-- <div class="row my-3">
-		<table>
-			<tr>
-				<th>캠핑장 이름</th>
-				<th>캠핑장 전화번호</th>
-				<th>캠핑장 주소</th>
-			</tr>
-			<c:forEach items="${list}" var="dto">
-				<tr>
-					<td class="btn btn-primary"><a class="a" href="./detail?campNum=${dto.campNum}">${dto.name}</a></td>
-					<td>${dto.phone}</td>
-					<td>${dto.address}</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div> -->
 
 	<!-- Pager -->
 	<div class="row col-3 mx-auto">

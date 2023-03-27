@@ -121,14 +121,21 @@
 						<tr>
 							<th scope="col my-auto">권역 / 도 / 시군구 선택</th>
 							<td>
-								<select name="Region" id="addressRegion"></select>
-								<select name="addressDo" id="addressDo1"></select>
-								<select name="addressSiGunGu" id="addressSiGunGu1"></select>
+								<select name="regionName" id="addressRegion"></select>
+								<select name="doName" id="addressDo"></select>
+								<select name="sigunguName" id="addressSigungu"></select>
 							</td>
 						</tr>
+						<!-- <tr>
+							<th scope="col my-auto">도 / 시군구 선택</th>
+							<td>
+								<select name="doName" id="do"></select>
+								<select name="sigunguName" id="sigungu"></select>
+							</td>
+						</tr> -->
 						<tr>
 							<th scope="col my-auto">주소</th>
-							<td><input type="text" name="address" class="form-control" placeholder="사업장 주소를 입력하세요"></td>
+							<td><input type="text" name="address" class="form-control" placeholder="나머지 주소를 입력하세요"></td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">문의처</th>

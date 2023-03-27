@@ -1,4 +1,5 @@
 let viewType = $('#viewType').attr('data-viewType');
+let chkButton = true;
 
 
 
@@ -36,7 +37,11 @@ function chkBtn(){
 
     if(chkArray.length < 1){
         alert('시설정보를 체크해주세요');
+        //시설체크 안되있으면 폼 안넘어가게
+        chkButton = false;
         return;
+    }else{
+        chkButton = true;
     }
 
     for(let i of chkArray){
@@ -50,7 +55,9 @@ function chkBtn(){
 //체크박스 값 넣는거 이벤트 걸기 - add.jsp
 $('#addReg').click(function(){
     chkBtn();
-    $('#frm').submit();
+    if(chkButton){
+        $('#frm').submit();
+    }
 })
 
 

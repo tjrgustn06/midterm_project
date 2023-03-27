@@ -175,13 +175,13 @@
 		VALUES(#{campNum}, #{name}, #{phone}, #{address})
 	</insert> -->
 	
-	<!-- DONAME, SIGUNGUNAME, MAPX, MAPY, THEME, THUMBNAIL, LAYOUT, REGDATE 나중에 -->
+	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT, REGDATE 나중에 -->
 	<insert id="setCampAdd" parameterType="CampDTO">
 		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, MODIDATE, HIT)
-		VALUES(#{campNum}, #{name}, #{phone}, #{address}, #{lineIntro}, #{intro}, #{feature}, #{induty}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, 0)
+		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, DONAME, SIGUNGUNAME, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, MODIDATE, HIT)
+		VALUES(#{campNum}, #{name}, #{phone}, (#{doName}||' '||#{sigunguName}||' '||#{address}), #{lineIntro}, #{intro}, #{feature}, #{induty}, #{doName}, #{sigunguName}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, 0)
 	</insert>
 	
 	<!-- CampSiteAdd -->

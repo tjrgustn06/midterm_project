@@ -90,4 +90,20 @@ public class CampDAOTest extends MyTestCase{
 //		}
 //	}
 	
+	//@Test
+	public void setCampSiteAddTest() throws Exception{
+		CampSiteDTO campSiteDTO = new CampSiteDTO();
+		//campSiteDTO.setAreaNum(99L); SEQ
+		campSiteDTO.setCampNum(582L);
+		campSiteDTO.setSiteName("일반A2");
+		campSiteDTO.setSiteSize("9*11");
+		campSiteDTO.setOffWeekdaysPrice(50000L);
+		campSiteDTO.setOffWeekendsPrice(70000L);
+		campSiteDTO.setPeakWeekdaysPrice(80000L);
+		campSiteDTO.setPeakWeekendsPrice(100000L);
+		
+		int result = campDAO.setCampSiteAdd(campSiteDTO);
+		assertNotEquals(0, result);
+	}
+	
 }

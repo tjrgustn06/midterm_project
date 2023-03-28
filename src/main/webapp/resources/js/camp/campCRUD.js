@@ -25,6 +25,7 @@ $('#addCancel').click(function(){
 })
 
 //체크박스 선택된 값 여러개 받아오는 함수 - add.jsp
+//다음에는 컨트롤러에서 배열로 받아서 처리해보기
 function chkBtn(){
     let chkArray = new Array();
     let chkService = $('input[name="serv"]:checked')

@@ -99,8 +99,26 @@ public class CampController {
 	
 	//add-post
 	@PostMapping("add")
-	public ModelAndView setCampAdd(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, HttpSession session) throws Exception{
+	public ModelAndView setCampAdd(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, HttpSession session, 
+			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		//site 추가
+		List<CampSiteDTO> ar = new ArrayList<CampSiteDTO>();
+		for(int i=0; i<siteName.length; i++) {
+			//새 옵션 반복문마다 만들어줌
+			CampSiteDTO campSiteDTO = new CampSiteDTO();
+			campSiteDTO.setSiteName(siteName[i]);
+			campSiteDTO.setSiteSize(siteSize[i]);
+			campSiteDTO.setOffWeekdaysPrice(offWeekdaysPrice[i]);
+			campSiteDTO.setOffWeekendsPrice(offWeekendsPrice[i]);
+			campSiteDTO.setPeakWeekdaysPrice(peakWeekdaysPrice[i]);
+			campSiteDTO.setPeakWeekendsPrice(peakWeekendsPrice[i]);
+			//마지막에 List에 만든 옵션 하나 넣기
+			ar.add(campSiteDTO);
+		}
+		//만든 siteList CampDTO에 저장
+		campDTO.setCampSiteDTOs(ar);
 		
 		int result = campService.setCampAdd(campDTO, files, session);
 		logger.info("param: "+params);

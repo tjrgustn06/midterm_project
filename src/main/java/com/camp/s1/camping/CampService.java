@@ -86,6 +86,13 @@ public class CampService {
 		//캠프장 하나 추가
 		int result = campDAO.setCampAdd(campDTO);
 		
+		//캠프사이트 추가
+		for(CampSiteDTO campSiteDTO : campDTO.getCampSiteDTOs()) {
+			campSiteDTO.setCampNum(campDTO.getCampNum());
+			result = campDAO.setCampSiteAdd(campSiteDTO);
+		}
+		
+		//파일 추가
 		//1.HDD에 file 저장('어디'에 '무슨'이름으로)
 		String realPath = session.getServletContext().getRealPath("resources/upload/camp");
 		System.out.println(realPath); //확인용

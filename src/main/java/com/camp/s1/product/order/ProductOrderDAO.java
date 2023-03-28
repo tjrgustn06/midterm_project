@@ -62,4 +62,9 @@ public class ProductOrderDAO {
 		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
 	}
 	
+	// Delete 주문 취소
+	public int setProductOrderDelete(ProductOrderDTO productOrderDTO) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setProductOrderDelete", productOrderDTO);
+	}
+	
 }

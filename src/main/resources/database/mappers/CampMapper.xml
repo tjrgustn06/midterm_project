@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.camping.CampDAO">
+  
+    <!-- 공통부분 - 검색 -->
+  	<sql id="searchCondition">
+  		<where>
+  			<!-- CAMPNUM = #{campNum} AND / site 옵션 쓸 때 써야하려나 -->
+	  		<if test="kind=='name'">
+	  			NAME LIKE '%' || #{search} || '%'
+	  		</if>
+			<if test="kind=='phone'">
+	  			PHONE LIKE '%' || #{search} || '%'
+	  		</if>
+	  		<if test="kind=='address'">
+	  			ADDRESS LIKE '%' || #{search} || '%'
+	  		</if>
+  		</where>
+  	</sql>
+  	
+  	
+  	<!-- totalCount - calculate row of Pager -->
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(CAMPNUM) FROM CAMPINFO
+  		<include refid="searchCondition"></include>
+  	</select>
+  
+  
+  	<!-- list -->
+  	<!-- <select id="getCampList" parameterType="Pager" resultType="CampDTO"> -->
+ 	<select id="getCampList" parameterType="Pager" resultMap="getCampFileList">
+  		<!-- SELECT * FROM CAMPINFO ORDER BY CAMPNUM DESC -->
+  		<!-- SELECT * FROM
+			(SELECT ROWNUM R, C.* FROM
+				(SELECT * FROM CAMPINFO
+				<include refid="searchCondition"></include>
+			ORDER BY CAMPNUM ASC) C)
+		WHERE R BETWEEN #{startRow} AND #{lastRow} -->
+		SELECT * FROM
+			(SELECT ROWNUM R, C.* FROM
+				(SELECT * FROM CAMPINFO CI
+				LEFT OUTER JOIN
+				CAMPFILES CF
+				USING(CAMPNUM)
+				<include refid="searchCondition"></include>
+			ORDER BY CAMPNUM ASC) C)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}  		
+  	</select>
+  	<!-- List-file/이게 필요한지 싶음 - list에서 불러올것은 thumbnail에 있어서 -->
+  	<resultMap type="CampDTO" id="getCampFileList">
+  		<id column="CAMPNUM" property="campNum"/>
+  		<result column="NAME" property="name"/>
+  		<result column="PHONE" property="phone"/>
+  		<result column="ADDRESS" property="address"/>
+  		<result column="LINEINTRO" property="lineIntro"/>
+  		<result column="INTRO" property="intro"/>
+  		<result column="FEATURE" property="feature"/>
+  		<result column="INDUTY" property="induty"/>
+  		<result column="DONAME" property="doName"/>
+  		<result column="SIGUNGUNAME" property="sigunguName"/>
+  		<result column="MAPX" property="mapX"/>
+  		<result column="MAPY" property="mapY"/>
+  		<result column="GLAMPFACILITY" property="glampFacility"/>
+  		<result column="CARAVFACILITY" property="caravFacility"/>
+  		<result column="SERVICE" property="service"/>
+  		<result column="POSBLFACILITY" property="posblFacility"/>
+  		<result column="THEME" property="theme"/>
+  		<result column="PETALLOW" property="petAllow"/>
+  		<result column="USEINFO" property="useInfo"/>
+  		<result column="HOMEPAGE" property="homePage"/>
+  		<result column="THUMBNAIL" property="thumbnail"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MODIDATE" property="modiDate"/>
+  		
+  		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
+  	
+  	<!-- detail-file, site 한번에 가져오기 -->
+  	<select id="getCampDetail" parameterType="CampDTO" resultMap="getCampDetailResult">
+  		<!-- SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum} -->
+  		SELECT * FROM CAMPINFO CI
+			LEFT OUTER JOIN
+			CAMPFILES CF
+			ON(CI.CAMPNUM=CF.CAMPNUM)
+			LEFT OUTER JOIN
+			CAMPSITE CS
+			ON(CI.CAMPNUM=CS.CAMPNUM)
+		WHERE CI.CAMPNUM=#{campNum}
+  	</select>
+  	<!-- detail-file/site 연결 -->
+  	<resultMap type="CampDTO" id="getCampDetailResult">
+  		<id column="CAMPNUM" property="campNum"/>
+  		<result column="NAME" property="name"/>
+  		<result column="PHONE" property="phone"/>
+  		<result column="ADDRESS" property="address"/>
+  		<result column="LINEINTRO" property="lineIntro"/>
+  		<result column="INTRO" property="intro"/>
+  		<result column="FEATURE" property="feature"/>
+  		<result column="INDUTY" property="induty"/>
+  		<result column="DONAME" property="doName"/>
+  		<result column="SIGUNGUNAME" property="sigunguName"/>
+  		<result column="MAPX" property="mapX"/>
+  		<result column="MAPY" property="mapY"/>
+  		<result column="GLAMPFACILITY" property="glampFacility"/>
+  		<result column="CARAVFACILITY" property="caravFacility"/>
+  		<result column="SERVICE" property="service"/>
+  		<result column="POSBLFACILITY" property="posblFacility"/>
+  		<result column="THEME" property="theme"/>
+  		<result column="PETALLOW" property="petAllow"/>
+  		<result column="USEINFO" property="useInfo"/>
+  		<result column="HOMEPAGE" property="homePage"/>
+  		<result column="THUMBNAIL" property="thumbnail"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MODIDATE" property="modiDate"/>
+  		
+  		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  		
+  		<collection property="campSiteDTOs" javaType="List" ofType="CampSiteDTO">
+  			<id column="AREANUM" property="areaNum"/>
+  			<result column="SITENAME" property="siteName"/>
+  			<result column="SITESIZE" property="siteSize"/>
+  			<result column="OFFWEEKDAYSPRICE" property="offWeekdaysPrice"/>
+  			<result column="OFFWEEKENDSPRICE" property="offWeekendsPrice"/>
+  			<result column="PEAKWEEKDAYSPRICE" property="peakWeekdaysPrice"/>
+  			<result column="PEAKWEEKENDSPRICE" property="peakWeekendsPrice"/>
+  			<result column="STATUS" property="status"/>
+  		</collection>
+  	</resultMap>
+  
+  
+	<!-- add -->
+	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT 나중에, REGDATE는 UPDATE에서는 빼면 될거같음 -->
+	<insert id="setCampAdd" parameterType="CampDTO">
+		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, DONAME, SIGUNGUNAME, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, REGDATE, MODIDATE, HIT)
+		VALUES(#{campNum}, #{name}, #{phone}, (#{doName}||' '||#{sigunguName}||' '||#{address}), #{lineIntro}, #{intro}, #{feature}, #{induty}, #{doName}, #{sigunguName}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, SYSDATE, 0)
+	</insert>
+	
+	<!-- siteAdd -->
+	<insert id="setCampSiteAdd">
+		<selectKey keyProperty="areaNum" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS)
+		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, '예약가능')
+	</insert>
+	
+	<!-- delete -->
+	<delete id="setCampDelete" parameterType="CampDTO">
+		DELETE CAMPINFO WHERE CAMPNUM=#{campNum}
+	</delete>
+	
+	<!-- update -->
+	<update id="setCampUpdate" parameterType="CampDTO">
+		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}
+		WHERE CAMPNUM=#{campNum}
+	</update>
+	
+	
+	<!-- file -->
+	<!-- fileList -->
+	<select id="getCampFileList" parameterType="CampDTO" resultType="CampFileDTO">
+		SELECT * FROM CAMPFILES WHERE CAMPNUM=#{campNum}
+	</select>
+  
+	<!-- fileAdd -->
+	<insert id="setCampFileAdd" parameterType="CampFileDTO">
+		INSERT INTO CAMPFILES (FILENUM, CAMPNUM, FILENAME, ORINAME)
+		VALUES(CAMPSEQ.NEXTVAL, #{campNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<!-- fileDetail -->
+	<select id="getCampFileDetail" parameterType="CampFileDTO" resultType="CampFileDTO">
+		SELECT * FROM CAMPFILES WHERE FILENUM=#{fileNum}
+	</select>
+	
+	<!-- fileDelete/CASCADE에서는 필요없을듯 -->
+	<delete id="setCampFileDelete" parameterType="Long">
+		DELETE CAMPFILES WHERE FILENUM=#{fileNum}
+	</delete>
+  
+  </mapper>

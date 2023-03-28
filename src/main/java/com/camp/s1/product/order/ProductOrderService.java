@@ -54,4 +54,19 @@ public class ProductOrderService {
 		return productOrderDAO.setProductOrderPayment(productOrderDTO);
 	}
 	
+	// delete 주문 취소
+	public int setProductOrderDelete(ProductOrderDTO productOrderDTO) throws Exception {
+		int result = productOrderDAO.setProductOrderDelete(productOrderDTO);
+				
+		String gradeName=productOrderDTO.getName();
+		gradeName=gradeName.substring(gradeName.lastIndexOf("급")-1);
+		ProductGradeDTO productGradeDTO = new ProductGradeDTO();
+		productGradeDTO.setGradeName(gradeName);
+		productGradeDTO.setGradeNum(productOrderDTO.getGradeNum());
+		productGradeDTO=productOrderDAO.getGradeStock(productGradeDTO);
+		productGradeDTO.setGradeStock(productGradeDTO.getGradeStock()+productOrderDTO.getAmount());
+		result=productOrderDAO.setGradeStockUpdate(productGradeDTO);
+		return result;
+	}
+	
 }

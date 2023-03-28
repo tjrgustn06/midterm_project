@@ -19,7 +19,6 @@
 		
 		<div class="row col-md-8 mx-auto border-bottom ">
 			<form action="./add" method="post" enctype="multipart/form-data">
-			
 				<div class="row mb-3">
 				  <label for="writer" class="col-sm-2 col-form-label">작성자</label>
 				  <div class="col-sm-10">

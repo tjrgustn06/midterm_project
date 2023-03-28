@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.product.review.ProductReviewDAO">
+  
+  	<!-- 검색을 위한 조건 -->
+  	<!-- <sql id="searchCondition">
+  		<if test="kind == 'title'">
+  			WHERE TITLE LIKE '%' || #{search} || '%'
+  		</if>
+  		<if test="kind == 'contents'">
+  			WHERE CONTENTS LIKE '%' || #{search} || '%'
+  		</if>
+  		<if test="kind == 'writer'">
+  			WHERE WRITER LIKE '%' || #{search} || '%'
+  		</if>
+  	</sql> -->
+  	
+  	<!-- List -->
+  	<select id="getBoardList" parameterType="Pager" resultType="ProductReviewDTO">
+  		SELECT * FROM(
+  			SELECT ROWNUM R, PR.* FROM(
+  				SELECT * FROM PRODUCTREVIEW
+  				<!-- <include refid="searchCondition"></include> -->
+  				ORDER BY NUM DESC
+  			) PR
+  		) WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<!-- 총 갯수 출력 -->
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(NUM) FROM PRODUCTREVIEW
+  		<!-- <include refid="searchCondition"></include> -->
+  	</select>
+  	
+  	<!-- List에 file값을 넣기위한 쿼리 -->
+  	<select id="getBoardDetail" parameterType="BbsDTO" resultMap="ProductReviewFileResult">
+  		SELECT * FROM PRODUCTREVIEW
+  		LEFT JOIN
+  		PRODUCTREVIEWFILES
+  		USING (NUM)
+  		WHERE NUM=#{num}
+  	</select>
+  	
+  	<resultMap type="ProductReviewDTO" id="ProductReviewFileResult">
+  		<id column="NUM" property="num"/>
+  		<result column="PRODUCTNUM" property="productNum"/>
+  		<result column="WRITER" property="writer"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MARK" property="mark"/>
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
+  	<!-- Add -->
+  	<insert id="setBoardAdd" parameterType="BbsDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PRODUCTREVIEW (NUM, PRODUCTNUM, WRITER, CONTENTS, REGDATE, MARK)
+  		VALUES (#{num}, #{productNum},#{writer}, #{contents}, SYSDATE, #{mark})
+  	</insert>
+  	
+  	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+  		INSERT INTO PRODUCTREVIEWFILES (FILENUM, NUM, FILENAME, ORINAME)
+  		VALUES (PRODUCTSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+  	</insert>
+  	
+  	<!-- Update -->
+  	<update id="setBoardUpdate" parameterType="BbsDTO">
+  		UPDATE PRODUCTREVIEW SET CONTENTS=#{contents}, MARK=#{mark}
+  		WHERE NUM=#{num}
+  	</update>
+  	
+  	<!-- Delete -->
+  	<delete id="setBoardDelete" parameterType="BbsDTO">
+  		DELETE PRODUCTREVIEW WHERE NUM=#{num}
+  	</delete>
+  	
+  	<select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+  		SELECT * FROM PRODUCTREVIEWFILES
+  		WHERE NUM=#{num}
+  	</select>
+  
+  </mapper>

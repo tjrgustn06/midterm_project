@@ -26,26 +26,27 @@
 						<div class="col-md-12">
 					    	<h5 class="card-title" style="display: inline;">${dto.title}</h5>
 							<span class="p-2 mb-3 float-right">
-								<button class="btnToggle" style="border : 0px; background-color: transparent;">
+								<button class="btnToggle" style="border : 0px; background-color: transparent;" data-board-num="${dto.num}">
 									<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
 								</button>
 							</span>				
 						</div>
-						<span class="p-2 boardMenu" id="boardMenu${dto.num}" style="display: none;">
-							<div class="list-group">
-								<button type="button" class="list-group-item list-group-item-action updateMenu" data-board-num="${dto.num}" aria-current="true">
-									수정
-								</button>
-								<button type="button" class="list-group-item list-group-item-action deleteMenu" data-board-num="${dto.num}">삭제</button>
-								<button type="button" class="list-group-item list-group-item-action accuseMenu" data-board-num="${dto.num}">신고하기</button>
-								<button type="button" class="list-group-item list-group-item-action subCommentMenu" data-board-num="${dto.num}">답글달기</button>
-							</div>
-						</span>
+
 					    <p class="card-text">${dto.contents}</p>
 					    <p class="card-text"><small class="text-muted">${dto.regDate}</small></p>
 					  </div>
-					  <img src="..." class="card-img-bottom" alt="...">
+					  <!-- <img src="..." class="card-img-bottom" alt="..."> -->
 					</div>
+					<span class="p-2 boardMenu" id="boardMenu${dto.num}" style="display: none;">
+						<div class="list-group">
+							<button type="button" class="list-group-item list-group-item-action updateMenu" data-board-num="${dto.num}" aria-current="true">
+								수정
+							</button>
+							<button type="button" class="list-group-item list-group-item-action deleteMenu" data-board-num="${dto.num}">삭제</button>
+							<button type="button" class="list-group-item list-group-item-action accuseMenu" data-board-num="${dto.num}">신고하기</button>
+							<button type="button" class="list-group-item list-group-item-action subCommentMenu" data-board-num="${dto.num}">답글달기</button>
+						</div>
+					</span>
 				</div>
 			</div>
 		</c:forEach> 
@@ -60,8 +61,8 @@
 	</div>
 	
 
-	<script src="../resources/js/scroll.js"></script>
 	<script src="../resources/js/story.js"></script>
+	<script src="../resources/js/scroll.js"></script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

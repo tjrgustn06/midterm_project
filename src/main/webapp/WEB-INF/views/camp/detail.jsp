@@ -251,12 +251,14 @@
 									<tr>
 										<th scope="col my-auto">사이트 크기</th>
 										<c:if test="${not empty dto.campSiteDTOs}">
-											<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
-												<td>
-													<!-- 일단 사이트 이름, 크기만 출력 -->
-													<ul><li>${siteDTO.siteName}: ${siteDTO.sizeInfo}</li></ul> 
-												</td>
-											</c:forEach>
+											<td>
+												<!-- 일단 사이트 이름, 크기만 출력 -->
+												<ul>
+													<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
+														<li>${siteDTO.siteName}: ${siteDTO.siteSize}</li>
+													</c:forEach>
+												</ul> 
+											</td>
 										</c:if>
 									</tr>
 									<tr>

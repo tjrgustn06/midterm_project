@@ -115,7 +115,9 @@ public class CampController {
 			campSiteDTO.setPeakWeekdaysPrice(peakWeekdaysPrice[i]);
 			campSiteDTO.setPeakWeekendsPrice(peakWeekendsPrice[i]);
 			//마지막에 List에 만든 옵션 하나 넣기
-			ar.add(campSiteDTO);
+			if(campSiteDTO!=null) {
+				ar.add(campSiteDTO);
+			}
 		}
 		//만든 siteList CampDTO에 저장
 		campDTO.setCampSiteDTOs(ar);

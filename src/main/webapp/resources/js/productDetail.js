@@ -41,3 +41,10 @@ function getAmount(amount){
 
     $('#amountChange').append(child);
 }
+
+$('#reviewAdd').click(function(){
+    $('#review').slideDown("slow")
+})
+$('#reviewCancle').click(function(){
+    $('#review').slideUp("slow")
+})

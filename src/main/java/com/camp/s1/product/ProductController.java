@@ -92,9 +92,18 @@ public class ProductController {
 	
 	// Update 상품 수정 POST
 	@PostMapping("update")
-	public ModelAndView setProductUpdate(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] addFiles, HttpSession session) throws Exception {
+	public ModelAndView setProductUpdate(ProductDTO productDTO, String [] gradeName, Integer [] gradeStock, Long [] price, MultipartFile [] addFiles, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = productService.setProductUpdate(productDTO, productGradeDTO, addFiles, session);
+		ArrayList<ProductGradeDTO> productGradeDTOs = new ArrayList<ProductGradeDTO>();
+		for (int i = 0;i<gradeName.length;i++) {
+			ProductGradeDTO productGradeDTO = new ProductGradeDTO();
+			productGradeDTO.setGradeName(gradeName[i]);
+			productGradeDTO.setGradeStock(gradeStock[i]);
+			productGradeDTO.setPrice(price[i]);
+			productGradeDTOs.add(productGradeDTO);
+		}
+		productDTO.setProductGradeDTOs(productGradeDTOs);
+		int result = productService.setProductUpdate(productDTO, addFiles, session);
 		
 		String msg = "수정 실패";
 		if(result > 0) {

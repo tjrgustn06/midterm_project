@@ -22,7 +22,7 @@
 			SELECT ROWNUM R, P.* FROM(
 				SELECT * FROM PRODUCT 
 				<include refid="searchCondition"></include>
-				ORDER BY NAME DESC
+				ORDER BY NAME ASC
 			) P
 		) WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>

@@ -22,7 +22,7 @@ public class ProductService {
 	
 	// List출력
 	public List<ProductDTO> getProductList(Pager pager) throws Exception {
-		pager.setPerPage(30L);
+		pager.setPerPage(12L);
 		pager.makeRow();
 		
 		
@@ -78,12 +78,12 @@ public class ProductService {
 	}
 	
 	// Update 물품 수정
-	public int setProductUpdate(ProductDTO productDTO, ProductGradeDTO productGradeDTO, MultipartFile [] files, HttpSession session) throws Exception {
+	public int setProductUpdate(ProductDTO productDTO, MultipartFile [] files, HttpSession session) throws Exception {
 		int result = productDAO.setProductUpdate(productDTO);
-		
-		productGradeDTO.setProductNum(productDTO.getProductNum());
-		
-		result = productDAO.setProductGradeUpdate(productGradeDTO);
+		for(ProductGradeDTO productGradeDTO:productDTO.getProductGradeDTOs()) {
+			productGradeDTO.setProductNum(productDTO.getProductNum());
+			result = productDAO.setProductGradeUpdate(productGradeDTO);			
+		}
 		
 		String realPath = session.getServletContext().getRealPath("resources/upload/product");
 		

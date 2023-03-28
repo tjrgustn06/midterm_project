@@ -40,7 +40,7 @@
   	
   	<!-- 특정GradeStock 변경을 위한 grade 출력 -->
   	<select id="getGradeStock" parameterType="ProductGradeDTO" resultType="ProductGradeDTO">
-  		SELECT GRADESTOCK FROM PRODUCTGRADE
+  		SELECT * FROM PRODUCTGRADE
   		WHERE GRADENUM=#{gradeNum} AND GRADENAME=#{gradeName}
   	</select>
   	
@@ -66,5 +66,10 @@
   	<select id="getTotalCount" parameterType="Pager" resultType="Long">
   		SELECT COUNT(NUM) FROM PRODUCTORDER
   	</select>
+  	
+  	<!-- delete 주문 삭제 -->
+  	<delete id="setProductOrderDelete" parameterType="ProductOrderDTO">
+  		DELETE PRODUCTORDER WHERE NUM=#{num}
+  	</delete>
   	
   </mapper>

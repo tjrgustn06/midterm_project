@@ -28,7 +28,7 @@
             </div>
             <div class="form1_2">
                 <p class="tt">지역별</p>
-                <label class="skip" for="c_do">지역별 검색</label> <select name="c_do" id="c_do" class="select_01" title="검색할 지역을 선택하세요.">
+                <label class="skip" for="c_do">지역별 검색</label> <select name="do" id="c_do" class="select_01" title="검색할 지역을 선택하세요.">
                     <option value="">전체/도</option>
                     <option value="1">서울시</option>
                     <option value="2">부산시</option>

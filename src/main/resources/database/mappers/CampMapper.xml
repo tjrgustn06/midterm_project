@@ -85,19 +85,19 @@
   	
   	
   	<!-- detail-file, site 한번에 가져오기 -->
-  	<select id="getCampDetail" parameterType="CampDTO" resultMap="getCampFileDetail">
+  	<select id="getCampDetail" parameterType="CampDTO" resultMap="getCampDetailResult">
   		<!-- SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum} -->
   		SELECT * FROM CAMPINFO CI
 			LEFT OUTER JOIN
 			CAMPFILES CF
-			USING(CAMPNUM)
+			ON(CI.CAMPNUM=CF.CAMPNUM)
 			LEFT OUTER JOIN
 			CAMPSITE CS
-			USING(CAMPNUM)
-		WHERE CAMPNUM=#{campNum}
+			ON(CI.CAMPNUM=CS.CAMPNUM)
+		WHERE CI.CAMPNUM=#{campNum}
   	</select>
   	<!-- detail-file/site 연결 -->
-  	<resultMap type="CampDTO" id="getCampFileDetail">
+  	<resultMap type="CampDTO" id="getCampDetailResult">
   		<id column="CAMPNUM" property="campNum"/>
   		<result column="NAME" property="name"/>
   		<result column="PHONE" property="phone"/>
@@ -139,53 +139,26 @@
   			<result column="STATUS" property="status"/>
   		</collection>
   	</resultMap>
-  	
-  	
-  	<!-- detail-site(option) -->
-<!--   	<select id="getCampSiteList" parameterType="CampDTO" resultMap="getCampSiteDetail">
-  		SELECT * FROM CAMPINFO CI
-			LEFT OUTER JOIN
-			CAMPSITE CS 
-			USING(CAMPNUM)
-		WHERE CAMPNUM=#{campNum}
-  	</select>
-  	<resultMap type="CampSiteDTO" id="getCampSiteDetail">
-  		<id column="CAMPNUM" property="campNum"/>
-  		<result column="NAME" property="name"/>
-  		<result column="PHONE" property="phone"/>
-  		<result column="ADDRESS" property="address"/>
-  		<result column="CONTENTS" property="contents"/>
-  		
-  		<collection property="campSiteDTOs" javaType="List" ofType="CampSiteDTO">
-  			<id column="AREANUM" property="areaNum"/>
-  			<result column="SIZEINFO" property="sizeInfo"/>
-  			<result column="PRICE" property="price"/>
-  			<result column="STATUS" property="status"/>
-  			<result column="SITENAME" property="siteName"/>
-  		</collection>
-  	</resultMap> -->
   
   
 	<!-- add -->
-	<!-- <insert id="setCampAdd" parameterType="CampDTO">
-		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
-			SELECT CAMPSEQ.NEXTVAL FROM DUAL
-		</selectKey>
-		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS)
-		VALUES(#{campNum}, #{name}, #{phone}, #{address})
-	</insert> -->
-	
-	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT, REGDATE 나중에 -->
+	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT 나중에, REGDATE는 UPDATE에서는 빼면 될거같음 -->
 	<insert id="setCampAdd" parameterType="CampDTO">
 		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, DONAME, SIGUNGUNAME, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, MODIDATE, HIT)
-		VALUES(#{campNum}, #{name}, #{phone}, (#{doName}||' '||#{sigunguName}||' '||#{address}), #{lineIntro}, #{intro}, #{feature}, #{induty}, #{doName}, #{sigunguName}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, 0)
+		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, DONAME, SIGUNGUNAME, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, REGDATE, MODIDATE, HIT)
+		VALUES(#{campNum}, #{name}, #{phone}, (#{doName}||' '||#{sigunguName}||' '||#{address}), #{lineIntro}, #{intro}, #{feature}, #{induty}, #{doName}, #{sigunguName}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, SYSDATE, 0)
 	</insert>
 	
-	<!-- CampSiteAdd -->
-	
+	<!-- siteAdd -->
+	<insert id="setCampSiteAdd">
+		<selectKey keyProperty="areaNum" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS)
+		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, '예약가능')
+	</insert>
 	
 	<!-- delete -->
 	<delete id="setCampDelete" parameterType="CampDTO">
@@ -204,7 +177,6 @@
 	<select id="getCampFileList" parameterType="CampDTO" resultType="CampFileDTO">
 		SELECT * FROM CAMPFILES WHERE CAMPNUM=#{campNum}
 	</select>
-	
   
 	<!-- fileAdd -->
 	<insert id="setCampFileAdd" parameterType="CampFileDTO">

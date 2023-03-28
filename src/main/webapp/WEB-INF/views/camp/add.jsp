@@ -334,15 +334,15 @@
 							<table class="table priceInfo">
 								<!-- <caption>캠핑 구분에 따른 요금 테이블. 평상시의 주중, 주말과 성수기의 주중, 주말로 나뉘어 설명합니다.</caption> -->
 								<colgroup>
-									<col style="width: 20%">
-									<col style="width: 20%">
-									<col style="width: 20%">
-									<col style="width: 20%">
-									<col style="width: 20%">
+									<col style="width: 40%">
+									<col style="width: 15%">
+									<col style="width: 15%">
+									<col style="width: 15%">
+									<col style="width: 15%">
 								</colgroup>
 								<thead>
 									<tr>
-										<th rowspan="2" scope="col">구분</th>
+										<th rowspan="2" scope="col">사이트이름: 크기</th>
 										<th colspan="2" scope="colgroup">평상시</th>
 										<th colspan="2" scope="colgroup">성수기</th>
 									</tr>
@@ -356,10 +356,30 @@
 								</thead>
 								<tbody class="sitePriceOption">
 									<!-- priceOption 부분 -->
+									<div class="input-group row mb-3">
+									<tr>
+										<th scope="col">
+											<span class="input-group-text" id="siteName">사이트이름</span>
+											<input type="text" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1" aria-label="ex)일반A1, 카라반A1" aria-describedby="siteName">
+											<span class="input-group-text" id="siteSize">크기(m^2)</span>
+											<input type="text" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10" aria-label="ex)6*11, 10*10" aria-describedby="siteSize">
+											<!-- <label for="siteName" class="form-control">사이트이름</label>
+											<input type="text" id="siteName" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1">
+											<label for="siteSize" class="form-control">사이트크기(단위 : m^2)</label>
+											<input type="text" id="siteSize" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10"> -->
+										</th>
+										<!-- Controller에서 siteDTO 생성, 갯수만큼 저장하기 -->
+										<td data-cell-header="평상시 주중："><input type="text" name="offWeekdaysPrice" class="form-control" placeholder="평상시 주중 요금을 입력하세요"></td>
+										<td data-cell-header="평상시 주말："><input type="text" name="offWeekendsPrice" class="form-control" placeholder="평상시 주말 요금을 입력하세요"></td>
+										<td data-cell-header="성수기 주중："><input type="text" name="peakWeekdaysPrice" class="form-control" placeholder="성수기 주중 요금을 입력하세요"></td>
+										<td data-cell-header="성수기 주말："><input type="text" name="peakWeekendsPrice" class="form-control" placeholder="성수기 주말 요금을 입력하세요"></td>
+									</tr>
+									</div>
+
 									<tr>
 										<th scope="col">
 											<label for="siteName" class="form-control">사이트이름</label>
-											<input type="text" id="siteName" name="siteName" class="form-control" placeholder="ex)일반A, 카라반A">
+											<input type="text" id="siteName" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1">
 											<label for="siteSize" class="form-control">사이트크기(단위 : m^2)</label>
 											<input type="text" id="siteSize" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10">
 										</th>
@@ -373,7 +393,7 @@
 									<tr>
 										<th scope="col">
 											<label for="siteName" class="form-control">사이트이름</label>
-											<input type="text" id="siteName" name="siteName" class="form-control" placeholder="ex)일반A, 카라반A">
+											<input type="text" id="siteName" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1">
 											<label for="siteSize" class="form-control">사이트크기(단위 : m^2)</label>
 											<input type="text" id="siteSize" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10">
 										</th>
@@ -387,21 +407,7 @@
 									<tr>
 										<th scope="col">
 											<label for="siteName" class="form-control">사이트이름</label>
-											<input type="text" id="siteName" name="siteName" class="form-control" placeholder="ex)일반A, 카라반A">
-											<label for="siteSize" class="form-control">사이트크기(단위 : m^2)</label>
-											<input type="text" id="siteSize" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10">
-										</th>
-										<!-- Controller에서 siteDTO 생성, 갯수만큼 저장하기 -->
-										<td data-cell-header="평상시 주중："><input type="text" name="offWeekdaysPrice" class="form-control" placeholder="평상시 주중 요금을 입력하세요"></td>
-										<td data-cell-header="평상시 주말："><input type="text" name="offWeekendsPrice" class="form-control" placeholder="평상시 주말 요금을 입력하세요"></td>
-										<td data-cell-header="성수기 주중："><input type="text" name="peakWeekdaysPrice" class="form-control" placeholder="성수기 주중 요금을 입력하세요"></td>
-										<td data-cell-header="성수기 주말："><input type="text" name="peakWeekendsPrice" class="form-control" placeholder="성수기 주말 요금을 입력하세요"></td>
-									</tr>
-
-									<tr>
-										<th scope="col">
-											<label for="siteName" class="form-control">사이트이름</label>
-											<input type="text" id="siteName" name="siteName" class="form-control" placeholder="ex)일반A, 카라반A">
+											<input type="text" id="siteName" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1">
 											<label for="siteSize" class="form-control">사이트크기(단위 : m^2)</label>
 											<input type="text" id="siteSize" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10">
 										</th>

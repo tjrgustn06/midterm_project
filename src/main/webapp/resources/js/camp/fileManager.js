@@ -56,7 +56,7 @@ $('#fileAdd').click(function(){
     idx++;
 })
 
-//Ajax-fileAdd버튼 기능구현
+//Ajax-file삭제버튼 기능구현
 $('#fileList').on('click', '.dels', function(){
     $(this).parent().remove();
     count--;

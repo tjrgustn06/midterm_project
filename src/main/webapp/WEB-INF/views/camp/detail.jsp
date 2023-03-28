@@ -359,7 +359,7 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th rowspan="2" scope="col">구분</th>
+									<th rowspan="2" scope="col">사이트이름: 크기</th>
 									<th colspan="2" scope="colgroup">평상시</th>
 									<th colspan="2" scope="colgroup">성수기</th>
 								</tr>
@@ -374,7 +374,7 @@
 							<tbody class="sitePriceOption">
 								<!-- siteDTO가 있으면 있는대로 테이블 만들기 -->
 								<c:if test="${not empty dto.campSiteDTOs}">
-									<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
+									<c:forEach items="${dto.campSiteDTOs}" var="siteDTO">
 										<tr>
 											<th scope="col">${siteDTO.siteName}: ${siteDTO.siteSize}</th>
 											<td data-cell-header="평상시 주중：">${siteDTO.offWeekdaysPrice}</td>
@@ -384,41 +384,7 @@
 										</tr>
 									</c:forEach>
 								</c:if>
-								
-								<!-- 옵션 완성되면 지울 부분 -->
-								<!-- <tr>
-									<th scope="col">일반캠핑</th>
-									<td data-cell-header="평상시 주중：">30,000</td>
-									<td data-cell-header="평상시 주말：">40,000</td>
-									<td data-cell-header="성수기 주중：">30,000</td>
-									<td data-cell-header="성수기 주말：">40,000</td>
-								</tr>
-
-								<tr>
-									<th scope="col">오토캠핑</th>
-									<td data-cell-header="평상시 주중：">30,000</td>
-									<td data-cell-header="평상시 주말：">40,000</td>
-									<td data-cell-header="성수기 주중：">30,000</td>
-									<td data-cell-header="성수기 주말：">40,000</td>
-								</tr>
-
-								<tr>
-									<th scope="col">글램핑</th>
-									<td data-cell-header="평상시 주중：">69,000~99,000</td>
-									<td data-cell-header="평상시 주말：">129,000~159,000</td>
-									<td data-cell-header="성수기 주중：">69,000~99,000</td>
-									<td data-cell-header="성수기 주말：">129,000~159,000</td>
-								</tr>
-
-								<tr>
-									<th scope="col">카라반</th>
-									<td data-cell-header="평상시 주중：">109,000</td>
-									<td data-cell-header="평상시 주말：">169,000</td>
-									<td data-cell-header="성수기 주중：">109,000</td>
-									<td data-cell-header="성수기 주말：">169,000</td>
-								</tr> -->
-								<!-- 지울 부분 끝 -->
-
+								<!-- 테이블 끝 -->
 							</tbody>
 						</table>
 					</div>

@@ -68,8 +68,12 @@ public class CampDAO {
 	
 	//site(option) - 디테일에서 캠프사이트를 가져올 것
 //	public List<CampSiteDTO> getCampSiteList(CampDTO campDTO) throws Exception{
-//		return sqlSession.selectOne(NAMESPACE+"CampSiteDTO", campDTO);
+//		return sqlSession.selectOne(NAMESPACE+"getCampSiteList", campDTO);
 //	}
 	
+	//siteAdd
+	public int setCampSiteAdd(CampSiteDTO campSiteDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCampSiteAdd", campSiteDTO);
+	}
 	
 }

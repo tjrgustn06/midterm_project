@@ -64,7 +64,7 @@ public class CampController {
 		ModelAndView mv = new ModelAndView();
 		campDTO = campService.getCampDetail(campDTO);
 		logger.info("param: "+params); //sysout과 유사한 역할, 확인하고 싶은 내용을 찍어보자.
-//		System.out.println("param: "+params);
+//		System.out.println("param: "+params);	
 		
 		mv.addObject("viewType", viewType);
 		mv.addObject("dto", campDTO);

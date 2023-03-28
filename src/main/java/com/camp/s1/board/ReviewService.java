@@ -14,8 +14,11 @@ public interface ReviewService extends BbsService {
 	public BoardFileDTO getBoardFileDetail(BoardFileDTO boardFileDTO) throws Exception;
 	
 	//update
-	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile [] multipartFiles, HttpSession session) throws Exception;
+	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception;
 	
 	public int setBoardFileDelete(Long fileNum) throws Exception;
+	
+	//delete
+	public int setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception;
 	
 }

@@ -4,6 +4,8 @@ let idx = 0;
 let param = '';
 let page = 1;
 let reviewName=$('#review').attr('data-review-name');
+let reviewNum=0;
+
 function setParam (p) {
     param = p;
 }
@@ -123,11 +125,13 @@ $('#reviewList').on('click','.page-link', function(e){
 })
 
 // 별점 입력
+
 $('.star').each((index, item)=>{
     $(item).on('click',()=>{
         rating(index);
     })
 })
+
 let rate = 0;
 function rating(score){
     $('.star').each((index,item)=>{
@@ -140,3 +144,148 @@ function rating(score){
         $('#mark').val(rate);
     })
 }
+
+// 리뷰 메뉴 토글
+$('#reviewList').on('click', '.btnToggle', function(){
+    $(this).parent().next().slideToggle();
+})
+
+// 리뷰 삭제
+$('#reviewList').on('click','.deleteMenu', function(){
+    reviewNum=$(this).attr('data-review-num');
+
+    $('#reviewMenu'+reviewNum).hide();
+
+    let delConfurm = confirm('리뷰를 삭제하시겠습니까?');
+
+    if(delConfurm) {
+        $.ajax({
+            type : 'POST',
+            url : './review/delete',
+            data : {
+                num : reviewNum
+            },
+            success : function(response){
+                if(response.trim() > 0){
+                    alert('리뷰가 삭제되었습니다.');
+                    getList(page);
+                } else{
+                    alert('삭제 실패');
+                }
+            }
+        })
+    } else {
+        return;
+    }
+
+})
+
+//리뷰 업데이트 
+$('#reviewList').on('click', '.updateMenu', function(){
+    setResetForm(reviewNum)
+    reviewNum=$(this).attr('data-review-num');
+    $('#reviewMenu'+reviewNum).hide();
+    getUpdateForm(reviewNum);
+    
+})
+
+//리뷰 업데이트 취소
+$('#reviewList').on('click', '.updateCancle', function(){
+    reviewNum=$(this).attr('data-review-num')
+    $('#reviewMark'+reviewNum).show()
+    setResetForm(reviewNum);
+})
+
+//리뷰 업데이트 수정 버튼
+$('#reviewList').on('click','.reviewUpdate', function (){
+    reviewNum=$(this).attr('data-review-num');
+    console.log(reviewNum)
+    $.ajax({
+        type : 'POST',
+        url : 'review/update',
+        data : {
+            num : reviewNum,
+            contents : $('#reviewContents'+reviewNum).val(),
+            mark : $('#uptStar').attr('data-update-mark')
+        },
+        success : function(response){
+            if(response.trim()>0){
+                alert('리뷰가 수정되었습니다');
+                getList(page);
+            } else {
+                alert('댓글 수정 실패, 관리자에게 문의하세요')
+            }
+        }
+    })
+})
+
+
+
+function getUpdateForm(reviewNum){
+    let text = $('#contents'+reviewNum).text();
+    let writer=$('#reviewWriter').text();
+    let mark=$('#reviewMark'+reviewNum).attr('data-review-mark');
+    console.log(mark)
+    console.log('updateFormNum : '+reviewNum);
+
+    let child = '<section class="mb-5 mx-2" id="updateForm'+reviewNum+'">';
+    child = child + '<div class="card bg-light">';
+    child = child + '<div class="d-flex">';
+    child = child + '<span class="me-auto p-2 fw-bold">'+writer;
+    child = child + '</span>'
+    child = child + '<span class="p-2">';
+    child = child + '<button class="btn btn-outline-danger updateCancle" data-review-num="'+reviewNum+'">취소</button>';
+    child = child + '</span>';
+    child = child + '</div>';
+
+    //평점 넣는 자리
+    child = child + '<div class="input-group mb-3">';
+    child = child + '<div><span>평점 : </span></div>';
+    child = child + '<div class="updateMark" id="uptStar">';
+    child = child + '<span class="updateStar">★</span><span class="updateStar">★</span>';
+    child = child + '<span class="updateStar">★</span><span class="updateStar">★</span>';
+    child = child + '<span class="updateStar">★</span></div></div>';
+
+    child = child + '<div class="card-body">';
+    child = child + '<textarea class="form-control mb-3" rows="3" id="reviewContents'+reviewNum+'">'+text.trim()+'</textarea>';
+    child = child + '</div>'
+    child = child + '<div class="mb-3">';
+    child = child + '<button class="btn btn-outline-primary col-auto offset-md-11 reviewUpdate" data-review-num="'+reviewNum+'">수정</button>';
+    child = child + '</div></section>'
+    $('#contents'+reviewNum).replaceWith(child);
+    $('.updateStar').each((index, item)=>{
+        if(index<=mark-1){
+            $(item).attr('style','color: red;')
+        } else {
+            $(item).removeAttr('style');
+        }
+    })
+    $('.updateStar').each((index, item)=>{
+        $(item).click(()=>{
+            updateRating(index)
+        })
+    })
+}
+
+function setResetForm(reviewNum) {
+    console.log('ResetFormNum'+reviewNum)
+    $('#reviewMark'+reviewNum).hide()
+    let child='<div id="contents'+reviewNum+'">'+$('#reviewContents'+reviewNum).text()+'';
+    chile = child+'</div>'
+    $('#updateForm'+reviewNum).replaceWith(child);
+}
+
+//update평점수정
+let updateRate=0;
+function updateRating(score){
+    $('.updateStar').each(function(index,item){
+        if(index<=score){
+            $(item).attr('style','color: red;')
+        } else {
+            $(item).removeAttr('style');
+        }
+        updateRate = score+1;
+        $(this).parent().attr('data-update-mark',updateRate);
+    })
+}
+

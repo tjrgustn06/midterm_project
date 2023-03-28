@@ -81,6 +81,9 @@
 				</div>
 			</form>
 			<form id="deleteForm" class="col-md-7" action="./delete" method="post">
+				<input type="hidden" name="gradeNum" value="${dto.gradeNum}">
+				<input type="hidden" name="amount" value="${dto.amount}">
+				<input type="hidden" name="name" value="${dto.name}">
 				<input type="hidden" name="num" value="${dto.num}">
 				<button id="delete" type="submit" class="btn btn-primary">주문취소</button>
 			</form>

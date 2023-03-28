@@ -74,7 +74,19 @@
   	</insert>
   	
   	<!-- Update -->
+  	<update id="setBoardUpdate" parameterType="BbsDTO">
+  		UPDATE PRODUCTREVIEW SET CONTENTS=#{contents}, MARK=#{mark}
+  		WHERE NUM=#{num}
+  	</update>
   	
   	<!-- Delete -->
+  	<delete id="setBoardDelete" parameterType="BbsDTO">
+  		DELETE PRODUCTREVIEW WHERE NUM=#{num}
+  	</delete>
+  	
+  	<select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+  		SELECT * FROM PRODUCTREVIEWFILES
+  		WHERE NUM=#{num}
+  	</select>
   
   </mapper>

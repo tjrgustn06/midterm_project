@@ -30,7 +30,7 @@ public class ProductReviewController {
 	}
 	
 	@GetMapping("list")
-	public ModelAndView getBoardList(Pager pager) throws Exception {
+	public ModelAndView getReviewList(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("reviewList", productReviewService.getBoardList(pager));
 		mv.setViewName("common/reviewList");
@@ -38,13 +38,32 @@ public class ProductReviewController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(ProductReviewDTO productReviewDTO, MultipartFile [] pics, HttpSession session) throws Exception {
+	public ModelAndView setReviewAdd(ProductReviewDTO productReviewDTO, MultipartFile [] pics, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		productReviewDTO.setWriter(memberDTO.getId());
 		mv.addObject("result", productReviewService.setBoardAdd(productReviewDTO, pics, session));
 		mv.setViewName("common/ajaxResult");
 		
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setReviewUpdate(ProductReviewDTO productReviewDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = productReviewService.setBoardUpdate(productReviewDTO);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	@PostMapping("delete")
+	public ModelAndView setReviewDelete(ProductReviewDTO productReviewDTO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = productReviewService.setBoardDelete(productReviewDTO, session);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

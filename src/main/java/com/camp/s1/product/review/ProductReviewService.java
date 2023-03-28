@@ -80,15 +80,32 @@ public class ProductReviewService implements ReviewService {
 	}
 
 	@Override
-	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
+	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return productReviewDAO.setBoardUpdate(bbsDTO);
 	}
 
 	@Override
 	public int setBoardFileDelete(Long fileNum) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public int setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		List<BoardFileDTO> ar = productReviewDAO.getBoardFileList(bbsDTO);
+		int result = productReviewDAO.setBoardDelete(bbsDTO);
+		
+		if(result>0) {
+			String realPath = session.getServletContext().getRealPath("resources/upload/product/review");
+			
+			for(BoardFileDTO boardFileDTO:ar) {
+				boolean check = fileManager.fileDelete(realPath, boardFileDTO.getFileName());
+			}
+		}
+		
+		return result;
 	}
 	
 	

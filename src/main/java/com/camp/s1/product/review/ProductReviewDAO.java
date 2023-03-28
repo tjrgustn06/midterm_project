@@ -46,13 +46,13 @@ public class ProductReviewDAO implements ReviewDAO {
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"setBoardUpdate", bbsDTO);
 	}
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"setBoardDelete", bbsDTO);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ProductReviewDAO implements ReviewDAO {
 	public List<BoardFileDTO> getBoardFileList(BbsDTO bbsDTO) throws Exception {
 		// TODO Auto-generated method stub
 		
-		return null;
+		return sqlSession.selectList(NAMESPACE+"getBoardFileList", bbsDTO);
 	}
 
 	@Override

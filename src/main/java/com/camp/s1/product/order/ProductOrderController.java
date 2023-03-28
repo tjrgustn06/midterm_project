@@ -69,6 +69,19 @@ public class ProductOrderController {
 		return mv;
 	}
 	
-	
+	// Delete 주문 취소
+	@PostMapping("delete")
+	public ModelAndView setProductOrderDelete(ProductOrderDTO productOrderDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = productOrderService.setProductOrderDelete(productOrderDTO);
+		String msg = "취소 실패";
+		if(result>0) {
+			msg = "취소 성공";
+		}
+		mv.addObject("result", msg);
+		mv.addObject("url", "./list");
+		mv.setViewName("common/result");
+		return mv;
+	}
 
 }

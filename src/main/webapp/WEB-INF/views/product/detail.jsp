@@ -133,7 +133,7 @@
 						<div class="input-group-prepend">
 						<span class="input-group-text" >평점</span>
 						</div>
-						<div>
+						
 							<div class="starRate" id="star">
 								<span class="star">★</span>
 								<span class="star">★</span>
@@ -142,8 +142,8 @@
 								<span class="star">★</span>
 							</div>
 							<input id="mark" type="hidden" name="mark">
-						</div>
-				</div>			
+						
+					</div>			
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="gradeStock">내용</label>

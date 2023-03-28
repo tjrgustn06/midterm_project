@@ -10,29 +10,48 @@
 					<div>
 						<p>평점 평균</p>
 						<div class="starRate" id="starAvg">
-							<span class="starmark">★</span>
-							<span class="starmark">★</span>
-							<span class="starmark">★</span>
-							<span class="starmark">★</span>
-							<span class="starmark">★</span>
+							<span class="starMark">★</span>
+							<span class="starMark">★</span>
+							<span class="starMark">★</span>
+							<span class="starMark">★</span>
+							<span class="starMark">★</span>
 						</div>
 						<p id="reviewAvg"></p>
 					</div>
 					  	<c:forEach items="${reviewList}" var="dto">
-						    
-						    <div class="row">
-						    	<p>${dto.writer}</p>
-						    	<p>${dto.regDate}</p>
-						    	<p>${dto.mark}
-						    </div>
-							<div class="row">
-								<td>${dto.contents}</td>
-							</div>
-							<div class="row">
-						    <c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
-						    	<img style="width: 30%; height: 30%;" alt="" src="../resources/upload/product/review/${fileDTO.fileName}">
-						    </c:forEach>
-							</div>
+							<div>
+								<div class="d-flex">
+									<span class="flex-shrink-0" id="comments${dto.num}"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></span>
+									<span class="me-auto p-2 fw-bold" id="reviewWriter">${dto.writer}</span>
+									<span class="p-2">${dto.regDate}</span>
+									<span class="p-2" id="reviewMark${dto.num}" data-review-mark="${dto.mark}">평점 : ${dto.mark}</span>
+									<span class="p-2">
+										<button class="btnToggle" style="border : 0px; background-color: transparent;" data-comment-num="${dto.num}">
+											<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
+										</button>
+									</span>
+												
+									<span class="p-2 reviewMenu" id="reviewMenu${dto.num}" style="display: none;">
+										<div class="list-group">
+											<button type="button" class="list-group-item list-group-item-action updateMenu" data-review-num='${dto.num}'aria-current="true">수정</button>
+											<button type="button" class="list-group-item list-group-item-action deleteMenu" data-review-num='${dto.num}'>삭제</button>
+											<button type="button" class="list-group-item list-group-item-action accuseMenu" data-review-num='${dto.num}'>신고하기</button>
+										</div>
+									</span>
+								</div>
+								<div>
+									<div id="contents${dto.num}">
+										${dto.contents}
+									</div>
+									<div id="">
+										<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
+											<img style="width: 30%; height: 30%;" alt="" src="../resources/upload/product/review/${fileDTO.fileName}">
+										</c:forEach>
+									</div>
+								
+								</div>
+								
+							</div>	
 					  	</c:forEach>
 				  	</c:when>
 				 	<c:otherwise>
@@ -97,7 +116,7 @@
 		starRating($('#starAvg').attr('data-review-avg'))
 		function starRating(score){
     
-			$('.starmark').each((index,item)=>{
+			$('.starMark').each((index,item)=>{
 				if(index<=score){
 					$(item).attr('style','color: red;')
 				} else {

@@ -48,7 +48,7 @@ public class StoryController {
 	public ModelAndView setBoardAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("./add");
+		mv.setViewName("/story/add");
 		return mv;
 	}
 	

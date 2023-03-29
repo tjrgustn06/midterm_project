@@ -13,7 +13,7 @@ public class CartDTO {
 	private String startDate;
 	private String lastDate;
 	private Integer amount;
-	private Long cost;
+	private Long price;
 	
 	public String getOrderer() {
 		return orderer;
@@ -76,11 +76,12 @@ public class CartDTO {
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-	public Long getCost() {
-		return cost;
+	public Long getPrice() {
+		return price;
 	}
-	public void setCost(Long cost) {
-		this.cost = cost;
+	public void setPrice(Long price) {
+		this.price = price;
 	}
+	
 
 }

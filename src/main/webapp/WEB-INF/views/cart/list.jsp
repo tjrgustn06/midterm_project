@@ -36,7 +36,7 @@
 									<td>${dto.orderer}</td>
 									<td>${dto.name}</td>
 									<td>${dto.amount}</td>
-									<td>${dto.cost}</td>
+									<td>${dto.price}</td>
 									<td>${dto.startDate}</td>
 									<td>${dto.lastDate}</td>
 								</tr>

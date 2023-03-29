@@ -14,5 +14,9 @@ public class CartService {
 	public List<CartDTO> getCartList() throws Exception {
 		return cartDAO.getCartList();
 	}
+	
+	public int setCartAdd(CartDTO cartDTO) throws Exception {
+		return cartDAO.setCartAdd(cartDTO);
+	}
 
 }

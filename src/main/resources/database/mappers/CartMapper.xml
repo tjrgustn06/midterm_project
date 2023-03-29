@@ -11,4 +11,13 @@
   	SELECT * FROM CART
   </select>
   
+  <!-- add -->
+  <insert id="setCartAdd" parameterType="CartDTO">
+  	<selectKey keyProperty="cartNum" resultType="Long" order="BEFORE">
+  		SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
+  	</selectKey>
+  	INSERT INTO CART (CARTNUM, ID, GRADENUM, NAME, AMOUNT, PRICE, ORDERER, STARTDATE, LASTDATE, INDEXCODE)
+  	VALUES (#{cartNum}, #{id}, #{gradeNum}, #{name}, #{amount}, #{price}, #{orderer}, #{startDate}, #{lastDate}, #{indexCode})
+  </insert>
+  
   </mapper>

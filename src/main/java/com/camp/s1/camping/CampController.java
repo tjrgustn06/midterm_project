@@ -102,10 +102,19 @@ public class CampController {
 	public ModelAndView setCampAdd(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, HttpSession session, 
 			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		int length = 0;
+		
+		
+		//siteDTO가 몇개 입력되었는지 체크 -> 나중에 버튼 만들어서 입력폼 추가, 삭제하기
+		for(int i=0; i<siteName.length; i++) {
+			if(siteName[i].equals("")) {
+				length = i; 
+			}
+		}
 		
 		//site 추가
 		List<CampSiteDTO> ar = new ArrayList<CampSiteDTO>();
-		for(int i=0; i<siteName.length; i++) {
+		for(int i=0; i<length; i++) {
 			//새 옵션 반복문마다 만들어줌
 			CampSiteDTO campSiteDTO = new CampSiteDTO();
 			campSiteDTO.setSiteName(siteName[i]);
@@ -115,9 +124,7 @@ public class CampController {
 			campSiteDTO.setPeakWeekdaysPrice(peakWeekdaysPrice[i]);
 			campSiteDTO.setPeakWeekendsPrice(peakWeekendsPrice[i]);
 			//마지막에 List에 만든 옵션 하나 넣기
-			if(campSiteDTO!=null) {
-				ar.add(campSiteDTO);
-			}
+			ar.add(campSiteDTO);
 		}
 		//만든 siteList CampDTO에 저장
 		campDTO.setCampSiteDTOs(ar);

@@ -76,8 +76,13 @@ public class CampDAO {
 		return sqlSession.insert(NAMESPACE+"setCampSiteAdd", campSiteDTO);
 	}
 	
-	public List<CampDTO> getDoNameList(CampDTO campDTO) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getDoNameList", campDTO);
+	//
+	public List<CampDTO> getSigunguNameList(CampDTO campDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getSigunguNameList", campDTO);
+	}
+	
+	public List<CampDTO> getSearchCampList(CampDTO campDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getSearchCampList", campDTO);
 	}
 	
 }

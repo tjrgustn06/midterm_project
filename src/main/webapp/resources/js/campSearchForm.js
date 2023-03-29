@@ -24,3 +24,12 @@ $('#doName').change(function(){
         })
     }
 })
+
+$('#searchBtn').click(function(){
+
+})
+
+$('#sigunguName').change(function(){
+    
+})
+

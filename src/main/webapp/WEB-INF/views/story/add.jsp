@@ -104,7 +104,14 @@
                                 <div class="input_search">
                                     <fieldset class="totalSearch">
                                         <label for="searchKrwd2" class="skip">키워드 검색</label>
-                                        <input id="searchKrwd2" name="searchKrwd" class="m_search_in" style="vertical-align: middle;" title="검색어를 입력하세요." placeholder="검색어를 입력하세요." type="text" value=""/></fieldset>
+                                        <input id="name" name="name" class="m_search_in" style="vertical-align: middle;" title="검색어를 입력하세요." placeholder="검색어를 입력하세요." type="text" value=""/></fieldset>
+                                </div>
+                            </li>                            
+                            <li class="tt top_kwdSearch">
+                                <div class="input_search">
+                                    <fieldset class="totalSearch">
+                                        <button class="btn btn-primary" style="vertical-align: middle;" type="button" id="searchBtn">검색</button>
+                                    </fieldset>
                                 </div>
                             </li>
 
@@ -117,6 +124,21 @@
                             </li>-->
                         </ul>
                     </div>
+                    <div class="row my-5">
+                        <div class="col-auto mx-2" id="searchCampList">
+                        <ul class="list-group list-group-horizontal list1" >
+                            <li class="list-group-item">
+                              <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                              First checkbox
+                            </li>
+                            <li class="list-group-item">
+                              <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                              First checkbox
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    
             </div>
                 
             <div class="row mb-3">

@@ -32,6 +32,9 @@
 		</form>
 	</div>
 </div>
-
+	<div class="mb-3 form-check">
+<a href="./findIdForm" id="find_id" class="btn btn-warning">아이디 찾기</a>
+<a href="./findPwForm" id="find_pw" class="btn btn-dark">비밀번호 찾기</a>
+</div>
 </body>
 </html>

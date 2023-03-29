@@ -10,9 +10,9 @@
 	VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email}, 'MEMBER')
 </insert>
 
-<insert id="getAddressJoin" parameterType="AddressDTO">
-	INSERT INTO ADDRESS(ADDRESSNUM, ID, ADDRESSNAME, ADDRESSDETAIL, POSTCODE)
-	VALUES(ADDRESSSEQ.NEXTVAL, #{id}, #{addressName}, #{addressDetail}, #{postCode})
+<insert id="setAddressJoin" parameterType="AddressDTO">
+	INSERT INTO ADDRESS(ADDRESSNUM, ID, ADDRESSNAME, ADDRESS, ADDRESSDETAIL, POSTCODE)
+	VALUES(ADDRESSSEQ.NEXTVAL, #{id}, #{addressName},#{address}, #{addressDetail}, #{postCode, jdbcType=NUMERIC})
 </insert>
 
 <!-- Login -->
@@ -43,12 +43,13 @@
 <!-- Update -->
 <update id="setMemberUpdate" parameterType="MemberDTO">
 	UPDATE MEMBER SET NAME=#{name},PHONE=#{phone},EMAIL=#{email},ROLENAME=#{roleName}
-	WHERE ID =#{id}
+	WHERE ID =#{id, jdbcType=VARCHAR}
 </update>
 
 <update id="setAddressUpdate" parameterType="AddressDTO">
-	UPDATE ADDRESS SET ADDRESSNAME=#{addressName}, ADDRESS=#{address}, ADDRESSDETAIL=#{addressDetail}, POSTCODE=#{postCode}
-	WHERE  ID=#{id}
+	UPDATE ADDRESS SET ADDRESSNAME=#{addressName, jdbcType=VARCHAR}, ADDRESS=#{address, jdbcType=VARCHAR}, 
+	ADDRESSDETAIL=#{addressDetail, jdbcType=VARCHAR}, POSTCODE=#{postCode, jdbcType=NUMERIC}
+	WHERE  ID=#{id, jdbcType=VARCHAR}
 </update>
 
 <!-- Delete -->
@@ -61,5 +62,17 @@
 	DELETE * FROM ADDRESS
 	WHERE ID=#{id}
 </delete>
+
+<!--Find Id  -->
+<select id="findId" parameterType="MemberDTO" resultType="MemberDTO">
+	SELECT ID FROM MEMBER 
+	WHERE EMAIL=#{email}
+</select>
+
+<!-- ChangePw -->
+<update id="setMemberPwChange" parameterType="MemberDTO">
+	UPDATE MEMBER SET PW=#{pw} WHERE ID=#{id}
+</update>
+
 
 </mapper>

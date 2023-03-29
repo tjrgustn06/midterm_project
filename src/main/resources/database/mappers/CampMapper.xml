@@ -193,5 +193,10 @@
 	<delete id="setCampFileDelete" parameterType="Long">
 		DELETE CAMPFILES WHERE FILENUM=#{fileNum}
 	</delete>
+	
+	<select id="getDoNameList" parameterType="CampDTO" resultType="CampDTO">
+		SELECT DISTINCT SIGUNGUNAME FROM CAMPINFO
+		WHERE DONAME LIKE '%' || #{doName} || '%'
+	</select>
   
   </mapper>

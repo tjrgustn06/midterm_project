@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -187,6 +188,14 @@ public class CampController {
 		mv.setViewName("common/ajaxResult");
 		
 		return mv;
+	}
+	
+	@ResponseBody
+	@GetMapping("doNameList")
+	public List<CampDTO> getDoNameList(CampDTO campDTO) throws Exception {
+		
+		
+		return campService.getdoNameList(campDTO);
 	}
 	
 }

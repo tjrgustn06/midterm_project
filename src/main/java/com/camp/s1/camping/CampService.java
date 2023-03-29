@@ -202,4 +202,8 @@ public class CampService {
 		}
 		return result;
 	}
+	
+	public List<CampDTO> getdoNameList(CampDTO campDTO) throws Exception {
+		return campDAO.getDoNameList(campDTO);
+	}
 }

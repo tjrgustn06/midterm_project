@@ -96,7 +96,7 @@ $('#detDelete').click(function(){
 })
 
 //리스트로 - detail.jsp
-$('#list').click(function(){
+$('#detList').click(function(){
     location.href="./list";
 })
 

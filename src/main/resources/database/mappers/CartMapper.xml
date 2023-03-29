@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.cart.CartDAO">
+  
+  <!-- list -->
+  <select id="getCartList" resultType="CartDTO">
+  	SELECT * FROM CART
+  </select>
+  
+  </mapper>

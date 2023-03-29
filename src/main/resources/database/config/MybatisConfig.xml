@@ -21,7 +21,9 @@
 		<typeAlias type="com.camp.s1.product.ProductGradeDTO" alias="ProductGradeDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductFileDTO" alias="ProductFileDTO"/>
 		<typeAlias type="com.camp.s1.product.order.ProductOrderDTO" alias="ProductOrderDTO"/>
-		<typeAlias type="com.camp.s1.product.review.ProductReviewDTO" alias="ProductReviewDTO"/>		
+		<typeAlias type="com.camp.s1.product.review.ProductReviewDTO" alias="ProductReviewDTO"/>	
+		
+		<typeAlias type="com.camp.s1.cart.CartDTO" alias="CartDTO"/>	
 		
 		<typeAlias type="com.camp.s1.board.CommentDTO" alias="CommentDTO"/>
 		

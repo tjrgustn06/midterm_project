@@ -93,6 +93,9 @@
 							<div>
 								<button type="submit" class="btn btn-outline-info" formaction="./order/order">주문하기</button>
 							</div>
+							<div>
+								<button type="submit" class="btn btn-outline-info" formaction="../cart/add">장바구니추가</button>
+							</div>
 						</form>
 					</c:if>
 				</div>

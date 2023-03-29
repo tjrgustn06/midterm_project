@@ -5,6 +5,7 @@ import java.sql.Date;
 public class CartDTO {
 	private Long cartNum;
 	private String id;
+	private String orderer;
 	private Long gradeNum;
 	private Long indexCode;
 	private String name;
@@ -13,6 +14,13 @@ public class CartDTO {
 	private String lastDate;
 	private Integer amount;
 	private Long cost;
+	
+	public String getOrderer() {
+		return orderer;
+	}
+	public void setOrderer(String orderer) {
+		this.orderer = orderer;
+	}
 	
 	public Long getCartNum() {
 		return cartNum;

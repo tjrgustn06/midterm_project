@@ -6,7 +6,7 @@ $(function(){
 });
 
 let areaSelect = function(target){
-    console.log($(target));
+    //console.log($(target));
     if(target == null || $(target).length == 0){
         console.warn("Unkwon Area Tag");
         return;

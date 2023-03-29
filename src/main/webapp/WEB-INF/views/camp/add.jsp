@@ -72,7 +72,7 @@
 		<!-- 파라미터 넘어가는거 확인용 -->
 		--${param}--
 		<h1>Camp Add Page</h1>
-		<input type="text" name="name" class="form-control my-1" placeholder="캠핑장 이름을 입력하세요">
+		<input type="text" id="ChkName" name="name" class="form-control my-1" placeholder="캠핑장 이름을 입력하세요">
 	</div>
 	
 	<hr>
@@ -329,79 +329,42 @@
 						<hr>
 							
 						<!-- 요금구분 -->
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트별 요금 안내</h5>
-						<div class="tablePrice">
-							<table class="table priceInfo">
-								<!-- <caption>캠핑 구분에 따른 요금 테이블. 평상시의 주중, 주말과 성수기의 주중, 주말로 나뉘어 설명합니다.</caption> -->
-								<colgroup>
-									<col style="width: 40%">
-									<col style="width: 15%">
-									<col style="width: 15%">
-									<col style="width: 15%">
-									<col style="width: 15%">
-								</colgroup>
-								<thead>
-									<tr>
-										<th rowspan="2" scope="col">사이트이름: 크기</th>
-										<th colspan="2" scope="colgroup">평상시</th>
-										<th colspan="2" scope="colgroup">성수기</th>
-									</tr>
-
-									<tr>
-										<th scope="col" class="gray">주중</th>
-										<th scope="col" class="gray">주말</th>
-										<th scope="col" class="gray">주중</th>
-										<th scope="col" class="gray">주말</th>
-									</tr>
-								</thead>
-								<tbody class="sitePriceOption">
-									<!-- siteDTO 부분 -->
-									<div class="input-group row mb-3">
-										<!-- 버튼 누르면 생성될 부분 -->
-										<tr>
-											<th scope="col">
-												<span class="input-group-text" id="siteName">사이트이름</span>
-												<input type="text" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1" aria-label="ex)일반A1, 카라반A1" aria-describedby="siteName">
-												<span class="input-group-text" id="siteSize">크기(m^2)</span>
-												<input type="text" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10" aria-label="ex)6*11, 10*10" aria-describedby="siteSize">
-											</th>
-											<td data-cell-header="평상시 주중："><input type="text" name="offWeekdaysPrice" class="form-control" placeholder="평상시 주중 요금을 입력하세요"></td>
-											<td data-cell-header="평상시 주말："><input type="text" name="offWeekendsPrice" class="form-control" placeholder="평상시 주말 요금을 입력하세요"></td>
-											<td data-cell-header="성수기 주중："><input type="text" name="peakWeekdaysPrice" class="form-control" placeholder="성수기 주중 요금을 입력하세요"></td>
-											<td data-cell-header="성수기 주말："><input type="text" name="peakWeekendsPrice" class="form-control" placeholder="성수기 주말 요금을 입력하세요"></td>
-										</tr>
-										<!-- 버튼 누르면 생성될 부분 끝 -->
-
-										<tr>
-											<th scope="col">
-												<span class="input-group-text" id="siteName">사이트이름</span>
-												<input type="text" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1" aria-label="ex)일반A1, 카라반A1" aria-describedby="siteName">
-												<span class="input-group-text" id="siteSize">크기(m^2)</span>
-												<input type="text" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10" aria-label="ex)6*11, 10*10" aria-describedby="siteSize">
-											</th>
-											<td data-cell-header="평상시 주중："><input type="text" name="offWeekdaysPrice" class="form-control" placeholder="평상시 주중 요금을 입력하세요"></td>
-											<td data-cell-header="평상시 주말："><input type="text" name="offWeekendsPrice" class="form-control" placeholder="평상시 주말 요금을 입력하세요"></td>
-											<td data-cell-header="성수기 주중："><input type="text" name="peakWeekdaysPrice" class="form-control" placeholder="성수기 주중 요금을 입력하세요"></td>
-											<td data-cell-header="성수기 주말："><input type="text" name="peakWeekendsPrice" class="form-control" placeholder="성수기 주말 요금을 입력하세요"></td>
-										</tr>
-
-										<tr>
-											<th scope="col">
-												<span class="input-group-text" id="siteName">사이트이름</span>
-												<input type="text" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1" aria-label="ex)일반A1, 카라반A1" aria-describedby="siteName">
-												<span class="input-group-text" id="siteSize">크기(m^2)</span>
-												<input type="text" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10" aria-label="ex)6*11, 10*10" aria-describedby="siteSize">
-											</th>
-											<td data-cell-header="평상시 주중："><input type="text" name="offWeekdaysPrice" class="form-control" placeholder="평상시 주중 요금을 입력하세요"></td>
-											<td data-cell-header="평상시 주말："><input type="text" name="offWeekendsPrice" class="form-control" placeholder="평상시 주말 요금을 입력하세요"></td>
-											<td data-cell-header="성수기 주중："><input type="text" name="peakWeekdaysPrice" class="form-control" placeholder="성수기 주중 요금을 입력하세요"></td>
-											<td data-cell-header="성수기 주말："><input type="text" name="peakWeekendsPrice" class="form-control" placeholder="성수기 주말 요금을 입력하세요"></td>
-										</tr>
-										
-									</div>
-									<!-- siteDTO 끝 -->
-								</tbody>
-							</table>
+						<div class="row addSite">
+							<div class="col-10">
+								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트별 요금 안내</h5>
+							</div>
+							<div class="col-2">
+								<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
+							</div>
+						</div>
+						
+						<!-- siteDTO 입력부 추가될 부분 -->
+						<div class="row my-2" id="siteList">
+							<!-- siteDTO - 버튼 누르면 생성될 부분 -->
+							<div id="siteOne">
+								<div class="input-group mb-2">
+									<span class="input-group-text" id="siteName">사이트이름</span>
+									<input type="text" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1">
+									<span class="input-group-text" id="siteSize">크기(m^2)</span>
+									<input type="text" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10">
+								</div>
+								<div class="input-group mb-2">
+									<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+									<input type="text" name="offWeekdaysPrice" class="form-control" placeholder="요금 입력">
+									<span class="input-group-text" id="offWeekendsPrice">주말</span>
+									<input type="text" name="offWeekendsPrice" class="form-control" placeholder="요금 입력">
+								</div>
+								<div class="input-group mb-2">
+									<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+									<input type="text" name="peakWeekdaysPrice" class="form-control" placeholder="요금 입력">
+									<span class="input-group-text" id="peakWeekendsPrice">주말</span>
+									<input type="text" name="peakWeekendsPrice" class="form-control" placeholder="요금 입력">
+								</div>
+								<div class="mb-2">
+									<button type="button" class="siteDels btn btn-outline-danger">입력창 삭제</button>
+								</div>
+							</div>
+							<!-- 생성 끝날 부분 -->
 						</div>
 						<hr>
 
@@ -480,6 +443,9 @@
 	setMax(10);
 	setParam('files');
 	setCount(1);
+
+	setSiteCount(1);
+	setSiteMax(5);
 </script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>

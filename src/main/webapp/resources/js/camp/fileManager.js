@@ -46,9 +46,6 @@ $('#fileAdd').click(function(){
 // child = child + '</div>';
 
     let child = '<div class="input-group my-2" id="del'+idx+'">';
-        // child = child + '<div class="col-1">';
-        // child = child + '<input class="form-check-input titleCheck" type="radio" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">';
-        // child = child + '</div>';
         child = child + '<input type="file" class="form-control" name="'+param+'">';
         child = child + '<button type="button" class="dels btn btn-outline-secondary" data-del-idx=del"'+idx+'">파일 삭제</button>';
         child = child + '</div>';
@@ -56,7 +53,7 @@ $('#fileAdd').click(function(){
     idx++;
 })
 
-//Ajax-file삭제버튼 기능구현
+//file삭제 버튼 기능
 $('#fileList').on('click', '.dels', function(){
     $(this).parent().remove();
     count--;

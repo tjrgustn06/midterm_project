@@ -361,7 +361,7 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th rowspan="2" scope="col">사이트이름: 크기</th>
+									<th rowspan="2" scope="col">사이트이름(크기)</th>
 									<th colspan="2" scope="colgroup">평상시</th>
 									<th colspan="2" scope="colgroup">성수기</th>
 								</tr>
@@ -378,7 +378,7 @@
 								<c:if test="${not empty dto.campSiteDTOs}">
 									<c:forEach items="${dto.campSiteDTOs}" var="siteDTO">
 										<tr>
-											<th scope="col">${siteDTO.siteName}: ${siteDTO.siteSize}</th>
+											<th scope="col">${siteDTO.siteName}(${siteDTO.siteSize})</th>
 											<td data-cell-header="평상시 주중：">${siteDTO.offWeekdaysPrice}</td>
 											<td data-cell-header="평상시 주말：">${siteDTO.offWeekendsPrice}</td>
 											<td data-cell-header="성수기 주중：">${siteDTO.peakWeekdaysPrice}</td>

@@ -192,7 +192,7 @@ public class CampController {
 	
 	@ResponseBody
 	@GetMapping("sigunguNameList")
-	public List<CampDTO> getDoNameList(CampDTO campDTO) throws Exception {
+	public List<CampDTO> getSigunguNameList(CampDTO campDTO) throws Exception {
 		
 		
 		return campService.getSigunguNameList(campDTO);

@@ -12,11 +12,21 @@ public class CartService {
 	private CartDAO cartDAO;
 	
 	public List<CartDTO> getCartList() throws Exception {
-		return cartDAO.getCartList();
+		List<CartDTO> ar= cartDAO.getCartList();
+		for(CartDTO cartDTO:ar) {
+			cartDTO.setStartDate(cartDTO.getStartDate().substring(0, 10));
+			cartDTO.setLastDate(cartDTO.getLastDate().substring(0, 10));
+			System.out.println("lastDate : "+cartDTO.getLastDate());
+		}
+		return ar;
 	}
 	
 	public int setCartAdd(CartDTO cartDTO) throws Exception {
 		return cartDAO.setCartAdd(cartDTO);
+	}
+	
+	public int setCartDelete(CartDTO cartDTO) throws Exception {
+		return cartDAO.setCartDelete(cartDTO);
 	}
 
 }

@@ -21,5 +21,9 @@ public class CartDAO {
 	public int setCartAdd(CartDTO cartDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setCartAdd", cartDTO);
 	}
+	
+	public int setCartDelete(CartDTO cartDTO) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setCartDelete", cartDTO);
+	}
 
 }

@@ -15,7 +15,7 @@
 			<h1>Cart List Page</h1>
 		</div>
 		<div class="row my-6">
-			<table class="table table-striped">
+			<table class="table table-striped col-6">
 				<thead>
 					<tr>
 						<th scope="col">글번호</th>
@@ -32,15 +32,42 @@
 						<c:when test="${not empty list}">
 							<c:forEach items="${list}" var="dto">	
 								<tr>
-									<td>${dto.cartNum}</td>
-									<td>${dto.orderer}</td>
-									<td>${dto.name}</td>
-									<td>${dto.amount}</td>
-									<td>${dto.price}</td>
-									<td>${dto.startDate}</td>
-									<td>${dto.lastDate}</td>
+									<form id="cartForm${dto.cartNum}" class="cartFormData">
+
+										<td><input type="text" class="cartNums" name="cartNum" value="${dto.cartNum}" readonly style="width: 100px;"></td>
+										<td><input type="text" class="orderers" name="orderer" value="${dto.orderer}" readonly style="width: 100px;"></td>
+										<td><input type="text" class="names" name="name" value="${dto.name}" readonly style="width: 100px;"></td>
+										<td><input type="text" class="amounts" name="amount" value="${dto.amount}" readonly style="width: 100px;">
+											<span>
+												<button class="plus_btn">+</button>
+												<button class="minus_btn">-</button>
+											</span>
+										</td>
+										<td><input type="text" class="prices" name="price" value="${dto.price}" readonly style="width: 100px;"></td>
+										<td><input type="text" class="startDates" name="startDate" value="${dto.startDate}" readonly style="width: 100px;"></td>
+										<td><input type="text" class="lastDates" name="lastDate" value="${dto.lastDate}" readonly style="width: 100px;"></td>
+										<input type="hidden" class="indexCodes" name="indexCode" value="${dto.indexCode}">
+										<input type="hidden" class="gradeNums" name="gradeNum" value="${dto.gradeNum}">
+										<td>
+											<button type="button" class="cartOrder" data-cart-num="${dto.cartNum}">주문</button>
+											<button type="button" class="cartDel" data-cart-num="${dto.cartNum}">삭제</button>
+										</td>
+									</form>
 								</tr>
 							</c:forEach>
+							<tr>
+								<form id="cartAllForm">
+									<td></td>
+									<td><input type="text" name="orderer" id="orderer"></td>
+									<td><input type="text" name="name" id="name"></td>
+									<td><input type="text" name="amount" id="amount"></td>
+									<td><input type="text" name="price" id="price"></td>
+									<td><input type="text" name="startDate" id="startDate"></td>
+									<td><input type="text" name="lastDate" id="lastDate"></td>
+									<input type="hidden" name="indexCode" id="indexCode">
+									<input type="hidden" name="gradeNum" id="gradeNum">
+								</form>
+							</tr>
 						</c:when>
 						<c:otherwise>
 							<tr height="200px">
@@ -50,9 +77,11 @@
 					</c:choose>
 				</tbody>
 			</table>
+			<button type="button" class="btn btn-primary" id="allForm">전체 주문</button>
 		</div>
 
 	</div>
+	<script src="../resources/js/cartList.js"></script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

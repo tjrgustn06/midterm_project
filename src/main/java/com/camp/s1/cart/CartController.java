@@ -41,5 +41,15 @@ public class CartController {
 		mv.setViewName("common/result");
 		return mv;
 	}
+	
+	@PostMapping("delete")
+	public ModelAndView setCartDelete(CartDTO cartDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", cartService.setCartDelete(cartDTO));
+		
+		return mv;
+	}
 
 }

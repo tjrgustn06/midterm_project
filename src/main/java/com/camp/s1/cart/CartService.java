@@ -16,7 +16,6 @@ public class CartService {
 		for(CartDTO cartDTO:ar) {
 			cartDTO.setStartDate(cartDTO.getStartDate().substring(0, 10));
 			cartDTO.setLastDate(cartDTO.getLastDate().substring(0, 10));
-			System.out.println("lastDate : "+cartDTO.getLastDate());
 		}
 		return ar;
 	}

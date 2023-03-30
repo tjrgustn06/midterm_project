@@ -42,6 +42,15 @@ public class CartController {
 		return mv;
 	}
 	
+	@PostMapping("stockUpdate")
+	public ModelAndView setStockUpdate(Long [] gradeNum, Integer [] amount) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		for(Long gradeNums:gradeNum) {
+			System.out.println(gradeNums);
+		}
+		return mv;
+	}
+	
 	@PostMapping("delete")
 	public ModelAndView setCartDelete(CartDTO cartDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();

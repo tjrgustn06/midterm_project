@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<style>
+	.form-data{
+		width: 100%;
+	}
+</style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -34,20 +39,20 @@
 								<tr>
 									<form id="cartForm${dto.cartNum}" class="cartFormData">
 
-										<td><input type="text" class="cartNums" name="cartNum" value="${dto.cartNum}" readonly style="width: 100px;"></td>
-										<td><input type="text" class="orderers" name="orderer" value="${dto.orderer}" readonly style="width: 100px;"></td>
-										<td><input type="text" class="names" name="name" value="${dto.name}" readonly style="width: 100px;"></td>
-										<td><input type="text" class="amounts" name="amount" value="${dto.amount}" readonly style="width: 100px;">
+										<td><input type="text" class="cartNums form-data" name="cartNum" value="${dto.cartNum}" readonly></td>
+										<td><input type="text" class="orderers form-data" name="orderer" value="${dto.orderer}" readonly></td>
+										<td><input type="text" class="names form-data" name="name" value="${dto.name}" readonly></td>
+										<td><input type="text" class="amounts form-data" name="amount" value="${dto.amount}" readonly>
 											<span>
 												<button class="plus_btn">+</button>
 												<button class="minus_btn">-</button>
 											</span>
 										</td>
-										<td><input type="text" class="prices" name="price" value="${dto.price}" readonly style="width: 100px;"></td>
-										<td><input type="text" class="startDates" name="startDate" value="${dto.startDate}" readonly style="width: 100px;"></td>
-										<td><input type="text" class="lastDates" name="lastDate" value="${dto.lastDate}" readonly style="width: 100px;"></td>
-										<input type="hidden" class="indexCodes" name="indexCode" value="${dto.indexCode}">
-										<input type="hidden" class="gradeNums" name="gradeNum" value="${dto.gradeNum}">
+										<td><input type="text" class="prices form-data" name="price" value="${dto.price}" readonly></td>
+										<td><input type="text" class="startDates form-data" name="startDate" value="${dto.startDate}" readonly></td>
+										<td><input type="text" class="lastDates form-data" name="lastDate" value="${dto.lastDate}" readonly></td>
+										<input type="hidden" class="indexCodes form-data" name="indexCode" value="${dto.indexCode}">
+										<input type="hidden" class="gradeNums form-data" name="gradeNum" value="${dto.gradeNum}">
 										<td>
 											<button type="button" class="cartOrder" data-cart-num="${dto.cartNum}">주문</button>
 											<button type="button" class="cartDel" data-cart-num="${dto.cartNum}">삭제</button>
@@ -57,13 +62,13 @@
 							</c:forEach>
 							<tr>
 								<form id="cartAllForm">
-									<td></td>
-									<td><input type="text" name="orderer" id="orderer"></td>
-									<td><input type="text" name="name" id="name"></td>
-									<td><input type="text" name="amount" id="amount"></td>
-									<td><input type="text" name="price" id="price"></td>
-									<td><input type="text" name="startDate" id="startDate"></td>
-									<td><input type="text" name="lastDate" id="lastDate"></td>
+									<td>총합</td>
+									<td><input type="text" class="form-data" name="orderer" id="orderer" readonly></td>
+									<td><input type="text" class="form-data" name="name" id="name" readonly></td>
+									<td><input type="text" class="form-data" name="amount" id="amount" readonly></td>
+									<td><input type="text" class="form-data" name="price" id="price" readonly></td>
+									<td><input type="text" class="form-data" name="startDate" id="startDate" readonly></td>
+									<td><input type="text" class="form-data" name="lastDate" id="lastDate" readonly></td>
 									<input type="hidden" name="indexCode" id="indexCode">
 									<input type="hidden" name="gradeNum" id="gradeNum">
 								</form>
@@ -82,6 +87,9 @@
 
 	</div>
 	<script src="../resources/js/cartList.js"></script>
+	<script>
+		getAllCart()
+	</script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

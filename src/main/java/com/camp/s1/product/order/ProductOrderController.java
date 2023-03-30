@@ -59,11 +59,14 @@ public class ProductOrderController {
 	
 	// cart 전체 order
 	@PostMapping("cartOrder")
-	public ModelAndView setCartOrderAdd(ProductOrderDTO [] productOrderDTOs, HttpSession session) throws Exception {
+	public ModelAndView setCartOrderAdd(ProductOrderDTO productOrderDTO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		for(ProductOrderDTO productOrderDTO:productOrderDTOs) {
-			System.out.println("gradeNum : "+productOrderDTO.getGradeNum());
-		}
+		MemberDTO memberDTO=(MemberDTO)session.getAttribute("member");
+		productOrderDTO.setId(memberDTO.getId());
+		int result = productOrderService.setCartOrderAdd(productOrderDTO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

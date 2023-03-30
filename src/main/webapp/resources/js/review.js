@@ -185,6 +185,7 @@ $('#reviewList').on('click', '.updateMenu', function(){
     setResetForm(reviewNum)
     reviewNum=$(this).attr('data-review-num');
     $('#reviewMenu'+reviewNum).hide();
+    $('#reviewMark'+reviewNum).hide()
     getUpdateForm(reviewNum);
     
 })
@@ -269,7 +270,6 @@ function getUpdateForm(reviewNum){
 
 function setResetForm(reviewNum) {
     console.log('ResetFormNum'+reviewNum)
-    $('#reviewMark'+reviewNum).hide()
     let child='<div id="contents'+reviewNum+'">'+$('#reviewContents'+reviewNum).text()+'';
     chile = child+'</div>'
     $('#updateForm'+reviewNum).replaceWith(child);

@@ -55,8 +55,22 @@ public class ProductOrderController {
 			msg = "주문 성공";
 		}
 		mv.addObject("result", msg);
-		mv.addObject("url", "./list");
+		mv.addObject("url", "../product/list");
 		mv.setViewName("common/result");
+		
+		return mv;
+	}
+	
+	// cart 전체 order
+	@PostMapping("cartOrder")
+	public ModelAndView setCartOrderAdd(ProductOrderDTO productOrderDTO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO=(MemberDTO)session.getAttribute("member");
+		productOrderDTO.setId(memberDTO.getId());
+		int result = productOrderService.setCartOrderAdd(productOrderDTO);
+		mv.addObject("result", result);
+		
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

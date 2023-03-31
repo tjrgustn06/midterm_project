@@ -273,7 +273,7 @@ public class MemberController {
 		}
 		
 		//카카오 간편 로그인
-	    @GetMapping("memberLogin")
+	    @GetMapping("kakaoLogin")
 	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
 	    	System.out.println("#########" + code);
 	    	String access_Token = memberService.getAccessToken(code);

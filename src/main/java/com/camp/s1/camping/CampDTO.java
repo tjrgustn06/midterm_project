@@ -30,6 +30,7 @@ public class CampDTO {
 	private Long hit;
 	private List<CampFileDTO> campFileDTOs;
 	private List<CampSiteDTO> campSiteDTOs;
+	private ThumbnailDTO thumbnailDTO;
 	
 	public CampDTO() {
 		
@@ -244,6 +245,14 @@ public class CampDTO {
 
 	public void setCampSiteDTOs(List<CampSiteDTO> campSiteDTOs) {
 		this.campSiteDTOs = campSiteDTOs;
+	}
+
+	public ThumbnailDTO getThumbnailDTO() {
+		return thumbnailDTO;
+	}
+
+	public void setThumbnailDTO(ThumbnailDTO thumbnailDTO) {
+		this.thumbnailDTO = thumbnailDTO;
 	}
 	
 }

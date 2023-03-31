@@ -96,8 +96,8 @@
 				<h5><i class="fa-solid fa-camera fa-sm"></i> 대표 사진 등록</h5>
 				<div id="fileList" class="row">
 					<div class="row mb-3">
-						<!-- <label for="campFiles" class="form-label">대표 사진 등록</label> -->
-						<input type="file" id="campFiles" name="files" class="form-control">
+						<!-- <label for="thumbnail" class="form-label">대표 사진 등록</label> -->
+						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
 					</div>
 					
 					<div class="row col-4 mb-3">

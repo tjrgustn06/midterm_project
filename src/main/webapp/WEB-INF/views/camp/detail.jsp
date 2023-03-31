@@ -484,6 +484,7 @@
 
 				<c:if test="${viewType eq 4}">
 					<!-- 후기 영역 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
 					<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
 						<form id="reviewForm" method="POST" enctype="multipart/form-data">
 							<input type="hidden" name="campNum" value="${dto.campNum}">

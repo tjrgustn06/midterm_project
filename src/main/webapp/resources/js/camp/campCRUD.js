@@ -293,7 +293,7 @@ function chkValidation(){
         return;
     }else{
         console.log('Submit Success!');
-        //$('#frm').submit();
+        $('#frm').submit();
     }
 }
 

@@ -78,19 +78,28 @@
 	<!-- 대표사진 + 설명 div -->
 	<div class="d-flex row my-3">
 		<div class="row pic my-3 mx-auto">
-<%-- 			<c:if test="${not empty dto.campFileDTOs}">
-				<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="i">
-					<!-- 파일이 보이게 -->
-					<c:if test="${pageScope.i.first}">
-						<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+			<c:choose>
+				<c:when test="${not empty dto.thumbnailDTO}">
+					<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.fileName}">
+				</c:when>
+				<c:otherwise>
+					<c:if test="${not empty dto.thumbnail}">
+						<img alt="" src="${dto.thumbnail}">	
 					</c:if>
-				</c:forEach>
-			</c:if> --%>
+				</c:otherwise>
+			</c:choose>
+			
+			<%-- <c:if test="${not empty dto.thumbnailDTO}">
+				<!-- 파일이 보이게 -->
+				<c:if test="${pageScope.i.first}">
+					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+				</c:if>
+			</c:if>
 			<c:catch var="er">
 				<c:if test="${not empty dto.thumbnail}">
 					<img alt="" src="${dto.thumbnail}">
 				</c:if>
-			</c:catch>
+			</c:catch> --%>
 		</div>
 		
 		<hr class="my-2">

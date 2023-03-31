@@ -76,4 +76,18 @@ public class CampDAO {
 		return sqlSession.insert(NAMESPACE+"setCampSiteAdd", campSiteDTO);
 	}
 	
+	//thumbnail - list가 없고 이미지 파일 한개임
+//	public ThumbnailDTO getThumbnail(CampDTO campDTO) throws Exception{
+//		return sqlSession.selectOne(NAMESPACE+"getThumbnail", campDTO);
+//	}
+	
+	//thumbnailAdd
+	public int setThumbnailAdd(ThumbnailDTO thumbnailDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setThumbnailAdd", thumbnailDTO);
+	}
+	
+	//thumbnailDelete
+	public int setThumbnailDelete(Long fileNum) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setThumbnailDelete", fileNum);
+	}
 }

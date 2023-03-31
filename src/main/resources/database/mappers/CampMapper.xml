@@ -34,22 +34,22 @@
   	<!-- <select id="getCampList" parameterType="Pager" resultType="CampDTO"> -->
  	<select id="getCampList" parameterType="Pager" resultType="CampDTO">
   		<!-- SELECT * FROM CAMPINFO ORDER BY CAMPNUM DESC -->
-  		SELECT * FROM
+  		<!-- SELECT * FROM
 			(SELECT ROWNUM R, C.* FROM
 				(SELECT * FROM CAMPINFO
 				<include refid="searchCondition"></include>
 			ORDER BY CAMPNUM DESC) C)
-		WHERE R BETWEEN #{startRow} AND #{lastRow}
+		WHERE R BETWEEN #{startRow} AND #{lastRow} -->
 		<!-- 아래는 file join한 결과, 썸네일테이블이랑 조인할거면 이거 써야할거같음 -->
-		<!-- SELECT * FROM
+		SELECT * FROM
 			(SELECT ROWNUM R, C.* FROM
 				(SELECT * FROM CAMPINFO CI
 				LEFT OUTER JOIN
-				CAMPFILES CF
+				THUMBNAIL TH
 				USING(CAMPNUM)
 				<include refid="searchCondition"></include>
 			ORDER BY CAMPNUM ASC) C)
-		WHERE R BETWEEN #{startRow} AND #{lastRow}  --> 		
+		WHERE R BETWEEN #{startRow} AND #{lastRow}  		
   	</select>
   	<!-- List-file/이게 필요한지 싶음 - list에서 불러올것은 thumbnail에 있어서 -->
  <!--  	<resultMap type="CampDTO" id="getCampFileList">
@@ -95,6 +95,9 @@
 			LEFT OUTER JOIN
 			CAMPSITE CS
 			ON(CI.CAMPNUM=CS.CAMPNUM)
+			LEFT OUTER JOIN
+			THUMBNAIL TH
+			ON(CI.CAMPNUM=TH.CAMPNUM)
 		WHERE CI.CAMPNUM=#{campNum}
   	</select>
   	<!-- detail-file/site 연결 -->
@@ -138,6 +141,12 @@
   			<result column="PEAKWEEKDAYSPRICE" property="peakWeekdaysPrice"/>
   			<result column="PEAKWEEKENDSPRICE" property="peakWeekendsPrice"/>
   			<result column="STATUS" property="status"/>
+  		</collection>
+  		
+  		<collection property="thumbnailDTO" javaType="ThumbnailDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
   		</collection>
   	</resultMap>
   
@@ -193,6 +202,26 @@
 	<!-- fileDelete/CASCADE에서는 필요없을듯 -->
 	<delete id="setCampFileDelete" parameterType="Long">
 		DELETE CAMPFILES WHERE FILENUM=#{fileNum}
+	</delete>
+	
+	<!-- thumbnail -->
+	<!-- thumbnailDetail -->
+	<select id="getThumbnail" parameterType="CampDTO" resultType="ThumbnailDTO">
+		SELECT * FROM THUMBNAIL WHERE CAMPNUM=#{campNum}
+	</select>
+	
+	<!-- thumbnailAdd -->
+	<insert id="setThumbnailAdd" parameterType="ThumbnailDTO">
+		<selectKey keyProperty="fileNum" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO THUMBNAIL(FILENUM, CAMPNUM, FILENAME, ORINAME)
+		VALUES(#{fileNum}, #{campNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<!-- thumbnailDelete -->
+	<delete id="setThumbnailDelete" parameterType="Long">
+		DELETE THUMBNAIL WHERE FILENUM=#{fileNum}
 	</delete>
   
   </mapper>

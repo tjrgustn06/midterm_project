@@ -36,11 +36,11 @@ public class CampReviewController {
 	
 	@PostMapping("add")
 	public ModelAndView setReviewAdd(CampReviewDTO campReviewDTO, MultipartFile [] pics, HttpSession session) throws Exception {
-		System.out.println("check");
 		ModelAndView mv = new ModelAndView();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		campReviewDTO.setWriter(memberDTO.getId());
 		mv.addObject("result", campReviewService.setBoardAdd(campReviewDTO, pics, session));
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}

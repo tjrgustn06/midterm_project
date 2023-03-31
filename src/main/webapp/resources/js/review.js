@@ -77,7 +77,7 @@ getList(1);
 
 // 리뷰 등록
 $('#addReview').click(function(){
-    let reviewName=$(this).attr('data-review-name')
+    let reviewName=$(this).attr('data-review-name')+'';
     console.log(reviewName)
     let form=$('#reviewForm')[0];
     const form1= new FormData(form);
@@ -100,8 +100,8 @@ $('#addReview').click(function(){
                 alert('리뷰 등록 실패');
             }
         },
-        error : ()=>{
-            alert('리뷰 등록 실패. 관리자에게 문의하세요');
+        error : function(request,status,error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
     })
 })

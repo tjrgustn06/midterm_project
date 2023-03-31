@@ -11,7 +11,7 @@
   	SELECT * FROM(
   		SELECT ROWNUM R, CR.* FROM(
   			SELECT * FROM CAMPREVIEW
-  			
+  			WHERE CAMPNUM=#{num}
   			ORDER BY NUM DESC
   		) CR
   	) WHERE R BETWEEN #{startRow} AND #{lastRow}

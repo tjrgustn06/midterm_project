@@ -474,17 +474,63 @@
 
 
 				<c:if test="${viewType eq 4}">
-				<!-- 후기 영역 -->
-				<div class="campReview" id="campReview">
-					<!-- 캠핑/여행 후기 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
-						<!-- 후기 넣기 -->
-				</div>
-				</c:if>
+					<!-- 후기 영역 -->
+					<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
+						<form id="reviewForm" method="POST" enctype="multipart/form-data">
+							<input type="hidden" name="campNum" value="${dto.campNum}">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" >작성자</span>
+								</div>
+								<input type="text" name="writer" value="${member.id}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" >평점</span>
+								</div>
+								<div class="starRate" id="star">
+									<span class="star">★</span>
+									<span class="star">★</span>
+									<span class="star">★</span>
+									<span class="star">★</span>
+									<span class="star">★</span>
+								</div>
+								<input id="mark" type="hidden" name="mark">
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="gradeStock">내용</label>
+								</div>
+							</div>
+							<div class="input-group mb-3">
+								<textarea id="reviewContents" class="form-control" name="contents" style="height: 200px" placeholder="내용을 입력해주세요"></textarea>
+							</div>
+							<div id="picList">
+								<div class="row mb-2" id="addPicDiv">
+									<button type="button" id="addPic" class="col-2 offset-md-10 btn btn-primary">사진추가</button>
+								</div>
+							</div>
+							<div>
+								<button type="button" id="addReview" class="btn btn-outline-info" data-review-num="${dto.campNum}" data-review-name="camp">리뷰작성</button>
+							</div>
+						</form>
+					</div>
+					<div class="row col-6 mx-auto my-3">
+						<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
+						<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
+					</div>
+					<div class="row" id="reviewList">
 
+					</div>
+						<!-- 캠핑/여행 후기 -->
+						
+							<!-- 후기 넣기 -->
+				</c:if>
 			</div>
+
 		</div>
 	</div>
+
 
 
 
@@ -538,6 +584,11 @@
 
 
 <c:import url="../template/common_js.jsp"></c:import>
+<script src="../resources/js/review.js"></script>
+<script>
+	setParam('pics');
+	setMax(5);
+</script>
 <script src="../resources/js/camp/campCRUD.js"></script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 <script src="royal-master/js/gmaps.min.js"></script> -->

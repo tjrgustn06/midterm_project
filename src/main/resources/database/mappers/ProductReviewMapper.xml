@@ -25,6 +25,7 @@
   			SELECT ROWNUM R, PR.* FROM(
   				SELECT * FROM PRODUCTREVIEW
   				<!-- <include refid="searchCondition"></include> -->
+  				WHERE PRODUCTNUM=#{num}
   				ORDER BY NUM DESC
   			) PR
   		) WHERE R BETWEEN #{startRow} AND #{lastRow}

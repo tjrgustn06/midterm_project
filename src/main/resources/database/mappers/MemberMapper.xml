@@ -42,7 +42,7 @@
 
 <!-- Update -->
 <update id="setMemberUpdate" parameterType="MemberDTO">
-	UPDATE MEMBER SET NAME=#{name},PHONE=#{phone},EMAIL=#{email},ROLENAME=#{roleName}
+	UPDATE MEMBER SET NAME=#{name}, PHONE=#{phone}, EMAIL=#{email}, ROLENAME=#{roleName}
 	WHERE ID =#{id, jdbcType=VARCHAR}
 </update>
 
@@ -74,5 +74,16 @@
 	UPDATE MEMBER SET PW=#{pw} WHERE ID=#{id}
 </update>
 
+<!-- 카카오 정보 찾기  -->
+<select id="findKakao" parameterType="java.util.HashMap" resultType="KakaoDTO">
+	SELECT * FROM KAKAO 
+	WHERE KAKAONAME =#{kakaoName} AND KAKAOEMAIL=#{kakaoEmail}  
+</select>
+
+<!-- 정보 저장  -->
+<insert id="KakaoLogin" parameterType="java.util.HashMap" >
+	INSERT INTO KAKAO(kakaoName, kakaoEmail)
+	VALUES(#{kakaoName}, #{kakaoEmail})
+</insert>
 
 </mapper>

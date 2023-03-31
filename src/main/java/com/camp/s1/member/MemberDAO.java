@@ -2,8 +2,11 @@ package com.camp.s1.member;
 
 
 
+import java.util.HashMap;
+
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -57,18 +60,19 @@ public class MemberDAO {
 	
 	//Email 발송
 	
-	public void send_mail(MemberDTO memberDTO, String div) throws Exception {
+	public void sendMail(MemberDTO memberDTO, String div) throws Exception {
 		// Mail Server 설정
+		System.out.println("check");
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "tjrgustn06@naver.com";
-		String hostSMTPpwd = "";
+		String hostSMTPid = "tjrgustn06@naver.com"; // 아이디
+		String hostSMTPpwd = ""; //비밀번호
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "tjrgustn06@naver.com";
+		String fromEmail = "tjrgustn06@naver.com"; //보내는사람 아이디
 		String fromName = "Spring Homepage";
-		String subject = "";
-		String msg = "";
+		String subject = ""; //제목
+		String msg = ""; //내용(본문)
 		
 		if(div.equals("findPw")) {
 			subject = "Spring Homepage 임시 비밀번호 입니다.";
@@ -82,12 +86,13 @@ public class MemberDAO {
 		// 받는 사람 E-Mail 주소
 				String mail = memberDTO.getEmail();
 				try {
+					System.out.println("check");
 					HtmlEmail email = new HtmlEmail();
 					email.setDebug(true);
 					email.setCharset(charSet);
 					email.setSSL(true);
 					email.setHostName(hostSMTP);
-					email.setSmtpPort(496);
+					email.setSmtpPort(465);
 
 					email.setAuthentication(hostSMTPid, hostSMTPpwd);
 					email.setTLS(true);
@@ -107,5 +112,14 @@ public class MemberDAO {
 			return sqlSession.update(NAMESPACE+"setMemberPwChange", memberDTO);
 		}
 	
+		//카카오 로그인
+		public void KakaoLogin(HashMap<String, Object> userInfo) {
+				sqlSession.insert(NAMESPACE+"KakaoLogin", userInfo);
+		}
 
+		public KakaoDTO findKakao(HashMap<String, Object> userInfo) {
+			System.out.println("RN:"+userInfo.get("nickname"));
+			System.out.println("RE:"+userInfo.get("email"));
+			return sqlSession.selectOne(NAMESPACE+"findKakao", userInfo);
+		}
 }

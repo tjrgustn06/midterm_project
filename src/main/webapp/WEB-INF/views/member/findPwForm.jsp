@@ -44,6 +44,7 @@
 				},
 				success : function(result) {
 					alert("email로 임시비밀번호 발송하였습니다");
+				
 				},
 			})
 		});

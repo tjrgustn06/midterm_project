@@ -1,12 +1,21 @@
 package com.camp.s1.member;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +24,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+
+
+
 
 @Controller
 @RequestMapping("/member/*")
@@ -147,25 +167,34 @@ public class MemberController {
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
 		
-		
 		String msg="수정 실패";
 		
 		if(result>0) {
 			msg="수정이 완료되었습니다";
 		}
-	
-		mv.setViewName("redirect:./memberPage");
+		
+		
+		mv.addObject("result", msg);
+		mv.setViewName("common/result");
 		
 		return mv;
 	}
 	
 	//Delete
 	@PostMapping("memberDelete")
-	public ModelAndView setMemberDelete(MemberDTO memberDTO)throws Exception{
+	public ModelAndView setMemberDelete(AddressDTO addressDTO, MemberDTO memberDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		mv.addObject("result",memberService.setMemberDelete(memberDTO));
-		mv.setViewName("common/ajaxResult");
+		int result = memberService.setMemberDelete(addressDTO, memberDTO);
+		
+		String msg="삭제에 실패했습니다";
+		
+		if(result>0) {
+			msg="삭제에 성공하였습니다";
+		}
+		
+		mv.addObject("result", msg);
+		mv.setViewName("common/result");
 		return mv;
 	}
 	
@@ -223,7 +252,8 @@ public class MemberController {
 		//Pw변경
 		@PostMapping("memberPwChange")
 		public ModelAndView setMemberPwChange(MemberDTO memberDTO, String oldPw, HttpSession session,
-				HttpServletResponse response)throws Exception{
+			HttpServletResponse response)throws Exception{
+			
 			ModelAndView mv = new ModelAndView();
 			
 			int result = memberService.setMemberPwChange(memberDTO, oldPw, response);
@@ -241,5 +271,20 @@ public class MemberController {
 			return mv;
 			
 		}
+		
+		//카카오 간편 로그인
+	    @GetMapping("memberLogin")
+	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+	    	System.out.println("#########" + code);
+	    	String access_Token = memberService.getAccessToken(code);
+	    	KakaoDTO kakaoDTO = memberService.getUserInfo(access_Token);
+	        
+	    	System.out.println("###access_Token#### : " + access_Token);
+	    	System.out.println("###nickname#### : " + kakaoDTO.getKakoName());
+	    	System.out.println("###email#### : " + kakaoDTO.getKakoEmail());
+	    	return "member/memberLogin";
+	    }
+		
+		
 	
 }

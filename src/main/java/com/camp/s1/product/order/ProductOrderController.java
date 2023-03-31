@@ -50,10 +50,14 @@ public class ProductOrderController {
 		MemberDTO memberDTO=(MemberDTO)session.getAttribute("member");
 		productOrderDTO.setId(memberDTO.getId());
 		int result = productOrderService.setProductOrderAdd(productOrderDTO);
+		String msg = "주문 실패";
+		if(result>0) {
+			msg = "주문 성공";
+		}
+		mv.addObject("result", msg);
+		mv.addObject("url", "../product/list");
+		mv.setViewName("common/result");
 		
-		mv.addObject("result", result);
-		
-		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	
@@ -64,8 +68,8 @@ public class ProductOrderController {
 		MemberDTO memberDTO=(MemberDTO)session.getAttribute("member");
 		productOrderDTO.setId(memberDTO.getId());
 		int result = productOrderService.setCartOrderAdd(productOrderDTO);
-		
 		mv.addObject("result", result);
+		
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}

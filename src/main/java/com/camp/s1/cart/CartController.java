@@ -1,5 +1,7 @@
 package com.camp.s1.cart;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.s1.member.MemberDTO;
+import com.camp.s1.product.ProductGradeDTO;
 
 @Controller
 @RequestMapping("/cart/*")
@@ -43,11 +46,19 @@ public class CartController {
 	}
 	
 	@PostMapping("stockUpdate")
-	public ModelAndView setStockUpdate(Long [] gradeNum, Integer [] amount) throws Exception {
+	public ModelAndView setStockUpdate(Long [] gradeNum, Integer [] amount, Long [] cartNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		for(Long gradeNums:gradeNum) {
-			System.out.println(gradeNums);
+		ArrayList<CartDTO> cartDTOs = new ArrayList<CartDTO>();
+		for(int i=0;i<gradeNum.length;i++) {
+			CartDTO cartDTO = new CartDTO();
+			cartDTO.setGradeNum(gradeNum[i]);
+			cartDTO.setAmount(amount[i]);
+			cartDTO.setCartNum(cartNum[i]);
+			cartDTOs.add(cartDTO);
 		}
+		int result = cartService.setStockUpdate(cartDTOs);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

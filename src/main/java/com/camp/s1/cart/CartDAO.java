@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.camp.s1.product.ProductGradeDTO;
+
 @Repository
 public class CartDAO {
 	
@@ -24,6 +26,14 @@ public class CartDAO {
 	
 	public int setCartDelete(CartDTO cartDTO) throws Exception {
 		return sqlSession.delete(NAMESPACE+"setCartDelete", cartDTO);
+	}
+	
+	public ProductGradeDTO getGradeStock(ProductGradeDTO productGradeDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getGradeStock", productGradeDTO);
+	}
+	
+	public int setGradeStockUpdate(ProductGradeDTO productGradeDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setGradeStockUpdate", productGradeDTO);
 	}
 
 }

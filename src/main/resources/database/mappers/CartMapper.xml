@@ -25,4 +25,17 @@
 	  	DELETE CART WHERE CARTNUM=#{cartNum}
 	  </delete>
 	  
+	  <!-- 수량 변경을 위한 gradeStock 출력 -->
+	  <select id="getGradeStock" parameterType="ProductGradeDTO" resultType="ProductGradeDTO">
+	  	SELECT * FROM PRODUCTGRADE
+	  	WHERE GRADENUM = #{gradeNum}
+	  </select>
+	  
+	  <!-- 수량변경 -->
+	  <update id="setGradeStockUpdate" parameterType="ProductGradeDTO">
+	  	UPDATE PRODUCTGRADE SET GRADESTOCK=#{gradeStock}
+	  	WHERE GRADENUM = #{gradeNum}
+	  </update>
+	  
+	  
   </mapper>

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camp.s1.product.ProductGradeDTO;
+
 @Service
 public class CartService {
 	
@@ -26,6 +28,20 @@ public class CartService {
 	
 	public int setCartDelete(CartDTO cartDTO) throws Exception {
 		return cartDAO.setCartDelete(cartDTO);
+	}
+	
+	public int setStockUpdate(List<CartDTO> cartDTOs) throws Exception {
+		int result = 0;
+		for(CartDTO cartDTO:cartDTOs) {
+			ProductGradeDTO productGradeDTO = new ProductGradeDTO();
+			productGradeDTO.setGradeNum(cartDTO.getGradeNum());
+			productGradeDTO=cartDAO.getGradeStock(productGradeDTO);
+			productGradeDTO.setGradeStock(productGradeDTO.getGradeStock()-cartDTO.getAmount());
+			result = cartDAO.setGradeStockUpdate(productGradeDTO);
+			result = cartDAO.setCartDelete(cartDTO);
+		}
+		
+		return result;
 	}
 
 }

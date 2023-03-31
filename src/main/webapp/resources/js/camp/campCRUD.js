@@ -14,7 +14,15 @@ function setSiteMax(m){
     siteMax=m;
 }
 
+// 리뷰작성창 출력
+$('#reviewAdd').click(function(){
+    $('#review').slideDown("slow")
+})
 
+// 리뷰작성창 해제
+$('#reviewCancle').click(function(){
+    $('#review').slideUp("slow")
+})
 
 //add.jsp
 //캠핑장 글 등록 취소 버튼 - add.jsp

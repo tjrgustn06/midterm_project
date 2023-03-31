@@ -76,30 +76,32 @@ $('.deleteCheck').click(function(){
 getList(1);
 
 // 리뷰 등록
-$('#addReview').click(()=>{
+$('#addReview').click(function(){
+    let reviewName=$(this).attr('data-review-name')
+    console.log(reviewName)
     let form=$('#reviewForm')[0];
     const form1= new FormData(form);
     $.ajax({
         type : 'POST',
-        url : '/product/review/add',
+        url : '/'+reviewName+'/review/add',
         processData : false,
         contentType : false,
         data : form1,
         success : function(response){
             if(response.trim()>0) {
-                alert('리뷰가 등록되었습니다')
-                $('#addPicDiv').prevAll().remove()
+                alert('리뷰가 등록되었습니다');
+                $('#addPicDiv').prevAll().remove();
                 count=0;
                 idx=0;
                 $('#reviewContents').val('');
                 getList(1);
             }
             else {
-                alert('리뷰 등록 실패')
+                alert('리뷰 등록 실패');
             }
         },
         error : ()=>{
-            alert('댓글 등록 실패. 관리자에게 문의하세요');
+            alert('리뷰 등록 실패. 관리자에게 문의하세요');
         }
     })
 })
@@ -214,7 +216,7 @@ $('#reviewList').on('click','.reviewUpdate', function (){
                 alert('리뷰가 수정되었습니다');
                 getList(page);
             } else {
-                alert('댓글 수정 실패, 관리자에게 문의하세요')
+                alert('리뷰 수정 실패, 관리자에게 문의하세요')
             }
         }
     })

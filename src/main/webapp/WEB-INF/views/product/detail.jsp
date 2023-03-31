@@ -123,7 +123,7 @@
 					<p>${dto.contents}</p>
 				</div>
 			</div>
-			<div class="row col-5 mx-auto my-3" id="review" style="display: none;" data-review-name="${reviewName}">
+			<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
 				<form id="reviewForm" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="productNum" value="${dto.productNum}">
 					<div class="input-group mb-3">
@@ -134,18 +134,16 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-						<span class="input-group-text" >평점</span>
+							<span class="input-group-text" >평점</span>
 						</div>
-						
-							<div class="starRate" id="star">
-								<span class="star">★</span>
-								<span class="star">★</span>
-								<span class="star">★</span>
-								<span class="star">★</span>
-								<span class="star">★</span>
-							</div>
-							<input id="mark" type="hidden" name="mark">
-						
+						<div class="starRate" id="star">
+							<span class="star">★</span>
+							<span class="star">★</span>
+							<span class="star">★</span>
+							<span class="star">★</span>
+							<span class="star">★</span>
+						</div>
+						<input id="mark" type="hidden" name="mark">
 					</div>			
 					<div class="input-group">
 						<div class="input-group-prepend">
@@ -167,7 +165,7 @@
 						</div>
 					</div>
 					<div>
-						<button type="button" id="addReview" class="btn btn-outline-info" data-review-num="${dto.productNum}">리뷰작성</button>
+						<button type="button" id="addReview" class="btn btn-outline-info" data-review-num="${dto.productNum}" data-review-name="product">리뷰작성</button>
 					</div>
 				</form>
 			</div>

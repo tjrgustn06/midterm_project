@@ -45,7 +45,7 @@
 									</div>
 									<div id="">
 										<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
-											<img style="width: 30%; height: 30%;" alt="" src="../resources/upload/product/review/${fileDTO.fileName}">
+											<img style="width: 30%; height: 30%;" alt="" src="../resources/upload/${reviewName}/review/${fileDTO.fileName}">
 										</c:forEach>
 									</div>
 								

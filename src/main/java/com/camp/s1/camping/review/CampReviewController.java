@@ -1,6 +1,4 @@
-package com.camp.s1.product.review;
-
-import java.util.List;
+package com.camp.s1.camping.review;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,59 +11,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.camp.s1.board.BbsDTO;
 import com.camp.s1.member.MemberDTO;
 import com.camp.s1.util.Pager;
 
 @Controller
-@RequestMapping("/product/review/*")
-public class ProductReviewController {
+@RequestMapping("/camp/review/*")
+public class CampReviewController {
 	
 	@Autowired
-	private ProductReviewService productReviewService;
+	private CampReviewService campReviewService;
 	
 	@ModelAttribute("reviewName")
 	public String getReviewName() {
-		return "product";
+		return "camp";
 	}
 	
 	@GetMapping("list")
 	public ModelAndView getReviewList(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("reviewList", productReviewService.getBoardList(pager));
+		mv.addObject("reviewList", campReviewService.getBoardList(pager));
 		mv.setViewName("common/reviewList");
 		return mv;
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setReviewAdd(ProductReviewDTO productReviewDTO, MultipartFile [] pics, HttpSession session) throws Exception {
+	public ModelAndView setReviewAdd(CampReviewDTO campReviewDTO, MultipartFile [] pics, HttpSession session) throws Exception {
+		System.out.println("check");
 		ModelAndView mv = new ModelAndView();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		productReviewDTO.setWriter(memberDTO.getId());
-		mv.addObject("result", productReviewService.setBoardAdd(productReviewDTO, pics, session));
-		mv.setViewName("common/ajaxResult");
+		campReviewDTO.setWriter(memberDTO.getId());
+		mv.addObject("result", campReviewService.setBoardAdd(campReviewDTO, pics, session));
 		
 		return mv;
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setReviewUpdate(ProductReviewDTO productReviewDTO) throws Exception {
+	public ModelAndView setReviewUpdate(CampReviewDTO campReviewDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = productReviewService.setBoardUpdate(productReviewDTO);
+		int result = campReviewService.setBoardUpdate(campReviewDTO);
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	
 	@PostMapping("delete")
-	public ModelAndView setReviewDelete(ProductReviewDTO productReviewDTO, HttpSession session) throws Exception {
+	public ModelAndView setReviewDelete(CampReviewDTO campReviewDTO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = productReviewService.setBoardDelete(productReviewDTO, session);
-		
+		int result = campReviewService.setBoardDelete(campReviewDTO, session);
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
 		return mv;
+		
 	}
-	
-	
+
 }

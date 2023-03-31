@@ -86,11 +86,15 @@ public class CampService {
 		//캠프장 하나 추가
 		int result = campDAO.setCampAdd(campDTO);
 		
-		//캠프사이트 추가
-		for(CampSiteDTO campSiteDTO : campDTO.getCampSiteDTOs()) {
-			campSiteDTO.setCampNum(campDTO.getCampNum());
-			result = campDAO.setCampSiteAdd(campSiteDTO);
-		}
+		//캠프사이트 추가 - campSiteDTO의 데이터가 null이 아닌 경우에만
+			for(CampSiteDTO campSiteDTO : campDTO.getCampSiteDTOs()) {
+				if(campSiteDTO.getOffWeekdaysPrice()!=null) {
+					campSiteDTO.setCampNum(campDTO.getCampNum());
+					result = campDAO.setCampSiteAdd(campSiteDTO);
+				}else {
+					continue;
+				}
+			}		
 		
 		//파일 추가
 		//1.HDD에 file 저장('어디'에 '무슨'이름으로)
@@ -99,6 +103,7 @@ public class CampService {
 		
 		//반복저장
 		for(MultipartFile multipartFile : files) {
+			//파일이 비어있으면 continue실행. 해당 index를 건너뛰고 다음 index 반복문 시행
 			if(multipartFile.isEmpty()) {
 				continue;
 			}

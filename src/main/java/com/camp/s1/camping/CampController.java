@@ -112,22 +112,24 @@ public class CampController {
 			}
 		}
 		
-		//site 추가
-		List<CampSiteDTO> ar = new ArrayList<CampSiteDTO>();
-		for(int i=0; i<length; i++) {
-			//새 옵션 반복문마다 만들어줌
-			CampSiteDTO campSiteDTO = new CampSiteDTO();
-			campSiteDTO.setSiteName(siteName[i]);
-			campSiteDTO.setSiteSize(siteSize[i]);
-			campSiteDTO.setOffWeekdaysPrice(offWeekdaysPrice[i]);
-			campSiteDTO.setOffWeekendsPrice(offWeekendsPrice[i]);
-			campSiteDTO.setPeakWeekdaysPrice(peakWeekdaysPrice[i]);
-			campSiteDTO.setPeakWeekendsPrice(peakWeekendsPrice[i]);
-			//마지막에 List에 만든 옵션 하나 넣기
-			ar.add(campSiteDTO);
+		//site 추가(데이터로 받은 배열의 길이가 0보다 큰경우에만)
+		if(length>0) {
+			List<CampSiteDTO> ar = new ArrayList<CampSiteDTO>();
+			for(int i=0; i<length; i++) { //siteName의 길이값을 받아서 반복횟수결정
+				//새 옵션 반복문마다 만들어줌
+				CampSiteDTO campSiteDTO = new CampSiteDTO();
+				campSiteDTO.setSiteName(siteName[i]);
+				campSiteDTO.setSiteSize(siteSize[i]);
+				campSiteDTO.setOffWeekdaysPrice(offWeekdaysPrice[i]);
+				campSiteDTO.setOffWeekendsPrice(offWeekendsPrice[i]);
+				campSiteDTO.setPeakWeekdaysPrice(peakWeekdaysPrice[i]);
+				campSiteDTO.setPeakWeekendsPrice(peakWeekendsPrice[i]);
+				//마지막에 List에 만든 옵션 하나 넣기
+				ar.add(campSiteDTO);
+			}
+			//만든 siteList CampDTO에 저장
+			campDTO.setCampSiteDTOs(ar);
 		}
-		//만든 siteList CampDTO에 저장
-		campDTO.setCampSiteDTOs(ar);
 		
 		int result = campService.setCampAdd(campDTO, files, session);
 		logger.info("param: "+params);

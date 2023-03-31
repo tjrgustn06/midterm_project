@@ -28,12 +28,15 @@
 		<typeAlias type="com.camp.s1.board.CommentDTO" alias="CommentDTO"/>
 		
 		<typeAlias type="com.camp.s1.member.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="com.camp.s1.member.KakaoDTO" alias="KakaoDTO"/>
 		
 		<typeAlias type="com.camp.s1.member.AddressDTO" alias="AddressDTO"/>
 		
 		<typeAlias type="com.camp.s1.camping.CampDTO" alias="CampDTO"/>
 		<typeAlias type="com.camp.s1.camping.CampFileDTO" alias="CampFileDTO"/>
 		<typeAlias type="com.camp.s1.camping.CampSiteDTO" alias="CampSiteDTO"/>
+		<typeAlias type="com.camp.s1.camping.ThumbnailDTO" alias="ThumbnailDTO"/>
+		<typeAlias type="com.camp.s1.camping.review.CampReviewDTO" alias="CampReviewDTO"/>
 		
 		
 		<typeAlias type="java.lang.Long" alias="Long"/>

@@ -68,33 +68,47 @@ let areaSelect = function(target){
             });
 
             //이벤트 위임 - 값의 변경
-            //대분류에 이벤트 걸기
+            //권역박스에 이벤트 걸기
             $(a1).on("change", function(){
                 init($(this), false);
                 let Region = $(this).val();
-                let keys = Object.keys(area[Region]);
-                keys.forEach(function(doName){
-                    a2.append("<option value="+doName+">"+doName+"</option>");    
+                try{
+                    let keys = Object.keys(area[Region]);
+                    keys.forEach(function(doName){
+                        a2.append("<option value="+doName+">"+doName+"</option>");    
                 });
+                }catch(e){
+                     $('#addressInput').val('');
+                    $('#addressInput').prop('style', 'background-color:bisque;');
+                    $('#addressInput').prop('readonly', true);
+                    $('#addressInput').prop('placeholder', '권역/시도/시군구를 먼저 선택하세요');
+                }
             });
 
-            //중분류에 이벤트 걸기
+            //시/도박스에 이벤트 걸기
             $(a2).on("change", function(){
-                a3.empty().append("<option value=''>시/군/구</option>");
+                a3.empty().append("<option value='0'>시/군/구</option>");
                 let Region = a1.val();
                 let doName = $(this).val();
-                let keys = Object.keys(area[Region][doName]);
-                keys.forEach(function(siGunGuName){
-                    a3.append("<option value="+area[Region][doName][siGunGuName]+">"+area[Region][doName][siGunGuName]+"</option>");    
-                });
+                try{
+                    let keys = Object.keys(area[Region][doName]);
+                    keys.forEach(function(siGunGuName){
+                        a3.append("<option value="+area[Region][doName][siGunGuName]+">"+area[Region][doName][siGunGuName]+"</option>");    
+                    });
+                }catch(e){
+                    $('#addressInput').val('');
+                    $('#addressInput').prop('style', 'background-color:bisque;');
+                    $('#addressInput').prop('readonly', true);
+                    $('#addressInput').prop('placeholder', '권역/시도/시군구를 먼저 선택하세요');
+                }
             });
         })(i);        
 
         function init(t, first){
             //first면 '? ~ :' 영역, false면 ': ~ ;' 영역 실행
-            first ? t.empty().append("<option value=''>권역선택</option>") : "";
-            t.next().empty().append("<option value=''>시/도</option>");
-            t.next().next().empty().append("<option value=''>시/군/구</option>");
+            first ? t.empty().append("<option value='0'>권역선택</option>") : "";
+            t.next().empty().append("<option value='0'>시/도</option>");
+            t.next().next().empty().append("<option value='0'>시/군/구</option>");
         }
     }
 }

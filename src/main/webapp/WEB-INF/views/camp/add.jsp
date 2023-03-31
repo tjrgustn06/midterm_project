@@ -119,7 +119,7 @@
 					<tbody>
 						<!-- 셀렉트박스로 권역 / 도 / 시군구 구분 -->
 						<tr>
-							<th scope="col my-auto">권역 / 도 / 시군구 선택</th>
+							<th scope="col my-auto">권역/시도/시군구 선택</th>
 							<td>
 								<select name="regionName" id="addressRegion"></select>
 								<select name="doName" id="addressDo"></select>
@@ -135,7 +135,7 @@
 						</tr> -->
 						<tr>
 							<th scope="col my-auto">주소</th>
-							<td><input type="text" name="address" class="form-control" placeholder="나머지 주소를 입력하세요"></td>
+							<td><input type="text" name="address" id="addressInput" class="form-control" placeholder="권역/시도/시군구를 먼저 선택하세요" style="background-color: bisque;" readonly></td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">문의처</th>
@@ -331,7 +331,7 @@
 						<!-- 요금구분 -->
 						<div class="row addSite">
 							<div class="col-10">
-								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트별 요금 안내</h5>
+								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 추가</h5>
 							</div>
 							<div class="col-2">
 								<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
@@ -341,27 +341,27 @@
 						<!-- siteDTO 입력부 추가될 부분 -->
 						<div class="row my-2" id="siteList">
 							<!-- siteDTO - 버튼 누르면 생성될 부분 -->
-							<div id="siteOne">
+							<div id="siteOne1">
 								<div class="input-group mb-2">
 									<span class="input-group-text" id="siteName">사이트이름</span>
-									<input type="text" name="siteName" class="form-control" placeholder="ex)일반A1, 카라반A1">
+									<input type="text" name="siteName" data-site-idx="siteName1" class="form-control" placeholder="ex)일반A1, 카라반A1">
 									<span class="input-group-text" id="siteSize">크기(m^2)</span>
-									<input type="text" name="siteSize" class="form-control" placeholder="ex)6*11, 10*10">
+									<input type="text" name="siteSize" data-site-idx="siteSize1" class="form-control" placeholder="ex)6*11, 10*10">
 								</div>
 								<div class="input-group mb-2">
 									<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
-									<input type="text" name="offWeekdaysPrice" class="form-control" placeholder="요금 입력">
+									<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice1" class="form-control" placeholder="요금 입력">
 									<span class="input-group-text" id="offWeekendsPrice">주말</span>
-									<input type="text" name="offWeekendsPrice" class="form-control" placeholder="요금 입력">
+									<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice1" class="form-control" placeholder="요금 입력">
 								</div>
 								<div class="input-group mb-2">
 									<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
-									<input type="text" name="peakWeekdaysPrice" class="form-control" placeholder="요금 입력">
+									<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice1" class="form-control" placeholder="요금 입력">
 									<span class="input-group-text" id="peakWeekendsPrice">주말</span>
-									<input type="text" name="peakWeekendsPrice" class="form-control" placeholder="요금 입력">
+									<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice1" class="form-control" placeholder="요금 입력">
 								</div>
 								<div class="mb-2">
-									<button type="button" class="siteDels btn btn-outline-danger">입력창 삭제</button>
+									<button type="button" data-site-idx="siteIptDel1" class="siteDels btn btn-outline-danger">입력창 삭제</button>
 								</div>
 							</div>
 							<!-- 생성 끝날 부분 -->
@@ -443,7 +443,8 @@
 	setMax(10);
 	setParam('files');
 	setCount(1);
-
+</script>
+<script>
 	setSiteCount(1);
 	setSiteMax(5);
 </script>

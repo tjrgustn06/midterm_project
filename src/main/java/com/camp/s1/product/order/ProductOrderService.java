@@ -34,12 +34,26 @@ public class ProductOrderService {
 		return result;
 	}
 	
+	// cartOrder 장바구니 주문
+	public int setCartOrderAdd(ProductOrderDTO productOrderDTO) throws Exception {
+		productOrderDTO.setOrderNum(productOrderDAO.getOrderNumber());
+		int result = productOrderDAO.setOrderNumber(productOrderDTO);
+		productOrderDTO.setAddress("");
+		result = productOrderDAO.setProductOrderAdd(productOrderDTO);
+		return result;
+	}
+	
 	// Order List 출력
 	public List<ProductOrderDTO> getProductOrderList(Pager pager) throws Exception {
 		pager.setPerPage(10L);
 		pager.makeRow();
 		pager.makeNum(productOrderDAO.getTotalCount(pager));
-		return productOrderDAO.getProductOrderList(pager);
+		List<ProductOrderDTO> ar = productOrderDAO.getProductOrderList(pager);
+		for(ProductOrderDTO productOrderDTO:ar) {
+			productOrderDTO.setStartDate(productOrderDTO.getStartDate().substring(0, 10));
+			productOrderDTO.setLastDate(productOrderDTO.getLastDate().substring(0, 10));
+		}
+		return ar;
 		
 		
 	}

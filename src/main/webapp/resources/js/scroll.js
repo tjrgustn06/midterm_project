@@ -4,6 +4,11 @@ let oneTime = false;
 
 let lastScroll = 0;
 
+function setCurrentPage(c) {
+    currentPage = c;
+}
+
+
 $(document).scroll(function(){
 
     //현재 높이 저장
@@ -21,7 +26,7 @@ $(document).scroll(function(){
 
         if(maxHeight <= nowHeight + 100) {
             console.log("스크롤 이벤트")
-
+            currentPage++;
             getList(currentPage);
 
         lastScroll = currentScorll;
@@ -29,7 +34,6 @@ $(document).scroll(function(){
     }
 })
 
-getList(currentPage);
 
 
 

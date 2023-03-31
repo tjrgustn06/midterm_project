@@ -38,8 +38,7 @@ public class StoryDAO implements BoardDAO {
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE + "setBoardAdd", bbsDTO);
 	}
 
 	@Override
@@ -56,14 +55,12 @@ public class StoryDAO implements BoardDAO {
 
 	@Override
 	public int setBoardFileAdd(BoardFileDTO boardFileDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE + "setBoardFileAdd", boardFileDTO);
 	}
 
 	@Override
 	public List<BoardFileDTO> getBoardFileList(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(NAMESPACE + "getBoardFileList", bbsDTO);
 	}
 
 	@Override

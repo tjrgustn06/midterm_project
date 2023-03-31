@@ -10,7 +10,7 @@
   	SELECT COUNT(NUM) FROM STORY
   </select>
   
-  <select id="getBoardList" parameterType="Pager" resultType="StoryDTO">
+  <select id="getBoardList" parameterType="Pager" resultMap="storyDetailResult">
   		SELECT * FROM	
 	  		(
 		  	SELECT ROWNUM R, S.* FROM
@@ -22,5 +22,39 @@
 	  	WHERE R BETWEEN #{startRow} AND #{lastRow}
 	  	
   </select>
+  
+  <select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+  	SELECT * FROM STORYFILES
+  	WHERE NUM = #{num}
+  </select>
+  
+  <resultMap type="StoryDTO" id="storyDetailResult">
+  	<id property="num" column="NUM"/>
+  	<result property="writer" column="WRITER"/>
+  	<result property="title" column="TITLE"/>
+  	<result property="contents" column="CONTENTS"/>
+  	<result property="regDate" column="REGDATE"/>
+  	<result property="hit" column="HIT"/>
+  	<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  		<id property="fileNum" column="FILENUM"/>
+  		<result property="fileName" column="FILENAME"/>
+  		<result property="oriName" column="ORINAME"/>
+  	</collection>
+  </resultMap>
+  
+  <!-- Add Query -->
+  
+  <insert id="setBoardAdd" parameterType="BbsDTO">
+  	<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+  		SELECT BOARDSEQ.NEXTVAL FROM DUAL
+  	</selectKey>
+  	INSERT INTO STORY (NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT)
+  	VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  </insert>
+  
+  <insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+  	INSERT INTO STORYFILES (FILENUM, NUM, FILENAME, ORINAME) 
+  	VALUES (BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+  </insert>
   
   </mapper>

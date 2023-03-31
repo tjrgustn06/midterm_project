@@ -90,7 +90,7 @@
 	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 	<script type="text/javascript" src="../resources/js/comment.js"></script>
 	<script>
-		// setBoardName('${boardName}');
+		setNum('${dto.num}');
 
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>

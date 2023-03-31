@@ -1,5 +1,6 @@
 package com.camp.s1.board.story;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,14 +32,50 @@ public class StoryService implements BoardService {
 		pager.makeNum(totalCount);
 		
 		pager.makeRow();
+		//글을 특정 갯수만큼 불러오고 싶은 경우 
+		// file테이블과 join하는 쿼리문을 쓰면 파일 갯수만큼 rownum이 늘어나서 의도한 글 갯수만큼 불러오지 못함
 		
-		return storyDAO.getBoardList(pager);
+		List<BbsDTO> bbsDTOs = storyDAO.getBoardList(pager);
+	
+		
+		//특정 갯수의 글들을 먼저 가져오고 그다음 반복문으로 각 dto에 파일리스트를 넣어줌	
+		for (BbsDTO bbsDTO : bbsDTOs) {
+			//StoryDTO의 멤버변수 접근을 위해 형변환  
+			//참조변수간에는 형변환을 해도 주소값은 그대로이다
+			 StoryDTO dto = (StoryDTO)bbsDTO;
+
+			 dto.setBoardFileDTOs(storyDAO.getBoardFileList(dto));	 
+			 	
+		}
+		
+		//주소값은 그대로이므로 그대로 List<BbsDTO> 리턴
+		return bbsDTOs; 
 	}
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile[] files, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = storyDAO.setBoardAdd(bbsDTO);
+		
+		String realPath = session.getServletContext().getRealPath("resources/upload/story");
+		
+		System.out.println("RealPath : " + realPath);
+		
+		for (MultipartFile multipartFile : files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(multipartFile, realPath);
+			
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setNum(bbsDTO.getNum());
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			result = storyDAO.setBoardFileAdd(boardFileDTO);
+		}
+		
+		
+		return result;
 	}
 
 	@Override

@@ -32,6 +32,14 @@
 		</form>
 	</div>
 </div>
-
+	<div class="mb-3 form-check">
+<a href="./findIdForm" id="findId" class="btn btn-warning">아이디 찾기</a>
+<a href="./findPwForm" id="findPw" class="btn btn-dark">비밀번호 찾기</a>
+<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=a68e05dc27f7fb4288530cb001c55c40&redirect_uri=http://localhost:80&response_type=code">
+	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요 -->
+	<!-- 본인걸로 수정 시 띄어쓰기 절대 하지 마세요. 오류납니다. -->
+		<img src="/resources/icon/kakao_login_large_narrow.png" style="height:60px">
+	</a>
+</div>
 </body>
 </html>

@@ -46,7 +46,7 @@ $('#addressSigungu').change(function(){
         $('#addressInput').prop('style', 'background-color:white;');
         $('#addressInput').prop('readonly', false);
         $('#addressInput').prop('placeholder', '나머지 주소를 입력하세요');
-    }else if($('#addressRegion').val()==0 || $('#addressDo').val()==0){ //값이 공백이 아닌경우
+    }else if($('#addressSigungu').val()==0){ //값이 공백이 아닌경우
         //나머지 주소 입력창 닫힘
         $('#addressInput').val('');
         $('#addressInput').prop('style', 'background-color:bisque;');

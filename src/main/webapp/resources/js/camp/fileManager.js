@@ -66,7 +66,7 @@ $('.deleteCheck').click(function(){
 
     if(result){
         console.log("thisEvent: "+thisEvent);
-        let fileNum = $(this).val();
+        let fileNum = $(this).val(); 
 
         $.ajax({
             type:'POST',

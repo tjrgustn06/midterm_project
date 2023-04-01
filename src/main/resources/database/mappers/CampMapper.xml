@@ -77,9 +77,8 @@
   		<result column="MODIDATE" property="modiDate"/>
   		
   		<association property="thumbnailDTO" javaType="ThumbnailDTO">
-  			<id column="FILENUM" property="fileNum"/>
-  			<result column="FILENAME" property="fileName"/>
-  			<result column="ORINAME" property="oriName"/>
+  			<id column="THUMBNUM" property="thumbNum"/>
+  			<result column="THUMBNAME" property="thumbName"/>
   		</association>
   	</resultMap>
   	
@@ -88,15 +87,15 @@
   	<select id="getCampDetail" parameterType="CampDTO" resultMap="getCampDetailResult">
   		<!-- SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum} -->
   		SELECT * FROM CAMPINFO CI
-			LEFT OUTER JOIN
-			CAMPFILES CF
-			ON(CI.CAMPNUM=CF.CAMPNUM)
-			LEFT OUTER JOIN
+  			LEFT OUTER JOIN
 			CAMPSITE CS
 			ON(CI.CAMPNUM=CS.CAMPNUM)
 			LEFT OUTER JOIN
 			THUMBNAIL TH
 			ON(CI.CAMPNUM=TH.CAMPNUM)
+			LEFT OUTER JOIN
+			CAMPFILES CF
+			ON(CI.CAMPNUM=CF.CAMPNUM)		
 		WHERE CI.CAMPNUM=#{campNum}
   	</select>
   	<!-- detail-file/site 연결 -->
@@ -123,13 +122,7 @@
   		<result column="HOMEPAGE" property="homePage"/>
   		<result column="THUMBNAIL" property="thumbnail"/>
   		<result column="REGDATE" property="regDate"/>
-  		<result column="MODIDATE" property="modiDate"/>
-  		
-  		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">
-  			<id column="FILENUM" property="fileNum"/>
-  			<result column="FILENAME" property="fileName"/>
-  			<result column="ORINAME" property="oriName"/>
-  		</collection>
+  		<result column="MODIDATE" property="modiDate"/>	
   		
   		<collection property="campSiteDTOs" javaType="List" ofType="CampSiteDTO">
   			<id column="AREANUM" property="areaNum"/>
@@ -143,6 +136,11 @@
   		</collection>
   		
   		<collection property="thumbnailDTO" javaType="ThumbnailDTO">
+  			<id column="THUMBNUM" property="thumbNum"/>
+  			<result column="THUMBNAME" property="thumbName"/>
+  		</collection>
+  		
+  		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">
   			<id column="FILENUM" property="fileNum"/>
   			<result column="FILENAME" property="fileName"/>
   			<result column="ORINAME" property="oriName"/>
@@ -211,16 +209,16 @@
 	
 	<!-- thumbnailAdd -->
 	<insert id="setThumbnailAdd" parameterType="ThumbnailDTO">
-		<selectKey keyProperty="fileNum" order="BEFORE" resultType="Long">
+		<selectKey keyProperty="thumbNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO THUMBNAIL(FILENUM, CAMPNUM, FILENAME, ORINAME)
-		VALUES(#{fileNum}, #{campNum}, #{fileName}, #{oriName})
+		INSERT INTO THUMBNAIL(THUMBNUM, CAMPNUM, THUMBNAME)
+		VALUES(#{thumbNum}, #{campNum}, #{thumbName})
 	</insert>
 	
 	<!-- thumbnailDelete -->
 	<delete id="setThumbnailDelete" parameterType="Long">
-		DELETE THUMBNAIL WHERE FILENUM=#{fileNum}
+		DELETE THUMBNAIL WHERE THUMBNUM=#{thumbNum}
 	</delete>
   
   </mapper>

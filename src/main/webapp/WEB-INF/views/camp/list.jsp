@@ -92,27 +92,20 @@
 				<c:catch var="er">
 					<c:choose>
 						<c:when test="${not empty dto.thumbnailDTO}">
-							<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.fileName}">
+							<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
 						</c:when>
 						<c:otherwise>
-							<!-- <c:if test="${not empty dto.thumbnail}"> -->
-								<img alt="../resources/images/empty.jpg" src="${dto.thumbnail}">	
-							<!-- </c:if> -->
+							<c:choose>
+								<c:when test="${not empty dto.thumbnail}">
+									<img alt="" src="${dto.thumbnail}">
+								</c:when>
+								<c:otherwise>
+									<img alt="" src="../resources/images/empty.jpg">
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 				</c:catch>
-				
-				<!-- thumbnail에서 꺼내기 -->
-				<!-- <c:catch var="er">
-					<c:choose>
-						<c:when test="${not empty dto.thumbnail}">
-							<img alt="" src="${dto.thumbnail}">
-						</c:when>
-						<c:otherwise>
-							<img alt="" src="../resources/images/empty.jpg">
-						</c:otherwise>
-					</c:choose>
-				</c:catch> -->
 			</div>
 
 			<div class="row discription col-7">

@@ -70,6 +70,8 @@
 	<div class="row my-3">
 		<!-- 파라미터 넘어가는거 확인용 -->
 		--${param}--
+		--${dto.thumbnailDTO}--
+		--${dto.thumbnailDTO.thumbName}--
 		<h1>${dto.name}</h1>
 	</div>
 	
@@ -80,26 +82,19 @@
 		<div class="row pic my-3 mx-auto">
 			<c:choose>
 				<c:when test="${not empty dto.thumbnailDTO}">
-					<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.fileName}">
+					<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
 				</c:when>
 				<c:otherwise>
-					<c:if test="${not empty dto.thumbnail}">
-						<img alt="" src="${dto.thumbnail}">	
-					</c:if>
+					<c:choose>
+						<c:when test="${not empty dto.thumbnail}">
+							<img alt="" src="${dto.thumbnail}">
+						</c:when>
+						<c:otherwise>
+							<img alt="" src="../resources/images/empty.jpg">
+						</c:otherwise>
+					</c:choose>
 				</c:otherwise>
 			</c:choose>
-			
-			<%-- <c:if test="${not empty dto.thumbnailDTO}">
-				<!-- 파일이 보이게 -->
-				<c:if test="${pageScope.i.first}">
-					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-				</c:if>
-			</c:if>
-			<c:catch var="er">
-				<c:if test="${not empty dto.thumbnail}">
-					<img alt="" src="${dto.thumbnail}">
-				</c:if>
-			</c:catch> --%>
 		</div>
 		
 		<hr class="my-2">
@@ -407,7 +402,7 @@
 						<!-- <div class="row mb-3">
 							<c:if test="${not empty dto.campFileDTOs}">
 								<div class="facilityImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+									<img alt="" src="../resources/upload/camp/-">
 								</div>
 							</c:if>
 						</div> -->
@@ -525,71 +520,25 @@
 							</div>
 						</form>
 					</div>
+
 					<div class="row col-6 mx-auto my-3">
 						<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
 						<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
 					</div>
+
 					<div class="row" id="reviewList">
 
 					</div>
-						<!-- 캠핑/여행 후기 -->
 						
-							<!-- 후기 넣기 -->
-				</c:if>
-			</div>
 
+				</c:if> <!-- 후기 영역 끝 -->
+				
+
+			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- contents 내용 끝 -->
-	
-	
-	
-	<!-- 나머지사진 다보이게 -->
-	<!-- <div class="row col-7 mb-3">
-		<h3>나머지 사진 테스트</h3>
-		<c:if test="${not empty dto.campFileDTOs}">
-			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-			</c:forEach>
-		</c:if>
-	</div> -->
-	
-	
-	
-	<!-- file -->
-	<div>
-		<c:if test="${not empty dto.campFileDTOs}">
-			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<!-- 파일이 보이게 -->
-				<!-- <a href="../resources/upload/camp/${fileDTO.fileName}">${fileDTO.oriName}</a> -->
-				<!-- 파일다운추가되면 주소입력 -->
-				<!-- <a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a> -->
-			</c:forEach>
-		</c:if>
-	</div>
-	
+
 </div>
 
 

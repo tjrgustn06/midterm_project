@@ -135,17 +135,16 @@ public class CampService {
 		String savePath = "resources/upload/camp/thumbnail";
 		String thumbRealPath = session.getServletContext().getRealPath(savePath);
 		System.out.println("thumbFiles: "+thumbRealPath);
-		String fileName = fileManager.fileSave(thumbFile, thumbRealPath);
+		String thumbName = fileManager.fileSave(thumbFile, thumbRealPath);
 		
 		//2. DB에 저장
 		ThumbnailDTO thumbnailDTO = new ThumbnailDTO();
 		thumbnailDTO.setCampNum(campDTO.getCampNum());
-		thumbnailDTO.setFileName(fileName);
-		thumbnailDTO.setOriName(thumbFile.getOriginalFilename());
+		thumbnailDTO.setThumbName(thumbName);
 		
-		//3.CampDTO의 thumbnail 컬럼에 경로 저장(이걸 해야 list에서 사진이 보인다)
-		String thumbnail = "";
-		campDTO.setThumbnail(thumbnail);
+		//3.CampDTO의 thumbnail 컬럼에 경로 저장(일단 보류)
+//		String thumbnail = "";
+//		campDTO.setThumbnail(thumbnail);
 		
 		result = campDAO.setThumbnailAdd(thumbnailDTO);
 		//thumbFile end

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AddCamp - The Camping</title>
+<title>Add Camp - The Camping</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 	<style>
@@ -71,7 +71,7 @@
 	<div class="row my-3">
 		<!-- 파라미터 넘어가는거 확인용 -->
 		--${param}--
-		<h1>Camp Add Page</h1>
+		<h3>캠핑장 이름 등록</h3>
 		<input type="text" id="ChkName" name="name" class="form-control my-1" placeholder="캠핑장 이름을 입력하세요">
 	</div>
 	
@@ -92,24 +92,30 @@
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
 			<div class="row pic my-3 mx-auto">
-				<!-- 사진이 없는경우 empty.jpg 넣어주기 -->
+				<!-- 사진이 없는경우 empty.jpg 표시 -->
 				<h5><i class="fa-solid fa-camera fa-sm"></i> 대표 사진 등록</h5>
-				<div id="fileList" class="row">
+				<div id="thumbnailImage" class="row">
 					<div class="row mb-3">
-						<!-- <label for="thumbnail" class="form-label">대표 사진 등록</label> -->
 						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
 					</div>
-					
+				</div>
+
+				<!-- 원본 -->
+				<!-- <div id="fileList" class="row">
+					<div class="row mb-3">
+						<label for="thumbnail" class="form-label">대표 사진 등록</label>
+						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
+					</div>
 					<div class="row col-4 mb-3">
 						<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			
 			<hr class="my-2">
 			
 			<div class="row discription my-auto">
-			
+				<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 주요정보 등록</h5>
 				<table class="table">
 					<%-- <caption>캠핑장 기본정보입니다. 주소, 문의처, 캠핑장 유형, 찾아오시는길로 나뉘어 설명합니다.</caption> --%>
 					<colgroup>
@@ -126,13 +132,6 @@
 								<select name="sigunguName" id="addressSigungu"></select>
 							</td>
 						</tr>
-						<!-- <tr>
-							<th scope="col my-auto">도 / 시군구 선택</th>
-							<td>
-								<select name="doName" id="do"></select>
-								<select name="sigunguName" id="sigungu"></select>
-							</td>
-						</tr> -->
 						<tr>
 							<th scope="col my-auto">주소</th>
 							<td><input type="text" name="address" id="addressInput" class="form-control" placeholder="권역/시도/시군구를 먼저 선택하세요" style="background-color: bisque;" readonly></td>
@@ -170,21 +169,8 @@
 
 					<!-- 캠핑장소개 영역 -->
 					<div class="campIntro my-3" id="campIntro">
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개 내용</h5>
-						<!-- 이미지(파일) 추가 부분 -->
-						<div class="row">
-							<!-- <c:if test="${not empty dto.campFileDTOs}">
-								<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="i">
-									<c:if test="${i.index lt 3}">
-									<div class="introImage">
-										<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-									</div>
-									</c:if>
-								</c:forEach>
-							</c:if> -->
-						</div>
-						
-						<!-- <hr> -->
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개내용 등록</h5>
+						<!-- 이미지 3장 표시부분, 이미지는 아래쪽에서 추가 -->
 
 						<!-- 인트로 텍스트, 정보수정일 출력 -->
 						<input type="text" name="lineIntro" class="form-control mb-2" placeholder="캠핑장 한줄소개를 입력하세요">
@@ -196,7 +182,7 @@
 						<hr>
 						
 						<!-- 서비스 내용 입력 -->
-						<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 캠핑장 시설정보</h5>
+						<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 캠핑장 시설정보 등록</h5>
 						<div class="row mb-2">
 							<!-- checkbox value : 전기, 무선인터넷, 장작판매, 온수, 트렘폴린, 물놀이장, 놀이터, 산책로, 운동장, 운동시설, 마트.편의점 -->
 							<div class="col-4">
@@ -258,7 +244,7 @@
 
 
 						<!-- 기타 주요시설 출력 -->
-						<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 기타 주요시설</h5>
+						<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 기타 주요시설 등록</h5>
 						<section>
 							<div>
 								<table class="my-3">
@@ -292,46 +278,51 @@
 								</table>
 							</div>
 
-							<hr>
-
 							<!-- 경고 안내사항 -->
+							<!-- <hr>
 							<p class="campIntroTxt">
 								<span class="infoNotice">
 									&nbsp;* TheCamping에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span class="infoRed">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다.
 								</span> 
-							</p>
+							</p> -->
 						</section>
 
 						<hr>
 
-						<!-- 인트로 이미지 3장을 제외한 나머지 이미지 -->
-						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.name} 사진 추가</h5>
+						<!-- 이미지 추가 부분 / 인트로 이미지 3장을 제외한 나머지 이미지 표시 -->
+						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.name} 사진 등록</h5>
 						<div class="otherImage">
-							<p>사진 추가 기능 필요</p>
+							<!-- id=fileList인 부분에 js 작동 -->
+							<div id="fileList" class="row">					
+								<div class="row col-4 mb-3">
+									<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
+								</div>
+							</div>
 						</div>
 
 						<!-- 저작권 안내 -->
-						<div style="margin-top: 30px; margin-bottom: 30px;">
+						<!-- <div style="margin-top: 30px; margin-bottom: 30px;">
 							※ 모든 컨텐츠의 저작권은 TheCamping에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
-						</div>
+						</div> -->
 					</div> <!-- 캠핑장 소개 영역 종료 -->
 
+					<hr>
 
 					<!-- 이용안내 영역 -->
 					<div class="useInfo my-3" id="useInfo">
 						<!-- 이용안내 -->
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 이용안내사항</h5>
-							<!-- 입력 안하는경우 안내사항이 없다는 메시지 자동저장? -->
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 이용 안내사항 등록</h5>
+							<!-- 입력 안하는경우 안내사항이 없다는 메시지가 표시됩니다 -->
 							<div class="form-floating my-3">
 								<textarea id="useInfoText" name="useInfo" class="form-control" style="height:100px; resize:none;"></textarea>
-								<label for="useInfoText">캠핑장 이용 안내사항을 입력하세요</label>
+								<label for="useInfoText">입력하지 않는 경우 안내사항이 없다는 메시지가 표시됩니다.</label>
 							</div>
 						<hr>
 							
-						<!-- 요금구분 -->
+						<!-- 캠핑사이트 추가부분 -->
 						<div class="row addSite">
 							<div class="col-10">
-								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 추가</h5>
+								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 등록</h5>
 							</div>
 							<div class="col-2">
 								<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
@@ -340,7 +331,7 @@
 						
 						<!-- siteDTO 입력부 추가될 부분 -->
 						<div class="row my-2" id="siteList">
-							<!-- siteDTO - 버튼 누르면 생성될 부분 -->
+							<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
 							<div id="siteOne1">
 								<div class="input-group mb-2">
 									<span class="input-group-text" id="siteName">사이트이름</span>
@@ -366,33 +357,35 @@
 							</div>
 							<!-- 생성 끝날 부분 -->
 						</div>
+						
 						<hr>
 
-						<!-- 시설배치도 -->
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-							<!-- 임시로 막아놓고 나중에 추가해보기 ㅠㅠ -->
-							<!-- <div class="row mb-3">
+						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
+						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+							<div class="row mb-3">
 								<c:if test="${not empty dto.campFileDTOs}">
 									<div class="facilityImage">
-										<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+										<img alt="" src="../resources/upload/camp/-">
 									</div>
 								</c:if>
-							</div> -->
-						<hr>
+							</div>
+						<hr> -->
 					</div> <!-- 이용안내 영역 종료 -->
 
 
 					
 					<!-- 위치정보 영역 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 위치정보 입력</h5>
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 위치정보 등록</h5>
 					<div class="campMap" id="campMap">
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5>
-							<!-- 지도에서 검색해서 넣어주게끔 해야하나; -->
+						<p>*나중에 지도 정보 받아오는거 공부해서 추가하기</p>
+						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5> -->
+							<!-- 해당 캠핑장의 위치값 필요(경도, 위도 소수점 4~5자리까지 알아내야하는데 어떻게 하지?) -->
+							<!-- 나머지 정보는 CampDTO에 들어있어서 쓸 수 있음 -->
 					</div>
 
 
 					
-					<!-- 후기 영역 - productReview처럼 캠핑장 아래에 따로 나오게-->
+					<!-- 후기 영역: detail 페이지에서 바로 등록/수정/삭제가 가능하도록 -->
 					<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 후기 입력</h5>
 					<div class="campReview" id="campReview">
 						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
@@ -403,38 +396,10 @@
 			</div>
 		</div>
 	</form>
-
-
-
 	<!-- contents 내용 끝 -->
 	
-	
-	
-	<!-- 나머지사진 다보이게 -->
-	<!-- <div class="row col-7 mb-3">
-		<h3>나머지 사진 테스트</h3>
-		<c:if test="${not empty dto.campFileDTOs}">
-			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-			</c:forEach>
-		</c:if>
-	</div> -->
-	
-	
-	
-	<!-- file -->
-	<div>
-		<c:if test="${not empty dto.campFileDTOs}">
-			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<!-- 파일이 보이게 -->
-				<!-- <a href="../resources/upload/camp/${fileDTO.fileName}">${fileDTO.oriName}</a> -->
-				<!-- 파일다운추가되면 주소입력 -->
-				<!-- <a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a> -->
-			</c:forEach>
-		</c:if>
-	</div>
-	
 </div>
+
 
 <script src="../resources/js/camp/selectBox.js"></script>
 <script src="../resources/js/camp/campCRUD.js"></script>

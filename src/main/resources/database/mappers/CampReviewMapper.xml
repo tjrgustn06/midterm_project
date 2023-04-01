@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.camping.review.CampReviewDAO">
+  
+  <!-- List -->
+  <select id="getBoardList" parameterType="Pager" resultType="CampReviewDTO">
+  	SELECT * FROM(
+  		SELECT ROWNUM R, CR.* FROM(
+  			SELECT * FROM CAMPREVIEW
+  			WHERE CAMPNUM=#{num}
+  			ORDER BY NUM DESC
+  		) CR
+  	) WHERE R BETWEEN #{startRow} AND #{lastRow}
+  </select>
+  
+  <!-- 총개수 출력 -->
+  <select id="getTotalCount" parameterType="Pager" resultType="Long">
+  	SELECT COUNT(NUM) FROM CAMPREVIEW
+  </select>
+  
+  <!-- List에 file값을 넣기위한 쿼리 -->
+  <select id="getBoardDetail" parameterType="BbsDTO" resultMap="CampReviewFileResult">
+  	SELECT * FROM CAMPREVIEW
+  	LEFT JOIN
+  	CAMPREVIEWFILES
+  	USING(NUM)
+  	WHERE NUM=#{num}
+  </select>
+  
+  <resultMap type="CampReviewDTO" id="CampReviewFileResult">
+  	<id column="NUM" property="num"/>
+  		<result column="CAMPNUM" property="campNum"/>
+  		<result column="WRITER" property="writer"/>
+  		<result column="CONTENTS" property="contents"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MARK" property="mark"/>
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
+  	<!-- Add -->
+  	<insert id="setBoardAdd" parameterType="BbsDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO CAMPREVIEW (NUM, CAMPNUM, WRITER, CONTENTS, REGDATE, MARK)
+  		VALUES (#{num}, #{campNum},#{writer}, #{contents}, SYSDATE, #{mark})
+  	</insert>
+  	
+  	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+  		INSERT INTO CAMPREVIEWFILES (FILENUM, NUM, FILENAME, ORINAME)
+  		VALUES (CAMPSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+  	</insert>
+  	
+  	<!-- Update -->
+  	<update id="setBoardUpdate" parameterType="BbsDTO">
+  		UPDATE CAMPREVIEW SET CONTENTS=#{contents}, MARK=#{mark}
+  		WHERE NUM=#{num}
+  	</update>
+  	
+  	<!-- Delete -->
+  	<delete id="setBoardDelete" parameterType="BbsDTO">
+  		DELETE CAMPREVIEW WHERE NUM=#{num}
+  	</delete>
+  	
+  	<select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+  		SELECT * FROM CAMPREVIEWFILES
+  		WHERE NUM=#{num}
+  	</select>
+  
+  </mapper>

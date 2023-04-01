@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.cart.CartDAO">
+  
+	  <!-- list -->
+	  <select id="getCartList" resultType="CartDTO">
+	  	SELECT * FROM CART
+	  </select>
+	  
+	  <!-- add -->
+	  <insert id="setCartAdd" parameterType="CartDTO">
+	  	<selectKey keyProperty="cartNum" resultType="Long" order="BEFORE">
+	  		SELECT PRODUCTSEQ.NEXTVAL FROM DUAL
+	  	</selectKey>
+	  	INSERT INTO CART (CARTNUM, ID, GRADENUM, NAME, AMOUNT, PRICE, ORDERER, STARTDATE, LASTDATE, INDEXCODE)
+	  	VALUES (#{cartNum}, #{id}, #{gradeNum}, #{name}, #{amount}, #{price}, #{orderer}, #{startDate}, #{lastDate}, #{indexCode})
+	  </insert>
+	  
+	  <!-- delete -->
+	  <delete id="setCartDelete" parameterType="CartDTO">
+	  	DELETE CART WHERE CARTNUM=#{cartNum}
+	  </delete>
+	  
+	  <!-- 수량 변경을 위한 gradeStock 출력 -->
+	  <select id="getGradeStock" parameterType="ProductGradeDTO" resultType="ProductGradeDTO">
+	  	SELECT * FROM PRODUCTGRADE
+	  	WHERE GRADENUM = #{gradeNum}
+	  </select>
+	  
+	  <!-- 수량변경 -->
+	  <update id="setGradeStockUpdate" parameterType="ProductGradeDTO">
+	  	UPDATE PRODUCTGRADE SET GRADESTOCK=#{gradeStock}
+	  	WHERE GRADENUM = #{gradeNum}
+	  </update>
+	  
+	  
+  </mapper>

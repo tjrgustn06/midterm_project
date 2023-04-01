@@ -82,23 +82,28 @@ public class CampService {
 	}
 	
 	//add
-	public int setCampAdd(CampDTO campDTO, MultipartFile[] files, HttpSession session) throws Exception{
+	public int setCampAdd(CampDTO campDTO, MultipartFile[] files, MultipartFile thumbFile, HttpSession session) throws Exception{
 		//캠프장 하나 추가
 		int result = campDAO.setCampAdd(campDTO);
 		
-		//캠프사이트 추가
-		for(CampSiteDTO campSiteDTO : campDTO.getCampSiteDTOs()) {
-			campSiteDTO.setCampNum(campDTO.getCampNum());
-			result = campDAO.setCampSiteAdd(campSiteDTO);
-		}
+		//캠프사이트 추가 - campSiteDTO의 데이터가 null이 아닌 경우에만
+			for(CampSiteDTO campSiteDTO : campDTO.getCampSiteDTOs()) {
+				if(campSiteDTO.getOffWeekdaysPrice()!=null) {
+					campSiteDTO.setCampNum(campDTO.getCampNum());
+					result = campDAO.setCampSiteAdd(campSiteDTO);
+				}else {
+					continue;
+				}
+			}		
 		
-		//파일 추가
+		//파일 추가 - files
 		//1.HDD에 file 저장('어디'에 '무슨'이름으로)
 		String realPath = session.getServletContext().getRealPath("resources/upload/camp");
-		System.out.println(realPath); //확인용
+		System.out.println("files: "+realPath); //확인용
 		
 		//반복저장
 		for(MultipartFile multipartFile : files) {
+			//파일이 비어있으면 continue실행. 해당 index를 건너뛰고 다음 index 반복문 시행
 			if(multipartFile.isEmpty()) {
 				continue;
 			}
@@ -122,6 +127,29 @@ public class CampService {
 			//확인용
 			System.out.println("fileNum: "+campFileDTO.getFileNum());
 		}
+		//files end
+		
+		
+		//썸네일 저장 - thumbFile
+		//1. file을 HDD에 저장.
+		String savePath = "resources/upload/camp/thumbnail";
+		String thumbRealPath = session.getServletContext().getRealPath(savePath);
+		System.out.println("thumbFiles: "+thumbRealPath);
+		String fileName = fileManager.fileSave(thumbFile, thumbRealPath);
+		
+		//2. DB에 저장
+		ThumbnailDTO thumbnailDTO = new ThumbnailDTO();
+		thumbnailDTO.setCampNum(campDTO.getCampNum());
+		thumbnailDTO.setFileName(fileName);
+		thumbnailDTO.setOriName(thumbFile.getOriginalFilename());
+		
+		//3.CampDTO의 thumbnail 컬럼에 경로 저장(이걸 해야 list에서 사진이 보인다)
+		String thumbnail = "";
+		campDTO.setThumbnail(thumbnail);
+		
+		result = campDAO.setThumbnailAdd(thumbnailDTO);
+		//thumbFile end
+		
 		return result;
 	}
 		

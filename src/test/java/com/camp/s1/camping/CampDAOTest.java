@@ -106,4 +106,7 @@ public class CampDAOTest extends MyTestCase{
 		assertNotEquals(0, result);
 	}
 	
+	
+	//thumbnail test는 필요할까? 아니 할수있는건가
+	
 }

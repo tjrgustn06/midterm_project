@@ -88,17 +88,22 @@
 	<c:forEach items="${list}" var="dto">
 		<div class="d-flex row campOne my-3">
 			<div class="row pic col-5">
-<%-- 			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-				</c:forEach> --%>
-				
-				<!-- filedto에서 꺼내기 -->
-<%-- 				<c:if test="${not empty dto.campFileDTOs}">
-					<img alt="" src="../resources/upload/camp/${dto.campFileDTOs.get(0).fileName}">
-				</c:if> --%>
+				<!-- thumbnailDTO에서 꺼내기 -->
+				<c:catch var="er">
+					<c:choose>
+						<c:when test="${not empty dto.thumbnailDTO}">
+							<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.fileName}">
+						</c:when>
+						<c:otherwise>
+							<!-- <c:if test="${not empty dto.thumbnail}"> -->
+								<img alt="../resources/images/empty.jpg" src="${dto.thumbnail}">	
+							<!-- </c:if> -->
+						</c:otherwise>
+					</c:choose>
+				</c:catch>
 				
 				<!-- thumbnail에서 꺼내기 -->
-				<c:catch var="er">
+				<!-- <c:catch var="er">
 					<c:choose>
 						<c:when test="${not empty dto.thumbnail}">
 							<img alt="" src="${dto.thumbnail}">
@@ -107,7 +112,7 @@
 							<img alt="" src="../resources/images/empty.jpg">
 						</c:otherwise>
 					</c:choose>
-				</c:catch>
+				</c:catch> -->
 			</div>
 
 			<div class="row discription col-7">

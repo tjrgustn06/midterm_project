@@ -12,7 +12,7 @@
 <c:import url="../template/header.jsp"></c:import>
 	<div class="container-fluid">
 		<div class="row">
-			<h1>Member Page</h1>
+			<h1>My Page</h1>
 		</div>
 		
 		<div class="row">
@@ -20,12 +20,29 @@
 			<h3>Phone : ${dto.phone}</h3>
 			<h3>Email : ${dto.email}</h3>
 			<h3>RoleName  : ${dto.roleName}</h3>
-			<h3>Address	 : ${addressDTOs.address}</h3>
-			<h3>AddressDetail : ${addressDTOs.addressDetail}</h3> 
+			<h3 id="address">Address : </h3>
+			</div>
+			</div>
+			<script>
+				let addressName = '';
+				let address ='';
+				let addressDetail='';
+				let postCode = 0;
+				$('#address').load(function(){
+					<c:forEach items='${dto.addressDTOs}' var = 'addressDTO'>
+					if($('id').val() == ${addressDTO.id}){
+						addressName=${addressDTO.addressName}
+						address=${addressDTO.address}
+						addressDetail=${addressDTO.addressDetail}
+						postCode=${addressDTO.postCode}
+					}
+				})
+				</c:forEach>
+			</script>
+			<div class="mb-3">
 			<a href="./memberUpdate" class="btn btn-info">정보수정</a>
-			<a class="btn btn-danger">회원탈퇴</a>
-		</div>
-	</div>
+			<button class="btn btn-danger" type="submit">회원 탈퇴</button>
+			</div>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

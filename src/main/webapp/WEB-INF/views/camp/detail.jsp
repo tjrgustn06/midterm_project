@@ -78,19 +78,28 @@
 	<!-- 대표사진 + 설명 div -->
 	<div class="d-flex row my-3">
 		<div class="row pic my-3 mx-auto">
-<%-- 			<c:if test="${not empty dto.campFileDTOs}">
-				<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="i">
-					<!-- 파일이 보이게 -->
-					<c:if test="${pageScope.i.first}">
-						<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+			<c:choose>
+				<c:when test="${not empty dto.thumbnailDTO}">
+					<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.fileName}">
+				</c:when>
+				<c:otherwise>
+					<c:if test="${not empty dto.thumbnail}">
+						<img alt="" src="${dto.thumbnail}">	
 					</c:if>
-				</c:forEach>
-			</c:if> --%>
+				</c:otherwise>
+			</c:choose>
+			
+			<%-- <c:if test="${not empty dto.thumbnailDTO}">
+				<!-- 파일이 보이게 -->
+				<c:if test="${pageScope.i.first}">
+					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+				</c:if>
+			</c:if>
 			<c:catch var="er">
 				<c:if test="${not empty dto.thumbnail}">
 					<img alt="" src="${dto.thumbnail}">
 				</c:if>
-			</c:catch>
+			</c:catch> --%>
 		</div>
 		
 		<hr class="my-2">
@@ -361,7 +370,7 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th rowspan="2" scope="col">사이트이름: 크기</th>
+									<th rowspan="2" scope="col">사이트이름(크기)</th>
 									<th colspan="2" scope="colgroup">평상시</th>
 									<th colspan="2" scope="colgroup">성수기</th>
 								</tr>
@@ -378,7 +387,7 @@
 								<c:if test="${not empty dto.campSiteDTOs}">
 									<c:forEach items="${dto.campSiteDTOs}" var="siteDTO">
 										<tr>
-											<th scope="col">${siteDTO.siteName}: ${siteDTO.siteSize}</th>
+											<th scope="col">${siteDTO.siteName}(${siteDTO.siteSize})</th>
 											<td data-cell-header="평상시 주중：">${siteDTO.offWeekdaysPrice}</td>
 											<td data-cell-header="평상시 주말：">${siteDTO.offWeekendsPrice}</td>
 											<td data-cell-header="성수기 주중：">${siteDTO.peakWeekdaysPrice}</td>
@@ -411,23 +420,127 @@
 				<div class="campMap" id="campMap">
 					<!-- 찾아오시는 길 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5>
-						<!-- 지도 넣기 -->
+						<!--================Contact Area =================-->
+							<section class="contact_area section_gap">
+								<div class="container">
+									<div id="mapBox" class="mapBox" 
+										data-lat="40.701083" 
+										data-lon="-74.1522848" 
+										data-zoom="13" 
+										data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
+										data-mlat="40.701083"
+										data-mlon="-74.1522848">
+									</div>
+									<div class="row">
+										<div class="col-md-3">
+											<div class="contact_info">
+												<div class="info_item">
+													<i class="lnr lnr-home"></i>
+													<h6>California, United States</h6>
+													<p>Santa monica bullevard</p>
+												</div>
+												<div class="info_item">
+													<i class="lnr lnr-phone-handset"></i>
+													<h6><a href="#">00 (440) 9865 562</a></h6>
+													<p>Mon to Fri 9am to 6 pm</p>
+												</div>
+												<div class="info_item">
+													<i class="lnr lnr-envelope"></i>
+													<h6><a href="#">support@colorlib.com</a></h6>
+													<p>Send us your query anytime!</p>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-9">
+											<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+												<div class="col-md-6">
+													<div class="form-group">
+														<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+													</div>
+													<div class="form-group">
+														<input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
+													</div>
+													<div class="form-group">
+														<input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message"></textarea>
+													</div>
+												</div>
+												<div class="col-md-12 text-right">
+													<button type="submit" value="submit" class="btn theme_btn button_hover">Send Message</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</section>
+						<!--================Contact Area =================-->
 				</div>
 				</c:if>
 
 
 				<c:if test="${viewType eq 4}">
-				<!-- 후기 영역 -->
-				<div class="campReview" id="campReview">
-					<!-- 캠핑/여행 후기 -->
+					<!-- 후기 영역 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
-						<!-- 후기 넣기 -->
-				</div>
-				</c:if>
+					<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
+						<form id="reviewForm" method="POST" enctype="multipart/form-data">
+							<input type="hidden" name="campNum" value="${dto.campNum}">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" >작성자</span>
+								</div>
+								<input type="text" name="writer" value="${member.id}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" >평점</span>
+								</div>
+								<div class="starRate" id="star">
+									<span class="star">★</span>
+									<span class="star">★</span>
+									<span class="star">★</span>
+									<span class="star">★</span>
+									<span class="star">★</span>
+								</div>
+								<input id="mark" type="hidden" name="mark">
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="gradeStock">내용</label>
+								</div>
+							</div>
+							<div class="input-group mb-3">
+								<textarea id="reviewContents" class="form-control" name="contents" style="height: 200px" placeholder="내용을 입력해주세요"></textarea>
+							</div>
+							<div id="picList">
+								<div class="row mb-2" id="addPicDiv">
+									<button type="button" id="addPic" class="col-2 offset-md-10 btn btn-primary">사진추가</button>
+								</div>
+							</div>
+							<div>
+								<button type="button" id="addReview" class="btn btn-outline-info" data-review-num="${dto.campNum}" data-review-name="camp">리뷰작성</button>
+							</div>
+						</form>
+					</div>
+					<div class="row col-6 mx-auto my-3">
+						<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
+						<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
+					</div>
+					<div class="row" id="reviewList">
 
+					</div>
+						<!-- 캠핑/여행 후기 -->
+						
+							<!-- 후기 넣기 -->
+				</c:if>
 			</div>
+
 		</div>
 	</div>
+
 
 
 
@@ -481,6 +594,13 @@
 
 
 <c:import url="../template/common_js.jsp"></c:import>
+<script src="../resources/js/review.js"></script>
+<script>
+	setParam('pics');
+	setMax(5);
+</script>
 <script src="../resources/js/camp/campCRUD.js"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+<script src="royal-master/js/gmaps.min.js"></script> -->
 </body>
 </html>

@@ -39,6 +39,10 @@ public class ProductOrderService {
 		productOrderDTO.setOrderNum(productOrderDAO.getOrderNumber());
 		int result = productOrderDAO.setOrderNumber(productOrderDTO);
 		productOrderDTO.setAddress("");
+		String orderNames[]=productOrderDTO.getName().split("개");
+		for(String orderName:orderNames) {
+			System.out.println(orderName);
+		}
 		result = productOrderDAO.setProductOrderAdd(productOrderDTO);
 		return result;
 	}

@@ -128,8 +128,17 @@ public class QnaService implements BoardService{
 	}
 
 	@Override
-	public int setBoardFileDelete(Long fileNum) throws Exception {
+	public int setBoardFileDelete(Long fileNum, HttpSession session) throws Exception {
+		BoardFileDTO boardFileDTO = new BoardFileDTO();
+		boardFileDTO.setFileNum(fileNum);
+		boardFileDTO = qnaDAO.getBoardFileDetail(boardFileDTO);
 		int result = qnaDAO.setBoardFileDelete(fileNum);
+		
+		if(result > 0) {
+			String realPath = session.getServletContext().getRealPath("resources/upload/qna");
+			
+			boolean check = fileManager.fileDelete(realPath, boardFileDTO.getFileName());
+		}
 		
 		return result;
 	}

@@ -42,9 +42,11 @@ public class StoryService implements BoardService {
 		for (BbsDTO bbsDTO : bbsDTOs) {
 			//StoryDTO의 멤버변수 접근을 위해 형변환  
 			//참조변수간에는 형변환을 해도 주소값은 그대로이다
-			 StoryDTO dto = (StoryDTO)bbsDTO;
+//			 StoryDTO dto = (StoryDTO)bbsDTO;
+			 ((StoryDTO)bbsDTO).setBoardFileDTOs(storyDAO.getBoardFileList(bbsDTO));;
+			 
 
-			 dto.setBoardFileDTOs(storyDAO.getBoardFileList(dto));	 
+//			 dto.setBoardFileDTOs(storyDAO.getBoardFileList(dto));	 
 			 	
 		}
 		
@@ -80,32 +82,82 @@ public class StoryService implements BoardService {
 
 	@Override
 	public BoardDTO getBoardDetail(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return storyDAO.getBoardDetail(bbsDTO);
 	}
 
 	@Override
 	public BoardFileDTO getBoardFileDetail(BoardFileDTO boardFileDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return storyDAO.getBoardFileDetail(boardFileDTO);
 	}
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = storyDAO.setBoardUpdate(bbsDTO);
+		
+		if(result > 0) {
+			String realPath = session.getServletContext().getRealPath("resources/upload/story");
+			
+			for (MultipartFile multipartFile : multipartFiles) {
+				if(multipartFile.isEmpty()) {
+					continue;
+				}
+				
+				String fileName = fileManager.fileSave(multipartFile, realPath);
+				
+				BoardFileDTO boardFileDTO = new BoardFileDTO();
+				boardFileDTO.setFileName(fileName);
+				boardFileDTO.setNum(bbsDTO.getNum());
+				boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+				
+				result = storyDAO.setBoardFileAdd(boardFileDTO);
+				
+				
+				
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		List<BoardFileDTO> ar = storyDAO.getBoardFileList(bbsDTO);
+		int result = storyDAO.setBoardDelete(bbsDTO);
+		
+		
+		String realPath = session.getServletContext().getRealPath("resources/upload/story");
+		
+		if(result > 0) {
+			boolean check = false;
+			
+			for (BoardFileDTO boardFileDTO : ar) {
+				check = fileManager.fileDelete(realPath, boardFileDTO.getFileName());
+			}
+			
+		}
+		
+		return result;
 	}
 
 	@Override
-	public int setBoardFileDelete(Long fileNum) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int setBoardFileDelete(Long fileNum, HttpSession session) throws Exception {
+		BoardFileDTO boardFileDTO = new BoardFileDTO();
+		boardFileDTO.setFileNum(fileNum);
+		
+		boardFileDTO = storyDAO.getBoardFileDetail(boardFileDTO);
+		int result = storyDAO.setBoardFileDelete(fileNum);
+		
+		if(result > 0) {
+			String realPath = session.getServletContext().getRealPath("resources/upload/story");
+			
+			boolean check = fileManager.fileDelete(realPath, boardFileDTO.getFileName());
+				
+		}
+		
+		
+				
+		return result;
 	}
 
 	@Override

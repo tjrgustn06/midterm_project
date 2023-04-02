@@ -6,10 +6,6 @@ $('#delete').click(function(){
     if(check) {
         let num = $(this).attr("data-delete");
 
-        // $('#frm').attr('action', './delete');
-        // $('#frm').attr('method', 'post');
-        
-        // $('#frm').submit();
         $.ajax({
             type : 'POST',
             url : './delete',

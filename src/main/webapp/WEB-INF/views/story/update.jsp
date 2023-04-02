@@ -61,11 +61,12 @@ $(function() {
         <div class="row search_box">
 
             <div class="row col-md-8 mx-auto border-bottom ">
-                <form action="./add" method="post" enctype="multipart/form-data">
+                <form action="./update" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="num" value="${dto.num}">
                     <div class="row mb-3">
                         <label for="writer" class="col-sm-2 col-form-label">작성자</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="writer" id="writer" value="qwdfd1" readonly >
+                            <input type="text" class="form-control" name="writer" id="writer" value="${member.id}" readonly >
                         </div>
                     </div>
 
@@ -195,13 +196,13 @@ $(function() {
                 <div class="row mb-3">
                     <label for="title" class="col-sm-2 col-form-label">제목</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="ex)...캠핑장 (2021-02-14) 입력">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="ex)...캠핑장 (2021-02-14) 입력" value="${dto.title}">
                     </div>
                 </div>
                         
             <div class="mb-5">
                 <label for="contents" class="form-label">내용</label>
-                <textarea class="form-control" name="contents" id="contents" rows="8"></textarea>
+                <textarea class="form-control" name="contents" id="contents" rows="8">${dto.contents }</textarea>
             </div>
 
             <div id="fileList" class="row my-3">
@@ -212,29 +213,40 @@ $(function() {
                         <button class="dels btn btn-outline-danger" type="button" data-delete-id="idx">X</button>
                     </div>
                 </div>	 -->
+                <c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
+                    <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        <input class="form-check-input mt-0 deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+                    </div>
+                    <input type="text" disabled value="${fileDTO.oriName}" class="form-control" aria-label="Text input with checkbox">
+                    </div>
+                </c:forEach>
+
                 <button class="col-md-1 offset-md-11 btn btn-primary" type="button" id="addBtn">Add</button>
             </div> 
 
             <div class="row mt-5 mb-3 col-md-2 offset-md-10">
-                <button class="btn btn-primary " type="submit">글 쓰기</button>
+                <button class="btn btn-primary " type="submit">수정하기</button>
             </div>
 
 
-            </form>
+ 				</form>
             </div>
         </div>
           
-    
+   
     
 
 </div>
 <script src="../resources/js/campSearchForm.js"></script>
 <script src="../resources/js/fileManager.js"></script>
-<c:import url="../template/common_js.jsp"></c:import>
 <script>
-    setParam('files');
-    setMax(5)
+        setMax(5); 
+        setCount('${dto.boardFileDTOs.size()}');
+        setParam("files")
 </script>
+<c:import url="../template/common_js.jsp"></c:import>
+
 
 
 </body>

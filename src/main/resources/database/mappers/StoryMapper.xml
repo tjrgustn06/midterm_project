@@ -10,7 +10,7 @@
   	SELECT COUNT(NUM) FROM STORY
   </select>
   
-  <select id="getBoardList" parameterType="Pager" resultMap="storyDetailResult">
+  <select id="getBoardList" parameterType="Pager" resultType="StoryDTO">
   		SELECT * FROM	
 	  		(
 		  	SELECT ROWNUM R, S.* FROM
@@ -23,12 +23,15 @@
 	  	
   </select>
   
-  <select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
-  	SELECT * FROM STORYFILES
+    <select id="getBoardDetail" parameterType="BbsDTO" resultMap="storyDetailResult">
+  	SELECT * FROM STORY
+  	LEFT JOIN
+  	STORYFILES
+  	USING(NUM)
   	WHERE NUM = #{num}
   </select>
   
-  <resultMap type="StoryDTO" id="storyDetailResult">
+   <resultMap type="StoryDTO" id="storyDetailResult">
   	<id property="num" column="NUM"/>
   	<result property="writer" column="WRITER"/>
   	<result property="title" column="TITLE"/>
@@ -40,7 +43,19 @@
   		<result property="fileName" column="FILENAME"/>
   		<result property="oriName" column="ORINAME"/>
   	</collection>
-  </resultMap>
+  </resultMap> 
+  
+  <select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+  	SELECT * FROM STORYFILES
+  	WHERE NUM = #{num}
+  </select>
+  
+  <select id="getBoardFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+  	SELECT * FROM STORYFILES
+  	WHERE FILENUM = #{fileNum}
+  </select>
+  
+
   
   <!-- Add Query -->
   
@@ -56,5 +71,18 @@
   	INSERT INTO STORYFILES (FILENUM, NUM, FILENAME, ORINAME) 
   	VALUES (BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
   </insert>
+  
+  <delete id="setBoardDelete" parameterType="BbsDTO">
+  	DELETE STORY WHERE NUM = #{num}
+  </delete>
+  
+  <delete id="setBoardFileDelete" parameterType="Long">
+  	DELETE STORYFILES WHERE FILENUM = #{fileNum}
+  </delete>
+  
+  <update id="setBoardUpdate" parameterType="BbsDTO">
+  	UPDATE STORY SET TITLE = #{title}, CONTENTS = #{contents}
+  	WHERE NUM = #{num}
+  </update>
   
   </mapper>

@@ -85,5 +85,55 @@ public class StoryController {
 		
 	}
 	
+	@PostMapping("delete")
+	public ModelAndView setBoardDelete(StoryDTO storyDTO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", storyService.setBoardDelete(storyDTO, session));
+		
+		return mv;
+	}
+	
+	@GetMapping("update")
+	public ModelAndView setBoardUpdate(StoryDTO storyDTO) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/story/update");
+		mv.addObject("dto", storyService.getBoardDetail(storyDTO));
+		
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setBoardUpdate(StoryDTO storyDTO, MultipartFile [] files, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = storyService.setBoardUpdate(storyDTO, files, session);
+		
+		String msg = "수정 실패";
+		if(result > 0) {
+			msg = "수정되었습니다";
+		}
+		
+		mv.setViewName("common/result");
+		mv.addObject("result", msg);
+		mv.addObject("url", "./list");
+		
+		return mv;
+	}
+	
+	@PostMapping("boardFileDelete")
+	public ModelAndView setBoardFileDelete(Long fileNum, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", storyService.setBoardFileDelete(fileNum, session));
+		
+		
+		return mv;
+	}
+	
 	
 }

@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,7 @@ public class MemberService {
 			
 			memberDTO.setPw(null);
 			memberDTO.setRoleName(result.getRoleName());
+			memberDTO.setAddressDTOs(result.getAddressDTOs());
 			return memberDTO;
 			
 		}else {
@@ -118,26 +120,79 @@ public class MemberService {
 			}
 		}
 		
+		//Email 발송
+		
+				public void sendEmail(MemberDTO memberDTO, String div) throws Exception {
+					// Mail Server 설정
+					String charSet = "utf-8";
+					String hostSMTP = "smtp.naver.com";
+					String hostSMTPid = "tjrgustn06@naver.com"; // 이메일 입력
+					String hostSMTPpwd = "*sa5978640427"; //비밀번호 입력
+
+					// 보내는 사람 EMail, 제목, 내용
+					String fromEmail = "tjrgustn06@naver.com"; //보내는사람 아이디
+					String fromName = "camp Homepage";
+					String subject = ""; //제목
+					String msg = ""; //내용(본문)
+					
+					if(div.equals("findPw")) {
+						subject = "camp Homepage 임시 비밀번호 입니다.";
+						msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+						msg += "<h3 style='color: blue;'>";
+						msg += memberDTO.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+						msg += "<p>임시 비밀번호 : ";
+						msg += memberDTO.getPw() + "</p></div>";
+					}
+					
+					// 받는 사람 E-Mail 주소
+							String mail = memberDTO.getEmail();
+							try {
+								HtmlEmail email = new HtmlEmail();
+								email.setDebug(true);
+								email.setCharset(charSet);
+								email.setSSL(true);
+								email.setHostName(hostSMTP);
+								email.setSmtpPort(587);
+
+								email.setAuthentication(hostSMTPid, hostSMTPpwd);
+								email.setTLS(true);
+								email.addTo(mail, charSet);
+								email.setFrom(fromEmail, fromName, charSet);
+								email.setSubject(subject);
+								email.setHtmlMsg(msg);
+								email.send();
+							} catch (Exception e) {
+								System.out.println("메일발송 실패 : " + e);
+							}
+						}
+		
 		//pw 찾기
 		public MemberDTO findPw(HttpServletResponse response, MemberDTO memberDTO)throws Exception{
 			
+			response.setContentType("text/html;charset=utf-8");
+			MemberDTO check = memberDAO.getMemberLogin(memberDTO);
 			PrintWriter out = response.getWriter();
-			
-			if(memberDTO.getId() == null) {
+
+			if(memberDAO.getMemberLogin(memberDTO) == null) {
 				 out.println("아이디가 없습니다");
 				 out.close();
-			}else if(!memberDTO.getEmail().equals(memberDAO.getMemberLogin(memberDTO))){
-				 out.println("잘못된 이메일 입니다");
+			}else if(!memberDTO.getEmail().equals(check.getEmail())){
+				 out.println("등록되지 않은 이메일입니다");
 				 out.close();
 			}else {
+				//임시 비밀번호 생성
 				String pw ="";
-				for(int i=0; i<6; i++) {
+				for(int i=0; i<10; i++) {
 					pw += (char) ((Math.random() * 26) + 97);		
 				}
 				memberDTO.setPw(pw);
 				System.out.println(pw);
-				memberDAO.sendMail(memberDTO, "findPw");
+				// 비밀번호 변경
+				memberDAO.setMemberPwChange(memberDTO);
+				// 비밀번호 변경 메일 발송
+				sendEmail(memberDTO, "findPw");
 				 out.println("이메일로 임시 비밀번호를 발송하였습니다");
+				 
 				 out.close();
 			}
 			return memberDTO;
@@ -159,7 +214,7 @@ public class MemberService {
 				out.println("</script>");
 				out.close();
 				return 0;
-			}			
+			}
 		}
 		
 		// 카카오 로그인 토큰 발급

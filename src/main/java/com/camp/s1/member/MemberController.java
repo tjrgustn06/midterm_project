@@ -164,7 +164,6 @@ public class MemberController {
 		
 		int result = memberService.setMemberUpdate(addressDTO, memberDTO);
 		
-		
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
 		
@@ -220,20 +219,20 @@ public class MemberController {
 		}
 		
 
-		//pw 찾기 폼
-		@GetMapping("findPwForm")
-		public ModelAndView findPwForm()throws Exception{
+		//pw 찾기 
+		@GetMapping("findPw")
+		public ModelAndView findPw()throws Exception{
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("/member/findPwForm");
+			
 			return mv;
 		}
 		
 		//Pw찾기
 		@PostMapping("findPw")
-		public ModelAndView findPw(@ModelAttribute MemberDTO memberDTO, HttpServletResponse response)throws Exception{
+		public ModelAndView findPw(MemberDTO memberDTO, HttpServletResponse response)throws Exception{
 			ModelAndView mv = new ModelAndView();
 			
-			memberDTO = memberService.findPw(response, memberDTO);
+			memberService.findPw(response, memberDTO);
 			
 			return mv;
 		}

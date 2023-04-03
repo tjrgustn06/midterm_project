@@ -35,7 +35,7 @@
 </div>
 	<div class="mb-3 form-check">
 <a href="./findIdForm" id="findId" class="btn btn-warning">아이디 찾기</a>
-<a href="./findPwForm" id="findPw" class="btn btn-dark">비밀번호 찾기</a>
+<a href="./findPw" id="findPw" class="btn btn-dark">비밀번호 찾기</a><br>
 <!-- <a href="./kakaoLogin"  class="btn btn-warning">카카오 로그인</a> -->
 <a class="btn btn-warning" href="https://kauth.kakao.com/oauth/authorize?client_id=a68e05dc27f7fb4288530cb001c55c40&redirect_uri=http://localhost:80/member/kakaoLogin&response_type=code">
 	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요

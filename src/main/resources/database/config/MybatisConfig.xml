@@ -16,6 +16,7 @@
 		<typeAlias type="com.camp.s1.board.qna.QnaCommentDTO" alias="QnaCommentDTO"/>
 		
 		<typeAlias type="com.camp.s1.board.story.StoryDTO" alias="StoryDTO"/>
+		<typeAlias type="com.camp.s1.board.story.StoryCommentDTO" alias="StoryCommentDTO"/>
 		
 		<typeAlias type="com.camp.s1.product.ProductDTO" alias="ProductDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductGradeDTO" alias="ProductGradeDTO"/>

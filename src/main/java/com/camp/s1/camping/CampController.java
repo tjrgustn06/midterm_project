@@ -156,11 +156,11 @@ public class CampController {
 	public ModelAndView setCampUpdate(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, HttpSession session, 
 			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice, Long[] fileNum, 
 			Long[] areaNum) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트, 2.썸네일 업데이트, 3.파일 업데이트, 4.사이트 업데이트
+		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트(CampDTO-campNum), 2.썸네일 업데이트(CampDTO-thumbnailDTO-thumbNum), 3.파일 업데이트(CampDTO-fileDTOs-fileNum), 4.사이트 업데이트(CampDTO-siteDTOs-areaNum)
 		//컨트롤러에서 처리해야할 내용 - 4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함.
 		//1, 2, 3: 해당 내용 처리 메서드 실행(서비스>DAO로 넘기기)
 		//4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함. 서비스에서 areaNum을 통해 기존 db에 있는 siteDTO지우고 CampDTO에 있는 사이트 입력하게끔
+		ModelAndView mv = new ModelAndView();
 		
 		//CampDTO에 CampSiteDTOs 내용 저장
 		List<CampSiteDTO> ar = new ArrayList<CampSiteDTO>();
@@ -178,13 +178,17 @@ public class CampController {
 		//만든 siteList는 CampDTO에 저장
 		campDTO.setCampSiteDTOs(ar);
 		
+		//파일이 있는경우에 보냄
+//		if(fileNum != null) {
+//			System.out.println(fileNum);
+//			for(Long fn : fileNum) {System.out.println(fn);}
+//		}
 		
-		if(fileNum != null) {
-			System.out.println(fileNum);
-			for(Long fn : fileNum) {System.out.println(fn);}
-		}
+		//update 실행
+		//areaNum은 siteDTO 지우기 위해 필요
+		int result = campService.setCampUpdate(campDTO, files, thumbFile, session, areaNum, fileNum);
+		logger.info("param: "+params);
 		
-		int result = campService.setCampUpdate(campDTO, files, session, fileNum);
 		String message ="수정 실패";
 		if(result>0) {
 			message ="수정 성공";

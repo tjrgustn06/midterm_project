@@ -156,6 +156,13 @@ public class CampService {
 		
 	//update
 	public int setCampUpdate(CampDTO campDTO, MultipartFile[] files, HttpSession session, Long[] fileNums) throws Exception{
+		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트(CampDTO-campNum), 2.썸네일 업데이트(CampDTO-thumbnailDTO-thumbNum), 3.파일 업데이트(CampDTO-fileDTOs-fileNum), 4.사이트 업데이트(CampDTO-siteDTOs-areaNum)
+		//컨트롤러에서 처리해야할 내용 - 4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함.
+		//1, 2, 3: 해당 내용 처리 메서드 실행(서비스>DAO로 넘기기)
+		//4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함. 서비스에서 areaNum을 통해 기존 db에 있는 siteDTO지우고 CampDTO에 있는 사이트 입력하게끔
+		
+		
+		
 		//1.업데이트 -> 글 내용 + 업데이트 되는 파일은 2.지우고 3.다시 넣기
 		//ajax로 파일처리하면 파일추가만 하면 될듯
 		

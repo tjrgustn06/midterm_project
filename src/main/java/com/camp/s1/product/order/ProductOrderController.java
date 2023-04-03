@@ -55,7 +55,7 @@ public class ProductOrderController {
 			msg = "주문 성공";
 		}
 		mv.addObject("result", msg);
-		mv.addObject("url", "../product/list");
+		mv.addObject("url", "../order/list");
 		mv.setViewName("common/result");
 		
 		return mv;

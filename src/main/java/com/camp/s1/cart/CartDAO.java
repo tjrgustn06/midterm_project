@@ -20,6 +20,14 @@ public class CartDAO {
 		return sqlSession.selectList(NAMESPACE+"getCartList");
 	}
 	
+	public CartDTO getCartDetail(CartDTO cartDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getCartDetail", cartDTO);
+	}
+	
+	public int setCartUpdate(CartDTO cartDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setCartUpdate", cartDTO);
+	}
+	
 	public int setCartAdd(CartDTO cartDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setCartAdd", cartDTO);
 	}

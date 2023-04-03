@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -272,18 +273,24 @@ public class MemberController {
 			
 		}
 		
-		//카카오 간편 로그인
-	    @GetMapping("kakaoLogin")
-	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
-	    	System.out.println("#########" + code);
+		//카카오 로그인 토큰 받기
+		@GetMapping("kakaoLogin")
+	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+			
 	    	String access_Token = memberService.getAccessToken(code);
-	    	KakaoDTO kakaoDTO = memberService.getUserInfo(access_Token);
-	        
-	    	System.out.println("###access_Token#### : " + access_Token);
-	    	System.out.println("###nickname#### : " + kakaoDTO.getKakoName());
-	    	System.out.println("###email#### : " + kakaoDTO.getKakoEmail());
-	    	return "member/memberLogin";
+	    	KakaoDTO userInfo = memberService.getUserInfo(access_Token);
+
+	    	MemberDTO memberDTO = new MemberDTO();
+	    	memberDTO.setId(userInfo.getKakaoEmail());
+	    	memberDTO.setName(userInfo.getKakaoName());
+
+	    	session.setAttribute("member", memberDTO);
+
+	    	return "home";
 	    }
+		
+		
+
 		
 		
 	

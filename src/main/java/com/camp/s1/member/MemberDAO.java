@@ -113,13 +113,16 @@ public class MemberDAO {
 		}
 	
 		//카카오 로그인
-		public void KakaoLogin(HashMap<String, Object> userInfo) {
-				sqlSession.insert(NAMESPACE+"KakaoLogin", userInfo);
+		public void kakaoLogin(HashMap<String, Object> userInfo) {
+			
+			sqlSession.insert(NAMESPACE+"kakaoLogin", userInfo);
 		}
-
+		
+		//카카오 확인
 		public KakaoDTO findKakao(HashMap<String, Object> userInfo) {
 			System.out.println("RN:"+userInfo.get("nickname"));
 			System.out.println("RE:"+userInfo.get("email"));
 			return sqlSession.selectOne(NAMESPACE+"findKakao", userInfo);
 		}
+		
 }

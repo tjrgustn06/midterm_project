@@ -3,6 +3,7 @@ package com.camp.s1.board.story;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +26,11 @@ public class StoryCommentController {
 		
 		
 		return mv;
+		
+	}
+	
+	@PostMapping("add")
+	public ModelAndView setBoardadd(StoryCommentDTO storyCommentDTO) throws Exception {
 		
 	}
 }

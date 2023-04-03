@@ -38,6 +38,7 @@
 
 	<script src="../resources/js/scroll.js"></script>
 	<script src="../resources/js/story.js"></script>
+	<script src="../resources/js/storyComment.js"></script>
 
 <c:import url="../template/common_js.jsp"></c:import>
 </body>

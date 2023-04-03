@@ -30,7 +30,7 @@ $('#storyList').on('click', '.getDetail', function(e){
             perPage : 20
         },
         success : function(response){
-            
+            $('#commentList').html(response); 
         }
     })
     

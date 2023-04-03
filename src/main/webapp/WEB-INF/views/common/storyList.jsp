@@ -198,10 +198,10 @@
 						
 						
 
-						<!-- Modal -->
+						<!-- Modal
 						<div id="storyDetail${dto.num}">
 							
-						</div>
+						</div> -->
 
 
 

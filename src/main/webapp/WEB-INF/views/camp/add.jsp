@@ -125,16 +125,16 @@
 					<tbody>
 						<!-- 셀렉트박스로 권역 / 도 / 시군구 구분 -->
 						<tr>
-							<th scope="col my-auto">권역/시도/시군구 선택</th>
+							<th scope="col my-auto">시/도, 시/군/구</th>
 							<td>
-								<select name="regionName" id="addressRegion"></select>
+								<!-- <select name="regionName" id="addressRegion"></select> -->
 								<select name="doName" id="addressDo"></select>
 								<select name="sigunguName" id="addressSigungu"></select>
 							</td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">주소</th>
-							<td><input type="text" name="address" id="addressInput" class="form-control" placeholder="권역/시도/시군구를 먼저 선택하세요" style="background-color: bisque;" readonly></td>
+							<td><input type="text" name="address" id="addressInput" class="form-control" placeholder="시/도, 시/군/구를 먼저 선택하세요" style="background-color: bisque;" readonly></td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">문의처</th>

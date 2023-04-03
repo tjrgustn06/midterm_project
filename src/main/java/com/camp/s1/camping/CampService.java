@@ -86,7 +86,7 @@ public class CampService {
 		//캠프장 하나 추가
 		int result = campDAO.setCampAdd(campDTO);
 		
-		//캠프사이트 추가 - campSiteDTO의 데이터가 null이 아닌 경우에만
+		//캠프사이트 추가 - campSiteDTO의 데이터가 null이 아닌 경우에만(지금은 프론트에서 처리하긴 했는데...)
 			for(CampSiteDTO campSiteDTO : campDTO.getCampSiteDTOs()) {
 				if(campSiteDTO.getOffWeekdaysPrice()!=null) {
 					campSiteDTO.setCampNum(campDTO.getCampNum());

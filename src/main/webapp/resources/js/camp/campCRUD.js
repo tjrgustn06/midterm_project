@@ -18,6 +18,13 @@ function setSiteMax(m){
     siteMax=m;
 }
 
+//페이지 로딩 후 DOM 객체가 준비되었을 때 실행
+$(function(){
+    updAdrs(); //주소로 셀렉트박스 선택되게 하는 함수
+    updServiceCheck(); //서비스로 체크박스 선택되게 하는 함수
+})
+
+
 // 리뷰작성창 출력
 $('#reviewAdd').click(function(){
     $('#review').slideDown("slow")
@@ -55,7 +62,7 @@ $('#addressSigungu').change(function(){
         $('#addressInput').val('');
         $('#addressInput').prop('style', 'background-color:bisque;');
         $('#addressInput').prop('readonly', true);
-        $('#addressInput').prop('placeholder', '권역/시도/시군구를 먼저 선택하세요');
+        $('#addressInput').prop('placeholder', '시/도, 시/군/구를 먼저 선택하세요');
     }
 })
 
@@ -209,31 +216,67 @@ $('#detDelete').click(function(){
 $('#updCancel').click(function(){
     let check = confirm("정말 취소하시겠습니까? 저장하지 않은 내용은 변경되지 않습니다");
     if(check){
-        location.href="./detail?campNum="+$('#detailCampNum').val();
+        location.href="./detail?campNum="+$('#updCampNum').val();
     }
 })
 
 
+//주소값을 통해 셀렉트박스 선택이 되어있게끔 하는 함수 - update.jsp
+function updAdrs(){
+    let adrs = $('#addressInput').val();
+
+    //주소값이 있는 경우(update페이지)에만 실행. 없는 경우(add페이지)에서는 실행x
+    if(adrs!='' || adrs!=null){
+        //시/도, 시/군/구, 나머지주소로 자르기
+        let doName = adrs.substring(0, adrs.indexOf(' '));
+        let sigunguName = adrs.substring(adrs.indexOf(' ')+1, adrs.indexOf(' ', adrs.indexOf(' ')+1));
+        let otherAdrs = adrs.substring(adrs.indexOf(' ', adrs.indexOf(' ')+1)+1);
+    
+        // console.log(doName); //시/도
+        // console.log(sigunguName); //시/군/구
+        // console.log(otherAdrs); //나머지주소
+    
+        //selected 옵션을 주면 될거같은데 흠....
+        $('#addressDo').val(doName).prop("selected", true);
+        $('#addressSigungu').val(sigunguName).prop("selected", true);
+        $('#addressInput').val(otherAdrs);
+    }else if(adrs=='' || adrs==null){
+        //입력된 주소값이 없는경우 최초 선택하세요가 나타나게
+        $('#addressDo').val("0").prop("selected", true);
+        $('#addressSigungu').val("0").prop("selected", true);
+    }
+}
 
 
+//service로 받은 값이 checked로 되게끔 하기 - update.jsp
+function updServiceCheck(){
+    //service는 DB에 저장된 서비스들을 string으로 받아온 것
+    let service = $('input[name=service]').val();
+
+    //저장된 service를 배열로 만듬
+    chkArray = new Array();
+    chkArray = service.split(',');
+
+    //작업 전 우선 모두 체크 해제
+    $('input[name=serv]').prop("checked", false);
+
+    //이런식으로 반복문 돌리면 체크가 됨. value값이 바뀌도록
+    //$('input[name=serv][value="전기"]').prop("checked", true);
+
+    //반복문으로 체크된 값에만 체크옵션을 줌
+    for(let service of chkArray){
+        $('input[name=serv][value='+service+']').prop("checked", true);
+    }
+
+}
 
 
 //콘솔에 값 확인하고 싶을때 사용 - add.jsp/update.jsp(console 버튼)
 $('#consoleSign').click(function(){
-    //setService();
+    //setService(); //얘는 시작할때 바로하면 의미없다. 글등록 하기전에 받아야함
     //chkValidation();
-
-    //doName값을 가져와서 권역을 고를 수 있게끔 + value값 넣어주기
-    let adrs = $('#addressInput').val();
-
-    //시/도, 시/군/구, 나머지주소로 자르기
-    let doName = adrs.substring(0, adrs.indexOf(' '));
-    let sigunguName = adrs.substring(adrs.indexOf(' ')+1, adrs.indexOf(' ', adrs.indexOf(' ')+1));
-    let otherAdrs = adrs.substring(adrs.indexOf(' ', adrs.indexOf(' ')+1)+1);
-
-    console.log(doName);
-    console.log(sigunguName);
-    console.log(otherAdrs);
+    //updAdrs();
+    //updServiceCheck();
 
 
 })

@@ -102,37 +102,26 @@ public class CampController {
 	public ModelAndView setCampAdd(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, HttpSession session, 
 			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		//int length = 0;
 		
 		//확인용 - thumbFile이 있으면 사이즈가 나올거고 없으면 0일거라 예상
 		System.out.println("thumbnail size: "+thumbFile.getSize());
 		
-		
-		//siteDTO가 몇개 입력되었는지 체크 -> 나중에 버튼 만들어서 입력폼 추가, 삭제하기
-//		for(int i=0; i<siteName.length; i++) {
-//			if(siteName[i].equals("")) {
-//				length = i; 
-//			}
-//		}
-		
-		//site 추가(데이터로 받은 배열의 길이가 0보다 큰경우에만)
-		//if(length>0) {
-			List<CampSiteDTO> ar = new ArrayList<CampSiteDTO>();
-			for(int i=0; i<siteName.length; i++) { //siteName의 길이값을 받아서 반복횟수결정 -> length로
-				//새 옵션 반복문마다 만들어줌
-				CampSiteDTO campSiteDTO = new CampSiteDTO();
-				campSiteDTO.setSiteName(siteName[i]);
-				campSiteDTO.setSiteSize(siteSize[i]);
-				campSiteDTO.setOffWeekdaysPrice(offWeekdaysPrice[i]);
-				campSiteDTO.setOffWeekendsPrice(offWeekendsPrice[i]);
-				campSiteDTO.setPeakWeekdaysPrice(peakWeekdaysPrice[i]);
-				campSiteDTO.setPeakWeekendsPrice(peakWeekendsPrice[i]);
-				//마지막에 List에 만든 옵션 하나 넣기
-				ar.add(campSiteDTO);
-			}
-			//만든 siteList CampDTO에 저장
-			campDTO.setCampSiteDTOs(ar);
-		//}
+		//CampSiteDTO 저장
+		List<CampSiteDTO> ar = new ArrayList<CampSiteDTO>();
+		for(int i=0; i<siteName.length; i++) { //siteName의 길이값을 받아서 반복횟수결정 -> length로
+			//새 옵션 반복문마다 만들어줌
+			CampSiteDTO campSiteDTO = new CampSiteDTO();
+			campSiteDTO.setSiteName(siteName[i]);
+			campSiteDTO.setSiteSize(siteSize[i]);
+			campSiteDTO.setOffWeekdaysPrice(offWeekdaysPrice[i]);
+			campSiteDTO.setOffWeekendsPrice(offWeekendsPrice[i]);
+			campSiteDTO.setPeakWeekdaysPrice(peakWeekdaysPrice[i]);
+			campSiteDTO.setPeakWeekendsPrice(peakWeekendsPrice[i]);
+			//완성된 CampSiteDTO를 CampDTO에 넣기. List이므로 여러개의 siteDTO가 들어갈 수 있음
+			ar.add(campSiteDTO);
+		}
+		//만든 siteList CampDTO에 저장
+		campDTO.setCampSiteDTOs(ar);
 		
 		int result = campService.setCampAdd(campDTO, files, thumbFile, session);
 		logger.info("param: "+params);
@@ -164,8 +153,30 @@ public class CampController {
 	
 	//update-post
 	@PostMapping("update")
-	public ModelAndView setCampUpdate(CampDTO campDTO, MultipartFile[] files, HttpSession session, Long[] fileNum) throws Exception{
+	public ModelAndView setCampUpdate(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, HttpSession session, 
+			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice, Long[] fileNum, 
+			Long[] areaNum) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트, 2.썸네일 업데이트, 3.파일 업데이트, 4.사이트 업데이트
+		//컨트롤러에서 처리해야할 내용 - 4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함.
+		//1, 2, 3: 해당 내용 처리 메서드 실행(서비스>DAO로 넘기기)
+		//4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함. 서비스에서 areaNum을 통해 기존 db에 있는 siteDTO지우고 CampDTO에 있는 사이트 입력하게끔
+		
+		//CampDTO에 CampSiteDTOs 내용 저장
+		List<CampSiteDTO> ar = new ArrayList<CampSiteDTO>();
+		for(int i=0; i<siteName.length; i++) {
+			CampSiteDTO campSiteDTO = new CampSiteDTO();
+			campSiteDTO.setSiteName(siteName[i]);
+			campSiteDTO.setSiteSize(siteSize[i]);
+			campSiteDTO.setOffWeekdaysPrice(offWeekdaysPrice[i]);
+			campSiteDTO.setOffWeekendsPrice(offWeekendsPrice[i]);
+			campSiteDTO.setPeakWeekdaysPrice(peakWeekdaysPrice[i]);
+			campSiteDTO.setPeakWeekendsPrice(peakWeekendsPrice[i]);
+			//완성된 CampSiteDTO를 CampDTO에 넣기. List이므로 여러개의 siteDTO가 들어갈 수 있음
+			ar.add(campSiteDTO);
+		}
+		//만든 siteList는 CampDTO에 저장
+		campDTO.setCampSiteDTOs(ar);
 		
 		
 		if(fileNum != null) {

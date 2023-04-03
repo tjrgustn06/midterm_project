@@ -18,7 +18,7 @@
 	<div class="row justify-content-center">
 	<!-- insert form이 필요할듯 -->
 	<form action="./update" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="campNum" value="${dto.campNum}" id="detailCampNum">
+	<input type="hidden" name="campNum" value="${dto.campNum}" id="detCampNum">
 	
 		<!-- 수정 필요 -->
 		<div class="mb-3">

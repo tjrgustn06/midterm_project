@@ -68,6 +68,8 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid col-lg-9 my-5">
 	<form action="./update" id="frm" method="post" enctype="multipart/form-data">
+	<input type="hidden" id="updCampNum" value="${dto.campNum}">
+
 	<div class="row my-3">
 		<!-- 파라미터 넘어가는거 확인용 -->
 		--${param}--
@@ -94,6 +96,8 @@
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
 			<div class="row pic my-3 mx-auto">
+				--${dto.thumbnailDTO.thumbNum}--
+				<input type="hidden" id="updthumbNum" value="${dto.thumbnailDTO.thumbNum}">
 				<!-- 원래 사진 표시 -->
 				<c:choose>
 					<c:when test="${not empty dto.thumbnailDTO}">
@@ -136,9 +140,9 @@
 					<tbody>
 						<!-- 셀렉트박스로 권역 / 도 / 시군구 구분 -->
 						<tr>
-							<th scope="col my-auto">권역/시도/시군구 선택</th>
+							<th scope="col my-auto">시/도, 시/군/구</th>
 							<td>
-								<select name="regionName" id="addressRegion"></select>
+								<!-- <select name="regionName" id="addressRegion"></select> -->
 								<select name="doName" id="addressDo">
 									<option value="${dto.doName}" selected>${dto.doName}</option>
 								</select>
@@ -255,8 +259,6 @@
 									<label class="form-check-label" for="chkMart">마트/편의점</label>
 								</div>
 								<input type="hidden" name="service" id="serviceVal" value="${dto.service}">
-								<!-- service값 확인용 -->
-								--${dto.service}--
 							</div>
 						</div>
 
@@ -365,6 +367,7 @@
 							<!-- index는 0부터 시작, count는 1부터 시작 -->
 							<c:forEach items="${list}" var="siteDTO" varStatus="i">
 								<div id="siteOne${i.count}">
+									--areaNum: ${siteDTO.areaNum}--
 									<div class="input-group mb-2">
 										<span class="input-group-text" id="siteName">사이트이름</span>
 										<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}">
@@ -384,8 +387,9 @@
 										<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}">
 									</div>
 									<div class="mb-2">
-										<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">입력창 삭제</button>
-										<button type="button" data-site-idx="siteDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button>
+										<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button>
+										<!-- <button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">입력창 삭제</button>
+										<button type="button" data-site-idx="siteDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button> -->
 									</div>
 								</div>
 							</c:forEach>
@@ -435,7 +439,7 @@
 </div>
 
 
-<script src="../resources/js/camp/selectBox2.js"></script>
+<script src="../resources/js/camp/selectBox.js"></script>
 <script src="../resources/js/camp/campCRUD.js"></script>
 <script src="../resources/js/camp/fileManager.js"></script>
 <script>
@@ -446,8 +450,8 @@
 <script>
 	setSiteIdx(2+'${dto.campSiteDTOs.size()-1}'*1);
 	setSiteMax(10);
-	setSiteCount('${dto.campSiteDTOs.size()}');
-	console.log(siteIdx);
+	setSiteCount('${dto.campSiteDTOs.size()}');;
+	console.log("siteIdx: "+siteIdx);
 </script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>

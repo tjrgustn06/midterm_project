@@ -154,8 +154,8 @@ public class CampController {
 	//update-post
 	@PostMapping("update")
 	public ModelAndView setCampUpdate(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, HttpSession session, 
-			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice, Long[] fileNum, 
-			Long[] areaNum) throws Exception{
+			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice, Long[] areaNum, 
+			Long[] fileNum) throws Exception{
 		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트(CampDTO-campNum), 2.썸네일 업데이트(CampDTO-thumbnailDTO-thumbNum), 3.파일 업데이트(CampDTO-fileDTOs-fileNum), 4.사이트 업데이트(CampDTO-siteDTOs-areaNum)
 		//컨트롤러에서 처리해야할 내용 - 4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함.
 		//1, 2, 3: 해당 내용 처리 메서드 실행(서비스>DAO로 넘기기)

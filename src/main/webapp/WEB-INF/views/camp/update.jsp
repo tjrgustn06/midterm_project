@@ -453,6 +453,12 @@
 	setSiteCount('${dto.campSiteDTOs.size()}');;
 	console.log("siteIdx: "+siteIdx);
 </script>
+<script>
+	$(function(){
+		updAdrs();
+		updServiceCheck();
+	})
+</script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

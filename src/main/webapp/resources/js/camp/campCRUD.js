@@ -19,20 +19,21 @@ function setSiteMax(m){
 }
 
 //페이지 로딩 후 DOM 객체가 준비되었을 때 실행
+//바로 실행해야할 내용은 페이지마다 script로 적기.
 $(function(){
-    updAdrs(); //주소로 셀렉트박스 선택되게 하는 함수
-    updServiceCheck(); //서비스로 체크박스 선택되게 하는 함수
+    // updAdrs(); //주소로 셀렉트박스 선택되게 하는 함수
+    // updServiceCheck(); //서비스로 체크박스 선택되게 하는 함수
 })
 
 
 // 리뷰작성창 출력
 $('#reviewAdd').click(function(){
-    $('#review').slideDown("slow")
+    $('#review').slideDown("slow");
 })
 
 // 리뷰작성창 해제
 $('#reviewCancle').click(function(){
-    $('#review').slideUp("slow")
+    $('#review').slideUp("slow");
 })
 
 //add.jsp

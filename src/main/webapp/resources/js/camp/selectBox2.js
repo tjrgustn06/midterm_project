@@ -28,109 +28,109 @@ const area = {
 };
 
 //$(function(){});는 DOM 객체가 준비되면.... 이라는 뜻
-$(function() {
-    //아래 function 실행
-    init();
+// $(function() {
+//     //아래 function 실행
+//     init();
 
-    //중분류(doName) 이벤트 위임 - 값의 변경(change)
-    $(document).on('change', 'select[name=doName]', function() {
-        let classVal = $(this).val();
+//     //중분류(doName) 이벤트 위임 - 값의 변경(change)
+//     $(document).on('change', 'select[name=doName]', function() {
+//         let classVal = $(this).val();
 
-        //소분류(sigunguName)의 'data-class' 속성 값 확인, 일치시 보여줌
-        $('select[name=sigunguName] option').each(function(idx, item) {
-            if($(this).data('class') == classVal || $(this).val() == '') {
-                $(this).show();
-            }else {
-                $(this).hide();
-            }
-        });
-        $('select[name=sigunguName]').val('');
-    })
-});
+//         //소분류(sigunguName)의 'data-class' 속성 값 확인, 일치시 보여줌
+//         $('select[name=sigunguName] option').each(function(idx, item) {
+//             if($(this).data('class') == classVal || $(this).val() == '') {
+//                 $(this).show();
+//             }else {
+//                 $(this).hide();
+//             }
+//         });
+//         $('select[name=sigunguName]').val('');
+//     })
+// });
 
-// Selectbox option 생성
-function init() {
-    let doHtml = '<option value="">선택하세요.</option>'; //doName옵션 생성
-    let sigunguHtml = '<option value="">선택하세요.</option>'; //sigunguName옵션 생성
+// // Selectbox option 생성
+// function init() {
+//     let doHtml = '<option value="">선택하세요.</option>'; //doName옵션 생성
+//     let sigunguHtml = '<option value="">선택하세요.</option>'; //sigunguName옵션 생성
 
-    //key가 중분류(doName), value가 소분류(sigunguName)
-    for (let key in area) {
-        doHtml += `<option value="${key}">${key}</option>`;
+//     //key가 중분류(doName), value가 소분류(sigunguName)
+//     for (let key in area) {
+//         doHtml += `<option value="${key}">${key}</option>`;
 
-        let list = area[key];
-        for (let i=0; i<list.length; i++) {
-            //data-class속성에 중분류값 입력
-            sigunguHtml += `<option value="${list[i]}" data-class="${key}">${list[i]}</option>`;
-        }
-    }
-    $('select[name=doName]').html(doHtml);
-    $('select[name=sigunguName]').html(sigunguHtml);
+//         let list = area[key];
+//         for (let i=0; i<list.length; i++) {
+//             //data-class속성에 중분류값 입력
+//             sigunguHtml += `<option value="${list[i]}" data-class="${key}">${list[i]}</option>`;
+//         }
+//     }
+//     $('select[name=doName]').html(doHtml);
+//     $('select[name=sigunguName]').html(sigunguHtml);
 
-    //소분류(sigunguName) 항목은 초기화때 숨기기
-    $('select[name=sigunguName] option').each(function(idx, item) {
-        if ($(this).val() == '') return true;
-        $(this).hide();
-    });
-}
+//     //소분류(sigunguName) 항목은 초기화때 숨기기
+//     $('select[name=sigunguName] option').each(function(idx, item) {
+//         if ($(this).val() == '') return true;
+//         $(this).hide();
+//     });
+// }
 
 
 
 
 
 //함수를 선택자로 선택
-// $(function(){
-//     areaSelect("select[name=doName]");
-// });
+$(function(){
+    areaSelect("select[name=doName]");
+});
 
 
-// let areaSelect = function(target){
-//     console.log($(target));
-//     if(target == null || $(target).length == 0){
-//         console.warn("Unkwon Area Tag");
-//         return;
-//     }
+let areaSelect = function(target){
+    console.log($(target));
+    if(target == null || $(target).length == 0){
+        console.warn("Unkwon Area Tag");
+        return;
+    }
     
 
-//     for(i=0; i<$(target).length; i++){
-//         (function(z){
-//             let a1 = $(target).eq(z);
-//             let a2 = a1.next();
-//             // let a3 = a2.next();
+    for(i=0; i<$(target).length; i++){
+        (function(z){
+            let a1 = $(target).eq(z);
+            let a2 = a1.next();
 
-//             //초기화
-//             init(a1, true);
+            //초기화
+            init(a1, true);
 
-//             //권역 기본 생성
-//             let areaKeys1 = Object.keys(area);
-//             areaKeys1.forEach(function(doName){
-//                 a1.append("<option value="+doName+">"+doName+"</option>");
-//             });
+            //권역 기본 생성
+            let doKeys1 = Object.keys(area);
+            doKeys1.forEach(function(adrsDo){
+                a1.append("<option value="+adrsDo+">"+adrsDo+"</option>");
+            });
 
-//             //변경 이벤트
-//             $(a1).on("change", function(){
-//                 init($(this), false);
-//                 let Region = $(this).val();
-//                 let keys = Object.keys(area[Region]);
-//                 keys.forEach(function(doName){
-//                     a2.append("<option value="+doName+">"+doName+"</option>");    
-//                 });
-//             });
+            //변경 이벤트
+            $(a1).on("change", function(){
+                a2.empty().append("<option value=''>시/군/구</option>");
+                init($(this), false);
+                let adrsDo = $(this).val();
+                let sigunguKeys = Object.keys(area[adrsDo]);
+                sigunguKeys.forEach(function(adrsSigungu){
+                    a2.append("<option value="+area[adrsDo][adrsSi+">"+sigunguName+"</option>");    
+                });
+            });
 
-//             $(a2).on("change", function(){
-//                 a3.empty().append("<option value=''>시/군/구</option>");
-//                 let Region = a1.val();
-//                 let doName = $(this).val();
-//                 let keys = Object.keys(area[Region][doName]);
-//                 keys.forEach(function(siGunGuName){
-//                     a3.append("<option value="+area[Region][doName][siGunGuName]+">"+area[Region][doName][siGunGuName]+"</option>");    
-//                 });
-//             });
-//         })(i);        
+            // $(a2).on("change", function(){
+            //     a3.empty().append("<option value=''>시/군/구</option>");
+            //     let Region = a1.val();
+            //     let doName = $(this).val();
+            //     let keys = Object.keys(area[Region][doName]);
+            //     keys.forEach(function(siGunGuName){
+            //         a3.append("<option value="+area[Region][doName][siGunGuName]+">"+area[Region][doName][siGunGuName]+"</option>");    
+            //     });
+            // });
+        })(i);        
 
-//         function init(t, first){
-//             //first면 '? ~ :' 영역, false면 ': ~ ;' 영역 실행
-//             first ? t.empty().append("<option value=''>시/도</option>") : "";
-//             t.next().empty().append("<option value=''>시/군/구</option>");
-//         }
-//     }
-// }
+        function init(t, first){
+            //first면 '? ~ :' 영역, false면 ': ~ ;' 영역 실행
+            first ? t.empty().append("<option value=''>시/도</option>") : "";
+            t.next().empty().append("<option value=''>시/군/구</option>");
+        }
+    }
+}

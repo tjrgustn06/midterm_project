@@ -6,6 +6,10 @@ let siteIdx=2;
 let siteCount=0;
 let siteMax=0;
 
+function setSiteIdx(i){
+    siteIdx=i;
+}
+
 function setSiteCount(c){
     siteCount=c;
 }
@@ -200,7 +204,7 @@ $('#detDelete').click(function(){
 
 
 
-//update.jsp - 나중에 수정해야한다
+//update.jsp
 //캠핑장 글업데이트 취소 - update.jsp
 $('#updCancel').click(function(){
     let check = confirm("정말 취소하시겠습니까? 저장하지 않은 내용은 변경되지 않습니다");
@@ -211,11 +215,27 @@ $('#updCancel').click(function(){
 
 
 
+
+
+
 //콘솔에 값 확인하고 싶을때 사용 - add.jsp/update.jsp(console 버튼)
 $('#consoleSign').click(function(){
-    setService();
-    chkValidation();
-    
+    //setService();
+    //chkValidation();
+
+    //doName값을 가져와서 권역을 고를 수 있게끔 + value값 넣어주기
+    let adrs = $('#addressInput').val();
+
+    //시/도, 시/군/구, 나머지주소로 자르기
+    let doName = adrs.substring(0, adrs.indexOf(' '));
+    let sigunguName = adrs.substring(adrs.indexOf(' ')+1, adrs.indexOf(' ', adrs.indexOf(' ')+1));
+    let otherAdrs = adrs.substring(adrs.indexOf(' ', adrs.indexOf(' ')+1)+1);
+
+    console.log(doName);
+    console.log(sigunguName);
+    console.log(otherAdrs);
+
+
 })
 
 

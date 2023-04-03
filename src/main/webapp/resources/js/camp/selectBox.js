@@ -92,8 +92,8 @@ let areaSelect = function(target){
                 let doName = $(this).val();
                 try{
                     let keys = Object.keys(area[Region][doName]);
-                    keys.forEach(function(siGunGuName){
-                        a3.append("<option value="+area[Region][doName][siGunGuName]+">"+area[Region][doName][siGunGuName]+"</option>");    
+                    keys.forEach(function(sigunguName){
+                        a3.append("<option value="+area[Region][doName][sigunguName]+">"+area[Region][doName][sigunguName]+"</option>");    
                     });
                 }catch(e){
                     $('#addressInput').val('');

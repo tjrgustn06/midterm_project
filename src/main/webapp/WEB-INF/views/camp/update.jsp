@@ -140,10 +140,10 @@
 							<td>
 								<select name="regionName" id="addressRegion"></select>
 								<select name="doName" id="addressDo">
-									<option value="${dto.doName}">${dto.doName}</option>
+									<option value="${dto.doName}" selected>${dto.doName}</option>
 								</select>
 								<select name="sigunguName" id="addressSigungu">
-									<option value="${dto.sigunguName}">${dto.sigunguName}</option>
+									<option value="${dto.sigunguName}" selected>${dto.sigunguName}</option>
 								</select>
 							</td>
 						</tr>
@@ -362,35 +362,33 @@
 						<!-- siteDTO 입력부 추가될 부분 -->
 						<div class="row my-2" id="siteList">
 							<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
-							<c:forEach items="${list}" var="siteDTO">
-								--${siteDTO.areaNum}--
+							<!-- index는 0부터 시작, count는 1부터 시작 -->
+							<c:forEach items="${list}" var="siteDTO" varStatus="i">
+								<div id="siteOne${i.count}">
+									<div class="input-group mb-2">
+										<span class="input-group-text" id="siteName">사이트이름</span>
+										<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}">
+										<span class="input-group-text" id="siteSize">크기(m^2)</span>
+										<input type="text" name="siteSize" data-site-idx="siteSize${i.count}" class="form-control" value="${siteDTO.siteSize}">
+									</div>
+									<div class="input-group mb-2">
+										<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+										<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice${i.count}" class="form-control" value="${siteDTO.offWeekdaysPrice}">
+										<span class="input-group-text" id="offWeekendsPrice">주말</span>
+										<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice${i.count}" class="form-control" value="${siteDTO.offWeekendsPrice}">
+									</div>
+									<div class="input-group mb-2">
+										<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+										<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice${i.count}" class="form-control" value="${siteDTO.peakWeekdaysPrice}">
+										<span class="input-group-text" id="peakWeekendsPrice">주말</span>
+										<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}">
+									</div>
+									<div class="mb-2">
+										<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">입력창 삭제</button>
+										<button type="button" data-site-idx="siteDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button>
+									</div>
+								</div>
 							</c:forEach>
-
-
-							<!-- <div id="siteOne1">
-								<div class="input-group mb-2">
-									<span class="input-group-text" id="siteName">사이트이름</span>
-									<input type="text" name="siteName" data-site-idx="siteName1" class="form-control" placeholder="ex)일반A1, 카라반A1">
-									<span class="input-group-text" id="siteSize">크기(m^2)</span>
-									<input type="text" name="siteSize" data-site-idx="siteSize1" class="form-control" placeholder="ex)6*11, 10*10">
-								</div>
-								<div class="input-group mb-2">
-									<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
-									<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice1" class="form-control" placeholder="요금 입력">
-									<span class="input-group-text" id="offWeekendsPrice">주말</span>
-									<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice1" class="form-control" placeholder="요금 입력">
-								</div>
-								<div class="input-group mb-2">
-									<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
-									<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice1" class="form-control" placeholder="요금 입력">
-									<span class="input-group-text" id="peakWeekendsPrice">주말</span>
-									<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice1" class="form-control" placeholder="요금 입력">
-								</div>
-								<div class="mb-2">
-									<button type="button" data-site-idx="siteIptDel1" class="siteDels btn btn-outline-danger">입력창 삭제</button>
-									<button type="button" data-site-idx="siteDel1" class="siteDels btn btn-outline-danger">사이트 삭제</button>
-								</div>
-							</div> -->
 							<!-- 생성 끝날 부분 -->
 						</div>
 						
@@ -437,7 +435,7 @@
 </div>
 
 
-<script src="../resources/js/camp/selectBox.js"></script>
+<script src="../resources/js/camp/selectBox2.js"></script>
 <script src="../resources/js/camp/campCRUD.js"></script>
 <script src="../resources/js/camp/fileManager.js"></script>
 <script>
@@ -446,27 +444,11 @@
 	setCount('${dto.campFileDTOs.size()}');
 </script>
 <script>
-	setSiteMax(5);
+	setSiteIdx(2+'${dto.campSiteDTOs.size()-1}'*1);
+	setSiteMax(10);
 	setSiteCount('${dto.campSiteDTOs.size()}');
+	console.log(siteIdx);
 </script>
 <c:import url="../template/common_js.jsp"></c:import>
-
-
-
-
-<!-- add 추가되면 지워야할 부분 아래 ~ /body까지 -->
-<!-- <script src="../resources/js/camp/campCRUD.js"></script>
-<script src="../resources/js/camp/fileManager.js"></script>
-<script>
-	setMax(10);
-	setParam('files');
-	setCount('${dto.campFileDTOs.size()}');
-</script>
-<script>
-	setSiteMax(5);
-	setSiteCount('${dto.campSiteDTOs.size()}');
-</script>
-<c:import url="../template/common_js.jsp"></c:import> -->
-<!-- 지워야할 부분 끝 -->
 </body>
 </html>

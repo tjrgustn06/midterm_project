@@ -39,10 +39,6 @@ public class ProductOrderService {
 		productOrderDTO.setOrderNum(productOrderDAO.getOrderNumber());
 		int result = productOrderDAO.setOrderNumber(productOrderDTO);
 		productOrderDTO.setAddress("");
-		String orderNames[]=productOrderDTO.getName().split("개");
-		for(String orderName:orderNames) {
-			System.out.println(orderName);
-		}
 		result = productOrderDAO.setProductOrderAdd(productOrderDTO);
 		return result;
 	}
@@ -75,15 +71,34 @@ public class ProductOrderService {
 	// delete 주문 취소
 	public int setProductOrderDelete(ProductOrderDTO productOrderDTO) throws Exception {
 		int result = productOrderDAO.setProductOrderDelete(productOrderDTO);
-				
-		String gradeName=productOrderDTO.getName();
-		gradeName=gradeName.substring(gradeName.lastIndexOf("급")-1);
-		ProductGradeDTO productGradeDTO = new ProductGradeDTO();
-		productGradeDTO.setGradeName(gradeName);
-		productGradeDTO.setGradeNum(productOrderDTO.getGradeNum());
-		productGradeDTO=productOrderDAO.getGradeStock(productGradeDTO);
-		productGradeDTO.setGradeStock(productGradeDTO.getGradeStock()+productOrderDTO.getAmount());
-		result=productOrderDAO.setGradeStockUpdate(productGradeDTO);
+		String orderNames[]=productOrderDTO.getName().split("개");
+		String gradeName = "";
+		if(orderNames.length==1) {
+			gradeName=productOrderDTO.getName();
+			gradeName=gradeName.substring(gradeName.lastIndexOf("급")-1);
+			ProductGradeDTO productGradeDTO = new ProductGradeDTO();
+			productGradeDTO.setGradeName(gradeName);
+			productGradeDTO.setGradeNum(productOrderDTO.getGradeNum());
+			productGradeDTO=productOrderDAO.getGradeStock(productGradeDTO);
+			productGradeDTO.setGradeStock(productGradeDTO.getGradeStock()+productOrderDTO.getAmount());
+			result=productOrderDAO.setGradeStockUpdate(productGradeDTO);
+			return result;
+		}
+		for(String orderName:orderNames) {
+			System.out.println(orderName);
+			Long gradeNum=Long.parseLong(orderName.substring(0,orderName.indexOf(".")));
+			productOrderDTO.setGradeNum(gradeNum);
+			gradeName=orderName.substring(orderName.lastIndexOf("급")-1,orderName.lastIndexOf("급")+1);
+			Integer amount=Integer.parseInt(orderName.substring(orderName.lastIndexOf("급")+1));
+			productOrderDTO.setAmount(amount);
+			ProductGradeDTO productGradeDTO = new ProductGradeDTO();
+			productGradeDTO.setGradeName(gradeName);
+			productGradeDTO.setGradeNum(productOrderDTO.getGradeNum());
+			productGradeDTO=productOrderDAO.getGradeStock(productGradeDTO);
+			productGradeDTO.setGradeStock(productGradeDTO.getGradeStock()+productOrderDTO.getAmount());
+			result=productOrderDAO.setGradeStockUpdate(productGradeDTO);
+		}
+		
 		return result;
 	}
 	

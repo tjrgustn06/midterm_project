@@ -1,10 +1,11 @@
 package com.camp.s1.member;
 
+
 public class KakaoDTO {
 
 	private Long kakaoNum;
-	private String kakoName;
-	private String kakoEmail;
+	private String kakaoName;
+	private String kakaoEmail;
 	
 	
 	public Long getKakaoNum() {
@@ -13,17 +14,17 @@ public class KakaoDTO {
 	public void setKakaoNum(Long kakaoNum) {
 		this.kakaoNum = kakaoNum;
 	}
-	public String getKakoName() {
-		return kakoName;
+	public String getKakaoName() {
+		return kakaoName;
 	}
-	public void setKakoName(String kakoName) {
-		this.kakoName = kakoName;
+	public void setKakaoName(String kakaoName) {
+		this.kakaoName = kakaoName;
 	}
-	public String getKakoEmail() {
-		return kakoEmail;
+	public String getKakaoEmail() {
+		return kakaoEmail;
 	}
-	public void setKakoEmail(String kakoEmail) {
-		this.kakoEmail = kakoEmail;
+	public void setKakaoEmail(String kakaoEmail) {
+		this.kakaoEmail = kakaoEmail;
 	}
-	
+
 }

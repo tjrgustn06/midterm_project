@@ -147,7 +147,6 @@
   		</collection>
   	</resultMap>
   
-  
 	<!-- add -->
 	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT 나중에, REGDATE는 UPDATE에서는 빼면 될거같음 -->
 	<insert id="setCampAdd" parameterType="CampDTO">
@@ -156,15 +155,6 @@
 		</selectKey>
 		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, DONAME, SIGUNGUNAME, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, REGDATE, MODIDATE, HIT)
 		VALUES(#{campNum}, #{name}, #{phone}, (#{doName}||' '||#{sigunguName}||' '||#{address}), #{lineIntro}, #{intro}, #{feature}, #{induty}, #{doName}, #{sigunguName}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, SYSDATE, 0)
-	</insert>
-	
-	<!-- siteAdd -->
-	<insert id="setCampSiteAdd">
-		<selectKey keyProperty="areaNum" order="BEFORE" resultType="Long">
-			SELECT CAMPSEQ.NEXTVAL FROM DUAL
-		</selectKey>
-		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS)
-		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, '예약가능')
 	</insert>
 	
 	<!-- delete -->
@@ -177,6 +167,23 @@
 		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}
 		WHERE CAMPNUM=#{campNum}
 	</update>
+	
+	
+	<!-- site -->
+	<!-- siteAdd -->
+	<insert id="setCampSiteAdd">
+		<selectKey keyProperty="areaNum" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS)
+		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, '예약가능')
+	</insert>
+	
+	<!-- siteDelete -->
+	<delete id="setCampSiteDelete" parameterType="Long">
+		DELETE CAMPSITE WHERE AREANUM=#{areaNum}
+	</delete>
+	
 	
 	
 	<!-- file -->

@@ -76,6 +76,11 @@ public class CampDAO {
 		return sqlSession.insert(NAMESPACE+"setCampSiteAdd", campSiteDTO);
 	}
 	
+	//siteDelete
+	public int setCampSiteDelete(Long areaNum) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setCampSiteDelete", areaNum);
+	}
+	
 	//thumbnail - list가 없고 이미지 파일 한개임
 //	public ThumbnailDTO getThumbnail(CampDTO campDTO) throws Exception{
 //		return sqlSession.selectOne(NAMESPACE+"getThumbnail", campDTO);

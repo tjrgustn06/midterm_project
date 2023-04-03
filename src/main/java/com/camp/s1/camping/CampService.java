@@ -161,9 +161,9 @@ public class CampService {
 		//1.글내용 업데이트 메서드 실행, 2.썸네일 업데이트 메서드 실행, 3.파일 업데이트 메서드 실행, 4.사이트 업데이트 메서드 실행
 		
 		//캠프사이트 삭제 후 추가(서비스에서 areaNum을 통해 기존 db에 있는 siteDTO지우고 CampDTO에 있는 사이트 입력하게끔)
-		List<CampSiteDTO> ar = campDAO.getCampSiteList(campDTO);
-		for(CampSiteDTO campSiteDTO : ar) {
-			
+		//삭제
+		for(Long areaNum : areaNums) {
+			campDAO.setsitedele
 		}
 		
 		

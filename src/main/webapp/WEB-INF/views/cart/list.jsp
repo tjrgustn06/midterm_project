@@ -44,8 +44,8 @@
 										<td><input type="text" class="names form-data" name="name" value="${dto.name}" readonly></td>
 										<td><input type="text" class="amounts form-data" name="amount" value="${dto.amount}" readonly>
 											<span>
-												<button class="plus_btn">+</button>
-												<button class="minus_btn">-</button>
+												<button type="button" class="plus_btn">+</button>
+												<button type="button" class="minus_btn">-</button>
 											</span>
 										</td>
 										<td><input type="text" class="prices form-data" name="price" value="${dto.price}" readonly></td>

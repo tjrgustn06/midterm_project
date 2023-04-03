@@ -78,10 +78,10 @@
 							</div>
 							<div class="input-group mb-3">
 								<div class="row">
-								<p>사용시작날짜: <input type="text" class="datepicker" name="startDate"></p>
+								<p>사용시작날짜: <input type="text" class="datepicker" id="startDate" name="startDate"></p>
 								</div>
 								<div class="row">
-								<p>사용종료날짜: <input type="text" class="datepicker" name="lastDate"></p>
+								<p>사용종료날짜: <input type="text" class="datepicker" id="lastDate" name="lastDate"></p>
 								</div>
 							</div>
 							<div class="row">
@@ -203,6 +203,10 @@
 			$('#price').val($('#totalPrice').html())
 			$('#gradeNum').val(gradeNum)
 			$('#name').val('${dto.name}'+" "+$('#gradeName').val())
+			if(gradeStock<0) {
+				gradeStock=0;
+			}
+			console.log(gradeStock)
 			$('#gradeStock').html(gradeStock);
 		})
 		
@@ -225,10 +229,24 @@
             yearSuffix: '년',
             dateFormat: 'yy-mm-dd',
             showMonthAfterYear:true,
-            constrainInput: true
-		})
+            constrainInput: true,
+			minDate: 0
+		});
 
 		$('.datepicker').datepicker();
+
+		$('#startDate').datepicker('option', 'maxDate', $('#lastDate').val());
+		$('#startDate').datepicker('option','onClose', (selectedDate)=>{
+			$('#lastDate').datepicker('option', 'minDate', selectedDate);
+		});
+
+		$('#startDate').change(()=>{	
+			$('#lastDate').datepicker('option', 'minDate', $('#startDate').val());
+			$('#lastDate').datepicker('option', 'onClose', (selectedDate)=>{
+				$('#startDate').datepicker('option', 'maxDate', selectedDate);
+			})
+		})
+
 	</script>
 	
 	<script src="../resources/js/productDetail.js"></script>

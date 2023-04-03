@@ -23,6 +23,17 @@ public class CartService {
 	}
 	
 	public int setCartAdd(CartDTO cartDTO) throws Exception {
+		int result = 0;
+		List<CartDTO> ar = cartDAO.getCartList();
+		for (CartDTO cartDTODetail:ar) {
+			if(cartDTO.getId().equals(cartDTODetail.getId()) && cartDTO.getGradeNum().equals(cartDTODetail.getGradeNum())){
+				cartDTODetail=cartDAO.getCartDetail(cartDTODetail);
+				cartDTODetail.setAmount(cartDTODetail.getAmount()+cartDTO.getAmount());
+				cartDTODetail.setPrice(cartDTODetail.getPrice()+cartDTO.getPrice());
+				result = cartDAO.setCartUpdate(cartDTODetail);
+				return result;
+			}
+		}
 		return cartDAO.setCartAdd(cartDTO);
 	}
 	

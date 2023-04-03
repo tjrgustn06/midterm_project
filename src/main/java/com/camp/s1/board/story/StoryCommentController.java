@@ -21,7 +21,7 @@ public class StoryCommentController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("common/commentList");
-		mv.addObject("cmtList", storyCommentService.getBoardList(pager));
+		mv.addObject("commentList", storyCommentService.getBoardList(pager));
 		
 		
 		
@@ -31,6 +31,12 @@ public class StoryCommentController {
 	
 	@PostMapping("add")
 	public ModelAndView setBoardadd(StoryCommentDTO storyCommentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", storyCommentService.setBoardAdd(storyCommentDTO));
+		
+		
+		return mv;
 	}
 }

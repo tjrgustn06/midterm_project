@@ -5,6 +5,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   <mapper namespace="com.camp.s1.board.story.StoryCommentDAO">
+  
     <select id="getTotalCount" resultType="Long">
   	SELECT COUNT(COMMENTNUM) FROM STORYCOMMENT
   </select>
@@ -21,4 +22,16 @@
 	  	WHERE R BETWEEN #{startRow} AND #{lastRow}
 	  	
   </select>
+  
+  	<!-- BoardAdd Page -->	
+  	
+	<insert id="setBoardAdd" parameterType="BbsDTO">	
+		<selectKey keyProperty="commentNum" resultType="Long" order="BEFORE">	
+				SELECT BOARDSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+  		INSERT INTO STORYCOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
+  		VALUES (#{commentNum}, #{num}, #{writer}, #{contents}, SYSDATE, #{commentNum}, 0, 0)
+  	</insert> 
+  
+  
   </mapper>

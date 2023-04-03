@@ -28,8 +28,7 @@ public class StoryCommentService implements CommentService{
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return storyCommentDAO.setBoardAdd(bbsDTO);
 	}
 
 	@Override

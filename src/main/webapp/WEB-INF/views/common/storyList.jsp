@@ -181,6 +181,7 @@
 											<div class="card-body my-1">							
 												<form action="../${boardName}Comment/add" method="Post">
 													<input type="hidden" name="writer" value="${member.id}">
+													<input type="hidden" name="num" value="${dto.num}">
 													<input class="border border-0" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
 												</form>
 											</div>

@@ -94,7 +94,7 @@ public class CampService {
 				}else {
 					continue;
 				}
-			}		
+			}
 		
 		//파일 추가 - files
 		//1.HDD에 file 저장('어디'에 '무슨'이름으로)
@@ -109,6 +109,9 @@ public class CampService {
 			}
 			String fileName = fileManager.fileSave(multipartFile, realPath);
 			
+			//확인용 - 파일 있으면 사이즈 나올거고 없으면 0
+			System.out.println("file size: "+multipartFile.getSize());
+			
 			//2.DB에 insert
 			//객체 만들고, 이 객체에 추가할 파일 정보를 db로부터 조회해서 집어넣기
 			CampFileDTO campFileDTO = new CampFileDTO();
@@ -117,10 +120,10 @@ public class CampService {
 			campFileDTO.setOriName(multipartFile.getOriginalFilename());
 			
 			//확인용
-			System.out.println("fileNum: "+campFileDTO.getFileNum());
-			System.out.println("campNum: "+campFileDTO.getCampNum());
-			System.out.println("fileName: "+campFileDTO.getFileName());
-			System.out.println("oriName: "+campFileDTO.getOriName());
+//			System.out.println("fileNum: "+campFileDTO.getFileNum());
+//			System.out.println("campNum: "+campFileDTO.getCampNum());
+//			System.out.println("fileName: "+campFileDTO.getFileName());
+//			System.out.println("oriName: "+campFileDTO.getOriName());
 					
 			result = campDAO.setCampFileAdd(campFileDTO);
 			
@@ -131,22 +134,21 @@ public class CampService {
 		
 		
 		//썸네일 저장 - thumbFile
-		//1. file을 HDD에 저장.
-		String savePath = "resources/upload/camp/thumbnail";
-		String thumbRealPath = session.getServletContext().getRealPath(savePath);
-		System.out.println("thumbFiles: "+thumbRealPath);
-		String thumbName = fileManager.fileSave(thumbFile, thumbRealPath);
-		
-		//2. DB에 저장
-		ThumbnailDTO thumbnailDTO = new ThumbnailDTO();
-		thumbnailDTO.setCampNum(campDTO.getCampNum());
-		thumbnailDTO.setThumbName(thumbName);
-		
-		//3.CampDTO의 thumbnail 컬럼에 경로 저장(일단 보류)
-//		String thumbnail = "";
-//		campDTO.setThumbnail(thumbnail);
-		
-		result = campDAO.setThumbnailAdd(thumbnailDTO);
+		if(thumbFile.getSize()!=0) {
+			//1. file을 HDD에 저장.
+			String savePath = "resources/upload/camp/thumbnail";
+			String thumbRealPath = session.getServletContext().getRealPath(savePath);
+			System.out.println("thumbFiles: "+thumbRealPath);
+			String thumbName = fileManager.fileSave(thumbFile, thumbRealPath);
+			
+			//2. DB에 저장
+			ThumbnailDTO thumbnailDTO = new ThumbnailDTO();
+			thumbnailDTO.setCampNum(campDTO.getCampNum());
+			thumbnailDTO.setThumbName(thumbName);
+			
+			//3.CampDTO의 thumbnail 컬럼에 경로 저장(일단 보류)
+			result = campDAO.setThumbnailAdd(thumbnailDTO);		
+		}
 		//thumbFile end
 		
 		return result;

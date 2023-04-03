@@ -71,6 +71,8 @@
 	<div class="row my-3">
 		<!-- 파라미터 넘어가는거 확인용 -->
 		--${param}--
+		--file: ${dto.campFileDTOs.size()}--
+		--site: ${dto.campSiteDTOs.size()}--
 		<h3>캠핑장 이름 등록</h3>
 		<input type="text" id="ChkName" name="name" class="form-control my-1" value="${dto.name}">
 	</div>
@@ -81,7 +83,7 @@
 		<!-- 버튼 영역 -->
 		<div class="d-flex row justify-content-center col-4 mx-auto">
 			<div class="mx-auto mb-3">
-				<button id="updConsoleSign" class="btn btn-outline-success" type="button">console</button>
+				<button id="consoleSign" class="btn btn-outline-success" type="button">console</button>
 			</div>
 			<div class="mx-auto">
 				<button id="updReg" class="btn btn-outline-success" type="button">등록</button>
@@ -92,24 +94,33 @@
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
 			<div class="row pic my-3 mx-auto">
-				<!-- 사진이 없는경우 empty.jpg 표시 -->
+				<!-- 원래 사진 표시 -->
+				<c:choose>
+					<c:when test="${not empty dto.thumbnailDTO}">
+						<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${not empty dto.thumbnail}">
+								<img alt="" src="${dto.thumbnail}">
+							</c:when>
+							<c:otherwise>
+								<img alt="" src="../resources/images/empty.jpg">
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
+
+				<!-- 새로 사진 넣을 곳 표시.  -->
 				<h5><i class="fa-solid fa-camera fa-sm"></i> 대표 사진 등록</h5>
 				<div id="thumbnailImage" class="row">
+					<!-- 파일 입력폼 -->
 					<div class="row mb-3">
 						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
 					</div>
 				</div>
 
-				<!-- 원본 -->
-				<!-- <div id="fileList" class="row">
-					<div class="row mb-3">
-						<label for="thumbnail" class="form-label">대표 사진 등록</label>
-						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
-					</div>
-					<div class="row col-4 mb-3">
-						<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
-					</div>
-				</div> -->
+				
 			</div>
 			
 			<hr class="my-2">
@@ -128,29 +139,33 @@
 							<th scope="col my-auto">권역/시도/시군구 선택</th>
 							<td>
 								<select name="regionName" id="addressRegion"></select>
-								<select name="doName" id="addressDo"></select>
-								<select name="sigunguName" id="addressSigungu"></select>
+								<select name="doName" id="addressDo">
+									<option value="${dto.doName}">${dto.doName}</option>
+								</select>
+								<select name="sigunguName" id="addressSigungu">
+									<option value="${dto.sigunguName}">${dto.sigunguName}</option>
+								</select>
 							</td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">주소</th>
-							<td><input type="text" name="address" id="addressInput" class="form-control" placeholder="권역/시도/시군구를 먼저 선택하세요" style="background-color: bisque;" readonly></td>
+							<td><input type="text" name="address" id="addressInput" class="form-control" value="${dto.address}"></td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">문의처</th>
-							<td><input type="text" name="phone" class="form-control" placeholder="문의 가능한 연락처를 입력하세요"></td>
+							<td><input type="text" name="phone" class="form-control" value="${dto.phone}"></td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">캠핑장 유형</th>
-							<td><input type="text" name="induty" class="form-control" placeholder="유형구분은 쉼표(,)로 해주세요"></td>
+							<td><input type="text" name="induty" class="form-control" value="${dto.induty}"></td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">홈페이지</th>
-							<td><input type="text" name="homePage" class="form-control" placeholder="홈페이지 URL을 입력하세요"></td>
+							<td><input type="text" name="homePage" class="form-control" value="${dto.homePage}"></td>
 						</tr>
 						<tr>
 							<th scope="col my-auto">주변이용가능시설</th>
-							<td><input type="text" name="posblFacility" class="form-control" placeholder="시설구분은 쉼표(,)로 해주세요"></td>
+							<td><input type="text" name="posblFacility" class="form-control" value="${dto.posblFacility}"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -169,13 +184,16 @@
 
 					<!-- 캠핑장소개 영역 -->
 					<div class="campIntro my-3" id="campIntro">
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개내용 등록</h5>
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개 등록</h5>
 						<!-- 이미지 3장 표시부분, 이미지는 아래쪽에서 추가 -->
 
 						<!-- 인트로 텍스트, 정보수정일 출력 -->
-						<input type="text" name="lineIntro" class="form-control mb-2" placeholder="캠핑장 한줄소개를 입력하세요">
+						<i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 한 줄 소개
+						<input type="text" name="lineIntro" class="form-control mb-2" value="${dto.lineIntro}">
+
+						<i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개
 						<div class="form-floating">
-							<textarea id="introText" name="intro" class="form-control" style="height:100px; resize:none;"></textarea>
+							<textarea id="introText" name="intro" class="form-control" style="height:100px; resize:none;">${dto.intro}</textarea>
 							<label for="introText">캠핑장 소개 내용을 입력하세요</label>
 						</div>
 						
@@ -236,7 +254,9 @@
 									<input class="form-check-input" id="chkMart" name="serv" value="마트.편의점" type="checkbox">
 									<label class="form-check-label" for="chkMart">마트/편의점</label>
 								</div>
-								<input type="hidden" name="service" id="serviceVal" value="">
+								<input type="hidden" name="service" id="serviceVal" value="${dto.service}">
+								<!-- service값 확인용 -->
+								--${dto.service}--
 							</div>
 						</div>
 
@@ -260,19 +280,19 @@
 										</tr>
 										<tr>
 											<th scope="col">특징</th>
-											<td><input type="text" name="feature" class="form-control" placeholder="특징을 입력하세요"></td>
+											<td><input type="text" name="feature" class="form-control" value="${dto.feature}"></td>
 										</tr>
 										<tr>
 											<th scope="col">글램핑 내부시설</th>
-											<td><input type="text" name="glampFacility" class="form-control" placeholder="시설구분은 쉼표(,)로 해주세요"></td>
+											<td><input type="text" name="glampFacility" class="form-control" value="${dto.glampFacility}"></td>
 										</tr>
 										<tr>
 											<th scope="col">카라반 내부시설</th>
-											<td><input type="text" name="caravFacility" class="form-control" placeholder="시설구분은 쉼표(,)로 해주세요"></td>
+											<td><input type="text" name="caravFacility" class="form-control" value="${dto.caravFacility}"></td>
 										</tr>
 										<tr>
 											<th scope="col">동물 동반여부</th>
-											<td><input type="text" name="petAllow" class="form-control" placeholder="가능/불가능 여부를 입력하세요"></td>
+											<td><input type="text" name="petAllow" class="form-control" value="${dto.petAllow}"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -297,6 +317,16 @@
 								<div class="row col-4 mb-3">
 									<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
 								</div>
+
+								<!-- 이미 가지고있는 파일을 표시 -->
+								<c:forEach items="${dto.campFileDTOs}" var="fileDTO">		
+									<div class="input-group my-1">
+										<div class="input-group-text">
+											<input class="form-check-input deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+										</div>
+									<input type="text" class="form-control" disabled value="${fileDTO.oriName}" aria-label="Text input with checkbox">			
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 
@@ -314,7 +344,7 @@
 						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 이용 안내사항 등록</h5>
 							<!-- 입력 안하는경우 안내사항이 없다는 메시지가 표시됩니다 -->
 							<div class="form-floating my-3">
-								<textarea id="useInfoText" name="useInfo" class="form-control" style="height:100px; resize:none;"></textarea>
+								<textarea id="useInfoText" name="useInfo" class="form-control" style="height:100px; resize:none;">${dto.useInfo}</textarea>
 								<label for="useInfoText">입력하지 않는 경우 안내사항이 없다는 메시지가 표시됩니다.</label>
 							</div>
 						<hr>
@@ -332,7 +362,12 @@
 						<!-- siteDTO 입력부 추가될 부분 -->
 						<div class="row my-2" id="siteList">
 							<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
-							<div id="siteOne1">
+							<c:forEach items="${list}" var="siteDTO">
+								--${siteDTO.areaNum}--
+							</c:forEach>
+
+
+							<!-- <div id="siteOne1">
 								<div class="input-group mb-2">
 									<span class="input-group-text" id="siteName">사이트이름</span>
 									<input type="text" name="siteName" data-site-idx="siteName1" class="form-control" placeholder="ex)일반A1, 카라반A1">
@@ -353,8 +388,9 @@
 								</div>
 								<div class="mb-2">
 									<button type="button" data-site-idx="siteIptDel1" class="siteDels btn btn-outline-danger">입력창 삭제</button>
+									<button type="button" data-site-idx="siteDel1" class="siteDels btn btn-outline-danger">사이트 삭제</button>
 								</div>
-							</div>
+							</div> -->
 							<!-- 생성 끝날 부분 -->
 						</div>
 						
@@ -407,11 +443,11 @@
 <script>
 	setMax(10);
 	setParam('files');
-	setCount(1);
+	setCount('${dto.campFileDTOs.size()}');
 </script>
 <script>
-	setSiteCount(1);
 	setSiteMax(5);
+	setSiteCount('${dto.campSiteDTOs.size()}');
 </script>
 <c:import url="../template/common_js.jsp"></c:import>
 
@@ -419,14 +455,18 @@
 
 
 <!-- add 추가되면 지워야할 부분 아래 ~ /body까지 -->
-<script src="../resources/js/camp/campCRUD.js"></script>
+<!-- <script src="../resources/js/camp/campCRUD.js"></script>
 <script src="../resources/js/camp/fileManager.js"></script>
 <script>
 	setMax(10);
 	setParam('files');
 	setCount('${dto.campFileDTOs.size()}');
 </script>
-<c:import url="../template/common_js.jsp"></c:import>
+<script>
+	setSiteMax(5);
+	setSiteCount('${dto.campSiteDTOs.size()}');
+</script>
+<c:import url="../template/common_js.jsp"></c:import> -->
 <!-- 지워야할 부분 끝 -->
 </body>
 </html>

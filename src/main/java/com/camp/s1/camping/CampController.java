@@ -104,6 +104,9 @@ public class CampController {
 		ModelAndView mv = new ModelAndView();
 		//int length = 0;
 		
+		//확인용 - thumbFile이 있으면 사이즈가 나올거고 없으면 0일거라 예상
+		System.out.println("thumbnail size: "+thumbFile.getSize());
+		
 		
 		//siteDTO가 몇개 입력되었는지 체크 -> 나중에 버튼 만들어서 입력폼 추가, 삭제하기
 //		for(int i=0; i<siteName.length; i++) {
@@ -150,8 +153,11 @@ public class CampController {
 	public ModelAndView setCampUpdate(CampDTO campDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		campDTO = campService.getCampDetail(campDTO);
+		//CampSiteList도 보내주기 - list라는 이름으로
+		List<CampSiteDTO> ar = campService.getCampDetail(campDTO).getCampSiteDTOs();
 		
 		mv.addObject("dto", campDTO);
+		mv.addObject("list", ar);
 		mv.setViewName("camp/update");
 		return mv;
 	}
@@ -160,6 +166,7 @@ public class CampController {
 	@PostMapping("update")
 	public ModelAndView setCampUpdate(CampDTO campDTO, MultipartFile[] files, HttpSession session, Long[] fileNum) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
 		
 		if(fileNum != null) {
 			System.out.println(fileNum);

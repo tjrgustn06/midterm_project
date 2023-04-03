@@ -55,7 +55,6 @@ $('#addressSigungu').change(function(){
     }
 })
 
-
 //체크박스 선택된 값 여러개 받아오는 함수 - add.jsp
 //다음에는 컨트롤러에서 배열로 받아서 처리해보기
 function setService(){
@@ -131,6 +130,22 @@ $('#siteList').on('click', '.siteDels', function(){
 
 
 //detail.jsp
+//홈페이지 주소 앞에 https://가 안붙어있으면 붙여서 실행하기
+$('#detHomePage').click(function(){
+    console.log('homepage click');
+    console.log($(this).attr('href'));
+
+    let chkDomain = $(this).attr('href'); //www.naver.com임
+    if(chkDomain.startsWith('https://')){ //setDomain이 https://로 시작하는지 체크. 맞으면 true 아니면 false
+        //맞으면 아무런 작업도 안해도 됨
+    }else{
+        let setDomain = 'https://'+chkDomain;
+        $('#detHomePage').attr('href', setDomain);
+    }
+})
+
+
+
 //메뉴바 하이라이트 설정 - detail.jsp
 if(viewType==1){
     $('.camp').removeClass("active");
@@ -150,6 +165,26 @@ if(viewType==4){
 }
 
 
+
+//캠핑장 예약버튼 작동 - detail.jsp
+$('#detReserve').click(function(){
+    //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
+    if(confirm('예약 페이지로 넘어가시겠습니까? (test시 list로 넘어갑니다)')){
+        location.href='./list';
+    }
+})
+
+//리스트로 - detail.jsp
+$('#detList').click(function(){
+    location.href="./list";
+})
+
+//캠핑장 업데이트 - detail.jsp
+$('#detUpdate').click(function(){
+    console.log('update button click');
+    location.href="./update";
+})
+
 //캠핑장 글삭제 - detail.jsp
 $('#detDelete').click(function(){
     let check = confirm("정말 삭제하시겠습니까?");
@@ -161,25 +196,12 @@ $('#detDelete').click(function(){
     }
 })
 
-//리스트로 - detail.jsp
-$('#detList').click(function(){
-    location.href="./list";
-})
-
-//캠핑장 예약버튼 작동 - detail.jsp
-$('#detReserve').click(function(){
-    //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
-    if(confirm('예약 페이지로 넘어가시겠습니까? (test시 list로 넘어갑니다)')){
-        location.href='./list';
-    }
-})
-
 
 
 
 
 //update.jsp - 나중에 수정해야한다
-//캠핑장 글업데이트 취소 - update_old.jsp
+//캠핑장 글업데이트 취소 - update.jsp
 $('#updCancel').click(function(){
     let check = confirm("정말 취소하시겠습니까? 저장하지 않은 내용은 변경되지 않습니다");
     if(check){
@@ -189,11 +211,10 @@ $('#updCancel').click(function(){
 
 
 
-//콘솔에 값 확인하고 싶을때 사용 - add.jsp(console 버튼)
-$('#addConsoleSign').click(function(){
+//콘솔에 값 확인하고 싶을때 사용 - add.jsp/update.jsp(console 버튼)
+$('#consoleSign').click(function(){
     setService();
     chkValidation();
-
     
 })
 

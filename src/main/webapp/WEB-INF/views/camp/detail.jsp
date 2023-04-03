@@ -125,7 +125,7 @@
 						<th scope="col">홈페이지</th>
 						<td>
 							<c:if test="${not empty dto.homePage}">
-								<a href="${dto.homePage}" target="_BLANK" title="새창열림"><i class="fa-solid fa-house fa-lg"></i></a>
+								<a href="${dto.homePage}" id="detHomePage" target="_BLANK" title="새창열림"><i class="fa-solid fa-house fa-lg"></i></a>
 							</c:if>
 						</td>
 					</tr>

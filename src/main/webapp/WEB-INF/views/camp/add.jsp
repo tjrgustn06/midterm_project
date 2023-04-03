@@ -81,7 +81,7 @@
 		<!-- 버튼 영역 -->
 		<div class="d-flex row justify-content-center col-4 mx-auto">
 			<div class="mx-auto mb-3">
-				<button id="addConsoleSign" class="btn btn-outline-success" type="button">console</button>
+				<button id="consoleSign" class="btn btn-outline-success" type="button">console</button>
 			</div>
 			<div class="mx-auto">
 				<button id="addReg" class="btn btn-outline-success" type="button">등록</button>
@@ -169,11 +169,14 @@
 
 					<!-- 캠핑장소개 영역 -->
 					<div class="campIntro my-3" id="campIntro">
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개내용 등록</h5>
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개 등록</h5>
 						<!-- 이미지 3장 표시부분, 이미지는 아래쪽에서 추가 -->
 
 						<!-- 인트로 텍스트, 정보수정일 출력 -->
+						<i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 한 줄 소개
 						<input type="text" name="lineIntro" class="form-control mb-2" placeholder="캠핑장 한줄소개를 입력하세요">
+
+						<i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개
 						<div class="form-floating">
 							<textarea id="introText" name="intro" class="form-control" style="height:100px; resize:none;"></textarea>
 							<label for="introText">캠핑장 소개 내용을 입력하세요</label>
@@ -410,8 +413,8 @@
 	setCount(1);
 </script>
 <script>
-	setSiteCount(1);
 	setSiteMax(5);
+	setSiteCount(1);
 </script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>

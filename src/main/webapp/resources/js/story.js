@@ -1,4 +1,6 @@
 let num = 0;
+let boardName = $('#boardName').attr('data-board-name');
+
 
 
 $('#storyList').on('click', '.btnToggle', function(){
@@ -38,3 +40,8 @@ $('#storyList').on('click','.update', function(){
 
     location.href="./update?num="+num;
 })
+
+
+
+
+

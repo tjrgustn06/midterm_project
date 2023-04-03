@@ -4,9 +4,9 @@ let oneTime = false;
 
 let lastScroll = 0;
 
-function setCurrentPage(c) {
-    currentPage = c;
-}
+// function setCurrentPage(c) {
+//     currentPage = c;
+// }
 
 
 $(document).scroll(function(){
@@ -72,7 +72,7 @@ function getList(page) {
             },
             success : function(response){
                 $('#storyList').append(response);
-                page++;
+                // page++;
             }
             
     })

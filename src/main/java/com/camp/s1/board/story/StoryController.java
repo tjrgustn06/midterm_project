@@ -54,6 +54,16 @@ public class StoryController {
 		
 	}
 	
+	@GetMapping("detail")
+	public ModelAndView getBoardDetail(StoryDTO storyDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/story/detail");
+		mv.addObject("dto", storyService.getBoardDetail(storyDTO));
+		
+		return mv;
+	}
+	
 	@GetMapping("add")
 	public ModelAndView setBoardAdd() throws Exception {
 		ModelAndView mv = new ModelAndView();

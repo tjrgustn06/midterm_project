@@ -118,6 +118,12 @@
 		</div>
 		</div>
 	</div>
+	<script>
+		let list = ${list}
+		for(let i=0; i<'${list.size()}'; i++) {
+			console.log(i);
+		}
+	</script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

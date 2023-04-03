@@ -140,8 +140,19 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setBoardFileDelete(Long fileNum) throws Exception {
-		return noticeDAO.setBoardFileDelete(fileNum);
+	public int setBoardFileDelete(Long fileNum, HttpSession session) throws Exception {
+		BoardFileDTO boardFileDTO = new BoardFileDTO();
+		boardFileDTO.setFileNum(fileNum);
+		boardFileDTO = noticeDAO.getBoardFileDetail(boardFileDTO);
+		int result = noticeDAO.setBoardFileDelete(fileNum);
+		
+		if(result > 0) {
+			String realPath = session.getServletContext().getRealPath("resources/upload/notice");
+			
+			boolean check = fileManager.fileDelete(realPath, boardFileDTO.getFileName());
+		}
+		
+		return result;
 	}
 
 	@Override

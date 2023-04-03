@@ -6,8 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/common_css.jsp"></c:import>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> 
 <title>Insert title here</title>
 </head>
 <body>
@@ -24,7 +22,7 @@
 				<div class="row mb-3">
 				  <label for="writer" class="col-sm-2 col-form-label">작성자</label>
 				  <div class="col-sm-10">
-				  	<input type="text" class="form-control" name="writer" id="writer" value="qwdfd1" readonly >
+				  	<input type="text" class="form-control" name="writer" id="writer" value="user01" readonly >
 				  </div>
 				</div>
 				

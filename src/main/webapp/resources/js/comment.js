@@ -107,11 +107,12 @@ $('#commentList').on('click', '.deleteMenu', function(){
 
 })
 
-//댓글 업데이트
+//댓글 업데이트폼 가져오기
 $('#commentList').on('click', '.updateMenu', function(){
     // getList(1);
     setResetForm(commentNum);
     setSubCommentResetForm(commentNum);
+    $('#commentMenu'+commentNum).hide();
     commentNum = $(this).attr('data-comment-num');
     $('#commentMenu'+commentNum).hide();
     getUpdateForm(commentNum);
@@ -200,6 +201,7 @@ $('#commentList').on('click','.subCommentMenu', function(){
     
     setSubCommentResetForm(commentNum);
     setResetForm(commentNum);
+    $('#commentMenu'+commentNum).hide();
 
     commentNum = $(this).attr('data-comment-num');
 

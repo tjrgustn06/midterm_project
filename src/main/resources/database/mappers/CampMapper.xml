@@ -22,6 +22,19 @@
   		</where>
   	</sql>
   	
+  	<sql id="searchCondition2">
+  		<trim prefix="WHERE" prefixOverrides="AND |OR">
+  			<if test="doName != null">
+  				DONAME LIKE '%' || #{doName} || '%'
+  			</if>
+  			<if test="sigunguName != null">
+  				AND SIGUNGUNAME LIKE '%' || #{sigunguName} || '%'
+  			</if>
+  			<if test="name != null">
+  				AND NAME LIKE '%' || #{name} || '%'
+  			</if>
+  		</trim>
+  	</sql>
   	
   	<!-- totalCount - calculate row of Pager -->
   	<select id="getTotalCount" parameterType="Pager" resultType="Long">
@@ -227,5 +240,14 @@
 	<delete id="setThumbnailDelete" parameterType="Long">
 		DELETE THUMBNAIL WHERE THUMBNUM=#{thumbNum}
 	</delete>
+	<select id="getSigunguNameList" parameterType="CampDTO" resultType="CampDTO">
+		SELECT DISTINCT SIGUNGUNAME FROM CAMPINFO
+		WHERE DONAME LIKE '%' || #{doName} || '%'
+	</select>
+	
+	<select id="getSearchCampList" parameterType="CampDTO" resultType="CampDTO">
+		SELECT * FROM CAMPINFO
+		<include refid="searchCondition2"></include>
+	</select>
   
   </mapper>

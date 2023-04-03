@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -163,7 +164,6 @@ public class MemberController {
 		
 		int result = memberService.setMemberUpdate(addressDTO, memberDTO);
 		
-		
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
 		
@@ -219,20 +219,20 @@ public class MemberController {
 		}
 		
 
-		//pw 찾기 폼
-		@GetMapping("findPwForm")
-		public ModelAndView findPwForm()throws Exception{
+		//pw 찾기 
+		@GetMapping("findPw")
+		public ModelAndView findPw()throws Exception{
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("/member/findPwForm");
+			
 			return mv;
 		}
 		
 		//Pw찾기
 		@PostMapping("findPw")
-		public ModelAndView findPw(@ModelAttribute MemberDTO memberDTO, HttpServletResponse response)throws Exception{
+		public ModelAndView findPw(MemberDTO memberDTO, HttpServletResponse response)throws Exception{
 			ModelAndView mv = new ModelAndView();
 			
-			memberDTO = memberService.findPw(response, memberDTO);
+			memberService.findPw(response, memberDTO);
 			
 			return mv;
 		}
@@ -272,18 +272,24 @@ public class MemberController {
 			
 		}
 		
-		//카카오 간편 로그인
-	    @GetMapping("kakaoLogin")
-	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
-	    	System.out.println("#########" + code);
+		//카카오 로그인 토큰 받기
+		@GetMapping("kakaoLogin")
+	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+			
 	    	String access_Token = memberService.getAccessToken(code);
-	    	KakaoDTO kakaoDTO = memberService.getUserInfo(access_Token);
-	        
-	    	System.out.println("###access_Token#### : " + access_Token);
-	    	System.out.println("###nickname#### : " + kakaoDTO.getKakoName());
-	    	System.out.println("###email#### : " + kakaoDTO.getKakoEmail());
-	    	return "member/memberLogin";
+	    	KakaoDTO userInfo = memberService.getUserInfo(access_Token);
+
+	    	MemberDTO memberDTO = new MemberDTO();
+	    	memberDTO.setId(userInfo.getKakaoEmail());
+	    	memberDTO.setName(userInfo.getKakaoName());
+
+	    	session.setAttribute("member", memberDTO);
+
+	    	return "home";
 	    }
+		
+		
+
 		
 		
 	

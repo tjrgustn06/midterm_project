@@ -8,8 +8,19 @@
   
 	  <!-- list -->
 	  <select id="getCartList" resultType="CartDTO">
-	  	SELECT * FROM CART
+	  	SELECT * FROM CART ORDER BY CARTNUM DESC
 	  </select>
+	  
+	  <!-- detail -->
+	  <select id="getCartDetail" parameterType="CartDTO" resultType="CartDTO">
+	  	SELECT * FROM CART
+	  	WHERE CARTNUM = #{cartNum}
+	  </select>
+	  <!-- update -->
+	  <update id="setCartUpdate" parameterType="CartDTO">
+	  	UPDATE CART SET AMOUNT = #{amount}, PRICE = #{price}
+	  	WHERE CARTNUM=#{cartNum}
+	  </update>
 	  
 	  <!-- add -->
 	  <insert id="setCartAdd" parameterType="CartDTO">

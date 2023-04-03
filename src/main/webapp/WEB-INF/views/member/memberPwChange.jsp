@@ -46,6 +46,7 @@
 				alert("공백은 입력이 불가능합니다.");
 				return false;
 			}
+			alert("비밀번호가 변경되었습니다");
 		}));
 	})
 </script>

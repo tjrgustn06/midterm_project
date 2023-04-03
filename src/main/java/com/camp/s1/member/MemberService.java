@@ -12,12 +12,14 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
 
 @Service
 public class MemberService {
@@ -60,6 +62,7 @@ public class MemberService {
 			
 			memberDTO.setPw(null);
 			memberDTO.setRoleName(result.getRoleName());
+			memberDTO.setAddressDTOs(result.getAddressDTOs());
 			return memberDTO;
 			
 		}else {
@@ -117,26 +120,79 @@ public class MemberService {
 			}
 		}
 		
+		//Email 발송
+		
+				public void sendEmail(MemberDTO memberDTO, String div) throws Exception {
+					// Mail Server 설정
+					String charSet = "utf-8";
+					String hostSMTP = "smtp.naver.com";
+					String hostSMTPid = "tjrgustn06@naver.com"; // 이메일 입력
+					String hostSMTPpwd = "*sa5978640427"; //비밀번호 입력
+
+					// 보내는 사람 EMail, 제목, 내용
+					String fromEmail = "tjrgustn06@naver.com"; //보내는사람 아이디
+					String fromName = "camp Homepage";
+					String subject = ""; //제목
+					String msg = ""; //내용(본문)
+					
+					if(div.equals("findPw")) {
+						subject = "camp Homepage 임시 비밀번호 입니다.";
+						msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+						msg += "<h3 style='color: blue;'>";
+						msg += memberDTO.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+						msg += "<p>임시 비밀번호 : ";
+						msg += memberDTO.getPw() + "</p></div>";
+					}
+					
+					// 받는 사람 E-Mail 주소
+							String mail = memberDTO.getEmail();
+							try {
+								HtmlEmail email = new HtmlEmail();
+								email.setDebug(true);
+								email.setCharset(charSet);
+								email.setSSL(true);
+								email.setHostName(hostSMTP);
+								email.setSmtpPort(587);
+
+								email.setAuthentication(hostSMTPid, hostSMTPpwd);
+								email.setTLS(true);
+								email.addTo(mail, charSet);
+								email.setFrom(fromEmail, fromName, charSet);
+								email.setSubject(subject);
+								email.setHtmlMsg(msg);
+								email.send();
+							} catch (Exception e) {
+								System.out.println("메일발송 실패 : " + e);
+							}
+						}
+		
 		//pw 찾기
 		public MemberDTO findPw(HttpServletResponse response, MemberDTO memberDTO)throws Exception{
 			
+			response.setContentType("text/html;charset=utf-8");
+			MemberDTO check = memberDAO.getMemberLogin(memberDTO);
 			PrintWriter out = response.getWriter();
-			
-			if(memberDTO.getId() == null) {
+
+			if(memberDAO.getMemberLogin(memberDTO) == null) {
 				 out.println("아이디가 없습니다");
 				 out.close();
-			}else if(!memberDTO.getEmail().equals(memberDAO.getMemberLogin(memberDTO))){
-				 out.println("잘못된 이메일 입니다");
+			}else if(!memberDTO.getEmail().equals(check.getEmail())){
+				 out.println("등록되지 않은 이메일입니다");
 				 out.close();
 			}else {
+				//임시 비밀번호 생성
 				String pw ="";
-				for(int i=0; i<6; i++) {
+				for(int i=0; i<10; i++) {
 					pw += (char) ((Math.random() * 26) + 97);		
 				}
 				memberDTO.setPw(pw);
 				System.out.println(pw);
-				memberDAO.sendMail(memberDTO, "findPw");
+				// 비밀번호 변경
+				memberDAO.setMemberPwChange(memberDTO);
+				// 비밀번호 변경 메일 발송
+				sendEmail(memberDTO, "findPw");
 				 out.println("이메일로 임시 비밀번호를 발송하였습니다");
+				 
 				 out.close();
 			}
 			return memberDTO;
@@ -158,94 +214,126 @@ public class MemberService {
 				out.println("</script>");
 				out.close();
 				return 0;
-			}			
-		}
-		
-		public String getAccessToken (String authorize_code) {
-			String access_Token = "";
-			String refresh_Token = "";
-			String reqURL = "https://kauth.kakao.com/oauth/token";
-			try {
-				URL url = new URL(reqURL);
-				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-				conn.setRequestMethod("POST");
-				conn.setDoOutput(true);
-				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-				StringBuilder sb = new StringBuilder();
-				sb.append("grant_type=authorization_code");
-				sb.append("&client_id=a68e05dc27f7fb4288530cb001c55c40"); //본인이 발급받은 key
-				sb.append("&redirect_uri=http://localhost:80"); // 본인이 설정한 주소
-				sb.append("&code=" + authorize_code);
-				bw.write(sb.toString());
-				bw.flush();
-				int responseCode = conn.getResponseCode();
-				System.out.println("responseCode : " + responseCode);
-				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				String line = "";
-				String result = "";
-				while ((line = br.readLine()) != null) {
-					result += line;
-				}
-				System.out.println("response body : " + result);
-				JsonParser parser = new JsonParser();
-				JsonElement element = parser.parse(result);
-				access_Token = element.getAsJsonObject().get("access_token").getAsString();
-				refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
-				System.out.println("access_token : " + access_Token);
-				System.out.println("refresh_token : " + refresh_Token);
-				br.close();
-				bw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
-			return access_Token;
 		}
 		
-		
-		// 메서드 리턴타입 KakaoDTO로 변경 및 import.
-		public KakaoDTO getUserInfo(String access_Token) {
-				HashMap<String, Object> userInfo = new HashMap<String, Object>();
-				String reqURL = "https://kapi.kakao.com/v2/user/me";
-				try {
-					URL url = new URL(reqURL);
-					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-					conn.setRequestMethod("GET");
-					conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-					int responseCode = conn.getResponseCode();
-					System.out.println("responseCode : " + responseCode);
-					BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-					String line = "";
-					String result = "";
-					while ((line = br.readLine()) != null) {
-						result += line;
-					}
-					System.out.println("response body : " + result);
-					JsonParser parser = new JsonParser();
-					JsonElement element = parser.parse(result);
-					JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-					JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-					String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-					String email = kakao_account.getAsJsonObject().get("email").getAsString();
-					userInfo.put("nickname", nickname);
-					userInfo.put("email", email);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		// 카카오 로그인 토큰 발급
+		public String getAccessToken (String authorize_code) {
+	        String access_Token = "";
+	        String refresh_Token = "";
+	        String reqURL = "https://kauth.kakao.com/oauth/token";
 
-				// catch 아래 코드 추가.
-				KakaoDTO result = memberDAO.findKakao(userInfo);
-				// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
-				System.out.println("S:" + result);
-				if(result==null) {
-				// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
-					memberDAO.KakaoLogin(userInfo);
-					// 위 코드가 정보를 저장하기 위해 Repository로 보내는 코드임.
-					return memberDAO.findKakao(userInfo);
-					// 위 코드는 정보 저장 후 컨트롤러에 정보를 보내는 코드임.
-					//  result를 리턴으로 보내면 null이 리턴되므로 위 코드를 사용.
-				} else {
-					return result;
-					// 정보가 이미 있기 때문에 result를 리턴함.
-				}
+	        try {
+	            URL url = new URL(reqURL);
+
+	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+	            //    POST 요청을 위해 기본값이 false인 setDoOutput을 true로
+
+	            conn.setRequestMethod("POST");
+	            conn.setDoOutput(true);
+	            //    POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+	            
+	            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+	            StringBuilder sb = new StringBuilder();
+	            sb.append("grant_type=authorization_code");
+	            sb.append("&client_id=a68e05dc27f7fb4288530cb001c55c40");  //본인이 발급받은 key
+	            sb.append("&redirect_uri=http://localhost:80/member/kakaoLogin"); // 본인이 설정해 놓은 경로
+	            sb.append("&code=" + authorize_code);
+	            bw.write(sb.toString());
+	            bw.flush();
+
+	            //    결과 코드가 200이라면 성공
+	            int responseCode = conn.getResponseCode();
+	            System.out.println("responseCode : " + responseCode);
+
+	            //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+	            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	            String line = "";
+	            String result = "";
+
+	            while ((line = br.readLine()) != null) {
+	                result += line;
+	            }
+	            System.out.println("response body : " + result);
+
+	            //    Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+	            JsonParser parser = new JsonParser();
+	            JsonElement element = parser.parse(result);
+
+	            access_Token = element.getAsJsonObject().get("access_token").getAsString();
+	            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+
+	            System.out.println("access_token : " + access_Token);
+	            System.out.println("refresh_token : " + refresh_Token);
+
+	            br.close();
+	            bw.close();
+	        } catch (IOException e) {
+	           
+	            e.printStackTrace();
+	        }
+
+	        return access_Token;
+	    }
+		
+		
+		// 카카오 로그인 정보 저장
+		public KakaoDTO getUserInfo (String access_Token) {
+
+	        //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+	        HashMap<String, Object> userInfo = new HashMap<String, Object>();
+	        String reqURL = "https://kapi.kakao.com/v2/user/me";
+	       
+	        try {
+	            URL url = new URL(reqURL);
+	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	            conn.setRequestMethod("GET");
+
+	            //    요청에 필요한 Header에 포함될 내용
+	            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+	            int responseCode = conn.getResponseCode();
+	            System.out.println("responseCode : " + responseCode);
+
+	            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+	            String line = "";
+	            String result = "";
+
+	            while ((line = br.readLine()) != null) {
+	                result += line;
+	            }
+	            System.out.println("response body : " + result);
+
+	            	//데이터 꺼내오기
+	            JsonParser parser = new JsonParser();
+	            JsonElement element = parser.parse(result);
+
+	            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+	            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+
+	            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+	            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+
+	            userInfo.put("nickname", nickname);
+	            userInfo.put("email", email);
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } 
+	        KakaoDTO result = memberDAO.findKakao(userInfo);
+	        System.out.println("S :" + result);
+	        
+	        if(result==null) {
+	        	
+	        	memberDAO.kakaoLogin(userInfo);
+	        	
+	        	return memberDAO.findKakao(userInfo);
+	        } else {
+	        	return result;
+	        }   
 		}
+		
+			
 }

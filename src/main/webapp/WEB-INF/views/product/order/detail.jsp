@@ -63,6 +63,13 @@
 				<div class="input-group-prepend">
 					<label for="address" class="form-label">배송지 주소</label>
 					<c:if test="${dto.status eq '입금대기'}">
+						<%-- <c:if test="${not empty member.addressDTOs}">
+							<select class="form-select" if="address">
+								<c:forEach items="${member.addressDTOs}" var="addressDTO">
+									<option value="${addressDTO.address} ${addressDTO.addressDetail}">${addressDTO.addressName}</option>
+								</c:forEach>
+							</select>
+						</c:if> --%>
 						<input type="text" class="form-control" id="address" name="address" placeholder="배송될 주소를 입력해주세요.">
 					</c:if>
 					<c:if test="${dto.status eq '결제완료'}">

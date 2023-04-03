@@ -57,13 +57,17 @@ $('.cartOrder').click(function(){
 
 })
 
-
+const plusBtn=document.getElementsByClassName('plus_btn');
+const minusBtn=document.getElementsByClassName('minus_btn');
+const amounts = document.getElementsByClassName('amounts');
+const prices = document.getElementsByClassName('prices');
+const gradeNums=document.getElementsByClassName('gradeNums');
 
 function getAllCart(){
     let orderer = $('.orderers').val();
     const names=document.getElementsByClassName('names');
-    const amounts = document.getElementsByClassName('amounts');
-    const prices = document.getElementsByClassName('prices')
+   
+   
     let startDate = $('.startDates').val();
     let lastDate = $('.lastDates').val();
     let indexCode = $('.indexCodes').val();
@@ -72,7 +76,7 @@ function getAllCart(){
     let amount=0;
     let price=0;
     for(let i=0;i<names.length;i++){
-        title=title+names[i].value+'+'
+        title=title+gradeNums[i].value+'.'+names[i].value+amounts[i].value+'개'
         amount=amount+parseInt(amounts[i].value)
         price=price+parseInt(prices[i].value)
     }
@@ -87,6 +91,24 @@ function getAllCart(){
 
 
 }
+for(let i=0;i<plusBtn.length;i++){
+    let cost=0;
+    plusBtn[i].addEventListener('click', ()=>{
+        cost=prices[i].value/amounts[i].value
+        amounts[i].value++
+        prices[i].value=parseInt(prices[i].value)+cost
+        getAllCart()
+    })
+    minusBtn[i].addEventListener('click',()=>{
+        cost=prices[i].value/amounts[i].value
+        amounts[i].value--
+        prices[i].value=prices[i].value-cost
+        getAllCart()
+    })
+}
+
+
+
 $('#allForm').click(()=>{
     let check = confirm('주문하시겠습니까?')
     if(check) {

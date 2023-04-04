@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${dto.name} Order - The Camping</title>
+<title>${dto.name} Book - The Camping</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
 <div class="container-fluid">
 	<div class="row my-3">
-		<h1>${dto.name} Order</h1>
+		<h1>${dto.name} Book</h1>
 	</div>
 	
 	

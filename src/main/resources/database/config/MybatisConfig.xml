@@ -37,6 +37,7 @@
 		<typeAlias type="com.camp.s1.camping.CampFileDTO" alias="CampFileDTO"/>
 		<typeAlias type="com.camp.s1.camping.CampSiteDTO" alias="CampSiteDTO"/>
 		<typeAlias type="com.camp.s1.camping.ThumbnailDTO" alias="ThumbnailDTO"/>
+		<typeAlias type="com.camp.s1.camping.book.CampBookDTO" alias="CampBookDTO"/>
 		<typeAlias type="com.camp.s1.camping.review.CampReviewDTO" alias="CampReviewDTO"/>
 		
 		

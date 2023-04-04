@@ -255,7 +255,9 @@
 												<!-- 일단 사이트 이름, 크기만 출력 -->
 												<ul>
 													<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
+														<%-- <c:if test="${siteDTO.status eq '예약가능'}"> --%>
 														<li>${siteDTO.siteName}: ${siteDTO.siteSize}</li>
+														<%-- </c:if> --%>
 													</c:forEach>
 												</ul> 
 											</td>
@@ -377,6 +379,7 @@
 								<!-- siteDTO가 있으면 있는대로 테이블 만들기 -->
 								<c:if test="${not empty dto.campSiteDTOs}">
 									<c:forEach items="${dto.campSiteDTOs}" var="siteDTO">
+										<%-- <c:if test="${siteDTO.status eq '예약가능'}"> --%>
 										<tr>
 											<th scope="col">${siteDTO.siteName}(${siteDTO.siteSize})</th>
 											<td data-cell-header="평상시 주중：">${siteDTO.offWeekdaysPrice}</td>
@@ -384,6 +387,7 @@
 											<td data-cell-header="성수기 주중：">${siteDTO.peakWeekdaysPrice}</td>
 											<td data-cell-header="성수기 주말：">${siteDTO.peakWeekendsPrice}</td>
 										</tr>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 								<!-- 테이블 끝 -->
@@ -472,9 +476,8 @@
 				</div>
 				</c:if>
 
-
+				<!-- 후기 영역 -->
 				<c:if test="${viewType eq 4}">
-					<!-- 후기 영역 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
 					<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
 						<form id="reviewForm" method="POST" enctype="multipart/form-data">
@@ -525,10 +528,8 @@
 					<div class="row" id="reviewList">
 
 					</div>
-						
-
-				</c:if> <!-- 후기 영역 끝 -->
-				
+				</c:if>
+				<!-- 후기 영역 끝 -->
 
 			</div>
 		</div>

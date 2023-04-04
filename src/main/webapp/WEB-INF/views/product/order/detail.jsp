@@ -67,6 +67,7 @@
 							<select class="form-select" id="addressSelect">
 								<c:forEach items="${member.addressDTOs}" var="addressDTO">
 									<option selected>주소를 선택해 주세요</option>
+									<option>주소 직접 입력</option>
 									<option value="${addressDTO.address} ${addressDTO.addressDetail}">${addressDTO.addressName}</option>
 								</c:forEach>
 							</select>

@@ -61,12 +61,12 @@ $('#fileList').on('click', '.dels', function(){
 
 //이미 있는 파일 체크박스로 지우기
 $('.deleteCheck').click(function(){
-    let result = confirm("파일이 영구 삭제 됩니다");
+    let result = confirm("정말 파일을 삭제하시겠습니까?\n되돌릴 수 없습니다.");
     let thisEvent = $(this); //ajax 내에서 this를 쓰면 다른 오브젝트가 선택됨. 바깥에서 선언해놓기
 
     if(result){
         console.log("thisEvent: "+thisEvent);
-        let fileNum = $(this).val();
+        let fileNum = $(this).val(); 
 
         $.ajax({
             type:'POST',

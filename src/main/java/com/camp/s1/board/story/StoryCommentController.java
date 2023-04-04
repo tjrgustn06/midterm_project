@@ -29,8 +29,8 @@ public class StoryCommentController {
 		
 	}
 	
-	@PostMapping("add")
-	public ModelAndView setBoardadd(StoryCommentDTO storyCommentDTO) throws Exception {
-		
-	}
+//	@PostMapping("add")
+//	public ModelAndView setBoardadd(StoryCommentDTO storyCommentDTO) throws Exception {
+//		
+//	}
 }

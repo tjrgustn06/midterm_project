@@ -69,8 +69,6 @@
 <div class="container-fluid col-lg-9 my-5">
 	<form action="./add" id="frm" method="post" enctype="multipart/form-data">
 	<div class="row my-3">
-		<!-- 파라미터 넘어가는거 확인용 -->
-		--${param}--
 		<h3>캠핑장 이름 등록</h3>
 		<input type="text" id="ChkName" name="name" class="form-control my-1" placeholder="캠핑장 이름을 입력하세요">
 	</div>

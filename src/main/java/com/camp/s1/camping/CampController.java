@@ -30,11 +30,6 @@ public class CampController {
 	@Autowired
 	private CampService campService;
 	
-	//만약에 product랑 jsp 같이 쓸거면 필요한데 안그럴거같음, 쓰게되면 수정
-//	@ModelAttribute("boardName")
-//	public String getBoardName() {
-//		return "BankBookComment";
-//	}
 	
 	//list
 	@GetMapping("list")
@@ -155,8 +150,7 @@ public class CampController {
 	//update-post
 	@PostMapping("update")
 	public ModelAndView setCampUpdate(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, HttpSession session, 
-			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice, Long[] areaNum, 
-			Long[] fileNum) throws Exception{
+			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice) throws Exception{
 		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트(CampDTO-campNum), 2.썸네일 업데이트(CampDTO-thumbnailDTO-thumbNum), 3.파일 업데이트(CampDTO-fileDTOs-fileNum), 4.사이트 업데이트(CampDTO-siteDTOs-areaNum)
 		//컨트롤러에서 처리해야할 내용 - 4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함.
 		//1, 2, 3: 해당 내용 처리 메서드 실행(서비스>DAO로 넘기기)
@@ -179,15 +173,10 @@ public class CampController {
 		//만든 siteList는 CampDTO에 저장
 		campDTO.setCampSiteDTOs(ar);
 		
-		//파일이 있는경우에 보냄
-//		if(fileNum != null) {
-//			System.out.println(fileNum);
-//			for(Long fn : fileNum) {System.out.println(fn);}
-//		}
 		
 		//update 실행
 		//areaNum은 siteDTO 지우기 위해 필요
-		int result = campService.setCampUpdate(campDTO, files, thumbFile, session, areaNum, fileNum);
+		int result = campService.setCampUpdate(campDTO, files, thumbFile, session);
 		logger.info("param: "+params);
 		
 		String message ="수정 실패";
@@ -217,15 +206,12 @@ public class CampController {
 	@ResponseBody
 	@GetMapping("sigunguNameList")
 	public List<CampDTO> getSigunguNameList(CampDTO campDTO) throws Exception {
-		
-		
 		return campService.getSigunguNameList(campDTO);
 	}
 	
 	@ResponseBody
 	@GetMapping("searchCampList")
 	public List<CampDTO> getSearchCampList(CampDTO campDTO) throws Exception {
-		
 		return campService.getSearchCampList(campDTO);
 	}
 	

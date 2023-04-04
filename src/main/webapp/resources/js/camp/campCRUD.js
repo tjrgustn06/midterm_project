@@ -221,6 +221,12 @@ $('#updCancel').click(function(){
     }
 })
 
+//캠핑장 글업데이트 등록 - update.jsp
+$('#updReg').click(function(){
+    setService();
+    chkValidation();
+})
+
 
 //주소값을 통해 셀렉트박스 선택이 되어있게끔 하는 함수 - update.jsp
 function updAdrs(){
@@ -266,7 +272,7 @@ function updServiceCheck(){
 
     //반복문으로 체크된 값에만 체크옵션을 줌
     for(let service of chkArray){
-        $('input[name=serv][value='+service+']').prop("checked", true);
+        $('input[name=serv][value="'+service+'"]').prop("checked", true);
     }
 
 }
@@ -274,11 +280,13 @@ function updServiceCheck(){
 
 //콘솔에 값 확인하고 싶을때 사용 - add.jsp/update.jsp(console 버튼)
 $('#consoleSign').click(function(){
-    //setService(); //얘는 시작할때 바로하면 의미없다. 글등록 하기전에 받아야함
-    //chkValidation();
     //updAdrs();
     //updServiceCheck();
 
+    setService(); //얘는 시작할때 바로하면 의미없다. 글등록 하기전에 받아야함
+    //chkValidation();
+
+    console.log(service);
 
 })
 

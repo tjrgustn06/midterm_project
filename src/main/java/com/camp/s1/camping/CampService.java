@@ -32,27 +32,13 @@ public class CampService {
 		return ar;
 	}
 	
-	//list에서 아이콘 작업을 위해 문자열을 parsing
-//	public static void main(String[] ar){
-//		String str="this-=string-includes=delims";
-//		StringTokenizer stk=new StringTokenizer(str,"-=");
-//		System.out.println(str);
-//		System.out.println();
-//			
-//		System.out.println("total tokens:"+stk.countTokens());
-//		System.out.println("================tokens==================");
-//		while(stk.hasMoreTokens()){
-//			System.out.println(stk.nextToken());
-//		}
-//		System.out.println("total tokens:"+stk.countTokens());
-//	}
+	//Icon 표시를 위한 service파싱
 	public List<String> getCampServiceIcon(CampDTO campDTO) throws Exception{
 		List<String> service = new ArrayList<String>();
 		String str = campDAO.getCampDetail(campDTO).getService();
 		StringTokenizer stk = new StringTokenizer(str, ",");
 		
 		while(stk.hasMoreTokens()) {
-			//System.out.println(stk.nextToken());
 			service.add(stk.nextToken());
 		}
 		return service;
@@ -86,7 +72,7 @@ public class CampService {
 		//캠프장 하나 추가
 		int result = campDAO.setCampAdd(campDTO);
 		
-		//캠프사이트 추가 - campSiteDTO의 데이터가 null이 아닌 경우에만(지금은 프론트에서 처리하긴 했는데...)
+		//캠프사이트 추가 - campSiteDTO의 데이터가 null이 아닌 경우에만(프론트 - 유효성검사 시행)
 			for(CampSiteDTO campSiteDTO : campDTO.getCampSiteDTOs()) {
 				if(campSiteDTO.getOffWeekdaysPrice()!=null) {
 					campSiteDTO.setCampNum(campDTO.getCampNum());
@@ -119,19 +105,9 @@ public class CampService {
 			campFileDTO.setFileName(fileName);
 			campFileDTO.setOriName(multipartFile.getOriginalFilename());
 			
-			//확인용
-//			System.out.println("fileNum: "+campFileDTO.getFileNum());
-//			System.out.println("campNum: "+campFileDTO.getCampNum());
-//			System.out.println("fileName: "+campFileDTO.getFileName());
-//			System.out.println("oriName: "+campFileDTO.getOriName());
-					
 			result = campDAO.setCampFileAdd(campFileDTO);
-			
-			//확인용
-			System.out.println("fileNum: "+campFileDTO.getFileNum());
 		}
 		//files end
-		
 		
 		//썸네일 저장 - thumbFile
 		if(thumbFile.getSize()!=0) {
@@ -147,7 +123,7 @@ public class CampService {
 			thumbnailDTO.setThumbName(thumbName);
 			
 			//3.CampDTO의 thumbnail 컬럼에 경로 저장(일단 보류)
-			result = campDAO.setThumbnailAdd(thumbnailDTO);		
+			result = campDAO.setThumbnailAdd(thumbnailDTO);	
 		}
 		//thumbFile end
 		
@@ -155,47 +131,51 @@ public class CampService {
 	}
 		
 	//update
-	public int setCampUpdate(CampDTO campDTO, MultipartFile[] files, HttpSession session, Long[] areaNums, Long[] fileNums) throws Exception{
+	public int setCampUpdate(CampDTO campDTO, MultipartFile[] files, MultipartFile thumbFile, HttpSession session) throws Exception{
 		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트(CampDTO-campNum), 2.썸네일 업데이트(CampDTO-thumbnailDTO-thumbNum), 3.파일 업데이트(CampDTO-fileDTOs-fileNum), 4.사이트 업데이트(CampDTO-siteDTOs-areaNum)
 		//서비스에서 처리해야할 내용
 		//1.글내용 업데이트 메서드 실행, 2.썸네일 업데이트 메서드 실행, 3.파일 업데이트 메서드 실행, 4.사이트 업데이트 메서드 실행
 		
-		//캠프사이트 삭제 후 추가(서비스에서 areaNum을 통해 기존 db에 있는 siteDTO지우고 CampDTO에 있는 사이트 입력하게끔)
-		//삭제
-		for(Long areaNum : areaNums) {
-			campDAO.setsitedele
+		//기존 정보를 지우기 위해서 캠프를 업데이트 하기 전에 먼저 캠프에 저장되어있는 이전의 site 번호와 thumbnail 번호를 먼저 조회해온다
+		//site 번호 조회
+		List<CampSiteDTO> ar = campDAO.getCampSiteList(campDTO);
+		List<Long> areaNums = new ArrayList<Long>();
+		//areaNums에 업데이트 이전의 site번호 저장해둠
+		for(int i=0; i<ar.size(); i++) {
+			areaNums.add(ar.get(i).getAreaNum());
+		}
+		
+		//thumbnail 번호 조회 - 기존 썸네일이 있는 경우에만 조회. 또는 강제로 저장하게 하기(유효성 검사)
+		Long thumbNum = 0L;
+		if(campDAO.getThumbnailDetail(campDTO)!=null) {
+			thumbNum = campDAO.getThumbnailDetail(campDTO).getThumbNum();
 		}
 		
 		
-		
-		//1.업데이트 -> 글 내용 + 업데이트 되는 파일은 2.지우고 3.다시 넣기
-		//ajax로 파일처리하면 파일추가만 하면 될듯
-		
-		//1.
-//		List<CampFileDTO> ar = campDAO.getCampFileList(campDTO); //업데이트 하기전에 캠핑장에 묶인 파일리스트 조회
-//		
-//		for(CampFileDTO campFileDTO : ar) { //확인용
-//			System.out.println("fileNum: "+campFileDTO.getFileNum());
-//		}
-		
+		//글내용 업데이트
 		int result = campDAO.setCampUpdate(campDTO);
 		
-//		//파일처리 - DB의 파일정보 지우기.
-//		if(fileNums != null) {
-//			for(Long fileNum : fileNums) {
-//				campDAO.setCampFileDelete(fileNum);
-//			}
-//		}
-//		
-//		//2.업데이트 성공하면 파일 지우기(이름, 경로 필요) - CampDelete에서 file delete와 동일
+		
+		//업데이트 성공하면 캠프사이트, 파일, 썸네일 수정
 		if(result>0) {
+			//캠프사이트 수정(서비스에서 areaNum을 통해 기존 db에 있는 siteDTO지우고 CampDTO에 있는 사이트 입력하게끔)
+			//삭제 - 받아온 areaNum으로 삭제메서드 실행
+			for(Long areaNum : areaNums) {
+				result = campDAO.setCampSiteDelete(areaNum);
+			}
+			//추가 - CampDTO 내부에 있는 CampSiteDTOs 내용을 받아옴
+			for(CampSiteDTO campSiteDTO : campDTO.getCampSiteDTOs()) {
+				if(campSiteDTO.getOffWeekdaysPrice()!=null) {
+					campSiteDTO.setCampNum(campDTO.getCampNum());
+					result = campDAO.setCampSiteAdd(campSiteDTO);
+				}else {
+					continue;
+				}
+			}
+			
+			
+			//파일 추가(삭제는 ajax로 바로바로 실행)
 			String realPath = session.getServletContext().getRealPath("resources/upload/camp");
-//			
-//			for(CampFileDTO campFileDTO : ar) {
-//				fileManager.fileDelete(realPath, campFileDTO.getFileName());
-//			}
-//		
-		//3.업데이트 성공하고 파일지우면, 새로 넣기 - CampAdd에서 file Insert와 동일
 			//반복저장
 			for(MultipartFile multipartFile : files) {
 				if(multipartFile.isEmpty()) {
@@ -209,6 +189,30 @@ public class CampService {
 				campFileDTO.setOriName(multipartFile.getOriginalFilename());
 						
 				result = campDAO.setCampFileAdd(campFileDTO);
+			}
+			
+			
+			//썸네일 수정(삭제 및 추가)
+			if(thumbFile.getSize()!=0) { //thumbFile의 크기가 0인경우 기존 썸네일을 삭제하지 않고 그대로 냅둠. 크기가 0이 아닌경우 기존 썸네일 삭제 + 새 썸네일 추가
+				//thumbFile의 크기가 0이 아닌 경우, 기존 썸네일 삭제 + 새 썸네일 추가
+				//기존 썸네일 삭제 - 썸네일번호(파일)가 있는경우 지우고 없으면 넘어가기.
+				if(thumbNum!=null || thumbNum!=0) {
+					result = campDAO.setThumbnailDelete(thumbNum);
+				}
+				
+				//새 썸네일 저장
+				//1. file을 HDD에 저장.
+				String savePath = "resources/upload/camp/thumbnail";
+				String thumbRealPath = session.getServletContext().getRealPath(savePath);
+				System.out.println("thumbFiles: "+thumbRealPath);
+				String thumbName = fileManager.fileSave(thumbFile, thumbRealPath);
+				
+				//2. DB에 저장
+				ThumbnailDTO thumbnailDTO = new ThumbnailDTO();
+				thumbnailDTO.setCampNum(campDTO.getCampNum());
+				thumbnailDTO.setThumbName(thumbName);
+				
+				result = campDAO.setThumbnailAdd(thumbnailDTO);	
 			}
 		}
 		return result;

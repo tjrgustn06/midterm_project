@@ -108,7 +108,7 @@ public class CampDAOTest extends MyTestCase{
 	
 	@Test
 	public void setCampSiteDelete() throws Exception{
-		Long areaNum = 560L;
+		Long areaNum = 101L;
 		
 		int result = campDAO.setCampSiteDelete(areaNum);
 		assertNotEquals(0, result);

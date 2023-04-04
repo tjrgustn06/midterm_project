@@ -68,10 +68,6 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid col-lg-9 my-5">
 	<div class="row my-3">
-		<!-- 파라미터 넘어가는거 확인용 -->
-		--${param}--
-		--${dto.thumbnailDTO}--
-		--${dto.thumbnailDTO.thumbName}--
 		<h1>${dto.name}</h1>
 	</div>
 	
@@ -161,21 +157,20 @@
 		<div class="campContent">
 			<!-- 탭 선택 버튼 -->
 			<div class="layout">
-				<!-- 탭영역 - 다단 라인 -->
+				<!-- 탭영역 - 다단 라인 / 탭영역으로 화면이동을 하고싶다면 주소 끝에 #contents 붙여주면 됨 -->
 				<div id="viewType" data-viewType="${viewType}"></div>
 				<ul class="nav nav-pills nav-fill">
 					<li class="nav-item" id="c_intro">
-						<a class="nav-link camp camp_intro active" aria-current="page" href="./detail?campNum=${dto.campNum}&viewType=1#contents">캠핑장소개</a>
-						<!-- data-camp-campNum="${dto.campNum}"" -->
+						<a class="nav-link camp camp_intro active" aria-current="page" href="./detail?campNum=${dto.campNum}&viewType=1">캠핑장 소개</a>
 					</li>
 					<li class="nav-item" id="c_guide">
-						<a class="nav-link camp camp_guide" href="./detail?campNum=${dto.campNum}&viewType=2#contents">이용안내</a>
+						<a class="nav-link camp camp_guide" href="./detail?campNum=${dto.campNum}&viewType=2">이용안내</a>
 					</li>
 					<li class="nav-item" id="c_map">
-						<a class="nav-link camp camp_map" href="./detail?campNum=${dto.campNum}&viewType=3#contents">위치정보</a>
+						<a class="nav-link camp camp_map" href="./detail?campNum=${dto.campNum}&viewType=3">위치정보</a>
 					</li>
 					<li class="nav-item" id="c_review">
-						<a class="nav-link camp camp_review" href="./detail?campNum=${dto.campNum}&viewType=4#contents">후기</a>
+						<a class="nav-link camp camp_review" href="./detail?campNum=${dto.campNum}&viewType=4">후기</a>
 					</li>
 				</ul>
 
@@ -186,6 +181,7 @@
 				<c:if test="${viewType eq 1}">
 				<!-- 캠핑장소개 영역 -->
 				<div class="campIntro my-3" id="campIntro">
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개</h5>
 					<!-- 인트로 이미지 3장까지만 출력 -->
 					<div class="row mb-3">
 						<c:if test="${not empty dto.campFileDTOs}">

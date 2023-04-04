@@ -161,7 +161,7 @@
   	</resultMap>
   
 	<!-- add -->
-	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT 나중에, REGDATE는 UPDATE에서는 빼면 될거같음 -->
+	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT 나중에 -->
 	<insert id="setCampAdd" parameterType="CampDTO">
 		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
@@ -176,13 +176,21 @@
 	</delete>
 	
 	<!-- update -->
+	<!-- 글내용, 썸네일, 파일, 사이트 총 4가지 수정 - 썸네일, 파일, 사이트는 다른 메서드를 통해서 수정한다 -->
+	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT 나중에, REGDATE, HIT는 UPDATE에서는 빼면 될거같음 -->
 	<update id="setCampUpdate" parameterType="CampDTO">
-		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}
+		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=(#{doName}||' '||#{sigunguName}||' '||#{address}), LINEINTRO=#{lineIntro}, INTRO=#{intro}, FEATURE=#{feature}, INDUTY=#{induty}, DONAME=#{doName}, SIGUNGUNAME=#{sigunguName}, GLAMPFACILITY=#{glampFacility}, 
+		CARAVFACILITY=#{caravFacility}, SERVICE=#{service}, POSBLFACILITY=#{posblFacility}, PETALLOW=#{petAllow}, USEINFO=#{useInfo}, HOMEPAGE=#{homePage}, MODIDATE=SYSDATE
 		WHERE CAMPNUM=#{campNum}
 	</update>
 	
 	
 	<!-- site -->
+	<!-- siteList -->
+	<select id="getCampSiteList" parameterType="CampDTO" resultType="CampSiteDTO">
+		SELECT * FROM CAMPSITE WHERE CAMPNUM=#{campNum}
+	</select>
+	
 	<!-- siteAdd -->
 	<insert id="setCampSiteAdd">
 		<selectKey keyProperty="areaNum" order="BEFORE" resultType="Long">
@@ -223,7 +231,7 @@
 	
 	<!-- thumbnail -->
 	<!-- thumbnailDetail -->
-	<select id="getThumbnail" parameterType="CampDTO" resultType="ThumbnailDTO">
+	<select id="getThumbnailDetail" parameterType="CampDTO" resultType="ThumbnailDTO">
 		SELECT * FROM THUMBNAIL WHERE CAMPNUM=#{campNum}
 	</select>
 	
@@ -240,6 +248,8 @@
 	<delete id="setThumbnailDelete" parameterType="Long">
 		DELETE THUMBNAIL WHERE THUMBNUM=#{thumbNum}
 	</delete>
+	
+	<!-- board용 -->
 	<select id="getSigunguNameList" parameterType="CampDTO" resultType="CampDTO">
 		SELECT DISTINCT SIGUNGUNAME FROM CAMPINFO
 		WHERE DONAME LIKE '%' || #{doName} || '%'

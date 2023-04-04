@@ -68,7 +68,7 @@ public class CampDAO {
 	
 	//site(option) - 디테일에서 캠프사이트를 가져올 것
 	public List<CampSiteDTO> getCampSiteList(CampDTO campDTO) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getCampSiteList", campDTO);
+		return sqlSession.selectList(NAMESPACE+"getCampSiteList", campDTO);
 	}
 	
 	//siteAdd
@@ -82,9 +82,9 @@ public class CampDAO {
 	}
 	
 	//thumbnail - list가 없고 이미지 파일 한개임
-//	public ThumbnailDTO getThumbnail(CampDTO campDTO) throws Exception{
-//		return sqlSession.selectOne(NAMESPACE+"getThumbnail", campDTO);
-//	}
+	public ThumbnailDTO getThumbnailDetail(CampDTO campDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getThumbnailDetail", campDTO);
+	}
 	
 	//thumbnailAdd
 	public int setThumbnailAdd(ThumbnailDTO thumbnailDTO) throws Exception{
@@ -92,8 +92,8 @@ public class CampDAO {
 	}
 	
 	//thumbnailDelete
-	public int setThumbnailDelete(Long fileNum) throws Exception{
-		return sqlSession.delete(NAMESPACE+"setThumbnailDelete", fileNum);
+	public int setThumbnailDelete(Long thumbNum) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setThumbnailDelete", thumbNum);
 	}
 	//
 	public List<CampDTO> getSigunguNameList(CampDTO campDTO) throws Exception {

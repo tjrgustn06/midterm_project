@@ -68,13 +68,9 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid col-lg-9 my-5">
 	<form action="./update" id="frm" method="post" enctype="multipart/form-data">
-	<input type="hidden" id="updCampNum" value="${dto.campNum}">
+	<input type="hidden" id="updCampNum" name="campNum" value="${dto.campNum}">
 
 	<div class="row my-3">
-		<!-- 파라미터 넘어가는거 확인용 -->
-		--${param}--
-		--file: ${dto.campFileDTOs.size()}--
-		--site: ${dto.campSiteDTOs.size()}--
 		<h3>캠핑장 이름 등록</h3>
 		<input type="text" id="ChkName" name="name" class="form-control my-1" value="${dto.name}">
 	</div>
@@ -96,8 +92,6 @@
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
 			<div class="row pic my-3 mx-auto">
-				--${dto.thumbnailDTO.thumbNum}--
-				<input type="hidden" id="updthumbNum" value="${dto.thumbnailDTO.thumbNum}">
 				<!-- 원래 사진 표시 -->
 				<c:choose>
 					<c:when test="${not empty dto.thumbnailDTO}">
@@ -367,7 +361,6 @@
 							<!-- index는 0부터 시작, count는 1부터 시작 -->
 							<c:forEach items="${list}" var="siteDTO" varStatus="i">
 								<div id="siteOne${i.count}">
-									--areaNum: ${siteDTO.areaNum}--
 									<div class="input-group mb-2">
 										<span class="input-group-text" id="siteName">사이트이름</span>
 										<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}">
@@ -388,8 +381,6 @@
 									</div>
 									<div class="mb-2">
 										<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button>
-										<!-- <button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">입력창 삭제</button>
-										<button type="button" data-site-idx="siteDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button> -->
 									</div>
 								</div>
 							</c:forEach>

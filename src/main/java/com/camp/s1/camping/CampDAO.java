@@ -90,4 +90,13 @@ public class CampDAO {
 	public int setThumbnailDelete(Long fileNum) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setThumbnailDelete", fileNum);
 	}
+	//
+	public List<CampDTO> getSigunguNameList(CampDTO campDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getSigunguNameList", campDTO);
+	}
+	
+	public List<CampDTO> getSearchCampList(CampDTO campDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getSearchCampList", campDTO);
+	}
+	
 }

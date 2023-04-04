@@ -1,10 +1,18 @@
+let num = 0;
+let boardName = $('#boardName').attr('data-board-name');
 
-$('#delete').click(function(){
-    
+
+
+$('#storyList').on('click', '.btnToggle', function(){
+
+   $(this).parents('#storyList').find('#boardMenu'+$(this).attr('data-board-num')).slideToggle();
+})
+
+$('#storyList').on('click', '.delete', function(){
     let check = window.confirm("삭제하시겠습니까?");
 
     if(check) {
-        let num = $(this).attr("data-delete");
+        num = $(this).attr("data-board-num");
 
         $.ajax({
             type : 'POST',
@@ -25,3 +33,15 @@ $('#delete').click(function(){
         })
     }
 })
+
+$('#storyList').on('click','.update', function(){
+    
+    num = $(this).attr('data-board-num');
+
+    location.href="./update?num="+num;
+})
+
+
+
+
+

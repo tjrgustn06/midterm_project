@@ -173,10 +173,10 @@ public class NoticeController {
 	}
 	
 	@PostMapping("boardFileDelete")
-	public ModelAndView setBoardFileDelete(Long fileNum) throws Exception {
+	public ModelAndView setBoardFileDelete(Long fileNum, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.addObject("result", noticeService.setBoardFileDelete(fileNum));
+		mv.addObject("result", noticeService.setBoardFileDelete(fileNum, session));
 		mv.setViewName("common/ajaxResult");
 		
 		return mv;

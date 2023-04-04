@@ -3,8 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	
-	<table class="table table-striped">
-		<tbody >
+
 			<c:forEach var="dto" items="${commentList}">
 
 							<!-- Comment with nested comments-->
@@ -61,18 +60,8 @@
 								</div>
 							</div>
 
-
-
-
-			   
-
-
-
-
 			</c:forEach>
-		</tbody>
-	</table>
-	
+
 
 			<!-- 페이징 -->
 			<div class="replyList">

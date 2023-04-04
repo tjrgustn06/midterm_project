@@ -34,7 +34,12 @@ public class StoryCommentController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("common/ajaxResult");
-		mv.addObject("result", storyCommentService.setBoardAdd(storyCommentDTO));
+		int result = storyCommentService.setBoardAdd(storyCommentDTO);
+		
+		
+		
+		mv.addObject("result", result);
+		
 		
 		
 		return mv;

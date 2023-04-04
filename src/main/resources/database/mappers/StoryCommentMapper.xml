@@ -8,6 +8,7 @@
   
     <select id="getTotalCount" resultType="Long">
   	SELECT COUNT(COMMENTNUM) FROM STORYCOMMENT
+  	WHERE NUM = #{num}
   </select>
   
   <select id="getBoardList" parameterType="Pager" resultType="StoryCommentDTO">
@@ -16,6 +17,7 @@
 		  	SELECT ROWNUM R, S.* FROM
 				  	(
 				  	SELECT * FROM STORYCOMMENT
+				  	WHERE NUM = #{num}
 				  	ORDER BY COMMENTNUM DESC
 				  	) S
 		  	)

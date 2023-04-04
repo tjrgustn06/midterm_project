@@ -102,3 +102,7 @@
 				</div>
 			</div>
 
+			<script>
+				setWriter('${member.id}');
+			</script>
+

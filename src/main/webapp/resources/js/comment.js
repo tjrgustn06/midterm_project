@@ -274,4 +274,3 @@ function getSubCommentForm(commentNum) {
 function setSubCommentResetForm(commentNum) {
     $('#subCommentForm'+commentNum).remove();
 }
-

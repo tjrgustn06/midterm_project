@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<c:forEach items="${list}" var="dto">
-			<div class="col-md-8 mx-auto" style="height: 100%;">
+			<div class="col-md-8 mx-auto" id="${boardName}${dto.num}"  style="height: 100%;">
+
 				<div class="d-flex flex-column mb-3">
 					<div class="card col-md-5 mx-5">
 					  <div class="card-body">
@@ -87,9 +88,13 @@
 						</a >
 						
 						<div class="card-body my-1">							
-							<form action="../${boardName}Comment/add" method="Post">
-								<input type="hidden" name="writer" value="${member.id}">
-								<input class="border border-0" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+							<form action="../${boardName}Comment/add" method="post">
+								<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
+								<input type="hidden" name="num" value="${dto.num}">
+								
+									<input class="border border-0 replyContents"  id="replyContents" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+									<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
+								
 							</form>
 						</div>
 						
@@ -100,7 +105,7 @@
 						<!-- Modal -->
 						
 							<div class="modal fade" id="exampleModal${dto.num}" tabindex="-1" aria-labelledby="exampleModalLabel${dto.num}" aria-hidden="true">
-								<div class="modal-dialog">
+								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 								<div class="modal-content">
 									<div class="modal-header">
 									<h1 class="modal-title fs-5" id="exampleModalLabel${dto.num}">${dto.writer}님의 게시물</h1>
@@ -173,16 +178,19 @@
 										
 										</div>
 
-										<div class="commentList">
+										<div id="commentList${dto.num}" data-board-name="${boardName}">
 
 										</div>
 
 										<div class="modal-footer">
 											<div class="card-body my-1">							
-												<form action="../${boardName}Comment/add" method="Post">
-													<input type="hidden" name="writer" value="${member.id}">
+												<form action="../${boardName}Comment/add" method="post">
+													<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
 													<input type="hidden" name="num" value="${dto.num}">
-													<input class="border border-0" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+													
+														<input class="border border-0 replyContents"  id="replyContents" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+														<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
+													
 												</form>
 											</div>
 										</div>
@@ -195,14 +203,6 @@
 
 								</div>
 
-
-						
-						
-
-						<!-- Modal
-						<div id="storyDetail${dto.num}">
-							
-						</div> -->
 
 
 
@@ -219,6 +219,11 @@
 				</div>
 			</div>
 		</c:forEach> 		
+
 		
+
+		
+	
+
 	
 	

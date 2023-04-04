@@ -2,6 +2,8 @@ package com.camp.s1.product;
 
 import java.util.List;
 
+import com.camp.s1.product.review.ProductReviewDTO;
+
 public class ProductDTO {
 	
 	private Long productNum;
@@ -12,7 +14,14 @@ public class ProductDTO {
 	
 	private List<ProductGradeDTO> productGradeDTOs;
 	private List<ProductFileDTO> productFileDTOs;
+	private List<ProductReviewDTO> productReviewDTOs;
 	
+	public List<ProductReviewDTO> getProductReviewDTOs() {
+		return productReviewDTOs;
+	}
+	public void setProductReviewDTOs(List<ProductReviewDTO> productReviewDTOs) {
+		this.productReviewDTOs = productReviewDTOs;
+	}
 	public List<ProductFileDTO> getProductFileDTOs() {
 		return productFileDTOs;
 	}

@@ -379,6 +379,14 @@
 										<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 										<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}">
 									</div>
+									<!-- <div class="form-check mb-2">
+										<input class="form-check-input" type="radio" name="status" id="bookable" value="예약가능">
+										<label class="form-check-label" for="bookable">예약가능</label>
+									</div>
+									<div class="form-check mb-2">
+										<input class="form-check-input" type="radio" name="status" id="unbookable" value="예약불가">
+										<label class="form-check-label" for="unbookable">예약불가</label>
+									</div> -->
 									<div class="mb-2">
 										<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button>
 									</div>
@@ -448,6 +456,7 @@
 	$(function(){
 		updAdrs();
 		updServiceCheck();
+		// updStatus();
 	})
 </script>
 <c:import url="../template/common_js.jsp"></c:import>

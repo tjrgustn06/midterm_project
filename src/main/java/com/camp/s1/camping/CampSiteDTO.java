@@ -81,6 +81,9 @@ public class CampSiteDTO {
 	}
 
 	public String getStatus() {
+		if(this.status==null) {
+			this.status = "예약가능";
+		}
 		return status;
 	}
 

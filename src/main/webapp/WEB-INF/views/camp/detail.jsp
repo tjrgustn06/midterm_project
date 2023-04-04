@@ -68,8 +68,6 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid col-lg-9 my-5">
 	<div class="row my-3">
-		<!-- 파라미터 넘어가는거 확인용 -->
-		--${param}--
 		<h1>${dto.name}</h1>
 	</div>
 	
@@ -80,26 +78,19 @@
 		<div class="row pic my-3 mx-auto">
 			<c:choose>
 				<c:when test="${not empty dto.thumbnailDTO}">
-					<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.fileName}">
+					<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
 				</c:when>
 				<c:otherwise>
-					<c:if test="${not empty dto.thumbnail}">
-						<img alt="" src="${dto.thumbnail}">	
-					</c:if>
+					<c:choose>
+						<c:when test="${not empty dto.thumbnail}">
+							<img alt="" src="${dto.thumbnail}">
+						</c:when>
+						<c:otherwise>
+							<img alt="" src="../resources/images/empty.jpg">
+						</c:otherwise>
+					</c:choose>
 				</c:otherwise>
 			</c:choose>
-			
-			<%-- <c:if test="${not empty dto.thumbnailDTO}">
-				<!-- 파일이 보이게 -->
-				<c:if test="${pageScope.i.first}">
-					<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-				</c:if>
-			</c:if>
-			<c:catch var="er">
-				<c:if test="${not empty dto.thumbnail}">
-					<img alt="" src="${dto.thumbnail}">
-				</c:if>
-			</c:catch> --%>
 		</div>
 		
 		<hr class="my-2">
@@ -130,7 +121,7 @@
 						<th scope="col">홈페이지</th>
 						<td>
 							<c:if test="${not empty dto.homePage}">
-								<a href="${dto.homePage}" target="_BLANK" title="새창열림"><i class="fa-solid fa-house fa-lg"></i></a>
+								<a href="${dto.homePage}" id="detHomePage" target="_BLANK" title="새창열림"><i class="fa-solid fa-house fa-lg"></i></a>
 							</c:if>
 						</td>
 					</tr>
@@ -166,21 +157,20 @@
 		<div class="campContent">
 			<!-- 탭 선택 버튼 -->
 			<div class="layout">
-				<!-- 탭영역 - 다단 라인 -->
+				<!-- 탭영역 - 다단 라인 / 탭영역으로 화면이동을 하고싶다면 주소 끝에 #contents 붙여주면 됨 -->
 				<div id="viewType" data-viewType="${viewType}"></div>
 				<ul class="nav nav-pills nav-fill">
 					<li class="nav-item" id="c_intro">
-						<a class="nav-link camp camp_intro active" aria-current="page" href="./detail?campNum=${dto.campNum}&viewType=1#contents">캠핑장소개</a>
-						<!-- data-camp-campNum="${dto.campNum}"" -->
+						<a class="nav-link camp camp_intro active" aria-current="page" href="./detail?campNum=${dto.campNum}&viewType=1">캠핑장 소개</a>
 					</li>
 					<li class="nav-item" id="c_guide">
-						<a class="nav-link camp camp_guide" href="./detail?campNum=${dto.campNum}&viewType=2#contents">이용안내</a>
+						<a class="nav-link camp camp_guide" href="./detail?campNum=${dto.campNum}&viewType=2">이용안내</a>
 					</li>
 					<li class="nav-item" id="c_map">
-						<a class="nav-link camp camp_map" href="./detail?campNum=${dto.campNum}&viewType=3#contents">위치정보</a>
+						<a class="nav-link camp camp_map" href="./detail?campNum=${dto.campNum}&viewType=3">위치정보</a>
 					</li>
 					<li class="nav-item" id="c_review">
-						<a class="nav-link camp camp_review" href="./detail?campNum=${dto.campNum}&viewType=4#contents">후기</a>
+						<a class="nav-link camp camp_review" href="./detail?campNum=${dto.campNum}&viewType=4">후기</a>
 					</li>
 				</ul>
 
@@ -191,6 +181,7 @@
 				<c:if test="${viewType eq 1}">
 				<!-- 캠핑장소개 영역 -->
 				<div class="campIntro my-3" id="campIntro">
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개</h5>
 					<!-- 인트로 이미지 3장까지만 출력 -->
 					<div class="row mb-3">
 						<c:if test="${not empty dto.campFileDTOs}">
@@ -407,7 +398,7 @@
 						<!-- <div class="row mb-3">
 							<c:if test="${not empty dto.campFileDTOs}">
 								<div class="facilityImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+									<img alt="" src="../resources/upload/camp/-">
 								</div>
 							</c:if>
 						</div> -->
@@ -525,71 +516,25 @@
 							</div>
 						</form>
 					</div>
+
 					<div class="row col-6 mx-auto my-3">
 						<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
 						<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
 					</div>
+
 					<div class="row" id="reviewList">
 
 					</div>
-						<!-- 캠핑/여행 후기 -->
 						
-							<!-- 후기 넣기 -->
-				</c:if>
-			</div>
 
+				</c:if> <!-- 후기 영역 끝 -->
+				
+
+			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- contents 내용 끝 -->
-	
-	
-	
-	<!-- 나머지사진 다보이게 -->
-	<!-- <div class="row col-7 mb-3">
-		<h3>나머지 사진 테스트</h3>
-		<c:if test="${not empty dto.campFileDTOs}">
-			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-			</c:forEach>
-		</c:if>
-	</div> -->
-	
-	
-	
-	<!-- file -->
-	<div>
-		<c:if test="${not empty dto.campFileDTOs}">
-			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<!-- 파일이 보이게 -->
-				<!-- <a href="../resources/upload/camp/${fileDTO.fileName}">${fileDTO.oriName}</a> -->
-				<!-- 파일다운추가되면 주소입력 -->
-				<!-- <a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a> -->
-			</c:forEach>
-		</c:if>
-	</div>
-	
+
 </div>
 
 

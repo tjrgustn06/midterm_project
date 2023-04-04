@@ -33,6 +33,17 @@ public class ProductController {
 		return mv;
 	}
 	
+	// home에서 평점에 따른 리스트4개 출력
+	@GetMapping("productListTop")
+	public ModelAndView getProductListTop(Pager pager) throws Exception {
+		ModelAndView mv =new ModelAndView();
+		List<ProductDTO> ar = productService.getProductList(pager);
+		mv.addObject("list", ar);
+		mv.setViewName("common/productTopResult");
+		
+		return mv;
+	}
+	
 	// Detail 상세페이지 출력
 	@GetMapping("detail")
 	public ModelAndView getProductDetail(ProductDTO productDTO) throws Exception {

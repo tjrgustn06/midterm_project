@@ -108,13 +108,15 @@ $('#addReview').click(function(){
 
 // 리스트 가져오기
 function getList(page) {
-    $.ajax({
-        type : 'GET',
-        url : './review/list?num='+$('#addReview').attr('data-review-num')+'&page='+page,
-        success : (response) =>{
-            $('#reviewList').html(response);
-        }
-    })
+    if($('#addReview').attr('data-review-num')!=null){
+        $.ajax({
+            type : 'GET',
+            url : './review/list?num='+$('#addReview').attr('data-review-num')+'&page='+page,
+            success : (response) =>{
+                $('#reviewList').html(response);
+            }
+        })
+    }
 }
 
 // 페이징

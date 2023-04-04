@@ -92,10 +92,27 @@
                     <p>등급별로 나뉘어져있는 캠핑물품을 대여해보세요</p>
                 </div>
                 <div id="productList">
+
                 </div>
             </div>
         </section>
         <!--================ 물품대여 Area  =================-->
+
+         <!--================ 캠핑스토리 Area  =================-->
+        <section class="facilities_area section_gap">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="">  
+            </div>
+            <div class="container">
+                <div class="section_title text-center">
+                    <h2 class="title_w">캠핑스토리</h2>
+                    <p>캠핑스토리를 올려보세요</p>
+                </div>
+                
+            </div>
+        </section>
+        <!--================ 캠핑스토리 Area  =================-->
+        
+<script src="/resources/js/productListTop.js"></script>
 <c:import url="./template/common_js.jsp"></c:import>
 </body>
 </html>

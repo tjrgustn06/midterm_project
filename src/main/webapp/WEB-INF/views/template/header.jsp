@@ -17,7 +17,8 @@
                     	<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> 
                         <li class="nav-item"><a class="nav-link" href="/notice/list">공지사항</a></li>
                         <li class="nav-item"><a class="nav-link" href="/qna/list">QnA</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/camp/list">캠피장보기</a></li>
+						<li class="nav-item"><a class="nav-link" href="/story/list">캠핑스토리</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/camp/list">캠핑장보기</a></li>
                         <li class="nav-item"><a class="nav-link" href="/product/list">물품대여</a></li>
                     </ul>
                     <ul class="nav navbar-nav menu_nav mx-auto">

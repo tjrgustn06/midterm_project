@@ -13,7 +13,7 @@
 <body>
 <c:import url="../../template/header.jsp"></c:import>
 <div class="container-fluid col-lg-9 my-5">
-
+	<div class="mb-10">0</div>
 	<div class="row my-3">
 		<h1>BookList Page</h1>
 		<p>해당 캠핑장에서 예약된 사이트 전체를 보여줌, 사이트이름, 사용기간, 결제여부 확인(입금대기/결제완료)</p>

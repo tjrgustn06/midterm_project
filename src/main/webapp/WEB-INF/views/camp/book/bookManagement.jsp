@@ -13,7 +13,7 @@
 <body>
 <c:import url="../../template/header.jsp"></c:import>
 <div class="container-fluid col-lg-9 my-5">
-
+	<div class="mb-10">0</div>
 	<div class="row my-3">
 		<h1>BookManagement Page</h1>
 		<p>사이트 정보 수정(사이트 추가/수정/삭제, 예약가능 여부(중복x), 금액변동) -> 글 수정할때 넣은 기능이라 거기서 빼고 여기다 넣는식으로 해도 될거같음</p>

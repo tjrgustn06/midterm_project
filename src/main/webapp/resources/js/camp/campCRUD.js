@@ -186,24 +186,36 @@ if(viewType==4){
 
 
 
-//캠핑장 예약버튼 작동 - detail.jsp
+//예약 버튼 작동 - detail.jsp
 $('#detBook').click(function(){
     //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
     if(confirm('예약 페이지로 넘어가시겠습니까?')){
-        location.href='./book/site';
+        $('#frm').attr('action', './book/site');
+        $('#frm').submit();
+        //파라미터 따로 안넣었는데 form 안에 campNum 넣으니까 알아서 들어가는거같음
     }
+})
+
+//예약 목록 버튼 작동 - detail.jsp
+$('#detBookList').click(function(){
+    $('#frm').attr('action', './book/list');
+    $('#frm').submit();
+})
+
+//예약 사이트 관리 버튼 작동 - detail.jsp
+$('#detManagement').click(function(){
+    $('#frm').attr('action', './book/management');
+    $('#frm').submit();
 })
 
 //리스트로 - detail.jsp
 $('#detList').click(function(){
-    console.log(campNum);
     location.href="./list";
 })
 
 //캠핑장 업데이트 - detail.jsp
 $('#detUpdate').click(function(){
-    console.log('update button click');
-    location.href="./update";
+    $('#frm').submit();
 })
 
 //캠핑장 글삭제 - detail.jsp
@@ -212,7 +224,6 @@ $('#detDelete').click(function(){
     if(check){
         $('#frm').attr('action', './delete');
         $('#frm').attr('method', 'POST');
-        $('#frm').attr('button', 'submit');
         $('#frm').submit();
     }
 })
@@ -295,7 +306,7 @@ function updServiceCheck(){
 // }
 
 // //status가 선택된 값이 checked로 되게끔 하기 - update.jsp
-// function setService(){
+// function setStatus2(){
 //     chkArray = new Array();
 //     let chkService = $('input[name="serv"]:checked');
 //     let serv ='';

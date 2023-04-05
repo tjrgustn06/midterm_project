@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Schema 추가 -->
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="com.camp.s1.camping.book.CampBookDAO">
-  
-  </mapper>
+	<mapper namespace="com.camp.s1.camping.book.CampBookDAO">
+	  
+	  
+	<!-- siteList 불러오기 -->
+	<select id="getCampBookSite" parameterType="CampDTO" resultType="CampSiteDTO">
+		SELECT * FROM CAMPSITE WHERE CAMPNUM=#{campNum}
+	</select>
+	  
+	</mapper>

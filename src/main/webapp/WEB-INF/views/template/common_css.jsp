@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/resources/vendors/linericon/style.css">
     <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="/resources/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
-    <!-- <link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css"> -->
+    <link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css">
     <link rel="stylesheet" href="/resources/vendors/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/responsive.css">

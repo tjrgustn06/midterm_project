@@ -196,6 +196,7 @@ $('#detBook').click(function(){
 
 //리스트로 - detail.jsp
 $('#detList').click(function(){
+    console.log(campNum);
     location.href="./list";
 })
 

@@ -277,7 +277,7 @@ public class MemberController {
 				msg="비밀번호 변경 성공";
 			}
 			
-			mv.setViewName("redirect:./memberPage");
+			mv.setViewName("member/memberPage");
 			return mv;
 			
 		}

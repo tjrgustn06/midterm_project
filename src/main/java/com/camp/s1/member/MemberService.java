@@ -130,54 +130,50 @@ public class MemberService {
 			}
 		}
 		
-		//Email 발송
-		
+				//Email 발송
 				public void sendEmail(MemberDTO memberDTO, String div) throws Exception {
-					Properties props = new Properties();
-					props.put("mail.smtp.ssl.enable", "true");
 					
-					// Mail Server 설정				
-					String charSet = "utf-8";
-					String hostSMTP = "smtp.gmail.com";
-					String hostSMTPid = "tjrgustn06@gmail.com"; // 이메일 입력
-					String hostSMTPpwd = "*sz5978640427"; //비밀번호 입력
+					final String user = "tjrgustn06@gmail.com"; 
+					final String password = "sdrzkfhjymjjolas";
+					
+				  // SMTP 서버 정보 설정
+				  // TLSv1.2 추가하여 신뢰성 확보
+				  Properties prop = new Properties();
+				  prop.put("mail.smtp.host", "smtp.gmail.com"); 
+				  prop.put("mail.smtp.port", 465); 
+				  prop.put("mail.smtp.auth", "true"); 
+				  prop.put("mail.smtp.ssl.enable", "true"); 
+				  prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+				  prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-					// 보내는 사람 EMail, 제목, 내용
-					String fromEmail = "tjrgustn06@gmail.com"; //보내는사람 아이디
-					String fromName = "camp Homepage"; //보내는사람 이름(카페 이름)
-					String subject = ""; //제목
-					String msg = ""; //내용(본문)
-					
-					if(div.equals("findPw")) {
-						subject = "camp Homepage 임시 비밀번호 입니다.";
-						msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-						msg += "<h3 style='color: blue;'>";
-						msg += memberDTO.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-						msg += "<p>임시 비밀번호 : ";
-						msg += memberDTO.getPw() + "</p></div>";
-					}
-					
-					// 받는 사람 E-Mail 주소
-							String mail =  memberDTO.getEmail();
-							try {
-								HtmlEmail email = new HtmlEmail();
-								email.setDebug(true);
-								email.setCharset(charSet);
-								email.setSSL(true);
-								email.setHostName(hostSMTP);
-								email.setSmtpPort(587);
+				  Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+				              protected PasswordAuthentication getPasswordAuthentication() {
+				                    return new PasswordAuthentication(user, password);
+				                      }
+				                    });
+				  try {
+				      MimeMessage message = new MimeMessage(session);
 
-								email.setAuthentication(hostSMTPid, hostSMTPpwd);
-								email.setTLS(false);
-								email.addTo(mail, charSet);
-								email.setFrom(fromEmail, fromName, charSet);
-								email.setSubject(subject);
-								email.setHtmlMsg(msg);
-								email.send();
-							} catch (Exception e) {
-								System.out.println("메일발송 실패 : " + e);
-							}
-						}
+				      // 발신자 정보
+				      message.setFrom(new InternetAddress(user, "THECAMP"));
+
+				      // 수신자 메일주소
+				      message.addRecipient(Message.RecipientType.TO, new InternetAddress(memberDTO.getEmail())); 
+
+				      // 메일 제목
+				      message.setSubject(memberDTO.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요"); //메일 제목을 입력
+
+				      // 메일 내용
+				      message.setText(memberDTO.getPw()+"회원님의 임시 비밀번호 입니다");
+
+				      // 메일 전송
+				      Transport.send(message);
+				      System.out.println("메일 전송 완료");
+				  } catch (Exception e) {
+				      e.printStackTrace();
+				      System.out.println("메일발송 실패 : " + e);				      
+				  }
+				}
 		
 
 		//pw 찾기

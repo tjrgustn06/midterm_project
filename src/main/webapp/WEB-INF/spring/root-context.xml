@@ -12,5 +12,5 @@
 		<!-- upload하는 파일당 크기 제한 단위 byte -->
 		<property name="maxUploadSizePerFile" value="10242880"></property>
 	</bean>		
-		
+
 </beans>

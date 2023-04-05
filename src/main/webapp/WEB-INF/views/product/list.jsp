@@ -5,17 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css">
 <style>
 	.card{display: inline-block;}
 </style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-	<div class="container-fluid col-6">
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">물품대여</h2>
+		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
+
+<!--================물품대여 Area ====================-->
+<section class="accomodation_area section_gap">
+	<div class="container col-6">
 		<c:forEach items="${list}" var="dto">
-			<div class="card" style="width: 18rem">
+			<div class="card" style="width: 16rem">
 				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
 					<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
 				</c:forEach>
@@ -23,12 +37,12 @@
 				<div class="card-body">
 				  <h5 class="card-title">${dto.name}</h5>
 				  <p class="card-text">${dto.summary}</p>
-				  <a href="./detail?productNum=${dto.productNum}" class="btn btn-primary">상세보기</a>
+				  <a href="./detail?productNum=${dto.productNum}" class="genric-btn success radius">상세보기</a>
 				</div>
 			</div>
 		</c:forEach>
 		<!-- paging -->
-		<div class="row col-6 mx-auto">
+		<div class="col-2 mx-auto">
 			<nav aria-label="Page navigation example">
 			  <ul class="pagination">
 			  	<li class="page-item">
@@ -58,21 +72,21 @@
 			  </ul>
 			</nav>
 		</div>
-		<div class="row col-md-7 mx-auto">
-			<form class="row g-3" action="./list" method="get">
-				<div class="col-auto">
+		<div class="col-md-7 mx-auto">
+			<form class="g-3" action="./list" method="get">
+				<div>
 					<label for="kind" class="visually-hidden">Kind</label>
-					<select class="form-select" name="kind" id="kind" aria-label="Default select example">
-					<option value="name">물품이름</option>
-					<option value="contents">물품내용</option>
+					<select class="nice-select" name="kind" id="kind" aria-label="Default select example">
+						<option value="name">물품이름</option>
+						<option value="contents">물품내용</option>
 					</select>
 				</div>
-				<div class="col-auto">
+				<div>
 					<label for="search" class="visually-hidden">Search</label>
-					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요">
+					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 73%;">
 				</div>
-				<div class="col-auto">
-					<button type="submit" id="btn" class="btn btn-primary mb-3">검색</button>
+				<div>
+					<button type="submit" id="btn" class="genric-btn success radius" style="width: 100px; height: 100px;">검색</button>
 				</div>
 			</form>
 		</div>
@@ -82,6 +96,8 @@
 			</c:if>
 		</div>
 	</div>
+</section>
+	<script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

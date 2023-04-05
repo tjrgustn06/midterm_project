@@ -40,7 +40,7 @@
 			    					<label class="input-group-text" for="gradeName">옵션</label>
 			  					</div>
 			  					<div class="row">
-									<select class="form-select" aria-label="Default select example" id="gradeName">
+									<select class="nice-select" aria-label="Default select example" id="gradeName">
 						    			<option selected>--옵션을 선택하세요--</option>
 										<option value="A급">A급</option>
 										<option value="B급">B급</option>

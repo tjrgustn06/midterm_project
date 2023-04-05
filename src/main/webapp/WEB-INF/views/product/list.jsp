@@ -41,7 +41,7 @@
 			</div>
 		</c:forEach>
 		<!-- paging -->
-		<div class="col-3 mx-auto">
+		<div class="col-2 mx-auto">
 			<nav aria-label="Page navigation example">
 			  <ul class="pagination">
 			  	<li class="page-item">
@@ -73,18 +73,18 @@
 		</div>
 		<div class="col-md-7 mx-auto">
 			<form class="g-3" action="./list" method="get">
-				<div class="col-auto">
+				<div>
 					<label for="kind" class="visually-hidden">Kind</label>
-					<select name="kind" id="kind" aria-label="Default select example">
+					<select class="nice-select" name="kind" id="kind" aria-label="Default select example">
 						<option value="name">물품이름</option>
 						<option value="contents">물품내용</option>
 					</select>
 				</div>
-				<div class="col-auto">
+				<div>
 					<label for="search" class="visually-hidden">Search</label>
-					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요">
+					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 73%;">
 				</div>
-				<div class="col-auto">
+				<div>
 					<button type="submit" id="btn" class="genric-btn success radius">검색</button>
 				</div>
 			</form>

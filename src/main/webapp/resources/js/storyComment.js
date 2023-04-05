@@ -17,7 +17,7 @@ $('#storyList').on('click', '.getDetail', function(e){
     e.preventDefault();
     num = $(this).attr('data-board-num');
     
-    console.log(num);
+
     
     getCommentList(num , 1);
     
@@ -51,21 +51,37 @@ $('#storyList').on('change', '.replyContents', function(){
 
 
 
-//댓글 등록
+//댓글 등록 이벤트
 $("#"+boardName+'List').on('click','.replyAdd',function(){
 
     board = $(this).parents($('#'+boardName+$(this).attr('data-board-num')))
-    let contents = board.children('.replyContents').val();
+    let contents = board.find('.replyContents').val();
+    num = $(this).attr('data-board-num')
+
+    setCommentAdd(num, contents, writer);
     
+})
 
+//댓글 등록 이벤트
+$('#'+boardName+'List').on('keydown','.replyContents', function(e){
+    if(e.keyCode === 13) {
+        e.preventDefault();
 
-    console.log(writer);
-   
+        let contents = $(this).val();
+        num = $(this).attr('data-board-num')
+
+        setCommentAdd(num, contents, writer);
+        
+    }
+})
+
+//댓글 등록 함수
+function setCommentAdd(num, contents, writer) {
     $.ajax({
         type : 'POST',
         url : '../'+ boardName + 'Comment/add',
         data : {
-            num : $(this).attr('data-board-num'),
+            num : num,
             contents : contents,
             writer : writer
 
@@ -73,7 +89,8 @@ $("#"+boardName+'List').on('click','.replyAdd',function(){
         success : function(response) {
             if(response.trim() == 1) {
                 alert('댓글이 등록되었습니다');
-                board.children($('.replyContents')).val('');
+                $('#'+boardName+num).find('.replyContents').val('');
+                // console.log( $('#'+boardName+num).children('.replyContents').val());
                 getCommentList(num, 1);
             }
             else {
@@ -85,7 +102,7 @@ $("#"+boardName+'List').on('click','.replyAdd',function(){
             alert("댓글 등록 실패. 관리자에게 문의하세요");
         }  
     })
-})
+} 
 
 
 
@@ -105,7 +122,7 @@ function getCommentList(num ,page) {
 
         success : function(response) {
             $('#commentList'+num).html(response); 
-            // console.log(num);                                                                        
+                                                                                 
         }
 
     })
@@ -117,10 +134,6 @@ $('#storyList').on('click','.page-link', function(e){
     page = $(this).attr('data-board-page');
     getCommentList(num,page);
 
-    console.log('Page :' +  page);
-
-    
-
 })
 
 
@@ -130,8 +143,7 @@ $('#storyList').on('click','.page-link', function(e){
 //탐색 선택자를 이용해서 요소를 선택해서 토글
 $('#'+boardName+'List').on('click', '.btnToggle', function(){
 
-    // commentNum = $(this).attr('data-comment-num');
-    // $('#commentMenu'+commentNum).slideToggle();
+    $('.commentMenu').hide();
    $(this).parent().next().slideToggle();
 })
 
@@ -141,9 +153,7 @@ $('#'+boardName+'List').on('click', '.deleteMenu', function(){
 
     $('#commentMenu'+commentNum).hide();
 
-    let delConfirm = confirm('댓글을 삭제하시겠습니까?');
-
-    if(delConfirm) {
+    if(confirm('댓글을 삭제하시겠습니까?')) {
         $.ajax({
             type : 'POST',
             url : '../' + boardName + 'Comment/delete',
@@ -172,9 +182,11 @@ $('#'+boardName+'List').on('click', '.updateMenu', function(){
     // getCommentList(1);
     setResetForm(commentNum);
     setSubCommentResetForm(commentNum);
-    $('#commentMenu'+commentNum).hide();
+    
+    $('.commentMenu').hide();
     commentNum = $(this).attr('data-comment-num');
-    $('#commentMenu'+commentNum).hide();
+    
+    
     getUpdateForm(commentNum);
 
 })
@@ -217,14 +229,14 @@ function getUpdateForm(commentNum) {
     
     let text = $('#contents'+commentNum).text();
 
-    console.log('UpdateFormNum : ' + commentNum);
+    
 
 
     
     let htmls = '<section class="mb-5 mx-2" id="updateForm'+commentNum+'">';
     htmls += '<div class="card bg-light">';
     htmls += '<div class="d-flex">';
-    htmls += '<span class="me-auto p-2 fw-bold">qwdfd';
+    htmls += '<span class="me-auto p-2 fw-bold">'+writer;
     htmls += '</span>';
     htmls += '<span class="p-2">';
     htmls += '<button class="btn btn-outline-danger commentCancle" data-comment-num="'+commentNum+'">취소</button>';
@@ -242,12 +254,12 @@ function getUpdateForm(commentNum) {
             
 
     $('#contents'+commentNum).replaceWith(htmls);
-    // $('#comments'+commentNum).replaceWith(htmls);
+    
 }
 
 ////업데이트폼 원래대로 돌려놓기
 function setResetForm(commentNum) {
-    console.log('ResetFormNum' + commentNum);
+    
     let htmls = '<div id="contents'+commentNum+'">'+$('#commentContents'+commentNum).text()+'';
     htmls += '</div>'
 
@@ -262,11 +274,10 @@ $('#'+boardName+'List').on('click','.subCommentMenu', function(){
     
     setSubCommentResetForm(commentNum);
     setResetForm(commentNum);
-    $('#commentMenu'+commentNum).hide();
+    $('.commentMenu'+commentNum).hide();
 
     commentNum = $(this).attr('data-comment-num');
 
-    $('#commentMenu'+commentNum).hide();
     getSubCommentForm(commentNum);
 
   
@@ -286,7 +297,7 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
     contents = $('#subCommentContents'+commentNum).val();
    
 
-    console.log('Num : ' + num);
+    
 
     $.ajax({
         type : 'POST',
@@ -299,7 +310,7 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
         success : function(repsonse) {
             if(repsonse.trim()>0) {
                 alert('댓글이 등록되었습니다.');
-                getCommentList(page);
+                getCommentList(num,1);
             }
             else {
                 alert('댓글 등록 실패. 관리자에게 문의하세요');
@@ -314,7 +325,7 @@ function getSubCommentForm(commentNum) {
     htmls += '<div class="card bg-light">';
     htmls += '<input class="replyWriter" type="hidden" name="writer" value="${member.id}">';
     htmls += '<div class="d-flex">';
-    htmls += '<span class="me-auto p-2 fw-bold">qwdfd';
+    htmls += '<span class="me-auto p-2 fw-bold">'+writer;
     htmls += '</span>';
     htmls += '<span class="p-2">';
     htmls += '<button class="btn btn-outline-danger subCommentCancle" data-comment-num="'+commentNum+'">취소</button>';

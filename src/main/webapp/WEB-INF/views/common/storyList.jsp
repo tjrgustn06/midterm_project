@@ -84,7 +84,7 @@
 						</div> -->
 						<!-- Button trigger modal -->
 						<a type="button" class="getDetail" data-board-num="${dto.num}" data-bs-toggle="modal" data-bs-target="#exampleModal${dto.num}">
-							댓글 더 보기 
+							댓글 보기 
 						</a >
 						
 						<div class="card-body my-1">							
@@ -92,7 +92,7 @@
 								<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
 								<input type="hidden" name="num" value="${dto.num}">
 								
-									<input class="border border-0 replyContents"  id="replyContents" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+									<input class="border border-0 replyContents"  id="replyContents" type="text" data-board-num="${dto.num}" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
 									<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
 								
 							</form>
@@ -188,7 +188,7 @@
 													<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
 													<input type="hidden" name="num" value="${dto.num}">
 													
-														<input class="border border-0 replyContents"  id="replyContents" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+														<input class="border border-0 replyContents"  id="replyContents" data-board-num="${dto.num}" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
 														<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
 													
 												</form>
@@ -219,6 +219,16 @@
 				</div>
 			</div>
 		</c:forEach> 		
+
+
+		<script>
+			$(function(){
+				setWriter('${member.id}');
+			})
+
+			
+			
+		</script>
 
 		
 

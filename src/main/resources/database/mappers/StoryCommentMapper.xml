@@ -18,11 +18,16 @@
 				  	(
 				  	SELECT * FROM STORYCOMMENT
 				  	WHERE NUM = #{num}
-				  	ORDER BY COMMENTNUM DESC
+				  	ORDER BY REF DESC, STEP ASC
 				  	) S
 		  	)
 	  	WHERE R BETWEEN #{startRow} AND #{lastRow}
 	  	
+  </select>
+  
+  <select id="getBoardDetail" parameterType="BbsDTO" resultType="StoryCommentDTO">
+  		SELECT * FROM STORYCOMMENT
+  		WHERE COMMENTNUM = #{commentNum} 
   </select>
   
   	<!-- BoardAdd Page -->	
@@ -34,6 +39,31 @@
   		INSERT INTO STORYCOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
   		VALUES (#{commentNum}, #{num}, #{writer}, #{contents}, SYSDATE, #{commentNum}, 0, 0)
   	</insert> 
+  	
+  	
+  	<!-- Board Update  -->
+  	<update id="setBoardUpdate" parameterType="BbsDTO">
+  		UPDATE STORYCOMMENT SET CONTENTS = #{contents}
+  		WHERE COMMENTNUM = #{commentNum}
+  	</update>
+  	
+  	<!-- Board Delete -->
+  	<delete id="setBoardDelete" parameterType="BbsDTO">
+  		DELETE STORYCOMMENT WHERE COMMENTNUM = #{commentNum}
+  	</delete>
+
+
+	<!-- SubComment Add -->  	
+  	<select id="getStepMax" parameterType="BbsDTO" resultType="Long">
+  		SELECT MAX(STEP) FROM STORYCOMMENT
+  		WHERE REF = #{ref}
+  	</select>
+  	
+  	<insert id="setSubCommentAdd" parameterType="BbsDTO">
+
+  		INSERT INTO STORYCOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
+  		VALUES (BOARDSEQ.NEXTVAL, #{num}, #{writer}, #{contents}, SYSDATE, #{ref}, #{step}, #{depth})
+  	</insert>
   
   
   </mapper>

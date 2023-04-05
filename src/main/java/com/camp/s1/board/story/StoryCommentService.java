@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.camp.s1.board.BbsDTO;
 import com.camp.s1.board.CommentDTO;
 import com.camp.s1.board.CommentService;
+import com.camp.s1.board.qna.QnaCommentDTO;
 import com.camp.s1.util.Pager;
 
 @Service
@@ -35,20 +36,30 @@ public class StoryCommentService implements CommentService{
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return storyCommentDAO.setBoardUpdate(bbsDTO);
 	}
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return storyCommentDAO.setBoardDelete(bbsDTO);
 	}
 
 	@Override
 	public int setSubCommentAdd(CommentDTO commentDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		StoryCommentDTO parent =(StoryCommentDTO)storyCommentDAO.getBoardDetail(commentDTO);
+		
+		System.out.println(parent.getRef());
+		
+		commentDTO.setNum(parent.getNum());
+		
+		commentDTO.setRef(parent.getRef());
+		
+		commentDTO.setStep(storyCommentDAO.getStepMax(parent)+1);
+		
+		commentDTO.setDepth(parent.getDepth()+1);
+		
+
+		return storyCommentDAO.setSubCommentAdd(commentDTO);
 	}
 
 	

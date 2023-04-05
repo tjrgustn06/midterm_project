@@ -25,8 +25,7 @@ public class StoryCommentDAO implements CommentDAO {
 
 	@Override
 	public BbsDTO getBoardDetail(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE + "getBoardDetail", bbsDTO);
 	}
 
 	@Override
@@ -41,14 +40,12 @@ public class StoryCommentDAO implements CommentDAO {
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE + "setBoardUpdate", bbsDTO);
 	}
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE + "setBoardDelete", bbsDTO);
 	}
 
 	@Override
@@ -59,14 +56,12 @@ public class StoryCommentDAO implements CommentDAO {
 
 	@Override
 	public Long getStepMax(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE + "getStepMax", bbsDTO);
 	}
 
 	@Override
 	public int setSubCommentAdd(BbsDTO bbsDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE + "setSubCommentAdd", bbsDTO);
 	}
 	
 	

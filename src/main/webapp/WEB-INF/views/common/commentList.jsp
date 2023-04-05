@@ -23,21 +23,25 @@
 										<span class="p-2">
 											${dto.regDate}
 										</span>
-										<c:if test="${dto.depth eq 0}">
+										
 											<span class="p-2">
 												<button class="btnToggle" style="border : 0px; background-color: transparent;" data-comment-num="${dto.commentNum}">
 													<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
 												</button>
 											</span>
-										</c:if>
+										
 										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
 											<div class="list-group">
-												<button type="button" class="list-group-item list-group-item-action updateMenu" data-comment-num='${dto.commentNum}'aria-current="true">
-													수정
-												</button>
-												<button type="button" class="list-group-item list-group-item-action deleteMenu" data-comment-num='${dto.commentNum}'>삭제</button>
+												<c:if test="${dto.writer eq member.id}">
+													<button type="button" class="list-group-item list-group-item-action updateMenu" data-comment-num='${dto.commentNum}'aria-current="true">수정</button>
+													<button type="button" class="list-group-item list-group-item-action deleteMenu" data-comment-num='${dto.commentNum}'>삭제</button>
+												</c:if>
+												
 												<button type="button" class="list-group-item list-group-item-action accuseMenu" data-comment-num='${dto.commentNum}'>신고하기</button>
-												<button type="button" class="list-group-item list-group-item-action subCommentMenu" data-comment-num='${dto.commentNum}'>답글달기</button>
+												
+												<c:if test="${dto.depth eq 0}">
+													<button type="button" class="list-group-item list-group-item-action subCommentMenu" data-comment-num='${dto.commentNum}'>답글달기</button>
+												</c:if>
 											</div>
 										</span>
 									</div>
@@ -102,7 +106,5 @@
 				</div>
 			</div>
 
-			<script>
-				setWriter('${member.id}');
-			</script>
+
 

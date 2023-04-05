@@ -34,14 +34,39 @@ public class StoryCommentController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("common/ajaxResult");
-		int result = storyCommentService.setBoardAdd(storyCommentDTO);
-		
-		
-		
-		mv.addObject("result", result);
-		
-		
+		mv.addObject("result", storyCommentService.setBoardAdd(storyCommentDTO));
 		
 		return mv;
 	}
+	
+	@PostMapping("update")
+	public ModelAndView setBoardUpdate(StoryCommentDTO storyCommentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", storyCommentService.setBoardUpdate(storyCommentDTO));
+		
+		return mv;
+	}
+	
+	@PostMapping("delete")
+	public ModelAndView setBoardDelete(StoryCommentDTO storyCommentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", storyCommentService.setBoardDelete(storyCommentDTO));
+		
+		return mv;
+	}
+	
+	@PostMapping("subCommentAdd")
+	public ModelAndView setSubCommentAdd(StoryCommentDTO storyCommentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", storyCommentService.setSubCommentAdd(storyCommentDTO));
+		
+		return mv;
+	}
+	
 }

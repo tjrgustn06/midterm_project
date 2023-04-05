@@ -7,6 +7,7 @@
 	<title>The Camp</title>
 </head>
 <c:import url="./template/common_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css">
 <body>
 <c:import url="./template/header.jsp"></c:import>
 <!--================Banner Area =================-->
@@ -113,6 +114,7 @@
         <!--================ 캠핑스토리 Area  =================-->
         
 <script src="/resources/js/productListTop.js"></script>
+<script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
 <c:import url="./template/common_js.jsp"></c:import>
 </body>
 </html>

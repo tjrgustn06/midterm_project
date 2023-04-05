@@ -22,7 +22,7 @@ public class ProductService {
 	
 	// List출력
 	public List<ProductDTO> getProductList(Pager pager) throws Exception {
-		pager.setPerPage(12L);
+		
 		pager.makeRow();
 		
 		
@@ -34,6 +34,20 @@ public class ProductService {
 		}
 		
 		return ar;
+	}
+	
+	// productListTop 출력
+	public List<ProductDTO> getProductListTop(Pager pager) throws Exception {
+		pager.setPerPage(4L);
+		pager.makeRow();
+		
+		List<ProductDTO> ar = productDAO.getProductList(pager);
+		for(ProductDTO productDTO:ar) {
+			productDTO.setProductFileDTOs(productDAO.getProductDetail(productDTO).getProductFileDTOs());
+		}
+		
+		return ar;
+		
 	}
 	
 	// Detail 상세페이지 출력

@@ -457,6 +457,8 @@
 		updAdrs();
 		updServiceCheck();
 		// updStatus();
+		console.log('nice-select tt');
+	$('.nice-select').prop("style", "display:on;");
 	})
 </script>
 <c:import url="../template/common_js.jsp"></c:import>

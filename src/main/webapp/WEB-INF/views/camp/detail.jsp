@@ -141,7 +141,7 @@
 			<form action="./update" id="frm" method="get">
 				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 				<input type="hidden" name="campNum" value="${dto.campNum}">
-				<button id="detReserve" type="button" class="btn btn-outline-primary">Reservation</button>
+				<button id="detBook" type="button" class="btn btn-outline-primary">Reservation</button>
 				<button id="detList" type="button" class="btn btn-outline-secondary">go to List</button>
 				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
 				<button id="detUpdate" type="submit" class="btn btn-outline-success">UPDATE</button>
@@ -520,7 +520,7 @@
 						</form>
 					</div>
 
-					<div class="row col-6 mx-auto my-3">
+					<div class="row col-6 mx-auto justify-content-center my-3">
 						<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
 						<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
 					</div>

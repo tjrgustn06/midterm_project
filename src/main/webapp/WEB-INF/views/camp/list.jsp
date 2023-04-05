@@ -60,7 +60,7 @@
 			<input type="hidden" name="page" value="1" id="page">
 			<div class="col-3">
 				<label for="kind" class="visually-hidden">Kind</label>
-				<select class="form-select" name="kind" id="kind" aria-label="Default select example">
+				<select class="nice-select" name="kind" id="kind" aria-label="Default select example">
 					<option value="name" ${pager.kind eq 'name'? 'selected':''}>캠핑장명</option>
 					<option value="phone" ${pager.kind eq 'phone'? 'selected':''}>전화번호</option>
 					<option value="address" ${pager.kind eq 'address'? 'selected':''}>주소</option>

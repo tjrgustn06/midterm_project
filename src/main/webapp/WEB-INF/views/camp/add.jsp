@@ -126,8 +126,8 @@
 							<th scope="col my-auto">시/도, 시/군/구</th>
 							<td>
 								<!-- <select name="regionName" id="addressRegion"></select> -->
-								<select name="doName" id="addressDo"></select>
-								<select name="sigunguName" id="addressSigungu"></select>
+								<select name="doName" id="addressDo" class="nice-select"></select>
+								<select name="sigunguName" id="addressSigungu" class="nice-select"></select>
 							</td>
 						</tr>
 						<tr>

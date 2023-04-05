@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css">
 <style>
 	.card{display: inline-block;}
 </style>

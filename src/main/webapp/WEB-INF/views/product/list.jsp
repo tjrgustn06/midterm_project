@@ -86,7 +86,7 @@
 					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 73%;">
 				</div>
 				<div>
-					<button type="submit" id="btn" class="genric-btn success radius">검색</button>
+					<button type="submit" id="btn" class="genric-btn success radius" style="width: 100px; height: 100px;">검색</button>
 				</div>
 			</form>
 		</div>

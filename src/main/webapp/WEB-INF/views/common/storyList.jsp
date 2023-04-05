@@ -225,9 +225,6 @@
 			$(function(){
 				setWriter('${member.id}');
 			})
-
-			
-			
 		</script>
 
 		

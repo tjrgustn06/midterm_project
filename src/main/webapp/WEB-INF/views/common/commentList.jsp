@@ -5,7 +5,7 @@
 	
 
 			<c:forEach var="dto" items="${commentList}">
-
+						
 							<!-- Comment with nested comments-->
 							<div class="d-flex mb-4 offset-md-1">
 							<c:forEach begin="1" end="${dto.depth}" varStatus="s">
@@ -14,7 +14,7 @@
 											</div>
 									</c:forEach> 
 								<!-- Parent comment-->
-								<div class="flex-shrink-0" id="comments${dto.commentNum}"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+								<div class="flex-shrink-0" ><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
 								<div class="ms-2 col-md-7">
 									<div class="d-flex">
 										<span class="me-auto p-2 fw-bold">
@@ -63,6 +63,7 @@
 						
 								</div>
 							</div>
+						
 
 			</c:forEach>
 

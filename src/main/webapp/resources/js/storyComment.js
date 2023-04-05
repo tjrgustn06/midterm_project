@@ -143,8 +143,15 @@ $('#storyList').on('click','.page-link', function(e){
 //탐색 선택자를 이용해서 요소를 선택해서 토글
 $('#'+boardName+'List').on('click', '.btnToggle', function(){
 
-    $('.commentMenu').hide();
-   $(this).parent().next().slideToggle();
+    if($('#commentMenu'+$(this).attr('data-comment-num')).is(':visible')) {
+        $('.commentMenu').slideUp();
+    }
+    else {
+        $('.commentMenu').hide();
+        $('#commentMenu'+$(this).attr('data-comment-num')).slideDown();
+    }
+    
+   
 })
 
 //댓글 삭제

@@ -24,7 +24,7 @@
 			width: 30%;
 			height: 30%;
 		}
-	
+
 		.campOne{
 			border: black, solid, 1px;
 			border-radius: 5%;
@@ -67,434 +67,388 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid col-lg-9 my-5">
+	<form action="./update" id="frm" method="post" enctype="multipart/form-data">
+	<input type="hidden" id="updCampNum" name="campNum" value="${dto.campNum}">
+
 	<div class="row my-3">
-		<!-- 파라미터 넘어가는거 확인용 -->
-		--${param}--
-		<h1>${dto.name}</h1>
+		<h3>캠핑장 이름 등록</h3>
+		<input type="text" id="ChkName" name="name" class="form-control my-1" value="${dto.name}">
 	</div>
 	
 	<hr>
 	
 	<!-- 대표사진 + 설명 div -->
-	<div class="d-flex row my-3">
-		<div class="row pic my-3 mx-auto">
-<%-- 			<c:if test="${not empty dto.campFileDTOs}">
-				<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="i">
-					<!-- 파일이 보이게 -->
-					<c:if test="${pageScope.i.first}">
-						<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-					</c:if>
-				</c:forEach>
-			</c:if> --%>
-			<c:catch var="er">
-				<c:if test="${not empty dto.thumbnail}">
-					<img alt="" src="${dto.thumbnail}">
-				</c:if>
-			</c:catch>
+		<!-- 버튼 영역 -->
+		<div class="d-flex row justify-content-center col-4 mx-auto">
+			<div class="mx-auto mb-3">
+				<button id="consoleSign" class="btn btn-outline-success" type="button">console</button>
+			</div>
+			<div class="mx-auto">
+				<button id="updReg" class="btn btn-outline-success" type="button">등록</button>
+				<button id="updCancel" class="btn btn-outline-danger" type="button">취소</button>
+			</div>
 		</div>
-		
-		<hr class="my-2">
-		
-		<div class="row discription my-auto">
-		
-			<table class="table">
-				<%-- <caption>캠핑장 기본정보입니다. 주소, 문의처, 캠핑장 유형, 찾아오시는길로 나뉘어 설명합니다.</caption> --%>
-				<colgroup>
-					<col style="width: 30%;" />
-					<col style="width: 70%;" />
-				</colgroup>
-				<tbody>
-					<tr>
-						<th scope="col">주소</th>
-						<td>${dto.address}</td>
-					</tr>
-					<tr class="camp_call_pcVer">
-						<th scope="col">문의처</th>
-						<td>${dto.phone}</td>
-					</tr>
-					<tr>
-						<th scope="col">캠핑장 유형</th>
-						<td>${dto.induty}</td>
-					</tr>
-					<c:catch var="er">
-					<tr>
-						<th scope="col">홈페이지</th>
-						<td>
-							<c:if test="${not empty dto.homePage}">
-								<a href="${dto.homePage}" target="_BLANK" title="새창열림"><i class="fa-solid fa-house fa-lg"></i></a>
-							</c:if>
-						</td>
-					</tr>
-					</c:catch>
-					<tr>
-						<th scope="col">주변이용가능시설</th>
-						<td>${dto.posblFacility}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	
-	<!-- 버튼 - update/delete 모두 campNum이 필요 -->
-	<div class="d-flex">
-		<div class="mx-auto mb-3">
-			<form action="./update" id="frm" method="get">
-				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
-				<input type="hidden" name="campNum" value="${dto.campNum}">
-				<button id="reserve" type="button" class="btn btn-outline-primary">Reservation</button>
-				<button id="list" type="button" class="btn btn-outline-secondary">go to List</button>
-				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
-				<button id="update" type="submit" class="btn btn-outline-success">UPDATE</button>
-				<button id="delete" type="button" class="btn btn-outline-danger">DELETE</button>
-			</form>
-		</div>
-	</div>
-	<hr>
-	
 
-	<!-- contents 내용 시작 -->
-	<div id="contents">
-		<div class="campContent">
-			<!-- 탭 선택 버튼 -->
-			<div class="layout">
-				<!-- 탭영역 - 다단 라인 -->
-				<div id="viewType" data-viewType="${viewType}"></div>
-				<ul class="nav nav-pills nav-fill">
-					<li class="nav-item" id="c_intro">
-						<a class="nav-link camp camp_intro active" aria-current="page" href="./detail?campNum=${dto.campNum}&viewType=1#contents">캠핑장소개</a>
-						<!-- data-camp-campNum="${dto.campNum}"" -->
-					</li>
-					<li class="nav-item" id="c_guide">
-						<a class="nav-link camp camp_guide" href="./detail?campNum=${dto.campNum}&viewType=2#contents">이용안내</a>
-					</li>
-					<li class="nav-item" id="c_map">
-						<a class="nav-link camp camp_map" href="./detail?campNum=${dto.campNum}&viewType=3#contents">위치정보</a>
-					</li>
-					<li class="nav-item" id="c_review">
-						<a class="nav-link camp camp_review" href="./detail?campNum=${dto.campNum}&viewType=4#contents">후기</a>
-					</li>
-				</ul>
+		<!-- 썸네일 사진 추가 -->
+		<div class="d-flex row my-3">
+			<div class="row pic my-3 mx-auto">
+				<!-- 원래 사진 표시 -->
+				<c:choose>
+					<c:when test="${not empty dto.thumbnailDTO}">
+						<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${not empty dto.thumbnail}">
+								<img alt="" src="${dto.thumbnail}">
+							</c:when>
+							<c:otherwise>
+								<img alt="" src="../resources/images/empty.jpg">
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
 
-
-
-				<!-- 탭 아래 내용 - 캠핑장소개 / 이용안내 / 위치정보(지도) / 후기 -->
-
-				<c:if test="${viewType eq 1}">
-				<!-- 캠핑장소개 영역 -->
-				<div class="campIntro my-3" id="campIntro">
-					<!-- 인트로 이미지 3장까지만 출력 -->
+				<!-- 새로 사진 넣을 곳 표시.  -->
+				<h5><i class="fa-solid fa-camera fa-sm"></i> 대표 사진 등록</h5>
+				<div id="thumbnailImage" class="row">
+					<!-- 파일 입력폼 -->
 					<div class="row mb-3">
-						<c:if test="${not empty dto.campFileDTOs}">
-							<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="i">
-								<!-- 1~3번 이미지만 보이게 크기 등 나중에 수정-->
-								<c:if test="${i.index lt 3}">
-								<div class="introImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
+					</div>
+				</div>
+
+				
+			</div>
+			
+			<hr class="my-2">
+			
+			<div class="row discription my-auto">
+				<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 주요정보 등록</h5>
+				<table class="table">
+					<%-- <caption>캠핑장 기본정보입니다. 주소, 문의처, 캠핑장 유형, 찾아오시는길로 나뉘어 설명합니다.</caption> --%>
+					<colgroup>
+						<col style="width: 30%;"/>
+						<col style="width: 70%;"/>
+					</colgroup>
+					<tbody>
+						<!-- 셀렉트박스로 권역 / 도 / 시군구 구분 -->
+						<tr>
+							<th scope="col my-auto">시/도, 시/군/구</th>
+							<td>
+								<!-- <select name="regionName" id="addressRegion"></select> -->
+								<select name="doName" id="addressDo">
+									<option value="${dto.doName}" selected>${dto.doName}</option>
+								</select>
+								<select name="sigunguName" id="addressSigungu">
+									<option value="${dto.sigunguName}" selected>${dto.sigunguName}</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th scope="col my-auto">주소</th>
+							<td><input type="text" name="address" id="addressInput" class="form-control" value="${dto.address}"></td>
+						</tr>
+						<tr>
+							<th scope="col my-auto">문의처</th>
+							<td><input type="text" name="phone" class="form-control" value="${dto.phone}"></td>
+						</tr>
+						<tr>
+							<th scope="col my-auto">캠핑장 유형</th>
+							<td><input type="text" name="induty" class="form-control" value="${dto.induty}"></td>
+						</tr>
+						<tr>
+							<th scope="col my-auto">홈페이지</th>
+							<td><input type="text" name="homePage" class="form-control" value="${dto.homePage}"></td>
+						</tr>
+						<tr>
+							<th scope="col my-auto">주변이용가능시설</th>
+							<td><input type="text" name="posblFacility" class="form-control" value="${dto.posblFacility}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<hr>
+		
+
+		<!-- contents 내용 시작 -->
+		<div id="contents">
+			<div class="campContent">
+				<!-- 탭 선택 버튼 -->
+				<div class="layout">
+					<!-- 탭 아래 내용 - 캠핑장소개 / 이용안내 / 위치정보(지도) / 후기 -->
+
+					<!-- 캠핑장소개 영역 -->
+					<div class="campIntro my-3" id="campIntro">
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개 등록</h5>
+						<!-- 이미지 3장 표시부분, 이미지는 아래쪽에서 추가 -->
+
+						<!-- 인트로 텍스트, 정보수정일 출력 -->
+						<i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 한 줄 소개
+						<input type="text" name="lineIntro" class="form-control mb-2" value="${dto.lineIntro}">
+
+						<i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 소개
+						<div class="form-floating">
+							<textarea id="introText" name="intro" class="form-control" style="height:100px; resize:none;">${dto.intro}</textarea>
+							<label for="introText">캠핑장 소개 내용을 입력하세요</label>
+						</div>
+						
+						<hr>
+						
+						<!-- 서비스 내용 입력 -->
+						<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 캠핑장 시설정보 등록</h5>
+						<div class="row mb-2">
+							<!-- checkbox value : 전기, 무선인터넷, 장작판매, 온수, 트렘폴린, 물놀이장, 놀이터, 산책로, 운동장, 운동시설, 마트.편의점 -->
+							<div class="col-4">
+								<div class="form-check">
+									<input class="form-check-input" id="chkBolt" name="serv" value="전기" type="checkbox">
+									<label class="form-check-label" for="chkBolt">전기</label>
 								</div>
-								</c:if>
-							</c:forEach>
-						</c:if>
-					</div>
-					
-					<hr>
+								<div class="form-check">
+									<input class="form-check-input" id="chkWifi" name="serv" value="무선인터넷" type="checkbox">
+									<label class="form-check-label" for="chkWifi">와이파이</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" id="chkCampWood" name="serv" value="장작판매" type="checkbox">
+									<label class="form-check-label" for="chkCampWood">장작판매</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" id="chkHotWater" name="serv" value="온수" type="checkbox">
+									<label class="form-check-label" for="chkHotWater">온수</label>
+								</div>
+							</div>
 
-					<!-- 기존 비교용 -->
-					<!-- <ul>
-						<li class="col_03 img_box"><img src="/upload/camp/6946/thumb/thumb_384_79574q9oF5qyMDKogFY3fpqS.jpeg" class="imgFit" alt="캠핑장소개 이미지"></li>
-						<li class="col_03 img_box"><img src="/upload/camp/6946/thumb/thumb_384_5247YvzPpFQ61vEyftpAXW7L.jpg" class="imgFit" alt="캠핑장소개 이미지"></li>
-						<li class="col_03 img_box"><img src="/upload/camp/6946/thumb/thumb_384_2062kfPltpg3GTiPfTbr4Wp4.jpg" class="imgFit" alt="캠핑장소개 이미지"></li>
-					</ul> -->
+							<div class="col-4">
+								<div class="form-check">
+									<input class="form-check-input" id="chkTrampol" name="serv" value="트렘폴린" type="checkbox">
+									<label class="form-check-label" for="chkTrampol">트램펄린</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" id="chkPool" name="serv" value="물놀이장" type="checkbox">
+									<label class="form-check-label" for="chkPool">물놀이장</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" id="chkPlaygrd" name="serv" value="놀이터" type="checkbox">
+									<label class="form-check-label" for="chkPlaygrd">놀이터</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" id="chkTrail" name="serv" value="산책로" type="checkbox">
+									<label class="form-check-label" for="chkTrail">산책로</label>
+								</div>
+							</div>
 
-					<!-- 인트로 텍스트, 정보수정일 출력 -->
-					<p class="camp_intro_txt">
-						<ul>
-							<li>${dto.intro}</li>
-							<li class="my-2">최종 정보 수정일 : ${dto.modiDate}</li>
-						</ul>
-					</p>
-					
-					<hr>
-					
-					<!-- 서비스 내용 출력 -->
-					<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 캠핑장 시설정보</h5>
-					<div class="mb-2">
-						<c:set var="service" value="${dto.service}"></c:set>
-						<ul>
-							<c:if test="${fn:contains(service, '전기')}"><i class="fa-solid fa-bolt fa-sm"><span>전기</span></i></c:if>
-							<c:if test="${fn:contains(service, '무선인터넷')}"><i class="fa-solid fa-wifi fa-sm"><span>와이파이</span></i></c:if>
-							<c:if test="${fn:contains(service, '장작판매')}"><i class="fa-solid fa-campground fa-sm"><span>장작판매</span></i></c:if>
-							<c:if test="${fn:contains(service, '온수')}"><i class="fa-solid fa-mug-hot fa-sm"><span>온수</span></i></c:if>
-							<c:if test="${fn:contains(service, '트렘폴린')}"><i class="fa-solid fa-hockey-puck fa-sm"><span>트렘폴린</span></i></c:if>
-							<c:if test="${fn:contains(service, '물놀이장')}"><i class="fa-solid fa-person-swimming fa-sm"><span>물놀이장</span></i></c:if>
-							<c:if test="${fn:contains(service, '놀이터')}"><i class="fa-solid fa-volleyball fa-sm"><span>놀이터</span></i></c:if>
-							<c:if test="${fn:contains(service, '산책로')}"><i class="fa-solid fa-person-walking fa-sm"><span>산책로</span></i></c:if>
-							<c:if test="${fn:contains(service, '운동장')}"><i class="fa-solid fa-mound fa-sm"><span>운동장</span></i></c:if>
-							<c:if test="${fn:contains(service, '운동시설')}"><i class="fa-solid fa-baseball fa-sm"><span>운동시설</span></i></c:if>
-							<c:if test="${fn:contains(service, '마트.편의점')}"><i class="fa-solid fa-shop fa-sm"><span>마트.편의점</span></i></c:if>
-						</ul>
-					</div>
-
-					<hr>
-
-
-					<!-- 기타 주요시설 출력 -->
-					<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 기타 주요시설</h5>
-					<section id="table_type03">
-						<div class="table_w">
-							<table class="table_t4 camp_etc_tb my-3">
-								<!-- <caption>사이트 크기(옵션), 글램핑/카라반 내부시설, 동물동반여부, 추가사진등록</caption> -->
-								<colgroup>
-									<col style="width: 20%;" />
-									<col style="width: 80%;" />
-								</colgroup>
-								<tbody class="t_c">
-									<tr>
-										<th scope="col">사이트 크기</th>
-										<c:if test="${not empty dto.campSiteDTOs}">
-											<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
-												<td>
-													<!-- 일단 사이트 이름, 크기만 출력 -->
-													<ul>
-														<li>${siteDTO.siteName}</li>
-														<li>${siteDTO.sizeInfo}</li>
-													</ul> 
-												</td>
-											</c:forEach>
-										</c:if>
-									</tr>
-									<tr>
-										<th scope="col">글램핑 내부시설</th>
-										<c:if test="${not empty dto.glampFacility}">
-											<td>
-												<ul><li>${dto.glampFacility}</li></ul> 
-											</td>
-										</c:if>
-									</tr>
-									<tr>
-										<th scope="col">카라반 내부시설</th>
-										<c:if test="${not empty dto.caravFacility}">
-											<td>
-												<ul><li>${dto.caravFacility}</li></ul> 
-											</td>
-										</c:if>
-									</tr>
-									<tr>
-										<th scope="col">동물 동반여부</th>
-										<c:if test="${not empty dto.petAllow}">
-											<td class="etc_type">${dto.petAllow}</td>
-										</c:if>
-									</tr>
-								</tbody>
-							</table>
+							<div class="col-4">
+								<div class="form-check">
+									<input class="form-check-input" id="chkField" name="serv" value="운동장" type="checkbox">
+									<label class="form-check-label" for="chkField">운동장</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" id="chkSpoFacty" name="serv" value="운동시설" type="checkbox">
+									<label class="form-check-label" for="chkSpoFacty">운동시설</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" id="chkMart" name="serv" value="마트.편의점" type="checkbox">
+									<label class="form-check-label" for="chkMart">마트/편의점</label>
+								</div>
+								<input type="hidden" name="service" id="serviceVal" value="${dto.service}">
+							</div>
 						</div>
 
 						<hr>
 
-						<!-- 경고 안내사항 -->
-						<p class="campIntroTxt">
-							<span class="infoNotice">
-								&nbsp;* TheCamping에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span class="infoRed">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다.
-							</span> 
-						</p>
-					</section>
 
-					<hr>
+						<!-- 기타 주요시설 출력 -->
+						<h5><i class="fa-solid fa-gears fa-sm my-3"></i> 기타 주요시설 등록</h5>
+						<section>
+							<div>
+								<table class="my-3">
+									<!-- <caption>사이트 크기(옵션), 글램핑/카라반 내부시설, 동물동반여부, 추가사진등록</caption> -->
+									<colgroup>
+										<col style="width: 30%;"/>
+										<col style="width: 70%;"/>
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="col">사이트 크기</th>
+											<td>요금안내에 입력시 자동으로 표기됩니다.</td>
+										</tr>
+										<tr>
+											<th scope="col">특징</th>
+											<td><input type="text" name="feature" class="form-control" value="${dto.feature}"></td>
+										</tr>
+										<tr>
+											<th scope="col">글램핑 내부시설</th>
+											<td><input type="text" name="glampFacility" class="form-control" value="${dto.glampFacility}"></td>
+										</tr>
+										<tr>
+											<th scope="col">카라반 내부시설</th>
+											<td><input type="text" name="caravFacility" class="form-control" value="${dto.caravFacility}"></td>
+										</tr>
+										<tr>
+											<th scope="col">동물 동반여부</th>
+											<td><input type="text" name="petAllow" class="form-control" value="${dto.petAllow}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 
-					<!-- 인트로 이미지 3장을 제외한 나머지 이미지 -->
-					<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.name}</h5>
-					<div class="otherImage">
-						<c:if test="${not empty dto.campFileDTOs}">
-							<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="j">
-								<c:if test="${j.index ge 3}">
-								<div class="otherImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+							<!-- 경고 안내사항 -->
+							<!-- <hr>
+							<p class="campIntroTxt">
+								<span class="infoNotice">
+									&nbsp;* TheCamping에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span class="infoRed">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다.
+								</span> 
+							</p> -->
+						</section>
+
+						<hr>
+
+						<!-- 이미지 추가 부분 / 인트로 이미지 3장을 제외한 나머지 이미지 표시 -->
+						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.name} 사진 등록</h5>
+						<div class="otherImage">
+							<!-- id=fileList인 부분에 js 작동 -->
+							<div id="fileList" class="row">					
+								<div class="row col-4 mb-3">
+									<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
 								</div>
-								</c:if>
-							</c:forEach>
-						</c:if>
-					</div>
 
-					<!-- 저작권 안내 -->
-					<div style="margin-top: -30px; margin-bottom: 30px;">
-						※ 모든 컨텐츠의 저작권은 TheCamping에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
-					</div>
-				</div> <!-- 캠핑장 소개 영역 종료 -->
-				</c:if>
+								<!-- 이미 가지고있는 파일을 표시 -->
+								<c:forEach items="${dto.campFileDTOs}" var="fileDTO">		
+									<div class="input-group my-1">
+										<div class="input-group-text">
+											<input class="form-check-input deleteCheck" type="checkbox" value="${fileDTO.fileNum}" name="fileNum" aria-label="Checkbox for following text input">
+										</div>
+									<input type="text" class="form-control" disabled value="${fileDTO.oriName}" aria-label="Text input with checkbox">			
+									</div>
+								</c:forEach>
+							</div>
+						</div>
 
-				<c:if test="${viewType eq 2}">
-				<!-- 이용안내 영역 -->
-				<div class="useInfo my-3" id="useInfo">
-					<!-- 이용안내 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 이용안내사항</h5>
-						<c:choose>
-							<c:when test="${not empty dto.useInfo}">
-								<div class="useInfomation my-3">
-									<ul>
-										<li>${dto.useInfo}</li>
-									</ul>
-								</div>	
-							</c:when>
-							<c:otherwise><li>*안내사항이 없습니다.</li></c:otherwise>
-						</c:choose>
-					<hr>
-						
-					<!-- 요금구분 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 요금 안내</h5>
-					<div class="table_w">
-						<table class="table camp_info_tb">
-							<!-- <caption>캠핑 구분에 따른 요금 테이블. 평상시의 주중, 주말과 성수기의 주중, 주말로 나뉘어 설명합니다.</caption> -->
-							<colgroup>
-								<col style="width: 20%">
-								<col style="width: 20%">
-								<col style="width: 20%">
-								<col style="width: 20%">
-								<col style="width: 20%">
-							</colgroup>
-							<thead>
-								<tr>
-									<th rowspan="2" scope="col">구분</th>
-									<th colspan="2" scope="colgroup">평상시</th>
-									<th colspan="2" scope="colgroup">성수기</th>
-								</tr>
-
-								<tr>
-									<th scope="col" class="gray">주중</th>
-									<th scope="col" class="gray">주말</th>
-									<th scope="col" class="gray">주중</th>
-									<th scope="col" class="gray">주말</th>
-								</tr>
-							</thead>
-							<tbody class="t_c">
-								<tr>
-									<th scope="col">일반캠핑</th>
-									<td data-cell-header="평상시 주중：">30,000</td>
-									<td data-cell-header="평상시 주말：">40,000</td>
-									<td data-cell-header="성수기 주중：">30,000</td>
-									<td data-cell-header="성수기 주말：">40,000</td>
-								</tr>
-
-								<tr>
-									<th scope="col">오토캠핑</th>
-									<td data-cell-header="평상시 주중：">30,000</td>
-									<td data-cell-header="평상시 주말：">40,000</td>
-									<td data-cell-header="성수기 주중：">30,000</td>
-									<td data-cell-header="성수기 주말：">40,000</td>
-								</tr>
-
-								<tr>
-									<th scope="col">글램핑</th>
-									<td data-cell-header="평상시 주중：">69,000~99,000</td>
-									<td data-cell-header="평상시 주말：">129,000~159,000</td>
-									<td data-cell-header="성수기 주중：">69,000~99,000</td>
-									<td data-cell-header="성수기 주말：">129,000~159,000</td>
-								</tr>
-
-								<tr>
-									<th scope="col">카라반</th>
-									<td data-cell-header="평상시 주중：">109,000</td>
-									<td data-cell-header="평상시 주말：">169,000</td>
-									<td data-cell-header="성수기 주중：">109,000</td>
-									<td data-cell-header="성수기 주말：">169,000</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<hr>
-
-					<!-- 시설배치도 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-						<!-- 임시로 막아놓고 나중에 추가해보기 ㅠㅠ -->
-						<!-- <div class="row mb-3">
-							<c:if test="${not empty dto.campFileDTOs}">
-								<div class="facilityImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-								</div>
-							</c:if>
+						<!-- 저작권 안내 -->
+						<!-- <div style="margin-top: 30px; margin-bottom: 30px;">
+							※ 모든 컨텐츠의 저작권은 TheCamping에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
 						</div> -->
+					</div> <!-- 캠핑장 소개 영역 종료 -->
+
 					<hr>
-				</div> <!-- 이용안내 영역 종료 -->
-				</c:if>
 
-				<c:if test="${viewType eq 3}">
-				<!-- 위치정보 영역 -->
-				<div class="campMap" id="campMap">
-					<!-- 찾아오시는 길 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5>
-						<!-- 지도 넣기 -->
+					<!-- 이용안내 영역 -->
+					<div class="useInfo my-3" id="useInfo">
+						<!-- 이용안내 -->
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 이용 안내사항 등록</h5>
+							<!-- 입력 안하는경우 안내사항이 없다는 메시지가 표시됩니다 -->
+							<div class="form-floating my-3">
+								<textarea id="useInfoText" name="useInfo" class="form-control" style="height:100px; resize:none;">${dto.useInfo}</textarea>
+								<label for="useInfoText">입력하지 않는 경우 안내사항이 없다는 메시지가 표시됩니다.</label>
+							</div>
+						<hr>
+							
+						<!-- 캠핑사이트 추가부분 -->
+						<div class="row addSite">
+							<div class="col-10">
+								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 등록</h5>
+							</div>
+							<div class="col-2">
+								<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
+							</div>
+						</div>
+						
+						<!-- siteDTO 입력부 추가될 부분 -->
+						<div class="row my-2" id="siteList">
+							<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
+							<!-- index는 0부터 시작, count는 1부터 시작 -->
+							<c:forEach items="${list}" var="siteDTO" varStatus="i">
+								<div id="siteOne${i.count}">
+									<div class="input-group mb-2">
+										<span class="input-group-text" id="siteName">사이트이름</span>
+										<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}">
+										<span class="input-group-text" id="siteSize">크기(m^2)</span>
+										<input type="text" name="siteSize" data-site-idx="siteSize${i.count}" class="form-control" value="${siteDTO.siteSize}">
+									</div>
+									<div class="input-group mb-2">
+										<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+										<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice${i.count}" class="form-control" value="${siteDTO.offWeekdaysPrice}">
+										<span class="input-group-text" id="offWeekendsPrice">주말</span>
+										<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice${i.count}" class="form-control" value="${siteDTO.offWeekendsPrice}">
+									</div>
+									<div class="input-group mb-2">
+										<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+										<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice${i.count}" class="form-control" value="${siteDTO.peakWeekdaysPrice}">
+										<span class="input-group-text" id="peakWeekendsPrice">주말</span>
+										<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}">
+									</div>
+									<div class="mb-2">
+										<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button>
+									</div>
+								</div>
+							</c:forEach>
+							<!-- 생성 끝날 부분 -->
+						</div>
+						
+						<hr>
+
+						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
+						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+							<div class="row mb-3">
+								<c:if test="${not empty dto.campFileDTOs}">
+									<div class="facilityImage">
+										<img alt="" src="../resources/upload/camp/-">
+									</div>
+								</c:if>
+							</div>
+						<hr> -->
+					</div> <!-- 이용안내 영역 종료 -->
+
+
+					
+					<!-- 위치정보 영역 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 위치정보 등록</h5>
+					<div class="campMap" id="campMap">
+						<p>*나중에 지도 정보 받아오는거 공부해서 추가하기</p>
+						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5> -->
+							<!-- 해당 캠핑장의 위치값 필요(경도, 위도 소수점 4~5자리까지 알아내야하는데 어떻게 하지?) -->
+							<!-- 나머지 정보는 CampDTO에 들어있어서 쓸 수 있음 -->
+					</div>
+
+
+					
+					<!-- 후기 영역: detail 페이지에서 바로 등록/수정/삭제가 가능하도록 -->
+					<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 후기 입력</h5>
+					<div class="campReview" id="campReview">
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
+					</div> -->
+
+
 				</div>
-				</c:if>
-
-
-				<c:if test="${viewType eq 4}">
-				<!-- 후기 영역 -->
-				<div class="campReview" id="campReview">
-					<!-- 캠핑/여행 후기 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
-						<!-- 후기 넣기 -->
-				</div>
-				</c:if>
-
 			</div>
 		</div>
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	</form>
 	<!-- contents 내용 끝 -->
-	
-	
-	
-	<!-- 나머지사진 다보이게 -->
-	<!-- <div class="row col-7 mb-3">
-		<h3>나머지 사진 테스트</h3>
-		<c:if test="${not empty dto.campFileDTOs}">
-			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
-			</c:forEach>
-		</c:if>
-	</div> -->
-	
-	
-	
-	<!-- file -->
-	<div>
-		<c:if test="${not empty dto.campFileDTOs}">
-			<c:forEach items="${dto.campFileDTOs}" var="fileDTO">
-				<!-- 파일이 보이게 -->
-				<!-- <a href="../resources/upload/camp/${fileDTO.fileName}">${fileDTO.oriName}</a> -->
-				<!-- 파일다운추가되면 주소입력 -->
-				<!-- <a href="#${fileDTO.fileNum}">${fileDTO.oriName}</a> -->
-			</c:forEach>
-		</c:if>
-	</div>
 	
 </div>
 
 
+<script src="../resources/js/camp/selectBox.js"></script>
 <script src="../resources/js/camp/campCRUD.js"></script>
 <script src="../resources/js/camp/fileManager.js"></script>
 <script>
 	setMax(10);
 	setParam('files');
 	setCount('${dto.campFileDTOs.size()}');
+</script>
+<script>
+	setSiteIdx(2+'${dto.campSiteDTOs.size()-1}'*1);
+	setSiteMax(10);
+	setSiteCount('${dto.campSiteDTOs.size()}');;
+	console.log("siteIdx: "+siteIdx);
+</script>
+<script>
+	$(function(){
+		updAdrs();
+		updServiceCheck();
+	})
 </script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>

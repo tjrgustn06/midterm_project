@@ -6,6 +6,10 @@ let siteIdx=2;
 let siteCount=0;
 let siteMax=0;
 
+function setSiteIdx(i){
+    siteIdx=i;
+}
+
 function setSiteCount(c){
     siteCount=c;
 }
@@ -14,14 +18,22 @@ function setSiteMax(m){
     siteMax=m;
 }
 
+//페이지 로딩 후 DOM 객체가 준비되었을 때 실행
+//바로 실행해야할 내용은 페이지마다 script로 적기.
+$(function(){
+    // updAdrs(); //주소로 셀렉트박스 선택되게 하는 함수
+    // updServiceCheck(); //서비스로 체크박스 선택되게 하는 함수
+})
+
+
 // 리뷰작성창 출력
 $('#reviewAdd').click(function(){
-    $('#review').slideDown("slow")
+    $('#review').slideDown("slow");
 })
 
 // 리뷰작성창 해제
 $('#reviewCancle').click(function(){
-    $('#review').slideUp("slow")
+    $('#review').slideUp("slow");
 })
 
 //add.jsp
@@ -46,15 +58,14 @@ $('#addressSigungu').change(function(){
         $('#addressInput').prop('style', 'background-color:white;');
         $('#addressInput').prop('readonly', false);
         $('#addressInput').prop('placeholder', '나머지 주소를 입력하세요');
-    }else if($('#addressRegion').val()==0 || $('#addressDo').val()==0){ //값이 공백이 아닌경우
+    }else if($('#addressSigungu').val()==0){ //값이 공백이 아닌경우
         //나머지 주소 입력창 닫힘
         $('#addressInput').val('');
         $('#addressInput').prop('style', 'background-color:bisque;');
         $('#addressInput').prop('readonly', true);
-        $('#addressInput').prop('placeholder', '권역/시도/시군구를 먼저 선택하세요');
+        $('#addressInput').prop('placeholder', '시/도, 시/군/구를 먼저 선택하세요');
     }
 })
-
 
 //체크박스 선택된 값 여러개 받아오는 함수 - add.jsp
 //다음에는 컨트롤러에서 배열로 받아서 처리해보기
@@ -131,6 +142,22 @@ $('#siteList').on('click', '.siteDels', function(){
 
 
 //detail.jsp
+//홈페이지 주소 앞에 https://가 안붙어있으면 붙여서 실행하기
+$('#detHomePage').click(function(){
+    console.log('homepage click');
+    console.log($(this).attr('href'));
+
+    let chkDomain = $(this).attr('href'); //www.naver.com임
+    if(chkDomain.startsWith('https://')){ //setDomain이 https://로 시작하는지 체크. 맞으면 true 아니면 false
+        //맞으면 아무런 작업도 안해도 됨
+    }else{
+        let setDomain = 'https://'+chkDomain;
+        $('#detHomePage').attr('href', setDomain);
+    }
+})
+
+
+
 //메뉴바 하이라이트 설정 - detail.jsp
 if(viewType==1){
     $('.camp').removeClass("active");
@@ -150,6 +177,26 @@ if(viewType==4){
 }
 
 
+
+//캠핑장 예약버튼 작동 - detail.jsp
+$('#detReserve').click(function(){
+    //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
+    if(confirm('예약 페이지로 넘어가시겠습니까? (test시 list로 넘어갑니다)')){
+        location.href='./list';
+    }
+})
+
+//리스트로 - detail.jsp
+$('#detList').click(function(){
+    location.href="./list";
+})
+
+//캠핑장 업데이트 - detail.jsp
+$('#detUpdate').click(function(){
+    console.log('update button click');
+    location.href="./update";
+})
+
 //캠핑장 글삭제 - detail.jsp
 $('#detDelete').click(function(){
     let check = confirm("정말 삭제하시겠습니까?");
@@ -161,40 +208,86 @@ $('#detDelete').click(function(){
     }
 })
 
-//리스트로 - detail.jsp
-$('#detList').click(function(){
-    location.href="./list";
-})
-
-//캠핑장 예약버튼 작동 - detail.jsp
-$('#detReserve').click(function(){
-    //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
-    if(confirm('예약 페이지로 넘어가시겠습니까? (test시 list로 넘어갑니다)')){
-        location.href='./list';
-    }
-})
 
 
 
 
-
-//update.jsp - 나중에 수정해야한다
-//캠핑장 글업데이트 취소 - update_old.jsp
+//update.jsp
+//캠핑장 글업데이트 취소 - update.jsp
 $('#updCancel').click(function(){
     let check = confirm("정말 취소하시겠습니까? 저장하지 않은 내용은 변경되지 않습니다");
     if(check){
-        location.href="./detail?campNum="+$('#detailCampNum').val();
+        location.href="./detail?campNum="+$('#updCampNum').val();
     }
 })
 
-
-
-//콘솔에 값 확인하고 싶을때 사용 - add.jsp(console 버튼)
-$('#addConsoleSign').click(function(){
+//캠핑장 글업데이트 등록 - update.jsp
+$('#updReg').click(function(){
     setService();
     chkValidation();
+})
 
+
+//주소값을 통해 셀렉트박스 선택이 되어있게끔 하는 함수 - update.jsp
+function updAdrs(){
+    let adrs = $('#addressInput').val();
+
+    //주소값이 있는 경우(update페이지)에만 실행. 없는 경우(add페이지)에서는 실행x
+    if(adrs!='' || adrs!=null){
+        //시/도, 시/군/구, 나머지주소로 자르기
+        let doName = adrs.substring(0, adrs.indexOf(' '));
+        let sigunguName = adrs.substring(adrs.indexOf(' ')+1, adrs.indexOf(' ', adrs.indexOf(' ')+1));
+        let otherAdrs = adrs.substring(adrs.indexOf(' ', adrs.indexOf(' ')+1)+1);
     
+        // console.log(doName); //시/도
+        // console.log(sigunguName); //시/군/구
+        // console.log(otherAdrs); //나머지주소
+    
+        //selected 옵션을 주면 될거같은데 흠....
+        $('#addressDo').val(doName).prop("selected", true);
+        $('#addressSigungu').val(sigunguName).prop("selected", true);
+        $('#addressInput').val(otherAdrs);
+    }else if(adrs=='' || adrs==null){
+        //입력된 주소값이 없는경우 최초 선택하세요가 나타나게
+        $('#addressDo').val("0").prop("selected", true);
+        $('#addressSigungu').val("0").prop("selected", true);
+    }
+}
+
+
+//service로 받은 값이 checked로 되게끔 하기 - update.jsp
+function updServiceCheck(){
+    //service는 DB에 저장된 서비스들을 string으로 받아온 것
+    let service = $('input[name=service]').val();
+
+    //저장된 service를 배열로 만듬
+    chkArray = new Array();
+    chkArray = service.split(',');
+
+    //작업 전 우선 모두 체크 해제
+    $('input[name=serv]').prop("checked", false);
+
+    //이런식으로 반복문 돌리면 체크가 됨. value값이 바뀌도록
+    //$('input[name=serv][value="전기"]').prop("checked", true);
+
+    //반복문으로 체크된 값에만 체크옵션을 줌
+    for(let service of chkArray){
+        $('input[name=serv][value="'+service+'"]').prop("checked", true);
+    }
+
+}
+
+
+//콘솔에 값 확인하고 싶을때 사용 - add.jsp/update.jsp(console 버튼)
+$('#consoleSign').click(function(){
+    //updAdrs();
+    //updServiceCheck();
+
+    setService(); //얘는 시작할때 바로하면 의미없다. 글등록 하기전에 받아야함
+    //chkValidation();
+
+    console.log(service);
+
 })
 
 

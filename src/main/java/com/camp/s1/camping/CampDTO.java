@@ -25,6 +25,7 @@ public class CampDTO {
 	private String useInfo;
 	private String homePage;
 	private String thumbnail;
+	private String layout;
 	private String regDate; //date
 	private String modiDate; //date
 	private Long hit;
@@ -202,6 +203,14 @@ public class CampDTO {
 
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	public String getLayout() {
+		return layout;
+	}
+
+	public void setLayout(String layout) {
+		this.layout = layout;
 	}
 
 	public String getRegDate() {

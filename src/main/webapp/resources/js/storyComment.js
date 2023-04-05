@@ -19,18 +19,7 @@ $('#storyList').on('click', '.getDetail', function(e){
     
     console.log(num);
     
-    $.ajax({
-        type : "GET",
-        url : '../'+boardName+'Comment/list',
-        data : {
-            num : num,
-            page : 1,
-        },
-        success : function(response){
-            $('#commentList'+num).html(response); 
-            
-        }
-    })
+    getCommentList(num , 1);
     
   
 })
@@ -85,7 +74,7 @@ $("#"+boardName+'List').on('click','.replyAdd',function(){
             if(response.trim() == 1) {
                 alert('댓글이 등록되었습니다');
                 board.children($('.replyContents')).val('');
-                getCommentList(1);
+                getCommentList(num, 1);
             }
             else {
                 alert('댓글 등록 실패');
@@ -102,13 +91,18 @@ $("#"+boardName+'List').on('click','.replyAdd',function(){
 
 
 // 리스트 가져오기
-function getCommentList(page) {
+function getCommentList(num ,page) {
 
     
 
     $.ajax({
         type : 'GET',
-        url : '../'+boardName + 'Comment/list?num=' + num + '&page=' + page,
+        url : '../'+boardName + 'Comment/list',
+        data : {
+            num : num,
+            page : page
+        },
+
         success : function(response) {
             $('#commentList'+num).html(response); 
             // console.log(num);                                                                        
@@ -119,12 +113,13 @@ function getCommentList(page) {
 
 //페이징
 $('#storyList').on('click','.page-link', function(e){
+    e.preventDefault();
     page = $(this).attr('data-board-page');
-    getCommentList(page);
+    getCommentList(num,page);
 
     console.log('Page :' +  page);
 
-    e.preventDefault();
+    
 
 })
 
@@ -158,7 +153,7 @@ $('#'+boardName+'List').on('click', '.deleteMenu', function(){
             success : function(response){
                 if(response.trim() > 0) {
                     alert("댓글이 삭제되었습니다.");
-                    getCommentList(page);
+                    getCommentList(num ,page);
                 }
                 else {
                     alert("삭제 실패");
@@ -205,7 +200,7 @@ $('#'+boardName+'List').on('click', '.commentUpdate', function(){
         success : function(response){
             if(response.trim() > 0) {
                 alert('댓글이 수정되었습니다');
-                getCommentList(page);
+                getCommentList(num, page);
 
             }
             else {

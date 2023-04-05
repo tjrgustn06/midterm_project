@@ -21,6 +21,8 @@ public class StoryCommentService implements CommentService{
 		Long totalCount = storyCommentDAO.getTotalCount(pager);
 		
 		pager.makeNum(totalCount);
+	
+
 		pager.makeRow();
 		
 		return storyCommentDAO.getBoardList(pager);

@@ -41,8 +41,9 @@
 			</script>
 			<div class="mb-3">
 			<a href="./memberUpdate" class="btn btn-info">정보수정</a>
-			<button class="btn btn-danger" type="submit">회원 탈퇴</button>
+			<button id="delete" class="btn btn-danger" type="submit">회원 탈퇴</button>
 			</div>
 <c:import url="../template/common_js.jsp"></c:import>
+<script src="../resources/js/memberPage.js"></script>
 </body>
 </html>

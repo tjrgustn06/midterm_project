@@ -159,10 +159,20 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberUpdate")
-	public ModelAndView setMemberUpdate(AddressDTO addressDTO, HttpSession session, MemberDTO memberDTO)throws Exception{
+	public ModelAndView setMemberUpdate( MemberDTO memberDTO, String [] addressName, String [] address, Long [] postCode, String [] addressDetail, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		int result = memberService.setMemberUpdate(addressDTO, memberDTO);
+		
+		ArrayList<AddressDTO> addressDTOs = new ArrayList<AddressDTO>();
+		for(int i=0; i<addressName.length; i++) {
+		 AddressDTO addressDTO = new AddressDTO();
+		 addressDTO.setAddressName(addressName[i]);
+		 addressDTO.setAddress(address[i]);
+		 addressDTO.setAddressDetail(addressDetail[i]);
+		 addressDTO.setPostCode(postCode[i]);
+		}
+		memberDTO.setAddressDTOs(addressDTOs);
+		int result = memberService.setMemberUpdate(memberDTO);
 		
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
@@ -267,7 +277,7 @@ public class MemberController {
 				msg="비밀번호 변경 성공";
 			}
 			
-			mv.setViewName("redirect:./memberPage");
+			mv.setViewName("member/memberPage");
 			return mv;
 			
 		}

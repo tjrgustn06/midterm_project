@@ -43,8 +43,14 @@
 					email : $("#email").val()
 				},
 				success : function(result) {
-					
-				},
+					if(result.trim()!=null){
+						alert('이메일로 임시 비밀번호를 보냈습니다')
+						location.href="./memberLogin";
+					}
+					else{
+						alert('아이디 또는 이메일이 잘못되었습니다')
+					}
+				}
 			})
 		});
 	})

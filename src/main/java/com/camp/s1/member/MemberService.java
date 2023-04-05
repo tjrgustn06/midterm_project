@@ -9,7 +9,16 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Properties;
+import java.util.logging.Logger;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.HtmlEmail;
@@ -78,13 +87,14 @@ public class MemberService {
 	}
 	
 	//Update
-	public int setMemberUpdate(AddressDTO addressDTO, MemberDTO memberDTO)throws Exception {
+	public int setMemberUpdate(MemberDTO memberDTO)throws Exception {
 		
 		int result = memberDAO.setMemberUpdate(memberDTO);
 		
-		addressDTO.setId(memberDTO.getId());
-		
-		result = memberDAO.setAddressUpdate(addressDTO);
+		for(AddressDTO addressDTO:memberDTO.getAddressDTOs()){
+			addressDTO.setId(memberDTO.getId());
+			result = memberDAO.setAddressUpdate(addressDTO);
+		}
 		
 		return result;
 	}
@@ -123,15 +133,18 @@ public class MemberService {
 		//Email 발송
 		
 				public void sendEmail(MemberDTO memberDTO, String div) throws Exception {
-					// Mail Server 설정
+					Properties props = new Properties();
+					props.put("mail.smtp.ssl.enable", "true");
+					
+					// Mail Server 설정				
 					String charSet = "utf-8";
-					String hostSMTP = "smtp.naver.com";
-					String hostSMTPid = "tjrgustn06@naver.com"; // 이메일 입력
-					String hostSMTPpwd = "*sa5978640427"; //비밀번호 입력
+					String hostSMTP = "smtp.gmail.com";
+					String hostSMTPid = "tjrgustn06@gmail.com"; // 이메일 입력
+					String hostSMTPpwd = "*sz5978640427"; //비밀번호 입력
 
 					// 보내는 사람 EMail, 제목, 내용
-					String fromEmail = "tjrgustn06@naver.com"; //보내는사람 아이디
-					String fromName = "camp Homepage";
+					String fromEmail = "tjrgustn06@gmail.com"; //보내는사람 아이디
+					String fromName = "camp Homepage"; //보내는사람 이름(카페 이름)
 					String subject = ""; //제목
 					String msg = ""; //내용(본문)
 					
@@ -145,7 +158,7 @@ public class MemberService {
 					}
 					
 					// 받는 사람 E-Mail 주소
-							String mail = memberDTO.getEmail();
+							String mail =  memberDTO.getEmail();
 							try {
 								HtmlEmail email = new HtmlEmail();
 								email.setDebug(true);
@@ -155,7 +168,7 @@ public class MemberService {
 								email.setSmtpPort(587);
 
 								email.setAuthentication(hostSMTPid, hostSMTPpwd);
-								email.setTLS(true);
+								email.setTLS(false);
 								email.addTo(mail, charSet);
 								email.setFrom(fromEmail, fromName, charSet);
 								email.setSubject(subject);
@@ -166,6 +179,7 @@ public class MemberService {
 							}
 						}
 		
+
 		//pw 찾기
 		public MemberDTO findPw(HttpServletResponse response, MemberDTO memberDTO)throws Exception{
 			

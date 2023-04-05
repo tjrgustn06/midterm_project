@@ -26,10 +26,23 @@ public class ProductController {
 	@GetMapping("list")
 	public ModelAndView getProductList(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		pager.setPerPage(12L);
 		List<ProductDTO> ar = productService.getProductList(pager);
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);
 		mv.setViewName("product/list");
+		return mv;
+	}
+	
+	// home에서 평점에 따른 리스트4개 출력
+	@GetMapping("productListTop")
+	public ModelAndView getProductListTop(Pager pager) throws Exception {
+		ModelAndView mv =new ModelAndView();
+		pager.setPerPage(4L);
+		List<ProductDTO> ar = productService.getProductList(pager);
+		mv.addObject("list", ar);
+		mv.setViewName("common/productTopResult");
+		
 		return mv;
 	}
 	

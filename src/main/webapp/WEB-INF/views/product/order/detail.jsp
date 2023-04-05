@@ -63,13 +63,15 @@
 				<div class="input-group-prepend">
 					<label for="address" class="form-label">배송지 주소</label>
 					<c:if test="${dto.status eq '입금대기'}">
-						<%-- <c:if test="${not empty member.addressDTOs}">
-							<select class="form-select" if="address">
+						<c:if test="${not empty member.addressDTOs}">
+							<select class="form-select" id="addressSelect">
 								<c:forEach items="${member.addressDTOs}" var="addressDTO">
+									<option selected>주소를 선택해 주세요</option>
+									<option>주소 직접 입력</option>
 									<option value="${addressDTO.address} ${addressDTO.addressDetail}">${addressDTO.addressName}</option>
 								</c:forEach>
 							</select>
-						</c:if> --%>
+						</c:if>
 						<input type="text" class="form-control" id="address" name="address" placeholder="배송될 주소를 입력해주세요.">
 					</c:if>
 					<c:if test="${dto.status eq '결제완료'}">
@@ -102,33 +104,37 @@
 			
 		})
 		function iamport(){
-		//가맹점 식별코드
-		IMP.init('imp15251423');
-		IMP.request_pay({
-		    pg : 'nictest04m',
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + $('#orderNum').val(),
-		    name : $('#name').val() , //결제창에서 보여질 이름
-		    amount : $('#price').val(), //실제 결제되는 가격
-		}, function(rsp) {
-			console.log(rsp);
-		    if ( rsp.success ) {
-		    	let msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-				console.log('성공')
-				alert(msg);
-				$('#paymentForm').submit()
-		    } else {
-		    	 var msg = '결제에 실패하였습니다.';
-		         msg += '에러내용 : ' + rsp.error_msg;
-				 console.log('실패')
-				 alert(msg);
-		    }
-		});
-	}
+			//가맹점 식별코드
+			IMP.init('imp15251423');
+			IMP.request_pay({
+				pg : 'nictest04m',
+				pay_method : 'card',
+				merchant_uid : 'merchant_' + $('#orderNum').val(),
+				name : $('#name').val() , //결제창에서 보여질 이름
+				amount : $('#price').val(), //실제 결제되는 가격
+			}, function(rsp) {
+				console.log(rsp);
+				if ( rsp.success ) {
+					let msg = '결제가 완료되었습니다.';
+					msg += '고유ID : ' + rsp.imp_uid;
+					msg += '상점 거래ID : ' + rsp.merchant_uid;
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					console.log('성공')
+					alert(msg);
+					$('#paymentForm').submit()
+				} else {
+					let msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
+					console.log('실패')
+					alert(msg);
+				}
+			});
+		};
+
+		$('#addressSelect').on('change','#address',function(){
+			$(this).val($('#addressSelect').prop())
+		})
 	</script>
 	<c:import url="../../template/common_js.jsp"></c:import>
 </body>

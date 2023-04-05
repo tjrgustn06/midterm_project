@@ -22,10 +22,12 @@
 			SELECT ROWNUM R, P.* FROM(
 				SELECT * FROM PRODUCT 
 				<include refid="searchCondition"></include>
-				ORDER BY NAME ASC
+				ORDER BY PRODUCTNUM DESC
 			) P
 		) WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
+  	
+  	<!--  -->
   	
   	<!-- 총 갯수 출력 -->
   	<select id="getTotalCount" parameterType="Pager" resultType="Long">

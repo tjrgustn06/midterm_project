@@ -187,9 +187,11 @@ $('#reviewList').on('click','.deleteMenu', function(){
 //리뷰 업데이트 
 $('#reviewList').on('click', '.updateMenu', function(){
     setResetForm(reviewNum)
+    $('#reviewMenu'+reviewNum).hide()
+    $('#reviewMark'+reviewNum).hide();
     reviewNum=$(this).attr('data-review-num');
     $('#reviewMenu'+reviewNum).hide();
-    $('#reviewMark'+reviewNum).hide()
+    $('#reviewMark'+reviewNum).hide();
     getUpdateForm(reviewNum);
     
 })

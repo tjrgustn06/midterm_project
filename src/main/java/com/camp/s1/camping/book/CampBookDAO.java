@@ -30,13 +30,13 @@ public class CampBookDAO {
 	}
 	
 	//주문번호 생성
-	public Long getOrderNum() throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getOrderNum");
+	public Long getOrderNumber() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getOrderNumber");
 	}
 	
-	//주문번호 입력 - 주문관리 테이블
-	public int setOrderNum(CampBookDTO campBookDTO) throws Exception{
-		return sqlSession.insert(NAMESPACE+"setOrderNum", campBookDTO);
+	//주문번호 입력 - 이걸 먼저 해야 주문서에 orderNum을 받아올 수 있음
+	public int setOrderNumber(CampBookDTO campBookDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setOrderNumber", campBookDTO);
 	}
 	
 }

@@ -22,12 +22,12 @@
 	</insert>
 	
 	<!-- getOrderNum -->
-	<select id="getOrderNum" resultType="Long">
+	<select id="getOrderNumber" resultType="Long">
 		SELECT PAYMENTSEQ.NEXTVAL FROM DUAL
 	</select>
 	
 	<!-- setOrderNum -->
-	<insert id="setOrderNum" parameterType="CampBookDTO">
+	<insert id="setOrderNumber" parameterType="CampBookDTO">
 		INSERT INTO ORDERS(ORDERNUM)
 		VALUES(#{orderNum})
 	</insert>

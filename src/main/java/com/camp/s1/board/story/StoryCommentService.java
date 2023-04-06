@@ -28,6 +28,10 @@ public class StoryCommentService implements CommentService{
 		
 		return storyCommentDAO.getBoardList(pager);
 	}
+	
+	public Long getBoardListCount(Pager pager) throws Exception {
+		return storyCommentDAO.getTotalCount(pager);
+	}
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {

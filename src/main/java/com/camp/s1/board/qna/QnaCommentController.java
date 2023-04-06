@@ -27,6 +27,7 @@ public class QnaCommentController {
 		
 	}
 	
+	
 	@PostMapping("add")
 	public ModelAndView setCommentAdd(QnaCommentDTO commentDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();

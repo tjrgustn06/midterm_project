@@ -24,6 +24,26 @@ $('#storyList').on('click', '.getDetail', function(e){
   
 })
 
+// 리스트 가져오기
+function getCommentList(num ,page) {
+
+    
+
+    $.ajax({
+        type : 'GET',
+        url : '../'+boardName + 'Comment/list',
+        data : {
+            num : num,
+            page : page
+        },
+
+        success : function(response) {
+            $('#commentList'+num).html(response); 
+                                                                                 
+        }
+
+    })
+}
 
 $('#storyList').on('input', '.replyContents', function(){
     if($(this).val() != '') {
@@ -50,16 +70,16 @@ $('#storyList').on('change', '.replyContents', function(){
     // getCommentList(1);
 
 
-
-//댓글 등록 이벤트
-$("#"+boardName+'List').on('click','.replyAdd',function(){
-
-    board = $(this).parents($('#'+boardName+$(this).attr('data-board-num')))
-    let contents = board.find('.replyContents').val();
-    num = $(this).attr('data-board-num')
-
-    setCommentAdd(num, contents, writer);
     
+    //댓글 등록 이벤트
+    $("#"+boardName+'List').on('click','.replyAdd',function(){
+        
+        board = $(this).parents($('#'+boardName+$(this).attr('data-board-num')))
+        let contents = board.find('.replyContents').val();
+        num = $(this).attr('data-board-num')
+        
+        setCommentAdd(num, contents, writer);
+        
 })
 
 //댓글 등록 이벤트
@@ -107,26 +127,6 @@ function setCommentAdd(num, contents, writer) {
 
 
 
-// 리스트 가져오기
-function getCommentList(num ,page) {
-
-    
-
-    $.ajax({
-        type : 'GET',
-        url : '../'+boardName + 'Comment/list',
-        data : {
-            num : num,
-            page : page
-        },
-
-        success : function(response) {
-            $('#commentList'+num).html(response); 
-                                                                                 
-        }
-
-    })
-}
 
 //페이징
 $('#storyList').on('click','.page-link', function(e){

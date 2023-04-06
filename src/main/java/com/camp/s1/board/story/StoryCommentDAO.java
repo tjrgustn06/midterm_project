@@ -45,7 +45,7 @@ public class StoryCommentDAO implements CommentDAO {
 
 	@Override
 	public int setBoardDelete(BbsDTO bbsDTO) throws Exception {
-		return sqlSession.delete(NAMESPACE + "setBoardDelete", bbsDTO);
+		return sqlSession.update(NAMESPACE + "setBoardDelete", bbsDTO);
 	}
 
 	@Override

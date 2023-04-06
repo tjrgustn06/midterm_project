@@ -37,7 +37,7 @@
 													<button type="button" class="list-group-item list-group-item-action deleteMenu" data-comment-num='${dto.commentNum}'>삭제</button>
 												</c:if>
 												
-												<button type="button" class="list-group-item list-group-item-action accuseMenu" data-comment-num='${dto.commentNum}'>신고하기</button>
+												<button type="button" class="list-group-item list-group-item-action reportMenu" data-comment-num='${dto.commentNum}'>신고하기</button>
 												
 												<c:if test="${dto.depth eq 0}">
 													<button type="button" class="list-group-item list-group-item-action subCommentMenu" data-comment-num='${dto.commentNum}'>답글달기</button>

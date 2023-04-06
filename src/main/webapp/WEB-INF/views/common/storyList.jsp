@@ -83,8 +83,21 @@
 							
 						</div> -->
 						<!-- Button trigger modal -->
-						<a type="button" class="getDetail" data-board-num="${dto.num}" data-bs-toggle="modal" data-bs-target="#exampleModal${dto.num}">
-							댓글 보기 
+						<a type="button" class="getDetail" id="getDetail${dto.num}" data-board-num="${dto.num}" data-bs-toggle="modal" data-bs-target="#exampleModal${dto.num}">
+							<script>
+								$(()=>{
+									$.ajax({
+										url : '../${boardName}Comment/listCount',
+										type : 'GET',
+										data : {
+											num : '${dto.num}',
+										},
+										success : function(data){
+											$("a[id='getDetail${dto.num}']").text('댓글' + data.trim() + '개 모두 보기');
+										}
+									})
+								})
+							</script>
 						</a >
 						
 						<div class="card-body my-1">							
@@ -213,7 +226,7 @@
 								수정
 							</button>
 							<button type="button" class="list-group-item list-group-item-action delete" data-board-num="${dto.num}">삭제</button>
-							<button type="button" class="list-group-item list-group-item-action accuse" data-board-num="${dto.num}">신고하기</button>
+							<button type="button" class="list-group-item list-group-item-action report" data-board-num="${dto.num}">신고하기</button>
 						</div>
 					</span>
 				</div>

@@ -41,6 +41,11 @@ $('#storyList').on('click','.update', function(){
     location.href="./update?num="+num;
 })
 
+$('#storyList').on('click', '.report', function(){
+    num = $(this).attr('data-board-num');
+    location.href="./report?num="+num;
+})
+
 
 
 

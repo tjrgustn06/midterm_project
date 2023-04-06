@@ -47,10 +47,16 @@
     function navActive(){
         let url=window.location.pathname;
         $('.nav-item').find('a').each(function(){
-            $(this).parent().toggleClass('active', $(this).attr('href')==url)
+            if($(this).attr('href')==url){
+                $(this).parent().toggleClass('active')
+                $(this).parent().parent().parent().toggleClass('active')
+            }
         })
+
     }
     navActive();
+
+    
     
     //------- Mailchimp js --------//  
 

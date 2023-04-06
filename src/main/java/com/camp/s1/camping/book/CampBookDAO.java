@@ -23,6 +23,11 @@ public class CampBookDAO {
 		return sqlSession.selectList(NAMESPACE+"getCampSiteList", campDTO);
 	}
 	
+	//booking 한 site 불러오기
+	public CampSiteDTO getCampSiteDetail(Long areaNum) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCampSiteDetail", areaNum);
+	}
+	
 	//사용자
 	//bookAdd(CampBookDTO 생성)
 	public int setCampBookAdd(CampBookDTO campBookDTO) throws Exception{

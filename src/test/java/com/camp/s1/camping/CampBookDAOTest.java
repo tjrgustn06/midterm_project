@@ -63,4 +63,14 @@ public class CampBookDAOTest extends MyTestCase{
 		result = campBookDAO.setCampBookAdd(campBookDTO);
 		assertNotEquals(0, result);
 	}
+	
+	
+	//CampSiteDetailTest
+	@Test
+	public void getCampSiteDetailTest() throws Exception{
+		Long areaNum = 905L;
+		CampSiteDTO campSiteDTO = campBookDAO.getCampSiteDetail(areaNum);
+		
+		assertNotEquals(0, campSiteDTO);
+	}
 }

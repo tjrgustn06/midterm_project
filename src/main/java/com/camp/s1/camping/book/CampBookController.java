@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,17 +41,24 @@ public class CampBookController {
 	}
 	
 	
-	
+	//booking 버튼을 눌렀을 때
 	//예약확정페이지(bookConfirmation.jsp) 호출
 	@GetMapping("confirmation")
-	public ModelAndView getCampBookConfirmation() throws Exception{
-		//예약 정보 표시, 최종 결제, 예약취소 기능 제공
+	public ModelAndView getCampBookConfirmation(CampSiteDTO campSiteDTO) throws Exception{
+		//campSiteDetail 호출 + 날짜 입력되서 넘어가게끔
 		ModelAndView mv = new ModelAndView();
 		
-		
+		//
 		
 		mv.setViewName("camp/book/bookConfirmation");
 		return mv;
+	}
+	
+	
+	//booking 버튼을 눌렀을 때
+	@PostMapping("confirmation")
+	public ModelAndView getCampBookConfirmation() throws Exception{
+		//예약 정보 표시, 최종 결제, 예약취소 기능 제공
 	}
 	
 	

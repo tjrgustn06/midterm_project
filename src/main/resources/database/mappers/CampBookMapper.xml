@@ -7,9 +7,14 @@
 	<mapper namespace="com.camp.s1.camping.book.CampBookDAO">
 	
 	
-	<!-- siteList 불러오기 -->
+	<!-- siteList -->
 	<select id="getCampSiteList" parameterType="CampDTO" resultType="CampSiteDTO">
 		SELECT * FROM CAMPSITE WHERE CAMPNUM=#{campNum}
+	</select>
+	
+	<!-- siteDetail -->
+	<select id="getCampSiteDetail" parameterType="Long" resultType="CampSiteDTO">
+		SELECT * FROM CAMPSITE WHERE AREANUM=#{areaNum}
 	</select>
 	
 	<!-- bookAdd -->

@@ -81,7 +81,7 @@
 		<c:forEach items="${siteList}" var="siteDTO" varStatus="i">
 			<!-- 파라미터 확인 -->
 			--campNum: ${siteDTO.campNum}--<br>
-			--siteNum: ${siteDTO.areaNum}--
+			--areaNum: ${siteDTO.areaNum}--
 			<div id="siteOne${i.count}">
 				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
 				<input type="hidden" name="campNum" value="${siteDTO.campNum}">

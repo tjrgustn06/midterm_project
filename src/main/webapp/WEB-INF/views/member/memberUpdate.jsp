@@ -42,6 +42,7 @@
 					<label for="address" class="form-label fw-bold">주소</label>
 					<button type="button" id="addressAdd">주소추가</button>
 					<c:forEach items="${dto.addressDTOs}" var="addressDTO">
+						<input type="hidden" value="${addressDTO.addressNum}">
 						<div id="oldAddress${addressDTO.addressNum}">	
 							<p>${addressDTO.addressName}</p>
 							<input type="text" class="form-control" value="${addressDTO.address}" readonly>

@@ -18,8 +18,8 @@ public class CampBookService {
 	
 	//필요한 메서드 작성
 	//campSite 가져오기
-	public List<CampSiteDTO> getCampBookSite(CampDTO campDTO) throws Exception{
-		List<CampSiteDTO> ar = campBookDAO.getCampBookSite(campDTO);
+	public List<CampSiteDTO> getCampSiteList(CampDTO campDTO) throws Exception{
+		List<CampSiteDTO> ar = campBookDAO.getCampSiteList(campDTO);
 		
 		
 		

@@ -24,15 +24,32 @@ public class CampBookController {
 	
 	//예약페이지(book.jsp) 호출
 	@GetMapping("site")
-	public ModelAndView getCampBookSite(CampDTO campDTO) throws Exception{
+	public ModelAndView getCampSiteList(CampDTO campDTO) throws Exception{
 		//사이트 고르고, 기간 설정, 예약가능 사이트 확인, 금액 확인, 예약하기 기능 제공
 		ModelAndView mv = new ModelAndView();
 		
 		//캠프장의 모든 사이트를 보내줘야한다
-		List<CampSiteDTO> ar = campBookService.getCampBookSite(campDTO);
+		List<CampSiteDTO> ar = campBookService.getCampSiteList(campDTO);
+		
+		//선택한 사이트의 정보를 CampBookDTO 형태로 만들어서 confirmation 페이지로 넘겨준다. - 계약서를 만드는 느낌으로
+		
 		
 		mv.addObject("siteList", ar);
 		mv.setViewName("camp/book/bookSite");
+		return mv;
+	}
+	
+	
+	
+	//예약확정페이지(bookConfirmation.jsp) 호출
+	@GetMapping("confirmation")
+	public ModelAndView getCampBookConfirmation() throws Exception{
+		//예약 정보 표시, 최종 결제, 예약취소 기능 제공
+		ModelAndView mv = new ModelAndView();
+		
+		
+		
+		mv.setViewName("camp/book/bookConfirmation");
 		return mv;
 	}
 	
@@ -64,18 +81,5 @@ public class CampBookController {
 		return mv;
 	}
 	
-	
-	
-	//예약확정페이지(bookConfirmation.jsp) 호출
-	@GetMapping("confirmation")
-	public ModelAndView getCampBookConfirmation() throws Exception{
-		//예약 정보 표시, 최종 결제, 예약취소 기능 제공
-		ModelAndView mv = new ModelAndView();
-		
-		
-		
-		mv.setViewName("camp/book/bookConfirmation");
-		return mv;
-	}
 	
 }

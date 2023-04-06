@@ -14,8 +14,8 @@ public class CampBookDTO {
 	private String startDate;
 	private String lastDate;
 	private String account;
-	private String status;
 	private Long dayInfo;
+	private String status;
 	
 	public CampBookDTO() {
 		

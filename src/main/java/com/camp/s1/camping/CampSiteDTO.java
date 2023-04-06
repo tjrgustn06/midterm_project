@@ -10,6 +10,8 @@ public class CampSiteDTO {
 	private Long offWeekendsPrice;
 	private Long peakWeekdaysPrice;
 	private Long peakWeekendsPrice;
+	private String startDate;
+	private String lastDate;
 	private String status;
 	
 	public CampSiteDTO() {
@@ -78,6 +80,22 @@ public class CampSiteDTO {
 
 	public void setPeakWeekendsPrice(Long peakWeekendsPrice) {
 		this.peakWeekendsPrice = peakWeekendsPrice;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getLastDate() {
+		return lastDate;
+	}
+
+	public void setLastDate(String lastDate) {
+		this.lastDate = lastDate;
 	}
 
 	public String getStatus() {

@@ -5,11 +5,32 @@
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 	<mapper namespace="com.camp.s1.camping.book.CampBookDAO">
-	  
-	  
+	
+	
 	<!-- siteList 불러오기 -->
-	<select id="getCampBookSite" parameterType="CampDTO" resultType="CampSiteDTO">
+	<select id="getCampSiteList" parameterType="CampDTO" resultType="CampSiteDTO">
 		SELECT * FROM CAMPSITE WHERE CAMPNUM=#{campNum}
 	</select>
-	  
+	
+	<!-- bookAdd -->
+	<insert id="setCampBookAdd" parameterType="CampBookDTO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CAMPBOOK(NUM, AREANUM, ID, INDEXCODE, ORDERNUM, PRICE, REGDATE, STARTDATE, LASTDATE, ACCOUNT, DAYINFO, STATUS)
+		VALUES(#{num}, #{areaNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, sysdate, #{startDate}, #{lastDate}, #{account}, #{dayInfo}, '입금대기')
+	</insert>
+	
+	<!-- getOrderNum -->
+	<select id="getOrderNum" resultType="Long">
+		SELECT PAYMENTSEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- setOrderNum -->
+	<insert id="setOrderNum" parameterType="CampBookDTO">
+		INSERT INTO ORDERS(ORDERNUM)
+		VALUES(#{orderNum})
+	</insert>
+	
+	
 	</mapper>

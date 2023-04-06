@@ -17,24 +17,29 @@
 <div class="container-fluid col-lg-9 my-5">
 	<div class="mb-10">0</div>
 	<div class="row my-3">
+		<!-- 파라미터 확인 -->
+		--${campNum}--
 		<h1>BookSite Page</h1>
 		<p>기간 설정, 예약 가능 사이트 확인, 금액 확인, 예약하기 기능</p>
 	</div>
 
-
-	<!-- 입력 폼 시작 -->
-	<form action="./confirmation" id="bksFrm" method="get">
-		<input type="hidden" id="bksCampNum" name="campNum" value="${dto.campNum}">
-		<div class="row my-2">
-			<button id="bksConsoleSign" type="button" class="generic-btn primary">Console</button>
-			<button id="bksConfirm" type="button" class="generic-btn success">confirm</button>
-			<button id="bksCancle" type="button" class="generic-btn info">cancle</button>
-		</div>
-	</form>
-	<!-- 입력 폼 끝 -->
+	<!-- 시설배치도 -->
+	<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+		<!-- 임시로 막아놓고 나중에 추가해보기 ㅠㅠ -->
+		<!-- <div class="row mb-3">
+			<c:if test="${not empty dto.campFileDTOs}">
+				<div class="layout">
+					<img alt="" src="">
+				</div>
+			</c:if>
+		</div> -->
+	<hr>
 
 	<!-- datePicker -->
-	<div class="row date">
+	<div class="row my-2 date">
+		<div class="col-10">
+			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 예약 기간 설정</h5>
+		</div>
 		<div class="col-md-3 mx-auto">
 			<input type="text" name="startDate" id="startDate" class="datepicker" placeholder="사용시작일" readonly>
 		</div>
@@ -43,14 +48,43 @@
 		</div>
 	</div>
 
+	<!-- 입력 폼 시작 -->
+	<form action="./confirmation" id="bksFrm" method="get">
+		<!-- <input type="hidden" id="bksCampNum" name="campNum" value="${dto.campNum}"> -->
+		<div class="row d-flex justify-content-center my-2">
+			<button id="bksSearch" type="button" class="generic-btn success col-3">Search</button>
+			<button id="bksCancle" type="button" class="generic-btn primary col-3">cancle</button>
+		</div>
+		<div class="row my-2">
+			<button id="bksConsoleSign" type="button" class="generic-btn primary col-3 mx-auto">확인용 버튼</button>
+		</div>
+	</form>
+	<!-- 입력 폼 끝 -->
 
+	<hr>
 
 	<!-- 캠핑장이 가지고있는 사이트들 -->
+	<!-- CampSite -->
+	<div class="row my-2">
+		<div class="col-10">
+			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 정보</h5>
+		</div>
+		<!-- <div class="col-2">
+			<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
+		</div> -->
+	</div>
+
+
 	<div class="row my-2" id="siteList">
 		<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
 		<!-- index는 0부터 시작, count는 1부터 시작 -->
 		<c:forEach items="${siteList}" var="siteDTO" varStatus="i">
+			<!-- 파라미터 확인 -->
+			--campNum: ${siteDTO.campNum}--<br>
+			--siteNum: ${siteDTO.areaNum}--
 			<div id="siteOne${i.count}">
+				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
+				<input type="hidden" name="campNum" value="${siteDTO.campNum}">
 				<div class="input-group mb-2">
 					<span class="input-group-text" id="siteName">사이트이름</span>
 					<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}" readonly>
@@ -77,8 +111,9 @@
 					<input class="form-check-input" type="radio" name="status" id="unbookable" value="예약불가">
 					<label class="form-check-label" for="unbookable">예약불가</label>
 				</div> -->
-				<div class="mb-2">
-					<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button>
+				<div class="d-flex justify-content-between mb-2">
+					<!-- <button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels generic-btn primary">Remove Site</button> -->
+					<button id="bksConfirm" type="button" class="generic-btn success">Booking</button>
 				</div>
 			</div>
 		</c:forEach>

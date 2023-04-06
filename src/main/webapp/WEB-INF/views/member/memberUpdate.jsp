@@ -40,16 +40,21 @@
 				
 				<div class="mb-3">
 					<label for="address" class="form-label fw-bold">주소</label> 
-					<input type="text" name="address" class="form-control" value="${addressDTOs.address}">
-					<input type="text" name="addressDetail" class="form-control" value="${addressDTOs.addressDetail}">
+					<c:forEach items="${dto.addressDTOs}" var="addressDTO">
+						<p>${addressDTO.addressName}</p>
+						<input type="text" class="form-control" name="address" value="${addressDTO.address}" readonly>
+						<input type="text" class="form-control" name="addressDetail" value="${addressDTO.addressDetail}" readonly>
+						<button type="button" id="addressUpdate">주소 수정</button>
+						<button type="button" id="addressUpdateCancle">취소</button>
+						<!-- <input type="text" name="addressName" id="addressName" placeholder="집,회사..."><br>
+						<input type="text" name="postCode" id="postcode" placeholder="우편번호">
+						<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="text" name="address" id="address" placeholder="주소" readonly><br>
+						<input type="text" name="addressDetail" id="addressDetail" placeholder="상세주소" readonly> -->
+					</c:forEach>
 				</div>
 				
 			<div class="mb-3">
-				<input type="text" name="addressName" id="addressName" placeholder="집,회사..."><br>
-				<input type="text" name="postCode" id="postcode" placeholder="우편번호">
-				<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" name="address" id="address" placeholder="주소"><br>
-				<input type="text" name="addressDetail" id="addressDetail" placeholder="상세주소">
 			</div>
 				
 				<div class="mb-3">

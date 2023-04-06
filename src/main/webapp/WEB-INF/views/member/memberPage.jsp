@@ -20,10 +20,13 @@
 			<h3>Phone : ${dto.phone}</h3>
 			<h3>Email : ${dto.email}</h3>
 			<h3>RoleName  : ${dto.roleName}</h3>
-			<h3 id="address">Address : </h3>
+			<c:forEach items="${dto.addressDTOs}" var="addressDTO">
+				<h3>AddressName : ${addressDTO.addressName}</h3>
+				<h3>Address : ${addressDTO.address} ${addressDTO.addressDetail}</h3>
+			</c:forEach>
 			</div>
-			</div>
-			<script>
+			
+			<!-- <script>
 				let addressName = '';
 				let address ='';
 				let addressDetail='';
@@ -38,11 +41,12 @@
 					}
 				})
 				</c:forEach>
-			</script>
+			</script> -->
 			<div class="mb-3">
 			<a href="./memberUpdate" class="btn btn-info">정보수정</a>
 			<button id="delete" class="btn btn-danger" type="submit">회원 탈퇴</button>
 			</div>
+	</div>
 <c:import url="../template/common_js.jsp"></c:import>
 <script src="../resources/js/memberPage.js"></script>
 </body>

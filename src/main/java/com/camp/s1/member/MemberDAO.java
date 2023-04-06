@@ -26,7 +26,7 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setMemberJoin", memberDTO);
 	}
 	
-	//Logion
+	//Login
 	public MemberDTO getMemberLogin(MemberDTO memberDTO)throws Exception{
 		
 		return sqlSession.selectOne(NAMESPACE+"getMemberLogin", memberDTO);

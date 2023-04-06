@@ -43,6 +43,20 @@
         }
     }
     testimonialSlider();
+
+    function navActive(){
+        let url=window.location.pathname;
+        $('.nav-item').find('a').each(function(){
+            if($(this).attr('href')==url){
+                $(this).parent().toggleClass('active')
+                $(this).parent().parent().parent().toggleClass('active')
+            }
+        })
+
+    }
+    navActive();
+
+    
     
     //------- Mailchimp js --------//  
 
@@ -63,28 +77,7 @@
     $('#datetimepicker11,#datetimepicker1').datetimepicker({
         daysOfWeekDisabled: [0, 6]
     });
-    
-     /*---------gallery isotope js-----------*/
-    function galleryMasonry(){
-        if ( $('#gallery').length ){
-            $('#gallery').imagesLoaded( function() {
-              // images have loaded
-                // Activate isotope in container
-                $("#gallery").isotope({
-                    itemSelector: ".gallery_item",
-                    layoutMode: 'masonry',
-                    animationOptions: {
-                        duration: 750,
-                        easing: 'linear'
-                    }
-                });
-            })
-        }
-    }
-    galleryMasonry();
-	
-	/*----------------------------------------------------*/
-    
+
     /*----------------------------------------------------*/
     /*  Google map js
     /*----------------------------------------------------*/

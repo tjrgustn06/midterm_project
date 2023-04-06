@@ -434,8 +434,7 @@ button:focus {
   border-bottom: none;
 }
 
-.navbar .menu_nav .nav-item.submenu ul .nav-item:hover .nav-link {
-  background: #f0f0f0;
+.navbar .menu_nav .nav-item.submenu ul .nav-item:hover .nav-link,.navbar .menu_nav .nav-item.submenu ul .nav-item.active .nav-link  {
   color: #52c5fd;
 }
 

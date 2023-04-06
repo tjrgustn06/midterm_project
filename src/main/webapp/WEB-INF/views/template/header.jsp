@@ -14,12 +14,16 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 	<ul class="nav navbar-nav menu_nav ml-auto">
-                    	<li class="nav-item"><a class="nav-link" href="/">Home</a></li> 
-                        <li class="nav-item"><a class="nav-link" href="/notice/list">공지사항</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/qna/list">QnA</a></li>
-						<li class="nav-item"><a class="nav-link" href="/story/list">캠핑스토리</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/camp/list">캠핑장보기</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/product/list">물품대여</a></li>
+						<li class="nav-item submenu dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">INFO</a>
+							<ul class="dropdown-menu">
+								<li class="nav-item"><a class="nav-link" href="/notice/list">NOTICE</a></li>
+								<li class="nav-item"><a class="nav-link" href="/qna/list">QNA</a></li>
+							</ul>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="/story/list">CAMPINGSTORY</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/camp/list">BOOK</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/product/list">RENT</a></li>
                     </ul>
                     <ul class="nav navbar-nav menu_nav mx-auto">
                         <c:if test="${empty member}">
@@ -30,9 +34,9 @@
 							<li class="nav-item submenu dropdown">
                             	<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MYPAGE</a>
                             	<ul class="dropdown-menu">
-                                	<li class="nav-item"><a class="nav-link" href="/member/memberPage">마이페이지</a></li>
-                                	<li class="nav-item"><a class="nav-link" href="/product/order/list">물품주문정보</a></li>
-                                	<li class="nav-item"><a class="nav-link" href="/cart/list">장바구니</a></li>
+                                	<li class="nav-item"><a class="nav-link" href="/member/memberPage">MYPAGE</a></li>
+                                	<li class="nav-item"><a class="nav-link" href="/product/order/list">PRODUCTORDER</a></li>
+                                	<li class="nav-item"><a class="nav-link" href="/cart/list">CART</a></li>
                             	</ul>
                         	</li>
 							<li class="nav-item"><a class="nav-link" href="/member/memberLogout">LOGOUT</a></li>

@@ -15,6 +15,10 @@ public class StoryDTO extends BoardDTO {
 	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
 		this.boardFileDTOs = boardFileDTOs;
 	}
+
+
+	
+	
 	
 	
 }

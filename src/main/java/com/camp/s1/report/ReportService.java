@@ -10,7 +10,6 @@ public class ReportService {
 	private ReportDAO reportDAO;
 	
 	public int setReportAdd(ReportDTO reportDTO) throws Exception {
-		reportDTO.setBoardId(1L);
 		return reportDAO.setReportAdd(reportDTO);
 	}
 }

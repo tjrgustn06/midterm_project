@@ -45,6 +45,8 @@ public class StoryCommentController {
 	public ModelAndView setBoardadd(StoryCommentDTO storyCommentDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println(storyCommentDTO.getParentBoardId());
+		
 		mv.setViewName("common/ajaxResult");
 		mv.addObject("result", storyCommentService.setBoardAdd(storyCommentDTO));
 		

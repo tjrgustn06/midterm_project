@@ -56,6 +56,7 @@ public class StoryService implements BoardService {
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile[] files, HttpSession session) throws Exception {
+		bbsDTO.setBoardId(3L);
 		int result = storyDAO.setBoardAdd(bbsDTO);
 		
 		String realPath = session.getServletContext().getRealPath("resources/upload/story");
@@ -71,6 +72,7 @@ public class StoryService implements BoardService {
 			
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
 			boardFileDTO.setNum(bbsDTO.getNum());
+			boardFileDTO.setBoardId(bbsDTO.getBoardId());
 			boardFileDTO.setFileName(fileName);
 			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
 			result = storyDAO.setBoardFileAdd(boardFileDTO);
@@ -92,6 +94,7 @@ public class StoryService implements BoardService {
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
+		
 		int result = storyDAO.setBoardUpdate(bbsDTO);
 		
 		if(result > 0) {

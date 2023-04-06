@@ -43,7 +43,8 @@ $('#storyList').on('click','.update', function(){
 
 $('#storyList').on('click', '.report', function(){
     num = $(this).attr('data-board-num');
-    location.href="./report?num="+num;
+    let boardId = $('#boardName').attr("data-board-id");
+    location.href="../report/report?num="+num+"&boardId="+boardId;
 })
 
 

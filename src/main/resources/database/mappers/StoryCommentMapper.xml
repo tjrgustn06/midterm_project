@@ -36,8 +36,8 @@
 		<selectKey keyProperty="commentNum" resultType="Long" order="BEFORE">	
 				SELECT BOARDSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-  		INSERT INTO STORYCOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
-  		VALUES (#{commentNum}, #{num}, #{writer}, #{contents}, SYSDATE, #{commentNum}, 0, 0)
+  		INSERT INTO STORYCOMMENT (COMMENTNUM, NUM, PARENTBOARDID, BOARDID, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
+  		VALUES (#{commentNum}, #{num}, #{parentBoardId}, #{boardId}, #{writer}, #{contents}, SYSDATE, #{commentNum}, 0, 0)
   	</insert> 
   	
   	
@@ -62,8 +62,8 @@
   	
   	<insert id="setSubCommentAdd" parameterType="BbsDTO">
 
-  		INSERT INTO STORYCOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
-  		VALUES (BOARDSEQ.NEXTVAL, #{num}, #{writer}, #{contents}, SYSDATE, #{ref}, #{step}, #{depth})
+  		INSERT INTO STORYCOMMENT (COMMENTNUM, NUM, PARENTBOARDID, BOARDID, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
+  		VALUES (BOARDSEQ.NEXTVAL, #{num}, #{parentBoardId}, #{boardId}, #{writer}, #{contents}, SYSDATE, #{ref}, #{step}, #{depth})
   	</insert>
   
   

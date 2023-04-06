@@ -1,5 +1,7 @@
 package com.camp.s1.board.story;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,15 @@ public class StoryController {
 		return "story";
 	}
 	
+	@ModelAttribute("boardId")
+	public Long getBoardId() {
+		return 3L;
+	}
+	
 	@GetMapping("list")
 	public ModelAndView getListPage(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
 		
 		
 		mv.setViewName("/story/list");

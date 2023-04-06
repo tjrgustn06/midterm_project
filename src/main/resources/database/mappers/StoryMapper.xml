@@ -33,6 +33,7 @@
   
    <resultMap type="StoryDTO" id="storyDetailResult">
   	<id property="num" column="NUM"/>
+  	<id property="boardId" column="BOARDID"/>
   	<result property="writer" column="WRITER"/>
   	<result property="title" column="TITLE"/>
   	<result property="contents" column="CONTENTS"/>
@@ -63,13 +64,13 @@
   	<selectKey keyProperty="num" order="BEFORE" resultType="Long">
   		SELECT BOARDSEQ.NEXTVAL FROM DUAL
   	</selectKey>
-  	INSERT INTO STORY (NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT)
-  	VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  	INSERT INTO STORY (NUM, BOARDID, WRITER, TITLE, CONTENTS, REGDATE, HIT)
+  	VALUES (#{num}, #{boardId}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
   </insert>
   
   <insert id="setBoardFileAdd" parameterType="BoardFileDTO">
-  	INSERT INTO STORYFILES (FILENUM, NUM, FILENAME, ORINAME) 
-  	VALUES (BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+  	INSERT INTO STORYFILES (FILENUM, NUM, BOARDID, FILENAME, ORINAME) 
+  	VALUES (BOARDSEQ.NEXTVAL, #{num}, #{boardId}, #{fileName}, #{oriName})
   </insert>
   
   <delete id="setBoardDelete" parameterType="BbsDTO">

@@ -7,6 +7,7 @@ public class BbsDTO {
 	private String writer;
 	private String contents;
 	private Date regDate;
+	private Long boardId;
 	
 	public Long getNum() {
 		return num;
@@ -32,7 +33,13 @@ public class BbsDTO {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
+	public Long getBoardId() {
+		return boardId;
+	}
+
+	public void setBoardId(Long boardId) {
+		this.boardId = boardId;
+	}
 	
 	
 	

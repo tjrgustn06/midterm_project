@@ -14,15 +14,17 @@
 	<div class="container-fluid my-3">
 		
 		<div class="row mb-4 border-bottom border-info">
-			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2">${boardName} 페이지</h1><br>
+			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2">신고 페이지</h1><br>
 		</div>
 		
 		<div class="row col-md-8 mx-auto border-bottom ">
 			<form action="./report" method="post">
+				<input type="hidden" name="boardId" value="${dto.boardId}">
+				<input type="hidden" name="num" value="${dto.num}">
 				<div class="row mb-3">
 				  <label for="writer" class="col-sm-2 col-form-label">작성자</label>
 				  <div class="col-sm-10">
-				  	<input type="text" class="form-control" name="reporter" id="writer" value="${member.id}" readonly >
+				  	<input type="text" class="form-control" name="reporter" id="reporter" value="${member.id}" readonly >
 				  </div>
 				</div>
 				
@@ -30,7 +32,7 @@
 				
 				<div class="mb-5">
 				  <label for="contents" class="form-label">신고 사유</label>
-				  <textarea class="form-control" name="reportContents" id="contents" rows="8"></textarea>
+				  <textarea class="form-control" name="reportContents" id="reportContents" rows="8"></textarea>
 				</div>
 				
 				

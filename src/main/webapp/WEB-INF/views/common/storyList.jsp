@@ -104,6 +104,7 @@
 							<form action="../${boardName}Comment/add" method="post">
 								<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
 								<input type="hidden" name="num" value="${dto.num}">
+								<input type="hidden" name="parentBoardId" value="${dto.boardId}">
 								
 									<input class="border border-0 replyContents"  id="replyContents" type="text" data-board-num="${dto.num}" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
 									<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
@@ -200,6 +201,7 @@
 												<form action="../${boardName}Comment/add" method="post">
 													<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
 													<input type="hidden" name="num" value="${dto.num}">
+													<input type="hidden" name="parentBoardId" value="${dto.boardId}">
 													
 														<input class="border border-0 replyContents"  id="replyContents" data-board-num="${dto.num}" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
 														<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>

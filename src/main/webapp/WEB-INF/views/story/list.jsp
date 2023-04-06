@@ -33,8 +33,7 @@
 	<div class="container-fluid my-3">
 	
 		<div class="row mb-4 border-bottom border-info">
-			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2" id="boardName" data-board-name="${boardName}">${boardName} 페이지</h1><br>
-			${member.id}
+			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2" id="boardName" data-board-id="${boardId}" data-board-name="${boardName}">${boardName} 페이지</h1><br>
 		</div>
 		
 		<div id="storyList">

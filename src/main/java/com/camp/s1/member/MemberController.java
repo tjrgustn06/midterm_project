@@ -192,19 +192,11 @@ public class MemberController {
 	
 	//Delete
 	@PostMapping("memberDelete")
-	public ModelAndView setMemberDelete(AddressDTO addressDTO, MemberDTO memberDTO)throws Exception{
+	public ModelAndView setMemberDelete(MemberDTO memberDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-		int result = memberService.setMemberDelete(addressDTO, memberDTO);
-		
-		String msg="삭제에 실패했습니다";
-		
-		if(result>0) {
-			msg="삭제에 성공하였습니다";
-		}
-		
-		mv.addObject("result", msg);
-		mv.setViewName("common/result");
+				
+		mv.addObject("result", memberService.setMemberDelete(memberDTO));
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

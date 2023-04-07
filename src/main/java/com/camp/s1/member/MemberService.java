@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -20,6 +21,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,13 +102,14 @@ public class MemberService {
 	}
 	
 	//Delete
-	public int setMemberDelete(AddressDTO addressDTO, MemberDTO memberDTO)throws Exception{
+	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
 		
 		int result = memberDAO.setMemberDelete(memberDTO);
 		
-		addressDTO.setId(memberDTO.getId());
-		
-		result = memberDAO.setAddressDelete(addressDTO);
+		for(AddressDTO addressDTO:memberDTO.getAddressDTOs()){
+			addressDTO.setId(memberDTO.getId());
+			result = memberDAO.setAddressDelete(addressDTO);
+		}
 		
 		return result;
 	}
@@ -164,7 +167,7 @@ public class MemberService {
 				      message.setSubject(memberDTO.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요"); //메일 제목을 입력
 
 				      // 메일 내용
-				      message.setText(memberDTO.getPw()+"회원님의 임시 비밀번호 입니다");
+				      message.setText(memberDTO.getId() + "님의 임시 비밀번호는" + memberDTO.getPw() +"입니다");
 
 				      // 메일 전송
 				      Transport.send(message);

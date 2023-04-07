@@ -1,14 +1,14 @@
 
 $('#delete').click(function(){
     console.log('check')
-    let check = window.confirm("삭제하시겠습니까?");
+    let check = window.confirm("탈퇴 하시겠습니까?");
 
     if(check) {
     $.ajax({
         type: 'POST',
         url: './delete',
         data :{
-            pw : pw
+            id : id
         },
         success : function(response){
             if(response.trim()>0){

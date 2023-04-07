@@ -66,7 +66,7 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container-fluid col-lg-9 my-5">
+<div class="container col-lg-9 my-5">
 	<div class="row my-3">
 		<h1>${dto.name}</h1>
 	</div>
@@ -141,14 +141,14 @@
 			<form action="./update" id="frm" method="get">
 				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 				<input type="hidden" name="campNum" value="${dto.campNum}">
-				<button id="detBook" type="button" class="btn btn-outline-primary">booking</button>
-				<button id="detBookList" type="button" class="btn btn-outline-primary">bookList</button>
-				<button id="detManagement" type="button" class="btn btn-outline-primary">siteManage</button> <!-- 관리자일때 보일 버튼 -->
+				<button id="detBook" type="button" class="genric-btn success">booking</button>
+				<button id="detBookList" type="button" class="genric-btn primary">bookList</button>
+				<button id="detManagement" type="button" class="genric-btn warning">siteManage</button> <!-- 관리자일때 보일 버튼 -->
 
-				<button id="detList" type="button" class="btn btn-outline-secondary">to List</button>
+				<button id="detList" type="button" class="genric-btn primary">to List</button>
 				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
-				<button id="detUpdate" type="button" class="btn btn-outline-success">update</button>
-				<button id="detDelete" type="button" class="btn btn-outline-danger">delete</button>
+				<button id="detUpdate" type="button" class="genric-btn warning">update</button>
+				<button id="detDelete" type="button" class="genric-btn danger">delete</button>
 			</form>
 		</div>
 	</div>
@@ -514,18 +514,18 @@
 							</div>
 							<div id="picList">
 								<div class="row mb-2" id="addPicDiv">
-									<button type="button" id="addPic" class="col-2 offset-md-10 btn btn-primary">사진추가</button>
+									<button type="button" id="addPic" class="col-2 offset-md-10 genric-btn primary small">사진추가</button>
 								</div>
 							</div>
 							<div>
-								<button type="button" id="addReview" class="btn btn-outline-info" data-review-num="${dto.campNum}" data-review-name="camp">리뷰작성</button>
+								<button type="button" id="addReview" class="genric-btn success small" data-review-num="${dto.campNum}" data-review-name="camp">리뷰작성</button>
 							</div>
 						</form>
 					</div>
 
 					<div class="row col-6 mx-auto justify-content-center my-3">
-						<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
-						<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
+						<button id="reviewAdd" type="button" class="genric-btn success small col-3">리뷰쓰기</button>
+						<button id="reviewCancle" type="button" class="genric-btn danger small col-3">취소</button>
 					</div>
 
 					<div class="row" id="reviewList">

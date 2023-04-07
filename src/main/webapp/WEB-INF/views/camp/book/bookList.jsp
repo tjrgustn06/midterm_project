@@ -12,7 +12,7 @@
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
-<div class="container-fluid col-lg-9 my-5">
+<div class="container col-lg-9 my-5">
 	<div class="mb-10">0</div>
 	<div class="row my-3">
 		<h1>BookList Page</h1>

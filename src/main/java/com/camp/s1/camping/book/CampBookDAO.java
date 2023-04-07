@@ -44,4 +44,10 @@ public class CampBookDAO {
 		return sqlSession.insert(NAMESPACE+"setOrderNumber", campBookDTO);
 	}
 	
+	//bookConfirmed - bookConfirmation.jsp에서 최종 확인한 경우
+	
+	
+	//bookDelete - bookConfirmation.jsp에서 취소한 경우
+	
+	
 }

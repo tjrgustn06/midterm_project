@@ -14,11 +14,12 @@
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
-<div class="container-fluid col-lg-9 my-5">
+<div class="container col-lg-9 my-5">
 	<div class="mb-10">0</div>
 	<div class="row my-3">
 		<!-- 파라미터 확인 -->
-		--${campNum}--
+		--CN: ${campNum}--
+		--AN: ${areaNum}--
 		<h1>BookSite Page</h1>
 		<p>기간 설정, 예약 가능 사이트 확인, 금액 확인, 예약하기 기능</p>
 	</div>
@@ -40,26 +41,26 @@
 		<div class="col-10">
 			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 예약 기간 설정</h5>
 		</div>
-		<div class="col-md-3 mx-auto">
-			<input type="text" name="startDate" id="startDate" class="datepicker" placeholder="사용시작일" readonly>
-		</div>
-		<div class="col-md-3 mx-auto">
-			<input type="text" name="lastDate" id="lastDate" class="datepicker" placeholder="사용종료일" readonly>
+		<div class="input-group mb-2">
+			<span class="input-group-text" for="startDate">사용 시작일</span>
+			<input type="text" name="searchStartDate" id="startDate" class="form-control datepicker" placeholder="날짜를 선택하세요" readonly>
+			<span class="input-group-text" for="lastDate">사용 종료일</span>
+			<input type="text" name="searchLastDate" id="lastDate" class="form-control datepicker" placeholder="날짜를 선택하세요" readonly>
 		</div>
 	</div>
 
-	<!-- 입력 폼 시작 -->
+	<!-- 검색 시작 ajax로 해야할거같음 -->
 	<form action="./bksSearch" id="searchFrm" method="get">
 		<!-- <input type="hidden" id="bksCampNum" name="campNum" value="${dto.campNum}"> -->
 		<div class="row d-flex justify-content-center my-2">
-			<button id="bksSearch" type="button" class="generic-btn success col-3">Search</button>
-			<button id="bksCancle" type="button" class="generic-btn primary col-3">cancle</button>
+			<button id="bksSearch" type="button" class="genric-btn success col-3">Search</button>
+			<button id="bksCancle" type="button" class="genric-btn primary col-3">cancle</button>
 		</div>
 		<div class="row my-2">
-			<button id="bksConsoleSign" type="button" class="generic-btn primary col-3 mx-auto">확인용 버튼</button>
+			<button id="bksConsoleSign" type="button" class="genric-btn primary col-3 mx-auto">확인용 버튼</button>
 		</div>
 	</form>
-	<!-- 입력 폼 끝 -->
+	<!-- 검색 끝 -->
 
 	<hr>
 
@@ -70,22 +71,24 @@
 			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 정보</h5>
 		</div>
 		<!-- <div class="col-2">
-			<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
+			<button class="genric-btn success" id="siteAddBtn" type="button">추가</button>
 		</div> -->
 	</div>
 
 
 	<div class="row my-2" id="siteList">
-		<form action="./confirmation" id="bksFrm" method="get">
 		<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
 		<!-- index는 0부터 시작, count는 1부터 시작 -->
 		<c:forEach items="${siteList}" var="siteDTO" varStatus="i">
+			<form action="./confirmation" id="bookFrm${i.count}" method="get">
 			<!-- 파라미터 확인 -->
 			--campNum: ${siteDTO.campNum}--<br>
 			--areaNum: ${siteDTO.areaNum}--
 			<div id="siteOne${i.count}">
 				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}" data-site-idx="area${i.count}">
-				<input type="hidden" name="campNum" value="${siteDTO.campNum}" data-site-idx="area${i.count}">
+				<input type="hidden" name="campNum" value="${siteDTO.campNum}" data-site-idx="camp${i.count}">
+				<input type="hidden" name="startDate" value="" data-site-idx="start${i.count}">
+				<input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">
 				<div class="input-group mb-2">
 					<span class="input-group-text" id="siteName">사이트이름</span>
 					<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}" readonly>
@@ -104,6 +107,12 @@
 					<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 					<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
 				</div>
+				<!-- <div class="input-group mb-2">
+					<span class="input-group-text" id="startDate">사용 시작일</span>
+					<input type="text" name="startDate" id="startDate" class="datepicker" placeholder="사용 시작일" readonly>
+					<span class="input-group-text" id="lastDate">종료일</span>
+					<input type="text" name="lastDate" id="lastDate" class="datepicker" placeholder="사용 종료일" readonly>
+				</div> -->
 				<!-- <div class="form-check mb-2">
 					<input class="form-check-input" type="radio" name="status" id="bookable" value="예약가능">
 					<label class="form-check-label" for="bookable">예약가능</label>
@@ -113,13 +122,13 @@
 					<label class="form-check-label" for="unbookable">예약불가</label>
 				</div> -->
 				<div class="d-flex justify-content-between mb-2">
-					<!-- <button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels generic-btn primary">Remove Site</button> -->
-					<button id="bksConfirm" type="button" class="generic-btn success">Booking</button>
+					<!-- <button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels genric-btn primary">Remove Site</button> -->
+					<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success" data-site-idx="${i.count}">Booking</button>
 				</div>
 			</div>
+			</form>
 		</c:forEach>
 		<!-- 생성 끝날 부분 -->
-		</form>
 	</div>
 
 

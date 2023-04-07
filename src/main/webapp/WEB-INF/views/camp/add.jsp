@@ -66,7 +66,7 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container-fluid col-lg-9 my-5">
+<div class="container col-lg-9 my-5">
 	<form action="./add" id="frm" method="post" enctype="multipart/form-data">
 	<div class="row my-3">
 		<h3>캠핑장 이름 등록</h3>
@@ -79,11 +79,11 @@
 		<!-- 버튼 영역 -->
 		<div class="d-flex row justify-content-center col-4 mx-auto">
 			<div class="mx-auto mb-3">
-				<button id="consoleSign" class="btn btn-outline-success" type="button">console</button>
+				<button id="consoleSign" class="genric-btn info" type="button">console</button>
 			</div>
 			<div class="mx-auto">
-				<button id="addReg" class="btn btn-outline-success" type="button">등록</button>
-				<button id="addCancel" class="btn btn-outline-danger" type="button">취소</button>
+				<button id="addReg" class="genric-btn success" type="button">등록</button>
+				<button id="addCancel" class="genric-btn primary" type="button">취소</button>
 			</div>
 		</div>
 
@@ -97,17 +97,6 @@
 						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
 					</div>
 				</div>
-
-				<!-- 원본 -->
-				<!-- <div id="fileList" class="row">
-					<div class="row mb-3">
-						<label for="thumbnail" class="form-label">대표 사진 등록</label>
-						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
-					</div>
-					<div class="row col-4 mb-3">
-						<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
-					</div>
-				</div> -->
 			</div>
 			
 			<hr class="my-2">
@@ -296,7 +285,7 @@
 							<!-- id=fileList인 부분에 js 작동 -->
 							<div id="fileList" class="row">					
 								<div class="row col-4 mb-3">
-									<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
+									<button id="fileAdd" class="genric-btn success" type="button">추가 사진 등록</button>
 								</div>
 							</div>
 						</div>
@@ -326,7 +315,7 @@
 								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 등록</h5>
 							</div>
 							<div class="col-2">
-								<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
+								<button class="genric-btn success" id="siteAddBtn" type="button">추가</button>
 							</div>
 						</div>
 						
@@ -353,7 +342,7 @@
 									<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice1" class="form-control" placeholder="요금 입력">
 								</div>
 								<div class="mb-2">
-									<button type="button" data-site-idx="siteIptDel1" class="siteDels btn btn-outline-danger">입력창 삭제</button>
+									<button type="button" data-site-idx="siteIptDel1" class="siteDels genric-btn danger">입력창 삭제</button>
 								</div>
 							</div>
 							<!-- 생성 끝날 부분 -->

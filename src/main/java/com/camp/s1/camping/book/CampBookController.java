@@ -2,6 +2,8 @@ package com.camp.s1.camping.book;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.camping.CampSiteDTO;
+import com.camp.s1.member.MemberDTO;
 import com.camp.s1.util.Pager;
 
 @Controller
@@ -40,28 +43,55 @@ public class CampBookController {
 		return mv;
 	}
 	
+	//ajax로 기간 조회하는 메서드 만들어서 bookSite에서 아래에 뿌리기
+	//기간 중복되는 날짜는 javascript로 날짜 선택 못하게끔 해줘야할듯
 	
-	//booking 버튼을 눌렀을 때
+	
+	//booking 버튼을 눌렀을 때(site -> confirmation page로 이동)
 	//예약확정페이지(bookConfirmation.jsp) 호출
 	@GetMapping("confirmation")
-	public ModelAndView getCampBookConfirmation(Long areaNum) throws Exception{
+	public ModelAndView getCampBookAdd(Long areaNum, String startDate, String lastDate) throws Exception{
 		//campSiteDetail 호출 + 날짜 입력되서 넘어가게끔
 		ModelAndView mv = new ModelAndView();
 		
 		//site정보 보내주기
 		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(areaNum);
+		//DB에 저장은 안하는데 일단 필요하니까;... 날짜 저장은 예약되는때에
+		campSiteDTO.setStartDate(startDate);
+		campSiteDTO.setLastDate(lastDate);
 		
+		//이렇게 보내면 bookConfirmation page에 campSiteDTO 정보가 나오게됨 - CampSiteDTO 조회해서 bookDTO에 저장하고 보내도 괜찮을려나
 		mv.addObject("siteDTO", campSiteDTO);
 		mv.setViewName("camp/book/bookConfirmation");
 		return mv;
 	}
 	
 	
-	//booking 버튼을 눌렀을 때
+	//booking 버튼을 눌렀을 때(confirmation 확정 또는 취소)
 	@PostMapping("confirmation")
-	public ModelAndView getCampBookConfirmation() throws Exception{
+	public ModelAndView getCampBookAdd(CampBookDTO campBookDTO, HttpSession session, Long areaNum, Long campNum) throws Exception{
 		//예약 정보 표시, 최종 결제, 예약취소 기능 제공
 		ModelAndView mv = new ModelAndView();
+		
+		//멤버정보 가져오기
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		campBookDTO.setId(memberDTO.getId());
+		
+		//CampBookAdd 메서드 호출해서 CampBookDTO 만들기
+		//ModelAndView에 CampBookDTO가 담기게끔 해야하고, 매개변수는 CampSite, CampDTO, member가 있어야 할거같긴함. member는 session에서 가져오는식으로(id 따와야 하니까)
+		//결제api 호출하고 결제가 되면 status가 예약완료로 표시
+		//
+		
+		int result = campBookService.setCampBookAdd(areaNum, campBookDTO);
+		
+		String message = "예약에 실패했습니다";
+		if(result>0) {
+			message = "예약에 성공했습니다";
+		}
+		
+		mv.addObject("result", message);
+		mv.addObject("url", "../book/list");
+		mv.setViewName("common/result");
 		
 		return mv;
 	}

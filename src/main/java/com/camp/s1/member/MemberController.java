@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.camp.s1.util.Pager;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -159,23 +160,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberUpdate")
-	public ModelAndView setMemberUpdate( MemberDTO memberDTO, String [] addressName, String [] address, Long [] postCode, String [] addressDetail, HttpSession session)throws Exception{
+	public ModelAndView setMemberUpdate(MemberDTO memberDTO, AddressDTO addressDTO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-		
-		ArrayList<AddressDTO> addressDTOs = new ArrayList<AddressDTO>();
-		for(int i=0; i<addressName.length; i++) {
-		 AddressDTO addressDTO = new AddressDTO();
-		 addressDTO.setAddressName(addressName[i]);
-		 addressDTO.setAddress(address[i]);
-		 addressDTO.setAddressDetail(addressDetail[i]);
-		 addressDTO.setPostCode(postCode[i]);
-		}
-		memberDTO.setAddressDTOs(addressDTOs);
-		int result = memberService.setMemberUpdate(memberDTO);
 		
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
+		addressDTO.setId(sessionMemberDTO.getId());
+		int result = memberService.setMemberUpdate(memberDTO, addressDTO);
 		
 		String msg="수정 실패";
 		
@@ -187,6 +178,15 @@ public class MemberController {
 		mv.addObject("result", msg);
 		mv.setViewName("common/result");
 		
+		return mv;
+	}
+	@PostMapping("addressDelete")
+	public ModelAndView setEachAddressDelete(AddressDTO addressDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.setEachAddressDelete(addressDTO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	
@@ -290,9 +290,17 @@ public class MemberController {
 	    	return "home";
 	    }
 		
-		
+		//회원 List 출력
+		@GetMapping("memberList")
+		public ModelAndView getMemberList(Pager pager) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			pager.setPerPage(20L);
+			List<MemberDTO> ar = memberService.getMemberList(pager);
+			mv.addObject("list", ar);
+			mv.addObject("pager", pager);
+			mv.setViewName("member/memberList");
+			return mv;
+		}
 
-		
-		
-	
+
 }

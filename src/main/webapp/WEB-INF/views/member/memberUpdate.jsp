@@ -38,18 +38,26 @@
 					<input type="text" readonly name="roleName" class="form-control" id="roleName" value="${dto.roleName}">
 				</div>
 				
-				<div class="mb-3">
-					<label for="address" class="form-label fw-bold">주소</label> 
-					<input type="text" name="address" class="form-control" value="${addressDTOs.address}">
-					<input type="text" name="addressDetail" class="form-control" value="${addressDTOs.addressDetail}">
+				<div class="mb-3" id="addressList">
+					<label for="address" class="form-label fw-bold">주소</label>
+					<button type="button" id="addressAdd">주소추가</button>
+					<c:forEach items="${dto.addressDTOs}" var="addressDTO">
+						<div id="oldAddress${addressDTO.addressNum}">	
+							<p>${addressDTO.addressName}</p>
+							<input type="text" class="form-control" value="${addressDTO.address}" readonly>
+							<input type="text" class="form-control" value="${addressDTO.addressDetail}" readonly>
+						</div>
+						<button type="button" id="addressUpdate${addressDTO.addressNum}" class="addressUpdate" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}" data-address-address="${addressDTO.address}" data-address-detail="${addressDTO.addressDetail}">${addressDTO.addressName}주소 수정</button>
+						<button type="button" id="addressDelete${addressDTO.addressNum}" class="addressDelete" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}">${addressDTO.addressName}주소 삭제</button>
+						<!--<input type="text" name="postCode" id="postcode" placeholder="우편번호">
+							<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+							<input type="text" name="address" id="address" placeholder="주소" readonly><br>
+							<input type="text" name="addressDetail" id="addressDetail" placeholder="상세주소">
+							<button type="button" id="addressUpdateCancle">취소</button>-->
+					</c:forEach>
 				</div>
 				
 			<div class="mb-3">
-				<input type="text" name="addressName" id="addressName" placeholder="집,회사..."><br>
-				<input type="text" name="postCode" id="postcode" placeholder="우편번호">
-				<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" name="address" id="address" placeholder="주소"><br>
-				<input type="text" name="addressDetail" id="addressDetail" placeholder="상세주소">
 			</div>
 				
 				<div class="mb-3">
@@ -60,6 +68,7 @@
 			</form>		
 		</div>
 	</div>
+	<c:import url="../template/common_js.jsp"></c:import>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="../resources/js/address.js"></script>
 </body>

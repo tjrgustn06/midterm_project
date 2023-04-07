@@ -187,9 +187,11 @@ $('#reviewList').on('click','.deleteMenu', function(){
 //리뷰 업데이트 
 $('#reviewList').on('click', '.updateMenu', function(){
     setResetForm(reviewNum)
+    $('#reviewMenu'+reviewNum).hide()
+    $('#reviewMark'+reviewNum).hide();
     reviewNum=$(this).attr('data-review-num');
     $('#reviewMenu'+reviewNum).hide();
-    $('#reviewMark'+reviewNum).hide()
+    $('#reviewMark'+reviewNum).hide();
     getUpdateForm(reviewNum);
     
 })
@@ -246,7 +248,7 @@ function getUpdateForm(reviewNum){
     //평점 넣는 자리
     child = child + '<div class="input-group mb-3">';
     child = child + '<div><span>평점 : </span></div>';
-    child = child + '<div class="updateMark" id="uptStar">';
+    child = child + '<div class="updateMark" id="uptStar" data-update-mark="'+mark+'">';
     child = child + '<span class="updateStar">★</span><span class="updateStar">★</span>';
     child = child + '<span class="updateStar">★</span><span class="updateStar">★</span>';
     child = child + '<span class="updateStar">★</span></div></div>';

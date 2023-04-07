@@ -3,11 +3,17 @@ package com.camp.s1.member;
 
 
 import java.util.HashMap;
+import java.util.List;
+
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.mail.HtmlEmail;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.camp.s1.util.Pager;
 
 @Repository
 public class MemberDAO {
@@ -26,7 +32,7 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setMemberJoin", memberDTO);
 	}
 	
-	//Logion
+	//Login
 	public MemberDTO getMemberLogin(MemberDTO memberDTO)throws Exception{
 		
 		return sqlSession.selectOne(NAMESPACE+"getMemberLogin", memberDTO);
@@ -41,6 +47,11 @@ public class MemberDAO {
 	public int setAddressUpdate(AddressDTO addressDTO)throws Exception{
 		
 		return sqlSession.update(NAMESPACE+"setAddressUpdate", addressDTO);
+	}
+	
+	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
+		
+		return sqlSession.delete(NAMESPACE+"setEachAddressDelete", addressDTO);
 	}
 	
 	//Delete
@@ -76,6 +87,16 @@ public class MemberDAO {
 			System.out.println("RN:"+userInfo.get("nickname"));
 			System.out.println("RE:"+userInfo.get("email"));
 			return sqlSession.selectOne(NAMESPACE+"findKakao", userInfo);
+		}
+		
+		//memberList(관리자용)
+		public List<MemberDTO> getMemberList(Pager pager) throws Exception {
+			return sqlSession.selectList(NAMESPACE+"getMemberList", pager);
+		}
+		
+		//총 회원 출력
+		public Long getTotalCount(Pager pager) throws Exception {
+			return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
 		}
 		
 }

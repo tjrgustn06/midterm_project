@@ -27,6 +27,7 @@ import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camp.s1.util.Pager;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -89,16 +90,24 @@ public class MemberService {
 	}
 	
 	//Update
-	public int setMemberUpdate(MemberDTO memberDTO)throws Exception {
+	public int setMemberUpdate(MemberDTO memberDTO, AddressDTO addressDTO)throws Exception {
 		
 		int result = memberDAO.setMemberUpdate(memberDTO);
 		
-		for(AddressDTO addressDTO:memberDTO.getAddressDTOs()){
-			addressDTO.setId(memberDTO.getId());
-			result = memberDAO.setAddressUpdate(addressDTO);
+		if(addressDTO != null) {
+			if(addressDTO.getAddressNum()==null) {
+				result=memberDAO.setAddressJoin(addressDTO);
+			} else {
+				result=memberDAO.setAddressUpdate(addressDTO);
+			}
 		}
 		
 		return result;
+	}
+	
+	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
+		
+		return memberDAO.setEachAddressDelete(addressDTO);
 	}
 	
 	//Delete
@@ -348,5 +357,24 @@ public class MemberService {
 	        }   
 		}
 		
+		//회원 리스트
+		public List<MemberDTO> getMemberList(Pager pager) throws Exception {
+			
+			pager.makeRow();
+			
+			pager.makeNum(memberDAO.getTotalCount(pager));
+			List<MemberDTO> ar = memberDAO.getMemberList(pager);
+			
+			return ar;
+		}
+		
+		public List<MemberDTO> getMemberListTop(Pager pager) throws Exception {
+			pager.setPerPage(20L);
+			pager.makeRow();
+			
+			List<MemberDTO> ar = memberDAO.getMemberList(pager);
+			
+			return ar;
+		}
 			
 }

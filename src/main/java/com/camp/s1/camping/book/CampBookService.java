@@ -23,6 +23,11 @@ public class CampBookService {
 		return ar;
 	}
 	
+	//예약 페이지 넘어갈때 site 정보 주기
+	public CampSiteDTO getCampSiteDetail(Long areaNum) throws Exception{
+		return campBookDAO.getCampSiteDetail(areaNum);
+	}
+	
 	//예약 추가
 	public int setCampBookAdd(CampSiteDTO campSiteDTO, CampBookDTO campBookDTO) throws Exception{
 		//필수 입력값: num / areanum, id, indexcode, ordernum / 나머지 입력값

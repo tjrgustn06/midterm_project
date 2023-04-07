@@ -14,7 +14,6 @@ $('#bksConsoleSign').click(function(){
 
 //예약버튼 작동 - bookSite.jsp
 $('#bksConfirm').click(function(){
-    //$('#bksFrm').attr('button', 'submit');
     $('#bksFrm').submit();
 })
 

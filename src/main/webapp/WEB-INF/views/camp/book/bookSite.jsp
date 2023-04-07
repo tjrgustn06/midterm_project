@@ -49,7 +49,7 @@
 	</div>
 
 	<!-- 입력 폼 시작 -->
-	<form action="./confirmation" id="bksFrm" method="get">
+	<form action="./bksSearch" id="searchFrm" method="get">
 		<!-- <input type="hidden" id="bksCampNum" name="campNum" value="${dto.campNum}"> -->
 		<div class="row d-flex justify-content-center my-2">
 			<button id="bksSearch" type="button" class="generic-btn success col-3">Search</button>
@@ -76,6 +76,7 @@
 
 
 	<div class="row my-2" id="siteList">
+		<form action="./confirmation" id="bksFrm" method="get">
 		<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
 		<!-- index는 0부터 시작, count는 1부터 시작 -->
 		<c:forEach items="${siteList}" var="siteDTO" varStatus="i">
@@ -83,8 +84,8 @@
 			--campNum: ${siteDTO.campNum}--<br>
 			--areaNum: ${siteDTO.areaNum}--
 			<div id="siteOne${i.count}">
-				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
-				<input type="hidden" name="campNum" value="${siteDTO.campNum}">
+				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}" data-site-idx="area${i.count}">
+				<input type="hidden" name="campNum" value="${siteDTO.campNum}" data-site-idx="area${i.count}">
 				<div class="input-group mb-2">
 					<span class="input-group-text" id="siteName">사이트이름</span>
 					<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}" readonly>
@@ -118,6 +119,7 @@
 			</div>
 		</c:forEach>
 		<!-- 생성 끝날 부분 -->
+		</form>
 	</div>
 
 

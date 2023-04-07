@@ -44,12 +44,14 @@ public class CampBookController {
 	//booking 버튼을 눌렀을 때
 	//예약확정페이지(bookConfirmation.jsp) 호출
 	@GetMapping("confirmation")
-	public ModelAndView getCampBookConfirmation(CampSiteDTO campSiteDTO) throws Exception{
+	public ModelAndView getCampBookConfirmation(Long areaNum) throws Exception{
 		//campSiteDetail 호출 + 날짜 입력되서 넘어가게끔
 		ModelAndView mv = new ModelAndView();
 		
-		//
+		//site정보 보내주기
+		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(areaNum);
 		
+		mv.addObject("siteDTO", campSiteDTO);
 		mv.setViewName("camp/book/bookConfirmation");
 		return mv;
 	}
@@ -59,6 +61,9 @@ public class CampBookController {
 	@PostMapping("confirmation")
 	public ModelAndView getCampBookConfirmation() throws Exception{
 		//예약 정보 표시, 최종 결제, 예약취소 기능 제공
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
 	}
 	
 	

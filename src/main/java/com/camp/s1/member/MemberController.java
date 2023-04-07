@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.camp.s1.util.Pager;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -298,9 +299,17 @@ public class MemberController {
 	    	return "home";
 	    }
 		
-		
+		//회원 List 출력
+		@GetMapping("memberList")
+		public ModelAndView getMemberList(Pager pager) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			pager.setPerPage(20L);
+			List<MemberDTO> ar = memberService.getMemberList(pager);
+			mv.addObject("list", ar);
+			mv.addObject("pager", pager);
+			mv.setViewName("member/memberList");
+			return mv;
+		}
 
-		
-		
-	
+
 }

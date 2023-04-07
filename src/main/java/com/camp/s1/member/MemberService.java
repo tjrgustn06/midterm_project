@@ -25,6 +25,7 @@ import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camp.s1.util.Pager;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -345,5 +346,24 @@ public class MemberService {
 	        }   
 		}
 		
+		//회원 리스트
+		public List<MemberDTO> getMemberList(Pager pager) throws Exception {
+			
+			pager.makeRow();
+			
+			pager.makeNum(memberDAO.getTotalCount(pager));
+			List<MemberDTO> ar = memberDAO.getMemberList(pager);
+			
+			return ar;
+		}
+		
+		public List<MemberDTO> getMemberListTop(Pager pager) throws Exception {
+			pager.setPerPage(20L);
+			pager.makeRow();
+			
+			List<MemberDTO> ar = memberDAO.getMemberList(pager);
+			
+			return ar;
+		}
 			
 }

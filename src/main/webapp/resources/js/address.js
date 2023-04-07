@@ -45,7 +45,7 @@ function execDaumPostcode() {
 
 // 주소추가를 눌렀을때
 $('#addressAdd').click(function(){
-    $('#addressAddForm').remove()
+    $('#addressAdd').hide()
     setResetAddress(addressNum, addressName, addressAds, addressDetail)
     let child = '<div id="addressAddForm">'
     child = child+'<input type="text" name="addressName" id="addressName" placeholder="집, 회사..."><br>'
@@ -59,6 +59,7 @@ $('#addressAdd').click(function(){
 // 주소추가취소 눌렀을때
 $('#addressList').on('click','#addressAddCancle',()=>{
     $('#addressAddForm').remove()
+    $('#addressAdd').show()
 })
 
 // 주소수정을 눌렀을때
@@ -82,6 +83,31 @@ $('#addressList').on('click','.addressUpdate',function(){
     // $('#newAddress'+addressNum).html(child)
 })
 
+//삭제 버튼을 눌렀을때
+$('#addressList').on('click', '.addressDelete', function(){
+    addressNum=$(this).attr('data-address-num');
+    addressName=$(this).attr('data-address-name');
+    let delConfirm = confirm(addressName+'주소를 삭제하시겠습니까?');
+
+    if(delConfirm) {
+        $.ajax({
+            type : 'POST',
+            url : './addressDelete',
+            data : {
+                addressNum : addressNum
+            },
+            success : function(response){
+                if(response.trim()>0) {
+                    alert(addressName+'주소가 삭제되었습니다');
+                    location.href='./memberUpdate'
+                } else {
+                    alert('삭제 실패')
+                }
+            }
+        })
+    }
+})
+
 // 취소 버튼을 눌렀을때
 $('#addressList').on('click','.addressUpdateCancle', function(){
     addressNum=$(this).attr('data-address-num')
@@ -91,6 +117,7 @@ $('#addressList').on('click','.addressUpdateCancle', function(){
 // 주소 업데이트폼 불러오기
 function getUpdateAddress(addressNum, addressName){
     let child = '<div id="newAddress'+addressNum+'">'
+    child = child+'<input type="hidden" name="addressNum" value="'+addressNum+'">'
     child = child+'<input type="text" name="addressName" id="addressName" value="'+addressName+'" readonly><br>'
     child = child+'<input type="text" name="postCode" id="postcode" placeholder="우편번호" readonly>'
     child = child+'<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>'

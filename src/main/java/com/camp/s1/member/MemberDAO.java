@@ -43,6 +43,11 @@ public class MemberDAO {
 		return sqlSession.update(NAMESPACE+"setAddressUpdate", addressDTO);
 	}
 	
+	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
+		
+		return sqlSession.delete(NAMESPACE+"setEachAddressDelete", addressDTO);
+	}
+	
 	//Delete
 	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
 		

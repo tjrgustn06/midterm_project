@@ -164,6 +164,7 @@ public class MemberController {
 		
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
+		addressDTO.setId(sessionMemberDTO.getId());
 		int result = memberService.setMemberUpdate(memberDTO, addressDTO);
 		
 		String msg="수정 실패";
@@ -176,6 +177,15 @@ public class MemberController {
 		mv.addObject("result", msg);
 		mv.setViewName("common/result");
 		
+		return mv;
+	}
+	@PostMapping("addressDelete")
+	public ModelAndView setEachAddressDelete(AddressDTO addressDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.setEachAddressDelete(addressDTO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

@@ -92,7 +92,7 @@ public class MemberService {
 		int result = memberDAO.setMemberUpdate(memberDTO);
 		
 		if(addressDTO != null) {
-			if(addressDTO.getAddressNum()!=null) {
+			if(addressDTO.getAddressNum()==null) {
 				result=memberDAO.setAddressJoin(addressDTO);
 			} else {
 				result=memberDAO.setAddressUpdate(addressDTO);
@@ -100,6 +100,11 @@ public class MemberService {
 		}
 		
 		return result;
+	}
+	
+	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
+		
+		return memberDAO.setEachAddressDelete(addressDTO);
 	}
 	
 	//Delete

@@ -5,7 +5,12 @@
 	
 
 			<c:forEach var="dto" items="${commentList}">
-						
+				<script>
+					$(function(){	
+						setBoardId('${dto.boardId}');
+					})
+				</script>
+							<div id="${boardName}Comment${dto.num}"></div>
 							<!-- Comment with nested comments-->
 							<div class="d-flex mb-4 offset-md-1">
 							<c:forEach begin="1" end="${dto.depth}" varStatus="s">

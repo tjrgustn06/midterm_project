@@ -1,4 +1,6 @@
 boardName = $('#boardName').attr('data-board-name');
+let parentBoardId = '';
+let boardId = '';
 let commentNum = 0;
 let page = 1;
 let writer = '';
@@ -11,6 +13,14 @@ function setNum(n) {
 
 function setWriter(w) {
     writer = w;
+}
+
+function setParentBoardId(pbi) {
+    parentBoardId = pbi;
+}
+
+function setBoardId(bi) {
+    boardId = bi;
 }
 
 $('#storyList').on('click', '.getDetail', function(e){
@@ -72,13 +82,13 @@ $('#storyList').on('change', '.replyContents', function(){
 
     
     //댓글 등록 이벤트
-    $("#"+boardName+'List').on('click','.replyAdd',function(){
+$("#"+boardName+'List').on('click','.replyAdd',function(){
         
-        board = $(this).parents($('#'+boardName+$(this).attr('data-board-num')))
-        let contents = board.find('.replyContents').val();
-        num = $(this).attr('data-board-num')
-        
-        setCommentAdd(num, contents, writer);
+    board = $(this).parents($('#'+boardName+$(this).attr('data-board-num')))
+    let contents = board.find('.replyContents').val();
+    num = $(this).attr('data-board-num')
+    
+    setCommentAdd(num, contents, writer, parentBoardId);
         
 })
 
@@ -90,20 +100,21 @@ $('#'+boardName+'List').on('keydown','.replyContents', function(e){
         let contents = $(this).val();
         num = $(this).attr('data-board-num')
 
-        setCommentAdd(num, contents, writer);
+        setCommentAdd(num, contents, writer, parentBoardId);
         
     }
 })
 
 //댓글 등록 함수
-function setCommentAdd(num, contents, writer) {
+function setCommentAdd(num, contents, writer, parentBoardId) {
     $.ajax({
         type : 'POST',
         url : '../'+ boardName + 'Comment/add',
         data : {
             num : num,
             contents : contents,
-            writer : writer
+            writer : writer,
+            boardId : parentBoardId+1
 
         },
         success : function(response) {
@@ -112,6 +123,7 @@ function setCommentAdd(num, contents, writer) {
                 $('#'+boardName+num).find('.replyContents').val('');
                 // console.log( $('#'+boardName+num).children('.replyContents').val());
                 getCommentList(num, 1);
+                getList(currentPage);
             }
             else {
                 alert('댓글 등록 실패');
@@ -312,18 +324,27 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
         data : {
             commentNum : commentNum,
             contents : contents,
-            writer : writer
+            writer : writer,
+            boardId : parentBoardId+1
         },
         success : function(repsonse) {
             if(repsonse.trim()>0) {
                 alert('댓글이 등록되었습니다.');
                 getCommentList(num,1);
+                getList(currentPage);
             }
             else {
                 alert('댓글 등록 실패. 관리자에게 문의하세요');
             }
         }
     })
+})
+
+
+//신고하기 버튼
+$('#'+boardName+'List').on('click','.reportMenu', function(){
+    commentNum = $(this).attr('data-comment-num');
+    reportAdd(num, boardId, commentNum)
 })
 
 

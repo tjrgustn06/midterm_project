@@ -2,7 +2,6 @@ package com.camp.s1.board;
 
 public class CommentDTO extends BbsDTO{
 	private Long commentNum;
-	private Long parentBoardId;
 	private Long ref;
 	private Long step;
 	private Long depth;
@@ -15,12 +14,6 @@ public class CommentDTO extends BbsDTO{
 		this.commentNum = commentNum;
 	}
 	
-	public Long getParentBoardId() {
-		return parentBoardId;
-	}
-	public void setParentBoardId(Long parentBoardId) {
-		this.parentBoardId = parentBoardId;
-	}
 	public Long getRef() {
 		return ref;
 	}

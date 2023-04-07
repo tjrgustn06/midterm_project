@@ -1,8 +1,13 @@
-let currentPage = 1;
+let currentPage = 2;
 let prePage = 0;
 let flag = true;
+let totalPage = 0;
 
 let lastScroll = 0;
+
+function setTotalPage(tp) {
+    totalPage = tp;
+}
 
 
 $(document).scroll(function(){
@@ -14,10 +19,9 @@ $(document).scroll(function(){
     let maxHeight = $(document).height();
     
 
-        if(currentScorll > maxHeight * 0.001 && flag) {
-            
-                currentPage++;
+        if(currentScorll > maxHeight * 0.001 && flag && currentPage <= totalPage) {
                 getList(currentPage);
+                currentPage++;
             
     }
 })

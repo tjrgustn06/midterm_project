@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+	$(function(){
+		setWriter('${member.id}');
+		setTotalPage('${pager.totalPage}')
+	})
+</script>
 		<c:forEach items="${list}" var="dto">
+
+		<script>
+			$(function(){	
+				setParentBoardId('${dto.boardId}');
+			})
+		</script>
 			<div class="col-md-8 mx-auto" id="${boardName}${dto.num}"  style="height: 100%;">
 
 				<div class="d-flex flex-column mb-3">
@@ -104,7 +116,7 @@
 							<form action="../${boardName}Comment/add" method="post">
 								<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
 								<input type="hidden" name="num" value="${dto.num}">
-								<input type="hidden" name="parentBoardId" value="${dto.boardId}">
+								<input type="hidden" name="boardId" value="${dto.boardId}">
 								
 									<input class="border border-0 replyContents"  id="replyContents" type="text" data-board-num="${dto.num}" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
 									<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
@@ -201,7 +213,7 @@
 												<form action="../${boardName}Comment/add" method="post">
 													<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
 													<input type="hidden" name="num" value="${dto.num}">
-													<input type="hidden" name="parentBoardId" value="${dto.boardId}">
+													<input type="hidden" name="boardId" value="${dto.boardId}">
 													
 														<input class="border border-0 replyContents"  id="replyContents" data-board-num="${dto.num}" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
 														<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
@@ -236,11 +248,7 @@
 		</c:forEach> 		
 
 
-		<script>
-			$(function(){
-				setWriter('${member.id}');
-			})
-		</script>
+
 
 		
 

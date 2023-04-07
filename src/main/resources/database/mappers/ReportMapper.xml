@@ -9,4 +9,24 @@
   		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, REPORTER, REPORTCONTENTS)
   		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{reporter}, #{reportContents})
   	</insert>
+  	
+	<insert id="setCommentReportAdd" parameterType="ReportDTO">
+  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, COMMENTNUM, REPORTER, REPORTCONTENTS)
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{commentNum}, #{reporter}, #{reportContents})
+  	</insert>
+  	
+  	<select id="getParentNum" parameterType="ReportDTO" resultType="ReportDTO">
+  		SELECT NUM FROM 
+  	</select>
+  	
+  	<select id="getReportList" parameterType="ReportDTO" resultType="ReportDTO">
+  		SELECT * FROM REPORT
+		<where>
+			NUM = #{num}
+			<if test="commentNum != null">
+				COMMENTNUM = #{commentNum}
+			</if>	
+		</where>
+  		
+  	</select>
   </mapper>

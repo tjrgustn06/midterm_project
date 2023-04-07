@@ -53,7 +53,6 @@ public class StoryCommentService implements CommentService{
 	public int setSubCommentAdd(CommentDTO commentDTO) throws Exception {
 		StoryCommentDTO parent =(StoryCommentDTO)storyCommentDAO.getBoardDetail(commentDTO);
 		
-		System.out.println(parent.getRef());
 		
 		commentDTO.setNum(parent.getNum());
 		

@@ -3,6 +3,7 @@ package com.camp.s1.report;
 public class ReportDTO {
 	private Long reportNum;
 	private Long num;
+	private Long commentNum;
 	private Long boardId;
 	private String reporter;
 	private String reportContents;
@@ -19,12 +20,20 @@ public class ReportDTO {
 	public void setNum(Long num) {
 		this.num = num;
 	}
+	
+	public Long getCommentNum() {
+		return commentNum;
+	}
+	public void setCommentNum(Long commentNum) {
+		this.commentNum = commentNum;
+	}
 	public Long getBoardId() {
 		return boardId;
 	}
 	public void setBoardId(Long boardId) {
 		this.boardId = boardId;
 	}
+	
 	public String getReporter() {
 		return reporter;
 	}

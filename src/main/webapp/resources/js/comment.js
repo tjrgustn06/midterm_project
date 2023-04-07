@@ -1,4 +1,5 @@
 let boardName = $('#boardName').attr('data-board-name');
+let boardId = '';
 let commentNum = 0;
 let page = 1;
 let writer = '';
@@ -10,6 +11,10 @@ function setNum(n) {
 
 function setWriter(w) {
     writer = w;
+}
+
+function setBoardId(bi) {
+    boardId = bi;
 }
 
 getList(1);
@@ -24,7 +29,8 @@ $('#replyAdd').click(function(){
         data : {
             num : $('#replyAdd').attr('data-board-num'),
             contents : $('#replyContents').val(),
-            writer : writer
+            writer : writer,
+            boardId : boardId
         },
         success : function(response) {
             if(response.trim() == 1) {

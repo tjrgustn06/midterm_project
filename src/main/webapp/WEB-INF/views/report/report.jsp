@@ -19,8 +19,12 @@
 		
 		<div class="row col-md-8 mx-auto border-bottom ">
 			<form action="./report" method="post">
-				<input type="hidden" name="boardId" value="${dto.boardId}">
+				
 				<input type="hidden" name="num" value="${dto.num}">
+				<input type="hidden" name="boardId" value="${dto.boardId}">
+				<c:if test="${not empty commentNum}">
+					<input type="hidden" name="commentNum" value="${commentNum}">
+				</c:if>
 				<div class="row mb-3">
 				  <label for="writer" class="col-sm-2 col-form-label">작성자</label>
 				  <div class="col-sm-10">

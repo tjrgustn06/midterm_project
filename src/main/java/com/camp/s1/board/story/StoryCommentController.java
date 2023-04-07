@@ -30,7 +30,6 @@ public class StoryCommentController {
 		
 	}
 	
-//	@ResponseBody
 	@GetMapping("listCount")
 	public ModelAndView getBoardListCount(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -45,7 +44,6 @@ public class StoryCommentController {
 	public ModelAndView setBoardadd(StoryCommentDTO storyCommentDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println(storyCommentDTO.getParentBoardId());
 		
 		mv.setViewName("common/ajaxResult");
 		mv.addObject("result", storyCommentService.setBoardAdd(storyCommentDTO));
@@ -76,6 +74,7 @@ public class StoryCommentController {
 	@PostMapping("subCommentAdd")
 	public ModelAndView setSubCommentAdd(StoryCommentDTO storyCommentDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
+
 		
 		mv.setViewName("common/ajaxResult");
 		mv.addObject("result", storyCommentService.setSubCommentAdd(storyCommentDTO));

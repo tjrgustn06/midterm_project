@@ -87,16 +87,24 @@ public class MemberService {
 	}
 	
 	//Update
-	public int setMemberUpdate(MemberDTO memberDTO)throws Exception {
+	public int setMemberUpdate(MemberDTO memberDTO, AddressDTO addressDTO)throws Exception {
 		
 		int result = memberDAO.setMemberUpdate(memberDTO);
 		
-		for(AddressDTO addressDTO:memberDTO.getAddressDTOs()){
-			addressDTO.setId(memberDTO.getId());
-			result = memberDAO.setAddressUpdate(addressDTO);
+		if(addressDTO != null) {
+			if(addressDTO.getAddressNum()==null) {
+				result=memberDAO.setAddressJoin(addressDTO);
+			} else {
+				result=memberDAO.setAddressUpdate(addressDTO);
+			}
 		}
 		
 		return result;
+	}
+	
+	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
+		
+		return memberDAO.setEachAddressDelete(addressDTO);
 	}
 	
 	//Delete

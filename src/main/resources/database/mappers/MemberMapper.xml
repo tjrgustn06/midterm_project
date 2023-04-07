@@ -12,7 +12,7 @@
 
 <insert id="setAddressJoin" parameterType="AddressDTO">
 	INSERT INTO ADDRESS(ADDRESSNUM, ID, ADDRESSNAME, ADDRESS, ADDRESSDETAIL, POSTCODE)
-	VALUES(ADDRESSSEQ.NEXTVAL, #{id}, #{addressName},#{address}, #{addressDetail}, #{postCode, jdbcType=NUMERIC})
+	VALUES(ADDRESSSEQ.NEXTVAL, #{id}, #{addressName},#{address}, #{addressDetail}, #{postCode})
 </insert>
 
 <!-- Login -->
@@ -43,14 +43,18 @@
 <!-- Update -->
 <update id="setMemberUpdate" parameterType="MemberDTO">
 	UPDATE MEMBER SET NAME=#{name}, PHONE=#{phone}, EMAIL=#{email}, ROLENAME=#{roleName}
-	WHERE ID =#{id, jdbcType=VARCHAR}
+	WHERE ID =#{id}
 </update>
 
 <update id="setAddressUpdate" parameterType="AddressDTO">
-	UPDATE ADDRESS SET ADDRESSNAME=#{addressName, jdbcType=VARCHAR}, ADDRESS=#{address, jdbcType=VARCHAR}, 
-	ADDRESSDETAIL=#{addressDetail, jdbcType=VARCHAR}, POSTCODE=#{postCode, jdbcType=NUMERIC}
-	WHERE  ID=#{id, jdbcType=VARCHAR}
+	UPDATE ADDRESS SET ADDRESSNAME=#{addressName}, ADDRESS=#{address}, 
+	ADDRESSDETAIL=#{addressDetail}, POSTCODE=#{postCode}
+	WHERE ADDRESSNUM=#{addressNum}
 </update>
+
+<delete id="setEachAddressDelete" parameterType="AddressDTO">
+	DELETE ADDRESS WHERE ADDRESSNUM=#{addressNum}
+</delete>
 
 <!-- Delete -->
 <delete id="setMemberDelete" parameterType="MemberDTO">
@@ -77,13 +81,13 @@
 <!-- findKakao  -->
 <select id="findKakao" parameterType="java.util.HashMap" resultType="KakaoDTO">
 	SELECT * FROM KAKAO 
-	WHERE KAKAONAME =#{nickname, jdbcType=VARCHAR} AND KAKAOEMAIL=#{email, jdbcType=VARCHAR}  
+	WHERE KAKAONAME =#{nickname} AND KAKAOEMAIL=#{email}  
 </select>
 
 <!-- KakaoLogin DB저장  -->
 <insert id="kakaoLogin" parameterType="java.util.HashMap" >
 	INSERT INTO KAKAO(KAKAONAME, KAKAOEMAIL)
-	VALUES(#{nickname, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR})
+	VALUES(#{nickname}, #{email})
 </insert>
 
 <!-- List 출력 -->

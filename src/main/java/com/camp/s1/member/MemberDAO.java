@@ -32,7 +32,7 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setMemberJoin", memberDTO);
 	}
 	
-	//Logion
+	//Login
 	public MemberDTO getMemberLogin(MemberDTO memberDTO)throws Exception{
 		
 		return sqlSession.selectOne(NAMESPACE+"getMemberLogin", memberDTO);
@@ -47,6 +47,11 @@ public class MemberDAO {
 	public int setAddressUpdate(AddressDTO addressDTO)throws Exception{
 		
 		return sqlSession.update(NAMESPACE+"setAddressUpdate", addressDTO);
+	}
+	
+	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
+		
+		return sqlSession.delete(NAMESPACE+"setEachAddressDelete", addressDTO);
 	}
 	
 	//Delete

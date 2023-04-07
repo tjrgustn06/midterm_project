@@ -160,23 +160,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberUpdate")
-	public ModelAndView setMemberUpdate( MemberDTO memberDTO, String [] addressName, String [] address, Long [] postCode, String [] addressDetail, HttpSession session)throws Exception{
+	public ModelAndView setMemberUpdate(MemberDTO memberDTO, AddressDTO addressDTO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-		
-		ArrayList<AddressDTO> addressDTOs = new ArrayList<AddressDTO>();
-		for(int i=0; i<addressName.length; i++) {
-		 AddressDTO addressDTO = new AddressDTO();
-		 addressDTO.setAddressName(addressName[i]);
-		 addressDTO.setAddress(address[i]);
-		 addressDTO.setAddressDetail(addressDetail[i]);
-		 addressDTO.setPostCode(postCode[i]);
-		}
-		memberDTO.setAddressDTOs(addressDTOs);
-		int result = memberService.setMemberUpdate(memberDTO);
 		
 		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(sessionMemberDTO.getId());
+		addressDTO.setId(sessionMemberDTO.getId());
+		int result = memberService.setMemberUpdate(memberDTO, addressDTO);
 		
 		String msg="수정 실패";
 		
@@ -188,6 +178,15 @@ public class MemberController {
 		mv.addObject("result", msg);
 		mv.setViewName("common/result");
 		
+		return mv;
+	}
+	@PostMapping("addressDelete")
+	public ModelAndView setEachAddressDelete(AddressDTO addressDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.setEachAddressDelete(addressDTO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

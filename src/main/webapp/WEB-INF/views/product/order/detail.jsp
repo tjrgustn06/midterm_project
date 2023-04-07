@@ -107,7 +107,7 @@
 			//가맹점 식별코드
 			IMP.init('imp15251423');
 			IMP.request_pay({
-				pg : 'nice.nictest04m',
+				pg : 'nice.nictest00m',
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + $('#orderNum').val(),
 				name : $('#name').val() , //결제창에서 보여질 이름

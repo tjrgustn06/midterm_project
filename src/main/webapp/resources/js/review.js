@@ -241,7 +241,7 @@ function getUpdateForm(reviewNum){
     child = child + '<span class="me-auto p-2 fw-bold">'+writer;
     child = child + '</span>'
     child = child + '<span class="p-2">';
-    child = child + '<button class="btn btn-outline-danger updateCancle" data-review-num="'+reviewNum+'">취소</button>';
+    child = child + '<button class="genric-btn primary radius updateCancle" data-review-num="'+reviewNum+'">취소</button>';
     child = child + '</span>';
     child = child + '</div>';
 
@@ -257,7 +257,7 @@ function getUpdateForm(reviewNum){
     child = child + '<textarea class="form-control mb-3" rows="3" id="reviewContents'+reviewNum+'">'+text.trim()+'</textarea>';
     child = child + '</div>'
     child = child + '<div class="mb-3">';
-    child = child + '<button class="btn btn-outline-primary col-auto offset-md-11 reviewUpdate" data-review-num="'+reviewNum+'">수정</button>';
+    child = child + '<button class="genric-btn success radius col-auto offset-md-10 reviewUpdate" data-review-num="'+reviewNum+'">수정</button>';
     child = child + '</div></section>'
     $('#contents'+reviewNum).replaceWith(child);
     $('.updateStar').each((index, item)=>{

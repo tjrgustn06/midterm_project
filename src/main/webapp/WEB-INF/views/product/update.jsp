@@ -73,7 +73,23 @@
 		setParam('addFiles')
 		setMax(1);
 		setCount('${dto.productFileDTOs.size()}');
-		$('#contents').summernote()
+		$('#contents').summernote({focus:true, lang:'ko-KR',
+		callbacks:{
+			onImageUpload: function(image) {
+                 
+				let file = image[0];
+				let reader = new FileReader();
+				reader.onloadend = function() {
+					let image = $('<img>').attr('src',  reader.result);
+					image.attr('width','100%');
+					$('#contents').summernote("insertNode", image[0]);
+				}
+			   reader.readAsDataURL(file);
+			
+		  }
+		}
+
+		})
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>

@@ -73,26 +73,26 @@
 			</nav>
 		</div>
 		<div class="col-md-7 mx-auto">
-			<form class="g-3" action="./list" method="get">
-				<div>
+			<form class="row g-3" action="./list" method="get">
+				<div class="col-auto">
 					<label for="kind" class="visually-hidden">Kind</label>
 					<select class="nice-select" name="kind" id="kind" aria-label="Default select example">
 						<option value="name">물품이름</option>
 						<option value="contents">물품내용</option>
 					</select>
 				</div>
-				<div>
+				<div class="col-auto">
 					<label for="search" class="visually-hidden">Search</label>
-					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 73%;">
+					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 100%;">
 				</div>
-				<div>
-					<button type="submit" id="btn" class="genric-btn success radius" style="width: 100px; height: 100px;">검색</button>
+				<div class="col-auto">
+					<input type="image" src="../resources/images/search.jpg" style="width: 35px; height: 35px; border-radius: 10%;">
 				</div>
 			</form>
 		</div>
-		<div class="row">
+		<div style="float: right;">
 			<c:if test="${not empty member.roleName and member.roleName ne 'MEMBER'}">
-				<a href="./add" class="btn btn-primary mb-3" role="button">상품추가</a>
+				<a href="./add" class="theme_btn button_hover success radius mb-3" role="button">상품추가</a>
 			</c:if>
 		</div>
 	</div>

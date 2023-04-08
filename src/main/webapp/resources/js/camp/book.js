@@ -7,6 +7,7 @@
 //콘솔버튼 확인 - bookSite.jsp
 $('#bksConsoleSign').click(function(){
     //console.log('bookSite Page');
+    //고른 날짜가 실제 value로 들어가게끔(이건 미리 세팅하지 않고 예약 버튼 눌렀을 때 보내야함)
     console.log("start: "+$('input[name=searchStartDate]').val());
     console.log("last: "+$('input[name=searchLastDate').val());
     $('input[name=startDate]').val($('input[name=searchStartDate]').val());
@@ -43,9 +44,10 @@ $('#siteList').on('click', '.bookBtn', function(e){
     $('#bookFrm'+siteIdx).submit();
 })
 
-$('#bksCancle').click(function(){
+//예약 취소 버튼 눌렀을 때
+$('#bksCancel').click(function(){
     let check = confirm("정말 취소하시겠습니까? 입력된 정보가 사라집니다");
     if(check){
-        location.href="./detail?campNum="+$('#bksCampNum').val();
+        location.href="./site?campNum="+$('input[name=campNum]').val();
     }
 })

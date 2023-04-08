@@ -48,14 +48,14 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container col-lg-9 my-5">
+<div class="container-fluid col-lg-9 my-5">
 	<div class="row my-3">
 		<h1>CampList Page</h1>
 	</div>
 
 	<!-- search -->
 	<!-- 만들어뒀던거 쓸수는 있는데 select의 option 태그를 좀 바꿔야함 -->
-	<div class="row col-10 mx-auto">
+	<div class="d-flex justify-content-center">
 		<form class="row g-3" action="./list" method="get" id="searchForm">
 			<input type="hidden" name="page" value="1" id="page">
 			<div class="col-3">
@@ -79,7 +79,7 @@
 	
 	
 	<!-- 캠프장 등록 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
-	<div class="d-flex justify-content-end col-4">
+	<div class="d-flex justify-content-end">
 		<a class="genric-btn success" href="./add">등록</a>
 	</div>
 	
@@ -146,7 +146,7 @@
 	
 
 	<!-- Pager -->
-	<div class="row col-3 mx-auto">
+	<div class="d-flex justify-content-center">
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		  

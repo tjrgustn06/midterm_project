@@ -2,6 +2,11 @@ package com.camp.s1.camping;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -66,11 +71,39 @@ public class CampBookDAOTest extends MyTestCase{
 	
 	
 	//CampSiteDetailTest
-	@Test
+	//@Test
 	public void getCampSiteDetailTest() throws Exception{
 		Long areaNum = 905L;
 		CampSiteDTO campSiteDTO = campBookDAO.getCampSiteDetail(areaNum);
 		
 		assertNotEquals(0, campSiteDTO);
 	}
+	
+	//getDayOfWeek
+	@Test
+	public void getDayOfWeekTest() throws Exception{
+		//campsiteDTO에 저장하면 안된다. 저장내용이 하나밖에 없진 않을테니
+		
+		CampSiteDTO campSiteDTO = campBookDAO.getCampSiteDetail(943L);
+		campSiteDTO.setStartDate("2023-04-10");
+		campSiteDTO.setLastDate("2023-04-12");
+		List<Long> dayList = campBookDAO.getDayOfWeek(campSiteDTO);
+		
+		Long offWeekdaysPrice = campSiteDTO.getOffWeekdaysPrice();
+		Long offWeekendsPrice = campSiteDTO.getOffWeekendsPrice();
+		
+		Long cost = 0L;
+		
+		for(Long day : dayList) {
+			if(day==6L || day==7L) {
+				cost = cost + offWeekendsPrice;
+			}else {
+				cost = cost + offWeekdaysPrice;
+			}
+		}
+		
+		System.out.println(cost);
+	}
+	
+	
 }

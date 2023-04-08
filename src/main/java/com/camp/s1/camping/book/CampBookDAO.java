@@ -44,6 +44,13 @@ public class CampBookDAO {
 		return sqlSession.insert(NAMESPACE+"setOrderNumber", campBookDTO);
 	}
 	
+	//요일 계산하는 쿼리 결과 받아오기 - bookAdd
+	public List<Long> getDayOfWeek(CampSiteDTO campSiteDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getDayOfWeek", campSiteDTO);
+	}
+	
+	
+	
 	//bookConfirmed - bookConfirmation.jsp에서 최종 확인한 경우
 	
 	

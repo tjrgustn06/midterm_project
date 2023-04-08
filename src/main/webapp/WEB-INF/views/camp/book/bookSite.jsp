@@ -53,11 +53,11 @@
 	<form action="./bksSearch" id="searchFrm" method="get">
 		<!-- <input type="hidden" id="bksCampNum" name="campNum" value="${dto.campNum}"> -->
 		<div class="row d-flex justify-content-center my-2">
-			<button id="bksSearch" type="button" class="genric-btn success col-3">Search</button>
-			<button id="bksCancle" type="button" class="genric-btn primary col-3">cancle</button>
+			<button id="bksSearch" type="button" class="genric-btn success medium col-3">Search</button>
+			<button id="bksCancle" type="button" class="genric-btn primary medium col-3">cancle</button>
 		</div>
 		<div class="row my-2">
-			<button id="bksConsoleSign" type="button" class="genric-btn primary col-3 mx-auto">확인용 버튼</button>
+			<button id="bksConsoleSign" type="button" class="genric-btn primary col-3 mx-auto">확인용</button>
 		</div>
 	</form>
 	<!-- 검색 끝 -->
@@ -89,6 +89,10 @@
 				<input type="hidden" name="campNum" value="${siteDTO.campNum}" data-site-idx="camp${i.count}">
 				<input type="hidden" name="startDate" value="" data-site-idx="start${i.count}">
 				<input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">
+				<div class="d-flex justify-content-end mb-2">
+					<!-- <button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels genric-btn primary">Remove Site</button> -->
+					<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">Booking</button>
+				</div>
 				<div class="input-group mb-2">
 					<span class="input-group-text" id="siteName">사이트이름</span>
 					<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}" readonly>
@@ -121,10 +125,6 @@
 					<input class="form-check-input" type="radio" name="status" id="unbookable" value="예약불가">
 					<label class="form-check-label" for="unbookable">예약불가</label>
 				</div> -->
-				<div class="d-flex justify-content-between mb-2">
-					<!-- <button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels genric-btn primary">Remove Site</button> -->
-					<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success" data-site-idx="${i.count}">Booking</button>
-				</div>
 			</div>
 			</form>
 		</c:forEach>

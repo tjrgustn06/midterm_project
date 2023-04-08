@@ -47,9 +47,9 @@
 			</div>
 			<div class="input-group mb-2">
 				<span class="input-group-text" for="startDate">사용 시작일</span>
-				<input type="text" name="startDate" id="startDate" class="form-control datepicker" value="${siteDTO.startDate}" readonly>
+				<input type="text" name="startDate" id="startDate" class="form-control" value="${siteDTO.startDate}" style="background-color: gray;" readonly>
 				<span class="input-group-text" for="lastDate">사용 종료일</span>
-				<input type="text" name="lastDate" id="lastDate" class="form-control datepicker" value="${siteDTO.lastDate}" readonly>
+				<input type="text" name="lastDate" id="lastDate" class="form-control" value="${siteDTO.lastDate}" style="background-color: gray;" readonly>
 			</div>
 		</div>
 
@@ -65,7 +65,7 @@
 	
 		<div id="bookSiteOne">
 			<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
-			<!-- <input type="hidden" name="campNum" value="${siteDTO.campNum}"> -->
+			<input type="hidden" name="campNum" value="${siteDTO.campNum}"> <!-- 돌아가기용 -->
 			<div class="input-group mb-2">
 				<!-- <span class="input-group-text" id="siteName">사이트이름</span>
 				<input type="text" name="siteName" class="form-control" value="${siteDTO.siteName}" readonly> -->
@@ -139,6 +139,10 @@
 				$('#startDate').datepicker('option', 'maxDate', selectedDate);
 			})
 		})
+</script>
+<script>
+	//금액계산 요청
+	
 </script>
 <c:import url="../../template/common_js.jsp"></c:import>
 </body>

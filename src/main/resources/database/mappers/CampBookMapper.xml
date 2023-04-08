@@ -37,5 +37,15 @@
 		VALUES(#{orderNum})
 	</insert>
 	
+	<!-- getDayOfWeek -->
+	<select id="getDayOfWeek" parameterType="CampSiteDTO" resultType="Long">
+		SELECT TO_CHAR(startDate + LEVEL-1, 'd') AS dayOfWeek
+			FROM 
+				(SELECT  TO_DATE(#{startDate}, 'YYYY-MM-DD') AS startDate
+						, TO_DATE(#{lastDate}, 'YYYY-MM-DD') AS lastDate
+			FROM DUAL)
+		<![CDATA[CONNECT BY LEVEL <= lastDate - startDate]]>
+	</select>
+	
 	
 	</mapper>

@@ -126,8 +126,8 @@ $('#siteAddBtn').click(function(){
     // site = site + '<input class="form-check-input" type="radio" name="status" id="unbookable" value="예약불가">';
     // site = site + '<label class="form-check-label" for="unbookable">예약불가</label>';
     // site = site + '</div>';
-    site = site + '<div class="mb-2">';
-    site = site + '<button type="button" data-site-idx="siteIptDel'+siteIdx+'" class="siteDels btn btn-outline-danger">입력창 삭제</button>';
+    site = site + '<div class="d-flex justify-content-center mb-2">';
+    site = site + '<button type="button" data-site-idx="siteIptDel'+siteIdx+'" class="siteDels genric-btn danger medium">삭제</button>';
     site = site + '</div>';
     site = site + '</div>';
     

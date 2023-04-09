@@ -1,6 +1,4 @@
 boardName = $('#boardName').attr('data-board-name');
-let parentBoardId = '';
-let boardId = '';
 let commentNum = 0;
 let page = 1;
 let writer = '';
@@ -15,23 +13,13 @@ function setWriter(w) {
     writer = w;
 }
 
-function setParentBoardId(pbi) {
-    parentBoardId = pbi;
-}
-
-function setBoardId(bi) {
-    boardId = bi;
-}
 
 $('#storyList').on('click', '.getDetail', function(e){
     e.preventDefault();
     num = $(this).attr('data-board-num');
-    
 
-    
     getCommentList(num , 1);
     
-  
 })
 
 // 리스트 가져오기
@@ -75,20 +63,41 @@ $('#storyList').on('change', '.replyContents', function(){
 
 })
 
+$('#storyList').on('input', '.modalReplyContents', function(){
+    if($(this).val() != '') {
+        $(this).next($('#replyAdd')).text('게시');
+    }
+    else {
+        $(this).next($('#replyAdd')).text('');
+    }
+
+})
+
+$('#storyList').on('change', '.modalReplyContents', function(){
+    if($(this).val() != '') {
+        $(this).next($('#replyAdd')).text('게시');
+    }
+    else {
+        $(this).next($('#replyAdd')).text('');
+    }
+
+})
+
 
 
     // getCommentList(1);
 
 
     
-    //댓글 등록 이벤트
+//댓글 등록 이벤트
 $("#"+boardName+'List').on('click','.replyAdd',function(){
         
-    board = $(this).parents($('#'+boardName+$(this).attr('data-board-num')))
+    board = $(this).parents('#'+boardName+$(this).attr('data-board-num'));
     let contents = board.find('.replyContents').val();
+
     num = $(this).attr('data-board-num')
     
-    setCommentAdd(num, contents, writer, parentBoardId);
+    setCommentAdd(num, contents, writer, boardId);
         
 })
 
@@ -100,10 +109,36 @@ $('#'+boardName+'List').on('keydown','.replyContents', function(e){
         let contents = $(this).val();
         num = $(this).attr('data-board-num')
 
-        setCommentAdd(num, contents, writer, parentBoardId);
+        setCommentAdd(num, contents, writer, boardId);
         
     }
 })
+
+//모달 창 댓글 등록 이벤트
+$('#'+boardName+'List').on('click','.modalReplyAdd', function(e){
+    board = $(this).parents('#'+boardName+$(this).attr('data-board-num'));
+    let contents = board.find('.modalReplyContents').val();
+
+    num = $(this).attr('data-board-num')
+    setCommentAdd(num, contents, writer, boardId);
+
+})
+
+//모달 창 댓글 등록 이벤트
+$('#'+boardName+'List').on('keydown','.modalReplyContents', function(e){
+    if(e.keyCode === 13) {
+        e.preventDefault();
+
+        let contents = $(this).val();
+        num = $(this).attr('data-board-num')
+
+        setCommentAdd(num, contents, writer, boardId);
+        
+    }
+
+})
+
+
 
 //댓글 등록 함수
 function setCommentAdd(num, contents, writer, parentBoardId) {
@@ -121,7 +156,7 @@ function setCommentAdd(num, contents, writer, parentBoardId) {
             if(response.trim() == 1) {
                 alert('댓글이 등록되었습니다');
                 $('#'+boardName+num).find('.replyContents').val('');
-                // console.log( $('#'+boardName+num).children('.replyContents').val());
+                $('#'+boardName+num).find('.modalReplyContents').val('');
                 getCommentList(num, 1);
                 getList(currentPage);
             }
@@ -325,7 +360,7 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
             commentNum : commentNum,
             contents : contents,
             writer : writer,
-            boardId : parentBoardId+1
+            boardId : boardId+1
         },
         success : function(repsonse) {
             if(repsonse.trim()>0) {
@@ -344,7 +379,8 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
 //신고하기 버튼
 $('#'+boardName+'List').on('click','.reportMenu', function(){
     commentNum = $(this).attr('data-comment-num');
-    reportAdd(num, boardId, commentNum)
+    
+    reportAdd(num, boardId+1, commentNum);
 })
 
 

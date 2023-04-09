@@ -1,5 +1,10 @@
 let num = 0;
 let boardName = $('#boardName').attr('data-board-name');
+let boardId = 0;
+
+function setBoardId(bi) {
+    boardId = Number(bi);
+}
 
 
 
@@ -43,22 +48,11 @@ $('#storyList').on('click','.update', function(){
 
 $('#storyList').on('click', '.report', function(){
     num = $(this).attr('data-board-num');
-    let boardId = $('#boardName').attr("data-board-id");
     reportAdd(num, boardId);
- 
     
 })
 
-function reportAdd() {
 
-    let reportUrl =  "../report/report?num="+arguments[0]+"&boardId="+arguments[1];
-    if(arguments.length > 2) {
-        reportUrl += "&commentNum="+arguments[2];
-    }
-    location.href= reportUrl;
-
-    
-}
 
 
 

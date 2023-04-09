@@ -31,6 +31,11 @@ public class QnaController {
 		return "qna";
 	}
 	
+	@ModelAttribute("boardId")
+	public Long getBoardId() {
+		return 1L;
+	}
+	
 	
 	@GetMapping("list")
 	public ModelAndView getBoardList(Pager pager) throws Exception {

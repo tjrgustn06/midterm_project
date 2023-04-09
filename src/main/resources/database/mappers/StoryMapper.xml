@@ -69,8 +69,8 @@
   </insert>
   
   <insert id="setBoardFileAdd" parameterType="BoardFileDTO">
-  	INSERT INTO STORYFILES (FILENUM, NUM, BOARDID, FILENAME, ORINAME) 
-  	VALUES (BOARDSEQ.NEXTVAL, #{num}, #{boardId}, #{fileName}, #{oriName})
+  	INSERT INTO STORYFILES (FILENUM, NUM, FILENAME, ORINAME) 
+  	VALUES (BOARDSEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
   </insert>
   
   <delete id="setBoardDelete" parameterType="BbsDTO">

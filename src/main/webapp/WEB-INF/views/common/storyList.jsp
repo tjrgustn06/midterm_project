@@ -2,18 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+
+
+
 	$(function(){
+
 		setWriter('${member.id}');
 		setTotalPage('${pager.totalPage}')
+		setBoardId('${boardId}')
 	})
 </script>
 		<c:forEach items="${list}" var="dto">
-
-		<script>
-			$(function(){	
-				setParentBoardId('${dto.boardId}');
-			})
-		</script>
 			<div class="col-md-8 mx-auto" id="${boardName}${dto.num}"  style="height: 100%;">
 
 				<div class="d-flex flex-column mb-3">
@@ -21,23 +20,13 @@
 					  <div class="card-body">
 						<div class="" style="height: 30px;">
 							<span class="card-title" style="float: left;">${dto.writer}</span>
-							<span class="card-title calcDate"  style="float: right;"id="reg${dto.num}" data-board-num="${dto.num}">
+							<span class="card-title calcDate"  style="float: right;" id="reg${dto.num}" data-board-num="${dto.num}">
 								${dto.regDate}
 								<script>
-									function getDateDiff(d2) {
-										let now = new Date();									
-										let date2 = new Date(d2);
-		
-										let diffDate = now.getTime() - date2.getTime();
-										let currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
-										
-										return parseInt(diffDate/currDay);
-										}
 
 									$(document).ready(function(){
 										let regDate = '${dto.regDate}';
-										let date = getDateDiff(regDate);
-										$('#reg'+'${dto.num}').text(date + "일전");
+										$('#reg'+'${dto.num}').text(getDateDiff(regDate));
 									})
 
 								
@@ -143,27 +132,17 @@
 												<div class="card-body">
 													<div class="" style="height: 30px;">
 														<span class="card-title" style="float: left;">${dto.writer}</span>
-														<span class="card-title calcDate"  style="float: right;"id="reg${dto.num}" data-board-num="${dto.num}">
+														<span class="card-title calcDate"  style="float: right;"id="modalReg${dto.num}" data-board-num="${dto.num}">
 															${dto.regDate}
 															<script>
-																function getDateDiff(d2) {
-																	let now = new Date();									
-																	let date2 = new Date(d2);
-									
-																	let diffDate = now.getTime() - date2.getTime();
-																	let currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
-																	
-																	return parseInt(diffDate/currDay);
-																	}
+
 								
 																$(document).ready(function(){
 																	let regDate = '${dto.regDate}';
-																	let date = getDateDiff(regDate);
-																	$('#reg'+'${dto.num}').text(date + "일전");
+																	$('#modalReg'+'${dto.num}').text(getDateDiff(regDate));
 																})
 								
-															
-															
+
 															</script>
 														</span>
 													</div>
@@ -215,8 +194,8 @@
 													<input type="hidden" name="num" value="${dto.num}">
 													<input type="hidden" name="boardId" value="${dto.boardId}">
 													
-														<input class="border border-0 replyContents"  id="replyContents" data-board-num="${dto.num}" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
-														<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
+														<input class="border border-0 modalReplyContents"  id="replyContents" data-board-num="${dto.num}" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+														<a class="modalReplyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
 													
 												</form>
 											</div>

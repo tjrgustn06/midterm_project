@@ -7,12 +7,17 @@
 <meta charset="UTF-8">
 <c:import url="../template/common_css.jsp"></c:import>
 <title>Insert title here</title>
+
+
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid">
+	<script>
+
+	</script>
 	<div class="row">
-			<div class="row" id="boardName" data-board-name="${boardName}">
+			<div class="row" id="boardName" data-board-name="${boardName}" data-board-id="${boardId}">
 				<h1> ${boardName} Detail Page</h1>
 			</div>
 			
@@ -39,8 +44,10 @@
 			<div class="row">
 				<div class="col-md-8">
 					<c:if test="${boardName ne 'notice'}">		
-						<a href="./reply?num=${dto.num}" class="btn btn-primary col-md-2 mx-2 my-2">답글</a>
+						<a href="./report?num=${dto.num}" class="btn btn-primary col-md-2 mx-2 my-2">답글</a>
+
 					</c:if>
+					
 				</div>		 
 			</div>
 	</div>
@@ -83,18 +90,21 @@
 
 	</div>
 </div>
-	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
-	<script type="text/javascript" src="../resources/js/comment.js"></script>
-	<script>
-		// setBoardName('${boardName}');
-
-	</script>
+	<script src="../resources/js/boardForm.js"></script>
+	<script src="../resources/js/comment.js"></script>
+	<script src="../resources/js/calcDate.js"></script>
+	<script src="../resources/js/report.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
+	<script>
+	
+			setBoardId('${boardId}');
+			setWriter('${member.id}');
+			setNum('${dto.num}')
+		
+	</script>
+
 </body>
 </html>
 
-<script>
-	$(function(){
-		setWriter('${member.id}');
-	})
+
 </script>

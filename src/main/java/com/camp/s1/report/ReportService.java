@@ -15,7 +15,7 @@ public class ReportService {
 		
 		int result = 0;
 		
-		if(reportDTO.getBoardId() % 2 != 0) {
+		if(reportDTO.getCommentNum() == null) {
 			List<ReportDTO> ar = reportDAO.getReportList(reportDTO);
 			for (ReportDTO reportDTO2 : ar) {
 				if(reportDTO2.getReporter().equals(reportDTO.getReporter())) {
@@ -27,6 +27,14 @@ public class ReportService {
 			return reportDAO.setReportAdd(reportDTO);
 		} 
 		else {
+			List<ReportDTO> ar = reportDAO.getReportList(reportDTO);
+			for (ReportDTO reportDTO2 : ar) {
+				if(reportDTO2.getReporter().equals(reportDTO.getReporter())) {
+					result = 2;
+					return result;
+				}
+				
+			}
 			return reportDAO.setCommentReportAdd(reportDTO);
 		}
 	

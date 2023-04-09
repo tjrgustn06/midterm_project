@@ -50,8 +50,10 @@
 	
 
 	<script src="../resources/js/scroll.js"></script>
+	<script src="../resources/js/calcDate.js"></script>
 	<script src="../resources/js/story.js"></script>
 	<script src="../resources/js/storyComment.js"></script>
+	<script src="../resources/js/report.js"></script>
 
 	
 	

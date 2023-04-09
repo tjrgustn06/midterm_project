@@ -24,7 +24,7 @@
 		<where>
 			NUM = #{num}
 			<if test="commentNum != null">
-				COMMENTNUM = #{commentNum}
+				AND COMMENTNUM = #{commentNum}
 			</if>	
 		</where>
   		

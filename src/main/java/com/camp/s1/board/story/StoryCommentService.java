@@ -35,7 +35,7 @@ public class StoryCommentService implements CommentService{
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
-		((CommentDTO)bbsDTO).setBoardId(4L);
+
 		return storyCommentDAO.setBoardAdd(bbsDTO);
 	}
 

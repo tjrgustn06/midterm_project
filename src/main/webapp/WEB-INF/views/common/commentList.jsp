@@ -5,11 +5,6 @@
 	
 
 			<c:forEach var="dto" items="${commentList}">
-				<script>
-					$(function(){	
-						setBoardId('${dto.boardId}');
-					})
-				</script>
 							<div id="${boardName}Comment${dto.num}"></div>
 							<!-- Comment with nested comments-->
 							<div class="d-flex mb-4 offset-md-1">
@@ -25,8 +20,13 @@
 										<span class="me-auto p-2 fw-bold">
 											${dto.writer}
 										</span>
-										<span class="p-2">
-											${dto.regDate}
+										<span class="p-2" id="cmntReg${dto.commentNum}" data-comment-num="${dto.num}">
+											<script>
+												$(document).ready(function(){
+													let regDate = '${dto.regDate}';
+													$('#cmntReg'+'${dto.commentNum}').text(getDateDiff(regDate));
+												})
+											</script>
 										</span>
 										
 											<span class="p-2">

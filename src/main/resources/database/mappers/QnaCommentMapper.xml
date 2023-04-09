@@ -37,8 +37,8 @@
 		<selectKey keyProperty="commentNum" resultType="Long" order="BEFORE">	
 				SELECT BOARDSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-  		INSERT INTO QNACOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
-  		VALUES (#{commentNum}, #{num}, #{writer}, #{contents}, SYSDATE, #{commentNum}, 0, 0)
+  		INSERT INTO QNACOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH, BOARDID)
+  		VALUES (#{commentNum}, #{num}, #{writer}, #{contents}, SYSDATE, #{commentNum}, 0, 0, ${boardId})
   	</insert> 
   	
 
@@ -81,8 +81,8 @@
   	
   	<insert id="setSubCommentAdd" parameterType="BbsDTO">
 
-  		INSERT INTO QNACOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH)
-  		VALUES (BOARDSEQ.NEXTVAL, #{num}, #{writer}, #{contents}, SYSDATE, #{ref}, #{step}, #{depth})
+  		INSERT INTO QNACOMMENT (COMMENTNUM, NUM, WRITER, CONTENTS, REGDATE, REF, STEP, DEPTH, BOARDID)
+  		VALUES (BOARDSEQ.NEXTVAL, #{num}, #{writer}, #{contents}, SYSDATE, #{ref}, #{step}, #{depth}, #{boardId})
   	</insert>
   	
   	

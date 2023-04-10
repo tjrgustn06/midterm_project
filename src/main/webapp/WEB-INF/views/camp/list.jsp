@@ -55,7 +55,7 @@
 
 	<!-- search -->
 	<!-- 만들어뒀던거 쓸수는 있는데 select의 option 태그를 좀 바꿔야함 -->
-	<div class="row col-7 mx-auto">
+	<div class="d-flex justify-content-center">
 		<form class="row g-3" action="./list" method="get" id="searchForm">
 			<input type="hidden" name="page" value="1" id="page">
 			<div class="col-3">
@@ -67,20 +67,20 @@
 					<%-- <option value="contents" ${pager.kind eq 'contents'? 'selected':''}>상세내용</option> --%>
 				</select>
 			</div>
-			<div class="col-6">
+			<div class="col-5">
 				<label for="search" class="visually-hidden">Search</label>
 				<input type="text" class="form-control" name="search" value="${pager.search}" id="search" placeholder="검색어를 입력하세요">
 			</div>
-			<div class="col-3">
-				<button type="submit" class="btn btn-outline-primary mb-3">검색</button>
+			<div class="col-4">
+				<button type="submit" class="genric-btn primary mb-3">검색</button>
 			</div>
 		</form>	
 	</div>
 	
 	
 	<!-- 캠프장 등록 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
-	<div class="row col-1">
-		<a class="btn btn-outline-success" href="./add">등록</a>
+	<div class="d-flex justify-content-end">
+		<a class="genric-btn success" href="./add">등록</a>
 	</div>
 	
 	
@@ -146,7 +146,7 @@
 	
 
 	<!-- Pager -->
-	<div class="row col-3 mx-auto">
+	<div class="d-flex justify-content-center">
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		  

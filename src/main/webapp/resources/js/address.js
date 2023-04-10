@@ -1,3 +1,7 @@
+let addressNum=0;
+let addressName='';
+let addressAds='';
+let addressDetail='';
 
 function execDaumPostcode() {
     new daum.Postcode({
@@ -39,6 +43,99 @@ function execDaumPostcode() {
     }).open();
 }
 
+// 주소추가를 눌렀을때
+$('#addressAdd').click(function(){
+    $('#addressAdd').hide()
+    setResetAddress(addressNum, addressName, addressAds, addressDetail)
+    let child = '<div id="addressAddForm">'
+    child = child+'<input type="text" name="addressName" id="addressName" placeholder="집, 회사..."><br>'
+    child = child+'<input type="text" name="postCode" id="postcode" placeholder="우편번호" readonly>'
+    child = child+'<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>'
+    child = child+'<input type="text" name="address" id="address" placeholder="주소" readonly><br>'
+    child = child+'<input type="text" name="addressDetail" id="addressDetail" placeholder="상세주소"><br>'
+    child = child+'<button type="button" id="addressAddCancle">취소</button></div>'
+    $(this).before(child)
+})
+// 주소추가취소 눌렀을때
+$('#addressList').on('click','#addressAddCancle',()=>{
+    $('#addressAddForm').remove()
+    $('#addressAdd').show()
+})
 
+// 주소수정을 눌렀을때
+$('#addressList').on('click','.addressUpdate',function(){
+    
+    setResetAddress(addressNum, addressName, addressAds, addressDetail)
+    addressNum=$(this).attr('data-address-num')
+    $('#addressUpdate'+addressNum).hide()
+    addressName=$(this).attr('data-address-name')
+    addressAds=$(this).attr('data-address-address')
+    addressDetail=$(this).attr('data-address-detail')
+    getUpdateAddress(addressNum, addressName)
+
+
+    // $('#oldAddress'+addressNum).hide()
+    // let child = child+'<input type="text" name="postCode" id="postcode" placeholder="우편번호">'
+    // child = child+'<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기">'
+    // child = child+'<input type="text" name="address" id="address" placeholder="주소" readonly>'
+    // child = child+'<input type="text" name="addressDetail" id="addressDetail" placeholder="상세주소">'
+    // child = child+'<button type="button" id="addressUpdateCancle">취소</button>'
+    // $('#newAddress'+addressNum).html(child)
+})
+
+//삭제 버튼을 눌렀을때
+$('#addressList').on('click', '.addressDelete', function(){
+    addressNum=$(this).attr('data-address-num');
+    addressName=$(this).attr('data-address-name');
+    let delConfirm = confirm(addressName+'주소를 삭제하시겠습니까?');
+
+    if(delConfirm) {
+        $.ajax({
+            type : 'POST',
+            url : './addressDelete',
+            data : {
+                addressNum : addressNum
+            },
+            success : function(response){
+                if(response.trim()>0) {
+                    alert(addressName+'주소가 삭제되었습니다');
+                    location.href='./memberUpdate'
+                } else {
+                    alert('삭제 실패')
+                }
+            }
+        })
+    }
+})
+
+// 취소 버튼을 눌렀을때
+$('#addressList').on('click','.addressUpdateCancle', function(){
+    addressNum=$(this).attr('data-address-num')
+    setResetAddress(addressNum, addressName, addressAds, addressDetail)
+})
+
+// 주소 업데이트폼 불러오기
+function getUpdateAddress(addressNum, addressName){
+    let child = '<div id="newAddress'+addressNum+'">'
+    child = child+'<input type="hidden" name="addressNum" value="'+addressNum+'">'
+    child = child+'<input type="text" name="addressName" id="addressName" value="'+addressName+'" readonly><br>'
+    child = child+'<input type="text" name="postCode" id="postcode" placeholder="우편번호" readonly>'
+    child = child+'<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>'
+    child = child+'<input type="text" name="address" id="address" placeholder="주소" readonly><br>'
+    child = child+'<input type="text" name="addressDetail" id="addressDetail" placeholder="상세주소"><br>'
+    child = child+'<button type="button" class="addressUpdateCancle" data-address-num="'+addressNum+'">취소</button></div>'
+    $('#oldAddress'+addressNum).replaceWith(child)
+}
+
+// 업데이트폼 원래대로 돌려놓기
+function setResetAddress(addressNum, addressName, addressAds, addressDetail){
+    $('#addressAddForm').remove()
+    let child='<div id="oldAddress'+addressNum+'">'
+    child = child + '<p>'+addressName+'</p>'
+    child = child + '<input type="text" class="form-control" value="'+addressAds+'" readonly>'
+    child = child + '<input type="text" class="form-control" value="'+addressDetail+'" readonly></div>'
+    $('#newAddress'+addressNum).replaceWith(child);
+    $('#addressUpdate'+addressNum).show()
+}
 
 

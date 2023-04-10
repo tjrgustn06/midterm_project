@@ -107,7 +107,7 @@
 				mark=mark+${mark.mark};
 				i++
 			</c:forEach>
-			markAvg=mark/i
+			markAvg=(mark/i).toFixed(1)
 			$('#reviewAvg').html(markAvg)
 			$('#starAvg').attr('data-review-avg',markAvg)
 		}

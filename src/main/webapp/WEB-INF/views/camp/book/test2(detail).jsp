@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${dto.name} Order - The Camping</title>
+<title>${dto.name} Book - The Camping</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 </head>
 <body>

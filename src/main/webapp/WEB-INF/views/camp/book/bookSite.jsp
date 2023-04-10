@@ -19,20 +19,23 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-			<h2 class="page-cover-tittle">BOOK</h2>
+			<h2 class="page-cover-tittle">BOOKING</h2>
+				<ol class="breadcrumb">
+					<li>마음에 드는 사이트를 골라주세요</li>
+				</ol>
 		</div>
 	</div>
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
+	<p>기간 설정, 예약 가능 사이트 확인, 금액 확인, 예약하기 기능</p>
 	<div class="row my-3">
-		<h1>BookSite Page</h1>
-		<p>기간 설정, 예약 가능 사이트 확인, 금액 확인, 예약하기 기능</p>
+		<h1>${campDTO.name}</h1>
 	</div>
 
 	<!-- 파라미터 확인 -->
-	--CN: ${campNum}--
-	--AN: ${areaNum}--
+	--CN: ${siteDTO.campNum}--
+	--AN: ${siteDTO.areaNum}--
 
 	<!-- 시설배치도 -->
 	<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
@@ -63,8 +66,8 @@
 	<form action="./bksSearch" id="searchFrm" method="get">
 		<!-- <input type="hidden" id="bksCampNum" name="campNum" value="${dto.campNum}"> -->
 		<div class="row d-flex justify-content-center my-2">
-			<button id="bksSearch" type="button" class="genric-btn success medium col-3">Search</button>
-			<button id="bksCancle" type="button" class="genric-btn primary medium col-3">cancle</button>
+			<button id="bksSearch" type="button" class="genric-btn success medium col-3">검색</button>
+			<button id="bksCancle" type="button" class="genric-btn primary medium col-3">취소</button>
 		</div>
 		<div class="row my-2">
 			<button id="bksConsoleSign" type="button" class="genric-btn primary col-3 mx-auto">확인용</button>
@@ -101,7 +104,7 @@
 				<input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">
 				<div class="d-flex justify-content-end mb-2">
 					<!-- <button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels genric-btn primary">Remove Site</button> -->
-					<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">Booking</button>
+					<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">예약</button>
 				</div>
 				<div class="input-group mb-2">
 					<span class="input-group-text" id="siteName">사이트이름</span>

@@ -64,6 +64,10 @@
 		WHERE CI.CAMPNUM = #{campNum} -->
 	</select>
 	
+	<!-- getCampDetail -->
+	<select id="getCampDetail" parameterType="Long" resultType="CampDTO">
+		SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum}
+	</select>
 	
 	
 	</mapper>

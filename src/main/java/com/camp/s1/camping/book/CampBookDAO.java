@@ -55,6 +55,11 @@ public class CampBookDAO {
 		return sqlSession.selectList(NAMESPACE+"getCampBookList", campNum);
 	}
 	
+	//캠프장 정보 조회 - CampDTO
+	public CampDTO getCampDetail(Long campNum) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCampDetail", campNum);
+	}
+	
 	//bookConfirmed - bookConfirmation.jsp에서 최종 확인한 경우
 	
 	

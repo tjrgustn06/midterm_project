@@ -29,7 +29,7 @@ public class CampBookService {
 	}
 	
 	//예약 추가
-	public int setCampBookAdd(Long areaNum, CampBookDTO campBookDTO) throws Exception{
+	public int setCampBookAdd(CampBookDTO campBookDTO) throws Exception{
 		//필수 입력값: num / areanum, id, indexcode, ordernum / 나머지 입력값
 		
 		//필수입력값
@@ -62,6 +62,11 @@ public class CampBookService {
 	//예약 사이트 리스트 조회
 	public List<CampBookDTO> getCampBookList(Long campNum) throws Exception{
 		return campBookDAO.getCampBookList(campNum);
+	}
+	
+	//캠프장 정보 조회
+	public CampDTO getCampDetail(Long campNum) throws Exception{
+		return campBookDAO.getCampDetail(campNum);
 	}
 	
 	

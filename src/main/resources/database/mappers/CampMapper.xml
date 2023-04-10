@@ -196,8 +196,8 @@
 		<selectKey keyProperty="areaNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS)
-		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, #{status})
+		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS, NAME)
+		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, #{status}, #{name})
 	</insert>
 	
 	<!-- siteDelete -->

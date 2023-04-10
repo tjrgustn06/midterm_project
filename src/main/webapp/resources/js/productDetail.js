@@ -72,11 +72,11 @@ function cartBar(){
 }
 cartBar()
 
-function getCartBar() {
+function getCartBar(page) {
     if($('#cartBar').attr('data-member-id')!=null){
         $.ajax({
             type : 'GET',
-            url : './cartBar',
+            url : './cartBar?page='+page,
             success : (response) =>{
                 $('#cartBar').html(response);
             }
@@ -84,4 +84,4 @@ function getCartBar() {
     }
 }
 
-getCartBar()
+getCartBar(1)

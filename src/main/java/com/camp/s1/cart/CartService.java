@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camp.s1.member.MemberDTO;
 import com.camp.s1.product.ProductGradeDTO;
 
 @Service
@@ -13,8 +14,8 @@ public class CartService {
 	@Autowired
 	private CartDAO cartDAO;
 	
-	public List<CartDTO> getCartList() throws Exception {
-		List<CartDTO> ar= cartDAO.getCartList();
+	public List<CartDTO> getCartList(MemberDTO memberDTO) throws Exception {
+		List<CartDTO> ar= cartDAO.getCartList(memberDTO);
 		for(CartDTO cartDTO:ar) {
 			cartDTO.setStartDate(cartDTO.getStartDate().substring(0, 10));
 			cartDTO.setLastDate(cartDTO.getLastDate().substring(0, 10));
@@ -24,7 +25,9 @@ public class CartService {
 	
 	public int setCartAdd(CartDTO cartDTO) throws Exception {
 		int result = 0;
-		List<CartDTO> ar = cartDAO.getCartList();
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(cartDTO.getId());
+		List<CartDTO> ar = cartDAO.getCartList(memberDTO);
 		for (CartDTO cartDTODetail:ar) {
 			if(cartDTO.getId().equals(cartDTODetail.getId()) && cartDTO.getGradeNum().equals(cartDTODetail.getGradeNum())){
 				cartDTODetail=cartDAO.getCartDetail(cartDTODetail);

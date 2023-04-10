@@ -24,8 +24,8 @@ public class ProductDAO {
 	}
 	
 	// CartBar 출력
-	public List<CartDTO> getCartBarList(CartDTO cartDTO) throws Exception {
-		return sqlSession.selectList(NAMESPACE+"getCartBarList", cartDTO);
+	public List<CartDTO> getCartBarList(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getCartBarList", pager);
 	}
 	
 	// CartBarFile 출력

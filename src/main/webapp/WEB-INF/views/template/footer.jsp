@@ -34,8 +34,8 @@
 				</div>
 			</div>							
 			<div class="col-lg-4 col-md-6 col-sm-6">
-				<div class="single-footer-widget">
-					<h6 class="footer_title">Newsletter</h6>
+				<div class="single-footer-widget storyfeed">
+					<h6 class="footer_title">STORYFEED</h6>
 				</div>
 			</div>
 							

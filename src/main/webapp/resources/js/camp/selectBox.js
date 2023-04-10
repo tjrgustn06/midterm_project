@@ -36,7 +36,6 @@ $(function() {
     //중분류(doName) 이벤트 위임 - 값의 변경(change)
     $(document).on('change', 'select[name=doName]', function() {
         let classVal = $(this).val();
-        $(this).prop("selected", true);
 
         //doName값이 0이 됐을 때
         if(classVal==0){
@@ -51,7 +50,6 @@ $(function() {
             //소분류(sigunguName)의 'data-class' 속성 값 확인, 일치시 보여줌
             if($(this).data('class') == classVal || $(this).val() == '0') {
                 $(this).show();
-                $(this).prop("selected", true);
             }else {
                 $(this).hide();
             }

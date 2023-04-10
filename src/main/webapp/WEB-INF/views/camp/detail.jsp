@@ -66,7 +66,7 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container-fluid col-lg-9 my-5">
+<div class="container col-lg-9 my-5">
 	<div class="row my-3">
 		<h1>${dto.name}</h1>
 	</div>
@@ -141,11 +141,17 @@
 			<form action="./update" id="frm" method="get">
 				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 				<input type="hidden" name="campNum" value="${dto.campNum}">
-				<button id="detReserve" type="button" class="btn btn-outline-primary">Reservation</button>
-				<button id="detList" type="button" class="btn btn-outline-secondary">go to List</button>
-				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
-				<button id="detUpdate" type="submit" class="btn btn-outline-success">UPDATE</button>
-				<button id="detDelete" type="button" class="btn btn-outline-danger">DELETE</button>
+				<div class="d-flex justify-content-center" id="userBtn">
+					<button id="detBook" type="button" class="genric-btn success medium">booking</button>
+					<button id="detList" type="button" class="genric-btn primary medium">to List</button>
+				</div>
+				<div class="d-flex justify-content-center" id="adminBtn">
+					<button id="detBookList" type="button" class="genric-btn primary medium">bookList</button>
+					<button id="detManagement" type="button" class="genric-btn warning medium">siteModify</button>
+					<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
+					<button id="detUpdate" type="button" class="genric-btn warning medium">update</button>
+					<button id="detDelete" type="button" class="genric-btn danger medium">delete</button>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -255,7 +261,9 @@
 												<!-- 일단 사이트 이름, 크기만 출력 -->
 												<ul>
 													<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
+														<%-- <c:if test="${siteDTO.status eq '예약가능'}"> --%>
 														<li>${siteDTO.siteName}: ${siteDTO.siteSize}</li>
+														<%-- </c:if> --%>
 													</c:forEach>
 												</ul> 
 											</td>
@@ -324,7 +332,7 @@
 					</div>
 
 					<!-- 저작권 안내 -->
-					<div style="margin-top: -30px; margin-bottom: 30px;">
+					<div style="margin-top: 0px; margin-bottom: 30px;">
 						※ 모든 컨텐츠의 저작권은 TheCamping에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
 					</div>
 				</div> <!-- 캠핑장 소개 영역 종료 -->
@@ -377,6 +385,7 @@
 								<!-- siteDTO가 있으면 있는대로 테이블 만들기 -->
 								<c:if test="${not empty dto.campSiteDTOs}">
 									<c:forEach items="${dto.campSiteDTOs}" var="siteDTO">
+										<%-- <c:if test="${siteDTO.status eq '예약가능'}"> --%>
 										<tr>
 											<th scope="col">${siteDTO.siteName}(${siteDTO.siteSize})</th>
 											<td data-cell-header="평상시 주중：">${siteDTO.offWeekdaysPrice}</td>
@@ -384,6 +393,7 @@
 											<td data-cell-header="성수기 주중：">${siteDTO.peakWeekdaysPrice}</td>
 											<td data-cell-header="성수기 주말：">${siteDTO.peakWeekendsPrice}</td>
 										</tr>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 								<!-- 테이블 끝 -->
@@ -392,89 +402,39 @@
 					</div>
 					<hr>
 
-					<!-- 시설배치도 -->
-					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-						<!-- 임시로 막아놓고 나중에 추가해보기 ㅠㅠ -->
-						<!-- <div class="row mb-3">
+					<!-- 시설배치도 - book페이지에서 보여주기 -->
+					<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+						<div class="row mb-3">
 							<c:if test="${not empty dto.campFileDTOs}">
 								<div class="facilityImage">
 									<img alt="" src="../resources/upload/camp/-">
 								</div>
 							</c:if>
-						</div> -->
-					<hr>
+						</div>
+					<hr> -->
 				</div> <!-- 이용안내 영역 종료 -->
 				</c:if>
 
 				<c:if test="${viewType eq 3}">
 				<!-- 위치정보 영역 -->
-				<div class="campMap" id="campMap">
+				<div class="campMap my-3" id="campMap">
 					<!-- 찾아오시는 길 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5>
 						<!--================Contact Area =================-->
-							<section class="contact_area section_gap">
-								<div class="container">
-									<div id="mapBox" class="mapBox" 
-										data-lat="40.701083" 
-										data-lon="-74.1522848" 
-										data-zoom="13" 
-										data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
-										data-mlat="40.701083"
-										data-mlon="-74.1522848">
-									</div>
-									<div class="row">
-										<div class="col-md-3">
-											<div class="contact_info">
-												<div class="info_item">
-													<i class="lnr lnr-home"></i>
-													<h6>California, United States</h6>
-													<p>Santa monica bullevard</p>
-												</div>
-												<div class="info_item">
-													<i class="lnr lnr-phone-handset"></i>
-													<h6><a href="#">00 (440) 9865 562</a></h6>
-													<p>Mon to Fri 9am to 6 pm</p>
-												</div>
-												<div class="info_item">
-													<i class="lnr lnr-envelope"></i>
-													<h6><a href="#">support@colorlib.com</a></h6>
-													<p>Send us your query anytime!</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-9">
-											<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-												<div class="col-md-6">
-													<div class="form-group">
-														<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
-													</div>
-													<div class="form-group">
-														<input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
-													</div>
-													<div class="form-group">
-														<input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message"></textarea>
-													</div>
-												</div>
-												<div class="col-md-12 text-right">
-													<button type="submit" value="submit" class="btn theme_btn button_hover">Send Message</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</section>
+						<p style="margin-top:-4px">
+							<em class="link">
+								<a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+									혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+								</a>
+							</em>
+						</p>
+						<div id="map" style="width:100%;height:350px;"></div>
 						<!--================Contact Area =================-->
 				</div>
 				</c:if>
 
-
+				<!-- 후기 영역 -->
 				<c:if test="${viewType eq 4}">
-					<!-- 후기 영역 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
 					<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
 						<form id="reviewForm" method="POST" enctype="multipart/form-data">
@@ -508,27 +468,25 @@
 							</div>
 							<div id="picList">
 								<div class="row mb-2" id="addPicDiv">
-									<button type="button" id="addPic" class="col-2 offset-md-10 btn btn-primary">사진추가</button>
+									<button type="button" id="addPic" class="col-2 offset-md-10 genric-btn primary small">사진추가</button>
 								</div>
 							</div>
 							<div>
-								<button type="button" id="addReview" class="btn btn-outline-info" data-review-num="${dto.campNum}" data-review-name="camp">리뷰작성</button>
+								<button type="button" id="addReview" class="genric-btn success small" data-review-num="${dto.campNum}" data-review-name="camp">리뷰작성</button>
 							</div>
 						</form>
 					</div>
 
-					<div class="row col-6 mx-auto my-3">
-						<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
-						<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
+					<div class="row col-6 mx-auto justify-content-center my-3">
+						<button id="reviewAdd" type="button" class="genric-btn success small col-3">리뷰쓰기</button>
+						<button id="reviewCancle" type="button" class="genric-btn danger small col-3">취소</button>
 					</div>
 
 					<div class="row" id="reviewList">
 
 					</div>
-						
-
-				</c:if> <!-- 후기 영역 끝 -->
-				
+				</c:if>
+				<!-- 후기 영역 끝 -->
 
 			</div>
 		</div>
@@ -537,7 +495,7 @@
 
 </div>
 
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c293ea779f66b9a038f4869ccb12bdc&libraries=services"></script>
 <c:import url="../template/common_js.jsp"></c:import>
 <script src="../resources/js/review.js"></script>
 <script>
@@ -545,7 +503,57 @@
 	setMax(5);
 </script>
 <script src="../resources/js/camp/campCRUD.js"></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-<script src="royal-master/js/gmaps.min.js"></script> -->
+<script>
+// DTO 이름, 주소 변수 선언
+let resName = '${dto.name}';
+let resAdr = '${dto.address}';
+
+try {
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.47882621053635, 126.88111136615962), // 지도의 중심좌표 goodee academy
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(resAdr, function(result, status) { //기본주소 '금천구 가산디지털1로 151 306호 Goodee 아카데미아카데미'
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+resName+'</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+		}
+});    
+}catch(e){
+	
+}
+</script>
 </body>
 </html>

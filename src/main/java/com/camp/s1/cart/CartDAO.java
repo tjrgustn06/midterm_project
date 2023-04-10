@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.camp.s1.member.MemberDTO;
 import com.camp.s1.product.ProductGradeDTO;
 
 @Repository
@@ -16,8 +17,8 @@ public class CartDAO {
 	
 	private final String NAMESPACE="com.camp.s1.cart.CartDAO.";
 	
-	public List<CartDTO> getCartList() throws Exception {
-		return sqlSession.selectList(NAMESPACE+"getCartList");
+	public List<CartDTO> getCartList(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getCartList", memberDTO);
 	}
 	
 	public CartDTO getCartDetail(CartDTO cartDTO) throws Exception {

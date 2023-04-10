@@ -23,8 +23,10 @@ public class ProductOrderController {
 	
 	// order List 출력
 	@GetMapping("list")
-	public ModelAndView getProductOrderList(Pager pager) throws Exception {
+	public ModelAndView getProductOrderList(Pager pager, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		pager.setId(memberDTO.getId());
 		List<ProductOrderDTO> ar = productOrderService.getProductOrderList(pager);
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);

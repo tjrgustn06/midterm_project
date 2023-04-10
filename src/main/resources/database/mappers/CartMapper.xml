@@ -7,8 +7,9 @@
   <mapper namespace="com.camp.s1.cart.CartDAO">
   
 	  <!-- list -->
-	  <select id="getCartList" resultType="CartDTO">
-	  	SELECT * FROM CART ORDER BY CARTNUM DESC
+	  <select id="getCartList" parameterType="MemberDTO" resultType="CartDTO">
+	  	SELECT * FROM CART WHERE ID = #{id}
+	  	ORDER BY CARTNUM DESC
 	  </select>
 	  
 	  <!-- detail -->

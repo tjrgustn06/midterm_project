@@ -84,7 +84,7 @@
 						</c:when>
 						<c:otherwise>
 							<tr height="200px">
-								<td class="align-middle text" colspan="20">검색 결과가 없습니다.</td>
+								<td class="align-middle text" colspan="20">장바구니가 비었습니다.</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>

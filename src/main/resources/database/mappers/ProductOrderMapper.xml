@@ -33,6 +33,7 @@
   		SELECT * FROM(
   			SELECT ROWNUM R, PO.* FROM(
   				SELECT * FROM PRODUCTORDER
+  				WHERE ID = #{id}
   				ORDER BY NUM DESC
   			) PO
   		) WHERE R BETWEEN #{startRow} AND #{lastRow}

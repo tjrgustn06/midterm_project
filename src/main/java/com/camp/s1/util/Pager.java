@@ -2,8 +2,13 @@ package com.camp.s1.util;
 
 public class Pager {
 	
+	// 개인정보를 위한 id
+	private String id;
+	
 	// 검색
 	
+	
+
 	// 검색을 위한 num
 	private Long num;
 	
@@ -194,6 +199,14 @@ public class Pager {
 
 	public void setAfter(boolean after) {
 		this.after = after;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

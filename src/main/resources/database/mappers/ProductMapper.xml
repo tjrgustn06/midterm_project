@@ -28,14 +28,14 @@
   	</select>
   	
   	<!-- cartBar 출력 -->
-  	<select id="getCartBarList" parameterType="CartDTO" resultType="CartDTO">
+  	<select id="getCartBarList" parameterType="Pager" resultType="CartDTO">
   		SELECT * FROM(
   			SELECT ROWNUM R, C.* FROM(
   				SELECT * FROM CART
   				WHERE ID=#{id}
   				ORDER BY CARTNUM DESC
   			) C
-  		) WHERE R BETWEEN 1 AND 2
+  		) WHERE R BETWEEN #{startRow} AND {lastRow}
   	</select>
   	<!-- CartBar 파일 출력 -->
   	<select id="getCartBarFileDetail" parameterType="CartDTO" resultType="ProductFileDTO">

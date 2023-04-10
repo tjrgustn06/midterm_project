@@ -23,11 +23,20 @@
 		<div class="container col-6">
 		<div class="row">
 			<table class="table table-hover">
-				<c:forEach items="${list}" var="dto">
-					<tr onclick="location.href='./detail?num=${dto.num}'" style="cursor: pointer;">
-						<td>${dto.orderNum}</td><td>${dto.orderer}</td><td>${dto.name}</td><td>${dto.startDate}</td><td>${dto.lastDate}</td><td>${dto.status}</td>
-					</tr>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${not empty list}">
+						<c:forEach items="${list}" var="dto">
+							<tr onclick="location.href='./detail?num=${dto.num}'" style="cursor: pointer;">
+								<td>${dto.orderNum}</td><td>${dto.orderer}</td><td>${dto.name}</td><td>${dto.startDate}</td><td>${dto.lastDate}</td><td>${dto.status}</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr height="200px">
+							<td class="align-middle text" colspan="20">검색결과가 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 			</table>
 		</div>
 		<!-- paging -->

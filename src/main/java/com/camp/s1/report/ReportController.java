@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.camp.s1.board.BbsDTO;
 import com.camp.s1.board.BoardDTO;
 
-@RequestMapping("/report/*")
+@RequestMapping("**/report/*")
 @Controller
 public class ReportController {
 	
@@ -22,12 +22,12 @@ public class ReportController {
 	
 	
 	@GetMapping("report")
-	public ModelAndView setReportAdd(BbsDTO bbsDTO, @RequestParam(name = "commentNum", required = false) Long commentNum) throws Exception {
+	public ModelAndView setReportAdd(ReportDTO reportDTO, @RequestParam(name = "commentNum", required = false) Long commentNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		
 		mv.setViewName("report/report");
-		mv.addObject("dto", bbsDTO);
+		mv.addObject("dto", reportDTO);
 		mv.addObject("commentNum", commentNum);
 		return mv ;
 	}

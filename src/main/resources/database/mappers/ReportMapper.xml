@@ -6,13 +6,13 @@
 
   <mapper namespace="com.camp.s1.report.reportDAO">
   	<insert id="setReportAdd" parameterType="ReportDTO">
-  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, REPORTER, REPORTCONTENTS)
-  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{reporter}, #{reportContents})
+  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT)
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult})
   	</insert>
   	
 	<insert id="setCommentReportAdd" parameterType="ReportDTO">
-  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, COMMENTNUM, REPORTER, REPORTCONTENTS)
-  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{commentNum}, #{reporter}, #{reportContents})
+  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, COMMENTNUM, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT)
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{commentNum}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult})
   	</insert>
   	
   	<select id="getParentNum" parameterType="ReportDTO" resultType="ReportDTO">

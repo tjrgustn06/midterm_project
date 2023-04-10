@@ -219,7 +219,7 @@
 								수정
 							</button>
 							<button type="button" class="list-group-item list-group-item-action delete" data-board-num="${dto.num}">삭제</button>
-							<button type="button" class="list-group-item list-group-item-action report" data-board-num="${dto.num}">신고하기</button>
+							<button type="button" class="list-group-item list-group-item-action report" data-board-num="${dto.num}" data-board-writer="${dto.writer}">신고하기</button>
 						</div>
 					</span>
 				</div>

@@ -31,10 +31,6 @@ public class QnaController {
 		return "qna";
 	}
 	
-	@ModelAttribute("boardId")
-	public Long getBoardId() {
-		return 1L;
-	}
 	
 	
 	@GetMapping("list")

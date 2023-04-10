@@ -93,11 +93,8 @@
 	<script src="../resources/js/boardForm.js"></script>
 	<script src="../resources/js/comment.js"></script>
 	<script src="../resources/js/calcDate.js"></script>
-	<script src="../resources/js/report.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
 	<script>
-	
-			setBoardId('${boardId}');
 			setWriter('${member.id}');
 			setNum('${dto.num}')
 		

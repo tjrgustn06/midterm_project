@@ -379,8 +379,9 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
 //신고하기 버튼
 $('#'+boardName+'List').on('click','.reportMenu', function(){
     commentNum = $(this).attr('data-comment-num');
+    reportedUser = $(this).attr('data-comment-writer');
     
-    reportAdd(num, boardId+1, commentNum);
+    reportAdd(num, boardId+1, reportedUser, commentNum);
 })
 
 

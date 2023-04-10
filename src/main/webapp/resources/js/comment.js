@@ -1,5 +1,4 @@
 let boardName = $('#boardName').attr('data-board-name');
-let boardId = 0;
 let commentNum = 0;
 let page = 1;
 let writer = '';
@@ -12,11 +11,6 @@ function setNum(n) {
 function setWriter(w) {
     writer = w;
 }
-
-function setBoardId(bi) {
-    boardId = Number(bi);
-}
-
 
 getList(1);
 
@@ -31,7 +25,6 @@ $('#replyAdd').click(function(){
             num : $('#replyAdd').attr('data-board-num'),
             contents : $('#replyContents').val(),
             writer : writer,
-            boardId : boardId+1
         },
         success : function(response) {
             if(response.trim() == 1) {
@@ -256,7 +249,6 @@ $('#commentList').on('click','.subCommentAdd', function(){
             commentNum : commentNum,
             contents : contents,
             writer : writer,
-            boardId : boardId+1
         },
         success : function(repsonse) {
             if(repsonse.trim()>0) {
@@ -270,12 +262,7 @@ $('#commentList').on('click','.subCommentAdd', function(){
     })
 })
 
-//신고하기 버튼
-$('#commentList').on('click', '.reportMenu', function(){
-    commentNum = $(this).attr('data-comment-num');
-    
-    reportAdd(num, boardId+1, commentNum);
-})
+
 
 function getSubCommentForm(commentNum) {
     let htmls = '<section class="mb-5 mx-2" id="subCommentForm'+commentNum+'">';

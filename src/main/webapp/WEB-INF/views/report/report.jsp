@@ -22,6 +22,8 @@
 				
 				<input type="hidden" name="num" value="${dto.num}">
 				<input type="hidden" name="boardId" value="${dto.boardId}">
+				<input type="hidden" name="reportResult" value="1">
+				<input type="hidden" name="reportedUser" value="${dto.reportedUser}">
 				<c:if test="${not empty commentNum}">
 					<input type="hidden" name="commentNum" value="${commentNum}">
 				</c:if>

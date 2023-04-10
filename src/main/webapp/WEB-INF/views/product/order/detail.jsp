@@ -64,7 +64,7 @@
 					<label for="address" class="form-label">배송지 주소</label>
 					<c:if test="${dto.status eq '입금대기'}">
 						<c:if test="${not empty member.addressDTOs}">
-							<select class="form-select" id="addressSelect">
+							<select class="nice-select form-control" id="addressSelect">
 								<c:forEach items="${member.addressDTOs}" var="addressDTO">
 									<option selected>주소를 선택해 주세요</option>
 									<option>주소 직접 입력</option>

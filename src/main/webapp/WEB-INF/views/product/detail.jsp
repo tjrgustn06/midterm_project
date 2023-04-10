@@ -13,6 +13,14 @@
 <style>
 	textarea{resize:none;}
 	.star, .updateStar{cursor: pointer;}
+	.quickmenu{
+		position:absolute; 
+		width: 150px;
+        height: 300px;
+        right: 50px;
+        border-radius: 10px;
+        border: 1px solid #dddddd;
+		}
 </style>
 </head>
 <body>
@@ -28,8 +36,15 @@
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container">
-		<div style="float: right;">
-			장바구니 사이드바
+		<div class="quickmenu mx-auto">
+			<div id="cartBar" data-member-id="${member.id}" style="margin-left: 50px; margin-top: 10px;">
+			</div>
+			<div style="margin-left: 50px;">
+				<a href="/cart/list">
+					장바구니
+				</a><br>
+				<a href="#">위로가기</a>
+			</div>
 		</div>
 		<c:if test="${not empty dto.productNum}">
 			<div class="row col-6 mx-auto mb-3">
@@ -43,13 +58,13 @@
 				<div class="order-info" id="orderForm">
 					<c:if test="${not empty member}">
 						<form method="post">
-							<div class="input-group">
-								<span class="input-group-text" >주문자 이름</span>
+							<div class="input-group mb-3">
+								<span class="input-group-text" style="width: 122px;">주문자 이름</span>
 			  					<input type="text" name="orderer" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 							</div>
-							<div class="input-group">
-								<span class="input-group-text" for="gradeName">옵션</span>
-								<select class="nice-select" aria-label="Default select example" id="gradeName">
+							<div class="input-group mb-3">
+								<span class="input-group-text" for="gradeName" style="width: 122px;">옵션</span>
+								<select class="nice-select form-control" aria-label="Default select example" id="gradeName">
 									<option selected>-옵션을 선택하세요-</option>
 									<option value="A급">A급</option>
 									<option value="B급">B급</option>
@@ -57,34 +72,34 @@
 								</select>
 									
 							</div>
-							<div class="input-group">	
-								<span class="input-group-text" for="gradeStock">재고</span>
+							<div class="input-group mb-3">	
+								<span class="input-group-text" for="gradeStock" style="width: 122px;">재고</span>
 								<div class="row my-auto" id="gradeStock">
 								</div>
 								<div class="row">
-									<p class="my-auto">개</p>
+									<p class="my-auto">&nbsp;개</p>
 								</div>
 							</div>
-							<div class="input-group">
-								<span class="input-group-text" for="amount">대여수량</span>
+							<div class="input-group mb-3">
+								<span class="input-group-text" for="amount" style="width: 122px;">대여수량</span>
 								<div class="row" id="amountChange">
 								</div>
 							</div>
-							<div class="input-group">
-								<span class="input-group-text">금액</span>
+							<div class="input-group mb-3">
+								<span class="input-group-text" style="width: 122px;">금액</span>
 								<div class="row my-auto" id="totalPrice">
 								</div>
 								<div class="row">
-									<p class="my-auto">원</p>
+									<p class="my-auto">&nbsp;원</p>
 								</div>
 							</div>
-							<div class="input-group">
+							<div class="input-group mb-3">
 								<span class="input-group-text">사용시작날짜</span>
-								<input type="text" class="datepicker radius" id="startDate" name="startDate" readonly style="width: 100px;">
+								<input type="date" class="form-control datepicker" id="startDate" name="startDate" readonly style="width: 100px;">
 							</div>
-							<div class="input-group">
+							<div class="input-group mb-3">
 								<span class="input-group-text">사용종료날짜</span>
-								<input type="text" class="datepicker radius" id="lastDate" name="lastDate" readonly style="width: 100px;">
+								<input type="date" class="form-control datepicker" id="lastDate" name="lastDate" readonly style="width: 100px;">
 							</div>
 							<div class="row">
 								<input type="hidden" name="indexCode" value="2">
@@ -196,7 +211,7 @@
 				gradeStock=0;
 			}
 			console.log(gradeStock)
-			$('#gradeStock').html(gradeStock);
+			$('#gradeStock').html("&nbsp;"+gradeStock);
 		})
 		
 		$('#amountChange').change(function(){

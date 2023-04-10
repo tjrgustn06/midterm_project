@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css">
 <style>
 	.card{display: inline-block;}
+	.quickmenu{
+		position:absolute; 
+		width: 150px;
+        height: 300px;
+        right: 50px;
+        border-radius: 10px;
+        border: 1px solid #dddddd;
+		}
 </style>
 </head>
 <body>
@@ -28,6 +36,16 @@
 <!--================물품대여 Area ====================-->
 <section class="accomodation_area section_gap">
 	<div class="container col-6">
+		<div class="quickmenu mx-auto">
+			<div id="cartBar" data-member-id="${member.id}" style="margin-left: 50px; margin-top: 10px;">
+			</div>
+			<div style="margin-left: 50px;">
+				<a href="/cart/list">
+					장바구니
+				</a><br>
+				<a href="#">위로가기</a>
+			</div>
+		</div>
 		<c:forEach items="${list}" var="dto">
 			<div class="card" style="width: 16rem">
 				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
@@ -99,5 +117,29 @@
 </section>
 	<script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
+	<script>
+		function cartBar(){
+			let currentPosition = parseInt($(".quickmenu").css("top"));
+			$(window).scroll(function() {
+			let position = $(window).scrollTop(); 
+			$(".quickmenu").stop().animate({"top":position+currentPosition+"px"},800);
+			});
+		}
+		cartBar()
+
+		function getCartBar() {
+			if($('#cartBar').attr('data-member-id')!=null){
+				$.ajax({
+					type : 'GET',
+					url : './cartBar',
+					success : (response) =>{
+						$('#cartBar').html(response);
+					}
+				})
+			}
+		}
+
+		getCartBar()
+	</script>
 </body>
 </html>

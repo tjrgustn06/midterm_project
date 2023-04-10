@@ -14,12 +14,20 @@
 </style>
 </head>
 <body>
-<c:import url="../template/header.jsp"></c:import>
-	<div class="container-fluid">
-		<div class="row my-5">
-			<h1>Cart List Page</h1>
+	<c:import url="../template/header.jsp"></c:import>
+	<!--================Breadcrumb Area =================-->
+	<section class="breadcrumb_area blog_banner_two">
+		<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+		<div class="container">
+			<div class="page-cover text-center">
+				<h2 class="page-cover-tittle f_48">장바구니</h2>
+			</div>
 		</div>
-		<div class="row my-6">
+	</section>
+	<!--================Breadcrumb Area =================-->
+	<div class="container">
+		
+		<div class="my-6">
 			<table class="table table-striped col-6">
 				<thead>
 					<tr>
@@ -82,7 +90,7 @@
 					</c:choose>
 				</tbody>
 			</table>
-			<button type="button" class="btn btn-primary" id="allForm">전체 주문</button>
+			<button type="button" class="genric-btn success" id="allForm" style="float: right;">전체 주문</button>
 		</div>
 
 	</div>

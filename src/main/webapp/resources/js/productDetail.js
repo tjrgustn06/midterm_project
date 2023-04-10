@@ -48,3 +48,26 @@ $('#reviewAdd').click(function(){
 $('#reviewCancle').click(function(){
     $('#review').slideUp("slow")
 })
+
+function cartBar(){
+    let currentPosition = parseInt($(".quickmenu").css("top"));
+    $(window).scroll(function() {
+      let position = $(window).scrollTop(); 
+      $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},800);
+    });
+}
+cartBar()
+
+function getCartBar() {
+    if($('#cartBar').attr('data-member-id')!=null){
+        $.ajax({
+            type : 'GET',
+            url : './cartBar',
+            success : (response) =>{
+                $('#cartBar').html(response);
+            }
+        })
+    }
+}
+
+getCartBar()

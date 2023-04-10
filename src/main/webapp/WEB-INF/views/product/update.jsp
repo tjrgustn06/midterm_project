@@ -60,10 +60,10 @@
 							<input type="text" disabled value="${fileDTO.oriName}" class="form-control" aria-label="Text input with checkbox">
 						</div>
 					</c:forEach>
-					<button type="button" id="addBtn" class="col-md-1 offset-md-11 btn btn-primary">ADD</button>
+					<button type="button" id="addBtn" class="offset-md-10 genric-btn success radius">ADD</button>
 				</div>
 				<div class="mt-5">
-					<button class="btn btn-secondary" type="submit">상품수정</button>
+					<button class="genric-btn success radius" type="submit">상품수정</button>
 				</div>
 			</form>
 		</div>

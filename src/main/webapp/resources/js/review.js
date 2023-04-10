@@ -94,6 +94,7 @@ $('#addReview').click(function(){
                 count=0;
                 idx=0;
                 $('#reviewContents').val('');
+                rating(-1)
                 getList(1);
             }
             else {

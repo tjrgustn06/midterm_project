@@ -87,10 +87,10 @@
 						<label for="files" class="form-label">Image</label>
 						<input type="file" class="form-control" id="files" name="pic">
 					</div> -->
-					<button type="button" id="addBtn" class="col-md-1 offset-md-11 btn btn-primary">사진추가</button>
+					<button type="button" id="addBtn" class="offset-md-10 genric-btn success">사진추가</button>
 				</div>
 				<div class="mt-5">
-					<button class="btn btn-secondary" type="submit">상품등록</button>
+					<button class="genric-btn success" type="submit">상품등록</button>
 				</div>
 			</form>
 		</div>

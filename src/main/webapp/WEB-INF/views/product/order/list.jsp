@@ -10,8 +10,17 @@
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
-	<h1>Order List Page</h1>
-	<div class="container-fluid col-6">
+		<!--================Breadcrumb Area =================-->
+        <section class="breadcrumb_area blog_banner_two">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="page-cover text-center">
+                    <h2 class="page-cover-tittle f_48">상품주문정보</h2>
+                </div>
+            </div>
+        </section>
+        <!--================Breadcrumb Area =================-->
+		<div class="container col-6">
 		<div class="row">
 			<table class="table table-hover">
 				<c:forEach items="${list}" var="dto">

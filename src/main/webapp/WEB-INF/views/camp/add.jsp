@@ -66,7 +66,7 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container-fluid col-lg-9 my-5">
+<div class="container col-lg-9 my-5">
 	<form action="./add" id="frm" method="post" enctype="multipart/form-data">
 	<div class="row my-3">
 		<h3>캠핑장 이름 등록</h3>
@@ -76,17 +76,6 @@
 	<hr>
 	
 	<!-- 대표사진 + 설명 div -->
-		<!-- 버튼 영역 -->
-		<div class="d-flex row justify-content-center col-4 mx-auto">
-			<div class="mx-auto mb-3">
-				<button id="consoleSign" class="btn btn-outline-success" type="button">console</button>
-			</div>
-			<div class="mx-auto">
-				<button id="addReg" class="btn btn-outline-success" type="button">등록</button>
-				<button id="addCancel" class="btn btn-outline-danger" type="button">취소</button>
-			</div>
-		</div>
-
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
 			<div class="row pic my-3 mx-auto">
@@ -97,17 +86,6 @@
 						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
 					</div>
 				</div>
-
-				<!-- 원본 -->
-				<!-- <div id="fileList" class="row">
-					<div class="row mb-3">
-						<label for="thumbnail" class="form-label">대표 사진 등록</label>
-						<input type="file" id="thumbnail" name="thumbFile" class="form-control">
-					</div>
-					<div class="row col-4 mb-3">
-						<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
-					</div>
-				</div> -->
 			</div>
 			
 			<hr class="my-2">
@@ -126,8 +104,8 @@
 							<th scope="col my-auto">시/도, 시/군/구</th>
 							<td>
 								<!-- <select name="regionName" id="addressRegion"></select> -->
-								<select name="doName" id="addressDo"></select>
-								<select name="sigunguName" id="addressSigungu"></select>
+								<select name="doName" id="addressDo" class="nice-select"></select>
+								<select name="sigunguName" id="addressSigungu" class="nice-select"></select>
 							</td>
 						</tr>
 						<tr>
@@ -295,8 +273,8 @@
 						<div class="otherImage">
 							<!-- id=fileList인 부분에 js 작동 -->
 							<div id="fileList" class="row">					
-								<div class="row col-4 mb-3">
-									<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
+								<div class="d-flex justify-content-end mb-3">
+									<button class="genric-btn success medium" id="fileAdd" type="button">등록</button>
 								</div>
 							</div>
 						</div>
@@ -322,11 +300,11 @@
 							
 						<!-- 캠핑사이트 추가부분 -->
 						<div class="row addSite">
-							<div class="col-10">
+							<div>
 								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 등록</h5>
 							</div>
-							<div class="col-2">
-								<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
+							<div class="d-flex justify-content-end">
+								<button class="genric-btn success medium" id="siteAddBtn" type="button">등록</button>
 							</div>
 						</div>
 						
@@ -352,8 +330,8 @@
 									<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 									<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice1" class="form-control" placeholder="요금 입력">
 								</div>
-								<div class="mb-2">
-									<button type="button" data-site-idx="siteIptDel1" class="siteDels btn btn-outline-danger">입력창 삭제</button>
+								<div class="d-flex justify-content-center mb-2">
+									<button type="button" data-site-idx="siteIptDel1" class="siteDels genric-btn danger medium">삭제</button>
 								</div>
 							</div>
 							<!-- 생성 끝날 부분 -->
@@ -378,19 +356,19 @@
 					<!-- 위치정보 영역 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 위치정보 등록</h5>
 					<div class="campMap" id="campMap">
-						<p>*나중에 지도 정보 받아오는거 공부해서 추가하기</p>
-						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5> -->
-							<!-- 해당 캠핑장의 위치값 필요(경도, 위도 소수점 4~5자리까지 알아내야하는데 어떻게 하지?) -->
-							<!-- 나머지 정보는 CampDTO에 들어있어서 쓸 수 있음 -->
+						<p>*정확한 주소를 입력한 경우 자동으로 표기 됩니다.</p>
 					</div>
 
-
-					
-					<!-- 후기 영역: detail 페이지에서 바로 등록/수정/삭제가 가능하도록 -->
-					<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 후기 입력</h5>
-					<div class="campReview" id="campReview">
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
-					</div> -->
+					<!-- 버튼 영역 -->
+					<div class="mx-auto">
+						<!-- <div class="mx-auto mb-3">
+							<button id="consoleSign" class="genric-btn info" type="button">console</button>
+						</div> -->
+						<div class="d-flex justify-content-center">
+							<button id="addReg" class="genric-btn success medium" type="button" style="margin-right: 3px;">등록</button>
+							<button id="addCancel" class="genric-btn primary medium" type="button">취소</button>
+						</div>
+					</div>
 
 
 				</div>

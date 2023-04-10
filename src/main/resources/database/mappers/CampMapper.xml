@@ -197,14 +197,13 @@
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS)
-		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, '예약가능')
+		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, #{status})
 	</insert>
 	
 	<!-- siteDelete -->
 	<delete id="setCampSiteDelete" parameterType="Long">
 		DELETE CAMPSITE WHERE AREANUM=#{areaNum}
 	</delete>
-	
 	
 	
 	<!-- file -->

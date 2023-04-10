@@ -48,8 +48,8 @@
 		<selectKey keyProperty="num" resultType="Long" order="BEFORE">	
 				SELECT BOARDSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-  		INSERT INTO QNA (NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT, BOARDID)
-  		VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0, ${boardId})
+  		INSERT INTO QNA (NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT)
+  		VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
   	</insert> 
   	
   	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">

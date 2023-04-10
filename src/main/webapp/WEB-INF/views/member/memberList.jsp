@@ -31,6 +31,7 @@
 		<th scope="col">전화번호</th>
 		<th scope="col">이메일</th>
 		<th scope="col">회원 등급</th>
+		<th scope="col">등급 변경</th>
 	</tr>
 	</thead>
 	 <tbody class="table-group-divider">
@@ -41,18 +42,18 @@
 			<td>${dto.name}</td>
 			<td>${dto.phone}</td>
 			<td>${dto.email}</td>
-			<td><a class="btn btn-warning dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    ${dto.roleName}
-  </a>
-   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">ADMIN</a></li>
-    <li><a class="dropdown-item" href="#">CAMPMANAGER</a></li>
-    <li><a class="dropdown-item" href="#">MEMBER</a></li>
-  </ul>
-  </td>
+			<td>
+			<select name="roleName">
+			<option value="${dto.roleName}" ${pager.kind eq 'MANAGER' ? 'selected' : ''}>MEMBER</option>
+			<option value="${dto.roleName}" ${pager.kind eq 'MANAGER' ? 'selected' : ''}>MANAGER</option>
+			<option value="${dto.roleName}" ${pager.kind eq 'CAMPMANAGER' ? 'selected' : ''}>CAMPMANAGER</option>
+			</select>
+  			</td>
+  			<td>
+  			<button type="submit">변경</button>
+  			</td>
 		</tr>
 	</c:forEach>
-</div>
 	</tbody>
 </table>
 
@@ -94,8 +95,7 @@
 					<label for="kind" class="visually-hidden">Kind</label> 
 					<select class="form-select" name="kind" id="kind" aria-label="Default select example">
 						<option value="name" ${pager.kind eq 'name' ? 'selected' : ''}>회원 이름</option>
-						<option value="id" ${pager.kind eq 'id' ? 'selected' : ''}>회원 아이디</option> </select>
-						
+						<option value="id" ${pager.kind eq 'id' ? 'selected' : ''}>회원 아이디</option> </select>						
 				</div>
 				<div class="col-auto">
 					<label for="search" class="visually-hidden">Search</label>

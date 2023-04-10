@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css">
 <style>
 	.card{display: inline-block;}
+	.quickmenu{
+		position:absolute; 
+		width: 150px;
+        height: 300px;
+        right: 50px;
+        border-radius: 10px;
+        border: 1px solid #dddddd;
+		}
 </style>
 </head>
 <body>
@@ -28,6 +36,16 @@
 <!--================물품대여 Area ====================-->
 <section class="accomodation_area section_gap">
 	<div class="container col-6">
+		<div class="quickmenu mx-auto">
+			<div id="cartBar" data-member-id="${member.id}" style="margin-left: 50px; margin-top: 10px;">
+			</div>
+			<div style="margin-left: 50px;">
+				<a href="/cart/list">
+					장바구니
+				</a><br>
+				<a href="#">위로가기</a>
+			</div>
+		</div>
 		<c:forEach items="${list}" var="dto">
 			<div class="card" style="width: 16rem">
 				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
@@ -74,31 +92,55 @@
 			</nav>
 		</div>
 		<div class="col-md-7 mx-auto">
-			<form class="g-3" action="./list" method="get">
-				<div>
+			<form class="row g-3" action="./list" method="get">
+				<div class="col-auto">
 					<label for="kind" class="visually-hidden">Kind</label>
 					<select class="nice-select" name="kind" id="kind" aria-label="Default select example">
 						<option value="name">물품이름</option>
 						<option value="contents">물품내용</option>
 					</select>
 				</div>
-				<div>
+				<div class="col-auto">
 					<label for="search" class="visually-hidden">Search</label>
-					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 73%;">
+					<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력하세요" style="width: 100%;">
 				</div>
-				<div>
-					<button type="submit" id="btn" class="genric-btn success radius" style="width: 100px; height: 100px;">검색</button>
+				<div class="col-auto">
+					<input type="image" src="../resources/images/search.jpg" style="width: 35px; height: 35px; border-radius: 10%;">
 				</div>
 			</form>
 		</div>
-		<div class="row">
+		<div style="float: right;">
 			<c:if test="${not empty member.roleName and member.roleName ne 'MEMBER'}">
-				<a href="./add" class="btn btn-primary mb-3" role="button">상품추가</a>
+				<a href="./add" class="theme_btn button_hover success radius mb-3" role="button">상품추가</a>
 			</c:if>
 		</div>
 	</div>
 </section>
 	<script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
+	<script>
+		function cartBar(){
+			let currentPosition = parseInt($(".quickmenu").css("top"));
+			$(window).scroll(function() {
+			let position = $(window).scrollTop(); 
+			$(".quickmenu").stop().animate({"top":position+currentPosition+"px"},800);
+			});
+		}
+		cartBar()
+
+		function getCartBar() {
+			if($('#cartBar').attr('data-member-id')!=null){
+				$.ajax({
+					type : 'GET',
+					url : './cartBar',
+					success : (response) =>{
+						$('#cartBar').html(response);
+					}
+				})
+			}
+		}
+
+		getCartBar()
+	</script>
 </body>
 </html>

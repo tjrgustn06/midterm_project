@@ -5,84 +5,101 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>The Camp</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <c:import url="../template/common_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css">
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <style>
 	textarea{resize:none;}
+	.star, .updateStar{cursor: pointer;}
+	.quickmenu{
+		position:absolute; 
+		width: 150px;
+        height: 300px;
+        right: 50px;
+        border-radius: 10px;
+        border: 1px solid #dddddd;
+		}
 </style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-	<h1>Detail Page</h1>
-	<div class="container-fluid">
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">물품대여</h2>
+		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
+<div class="container">
+		<div class="quickmenu mx-auto">
+			<div id="cartBar" data-member-id="${member.id}" style="margin-left: 50px; margin-top: 10px;">
+			</div>
+			<div style="margin-left: 50px;">
+				<a href="/cart/list">
+					장바구니
+				</a><br>
+				<a href="#">위로가기</a>
+			</div>
+		</div>
 		<c:if test="${not empty dto.productNum}">
-			<div class="row col-6 mx-auto">
+			<div class="row col-6 mx-auto mb-3">
+				<h1>${dto.name}</h1>
 				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
 					<img src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
 				</c:forEach>
 	   			<div class="item-line">
-	    			<h1>${dto.name}</h1>
 	    			<p>${dto.summary}</p>
 	   			</div>
-				<div class="order-info">
+				<div class="order-info" id="orderForm">
 					<c:if test="${not empty member}">
 						<form method="post">
 							<div class="input-group mb-3">
-			  					<div class="input-group-prepend">
-			    					<span class="input-group-text" >주문자 이름</span>
-			 					</div>
+								<span class="input-group-text" style="width: 122px;">주문자 이름</span>
 			  					<input type="text" name="orderer" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 							</div>
-			    			<div class="input-group mb-3">
-			  					<div class="input-group-prepend">
-			    					<label class="input-group-text" for="gradeName">옵션</label>
-			  					</div>
-			  					<div class="row">
-									<select class="form-select" aria-label="Default select example" id="gradeName">
-						    			<option selected>--옵션을 선택하세요--</option>
-										<option value="A급">A급</option>
-										<option value="B급">B급</option>
-										<option value="C급">C급</option>
-						  			</select>
-								</div>
-							</div>
 							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<label class="input-group-text" for="gradeStock">재고</label>
-								</div>
+								<span class="input-group-text" for="gradeName" style="width: 122px;">옵션</span>
+								<select class="nice-select form-control" aria-label="Default select example" id="gradeName">
+									<option selected>-옵션을 선택하세요-</option>
+									<option value="A급">A급</option>
+									<option value="B급">B급</option>
+									<option value="C급">C급</option>
+								</select>
+									
+							</div>
+							<div class="input-group mb-3">	
+								<span class="input-group-text" for="gradeStock" style="width: 122px;">재고</span>
 								<div class="row my-auto" id="gradeStock">
 								</div>
 								<div class="row">
-									<p class="my-auto">개</p>
+									<p class="my-auto">&nbsp;개</p>
 								</div>
 							</div>
-					    	<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<label class="input-group-text" for="amount">대여수량</label>
-								</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text" for="amount" style="width: 122px;">대여수량</span>
 								<div class="row" id="amountChange">
 								</div>
 							</div>
 							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<label class="input-group-text">금액</label>
-									
-								</div>
+								<span class="input-group-text" style="width: 122px;">금액</span>
 								<div class="row my-auto" id="totalPrice">
 								</div>
 								<div class="row">
-									<p class="my-auto">원</p>
+									<p class="my-auto">&nbsp;원</p>
 								</div>
 							</div>
 							<div class="input-group mb-3">
-								<div class="row">
-								<p>사용시작날짜: <input type="text" class="datepicker" id="startDate" name="startDate" readonly></p>
-								</div>
-								<div class="row">
-								<p>사용종료날짜: <input type="text" class="datepicker" id="lastDate" name="lastDate" readonly></p>
-								</div>
+								<span class="input-group-text">사용시작날짜</span>
+								<input type="date" class="form-control datepicker" id="startDate" name="startDate" readonly style="width: 100px;">
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text">사용종료날짜</span>
+								<input type="date" class="form-control datepicker" id="lastDate" name="lastDate" readonly style="width: 100px;">
 							</div>
 							<div class="row">
 								<input type="hidden" name="indexCode" value="2">
@@ -90,32 +107,27 @@
 								<input id="price" type="hidden" name="price">
 								<input id="name" type="hidden" name="name">
 							</div>
-							<div>
-								<button type="submit" class="btn btn-outline-info" formaction="./order/order">주문하기</button>
-							</div>
-							<div>
-								<button type="submit" class="btn btn-outline-info" formaction="../cart/add">장바구니추가</button>
+							<div style="float: right;">
+								<button id="orderSubmit" type="submit" class="genric-btn success-border radius" formaction="./order/order">주문하기</button>
+								<button id="cartSubmit" type="submit" class="genric-btn success-border radius" formaction="../cart/add">장바구니추가</button>
 							</div>
 						</form>
 					</c:if>
 				</div>
 			</div>
-			<div class="row">
-			<%-- <c:if test="${member.id eq dto.writer}"> --%>
-				<div class="col-md-3">
+			<div class="row col-6 mx-auto">
+				<div class="mb-3">
 					<form action="./update" id="frm" method="GET">
 						<input type="hidden" name="productNum" value="${dto.productNum}">
 						<c:if test="${not empty member.roleName and member.roleName ne 'MEMBER'}">
-							<button type="submit" class="btn btn-primary mx-2" id="update">글 수정</button>
-							<button type="button" class="btn btn-primary mx-2" id="delete" data-delete="${dto.productNum}">글 삭제</button>
+							<button type="submit" class="genric-btn success radius" id="update">글 수정</button>
+							<button type="button" class="genric-btn danger radius" id="delete" data-delete="${dto.productNum}">글 삭제</button>
 						</c:if>
 					</form>
 				</div>
-				<div class="col-md-3">
-					<a href="./list" class="btn btn-primary mx-2">목록으로</a>	
+				<div>
+					<a href="./list" class="genric-btn success radius">목록으로</a>	
 				</div>
-			<%-- </c:if> --%>
-			
 			<!-- delete시엔 post방식 update시엔 get -->
 			</div>
 			<div class="row">
@@ -127,9 +139,7 @@
 				<form id="reviewForm" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="productNum" value="${dto.productNum}">
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" >작성자</span>
-						</div>
+						<span class="input-group-text" >작성자</span>
 						<input type="text" name="writer" value="${member.id}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
 					</div>
 					<div class="input-group mb-3">
@@ -154,24 +164,18 @@
 						<textarea id="reviewContents" class="form-control" name="contents" style="height: 200px" placeholder="내용을 입력해주세요"></textarea>
 					</div>
 					<div id="picList">
-						<!-- <div class="row mb-2" id="d-idx">';
-							<div class="input-group mb-2 col-sm-2">
-								<input type="file" class="form-control" name="param">
-								<button class="dels btn btn-outline-danger" type="button" data-delete-id="idx">X</button>
-							</div>
-						</div> -->
-						<div class="row mb-2" id="addPicDiv">
-							<button type="button" id="addPic" class="col-2 offset-md-10 btn btn-primary">사진추가</button>
+						<div class="mb-2" id="addPicDiv">
+							<button type="button" id="addPic" class="genric-btn success-border radius" style="float: right;">사진추가</button>
 						</div>
 					</div>
 					<div>
-						<button type="button" id="addReview" class="btn btn-outline-info" data-review-num="${dto.productNum}" data-review-name="product">리뷰작성</button>
+						<button type="button" id="addReview" class="genric-btn success-border radius" data-review-num="${dto.productNum}" data-review-name="product">리뷰작성</button>
 					</div>
 				</form>
 			</div>
-			<div class="row col-6 mx-auto my-3">
-				<button id="reviewAdd" type="button" class="btn btn-primary col-3">리뷰쓰기</button>
-				<button id="reviewCancle" type="button" class="btn btn-primary col-3">취소</button>
+			<div class="col-6 mx-auto">
+				<button id="reviewAdd" type="button" class="genric-btn success radius">리뷰쓰기</button>
+				<button id="reviewCancle" type="button" class="genric-btn primary radius">취소</button>
 			</div>
 			<div class="row" id="reviewList">
 
@@ -207,7 +211,7 @@
 				gradeStock=0;
 			}
 			console.log(gradeStock)
-			$('#gradeStock').html(gradeStock);
+			$('#gradeStock').html("&nbsp;"+gradeStock);
 		})
 		
 		$('#amountChange').change(function(){
@@ -250,6 +254,7 @@
 	</script>
 	
 	<script src="../resources/js/productDetail.js"></script>
+	<script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

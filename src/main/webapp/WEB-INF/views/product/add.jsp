@@ -87,10 +87,10 @@
 						<label for="files" class="form-label">Image</label>
 						<input type="file" class="form-control" id="files" name="pic">
 					</div> -->
-					<button type="button" id="addBtn" class="col-md-1 offset-md-11 btn btn-primary">사진추가</button>
+					<button type="button" id="addBtn" class="offset-md-10 genric-btn success">사진추가</button>
 				</div>
 				<div class="mt-5">
-					<button class="btn btn-secondary" type="submit">상품등록</button>
+					<button class="genric-btn success" type="submit">상품등록</button>
 				</div>
 			</form>
 		</div>
@@ -99,7 +99,23 @@
 	<script>
 		setParam('addFiles')
 		setMax(1);
-		$('#contents').summernote()
+		$('#contents').summernote({focus:true, lang:'ko-KR',
+		callbacks:{
+			onImageUpload: function(image) {
+                 
+				let file = image[0];
+				let reader = new FileReader();
+				reader.onloadend = function() {
+					let image = $('<img>').attr('src',  reader.result);
+					image.attr('width','100%');
+					$('#contents').summernote("insertNode", image[0]);
+				}
+			   reader.readAsDataURL(file);
+			
+		  }
+		}
+
+		})
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>
 </body>

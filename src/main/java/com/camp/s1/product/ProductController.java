@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.camp.s1.cart.CartDTO;
+import com.camp.s1.member.MemberDTO;
 import com.camp.s1.util.Pager;
 
 @Controller
@@ -33,6 +35,24 @@ public class ProductController {
 		mv.setViewName("product/list");
 		return mv;
 	}
+	
+	// CartBar 출력
+		@GetMapping("cartBar")
+		public ModelAndView getcartBarList(HttpSession session) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+			CartDTO cartDTO = new CartDTO();
+			
+			cartDTO.setId(memberDTO.getId());
+			List<CartDTO> ar =productService.getCartBarList(cartDTO);
+			System.out.println("check");
+			ar.size();
+			
+			
+			mv.addObject("cartList", ar);
+			mv.setViewName("common/cartList");
+			return mv;
+		}
 	
 	// home에서 평점에 따른 리스트4개 출력
 	@GetMapping("productListTop")
@@ -146,6 +166,5 @@ public class ProductController {
 		 mv.addObject("result", productService.setProductDelete(productDTO, session));
 		return mv;
 	}
-	
 
 }

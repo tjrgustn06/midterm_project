@@ -180,6 +180,26 @@ public class MemberController {
 		
 		return mv;
 	}
+		
+	@PostMapping("roleNameUpdate")
+	public ModelAndView setRoleNameUpdate(MemberDTO memberDTO)throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = memberService.setRoleNameUpdate(memberDTO);
+		
+		String msg="수정 실패";
+		
+		if(result>0) {
+			msg="수정이 완료되었습니다";
+		}
+		
+		
+		mv.addObject("result", msg);
+		mv.setViewName("common/result");
+		
+		return mv;
+	}
+	
 	@PostMapping("addressDelete")
 	public ModelAndView setEachAddressDelete(AddressDTO addressDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();

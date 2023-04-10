@@ -103,19 +103,30 @@ public class MemberService {
 		return result;
 	}
 	
-	public int setAddressDelete(AddressDTO addressDTO)throws Exception{
+	public int setRoleNameUpdate(MemberDTO memberDTO)throws Exception {
+		
+		int result = memberDAO.setRoleNameUpdate(memberDTO);
+		
+		return result;
+	}
+	
+	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
 		
 		return memberDAO.setAddressDelete(addressDTO);
 	}
 	
 	//Delete
-	public int setMemberDelete(MemberDTO memberDTO, HttpSession session)throws Exception{
+	public int setMemberDelete(MemberDTO memberDTO, AddressDTO addressDTO)throws Exception{
 		
 		int result = memberDAO.setMemberDelete(memberDTO);
 		
-		addressDTO.setId(memberDTO.getId());
-		
-		result = memberDAO.setAddressDelete(addressDTO);
+		if(addressDTO != null) {
+			if(addressDTO.getAddressNum()==null) {
+				result=memberDAO.setAddressJoin(addressDTO);
+			} else {
+				result=memberDAO.setAddressUpdate(addressDTO);
+			}
+		}
 		
 		return result;
 	}

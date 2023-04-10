@@ -52,19 +52,22 @@
 	WHERE ADDRESSNUM=#{addressNum}
 </update>
 
+<update id="setRoleNameUpdate" parameterType="MemberDTO">
+	UPDATE MEMBER SET ROLENAME=#{roleName}
+	WHERE ROLENAME= 'ADMIN'
+</update>
+
 <delete id="setEachAddressDelete" parameterType="AddressDTO">
 	DELETE ADDRESS WHERE ADDRESSNUM=#{addressNum}
 </delete>
 
 <!-- Delete -->
 <delete id="setMemberDelete" parameterType="MemberDTO">
-	DELETE * FROM MEMBER
-	WHERE ID=#{id} AND PW=#{pw}
+	DELETE MEMBER WHERE ID=#{id}
 </delete>
 
 <delete id="setAddressDelete" parameterType="AddressDTO">
-	DELETE * FROM ADDRESS
-	WHERE ID=#{id}
+	DELETE ADDRESS WHERE ID=#{id}
 </delete>
 
 <!--Find Id  -->

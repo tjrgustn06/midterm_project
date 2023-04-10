@@ -54,6 +54,13 @@ public class MemberDAO {
 		return sqlSession.delete(NAMESPACE+"setEachAddressDelete", addressDTO);
 	}
 	
+	//관리자 등급 변경
+	public int setRoleNameUpdate(MemberDTO memberDTO)throws Exception {
+		
+		return sqlSession.update(NAMESPACE+"setRoleNameUpdate", memberDTO);
+		
+	}
+	
 	//Delete
 	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
 		

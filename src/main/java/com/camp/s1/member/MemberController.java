@@ -180,6 +180,26 @@ public class MemberController {
 		
 		return mv;
 	}
+		
+	@PostMapping("roleNameUpdate")
+	public ModelAndView setRoleNameUpdate(MemberDTO memberDTO)throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = memberService.setRoleNameUpdate(memberDTO);
+		
+		String msg="수정 실패";
+		
+		if(result>0) {
+			msg="수정이 완료되었습니다";
+		}
+		
+		
+		mv.addObject("result", msg);
+		mv.setViewName("common/result");
+		
+		return mv;
+	}
+	
 	@PostMapping("addressDelete")
 	public ModelAndView setEachAddressDelete(AddressDTO addressDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -192,9 +212,15 @@ public class MemberController {
 	
 	//Delete
 	@PostMapping("memberDelete")
-	public ModelAndView setMemberDelete(MemberDTO memberDTO, HttpSession session)throws Exception{
+	public ModelAndView setMemberDelete(MemberDTO memberDTO, AddressDTO addressDTO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
-				
+		
+		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
+		memberDTO.setId(sessionMemberDTO.getId());
+		addressDTO.setId(sessionMemberDTO.getId());
+		int result =  memberService.setMemberDelete(memberDTO, addressDTO);
+		
+		mv.addObject("result",result);
 		mv.setViewName("common/ajaxResult");
 		mv.addObject("result", memberService.setMemberDelete(memberDTO, session));
 		return mv;

@@ -11,11 +11,8 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 	<div class="container-fluid">
-		<div class="row">
-			<h1>My Page</h1>
-		</div>
-		
-		<div class="row">
+		<div class="row text-center">
+			<h3 id="id" name="id">ID : ${dto.id}</h3>
 			<h3>Name : ${dto.name}</h3>
 			<h3>Phone : ${dto.phone}</h3>
 			<h3>Email : ${dto.email}</h3>

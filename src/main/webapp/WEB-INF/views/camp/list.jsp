@@ -43,15 +43,29 @@
 		ul, ol, li{
 			list-style: none;
 			font-size: 0.9rem;
+			margin: 1px 0px;
 		}
 	</style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container-fluid col-lg-9 my-5">
-	<div class="row my-3">
-		<h1>CampList Page</h1>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">CAMPBOOK</h2>
+				<ol class="breadcrumb">
+					<li>마음에 드는 캠핑장을 골라보세요</li>
+				</ol>
+		</div>
 	</div>
+</section>
+<!--================Breadcrumb Area =================-->
+<div class="container-fluid col-lg-9 my-5">
+	<!-- <div class="row my-3">
+		<h1>CampList Page</h1>
+	</div> -->
 
 	<!-- search -->
 	<!-- 만들어뒀던거 쓸수는 있는데 select의 option 태그를 좀 바꿔야함 -->

@@ -48,6 +48,7 @@
 		ul, ol, li{
 			list-style: none;
 			font-size: 0.9rem;
+			margin: 1px 0px;
 		}
 
 		.infoNotice{
@@ -66,6 +67,19 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">CAMPBOOK</h2>
+				<ol class="breadcrumb">
+					<li>캠핑장을 자세히 알려드릴게요</li>
+				</ol>
+		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
 	<div class="row my-3">
 		<h1>${dto.name}</h1>

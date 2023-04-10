@@ -14,15 +14,25 @@
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">BOOK</h2>
+		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
-	<div class="mb-10">0</div>
 	<div class="row my-3">
-		<!-- 파라미터 확인 -->
-		--CN: ${campNum}--
-		--AN: ${areaNum}--
 		<h1>BookSite Page</h1>
 		<p>기간 설정, 예약 가능 사이트 확인, 금액 확인, 예약하기 기능</p>
 	</div>
+
+	<!-- 파라미터 확인 -->
+	--CN: ${campNum}--
+	--AN: ${areaNum}--
 
 	<!-- 시설배치도 -->
 	<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>

@@ -183,7 +183,7 @@ public class MemberController {
 	@PostMapping("addressDelete")
 	public ModelAndView setEachAddressDelete(AddressDTO addressDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = memberService.setEachAddressDelete(addressDTO);
+		int result = memberService.setAddressDelete(addressDTO);
 		
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");
@@ -192,19 +192,11 @@ public class MemberController {
 	
 	//Delete
 	@PostMapping("memberDelete")
-	public ModelAndView setMemberDelete(AddressDTO addressDTO, MemberDTO memberDTO)throws Exception{
+	public ModelAndView setMemberDelete(MemberDTO memberDTO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-		int result = memberService.setMemberDelete(addressDTO, memberDTO);
-		
-		String msg="삭제에 실패했습니다";
-		
-		if(result>0) {
-			msg="삭제에 성공하였습니다";
-		}
-		
-		mv.addObject("result", msg);
-		mv.setViewName("common/result");
+				
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", memberService.setMemberDelete(memberDTO, session));
 		return mv;
 	}
 	
@@ -300,8 +292,9 @@ public class MemberController {
 		
 		//회원 List 출력
 		@GetMapping("memberList")
-		public ModelAndView getMemberList(Pager pager) throws Exception {
+		public ModelAndView getMemberList(Pager pager, HttpSession session) throws Exception {
 			ModelAndView mv = new ModelAndView();
+			String roleName = (String)session.getAttribute("roleName");
 			pager.setPerPage(20L);
 			List<MemberDTO> ar = memberService.getMemberList(pager);
 			mv.addObject("list", ar);

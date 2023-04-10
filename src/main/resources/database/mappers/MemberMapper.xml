@@ -95,7 +95,7 @@
 	SELECT * FROM(
 	  SELECT ROWNUM R, M.* FROM(
 		SELECT * FROM MEMBER
-		ORDER BY ID DESC   
+		ORDER BY NAME DESC   
 	)M
 	) WHERE R BETWEEN #{startRow} AND #{lastRow}
 </select>
@@ -104,5 +104,17 @@
 <select id="getTotalCount" parameterType="Pager" resultType="Long">
 	SELECT COUNT(ID) FROM MEMBER
 </select>
+
+
+	<!-- 검색을 위한 조건 -->
+  	<sql id="searchCondition">
+  		<if test="kind == 'id'">
+  			WHERE ID LIKE '%' || #{search} || '%'
+  		</if>
+  		<if test="kind == 'name'">
+  			WHERE NAME LIKE '%' || #{search} || '%'
+  		</if>
+  	</sql>
+
 
 </mapper>

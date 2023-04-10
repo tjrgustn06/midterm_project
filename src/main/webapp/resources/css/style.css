@@ -343,12 +343,22 @@ button:focus {
   text-transform: uppercase;
   padding: 0px;
 }
+.navbar .nav-item .nav-link {
+  font: 800 12px/80px "Poppins", sans-serif;
+  color: #222222;
+  text-transform: uppercase;
+  padding: 0px;
+}
 
 .navbar .menu_nav .nav-item .nav-link:after {
   display: none;
 }
 
 .navbar .menu_nav .nav-item:hover .nav-link, .navbar .menu_nav .nav-item.active .nav-link {
+  color: #52c5fd;
+}
+
+.navbar .nav-item .nav-link:hover, .navbar .nav-item .nav-link.active {
   color: #52c5fd;
 }
 

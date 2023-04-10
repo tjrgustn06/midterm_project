@@ -30,6 +30,20 @@ $('#delete').click(function(){
     }
 })
 
+$('#orderSubmit').click(function(e){
+    if($('#gradeStock').text()==0){
+        alert('남은 재고가 없습니다')
+        e.preventDefault()
+    }
+})
+
+$('#cartSubmit').click(function(e){
+    if($('#gradeStock').text()==0){
+        alert('남은 재고가 없습니다')
+        e.preventDefault()
+    }
+})
+
 getAmount();
 
 function getAmount(amount){
@@ -48,3 +62,26 @@ $('#reviewAdd').click(function(){
 $('#reviewCancle').click(function(){
     $('#review').slideUp("slow")
 })
+
+function cartBar(){
+    let currentPosition = parseInt($(".quickmenu").css("top"));
+    $(window).scroll(function() {
+      let position = $(window).scrollTop(); 
+      $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},800);
+    });
+}
+cartBar()
+
+function getCartBar() {
+    if($('#cartBar').attr('data-member-id')!=null){
+        $.ajax({
+            type : 'GET',
+            url : './cartBar',
+            success : (response) =>{
+                $('#cartBar').html(response);
+            }
+        })
+    }
+}
+
+getCartBar()

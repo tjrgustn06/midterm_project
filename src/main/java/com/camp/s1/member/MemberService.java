@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -384,5 +385,6 @@ public class MemberService {
 			
 			return ar;
 		}
+
 			
 }

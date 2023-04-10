@@ -203,7 +203,7 @@ public class MemberController {
 	@PostMapping("addressDelete")
 	public ModelAndView setEachAddressDelete(AddressDTO addressDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = memberService.setAddressDelete(addressDTO);
+		int result = memberService.setEachAddressDelete(addressDTO);
 		
 		mv.addObject("result", result);
 		mv.setViewName("common/ajaxResult");

@@ -5,7 +5,7 @@
 	<div class="container">
     	<nav class="navbar navbar-expand-lg navbar-light">
 			<!-- Brand and toggle get grouped for better mobile display -->
-				<a class="navbar-brand logo_h" href="/"><img src="/resources/images/TheCamp-Logo-Desktop-Color.png" alt=""></a>
+				<a class="navbar-brand logo_h" href="/"><img src="/resources/images/LogoTheCamp.png" alt=""></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggle-icon"></span>
 					<span class="navbar-toggle-icon"></span>

@@ -9,9 +9,21 @@
 <title>bookManagement - The Camping</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">SITEMANAGEMENT</h2>
+		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
 	<div class="mb-10">0</div>
 	<div class="row my-3">

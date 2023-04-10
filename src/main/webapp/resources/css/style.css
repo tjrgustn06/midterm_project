@@ -509,7 +509,7 @@ button:focus {
 }
 
 .banner_area .bg-parallax {
-  background: url("/resources/images/KakaoTalk_20230405_100753858.png") no-repeat scroll center 0/cover;
+  background: url("/resources/images/BannerHome.png") no-repeat scroll center 0/cover;
   opacity: 0.50;
 }
 
@@ -682,7 +682,7 @@ button:focus {
 }
 
 .breadcrumb_area .bg-parallax {
-  background: url("/resources/images/story.png") no-repeat scroll center 0/cover;
+  background: url("/resources/images/BannerCamp.png") no-repeat scroll center 0/cover;
   opacity: 0.50;
   z-index: -1;
 }
@@ -727,7 +727,8 @@ button:focus {
 }
 
 .blog_banner .bg-parallax {
-  background: url("/resources/images/story.png") no-repeat scroll center center;
+  background: url("/resources/images/BannerStory.png") no-repeat scroll center center;
+  width: 100%;
 }
 
 .blog_banner .banner_content {
@@ -760,7 +761,7 @@ button:focus {
 }
 
 .blog_banner_two .bg-parallax {
-  background: url(../image/banner/banner-2.jpg) no-repeat scroll center top/cover;
+  background: url("/resources/images/BannerMember.png") no-repeat scroll center top/cover;
 }
 
 /*=============End Blog Banner css =============*/
@@ -838,7 +839,7 @@ button:focus {
 }
 
 .facilities_area .bg-parallax {
-  background: url("/resources/images/story.png") no-repeat scroll center 0/cover;
+  background: url("/resources/images/BackgroundStory.png") no-repeat scroll center 0/cover;
   opacity: 0.15;
 }
 

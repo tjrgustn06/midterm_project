@@ -10,9 +10,21 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Banner Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">My Page</h2>
+		</div>
+	</div>
+</section>
+<!--================Banner Area =================-->
+
+<!--================Member 정보 =================-->
 	<div class="container-fluid">
 		<div class="row text-center">
-			<h3 id="id" name="id">ID : ${dto.id}</h3>
+			<h3 id="id" class="id">ID : ${dto.id}</h3>
 			<h3>Name : ${dto.name}</h3>
 			<h3>Phone : ${dto.phone}</h3>
 			<h3>Email : ${dto.email}</h3>
@@ -36,7 +48,7 @@
 						addressDetail=${addressDTO.addressDetail}
 						postCode=${addressDTO.postCode}
 					}
-				})
+				});
 				</c:forEach>
 			</script> -->
 			<div class="mb-3">

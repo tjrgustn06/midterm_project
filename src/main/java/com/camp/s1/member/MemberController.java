@@ -119,7 +119,7 @@ public class MemberController {
 				session = request.getSession();
 			session.setAttribute("member", memberDTO);
 		}
-
+		
 		mv.setViewName("redirect:../");
 		return mv;
 	}
@@ -212,17 +212,11 @@ public class MemberController {
 	
 	//Delete
 	@PostMapping("memberDelete")
-	public ModelAndView setMemberDelete(MemberDTO memberDTO, AddressDTO addressDTO, HttpSession session)throws Exception{
+	public ModelAndView setMemberDelete(MemberDTO memberDTO)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-		MemberDTO sessionMemberDTO = (MemberDTO)session.getAttribute("member");
-		memberDTO.setId(sessionMemberDTO.getId());
-		addressDTO.setId(sessionMemberDTO.getId());
-		int result =  memberService.setMemberDelete(memberDTO, addressDTO);
-		
-		mv.addObject("result",result);
+				
+		mv.addObject("result", memberService.setMemberDelete(memberDTO));
 		mv.setViewName("common/ajaxResult");
-		mv.addObject("result", memberService.setMemberDelete(memberDTO, session));
 		return mv;
 	}
 	
@@ -318,9 +312,8 @@ public class MemberController {
 		
 		//회원 List 출력
 		@GetMapping("memberList")
-		public ModelAndView getMemberList(Pager pager, HttpSession session) throws Exception {
+		public ModelAndView getMemberList(Pager pager) throws Exception {
 			ModelAndView mv = new ModelAndView();
-			String roleName = (String)session.getAttribute("roleName");
 			pager.setPerPage(20L);
 			List<MemberDTO> ar = memberService.getMemberList(pager);
 			mv.addObject("list", ar);

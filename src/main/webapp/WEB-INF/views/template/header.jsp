@@ -16,13 +16,13 @@
                 	<ul class="nav navbar-nav menu_nav">
 						<li class="nav-item"><a class="nav-link" href="/notice/list">NOTICE</a></li>
 						<li class="nav-item submenu dropdown">
-							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">COMUNITY</a>
+							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">COMMUNITY</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link" href="/story/list">CAMPINGSTORY</a></li>
 								<li class="nav-item"><a class="nav-link" href="/qna/list">QNA</a></li>	
 							</ul>
 						</li>
-                        <li class="nav-item"><a class="nav-link" href="/camp/list">BOOK</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/camp/list">CAMPBOOK</a></li>
                         <li class="nav-item"><a class="nav-link" href="/product/list">RENT</a></li>
                     </ul>
                     <ul class="nav navbar-nav menu_nav" style="margin: auto 0 auto auto">

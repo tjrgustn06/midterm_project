@@ -108,8 +108,8 @@
 								<input id="name" type="hidden" name="name">
 							</div>
 							<div style="float: right;">
-								<button type="submit" class="genric-btn success-border radius" formaction="./order/order">주문하기</button>
-								<button type="submit" class="genric-btn success-border radius" formaction="../cart/add">장바구니추가</button>
+								<button id="orderSubmit" type="submit" class="genric-btn success-border radius" formaction="./order/order">주문하기</button>
+								<button id="cartSubmit" type="submit" class="genric-btn success-border radius" formaction="../cart/add">장바구니추가</button>
 							</div>
 						</form>
 					</c:if>

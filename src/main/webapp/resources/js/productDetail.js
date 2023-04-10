@@ -30,6 +30,20 @@ $('#delete').click(function(){
     }
 })
 
+$('#orderSubmit').click(function(e){
+    if($('#gradeStock').text()==0){
+        alert('남은 재고가 없습니다')
+        e.preventDefault()
+    }
+})
+
+$('#cartSubmit').click(function(e){
+    if($('#gradeStock').text()==0){
+        alert('남은 재고가 없습니다')
+        e.preventDefault()
+    }
+})
+
 getAmount();
 
 function getAmount(amount){

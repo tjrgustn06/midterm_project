@@ -66,7 +66,7 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="container-fluid col-lg-9 my-5">
+<div class="container col-lg-9 my-5">
 	<form action="./update" id="frm" method="post" enctype="multipart/form-data">
 	<input type="hidden" id="updCampNum" name="campNum" value="${dto.campNum}">
 
@@ -81,11 +81,11 @@
 		<!-- 버튼 영역 -->
 		<div class="d-flex row justify-content-center col-4 mx-auto">
 			<div class="mx-auto mb-3">
-				<button id="consoleSign" class="btn btn-outline-success" type="button">console</button>
+				<button id="consoleSign" class="genric-btn warning" type="button">console</button>
 			</div>
 			<div class="mx-auto">
-				<button id="updReg" class="btn btn-outline-success" type="button">등록</button>
-				<button id="updCancel" class="btn btn-outline-danger" type="button">취소</button>
+				<button id="updReg" class="genric-btn success" type="button">등록</button>
+				<button id="updCancel" class="genric-btn danger" type="button">취소</button>
 			</div>
 		</div>
 
@@ -310,8 +310,8 @@
 						<div class="otherImage">
 							<!-- id=fileList인 부분에 js 작동 -->
 							<div id="fileList" class="row">					
-								<div class="row col-4 mb-3">
-									<button id="fileAdd" class="btn btn-outline-info" type="button">추가 사진 등록</button>
+								<div class="d-flex justify-content-end mb-3">
+									<button class="genric-btn success medium" id="fileAdd" type="button">등록</button>
 								</div>
 
 								<!-- 이미 가지고있는 파일을 표시 -->
@@ -347,11 +347,11 @@
 							
 						<!-- 캠핑사이트 추가부분 -->
 						<div class="row addSite">
-							<div class="col-10">
+							<div>
 								<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 등록</h5>
 							</div>
-							<div class="col-2">
-								<button class="btn btn-outline-success" id="siteAddBtn" type="button">추가</button>
+							<div class="d-flex justify-content-end">
+								<button class="genric-btn success medium" id="siteAddBtn" type="button">등록</button>
 							</div>
 						</div>
 						
@@ -379,8 +379,8 @@
 										<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 										<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}">
 									</div>
-									<div class="mb-2">
-										<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels btn btn-outline-danger">사이트 삭제</button>
+									<div class="d-flex justify-content-center mb-2">
+										<button type="button" data-site-idx="siteIptDel${i.count}" class="siteDels genric-btn danger medium">삭제</button>
 									</div>
 								</div>
 							</c:forEach>
@@ -448,6 +448,7 @@
 	$(function(){
 		updAdrs();
 		updServiceCheck();
+		// updStatus();
 	})
 </script>
 <c:import url="../template/common_js.jsp"></c:import>

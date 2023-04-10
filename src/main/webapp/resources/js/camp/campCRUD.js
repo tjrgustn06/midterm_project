@@ -118,8 +118,16 @@ $('#siteAddBtn').click(function(){
     site = site + '<span class="input-group-text" id="peakWeekendsPrice">주말</span>';
     site = site + '<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice'+siteIdx+'" class="form-control" placeholder="요금 입력">';
     site = site + '</div>';
-    site = site + '<div class="mb-2">';
-    site = site + '<button type="button" data-site-idx="siteIptDel'+siteIdx+'" class="siteDels btn btn-outline-danger">입력창 삭제</button>';
+    // site = site + '<div class="form-check mb-2">';
+    // site = site + '<input class="form-check-input" type="radio" name="status" id="bookable" value="예약가능">';
+    // site = site + '<label class="form-check-label" for="bookable">예약가능</label>';
+    // site = site + '</div>';
+    // site = site + '<div class="form-check mb-2">';
+    // site = site + '<input class="form-check-input" type="radio" name="status" id="unbookable" value="예약불가">';
+    // site = site + '<label class="form-check-label" for="unbookable">예약불가</label>';
+    // site = site + '</div>';
+    site = site + '<div class="d-flex justify-content-center mb-2">';
+    site = site + '<button type="button" data-site-idx="siteIptDel'+siteIdx+'" class="siteDels genric-btn danger medium">삭제</button>';
     site = site + '</div>';
     site = site + '</div>';
     
@@ -178,12 +186,26 @@ if(viewType==4){
 
 
 
-//캠핑장 예약버튼 작동 - detail.jsp
-$('#detReserve').click(function(){
+//예약 버튼 작동 - detail.jsp
+$('#detBook').click(function(){
     //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
-    if(confirm('예약 페이지로 넘어가시겠습니까? (test시 list로 넘어갑니다)')){
-        location.href='./list';
+    if(confirm('예약 페이지로 넘어가시겠습니까?')){
+        $('#frm').attr('action', './book/site');
+        $('#frm').submit();
+        //파라미터 따로 안넣었는데 form 안에 campNum 넣으니까 알아서 들어가는거같음
     }
+})
+
+//예약 목록 버튼 작동 - detail.jsp
+$('#detBookList').click(function(){
+    $('#frm').attr('action', './book/list');
+    $('#frm').submit();
+})
+
+//예약 사이트 관리 버튼 작동 - detail.jsp
+$('#detManagement').click(function(){
+    $('#frm').attr('action', './book/management');
+    $('#frm').submit();
 })
 
 //리스트로 - detail.jsp
@@ -193,8 +215,7 @@ $('#detList').click(function(){
 
 //캠핑장 업데이트 - detail.jsp
 $('#detUpdate').click(function(){
-    console.log('update button click');
-    location.href="./update";
+    $('#frm').submit();
 })
 
 //캠핑장 글삭제 - detail.jsp
@@ -203,7 +224,6 @@ $('#detDelete').click(function(){
     if(check){
         $('#frm').attr('action', './delete');
         $('#frm').attr('method', 'POST');
-        $('#frm').attr('button', 'submit');
         $('#frm').submit();
     }
 })
@@ -277,6 +297,33 @@ function updServiceCheck(){
 
 }
 
+// //status로 받은 값이 checked로 되게끔 하기 - update.jsp
+// function updStatus(){
+//     //저장되어있는 status값 받아오기
+//     let status = $('input[name=status]').val();
+//     //status값에 맞는 라디오버튼 누르기
+//     $('input[name=status][value="'+status+'"]').prop("checked", true);
+// }
+
+// //status가 선택된 값이 checked로 되게끔 하기 - update.jsp
+// function setStatus2(){
+//     chkArray = new Array();
+//     let chkService = $('input[name="serv"]:checked');
+//     let serv ='';
+
+//     chkService.each(function(){
+//         let tmpVal = $(this).val();
+//         chkArray.push(tmpVal);
+//     })
+
+//     for(let i of chkArray){
+//         serv = serv + i +",";
+//     }
+
+//     service = serv.substring(0, serv.length-1);
+//     $('#serviceVal').val(service);
+// }
+
 
 //콘솔에 값 확인하고 싶을때 사용 - add.jsp/update.jsp(console 버튼)
 $('#consoleSign').click(function(){
@@ -320,6 +367,7 @@ function chkValidation(){
         let chkSiteOwdPrice = $('input[data-site-idx="siteOwdPrice'+i+'"]'); //평상시 주말요금
         let chkSitePwkPrice = $('input[data-site-idx="sitePwkPrice'+i+'"]'); //성수기 주중요금
         let chkSitePwdPrice = $('input[data-site-idx="sitePwdPrice'+i+'"]'); //성수기 주말요금
+        //예약가능/불가는 라디오버튼
 
         //변수내부 값 반복확인
         chkSiteName.each(function(){ //사이트이름

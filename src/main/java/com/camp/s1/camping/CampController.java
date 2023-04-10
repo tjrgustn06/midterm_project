@@ -185,7 +185,7 @@ public class CampController {
 		}
 		
 		mv.addObject("result", message);
-		mv.addObject("url", "./detail?campNum="+campDTO.getCampNum());
+		mv.addObject("url", "./detail?campNum="+campDTO.getCampNum()+"&viewType=1");
 		mv.setViewName("common/result");
 		
 		return mv;

@@ -31,7 +31,7 @@
 	<p>BankBookDTO 만들어서 db에 저장, orders에 ordernum 저장</p>
 	<p>예약 정보 표시, 최종 결제, 예약취소 기능</p>
 	<div class="row my-3">
-		<h1>${campDTO.name}</h1>
+		<h1>${campDTO.campName}</h1>
 	</div>
 
 	<!-- 파라미터 확인용 -->
@@ -79,7 +79,7 @@
 			</div>
 		</div>
 		
-		<!-- CampBook 하나 완성 -->
+		<!-- CampBook 하나 완성 - 정보는 bookDTO에서 꺼내야 할거같음... -->
 		<!-- num, areaNum, id, indexCode, price, regDate, startDate, lastDate, account, status -->
 		<div id="bookSiteOne">
 			<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
@@ -94,25 +94,25 @@
 			</div>
 			<div class="member input-group mb-2">
 				<span class="input-group-text" id="siteName">예약자</span>
-				<input type="text" name="name" class="form-control" value="${dto.name}" readonly>
+				<input type="text" name="name" class="form-control" value="#" readonly>
 			</div>
 			<div class="useDate input-group mb-2">
 				<span class="input-group-text" for="startDate">사용 시작일</span>
-				<input type="text" name="startDate" id="startDate" class="form-control" value="${siteDTO.startDate}" style="background-color: #ffffcc;" readonly>
+				<input type="text" name="startDate" id="startDate" class="form-control" value="${bookDTO.startDate}" style="background-color: #ffffcc;" readonly>
 				<span class="input-group-text" for="lastDate">사용 종료일</span>
-				<input type="text" name="lastDate" id="lastDate" class="form-control" value="${siteDTO.lastDate}" style="background-color: #ffffcc;" readonly>
+				<input type="text" name="lastDate" id="lastDate" class="form-control" value="${bookDTO.lastDate}" style="background-color: #ffffcc;" readonly>
 			</div>
 			<div class="totalPrice input-group mb-2">
 				<span class="input-group-text" id="price">이용 요금</span>
-				<input type="text" name="price" id="totalPrice" class="form-control" readonly>
+				<input type="text" name="price" id="totalPrice" class="form-control" value="${bookDTO.price}" readonly>
 			</div>
 			<div>
 				<input type="hidden" name="status" value="결제완료">
 			</div>
 
-			<div class="d-flex justify-content-between mb-2">
-				<button id="bksConfirm" type="button" class="genric-btn success">결제하기</button>
+			<div class="d-flex justify-content-between my-2">
 				<button id="bksCancel" type="button" class="genric-btn primary">예약취소</button>
+				<button id="bksConfirm" type="button" class="genric-btn success">결제하기</button>
 			</div>
 		</div>
 	</form>

@@ -69,5 +69,10 @@ public class CampBookService {
 		return campBookDAO.getCampDetail(campNum);
 	}
 	
+	//캠프장 예약 정보 한개 조회 - num으로 조회
+	public CampBookDTO getCampBookDetail(CampBookDTO campBookDTO) throws Exception{
+		return campBookDAO.getCampBookDetail(campBookDTO);
+	}
+	
 	
 }

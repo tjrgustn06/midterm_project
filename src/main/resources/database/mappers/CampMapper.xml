@@ -11,7 +11,7 @@
   		<where>
   			<!-- CAMPNUM = #{campNum} AND / site 옵션 쓸 때 써야하려나 -->
 	  		<if test="kind=='name'">
-	  			NAME LIKE '%' || #{search} || '%'
+	  			CAMPNAME LIKE '%' || #{search} || '%'
 	  		</if>
 			<if test="kind=='phone'">
 	  			PHONE LIKE '%' || #{search} || '%'
@@ -31,7 +31,7 @@
   				AND SIGUNGUNAME LIKE '%' || #{sigunguName} || '%'
   			</if>
   			<if test="name != null">
-  				AND NAME LIKE '%' || #{name} || '%'
+  				AND CAMPNAME LIKE '%' || #{campName} || '%'
   			</if>
   		</trim>
   	</sql>
@@ -66,7 +66,7 @@
   	</select>
   	<resultMap type="CampDTO" id="getCampListResult">
   		<id column="CAMPNUM" property="campNum"/>
-  		<result column="NAME" property="name"/>
+  		<result column="CAMPNAME" property="campName"/>
   		<result column="PHONE" property="phone"/>
   		<result column="ADDRESS" property="address"/>
   		<result column="LINEINTRO" property="lineIntro"/>
@@ -114,7 +114,7 @@
   	<!-- detail-file/site 연결 -->
   	<resultMap type="CampDTO" id="getCampDetailResult">
   		<id column="CAMPNUM" property="campNum"/>
-  		<result column="NAME" property="name"/>
+  		<result column="CAMPNAME" property="campName"/>
   		<result column="PHONE" property="phone"/>
   		<result column="ADDRESS" property="address"/>
   		<result column="LINEINTRO" property="lineIntro"/>
@@ -166,8 +166,8 @@
 		<selectKey keyProperty="campNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CAMPINFO(CAMPNUM, NAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, DONAME, SIGUNGUNAME, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, REGDATE, MODIDATE, HIT)
-		VALUES(#{campNum}, #{name}, #{phone}, (#{doName}||' '||#{sigunguName}||' '||#{address}), #{lineIntro}, #{intro}, #{feature}, #{induty}, #{doName}, #{sigunguName}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, SYSDATE, 0)
+		INSERT INTO CAMPINFO(CAMPNUM, CAMPNAME, PHONE, ADDRESS, LINEINTRO, INTRO, FEATURE, INDUTY, DONAME, SIGUNGUNAME, GLAMPFACILITY, CARAVFACILITY, SERVICE, POSBLFACILITY, PETALLOW, USEINFO, HOMEPAGE, REGDATE, MODIDATE, HIT)
+		VALUES(#{campNum}, #{campName}, #{phone}, (#{doName}||' '||#{sigunguName}||' '||#{address}), #{lineIntro}, #{intro}, #{feature}, #{induty}, #{doName}, #{sigunguName}, #{glampFacility}, #{caravFacility}, #{service}, #{posblFacility}, #{petAllow}, #{useInfo}, #{homePage}, SYSDATE, SYSDATE, 0)
 	</insert>
 	
 	<!-- delete -->
@@ -179,7 +179,7 @@
 	<!-- 글내용, 썸네일, 파일, 사이트 총 4가지 수정 - 썸네일, 파일, 사이트는 다른 메서드를 통해서 수정한다 -->
 	<!-- MAPX, MAPY, THEME, THUMBNAIL, LAYOUT 나중에, REGDATE, HIT는 UPDATE에서는 빼면 될거같음 -->
 	<update id="setCampUpdate" parameterType="CampDTO">
-		UPDATE CAMPINFO SET NAME=#{name}, PHONE=#{phone}, ADDRESS=(#{doName}||' '||#{sigunguName}||' '||#{address}), LINEINTRO=#{lineIntro}, INTRO=#{intro}, FEATURE=#{feature}, INDUTY=#{induty}, DONAME=#{doName}, SIGUNGUNAME=#{sigunguName}, GLAMPFACILITY=#{glampFacility}, 
+		UPDATE CAMPINFO SET CAMPNAME=#{campName}, PHONE=#{phone}, ADDRESS=(#{doName}||' '||#{sigunguName}||' '||#{address}), LINEINTRO=#{lineIntro}, INTRO=#{intro}, FEATURE=#{feature}, INDUTY=#{induty}, DONAME=#{doName}, SIGUNGUNAME=#{sigunguName}, GLAMPFACILITY=#{glampFacility}, 
 		CARAVFACILITY=#{caravFacility}, SERVICE=#{service}, POSBLFACILITY=#{posblFacility}, PETALLOW=#{petAllow}, USEINFO=#{useInfo}, HOMEPAGE=#{homePage}, MODIDATE=SYSDATE
 		WHERE CAMPNUM=#{campNum}
 	</update>
@@ -196,8 +196,8 @@
 		<selectKey keyProperty="areaNum" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS, NAME)
-		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, #{status}, #{name})
+		INSERT INTO CAMPSITE(AREANUM, CAMPNUM, SITENAME, SITESIZE, OFFWEEKDAYSPRICE, OFFWEEKENDSPRICE, PEAKWEEKDAYSPRICE, PEAKWEEKENDSPRICE, STATUS)
+		VALUES(#{areaNum}, #{campNum}, #{siteName}, #{siteSize}, #{offWeekdaysPrice}, #{offWeekendsPrice}, #{peakWeekdaysPrice}, #{peakWeekendsPrice}, #{status})
 	</insert>
 	
 	<!-- siteDelete -->

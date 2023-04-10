@@ -5,7 +5,7 @@ import java.util.List;
 public class CampDTO {
 	
 	private Long campNum;
-	private String name;
+	private String campName;
 	private String phone;
 	private String address;
 	private String lineIntro;
@@ -45,12 +45,12 @@ public class CampDTO {
 		this.campNum = campNum;
 	}
 
-	public String getName() {
-		return name;
+	public String getCampName() {
+		return campName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCampName(String campName) {
+		this.campName = campName;
 	}
 
 	public String getPhone() {

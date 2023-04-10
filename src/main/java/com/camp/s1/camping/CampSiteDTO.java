@@ -13,7 +13,6 @@ public class CampSiteDTO {
 	private String startDate;
 	private String lastDate;
 	private String status;
-	private String name;
 	
 	public CampSiteDTO() {
 		
@@ -109,15 +108,5 @@ public class CampSiteDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
 
 }

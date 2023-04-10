@@ -30,7 +30,7 @@
 <div class="container col-lg-9 my-5">
 	<p>기간 설정, 예약 가능 사이트 확인, 금액 확인, 예약하기 기능</p>
 	<div class="row my-3">
-		<h1>${campDTO.name}</h1>
+		<h1>${campDTO.campName}</h1>
 	</div>
 
 	<!-- 파라미터 확인 -->
@@ -65,12 +65,12 @@
 	<!-- 검색 시작 ajax로 해야할거같음 -->
 	<form action="./bksSearch" id="searchFrm" method="get">
 		<!-- <input type="hidden" id="bksCampNum" name="campNum" value="${dto.campNum}"> -->
-		<div class="row d-flex justify-content-center my-2">
-			<button id="bksSearch" type="button" class="genric-btn success medium col-3">검색</button>
-			<button id="bksCancle" type="button" class="genric-btn primary medium col-3">취소</button>
+		<div class="d-flex justify-content-between my-2">
+			<button id="bksCancle" type="button" class="genric-btn primary">취소</button>
+			<button id="bksSearch" type="button" class="genric-btn success">검색</button>
 		</div>
-		<div class="row my-2">
-			<button id="bksConsoleSign" type="button" class="genric-btn primary col-3 mx-auto">확인용</button>
+		<div class="d-flex justify-content-center my-2">
+			<button id="bksConsoleSign" type="button" class="genric-btn primary">확인용</button>
 		</div>
 	</form>
 	<!-- 검색 끝 -->

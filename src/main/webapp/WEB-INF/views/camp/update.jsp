@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Update ${dto.name} - The Camping</title>
+<title>Update ${dto.campName} - The Camping</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 	<style>
@@ -86,23 +86,12 @@
 
 	<div class="row my-3">
 		<h3>캠핑장 이름 등록</h3>
-		<input type="text" id="ChkName" name="name" class="form-control my-1" value="${dto.name}">
+		<input type="text" id="ChkName" name="campName" class="form-control my-1" value="${dto.campName}">
 	</div>
 	
 	<hr>
 	
 	<!-- 대표사진 + 설명 div -->
-		<!-- 버튼 영역 -->
-		<div class="d-flex row justify-content-center col-4 mx-auto">
-			<div class="mx-auto mb-3">
-				<button id="consoleSign" class="genric-btn warning" type="button">console</button>
-			</div>
-			<div class="mx-auto">
-				<button id="updReg" class="genric-btn success" type="button">등록</button>
-				<button id="updCancel" class="genric-btn danger" type="button">취소</button>
-			</div>
-		</div>
-
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
 			<div class="row pic my-3 mx-auto">
@@ -320,7 +309,7 @@
 						<hr>
 
 						<!-- 이미지 추가 부분 / 인트로 이미지 3장을 제외한 나머지 이미지 표시 -->
-						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.name} 사진 등록</h5>
+						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.campName} 사진 등록</h5>
 						<div class="otherImage">
 							<!-- id=fileList인 부분에 js 작동 -->
 							<div id="fileList" class="row">					
@@ -415,25 +404,23 @@
 						<hr> -->
 					</div> <!-- 이용안내 영역 종료 -->
 
-
 					
 					<!-- 위치정보 영역 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 위치정보 등록</h5>
 					<div class="campMap" id="campMap">
-						<p>*나중에 지도 정보 받아오는거 공부해서 추가하기</p>
-						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5> -->
-							<!-- 해당 캠핑장의 위치값 필요(경도, 위도 소수점 4~5자리까지 알아내야하는데 어떻게 하지?) -->
-							<!-- 나머지 정보는 CampDTO에 들어있어서 쓸 수 있음 -->
+						<p>*정확한 주소를 입력한 경우 자동으로 표기 됩니다.</p>
 					</div>
 
-
-					
-					<!-- 후기 영역: detail 페이지에서 바로 등록/수정/삭제가 가능하도록 -->
-					<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 후기 입력</h5>
-					<div class="campReview" id="campReview">
-						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
-					</div> -->
-
+					<!-- 버튼 영역 -->
+					<div class="mx-auto">
+						<div class="d-flex justify-content-between my-2">
+							<button id="updCancel" class="genric-btn danger" type="button">취소</button>
+							<button id="updReg" class="genric-btn success" type="button">등록</button>
+						</div>
+						<!-- <div class="d-flex justify-content-center my-2">
+							<button id="consoleSign" class="genric-btn warning" type="button">console</button>
+						</div> -->
+					</div>
 
 				</div>
 			</div>

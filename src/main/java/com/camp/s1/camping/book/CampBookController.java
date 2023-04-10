@@ -97,20 +97,21 @@ public class CampBookController {
 		int result = campBookService.setCampBookAdd(campBookDTO);
 		
 		//CampBookDTO로 site 조회
-		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
+		//CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
 		
 		//campSiteDTO로 camp 조회
-		CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
+		//CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
 		
 		String message = "예약에 실패했습니다";
 		if(result>0) {
 			message = "예약에 성공했습니다";
 		}
 		
-		mv.addObject("campDTO", campDTO);
-		mv.addObject("siteDTO", campSiteDTO);
+//		mv.addObject("campDTO", campDTO);
+//		mv.addObject("siteDTO", campSiteDTO);
+//		mv.addObject("bookDTO", campBookDTO);
 		mv.addObject("result", message);
-		mv.addObject("url", "../book/payment");
+		mv.addObject("url", "../book/payment?num="+campBookDTO.getNum());
 		mv.setViewName("common/result");
 		
 		return mv;
@@ -141,14 +142,18 @@ public class CampBookController {
 		//예약된 캠핑장 사이트의 목록을 보여주는 페이지(관리자용)
 		List<CampBookDTO> bookList = campBookService.getCampBookList(campNum);
 		
+		//캠핑장 정보 조회
+		CampDTO campDTO = campBookService.getCampDetail(campNum);
 		
-		System.out.println("List: "+bookList);
 		
+//		System.out.println("List: "+bookList);
+//		
+//		
+//		for(CampBookDTO campBookDTO : bookList) {
+//			System.out.println(campBookDTO.getAreaNum());
+//		}
 		
-		for(CampBookDTO campBookDTO : bookList) {
-			System.out.println(campBookDTO.getAreaNum());
-		}
-		
+		mv.addObject("campDTO", campDTO);
 		mv.addObject("bookList", bookList);
 		mv.setViewName("camp/book/bookList");
 		return mv;
@@ -159,7 +164,9 @@ public class CampBookController {
 	@GetMapping("payment")
 	public ModelAndView setCampBookPayment(CampBookDTO campBookDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-	
+		
+		//num(pk)로 CampBookDTO 조회해오기 - 페이지에서 CampBookDTO 하나를 뿌려줘야한다
+		campBookDTO = campBookService.getCampBookDetail(campBookDTO);
 		
 		//CampBookDTO로 site 조회
 		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
@@ -168,9 +175,10 @@ public class CampBookController {
 		CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
 		
 		
+		mv.addObject("bookDTO", campBookDTO);
 		mv.addObject("campDTO", campDTO);
 		mv.addObject("siteDTO", campSiteDTO);
-		mv.setViewName("bookPayment");
+		mv.setViewName("camp/book/bookPayment");
 		return mv;
 	}
 	

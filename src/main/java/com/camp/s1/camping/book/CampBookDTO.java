@@ -15,6 +15,7 @@ public class CampBookDTO {
 	private String lastDate;
 	private String account;
 	private String status;
+	private String siteName;
 	
 	public CampBookDTO() {
 		
@@ -106,6 +107,14 @@ public class CampBookDTO {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getSiteName() {
+		return siteName;
+	}
+
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
 	}
 	
 }

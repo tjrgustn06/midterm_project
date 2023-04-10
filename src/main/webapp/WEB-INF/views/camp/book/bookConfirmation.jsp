@@ -31,7 +31,7 @@
 	<p>BankBookDTO 만들어서 db에 저장, orders에 ordernum 저장</p>
 	<p>예약 정보 표시, 최종 결제, 예약취소 기능</p>
 	<div class="row my-3">
-		<h1>${campDTO.name}</h1>
+		<h1>${campDTO.campName}</h1>
 	</div>
 
 	<!-- 파라미터 확인용 -->

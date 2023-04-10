@@ -165,7 +165,7 @@
 			<div class="layout">
 				<!-- 탭영역 - 다단 라인 / 탭영역으로 화면이동을 하고싶다면 주소 끝에 #contents 붙여주면 됨 -->
 				<div id="viewType" data-viewType="${viewType}"></div>
-				<ul class="nav nav-pills nav-fill">
+				<ul class="navbar navbar-pills nav-fill">
 					<li class="nav-item" id="c_intro">
 						<a class="nav-link camp camp_intro active" aria-current="page" href="./detail?campNum=${dto.campNum}&viewType=1">캠핑장 소개</a>
 					</li>

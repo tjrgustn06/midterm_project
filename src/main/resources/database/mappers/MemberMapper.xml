@@ -59,7 +59,7 @@
 <!-- Delete -->
 <delete id="setMemberDelete" parameterType="MemberDTO">
 	DELETE * FROM MEMBER
-	WHERE ID=#{id} AND PW=#{pw}
+	WHERE ID=#{id}
 </delete>
 
 <delete id="setAddressDelete" parameterType="AddressDTO">

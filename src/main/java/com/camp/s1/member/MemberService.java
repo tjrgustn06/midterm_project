@@ -105,13 +105,13 @@ public class MemberService {
 		return result;
 	}
 	
-	public int setAddressDelete(AddressDTO addressDTO)throws Exception{
+	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
 		
-		return memberDAO.setAddressDelete(addressDTO);
+		return memberDAO.setEachAddressDelete(addressDTO);
 	}
 	
 	//Delete
-	public int setMemberDelete(MemberDTO memberDTO, HttpSession session)throws Exception{
+	public int setMemberDelete(MemberDTO memberDTO)throws Exception{
 		
 		int result = memberDAO.setMemberDelete(memberDTO);
 		

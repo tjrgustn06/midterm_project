@@ -24,6 +24,7 @@
 <!--================Member 정보 =================-->
 	<div class="container-fluid">
 		<div class="row text-center">
+			<h3 id="id" class="id">ID : ${dto.id}</h3>
 			<h3>Name : ${dto.name}</h3>
 			<h3>Phone : ${dto.phone}</h3>
 			<h3>Email : ${dto.email}</h3>

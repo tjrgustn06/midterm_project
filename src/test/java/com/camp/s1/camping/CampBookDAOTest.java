@@ -63,7 +63,6 @@ public class CampBookDAOTest extends MyTestCase{
 		campBookDTO.setStartDate("2023-04-10");
 		campBookDTO.setLastDate("2023-04-11");
 		campBookDTO.setAccount("112-01-6656");
-		campBookDTO.setDayInfo(1L);
 		
 		result = campBookDAO.setCampBookAdd(campBookDTO);
 		assertNotEquals(0, result);
@@ -79,31 +78,14 @@ public class CampBookDAOTest extends MyTestCase{
 		assertNotEquals(0, campSiteDTO);
 	}
 	
-	//getDayOfWeek
-	@Test
-	public void getDayOfWeekTest() throws Exception{
-		//campsiteDTO에 저장하면 안된다. 저장내용이 하나밖에 없진 않을테니
-		
-		CampSiteDTO campSiteDTO = campBookDAO.getCampSiteDetail(943L);
-		campSiteDTO.setStartDate("2023-04-10");
-		campSiteDTO.setLastDate("2023-04-12");
-		List<Long> dayList = campBookDAO.getDayOfWeek(campSiteDTO);
-		
-		Long offWeekdaysPrice = campSiteDTO.getOffWeekdaysPrice();
-		Long offWeekendsPrice = campSiteDTO.getOffWeekendsPrice();
-		
-		Long cost = 0L;
-		
-		for(Long day : dayList) {
-			if(day==6L || day==7L) {
-				cost = cost + offWeekendsPrice;
-			}else {
-				cost = cost + offWeekdaysPrice;
-			}
-		}
-		
-		System.out.println(cost);
-	}
 	
+	//getCampBookList
+	@Test
+	public void getCampBookListTest() throws Exception{
+		Long campNum = 940L;
+		List<CampBookDTO> ar = campBookDAO.getCampBookList(campNum);
+		
+		assertEquals(0, ar.size());
+	}
 	
 }

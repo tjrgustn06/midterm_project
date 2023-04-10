@@ -30,7 +30,7 @@
 	<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
 	<!-- 임시로 막아놓고 나중에 추가해보기 ㅠㅠ -->
 	<!-- <div class="row mb-3">
-		<c:if test="${not empty dto.campFileDTOs}">
+		<c:if test="${not empty fileDTO.campFileDTOs}">
 			<div class="layout">
 				<img alt="" src="">
 			</div>
@@ -38,62 +38,70 @@
 	</div> -->
 	<hr>
 
+	<div class="row my-2">
+		<div>
+			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 요금표</h5>
+			<p>*성수기 요금은 5~9월에 적용됩니다.</p>
+		</div>
+		<div class="input-group mb-2">
+			<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+			<input type="text" name="offWeekdaysPrice" class="form-control" value="${siteDTO.offWeekdaysPrice}" readonly>
+			<span class="input-group-text" id="offWeekendsPrice">주말</span>
+			<input type="text" name="offWeekendsPrice" class="form-control" value="${siteDTO.offWeekendsPrice}" readonly>
+		</div>
+		<div class="input-group mb-2">
+			<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+			<input type="text" name="peakWeekdaysPrice" class="form-control" value="${siteDTO.peakWeekdaysPrice}" readonly>
+			<span class="input-group-text" id="peakWeekendsPrice">주말</span>
+			<input type="text" name="peakWeekendsPrice" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
+		</div>
+	</div>
+
+	<hr>
 
 	<!-- form 시작 -->
-	<form action="./confirmation" id="ConfirmFrm" method="post">
-		<div class="row my-2">
-			<div class="col-10">
-				<h5><i class="fa-solid fa-circle-info fa-sm"></i> 예약 기간 설정</h5>
-			</div>
-			<div class="input-group mb-2">
-				<span class="input-group-text" for="startDate">사용 시작일</span>
-				<input type="text" name="startDate" id="startDate" class="form-control" value="${siteDTO.startDate}" style="background-color: gray;" readonly>
-				<span class="input-group-text" for="lastDate">사용 종료일</span>
-				<input type="text" name="lastDate" id="lastDate" class="form-control" value="${siteDTO.lastDate}" style="background-color: gray;" readonly>
-			</div>
-		</div>
-
+	<form action="./confirmation" id="confirmFrm" method="post">
 
 		<div class="row my-2">
 			<div class="col-10">
-				<h5><i class="fa-solid fa-circle-info fa-sm"></i> ${siteDTO.siteName} 사이트</h5>
+				<h5><i class="fa-solid fa-circle-info fa-sm"></i> 예약 정보</h5>
 			</div>
 		</div>
 		
 		<!-- CampBook 하나 완성 -->
-		<!-- num, areaNum, id, indexCode, price, regDate, startDate, lastDate, account, dayInfo, status -->
+		<!-- num, areaNum, id, indexCode, price, regDate, startDate, lastDate, account, status -->
 	
 		<div id="bookSiteOne">
 			<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
 			<input type="hidden" name="campNum" value="${siteDTO.campNum}"> <!-- 돌아가기용 -->
-			<div class="input-group mb-2">
-				<!-- <span class="input-group-text" id="siteName">사이트이름</span>
-				<input type="text" name="siteName" class="form-control" value="${siteDTO.siteName}" readonly> -->
+			<div class="siteSize input-group mb-2">
+				<span class="input-group-text" id="siteName">사이트이름</span>
+				<input type="text" name="siteName" class="form-control" value="${siteDTO.siteName}" readonly>
+			</div>
+			<div class="siteSize input-group mb-2">
 				<span class="input-group-text" id="siteSize">크기(m^2)</span>
 				<input type="text" name="siteSize" class="form-control" value="${siteDTO.siteSize}" readonly>
 			</div>
-			<div class="priceCalculate input-group mb-2">
+			<div class="member input-group mb-2">
+				<span class="input-group-text" id="siteName">예약자</span>
+				<input type="text" name="name" class="form-control" value="${dto.name}" readonly>
+			</div>
+			<div class="useDate input-group mb-2">
+				<span class="input-group-text" for="startDate">사용 시작일</span>
+				<input type="text" name="startDate" id="startDate" class="form-control" value="${siteDTO.startDate}" style="background-color: #ffffcc;" readonly>
+				<span class="input-group-text" for="lastDate">사용 종료일</span>
+				<input type="text" name="lastDate" id="lastDate" class="form-control" value="${siteDTO.lastDate}" style="background-color: #ffffcc;" readonly>
+			</div>
+			<div class="totalPrice input-group mb-2">
 				<span class="input-group-text" id="price">이용 요금</span>
-				<input type="text" name="price" class="form-control" value="#" readonly>
+				<input type="text" name="price" id="totalPrice" class="form-control" readonly>
+			</div>
+			<div>
+				<input type="hidden" name="status" value="입금 대기">
 			</div>
 
-			<!-- 완성되면 지울 내용 시작 -->
-			<div class="input-group mb-2">
-				<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
-				<input type="text" name="offWeekdaysPrice" class="form-control" value="${siteDTO.offWeekdaysPrice}" readonly>
-				<span class="input-group-text" id="offWeekendsPrice">주말</span>
-				<input type="text" name="offWeekendsPrice" class="form-control" value="${siteDTO.offWeekendsPrice}" readonly>
-			</div>
-			<div class="input-group mb-2">
-				<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
-				<input type="text" name="peakWeekdaysPrice" class="form-control" value="${siteDTO.peakWeekdaysPrice}" readonly>
-				<span class="input-group-text" id="peakWeekendsPrice">주말</span>
-				<input type="text" name="peakWeekendsPrice" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
-			</div>
-			<!-- 완성되면 지울 내용 끝 -->
 			<div class="d-flex justify-content-between mb-2">
 				<button id="bksConfirm" type="button" class="genric-btn success">Confirm</button>
-
 				<button id="bksCancel" type="button" class="genric-btn primary">Cancel</button>
 			</div>
 		</div>
@@ -141,8 +149,8 @@
 		})
 </script>
 <script>
-	//금액계산 요청
-	
+	//요금 계산 함수 호출
+	calculationPrice();
 </script>
 <c:import url="../../template/common_js.jsp"></c:import>
 </body>

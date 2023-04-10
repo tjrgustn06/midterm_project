@@ -14,7 +14,6 @@ public class CampBookDTO {
 	private String startDate;
 	private String lastDate;
 	private String account;
-	private Long dayInfo;
 	private String status;
 	
 	public CampBookDTO() {
@@ -107,14 +106,6 @@ public class CampBookDTO {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Long getDayInfo() {
-		return dayInfo;
-	}
-
-	public void setDayInfo(Long dayInfo) {
-		this.dayInfo = dayInfo;
 	}
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.camping.CampSiteDTO;
+import com.camp.s1.member.MemberDTO;
 
 @Service
 public class CampBookService {
@@ -39,38 +40,13 @@ public class CampBookService {
 		campBookDTO.setOrderNum(orderNum);
 		int result = campBookDAO.setOrderNumber(campBookDTO);
 		//num은 쿼리문 호출시 selectkey로 받아옴
-		//id는 컨트롤러에서 세션 가져와서 넣음, indexCode는 쿼리문에서 자동으로 1로 기입(변하지 않음)
+		//id는 컨트롤러에서 세션 가져와서 넣음, indexCode는 1로 입력
 
-		//나머지 입력값 - 요일정보, 금액, 예약날짜, 사용시작일, 사용종료일, 계좌번호, 결제상태
+		//나머지 입력값 - 금액, 주문서작성일, 사용시작일, 사용종료일, 계좌번호, 결제상태
 		//언급하지 않는 내용은 bookDTO에 들어가있을 것으로 예상되는 내용
 		
-		//요일정보 계산 - 금액 계산을 위해서 써야할 요일정보 계산
-		//금액은 요일 계산해서 금액값에 입력해주기(if~ 또는 switch~) - 임시로 평일주중요금으로만 나오게
-		CampSiteDTO campSiteDTO = campBookDAO.getCampSiteDetail(areaNum);
-		campSiteDTO.setStartDate("2023-04-10");
-		campSiteDTO.setLastDate("2023-04-12");
-		
-		List<Long> dayList = campBookDAO.getDayOfWeek(campSiteDTO);
-		
-		Long offWeekdaysPrice = campSiteDTO.getOffWeekdaysPrice();
-		Long offWeekendsPrice = campSiteDTO.getOffWeekendsPrice();
-		
-		Long cost = 0L;
-		
-		for(Long day : dayList) {
-			if(day==6L || day==7L) {
-				cost = cost + offWeekendsPrice;
-			}else {
-				cost = cost + offWeekdaysPrice;
-			}
-		}
-		
-		System.out.println(cost);
-		
-		
-		
-		//bookDTO에 들어가있을 것으로 예상되는 내용
-		campBookDTO.setAreaNum(campSiteDTO.getAreaNum());
+		//금액 - javascript로 계산 / 주문서작성일 - sysdate / 사용시작,종료일 - web에서 입력 / 계좌번호 - service에서 임시세팅 / 결제상태 - web에서 입금대기로 입력
+		campBookDTO.setIndexCode(1L);
 		campBookDTO.setAccount("tmpAccount"); //일단 임시로 해둔 것
 		
 		//결과 보내기
@@ -78,6 +54,15 @@ public class CampBookService {
 		return result;
 	}
 	
+	//멤버 정보 조회
+	public MemberDTO getMemberDetail(MemberDTO memberDTO) throws Exception{
+		return campBookDAO.getMemberDetail(memberDTO);
+	}
+	
+	//예약 사이트 리스트 조회
+	public List<CampBookDTO> getCampBookList(Long campNum) throws Exception{
+		return campBookDAO.getCampBookList(campNum);
+	}
 	
 	
 }

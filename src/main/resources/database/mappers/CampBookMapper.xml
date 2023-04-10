@@ -22,8 +22,8 @@
 		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CAMPBOOK(NUM, AREANUM, ID, INDEXCODE, ORDERNUM, PRICE, REGDATE, STARTDATE, LASTDATE, ACCOUNT, DAYINFO, STATUS)
-		VALUES(#{num}, #{areaNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, sysdate, #{startDate}, #{lastDate}, #{account}, #{dayInfo}, '입금대기')
+		INSERT INTO CAMPBOOK(NUM, AREANUM, ID, INDEXCODE, ORDERNUM, PRICE, REGDATE, STARTDATE, LASTDATE, ACCOUNT, STATUS)
+		VALUES(#{num}, #{areaNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, sysdate, #{startDate}, #{lastDate}, #{account}, '입금대기')
 	</insert>
 	
 	<!-- getOrderNum -->
@@ -37,15 +37,33 @@
 		VALUES(#{orderNum})
 	</insert>
 	
-	<!-- getDayOfWeek -->
-	<select id="getDayOfWeek" parameterType="CampSiteDTO" resultType="Long">
-		SELECT TO_CHAR(startDate + LEVEL-1, 'd') AS dayOfWeek
-			FROM 
-				(SELECT  TO_DATE(#{startDate}, 'YYYY-MM-DD') AS startDate
-						, TO_DATE(#{lastDate}, 'YYYY-MM-DD') AS lastDate
-			FROM DUAL)
-		<![CDATA[CONNECT BY LEVEL <= lastDate - startDate]]>
+	<!-- getMemberDetail -->
+	<select id="getMemberDetail" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT * FROM MEMBER WHERE ID=#{id}
 	</select>
+	
+	<!-- getCampBookList -->
+	<select id="getCampBookList" parameterType="Long" resultType="CampBookDTO">
+		<!-- SELECT CI.CAMPNUM, CS.SITENAME, CS.SITESIZE, CS.STATUS, CB.ID, CB.ORDERNUM, CB.PRICE, CB.STARTDATE, CB.LASTDATE, CB.STATUS -->
+		SELECT *
+		FROM CAMPBOOK CB
+			LEFT OUTER JOIN
+			CAMPSITE CS
+			ON(CB.AREANUM=CS.AREANUM)
+			LEFT OUTER JOIN
+			CAMPINFO CI
+			ON(CS.CAMPNUM=CI.CAMPNUM)
+		WHERE CI.CAMPNUM=#{campNum}
+		
+		
+		<!-- FROM CAMPINFO CI
+			JOIN CAMPSITE CS
+			ON(CI.CAMPNUM = CS.CAMPNUM)
+			JOIN CAMPBOOK CB
+			ON(CS.AREANUM = CB.AREANUM)
+		WHERE CI.CAMPNUM = #{campNum} -->
+	</select>
+	
 	
 	
 	</mapper>

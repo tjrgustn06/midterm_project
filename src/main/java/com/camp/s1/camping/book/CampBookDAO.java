@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.camping.CampSiteDTO;
+import com.camp.s1.member.MemberDTO;
 
 @Repository
 public class CampBookDAO {
@@ -44,12 +45,15 @@ public class CampBookDAO {
 		return sqlSession.insert(NAMESPACE+"setOrderNumber", campBookDTO);
 	}
 	
-	//요일 계산하는 쿼리 결과 받아오기 - bookAdd
-	public List<Long> getDayOfWeek(CampSiteDTO campSiteDTO) throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getDayOfWeek", campSiteDTO);
+	//회원정보 조회 - 로그인 세션에 id랑 주소만 추가되어 있음
+	public MemberDTO getMemberDetail(MemberDTO memberDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getMemberDetail", memberDTO);
 	}
 	
-	
+	//예약된 사이트 목록 조회 - CampSiteDTO
+	public List<CampBookDTO> getCampBookList(Long campNum) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getCampBookList", campNum);
+	}
 	
 	//bookConfirmed - bookConfirmation.jsp에서 최종 확인한 경우
 	

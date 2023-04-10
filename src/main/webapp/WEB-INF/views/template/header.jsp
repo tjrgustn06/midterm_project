@@ -25,7 +25,7 @@
                         <li class="nav-item"><a class="nav-link" href="/camp/list">BOOK</a></li>
                         <li class="nav-item"><a class="nav-link" href="/product/list">RENT</a></li>
                     </ul>
-                    <ul class="nav navbar-nav menu_nav mx-auto">
+                    <ul class="nav navbar-nav menu_nav" style="margin: auto 0 auto auto">
                         <c:if test="${empty member}">
 							<li class="nav-item"><a class="nav-link" href="/member/memberLogin">LOGIN</a></li>
 							<li class="nav-item"><a class="nav-link" href="/member/memberAgree">JOIN</a></li>

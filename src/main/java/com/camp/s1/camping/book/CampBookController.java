@@ -33,12 +33,12 @@ public class CampBookController {
 		ModelAndView mv = new ModelAndView();
 		
 		//캠프장의 모든 사이트를 보내줘야한다
-		List<CampSiteDTO> ar = campBookService.getCampSiteList(campDTO);
+		List<CampSiteDTO> siteList = campBookService.getCampSiteList(campDTO);
 		
 		//선택한 사이트의 정보를 CampBookDTO 형태로 만들어서 confirmation 페이지로 넘겨준다. - 계약서를 만드는 느낌으로
 		
 		
-		mv.addObject("siteList", ar);
+		mv.addObject("siteList", siteList);
 		mv.setViewName("camp/book/bookSite");
 		return mv;
 	}
@@ -50,9 +50,14 @@ public class CampBookController {
 	//booking 버튼을 눌렀을 때(site -> confirmation page로 이동)
 	//예약확정페이지(bookConfirmation.jsp) 호출
 	@GetMapping("confirmation")
-	public ModelAndView getCampBookAdd(Long areaNum, String startDate, String lastDate) throws Exception{
+	public ModelAndView getCampBookAdd(HttpSession session, Long areaNum, String startDate, String lastDate) throws Exception{
 		//campSiteDetail 호출 + 날짜 입력되서 넘어가게끔
 		ModelAndView mv = new ModelAndView();
+		
+		//로그인 정보 가져오기
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		memberDTO = campBookService.getMemberDetail(memberDTO);
+		System.out.println(memberDTO.getName());
 		
 		//site정보 보내주기
 		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(areaNum);
@@ -61,6 +66,7 @@ public class CampBookController {
 		campSiteDTO.setLastDate(lastDate);
 		
 		//이렇게 보내면 bookConfirmation page에 campSiteDTO 정보가 나오게됨 - CampSiteDTO 조회해서 bookDTO에 저장하고 보내도 괜찮을려나
+		mv.addObject("dto", memberDTO);
 		mv.addObject("siteDTO", campSiteDTO);
 		mv.setViewName("camp/book/bookConfirmation");
 		return mv;
@@ -79,8 +85,7 @@ public class CampBookController {
 		
 		//CampBookAdd 메서드 호출해서 CampBookDTO 만들기
 		//ModelAndView에 CampBookDTO가 담기게끔 해야하고, 매개변수는 CampSite, CampDTO, member가 있어야 할거같긴함. member는 session에서 가져오는식으로(id 따와야 하니까)
-		//결제api 호출하고 결제가 되면 status가 예약완료로 표시
-		//
+		//add에 성공하면 예약을 한 것이고, 결제페이지에서 결제하면 결제api 호출, 성공하면 결제완료로 status 변경.
 		
 		int result = campBookService.setCampBookAdd(areaNum, campBookDTO);
 		
@@ -114,12 +119,22 @@ public class CampBookController {
 	
 	//예약목록페이지(bookList.jsp) 호출
 	@GetMapping("list")
-	public ModelAndView getCampBookList() throws Exception{
+	public ModelAndView getCampBookList(Long campNum) throws Exception{
 		//해당 캠핑장에서 예약된 사이트 전체를 보여주는 페이지. [사이트이름 / 사용기간 / 결제여부(입금대기,완료 등)]
 		ModelAndView mv = new ModelAndView();
 		
+		//예약된 캠핑장 사이트의 목록을 보여주는 페이지(관리자용)
+		List<CampBookDTO> bookList = campBookService.getCampBookList(campNum);
 		
 		
+		System.out.println("List: "+bookList);
+		
+		
+		for(CampBookDTO campBookDTO : bookList) {
+			System.out.println(campBookDTO.getAreaNum());
+		}
+		
+		mv.addObject("bookList", bookList);
 		mv.setViewName("camp/book/bookList");
 		return mv;
 	}

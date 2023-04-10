@@ -35,7 +35,6 @@ public class StoryCommentService implements CommentService{
 
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO) throws Exception {
-
 		return storyCommentDAO.setBoardAdd(bbsDTO);
 	}
 
@@ -62,7 +61,7 @@ public class StoryCommentService implements CommentService{
 		
 		commentDTO.setDepth(parent.getDepth()+1);
 		
-		commentDTO.setBoardId(parent.getBoardId());
+		((StoryCommentDTO)commentDTO).setBoardId(parent.getBoardId());
 		
 
 		return storyCommentDAO.setSubCommentAdd(commentDTO);

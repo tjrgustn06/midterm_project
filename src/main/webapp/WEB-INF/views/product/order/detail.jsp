@@ -5,16 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>The Camp</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
-	<div class="container-fluid">
-		<div class="row md-7">
-			<h1 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">Order Detail</h1>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle f_48">상품주문정보</h2>
 		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
+	<div class="container">
 		<div class="row justify-content-center">
 			<form id="paymentForm" class="col-md-7" action="./payment" method="post">
 				<div class="row input-group mb-3">
@@ -64,10 +71,10 @@
 					<label for="address" class="form-label">배송지 주소</label>
 					<c:if test="${dto.status eq '입금대기'}">
 						<c:if test="${not empty member.addressDTOs}">
-							<select class="form-select" id="addressSelect">
+							<select class="nice-select form-select" id="addressSelect">
+								<option selected>주소를 선택해 주세요</option>
+								<option>주소 직접 입력</option>
 								<c:forEach items="${member.addressDTOs}" var="addressDTO">
-									<option selected>주소를 선택해 주세요</option>
-									<option>주소 직접 입력</option>
 									<option value="${addressDTO.address} ${addressDTO.addressDetail}">${addressDTO.addressName}</option>
 								</c:forEach>
 							</select>
@@ -134,6 +141,11 @@
 
 		$('#addressSelect').on('change','#address',function(){
 			$(this).val($('#addressSelect').prop())
+		})
+	</script>
+	<script>
+		$('#addressSelect').change(function(){
+			$('#address').val($(this).val())
 		})
 	</script>
 	<c:import url="../../template/common_js.jsp"></c:import>

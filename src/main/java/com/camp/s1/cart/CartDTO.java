@@ -2,6 +2,8 @@ package com.camp.s1.cart;
 
 import java.sql.Date;
 
+import com.camp.s1.product.ProductFileDTO;
+
 public class CartDTO {
 	private Long cartNum;
 	private String id;
@@ -15,6 +17,14 @@ public class CartDTO {
 	private Integer amount;
 	private Long price;
 	
+	private ProductFileDTO productFileDTO;
+	
+	public ProductFileDTO getProductFileDTO() {
+		return productFileDTO;
+	}
+	public void setProductFileDTO(ProductFileDTO productFileDTO) {
+		this.productFileDTO = productFileDTO;
+	}
 	public String getOrderer() {
 		return orderer;
 	}

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.camp.s1.cart.CartDTO;
+import com.camp.s1.member.MemberDTO;
 import com.camp.s1.util.FileManager;
 import com.camp.s1.util.Pager;
 
@@ -48,6 +50,16 @@ public class ProductService {
 		
 		return ar;
 		
+	}
+	
+	// CartBar 출력
+	public List<CartDTO> getCartBarList(CartDTO cartDTO) throws Exception {
+		List<CartDTO> ar = productDAO.getCartBarList(cartDTO);
+		for(CartDTO cartDTO2:ar) {
+			cartDTO2.setProductFileDTO(productDAO.getCartBarFileDetail(cartDTO2));
+		}
+		
+		return ar; 
 	}
 	
 	// Detail 상세페이지 출력

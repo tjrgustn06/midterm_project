@@ -48,6 +48,7 @@
 		ul, ol, li{
 			list-style: none;
 			font-size: 0.9rem;
+			margin: 1px 0px;
 		}
 
 		.infoNotice{
@@ -66,6 +67,19 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">CAMPBOOK</h2>
+				<ol class="breadcrumb">
+					<li>캠핑장을 자세히 알려드릴게요</li>
+				</ol>
+		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
 	<div class="row my-3">
 		<h1>${dto.name}</h1>
@@ -165,7 +179,7 @@
 			<div class="layout">
 				<!-- 탭영역 - 다단 라인 / 탭영역으로 화면이동을 하고싶다면 주소 끝에 #contents 붙여주면 됨 -->
 				<div id="viewType" data-viewType="${viewType}"></div>
-				<ul class="nav nav-pills nav-fill">
+				<ul class="navbar navbar-pills nav-fill">
 					<li class="nav-item" id="c_intro">
 						<a class="nav-link camp camp_intro active" aria-current="page" href="./detail?campNum=${dto.campNum}&viewType=1">캠핑장 소개</a>
 					</li>

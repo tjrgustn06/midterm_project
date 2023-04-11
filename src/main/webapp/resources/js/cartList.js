@@ -31,7 +31,7 @@ $('.cartOrder').click(function(){
         
         $.ajax({
             type : 'POST',
-            url : '/product/order/order',
+            url : '/product/order/cartEachOrder',
             data : form,
             success : function(response){
                 if(response.trim()>0){
@@ -115,7 +115,7 @@ $('#allForm').click(()=>{
         let form = $('#cartAllForm').serialize()
         $.ajax({
             type : 'POST',
-            url : '/product/order/cartOrder',
+            url : '/product/order/cartAllOrder',
             data : form,
             success : function(response){
                 if(response.trim()>0){

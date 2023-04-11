@@ -47,7 +47,7 @@ public class ProductController {
 				return mv;
 			}
 			pager.setId(memberDTO.getId());
-			List<CartDTO> ar =productService.getCartBarList(pager);
+			List<CartDTO> ar = productService.getCartBarList(pager);
 			
 			mv.addObject("cartList", ar);
 			mv.setViewName("common/cartList");

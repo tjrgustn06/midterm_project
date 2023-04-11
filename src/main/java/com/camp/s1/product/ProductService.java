@@ -58,7 +58,7 @@ public class ProductService {
 		pager.makeRow();
 		List<CartDTO> ar = productDAO.getCartBarList(pager);
 		for(CartDTO cartDTO:ar) {
-			cartDTO.setProductFileDTO(productDAO.getCartBarFileDetail(cartDTO));
+			cartDTO.setProductFileDTOs(productDAO.getCartBarFileList(cartDTO));
 		}
 		
 		return ar; 

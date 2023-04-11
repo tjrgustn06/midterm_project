@@ -5,7 +5,11 @@
 	<c:choose>
 		<c:when test="${not empty cartList}">
 			<c:forEach items="${cartList}" var="dto">
-        		<img src="../resources/upload/product/${dto.productFileDTO.fileName}" alt="" style="width: 50%; height: 50%;">
+				<c:forEach items="${dto.productFileDTOs}" var="fileDTO" varStatus="i">
+					<c:if test="${i.first}">
+		        		<img src="../resources/upload/product/${fileDTO.fileName}" alt="" style="width: 50%; height: 50%;">
+					</c:if>
+				</c:forEach>
 				<p>${dto.name}</p>
 			</c:forEach>
 		</c:when>

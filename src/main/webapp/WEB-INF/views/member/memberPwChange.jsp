@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>The Camp</title>
+<c:import url="../template/common_css.jsp"></c:import>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 	<div class="container-fluid">
 	<div class="row justify-content-center">
 	<form id="pwForm" action="memberPwChange" method="post">	
@@ -30,6 +33,8 @@
 	</form>
 	</div>
 	</div>
+<c:import url="../template/footer.jsp"></c:import>
+<c:import url="../template/common_js.jsp"></c:import>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(function(){

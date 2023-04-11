@@ -153,10 +153,11 @@ $('#datepicker').change(function(){
 })
 
 
-//제목입력 후 enter 누르면 form submit 되어버리는 경우 방지
+//캠핑장이름 입력 후 enter 누르면 form submit 되어버리는 경우 방지
 $('#name').keydown(function(event){
     if(event.keyCode == 13) {
         event.preventDefault();
+        getSearchList();
         return;
     }
 })
@@ -183,7 +184,7 @@ function getSearchList() {
         data : {
             doName : $('#doName').val(),
             sigunguName : $('#sigunguName').val(),
-            name : $('#name').val()
+            campName : $('#name').val()
         },
         dataType : 'JSON',
         success : function(data){
@@ -207,8 +208,8 @@ function getSearchList() {
                     idx++;
                 }
                 str = '<li class="list-group-item">';
-                str += '<input class="form-check-input me-1" type="checkbox" name="campChk" id="campNum'+data[i].campNum+'" value="'+data[i].name+'" data-camp-num="'+data[i].campNum+'" aria-label="...">';
-                str += data[i].name;
+                str += '<input class="form-check-input me-1" type="checkbox" name="campChk" id="campNum'+data[i].campNum+'" value="'+data[i].campName+'" data-camp-num="'+data[i].campNum+'" aria-label="...">';
+                str += data[i].campName;
                 str += '</li>';
                 $('#searchList'+idx).append(str);
             }

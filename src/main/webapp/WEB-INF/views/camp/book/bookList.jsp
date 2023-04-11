@@ -35,6 +35,13 @@
 
 	<hr>
 
+	<!-- 돌아가기 버튼 -->
+	<div class="d-flex justify-content-center my-2">
+		<button id="listCancel" type="button" class="genric-btn primary">돌아가기</button>
+	</div>
+
+	<hr>
+
 	<div class="row my-2">
 		<div class="col-10">
 			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 사이트 예약 리스트</h5>
@@ -46,6 +53,7 @@
 
 	<!-- 해당 캠핑장의 모든 예약 리스트를 볼 수 있음 -->
 	<div class="row my-2" id="bookList">
+		<input type="hidden" name="campNum" value="${campDTO.campNum}">
 		<!-- index는 0부터 시작, count는 1부터 시작 -->
 		<c:choose>
 			<c:when test="${not empty bookList}">
@@ -100,6 +108,7 @@
 
 
 </div>
+<script src="../../resources/js/camp/book.js"></script>
 <c:import url="../../template/common_js.jsp"></c:import>
 </body>
 </html>

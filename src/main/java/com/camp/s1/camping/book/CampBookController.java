@@ -58,7 +58,7 @@ public class CampBookController {
 		//로그인 정보 가져오기
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO = campBookService.getMemberDetail(memberDTO);
-		System.out.println(memberDTO.getName());
+		//System.out.println(memberDTO.getName());
 		
 		//site정보 보내주기
 		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(areaNum);

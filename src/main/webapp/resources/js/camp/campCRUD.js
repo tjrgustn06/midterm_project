@@ -404,7 +404,7 @@ function chkValidation(){
 
     //if문으로 빈값인지 체크
     //나중에 주석 해제(alert창, submit)
-    if(ChkName=null || ChkName==''){
+    if(ChkName==null || ChkName==''){
         //alert('캠핑장 이름을 입력하세요');
         return;
     }else if(chkArray.length<1){

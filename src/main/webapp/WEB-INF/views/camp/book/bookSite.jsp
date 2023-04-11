@@ -54,9 +54,9 @@
 			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 예약 기간 설정</h5>
 		</div>
 		<div class="input-group mb-2">
-			<span class="input-group-text" for="startDate">사용 시작일</span>
+			<span class="input-group-text" for="startDate">입실 날짜</span>
 			<input type="text" name="searchStartDate" id="startDate" class="form-control datepicker" placeholder="날짜를 선택하세요" readonly>
-			<span class="input-group-text" for="lastDate">사용 종료일</span>
+			<span class="input-group-text" for="lastDate">퇴실 날짜</span>
 			<input type="text" name="searchLastDate" id="lastDate" class="form-control datepicker" placeholder="날짜를 선택하세요" readonly>
 		</div>
 	</div>
@@ -67,9 +67,6 @@
 		<div class="d-flex justify-content-center my-2">
 			<button id="siteCancel" type="button" class="genric-btn primary">돌아가기</button>
 			<!-- <button id="siteSearch" type="button" class="genric-btn success">검색하기</button> -->
-		</div>
-		<div class="d-flex justify-content-center my-2">
-			<button id="bksConsoleSign" type="button" class="genric-btn primary">확인용</button>
 		</div>
 	</form>
 	<!-- 검색 끝 -->

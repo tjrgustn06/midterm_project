@@ -192,4 +192,12 @@ public class CampBookController {
 	}
 	
 	
+	//예약 취소
+	@PostMapping("delete")
+	public ModelAndView setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
+	
 }

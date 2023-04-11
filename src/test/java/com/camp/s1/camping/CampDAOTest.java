@@ -37,7 +37,7 @@ public class CampDAOTest extends MyTestCase{
 		campDTO = campDAO.getCampDetail(campDTO);
 		if(campDTO != null) {
 			System.out.println(campDTO.getCampNum());
-			System.out.println(campDTO.getName());
+			System.out.println(campDTO.getCampName());
 			System.out.println(campDTO.getPhone());
 			System.out.println(campDTO.getAddress());
 		}else if(campDTO == null) {
@@ -49,7 +49,7 @@ public class CampDAOTest extends MyTestCase{
 	//@Test
 	public void setCampAddTest() throws Exception{
 		CampDTO campDTO = new CampDTO();
-		campDTO.setName("범바위캠핑정원");
+		campDTO.setCampName("범바위캠핑정원");
 		campDTO.setPhone("010-2289-1111");
 		campDTO.setAddress("경기 김포시 대곶면 종생로 154");
 		int result = campDAO.setCampAdd(campDTO);
@@ -68,7 +68,7 @@ public class CampDAOTest extends MyTestCase{
 	public void setCampUpdateTest() throws Exception{
 		CampDTO campDTO = new CampDTO();
 		campDTO.setCampNum(2L);
-		campDTO.setName("글램비캠핑장");
+		campDTO.setCampName("글램비캠핑장");
 		campDTO.setPhone("010-5904-1111");
 		campDTO.setAddress("경기 화성시 서신면 해안길64");
 		int result = campDAO.setCampUpdate(campDTO);

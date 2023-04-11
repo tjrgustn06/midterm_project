@@ -65,8 +65,10 @@ public class CampBookDAO {
 		return sqlSession.selectOne(NAMESPACE+"getCampBookDetail", campBookDTO);
 	}
 	
-	
-	//bookDelete - 예약 취소한 경우
+	//예약취소(삭제)
+	public int setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setCampBookDelete", campBookDTO);
+	}
 	
 	
 }

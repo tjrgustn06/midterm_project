@@ -22,8 +22,8 @@
 		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
 			SELECT CAMPSEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CAMPBOOK(NUM, AREANUM, ID, INDEXCODE, ORDERNUM, PRICE, REGDATE, STARTDATE, LASTDATE, ACCOUNT, STATUS, SITENAME)
-		VALUES(#{num}, #{areaNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, sysdate, #{startDate}, #{lastDate}, #{account}, '입금대기', #{siteName})
+		INSERT INTO CAMPBOOK(NUM, AREANUM, ID, INDEXCODE, ORDERNUM, PRICE, REGDATE, STARTDATE, LASTDATE, ACCOUNT, STATUS, SITENAME, NAME)
+		VALUES(#{num}, #{areaNum}, #{id}, #{indexCode}, #{orderNum}, #{price}, sysdate, #{startDate}, #{lastDate}, #{account}, '입금대기', #{siteName}, #{name})
 	</insert>
 	
 	<!-- getOrderNum -->
@@ -73,6 +73,11 @@
 	<select id="getCampBookDetail" parameterType="CampBookDTO" resultType="CampBookDTO">
 		SELECT * FROM CAMPBOOK WHERE NUM=#{num}
 	</select>
+	
+	<!-- setCampBookDelete -->
+	<delete id="setCampBookDelete">
+	
+	</delete>
 	
 	
 	</mapper>

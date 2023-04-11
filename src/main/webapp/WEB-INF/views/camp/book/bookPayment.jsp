@@ -86,15 +86,11 @@
 			<input type="hidden" name="campNum" value="${siteDTO.campNum}"> <!-- 돌아가기용 -->
 			<div class="siteSize input-group mb-2">
 				<span class="input-group-text" id="siteName">사이트이름</span>
-				<input type="text" name="siteName" class="form-control" value="${siteDTO.siteName}" readonly>
-			</div>
-			<div class="siteSize input-group mb-2">
-				<span class="input-group-text" id="siteSize">크기(m^2)</span>
-				<input type="text" name="siteSize" class="form-control" value="${siteDTO.siteSize}" readonly>
+				<input type="text" name="siteName" class="form-control" value="${bookDTO.siteName}" readonly>
 			</div>
 			<div class="member input-group mb-2">
 				<span class="input-group-text" id="siteName">예약자</span>
-				<input type="text" name="name" class="form-control" value="#" readonly>
+				<input type="text" name="name" class="form-control" value="${bookDTO.name}" readonly>
 			</div>
 			<div class="useDate input-group mb-2">
 				<span class="input-group-text" for="startDate">사용 시작일</span>

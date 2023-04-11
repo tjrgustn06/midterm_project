@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<c:import url="../template/common_css.jsp"></c:import>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords"
@@ -14,7 +15,8 @@
     <meta name="description"
         content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Ample Admin Lite Template by WrapPixel</title>
+	<title>The Camp</title>
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../resources/plugins/images/favicon.png">
@@ -104,32 +106,7 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- PRODUCTS YEARLY SALES -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Products Yearly Sales</h3>
-                            <div class="d-md-flex">
-                                <ul class="list-inline d-flex ms-auto">
-                                    <li class="ps-3">
-                                        <h5><i class="fa fa-circle me-1 text-info"></i>Mac</h5>
-                                    </li>
-                                    <li class="ps-3">
-                                        <h5><i class="fa fa-circle me-1 text-inverse"></i>Windows</h5>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="ct-visits" style="height: 405px;">
-                                <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
-                                        class="chartist-tooltip-value">6</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="container-fluid"> 
                 <!-- ============================================================== -->
                 <!-- RECENT SALES -->
                 <!-- ============================================================== -->
@@ -137,80 +114,106 @@
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
                             <div class="d-md-flex mb-3">
-                                <h3 class="box-title mb-0">Recent sales</h3>
+                                <h3 class="box-title mb-0">회원 등급 관리</h3>
                                 <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
-                                    <select class="form-select shadow-none row border-top">
+                  <!--                   <select class="form-select shadow-none row border-top">
                                         <option>March 2021</option>
                                         <option>April 2021</option>
                                         <option>May 2021</option>
                                         <option>June 2021</option>
                                         <option>July 2021</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="table-responsive">
                                 <table class="table no-wrap">
                                     <thead>
-                                        <tr>
-                                            <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Status</th>
-                                            <th class="border-top-0">Date</th>
-                                            <th class="border-top-0">Price</th>
-                                        </tr>
+                                       <tr>
+											<th scope="col">아이디</th>
+											<th scope="col">비밀번호</th>
+											<th scope="col">회원 이름</th>
+											<th scope="col">전화번호</th>
+											<th scope="col">이메일</th>
+											<th scope="col">현재 등급</th>
+											<th scope="col">변경할 등급</th>
+											<th scope="col">등급 변경</th>
+										</tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 18, 2021</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td>EXTENDED</td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td>EXTENDED</td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td>TAX</td>
-                                            <td class="txt-oflo">April 20, 2021</td>
-                                            <td><span class="text-danger">-$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 21, 2021</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 23, 2021</td>
-                                            <td><span class="text-danger">-$14</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td class="txt-oflo">Helping Hands WP Theme</td>
-                                            <td>MEMBER</td>
-                                            <td class="txt-oflo">April 22, 2021</td>
-                                            <td><span class="text-success">$64</span></td>
-                                        </tr>
+                                     	<c:forEach items="${list}" var="dto" varStatus="i">
+											<tr>
+												<td>${dto.id}</td>
+												<td>${dto.pw}</td>
+												<td>${dto.name}</td>
+												<td>${dto.phone}</td>
+												<td>${dto.email}</td>
+												<td>${dto.roleName}</td>
+												<td>
+												<input type="hidden" name="id" value="${dto.id}">
+												<select id="roleName" name="roleName">
+												<option value="MEMBER" ${dto.roleName eq 'MEMBER' ? 'selected' : ''}> MEMBER</option>
+												<option value="MANAGER" ${dto.roleName eq 'MANAGER' ? 'selected' : ''}>MANAGER</option>
+												<option value="CAMPMANAGER" ${dto.roleName eq 'CAMPMANAGER' ? 'selected' : ''}>CAMPMANAGER</option>
+												</select>
+									  			</td>
+									  			<td>
+									  			<input id="roleNamechange" type="button" class="btn btn-success" value="변경" onclick="${i.count}"/>
+									  			</td>
+											</tr>
+											
+										</c:forEach>
                                     </tbody>
                                 </table>
+                                
+					                                										<!-- 페이징 -->
+								<div class="row">
+									<nav aria-label="Page navigation example">
+									  <ul class="pagination justify-content-center">
+									   <li class="page-item ${pager.before ? 'disabled':''}">
+									      <a class="page-link" aria-label="Previous" href="./memberList?page=1">
+									      	<span aria-hidden="true">&laquo;</span>
+									      </a>
+									   	</li>
+									    <li class="page-item ${pager.before ? 'disabled':''}">
+						   			      <a class="page-link" aria-label="Previous" href="./memberList?page=${pager.startNum-1}">
+									      	<span aria-hidden="true">&lsaquo;</span>
+									      </a>
+									   	</li>
+									   	<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+									    <li class="page-item"><a class="page-link" href="./memberList?page=${i}">${i}</a></li>
+									    </c:forEach>
+									    <li class="page-item ${pager.after ? 'disabled':''}">
+						   			      <a class="page-link" aria-label="Previous" href="./memberList?page=${pager.lastNum+1}">
+									      	<span aria-hidden="true">&rsaquo;</span>
+									      </a>
+									   	</li>
+						 			    <li class="page-item ${pager.after ? 'disabled':''}">
+						   			      <a class="page-link" aria-label="Previous" href="./memberList?page=${pager.totalPage}">
+									      	<span aria-hidden="true">&raquo;</span>
+									      </a>
+									   	</li>
+									  </ul>
+									</nav>
+								</div>
+								
+								<!-- 검색창 -->
+								<div class="row">
+									<form class="row col-md-7 mx-auto" action="./memberList" method="get">
+										<div class="col-auto">
+											<label for="kind" class="visually-hidden">Kind</label> 
+											<select class="form-select" name="kind" id="kind" aria-label="Default select example">
+												<option value="name" ${pager.kind eq 'name' ? 'selected' : ''}>회원 이름</option>
+												<option value="id" ${pager.kind eq 'id' ? 'selected' : ''}>회원 아이디</option> </select>						
+										</div>
+										<div class="col-auto">
+											<label for="search" class="visually-hidden">Search</label>
+											<input type="text" class="form-control" id="search" name="search" placeholder="검색어를 입력하세요">
+										</div>
+										<div class="col-auto">
+											<button type="submit" class="btn btn-success mb-3">검색</button>
+										</div>
+									</form>
+								</div>
                             </div>
                         </div>
                     </div>
@@ -249,9 +252,13 @@
     <script src="../resources/js/custom.js"></script>
     <!--This page JavaScript -->
     <!--chartis chart-->
+    
     <script src="../resources/plugins/bower_components/chartist/dist/chartist.min.js"></script>
     <script src="../resources/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="../resources/js/pages/dashboards/dashboard1.js"></script>
+	<script src="../resources/js/roleNameUpdate.js"></script>
+	<c:import url="../template/common_js.jsp"></c:import>
+    <c:import url="../template/footer.jsp"></c:import>
 </body>
 
 </html>

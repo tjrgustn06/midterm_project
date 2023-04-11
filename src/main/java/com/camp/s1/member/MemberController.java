@@ -312,7 +312,7 @@ public class MemberController {
 			List<MemberDTO> ar = memberService.getMemberList(pager);
 			mv.addObject("list", ar);
 			mv.addObject("pager", pager);
-			mv.setViewName("member/memberList");
+			mv.setViewName("manage/memberList");
 			return mv;
 		}
 

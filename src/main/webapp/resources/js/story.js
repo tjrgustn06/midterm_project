@@ -53,16 +53,23 @@ $('#storyList').on('click', '.report', function(){
     
 })
 
+$('#storyList').on('click', '.btn-close', function(){
+    num = $(this).attr('data-board-num');
 
-function getCommentCount(num) {
+    getCommentCount(num);
+})
+
+function getCommentCount(n) {
+
     $.ajax({
         url : '../'+boardName+'Comment/listCount',
         type : 'GET',
         data : {
-            num : num,
+            num : n,
         },
         success : function(data){
-            $('a[id="getDetail"'+num+']').text('댓글' + data.trim() + '개 모두 보기');
+            $('#getDetail'+n).text('댓글' + data.trim() + '개 모두 보기');
+
         }
     })
 }

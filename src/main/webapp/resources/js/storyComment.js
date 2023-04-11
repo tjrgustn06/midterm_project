@@ -157,6 +157,7 @@ function setCommentAdd(num, contents, writer, parentBoardId) {
                 alert('댓글이 등록되었습니다');
                 $('#'+boardName+num).find('.replyContents').val('');
                 $('#'+boardName+num).find('.modalReplyContents').val('');
+                getCommentCount(num);
                 getCommentList(num, 1);
                 
             }
@@ -218,6 +219,7 @@ $('#'+boardName+'List').on('click', '.deleteMenu', function(){
                 if(response.trim() > 0) {
                     alert("댓글이 삭제되었습니다.");
                     getCommentList(num ,page);
+                    getCommentCount(num);
                 }
                 else {
                     alert("삭제 실패");
@@ -267,7 +269,7 @@ $('#'+boardName+'List').on('click', '.commentUpdate', function(){
             if(response.trim() > 0) {
                 alert('댓글이 수정되었습니다');
                 getCommentList(num, page);
-                // getCommentCount(num);
+                
 
             }
             else {
@@ -366,8 +368,8 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
         success : function(repsonse) {
             if(repsonse.trim()>0) {
                 alert('댓글이 등록되었습니다.');
-                getCommentList(num,1);
                 getList(currentPage);
+                getCommentList(num,1);
             }
             else {
                 alert('댓글 등록 실패. 관리자에게 문의하세요');

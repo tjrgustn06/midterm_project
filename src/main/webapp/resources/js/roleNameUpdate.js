@@ -1,15 +1,21 @@
 
-$('#roleNamechange').click(function(){
-    console.log('check')
+$('#btn').on('click','.change' ,function(){
+    let id = $(this).attr('data-role-id')
+    let num = $(this).attr('data-role-num')
+    let roleName = $('#roleName'+num).val()
+
+    console.log(id)
+    console.log(roleName)
     let check = window.confirm("변경 하시겠습니까?");
 
+    if(check){
 
     $.ajax({
         type: 'POST',
         url: './roleNameUpdate',
         data :{
-            id : $('#id').val(),
-            roleName : $("#roleName").val()
+            id : id,
+            roleName : roleName
         },
         success : function(response){
             if(response.trim()>0){
@@ -21,4 +27,6 @@ $('#roleNamechange').click(function(){
             }
         }
     })
+}
+
 })

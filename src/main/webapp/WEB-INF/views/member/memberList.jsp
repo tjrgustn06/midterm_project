@@ -65,7 +65,6 @@
 	</c:forEach>
 	</tbody>
 </table>
-
 										<!-- 페이징 -->
 				<div class="row">
 			<nav aria-label="Page navigation example">

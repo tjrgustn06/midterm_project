@@ -1,5 +1,5 @@
 const checkAll = document.getElementById("checkAll");
-const checks = document.getElementsByClassName("checks")
+const checks = document.getElementsByClassName("checks");
 const agree = document.getElementById("agree");
 
 agree.addEventListener("click", function(){

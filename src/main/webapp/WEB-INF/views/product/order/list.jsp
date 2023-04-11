@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>The Camp</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 </head>
 <body>
@@ -71,6 +72,7 @@
 			</nav>
 		</div>
 	</div>
+	<c:import url="../../template/footer.jsp"></c:import>
 	<c:import url="../../template/common_js.jsp"></c:import>
 </body>
 </html>

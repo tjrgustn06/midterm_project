@@ -1,5 +1,7 @@
 package com.camp.s1.board.story;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.camp.s1.board.BbsDTO;
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.util.Pager;
 
@@ -142,6 +145,16 @@ public class StoryController {
 		mv.addObject("result", storyService.setBoardFileDelete(fileNum, session));
 		
 		
+		return mv;
+	}
+	
+	@GetMapping("storyfeed")
+	public ModelAndView getStoryFileList(Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		pager.setPerPage(6L);
+		List<BbsDTO> ar = storyService.getBoardList(pager);
+		mv.addObject("list", ar);
+		mv.setViewName("common/storyfeed");
 		return mv;
 	}
 	

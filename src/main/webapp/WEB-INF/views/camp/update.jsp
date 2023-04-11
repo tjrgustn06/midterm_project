@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Update ${dto.campName} - The Camping</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>Update ${dto.campName} - The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 	<style>
@@ -430,7 +431,7 @@
 	
 </div>
 
-
+<c:import url="../template/footer.jsp"></c:import>
 <script src="../resources/js/camp/selectBox.js"></script>
 <script src="../resources/js/camp/campCRUD.js"></script>
 <script src="../resources/js/camp/fileManager.js"></script>

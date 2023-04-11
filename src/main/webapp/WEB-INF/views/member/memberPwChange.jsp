@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>The Camp</title>
 </head>
 <body>
 	<div class="container-fluid">

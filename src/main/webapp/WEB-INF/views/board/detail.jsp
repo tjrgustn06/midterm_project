@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/common_css.jsp"></c:import>
-<title>Insert title here</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>The Camp</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -83,6 +84,7 @@
 
 	</div>
 </div>
+<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 	<script type="text/javascript" src="../resources/js/comment.js"></script>
 	<script>

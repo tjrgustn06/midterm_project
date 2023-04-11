@@ -7,7 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>아이디 찾기 검색결과</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>아이디 찾기 검색결과 - The Camp</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>

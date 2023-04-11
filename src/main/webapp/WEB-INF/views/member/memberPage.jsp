@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 </head>
 <body>
@@ -56,6 +57,7 @@
 			<button id="delete" class="btn btn-danger" type="submit">회원 탈퇴</button>
 			</div>
 	</div>
+<c:import url="../template/footer.jsp"></c:import>
 <c:import url="../template/common_js.jsp"></c:import>
 <script src="../resources/js/memberPage.js"></script>
 </body>

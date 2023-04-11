@@ -11,7 +11,7 @@
 				<div class="card-body">
 				  <h5 class="card-title">${dto.name}</h5>
 				  <p class="card-text">${dto.summary}</p>
-				  <a href="./detail?productNum=${dto.productNum}" class="btn theme_btn button_hover success">상세보기</a>
+				  <a href="./product/detail?productNum=${dto.productNum}" class="btn theme_btn button_hover success">상세보기</a>
 				</div>
 			</div>
 		</c:forEach>

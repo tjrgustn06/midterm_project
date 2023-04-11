@@ -83,7 +83,7 @@
                 <!-- ============================================================== -->
                 <!-- RECENT SALES -->
                 <!-- ============================================================== -->
-                <div class="row">
+                <div class="row" id="reportList">
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
                             <div class="d-md-flex mb-3">
@@ -102,40 +102,43 @@
                                 <table class="table no-wrap">
                                     <thead>
                                        <tr>
-											<th scope="col">아이디</th>
-											<th scope="col">비밀번호</th>
-											<th scope="col">회원 이름</th>
-											<th scope="col">전화번호</th>
-											<th scope="col">이메일</th>
-											<th scope="col">현재 등급</th>
-											<th scope="col">변경할 등급</th>
-											<th scope="col">등급 변경</th>
+											<th scope="col">신고 번호</th>
+											<th scope="col">신고 사유</th>
+											<th scope="col">신고자</th>
+											<th scope="col">글 내용</th>
+											<th scope="col">글 작성자</th>
+											<th scope="col">신고일자</th>
 										</tr>
                                     </thead>
                                     <tbody class="table-group-divider" id="btn">
                                      	<c:forEach items="${list}" var="dto" varStatus="i">
 											<tr>
-                                                <td>${dto.id}</td>
-                                                <td>${dto.pw}</td>
-                                                <td>${dto.name}</td>
-                                                <td>${dto.phone}</td>
-                                                <td>${dto.email}</td>
-                                                <td>${dto.roleName}</td>
-                                                <td>
-                                                <input type="hidden" name="id" value="${dto.id}">
-                                                <input type="hidden" name="pw" value="${dto.pw}">
-                                                <input type="hidden" name="name" value="${dto.name}">
-                                                <input type="hidden" name="phone" value="${dto.phone}">
-                                                <input type="hidden" name="email" value="${dto.email}">
-                                                <select id="roleName${i.count}" name="roleName">
-                                                <option value="MEMBER" ${dto.roleName eq 'MEMBER' ? 'selected' : ''}> MEMBER</option>
-                                                <option value="MANAGER" ${dto.roleName eq 'MANAGER' ? 'selected' : ''}>MANAGER</option>
-                                                <option value="CAMPMANAGER" ${dto.roleName eq 'CAMPMANAGER' ? 'selected' : ''}>CAMPMANAGER</option>
-                                                </select>
-                                                  </td>
-                                                  <td>
-                                                  <input id="roleNamechange" type="button" class="btn btn-success change" value="변경" data-role-num="${i.count}" data-role-id="${dto.id}"/>
-                                                  </td>
+                                                <td>${dto.reportNum}</td>
+                                                <td>${dto.reportContents}</td>
+                                                <td>${dto.reporter}</td>
+                                                <td id="reportedContents${dto.reportNum}">
+                                                    <script>
+                                                        $(function(){
+                                                            let contents = '${dto.reportedContents}';
+                                                            let maxStr = 5;
+
+                                                            if(contents.length >= maxStr) {
+                                                                contents = contents.substring(0,maxStr)+'...';
+                                                            }
+
+                                                            $('#reportedContents'+'${dto.reportNum}').text(contents);
+                                                        })
+                                                        
+                                                    </script>
+                                                </td>
+                                                <td>${dto.reportedUser}</td>
+                                                <td>${dto.reportDate}</td>
+                                                 <td>
+                                                 	<button type="button" class="btn genric-btn success accept" value="3" data-report-num="${dto.reportNum}">승인</button>
+                                                 </td>
+                                                 <td>
+                                                    <button type="button" class="btn genric-btn primary denied" value="2" data-report-num="${dto.reportNum}">거절</button>
+                                                </td>
                                             </tr>
 										</c:forEach>
                                     </tbody>
@@ -232,7 +235,7 @@
     <script src="../resources/plugins/bower_components/chartist/dist/chartist.min.js"></script>
     <script src="../resources/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="../resources/js/pages/dashboards/dashboard1.js"></script>
-	<script src="../resources/js/roleNameUpdate.js"></script>
+	<script src="../resources/js/report.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
     <c:import url="../template/footer.jsp"></c:import>
 </body>

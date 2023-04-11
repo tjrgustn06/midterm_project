@@ -383,8 +383,9 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
 $('#'+boardName+'List').on('click','.reportMenu', function(){
     commentNum = $(this).attr('data-comment-num');
     reportedUser = $(this).attr('data-comment-writer');
+    let reportedContents = $('contents'+commentNum).text();
     
-    reportAdd(num, boardId+1, reportedUser, commentNum);
+    reportAdd(num, boardId+1, reportedUser, reportedContents, commentNum);
 })
 
 

@@ -52,8 +52,7 @@
 											</div>
 										</span>
 									</div>
-									<div id="contents${dto.commentNum}">${dto.contents}
-									</div>
+									<div id="contents${dto.commentNum}">${dto.contents}</div>
 									<!-- Child comment 1-->
 									<!-- <c:forEach begin="1" end="${dto.depth}" varStatus="s">
 										<c:if test="${s.last}">

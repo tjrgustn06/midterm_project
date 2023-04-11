@@ -315,6 +315,8 @@ public class MemberController {
 			mv.setViewName("manage/memberList");
 			return mv;
 		}
+		
+	
 
 
 }

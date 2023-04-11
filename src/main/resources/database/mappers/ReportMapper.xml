@@ -6,27 +6,54 @@
 
   <mapper namespace="com.camp.s1.report.reportDAO">
   	<insert id="setReportAdd" parameterType="ReportDTO">
-  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT)
-  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult})
+  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT, REPORTEDCONTENTS)
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult}, #{reportedContents})
   	</insert>
   	
 	<insert id="setCommentReportAdd" parameterType="ReportDTO">
-  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, COMMENTNUM, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT)
-  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{commentNum}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult})
+  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, COMMENTNUM, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT, REPORTEDCONTENTS)
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{commentNum}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult}, #{reportedContents})
   	</insert>
   	
-  	<select id="getParentNum" parameterType="ReportDTO" resultType="ReportDTO">
-  		SELECT NUM FROM 
-  	</select>
-  	
-  	<select id="getReportList" parameterType="ReportDTO" resultType="ReportDTO">
-  		SELECT * FROM REPORT
+  	<select id="getReporterList" parameterType="ReportDTO" resultType="ReportDTO">
+  		SELECT REPORTER FROM REPORT
 		<where>
 			NUM = #{num}
 			<if test="commentNum != null">
 				AND COMMENTNUM = #{commentNum}
 			</if>	
 		</where>
-  		
   	</select>
+  	
+<!--   	<select id="getBoardName" parameterType="ReportDTO" resultType="BoardTypeDTO">
+  		SELECT BT.BOARDNAME FROM REPORT R
+  		JOIN
+  		BOARDTYPE BT
+  		USING(BOARDID)
+  		WHERE boardId = #{boardId}
+  		
+  	</select> -->
+  	
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(REPORTNUM) FROM REPORT
+  	</select>
+  	
+  	<select id="getReportList" parameterType="Pager" resultType="ReportDTO">
+  		SELECT * FROM	
+	  		(
+		  	SELECT ROWNUM R, S.* FROM
+				  	(
+				  	SELECT * FROM REPORT
+				  	ORDER BY REPORTNUM DESC
+				  	) S
+		  	)
+	  	WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<update id="setReportResult" parameterType="ReportDTO">
+  		UPDATE REPORT SET REPORTRESULT = #{reportResult}
+  		WHERE REPORTNUM = #{reportNum}
+  	</update>
+  	
+  	
   </mapper>

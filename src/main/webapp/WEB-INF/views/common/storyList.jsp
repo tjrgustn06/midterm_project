@@ -74,7 +74,7 @@
 					
 					</c:if>
 
-					    <p class="card-text">${dto.contents}</p>
+					    <p class="card-text" id="contents${dto.num}">${dto.contents}</p>
 					    <p class="card-text"><small class="text-muted">${dto.regDate}</small></p>
 					  </div>
 

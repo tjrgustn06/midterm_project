@@ -49,7 +49,8 @@ $('#storyList').on('click','.update', function(){
 $('#storyList').on('click', '.report', function(){
     num = $(this).attr('data-board-num');
     let reportedUser = $(this).attr('data-board-writer');
-    reportAdd(num, boardId, reportedUser);
+    let reportedContents = $('#contents'+num).text();
+    reportAdd(num, boardId, reportedUser, reportedContents);
     
 })
 

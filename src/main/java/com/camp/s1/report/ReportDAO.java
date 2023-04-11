@@ -6,6 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.camp.s1.board.BoardTypeDTO;
+import com.camp.s1.util.Pager;
+
 @Repository
 public class ReportDAO {
 	
@@ -26,9 +29,24 @@ public class ReportDAO {
 		return sqlSession.selectOne(NAMESPACE + "getParentNum", reportDTO);
 	}
 	
-	public List<ReportDTO> getReportList(ReportDTO reportDTO) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getReportList", reportDTO);
+	public List<ReportDTO> getReporterList(ReportDTO reportDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getReporterList", reportDTO);
 	}
+	
+	public List<ReportDTO> getReportList(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getReportList", pager);
+	}
+	
+	public Long getTotalCount(Pager pager) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getTotalCount", pager);
+	}
+	
+	public int setReportResult(ReportDTO reportDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "setReportResult", reportDTO);
+	}
+	
+	
+	
 	
 	
 }

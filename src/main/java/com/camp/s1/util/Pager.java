@@ -5,6 +5,9 @@ public class Pager {
 	// 개인정보를 위한 id
 	private String id;
 	
+	// 게시판 구분을 위한 변수
+	private String boardName;
+	
 	// 검색
 	
 	
@@ -208,5 +211,15 @@ public class Pager {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public String getBoardName() {
+		return boardName;
+	}
+
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+	
+	
 	
 }

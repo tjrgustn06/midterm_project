@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.s1.board.BbsDTO;
 import com.camp.s1.board.BoardDTO;
+import com.camp.s1.util.Pager;
 
 @RequestMapping("**/report/*")
 @Controller
@@ -35,11 +36,7 @@ public class ReportController {
 	@PostMapping("report")
 	public ModelAndView setReportAdd(ReportDTO reportDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-		System.out.println("Num :" + reportDTO.getNum());
-		System.out.println("BoardID :" + reportDTO.getBoardId());
-		System.out.println("CommentNum :" + reportDTO.getCommentNum());
-		
+			
 		int result = reportService.setReportAdd(reportDTO);
 		
 		String msg = "신고가 정상적으로 신청되지 못했습니다";
@@ -58,4 +55,27 @@ public class ReportController {
 		mv.addObject("url", "/");
 		return mv ;
 	}
+	
+	@GetMapping("list")
+	public ModelAndView getReportList(ReportDTO reportDTO, Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/manage/reportList");
+		mv.addObject("list", reportService.getReportList(pager));
+		mv.addObject("pager", pager);
+		
+		
+		return mv;
+	}
+	
+	@PostMapping("result")
+	public ModelAndView setReportResult(ReportDTO reportDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		
+		
+		
+		return mv;
+	}
+	
 }

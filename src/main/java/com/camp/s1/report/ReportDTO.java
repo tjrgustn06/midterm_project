@@ -1,6 +1,9 @@
 package com.camp.s1.report;
 
-import javax.xml.crypto.Data;
+import java.sql.Date;
+
+import com.camp.s1.board.BoardDTO;
+
 
 public class ReportDTO {
 	private Long reportNum;
@@ -11,7 +14,10 @@ public class ReportDTO {
 	private String reporter;
 	private String reportedUser;
 	private String reportContents;
-	private Data reportDate;
+	private String reportedContents;
+	private Date reportDate;
+	
+	private BoardDTO boardDTO;
 	
 	public Long getReportNum() {
 		return reportNum;
@@ -63,13 +69,26 @@ public class ReportDTO {
 	public void setReportedUser(String reportedUser) {
 		this.reportedUser = reportedUser;
 	}
-	public Data getReportDate() {
+	public Date getReportDate() {
 		return reportDate;
 	}
-	public void setReportDate(Data reportDate) {
+	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
 	}
+	public BoardDTO getBoardDTO() {
+		return boardDTO;
+	}
+	public void setBoardDTO(BoardDTO boardDTO) {
+		this.boardDTO = boardDTO;
+	}
+	public String getReportedContents() {
+		return reportedContents;
+	}
+	public void setReportedContents(String reportedContents) {
+		this.reportedContents = reportedContents;
+	}
 	
+
 	
 	
 	

@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/common_css.jsp"></c:import>
-<title>Insert title here</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>The Camp</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -61,7 +62,8 @@
 	</div>
 
 
-
+	
+	<c:import url="../template/footer.jsp"></c:import>
 	<script src="../resources/js/fileManager.js"></script>
 	<script>
 		setParam('files');

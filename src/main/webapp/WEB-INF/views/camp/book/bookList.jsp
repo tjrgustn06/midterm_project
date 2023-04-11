@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>bookList - The Camping</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>bookList - The Camp</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -93,6 +94,7 @@
 
 
 </div>
+<c:import url="../../template/footer.jsp"></c:import>
 <c:import url="../../template/common_js.jsp"></c:import>
 </body>
 </html>

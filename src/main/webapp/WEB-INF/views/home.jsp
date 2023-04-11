@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link rel="icon" href="/resources/images/Logo.png" type="image/png">
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
 	<title>The Camp</title>
 </head>
 <c:import url="./template/common_css.jsp"></c:import>

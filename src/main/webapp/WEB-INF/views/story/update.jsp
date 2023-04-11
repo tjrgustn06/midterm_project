@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <!-- 제이쿼리 ui css -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -238,6 +239,7 @@ $(function() {
     
 
 </div>
+<c:import url="../template/footer.jsp"></c:import>
 <script src="../resources/js/campSearchForm.js"></script>
 <script src="../resources/js/fileManager.js"></script>
 <script>

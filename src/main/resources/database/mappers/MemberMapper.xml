@@ -54,7 +54,7 @@
 
 <update id="setRoleNameUpdate" parameterType="MemberDTO">
 	UPDATE MEMBER SET ROLENAME=#{roleName}
-	WHERE ROLENAME= 'ADMIN'
+	WHERE ID=#{id}
 </update>
 
 <delete id="setEachAddressDelete" parameterType="AddressDTO">

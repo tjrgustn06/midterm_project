@@ -1,3 +1,4 @@
+<%@page import="com.camp.s1.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,18 +11,18 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+
 <!--================Banner Area =================-->
 <section class="breadcrumb_area blog_banner_two">
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-			
+		<h2 class="page-cover-tittle">회원 목록</h2>
 		</div>
 	</div>
 </section>
 <!--================Banner Area =================-->
 
-<h2 style="text-align: center">회원목록</h2>
 <table class="table table-striped">
   <thead class="table-info">
 	<tr>
@@ -30,29 +31,33 @@
 		<th scope="col">회원 이름</th>
 		<th scope="col">전화번호</th>
 		<th scope="col">이메일</th>
-		<th scope="col">회원 등급</th>
+		<th scope="col">현재 등급</th>
+		<th scope="col">변경할 등급</th>
 		<th scope="col">등급 변경</th>
 	</tr>
 	</thead>
 	 <tbody class="table-group-divider">
-	<c:forEach items="${list}" var="dto">	
+	<c:forEach items="${list}" var="dto" varStatus="i">
 		<tr>
 			<td>${dto.id}</td>
 			<td>${dto.pw}</td>
 			<td>${dto.name}</td>
 			<td>${dto.phone}</td>
 			<td>${dto.email}</td>
+			<td>${dto.roleName}</td>
 			<td>
-			<select name="roleName">
-			<option value="${dto.roleName}" ${pager.kind eq 'MANAGER' ? 'selected' : ''}>MEMBER</option>
-			<option value="${dto.roleName}" ${pager.kind eq 'MANAGER' ? 'selected' : ''}>MANAGER</option>
-			<option value="${dto.roleName}" ${pager.kind eq 'CAMPMANAGER' ? 'selected' : ''}>CAMPMANAGER</option>
+			<input type="hidden" name="id" value="${dto.id}">
+			<select id="roleName" name="roleName">
+			<option value="MEMBER" ${dto.roleName eq 'MEMBER' ? 'selected' : ''}> MEMBER</option>
+			<option value="MANAGER" ${dto.roleName eq 'MANAGER' ? 'selected' : ''}>MANAGER</option>
+			<option value="CAMPMANAGER" ${dto.roleName eq 'CAMPMANAGER' ? 'selected' : ''}>CAMPMANAGER</option>
 			</select>
   			</td>
   			<td>
-  			<button type="submit">변경</button>
+  			<input id="roleNamechange" type="button" class="btn btn-success" value="변경" onclick="${i.count}"/>
   			</td>
 		</tr>
+		
 	</c:forEach>
 	</tbody>
 </table>
@@ -110,5 +115,6 @@
 <input type="button" value="HOME" class="btn" onclick="location.href='/'">
 </div>
 <c:import url="../template/common_js.jsp"></c:import>
+<script src="../resources/js/roleNameUpdate.js"></script>
 </body>
 </html>

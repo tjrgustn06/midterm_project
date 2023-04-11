@@ -105,6 +105,14 @@ public class MemberService {
 		return result;
 	}
 	
+	//roleName 변경
+	public int setRoleNameUpdate(MemberDTO memberDTO)throws Exception {
+		
+		int result = memberDAO.setRoleNameUpdate(memberDTO);
+		
+		return result;
+	}
+	
 	public int setEachAddressDelete(AddressDTO addressDTO)throws Exception{
 		
 		return memberDAO.setEachAddressDelete(addressDTO);
@@ -376,6 +384,8 @@ public class MemberService {
 			
 			return ar;
 		}
+
+
 
 			
 }

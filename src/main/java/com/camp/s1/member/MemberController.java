@@ -182,19 +182,13 @@ public class MemberController {
 	}
 		
 	@PostMapping("roleNameUpdate")
-	public ModelAndView setRoleNameUpdate(MemberDTO memberDTO)throws Exception {
+	public ModelAndView setRoleNameUpdate(MemberDTO memberDTO, HttpSession session)throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
 		
 		int result = memberService.setRoleNameUpdate(memberDTO);
 		
-		String msg="수정 실패";
-		
-		if(result>0) {
-			msg="수정이 완료되었습니다";
-		}
-		
-		
-		mv.addObject("result", msg);
+		mv.addObject("result", result);
 		mv.setViewName("common/result");
 		
 		return mv;

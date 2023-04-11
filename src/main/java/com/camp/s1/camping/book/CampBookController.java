@@ -223,8 +223,12 @@ public class CampBookController {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		memberDTO.setId(memberDTO.getId());
 		
+		//CampBookDTO로 site 조회
+		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
+		
 		int result = campBookService.setCampBookPaymentAdd(paymentDTO, campBookDTO);
-		mv.setViewName("redirect:list");
+		
+		mv.setViewName("redirect:/camp/detail?campNum="+campSiteDTO.getCampNum()+"&viewType=1");
 		
 		return mv;
 	}

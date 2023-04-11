@@ -73,7 +73,7 @@ public class CampBookDAO {
 	
 	//결제하기
 	public int setCampBookPaymentAdd(PaymentDTO paymentDTO) throws Exception{
-		return sqlSession.insert(NAMESPACE+"setCampBookPayment", paymentDTO);
+		return sqlSession.insert(NAMESPACE+"setCampBookPaymentAdd", paymentDTO);
 	}
 	
 	//결제 완료 후 예약상태 변경을 위한 업데이트.(결제 취소나 변경 등에도 사용할 수 있을거같음)

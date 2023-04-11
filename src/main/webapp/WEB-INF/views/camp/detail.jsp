@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${dto.campName} - The Camping</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>${dto.campName} - The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 	<style>
@@ -534,7 +535,7 @@
 	</div>
 
 </div>
-
+<c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c293ea779f66b9a038f4869ccb12bdc&libraries=services"></script>
 <c:import url="../template/common_js.jsp"></c:import>
 <script src="../resources/js/review.js"></script>

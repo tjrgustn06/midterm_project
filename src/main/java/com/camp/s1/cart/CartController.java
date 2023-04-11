@@ -1,5 +1,6 @@
 package com.camp.s1.cart;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -22,9 +23,10 @@ public class CartController {
 	private CartService cartService;
 	
 	@GetMapping("list")
-	public ModelAndView getCartList() throws Exception {
+	public ModelAndView getCartList(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("list", cartService.getCartList());
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		mv.addObject("list", cartService.getCartList(memberDTO));
 		mv.setViewName("cart/list");
 		return mv;
 	}

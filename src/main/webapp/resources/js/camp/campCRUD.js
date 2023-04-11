@@ -190,28 +190,28 @@ if(viewType==4){
 $('#detBook').click(function(){
     //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
     if(confirm('예약 페이지로 넘어가시겠습니까?')){
-        $('#frm').attr('action', './book/site');
-        $('#frm').submit();
+        // $('#frm').attr('action', './book/site');
+        $('#bookFrm').submit();
         //파라미터 따로 안넣었는데 form 안에 campNum 넣으니까 알아서 들어가는거같음
     }
-})
-
-//예약 목록 버튼 작동 - detail.jsp
-$('#detBookList').click(function(){
-    $('#frm').attr('action', './book/list');
-    $('#frm').submit();
-})
-
-//예약 사이트 관리 버튼 작동 - detail.jsp
-$('#detManagement').click(function(){
-    $('#frm').attr('action', './book/management');
-    $('#frm').submit();
 })
 
 //리스트로 - detail.jsp
 $('#detList').click(function(){
     location.href="./list";
 })
+
+//예약 목록 버튼 작동 - detail.jsp
+// $('#detBookList').click(function(){
+//     $('#frm').attr('action', './book/list');
+//     $('#frm').submit();
+// })
+
+//예약 사이트 관리 버튼 작동 - detail.jsp
+// $('#detManagement').click(function(){
+//     $('#frm').attr('action', './book/management');
+//     $('#frm').submit();
+// })
 
 //캠핑장 업데이트 - detail.jsp
 $('#detUpdate').click(function(){
@@ -237,7 +237,7 @@ $('#detDelete').click(function(){
 $('#updCancel').click(function(){
     let check = confirm("정말 취소하시겠습니까? 저장하지 않은 내용은 변경되지 않습니다");
     if(check){
-        location.href="./detail?campNum="+$('#updCampNum').val();
+        location.href="./detail?campNum="+$('#updCampNum').val()+"&viewType=1";
     }
 })
 

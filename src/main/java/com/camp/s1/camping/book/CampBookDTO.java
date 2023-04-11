@@ -15,6 +15,8 @@ public class CampBookDTO {
 	private String lastDate;
 	private String account;
 	private String status;
+	private String siteName; //예약자리이름
+	private String name; //예약자이름(로그인 한 사람)
 	
 	public CampBookDTO() {
 		
@@ -106,6 +108,22 @@ public class CampBookDTO {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getSiteName() {
+		return siteName;
+	}
+
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

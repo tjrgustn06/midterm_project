@@ -38,16 +38,11 @@ public class ProductController {
 	
 	// CartBar 출력
 		@GetMapping("cartBar")
-		public ModelAndView getcartBarList(HttpSession session) throws Exception {
+		public ModelAndView getcartBarList(Pager pager, HttpSession session) throws Exception {
 			ModelAndView mv = new ModelAndView();
 			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-			CartDTO cartDTO = new CartDTO();
-			
-			cartDTO.setId(memberDTO.getId());
-			List<CartDTO> ar =productService.getCartBarList(cartDTO);
-			System.out.println("check");
-			ar.size();
-			
+			pager.setId(memberDTO.getId());
+			List<CartDTO> ar =productService.getCartBarList(pager);
 			
 			mv.addObject("cartList", ar);
 			mv.setViewName("common/cartList");

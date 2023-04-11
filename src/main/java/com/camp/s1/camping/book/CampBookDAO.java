@@ -55,10 +55,20 @@ public class CampBookDAO {
 		return sqlSession.selectList(NAMESPACE+"getCampBookList", campNum);
 	}
 	
-	//bookConfirmed - bookConfirmation.jsp에서 최종 확인한 경우
+	//캠프장 정보 조회 - CampDTO
+	public CampDTO getCampDetail(Long campNum) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCampDetail", campNum);
+	}
 	
+	//캠프장 예약 정보 하나 조회 - CampBookDTO(parameter num으로)
+	public CampBookDTO getCampBookDetail(CampBookDTO campBookDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCampBookDetail", campBookDTO);
+	}
 	
-	//bookDelete - bookConfirmation.jsp에서 취소한 경우
+	//예약취소(삭제)
+	public int setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setCampBookDelete", campBookDTO);
+	}
 	
 	
 }

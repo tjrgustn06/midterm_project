@@ -53,10 +53,10 @@ public class ProductService {
 	}
 	
 	// CartBar 출력
-	public List<CartDTO> getCartBarList(CartDTO cartDTO) throws Exception {
-		List<CartDTO> ar = productDAO.getCartBarList(cartDTO);
-		for(CartDTO cartDTO2:ar) {
-			cartDTO2.setProductFileDTO(productDAO.getCartBarFileDetail(cartDTO2));
+	public List<CartDTO> getCartBarList(Pager pager) throws Exception {
+		List<CartDTO> ar = productDAO.getCartBarList(pager);
+		for(CartDTO cartDTO:ar) {
+			cartDTO.setProductFileDTO(productDAO.getCartBarFileDetail(cartDTO));
 		}
 		
 		return ar; 

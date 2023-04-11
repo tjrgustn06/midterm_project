@@ -8,7 +8,6 @@ $('#roleNamechange').click(function(){
         type: 'POST',
         url: './roleNameUpdate',
         data :{
-            id : $('#id').val(),
             roleName : $("#roleName").val()
         },
         success : function(response){

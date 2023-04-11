@@ -47,6 +47,10 @@
 			<td>${dto.roleName}</td>
 			<td>
 			<input type="hidden" name="id" value="${dto.id}">
+			<input type="hidden" name="pw" value="${dto.pw}">
+			<input type="hidden" name="name" value="${dto.name}">
+			<input type="hidden" name="phone" value="${dto.phone}">
+			<input type="hidden" name="email" value="${dto.email}">
 			<select id="roleName" name="roleName">
 			<option value="MEMBER" ${dto.roleName eq 'MEMBER' ? 'selected' : ''}> MEMBER</option>
 			<option value="MANAGER" ${dto.roleName eq 'MANAGER' ? 'selected' : ''}>MANAGER</option>
@@ -57,7 +61,6 @@
   			<input id="roleNamechange" type="button" class="btn btn-success" value="변경" onclick="${i.count}"/>
   			</td>
 		</tr>
-		
 	</c:forEach>
 	</tbody>
 </table>

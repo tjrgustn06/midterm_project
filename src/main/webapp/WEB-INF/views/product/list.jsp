@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css">
@@ -116,6 +117,7 @@
 		</div>
 	</div>
 </section>
+	<c:import url="../template/footer.jsp"></c:import>
 	<script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
 	<script>

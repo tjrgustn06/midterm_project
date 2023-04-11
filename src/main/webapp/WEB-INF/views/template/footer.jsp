@@ -36,6 +36,8 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="single-footer-widget storyfeed">
 					<h6 class="footer_title">STORYFEED</h6>
+					<div id="storyfeed">
+					</div>
 				</div>
 			</div>
 							
@@ -53,5 +55,18 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		function getStoryfeed(page){
+			$.ajax({
+				type : 'GET',
+				url : '../../../../story/storyfeed?page='+page,
+				success : (response)=>{
+					$('#storyfeed').html(response)
+				}
+			})
+		}
+		getStoryfeed(1)
+		
+	</script>
 </footer>
 <!--================ End footer Area  =================-->

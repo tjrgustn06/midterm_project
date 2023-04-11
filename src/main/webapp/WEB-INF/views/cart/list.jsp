@@ -21,7 +21,10 @@
 		<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 		<div class="container">
 			<div class="page-cover text-center">
-				<h2 class="page-cover-tittle f_48">장바구니</h2>
+				<h2 class="page-cover-tittle f_48">CART</h2>
+				<ol class="breadcrumb">
+					<li>장바구니를 확인해보세요</li>
+				</ol>
 			</div>
 		</div>
 	</section>

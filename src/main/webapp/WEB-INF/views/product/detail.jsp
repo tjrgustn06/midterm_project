@@ -17,7 +17,7 @@
 	.quickmenu{
 		position:absolute; 
 		width: 150px;
-        height: 300px;
+        height: auto;
         right: 50px;
         border-radius: 10px;
         border: 1px solid #dddddd;
@@ -31,7 +31,10 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-			<h2 class="page-cover-tittle">물품대여</h2>
+			<h2 class="page-cover-tittle">RENT</h2>
+			<ol class="breadcrumb">
+				<li>캠핑장비를 자세히 알려드릴께요</li>
+			</ol>
 		</div>
 	</div>
 </section>
@@ -44,15 +47,43 @@
 				<a href="/cart/list">
 					장바구니
 				</a><br>
+				<a href="./list">목록으로</a><br>
 				<a href="#">위로가기</a>
 			</div>
+		</div>
+		<div class="row md-7">
+			<p class="col-md-7 mx-auto text-center border-bottom border-dark pb-4"></p>
 		</div>
 		<c:if test="${not empty dto.productNum}">
 			<div class="row col-6 mx-auto mb-3">
 				<h1>${dto.name}</h1>
-				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
-					<img src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
-				</c:forEach>
+				<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+				    	<c:forEach items="${dto.productFileDTOs}" var="fileDTO" varStatus="i">
+				    		<c:choose>
+				    			<c:when test="${i.first}">
+						    		<div class="carousel-item active">
+										<img src="../resources/upload/product/${fileDTO.fileName}" class="d-block w-100" alt="Card image cap" style="height: 500px;">
+							    	</div>
+				    			</c:when>
+					    		<c:otherwise>
+						    	<div class="carousel-item">
+									<img src="../resources/upload/product/${fileDTO.fileName}" class="d-block w-100" alt="Card image cap" style="height: 500px;">
+						    	</div>
+					    		</c:otherwise>
+				    		</c:choose>
+						</c:forEach>
+			  		</div>
+				  	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+				
 	   			<div class="item-line">
 	    			<p>${dto.summary}</p>
 	   			</div>

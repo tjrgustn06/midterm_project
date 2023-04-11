@@ -1,6 +1,7 @@
 package com.camp.s1.cart;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.camp.s1.product.ProductFileDTO;
 
@@ -17,13 +18,13 @@ public class CartDTO {
 	private Integer amount;
 	private Long price;
 	
-	private ProductFileDTO productFileDTO;
+	private List<ProductFileDTO> productFileDTOs;
 	
-	public ProductFileDTO getProductFileDTO() {
-		return productFileDTO;
+	public List<ProductFileDTO> getProductFileDTOs() {
+		return productFileDTOs;
 	}
-	public void setProductFileDTO(ProductFileDTO productFileDTO) {
-		this.productFileDTO = productFileDTO;
+	public void setProductFileDTOs(List<ProductFileDTO> productFileDTOs) {
+		this.productFileDTOs = productFileDTOs;
 	}
 	public String getOrderer() {
 		return orderer;

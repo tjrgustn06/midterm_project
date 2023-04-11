@@ -16,12 +16,18 @@
             <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
             <div class="container">
                 <div class="page-cover text-center">
-                    <h2 class="page-cover-tittle f_48">상품주문정보</h2>
+                    <h2 class="page-cover-tittle f_48">PRODUCTORDER</h2>
+					<ol class="breadcrumb">
+						<li>주문한 상품을 확인해보세요</li>
+					</ol>
                 </div>
             </div>
         </section>
         <!--================Breadcrumb Area =================-->
 		<div class="container col-6">
+		<div class="row md-7">
+			<p class="col-md-7 mx-auto text-center border-bottom border-dark pb-4"></p>
+		</div>
 		<div class="row">
 			<table class="table table-hover">
 				<c:choose>

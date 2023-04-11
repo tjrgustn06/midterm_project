@@ -41,6 +41,11 @@ public class ProductController {
 		public ModelAndView getcartBarList(Pager pager, HttpSession session) throws Exception {
 			ModelAndView mv = new ModelAndView();
 			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+			if(memberDTO==null) {
+				mv.addObject("cartList", memberDTO);
+				mv.setViewName("common/cartList");
+				return mv;
+			}
 			pager.setId(memberDTO.getId());
 			List<CartDTO> ar =productService.getCartBarList(pager);
 			

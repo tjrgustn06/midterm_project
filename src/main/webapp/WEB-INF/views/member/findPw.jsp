@@ -9,9 +9,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
+<c:import url="../template/common_css.jsp"></c:import>
 <title>비밀 번호 찾기 - The Camp</title>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
@@ -33,6 +35,8 @@
 			</div>
 		</div>
 	</div>
+<c:import url="../template/footer.jsp"></c:import>
+<c:import url="../template/common_js.jsp"></c:import>
 	<script>
 	$(function(){
 		$("#findBtn").click(function(){
@@ -56,6 +60,5 @@
 		});
 	})
 </script>
-<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

@@ -37,7 +37,7 @@
 		<th scope="col">등급 변경</th>
 	</tr>
 	</thead>
-	 <tbody class="table-group-divider">
+	 <tbody class="table-group-divider" id="btn">
 	<c:forEach items="${list}" var="dto" varStatus="i">
 		<tr>
 			<td>${dto.id}</td>
@@ -48,17 +48,20 @@
 			<td>${dto.roleName}</td>
 			<td>
 			<input type="hidden" name="id" value="${dto.id}">
-			<select id="roleName" name="roleName">
+			<input type="hidden" name="pw" value="${dto.pw}">
+			<input type="hidden" name="name" value="${dto.name}">
+			<input type="hidden" name="phone" value="${dto.phone}">
+			<input type="hidden" name="email" value="${dto.email}">
+			<select id="roleName${i.count}" name="roleName">
 			<option value="MEMBER" ${dto.roleName eq 'MEMBER' ? 'selected' : ''}> MEMBER</option>
 			<option value="MANAGER" ${dto.roleName eq 'MANAGER' ? 'selected' : ''}>MANAGER</option>
 			<option value="CAMPMANAGER" ${dto.roleName eq 'CAMPMANAGER' ? 'selected' : ''}>CAMPMANAGER</option>
 			</select>
   			</td>
   			<td>
-  			<input id="roleNamechange" type="button" class="btn btn-success" value="변경" onclick="${i.count}"/>
+  			<input id="roleNamechange" type="button" class="btn btn-success change" value="변경" data-role-num="${i.count}" data-role-id="${dto.id}"/>
   			</td>
 		</tr>
-		
 	</c:forEach>
 	</tbody>
 </table>

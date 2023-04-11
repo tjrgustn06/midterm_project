@@ -182,14 +182,14 @@ public class MemberController {
 	}
 		
 	@PostMapping("roleNameUpdate")
-	public ModelAndView setRoleNameUpdate(MemberDTO memberDTO, HttpSession session)throws Exception {
+	public ModelAndView setRoleNameUpdate(MemberDTO memberDTO)throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		
 		int result = memberService.setRoleNameUpdate(memberDTO);
 		
 		mv.addObject("result", result);
-		mv.setViewName("common/result");
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}

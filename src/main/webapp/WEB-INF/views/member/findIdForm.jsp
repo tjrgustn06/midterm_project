@@ -10,9 +10,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>The Camp</title>
+<c:import url="../template/common_css.jsp"></c:import>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<form action="../member/findId" method="post">
@@ -32,5 +34,7 @@
 			</form>
 		</div>
 	</div>
+	<c:import url="../template/footer.jsp"></c:import>
+<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

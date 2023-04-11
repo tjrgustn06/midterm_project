@@ -10,8 +10,11 @@
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>아이디 찾기 검색결과 - The Camp</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<c:import url="../template/common_css.jsp"></c:import>
+<c:import url="../template/header.jsp"></c:import>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
@@ -35,5 +38,7 @@
 		})
 	})
 </script>
+<c:import url="../template/footer.jsp"></c:import>
+<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

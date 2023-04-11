@@ -61,9 +61,8 @@
 				type : 'GET',
 				url : '../../../../story/storyfeed?page='+page,
 				success : (response)=>{
-					$('storyfeed').html(response)
+					$('#storyfeed').html(response)
 				}
-				
 			})
 		}
 		getStoryfeed(1)

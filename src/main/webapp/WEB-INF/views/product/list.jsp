@@ -52,6 +52,7 @@
 					<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
 				</c:forEach>
 				
+				
 				<div class="card-body">
 				  <h5 class="card-title">${dto.name}</h5>
 				  <p class="card-text">${dto.summary}</p>

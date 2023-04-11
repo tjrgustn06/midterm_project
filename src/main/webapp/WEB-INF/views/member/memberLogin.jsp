@@ -28,19 +28,23 @@
 			  	<input type="checkbox" name="remember" value="remember" class="form-check-input" id="remember">
 			  	<label class="form-check-label" for="remember">ID 기억하기</label>
 			</div>
-	  		<button type="submit" class="btn btn-primary">로그인</button>
+	  		<button type="submit" class="btn btn-success">로그인</button>
 	  		<a href="./memberJoin" class="btn btn-info">회원 가입</a>
 		</form>
 	</div>
 </div>
 	<div class="mb-3 form-check">
 <a href="./findIdForm" id="findId" class="btn btn-warning">아이디 찾기</a>
-<a href="./findPw" id="findPw" class="btn btn-dark">비밀번호 찾기</a><br>
+<a href="./findPw" id="findPw" class="btn btn-success">비밀번호 찾기</a><br>
+</div>
 <!-- <a href="./kakaoLogin"  class="btn btn-warning">카카오 로그인</a> -->
+	<div class="row">
+	<div class="justify-content-center">
 <a class="btn btn-warning" href="https://kauth.kakao.com/oauth/authorize?client_id=a68e05dc27f7fb4288530cb001c55c40&redirect_uri=http://localhost:80/member/kakaoLogin&response_type=code">
 	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요
 	본인걸로 수정 시 띄어쓰기 절대 하지 마세요. 오류납니다. -->
 	카카오 로그인</a> 
-</div>
+	</div>
+	</div>
 </body>
 </html>

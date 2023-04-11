@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CampList - The Camping</title>
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
+<title>CampList - The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 	<script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 	<style>

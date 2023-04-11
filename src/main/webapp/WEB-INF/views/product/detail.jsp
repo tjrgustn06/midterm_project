@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>The Camp</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <c:import url="../template/common_css.jsp"></c:import>

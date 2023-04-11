@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${dto.name} - The Camping</title>
+<title>${dto.campName} - The Camping</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 	<style>
@@ -82,7 +82,12 @@
 <!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
 	<div class="row my-3">
-		<h1>${dto.name}</h1>
+		<h1>${dto.campName}</h1>
+	</div>
+
+	<!-- 예약목록 확인 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
+	<div class="d-flex justify-content-end">
+		<a class="genric-btn success" href="./book/list?campNum=${dto.campNum}">예약목록 확인</a>
 	</div>
 	
 	<hr>
@@ -150,22 +155,22 @@
 	</div>
 	
 	<!-- 버튼 - update/delete 모두 campNum이 필요 -->
-	<div class="d-flex">
-		<div class="mx-auto mb-3">
-			<form action="./update" id="frm" method="get">
+	<div>
+		<div class="mx-auto">
+			<form action="./book/site" id="bookFrm" method="get">
 				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 				<input type="hidden" name="campNum" value="${dto.campNum}">
-				<div class="d-flex justify-content-center" id="userBtn">
-					<button id="detBook" type="button" class="genric-btn success medium">booking</button>
-					<button id="detList" type="button" class="genric-btn primary medium">to List</button>
+				<div class="d-flex justify-content-between my-2" id="userBtn">
+					<button id="detList" type="button" class="genric-btn primary">목록으로</button>
+					<button id="detBook" type="button" class="genric-btn success">예약하기</button>
 				</div>
-				<div class="d-flex justify-content-center" id="adminBtn">
-					<button id="detBookList" type="button" class="genric-btn primary medium">bookList</button>
+				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
+				<!-- <div class="d-flex justify-content-between my-2" id="adminBtn">
+					<button id="detBookList" type="button" class="genric-btn primary medium">예약목록</button>
 					<button id="detManagement" type="button" class="genric-btn warning medium">siteModify</button>
-					<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
-					<button id="detUpdate" type="button" class="genric-btn warning medium">update</button>
-					<button id="detDelete" type="button" class="genric-btn danger medium">delete</button>
-				</div>
+					<button id="detDelete" type="button" class="genric-btn danger">삭제</button>
+					<button id="detUpdate" type="button" class="genric-btn primary">수정</button>
+				</div> -->
 			</form>
 		</div>
 	</div>
@@ -332,7 +337,7 @@
 					<hr>
 
 					<!-- 인트로 이미지 3장을 제외한 나머지 이미지 -->
-					<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.name}</h5>
+					<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.campName}</h5>
 					<div class="otherImage">
 						<c:if test="${not empty dto.campFileDTOs}">
 							<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="j">
@@ -491,9 +496,9 @@
 						</form>
 					</div>
 
-					<div class="row col-6 mx-auto justify-content-center my-3">
-						<button id="reviewAdd" type="button" class="genric-btn success small col-3">리뷰쓰기</button>
-						<button id="reviewCancle" type="button" class="genric-btn danger small col-3">취소</button>
+					<div class="d-flex justify-content-evenly my-3">
+						<button id="reviewAdd" type="button" class="genric-btn success medium">작성</button>
+						<button id="reviewCancle" type="button" class="genric-btn danger medium">취소</button>
 					</div>
 
 					<div class="row" id="reviewList">
@@ -507,6 +512,27 @@
 	</div>
 	<!-- contents 내용 끝 -->
 
+	<!-- 버튼: update/delete 모두 campNum이 필요 -->
+	<div>
+		<div class="mx-auto">
+			<form action="./update" id="frm" method="get">
+				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
+				<input type="hidden" name="campNum" value="${dto.campNum}">
+				<!-- <div class="d-flex justify-content-between my-2" id="userBtn">
+					<button id="detList" type="button" class="genric-btn primary">목록으로</button>
+					<button id="detBook" type="button" class="genric-btn success">예약하기</button>
+					<button id="detBookList" type="button" class="genric-btn primary medium">예약목록</button>
+					<button id="detManagement" type="button" class="genric-btn warning medium">siteModify</button>
+				</div> -->
+				<div class="d-flex justify-content-between my-2" id="adminBtn">
+					<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
+					<button id="detDelete" type="button" class="genric-btn danger">삭제</button>
+					<button id="detUpdate" type="button" class="genric-btn primary">수정</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c293ea779f66b9a038f4869ccb12bdc&libraries=services"></script>
@@ -519,7 +545,7 @@
 <script src="../resources/js/camp/campCRUD.js"></script>
 <script>
 // DTO 이름, 주소 변수 선언
-let resName = '${dto.name}';
+let resName = '${dto.campName}';
 let resAdr = '${dto.address}';
 
 try {

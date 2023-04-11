@@ -35,9 +35,10 @@ public class CampBookController {
 		//캠프장의 모든 사이트를 보내줘야한다
 		List<CampSiteDTO> siteList = campBookService.getCampSiteList(campDTO);
 		
-		//선택한 사이트의 정보를 CampBookDTO 형태로 만들어서 confirmation 페이지로 넘겨준다. - 계약서를 만드는 느낌으로
+		//해당 캠핑장의 정보를 조회한다.
+		campDTO = campBookService.getCampDetail(campDTO.getCampNum());
 		
-		
+		mv.addObject("campDTO", campDTO);
 		mv.addObject("siteList", siteList);
 		mv.setViewName("camp/book/bookSite");
 		return mv;
@@ -65,8 +66,14 @@ public class CampBookController {
 		campSiteDTO.setStartDate(startDate);
 		campSiteDTO.setLastDate(lastDate);
 		
+		//site정보로 해당 캠핑장의 정보를 조회
+		CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
+		
+		
+		//선택한 사이트의 정보를 CampBookDTO 형태로 만들어서 confirmation 페이지로 넘겨준다. - 계약서를 만드는 느낌으로
 		//이렇게 보내면 bookConfirmation page에 campSiteDTO 정보가 나오게됨 - CampSiteDTO 조회해서 bookDTO에 저장하고 보내도 괜찮을려나
 		mv.addObject("dto", memberDTO);
+		mv.addObject("campDTO", campDTO);
 		mv.addObject("siteDTO", campSiteDTO);
 		mv.setViewName("camp/book/bookConfirmation");
 		return mv;
@@ -75,7 +82,7 @@ public class CampBookController {
 	
 	//booking 버튼을 눌렀을 때(confirmation 확정 또는 취소)
 	@PostMapping("confirmation")
-	public ModelAndView getCampBookAdd(CampBookDTO campBookDTO, HttpSession session, Long areaNum, Long campNum) throws Exception{
+	public ModelAndView getCampBookAdd(CampBookDTO campBookDTO, HttpSession session, Long campNum) throws Exception{
 		//예약 정보 표시, 최종 결제, 예약취소 기능 제공
 		ModelAndView mv = new ModelAndView();
 		
@@ -87,15 +94,24 @@ public class CampBookController {
 		//ModelAndView에 CampBookDTO가 담기게끔 해야하고, 매개변수는 CampSite, CampDTO, member가 있어야 할거같긴함. member는 session에서 가져오는식으로(id 따와야 하니까)
 		//add에 성공하면 예약을 한 것이고, 결제페이지에서 결제하면 결제api 호출, 성공하면 결제완료로 status 변경.
 		
-		int result = campBookService.setCampBookAdd(areaNum, campBookDTO);
+		int result = campBookService.setCampBookAdd(campBookDTO);
+		
+		//CampBookDTO로 site 조회
+		//CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
+		
+		//campSiteDTO로 camp 조회
+		//CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
 		
 		String message = "예약에 실패했습니다";
 		if(result>0) {
 			message = "예약에 성공했습니다";
 		}
 		
+//		mv.addObject("campDTO", campDTO);
+//		mv.addObject("siteDTO", campSiteDTO);
+//		mv.addObject("bookDTO", campBookDTO);
 		mv.addObject("result", message);
-		mv.addObject("url", "../book/list");
+		mv.addObject("url", "../book/payment?num="+campBookDTO.getNum());
 		mv.setViewName("common/result");
 		
 		return mv;
@@ -126,18 +142,62 @@ public class CampBookController {
 		//예약된 캠핑장 사이트의 목록을 보여주는 페이지(관리자용)
 		List<CampBookDTO> bookList = campBookService.getCampBookList(campNum);
 		
+		//캠핑장 정보 조회
+		CampDTO campDTO = campBookService.getCampDetail(campNum);
 		
-		System.out.println("List: "+bookList);
 		
+//		System.out.println("List: "+bookList);
+//		
+//		
+//		for(CampBookDTO campBookDTO : bookList) {
+//			System.out.println(campBookDTO.getAreaNum());
+//		}
 		
-		for(CampBookDTO campBookDTO : bookList) {
-			System.out.println(campBookDTO.getAreaNum());
-		}
-		
+		mv.addObject("campDTO", campDTO);
 		mv.addObject("bookList", bookList);
 		mv.setViewName("camp/book/bookList");
 		return mv;
 	}
 	
+	
+	//결제 페이지(bookPayment.jsp) 호출
+	@GetMapping("payment")
+	public ModelAndView setCampBookPayment(CampBookDTO campBookDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//num(pk)로 CampBookDTO 조회해오기 - 페이지에서 CampBookDTO 하나를 뿌려줘야한다
+		campBookDTO = campBookService.getCampBookDetail(campBookDTO);
+		
+		//CampBookDTO로 site 조회
+		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
+		
+		//campSiteDTO로 camp 조회
+		CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
+		
+		
+		mv.addObject("bookDTO", campBookDTO);
+		mv.addObject("campDTO", campDTO);
+		mv.addObject("siteDTO", campSiteDTO);
+		mv.setViewName("camp/book/bookPayment");
+		return mv;
+	}
+	
+	
+	//결제 진행
+	@PostMapping("payment")
+	public ModelAndView setCampBookPayment(HttpSession session, CampBookDTO campBookDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
+	
+	
+	//예약 취소
+	@PostMapping("delete")
+	public ModelAndView setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
 	
 }

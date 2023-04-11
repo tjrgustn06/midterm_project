@@ -19,17 +19,19 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-			<h2 class="page-cover-tittle">CONFIRMATION</h2>
+			<h2 class="page-cover-tittle">BOOKING</h2>
+				<ol class="breadcrumb">
+					<li>마음에 드는 사이트를 골라주세요</li>
+				</ol>
 		</div>
 	</div>
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
-	<div class="mb-10">0</div>
+	<p>BankBookDTO 만들어서 db에 저장, orders에 ordernum 저장</p>
+	<p>예약 정보 표시, 최종 결제, 예약취소 기능</p>
 	<div class="row my-3">
-		<h1>BookConfirmation Page</h1>
-		<p>BankBookDTO 만들어서 db에 저장, orders에 ordernum 저장</p>
-		<p>예약 정보 표시, 최종 결제, 예약취소 기능</p>
+		<h1>${campDTO.campName}</h1>
 	</div>
 
 	<!-- 파라미터 확인용 -->
@@ -111,8 +113,8 @@
 			</div>
 
 			<div class="d-flex justify-content-between mb-2">
-				<button id="bksConfirm" type="button" class="genric-btn success">Confirm</button>
-				<button id="bksCancel" type="button" class="genric-btn primary">Cancel</button>
+				<button id="bksConfirm" type="button" class="genric-btn success">예약</button>
+				<button id="bksCancel" type="button" class="genric-btn primary">취소</button>
 			</div>
 		</div>
 	</form>

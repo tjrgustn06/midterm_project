@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.camp.s1.board.BoardFileDTO;
 import com.camp.s1.cart.CartDTO;
 import com.camp.s1.util.Pager;
 
@@ -29,8 +30,8 @@ public class ProductDAO {
 	}
 	
 	// CartBarFile 출력
-	public ProductFileDTO getCartBarFileDetail(CartDTO cartDTO) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"getCartBarFileDetail", cartDTO);
+	public List<ProductFileDTO> getCartBarFileList(CartDTO cartDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getCartBarFileList", cartDTO);
 	}
 	
 	// 총 갯수 출력

@@ -14,10 +14,11 @@
 	.quickmenu{
 		position:absolute; 
 		width: 150px;
-        height: 300px;
+        height: auto;
         right: 50px;
         border-radius: 10px;
         border: 1px solid #dddddd;
+		
 		}
 </style>
 </head>
@@ -28,7 +29,10 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-			<h2 class="page-cover-tittle">물품대여</h2>
+			<h2 class="page-cover-tittle">RENT</h2>
+			<ol class="breadcrumb">
+				<li>캠핑에 유용한 장비를 사용해보세요</li>
+			</ol>
 		</div>
 	</div>
 </section>
@@ -49,8 +53,10 @@
 		</div>
 		<c:forEach items="${list}" var="dto">
 			<div class="card" style="width: 16rem">
-				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
-					<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+				<c:forEach items="${dto.productFileDTOs}" var="fileDTO" varStatus="i">
+					<c:if test="${i.first}">
+						<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+					</c:if>
 				</c:forEach>
 				
 				

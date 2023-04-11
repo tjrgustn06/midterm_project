@@ -38,7 +38,7 @@
   		) WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	<!-- CartBar 파일 출력 -->
-  	<select id="getCartBarFileDetail" parameterType="CartDTO" resultType="ProductFileDTO">
+  	<select id="getCartBarFileList" parameterType="CartDTO" resultType="ProductFileDTO">
   		SELECT *  FROM PRODUCTFILES
 		WHERE PRODUCTNUM = (
 			SELECT PRODUCTNUM FROM PRODUCTGRADE
@@ -133,8 +133,5 @@
   		SELECT * FROM PRODUCTFILES
   		WHERE PRODUCTNUM=#{productNum}
   	</select>
-  	
-  	
-  
   
   </mapper>

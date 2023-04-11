@@ -9,21 +9,29 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
-<title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Banner Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+		<h2 class="page-cover-tittle">아이디 찾기</h2>
+		</div>
+	</div>
+</section>
+<!--================Banner Area =================-->
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<form action="../member/findId" method="post">
 				<div class="w3-center w3-large w3-margin-top">
-					<h3>아이디 찾기</h3>
+					<h3>Email</h3>
 				</div>
 				<div>
 					<p>
-						<label>Email</label>
 						<input class="w3-input" type="text" id="email" name="email" required>
 					</p>
 					<p class="w3-center">

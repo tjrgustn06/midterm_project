@@ -204,10 +204,10 @@ public class MemberService {
 			PrintWriter out = response.getWriter();
 
 			if(memberDAO.getMemberLogin(memberDTO) == null) {
-				 out.println("아이디가 없습니다");
+				 out.println("아이디를 확인해주세요");
 				 out.close();
 			}else if(!memberDTO.getEmail().equals(check.getEmail())){
-				 out.println("등록되지 않은 이메일입니다");
+				 out.println("잘못된 이메일 입니다");
 				 out.close();
 			}else {
 				//임시 비밀번호 생성

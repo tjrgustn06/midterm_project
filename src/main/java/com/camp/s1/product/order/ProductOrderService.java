@@ -76,7 +76,9 @@ public class ProductOrderService {
 
 	// Detail 주문 페이지
 	public ProductOrderDTO getProductOrderDetail(ProductOrderDTO productOrderDTO) throws Exception {
-		return productOrderDAO.getProductOrderDetail(productOrderDTO);
+		productOrderDTO=productOrderDAO.getProductOrderDetail(productOrderDTO);
+		productOrderDTO.setStartDate(productOrderDTO.getStartDate().substring(0, 10));
+		return productOrderDTO;
 	}
 	
 	// payment 주문 결제

@@ -2100,11 +2100,13 @@ button:focus {
 }
 
 .success {
-  background: #009933;
+  background: #10715b;
+  /* background: #009933; */
 }
 
 .success:before {
-  background: #00802b;
+  background: #006750;
+  /* background: #00802b; */
 }
 
 .info {
@@ -2143,12 +2145,15 @@ button:focus {
 
 .success-border {
   background: transparent;
-  border: 1px solid #009933;
-  color: #009933;
+  border: 1px solid #10715b;
+  color: #10715b;
+  /* border: 1px solid #009933;
+  color: #009933; */
 }
 
 .success-border:before {
-  background: #009933;
+  background: #10715b;
+  /* background: #009933; */
 }
 
 .info-border {
@@ -2504,26 +2509,32 @@ h1, h2, h3, h4, h5, h6 {
 
 .genric-btn.success {
   color: #fff;
-  background: #009933;
+  background: #10715b;
   border: 1px solid transparent;
+  /* background: #009933; */
 }
 
 .genric-btn.success:hover {
-  color: #009933;
-  border: 1px solid #009933;
+  color: #10715b;
+  border: 1px solid #10715b;
   background: #fff;
+  /* color: #009933;
+  border: 1px solid #009933; */
 }
 
 .genric-btn.success-border {
-  color: #009933;
-  border: 1px solid #009933;
+  color: #10715b;
+  border: 1px solid #10715b;
   background: #fff;
+  /* color: #009933;
+  border: 1px solid #009933; */
 }
 
 .genric-btn.success-border:hover {
   color: #fff;
-  background: #009933;
+  background: #10715b;
   border: 1px solid transparent;
+  /* background: #009933; */
 }
 
 .genric-btn.info {

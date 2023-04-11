@@ -84,7 +84,7 @@
 	<form action="./add" id="frm" method="post" enctype="multipart/form-data">
 	<div class="row my-3">
 		<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑장 이름</h5>
-		<input type="text" id="ChkName" name="name" class="form-control my-1" placeholder="캠핑장 이름을 입력하세요">
+		<input type="text" id="ChkName" name="campName" class="form-control my-1" placeholder="캠핑장 이름을 입력하세요">
 	</div>
 	
 	<hr>
@@ -283,7 +283,7 @@
 						<hr>
 
 						<!-- 이미지 추가 부분 / 인트로 이미지 3장을 제외한 나머지 이미지 표시 -->
-						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.name} 사진 등록</h5>
+						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.campName} 사진 등록</h5>
 						<div class="otherImage">
 							<!-- id=fileList인 부분에 js 작동 -->
 							<div id="fileList" class="row">					
@@ -374,14 +374,14 @@
 					</div>
 
 					<!-- 버튼 영역 -->
-					<div class="mx-auto">
-						<!-- <div class="mx-auto mb-3">
+					<div class="mx-auto">	
+						<div class="d-flex justify-content-between my-2">
+							<button id="addCancel" class="genric-btn primary" type="button">취소</button>
+							<button id="addReg" class="genric-btn success" type="button">등록</button>
+						</div>
+						<!-- <div class="d-flex justify-content-evenly my-2">
 							<button id="consoleSign" class="genric-btn info" type="button">console</button>
 						</div> -->
-						<div class="d-flex justify-content-center">
-							<button id="addReg" class="genric-btn success medium" type="button" style="margin-right: 3px;">등록</button>
-							<button id="addCancel" class="genric-btn primary medium" type="button">취소</button>
-						</div>
 					</div>
 
 

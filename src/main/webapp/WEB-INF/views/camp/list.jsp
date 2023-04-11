@@ -75,7 +75,7 @@
 			<div class="col-3">
 				<label for="kind" class="visually-hidden">Kind</label>
 				<select class="form-select" name="kind" id="kind" aria-label="Default select example">
-					<option value="name" ${pager.kind eq 'name'? 'selected':''}>캠핑장명</option>
+					<option value="campName" ${pager.kind eq 'campName'? 'selected':''}>캠핑장명</option>
 					<option value="phone" ${pager.kind eq 'phone'? 'selected':''}>전화번호</option>
 					<option value="address" ${pager.kind eq 'address'? 'selected':''}>주소</option>
 					<%-- <option value="contents" ${pager.kind eq 'contents'? 'selected':''}>상세내용</option> --%>
@@ -124,7 +124,7 @@
 
 			<div class="row discription col-7">
 				<ul>
-					<li class="row-2 campName"><h5><a href="./detail?campNum=${dto.campNum}&viewType=1">[${dto.doName} ${dto.sigunguName}] ${dto.name}</a></h5></li>
+					<li class="row-2 campName"><h5><a href="./detail?campNum=${dto.campNum}&viewType=1">[${dto.doName} ${dto.sigunguName}] ${dto.campName}</a></h5></li>
 					<hr class="my-1">
 					<li class="mb-1 lineIntro">${dto.lineIntro}</li>
 					<li class="mb-1 introBox">${dto.intro}</li>

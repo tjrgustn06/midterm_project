@@ -1,5 +1,5 @@
 let num = 0;
-let boardName = $('#boardName').attr('data-board-name');
+// let boardName = $('#boardName').attr('data-board-name');
 let boardId = 0;
 
 function setBoardId(bi) {
@@ -52,6 +52,20 @@ $('#storyList').on('click', '.report', function(){
     reportAdd(num, boardId, reportedUser);
     
 })
+
+
+function getCommentCount(num) {
+    $.ajax({
+        url : '../'+boardName+'Comment/listCount',
+        type : 'GET',
+        data : {
+            num : num,
+        },
+        success : function(data){
+            $('a[id="getDetail"'+num+']').text('댓글' + data.trim() + '개 모두 보기');
+        }
+    })
+}
 
 
 

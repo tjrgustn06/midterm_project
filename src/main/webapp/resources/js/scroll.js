@@ -1,6 +1,7 @@
 let currentPage = 2;
 let prePage = 0;
 let flag = true;
+let boardName = $('#boardName').attr('data-board-name');
 let totalPage = 0;
 
 let lastScroll = 0;
@@ -19,7 +20,7 @@ $(document).scroll(function(){
     let maxHeight = $(document).height();
     
 
-        if(currentScorll > maxHeight * 0.001 && flag && currentPage <= totalPage) {
+        if(currentScorll > maxHeight * 0.5 && flag && currentPage <= totalPage) {
                 getList(currentPage);
                 currentPage++;
             
@@ -30,7 +31,11 @@ $(document).scroll(function(){
     
 function getList(page) {
 
+
+
     flag = false;
+
+    console.log(currentPage);
 
     $.ajax({
         type : 'GET',

@@ -86,18 +86,7 @@
 						<!-- Button trigger modal -->
 						<a type="button" class="getDetail" id="getDetail${dto.num}" data-board-num="${dto.num}" data-bs-toggle="modal" data-bs-target="#exampleModal${dto.num}">
 							<script>
-								$(()=>{
-									$.ajax({
-										url : '../${boardName}Comment/listCount',
-										type : 'GET',
-										data : {
-											num : '${dto.num}',
-										},
-										success : function(data){
-											$("a[id='getDetail${dto.num}']").text('댓글' + data.trim() + '개 모두 보기');
-										}
-									})
-								})
+								getCommentCount('${dto.num}')
 							</script>
 						</a >
 						
@@ -124,7 +113,7 @@
 								<div class="modal-content">
 									<div class="modal-header">
 									<h1 class="modal-title fs-5" id="exampleModalLabel${dto.num}">${dto.writer}님의 게시물</h1>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-board-num="${dto.num}"></button>
 									</div>
 									<div class="modal-body">
 										<div class="d-flex flex-column mb-3">

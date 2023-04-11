@@ -158,7 +158,7 @@ function setCommentAdd(num, contents, writer, parentBoardId) {
                 $('#'+boardName+num).find('.replyContents').val('');
                 $('#'+boardName+num).find('.modalReplyContents').val('');
                 getCommentList(num, 1);
-                getList(currentPage);
+                
             }
             else {
                 alert('댓글 등록 실패');
@@ -267,6 +267,7 @@ $('#'+boardName+'List').on('click', '.commentUpdate', function(){
             if(response.trim() > 0) {
                 alert('댓글이 수정되었습니다');
                 getCommentList(num, page);
+                // getCommentCount(num);
 
             }
             else {

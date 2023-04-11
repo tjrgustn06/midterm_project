@@ -120,10 +120,10 @@
                                                     <script>
                                                         $(function(){
                                                             let contents = '${dto.reportedContents}';
-                                                            let maxStr = 5;
+                                                            let maxStr = 10;
 
                                                             if(contents.length >= maxStr) {
-                                                                contents = contents.substring(0,maxStr)+'...';
+                                                                contents = contents.substring(0,maxStr)+' ...';
                                                             }
 
                                                             $('#reportedContents'+'${dto.reportNum}').text(contents);
@@ -134,10 +134,10 @@
                                                 <td>${dto.reportedUser}</td>
                                                 <td>${dto.reportDate}</td>
                                                  <td>
-                                                 	<button type="button" class="btn genric-btn success accept" value="3" data-report-num="${dto.reportNum}">승인</button>
+                                                 	<button type="button" class="btn genric-btn success accept" value="3" data-report-num="${dto.reportNum}" data-board-num="${dto.num}" data-comment-num="${dto.commentNum}">승인</button>
                                                  </td>
                                                  <td>
-                                                    <button type="button" class="btn genric-btn primary denied" value="2" data-report-num="${dto.reportNum}">거절</button>
+                                                    <button type="button" class="btn genric-btn primary denied" value="2" data-report-num="${dto.reportNum}" data-board-num="${dto.num}" data-comment-num="${dto.commentNum}">거절</button>
                                                 </td>
                                             </tr>
 										</c:forEach>

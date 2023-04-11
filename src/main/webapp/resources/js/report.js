@@ -1,13 +1,17 @@
 $('#reportList').on('click','.accept', function(){
     let reportNum = $(this).attr('data-report-num');
+    let num = $(this).attr('data-board-num');
+    let commentNum = $(this).attr('data-comment-num');
     let result =  $(this).val();
-    reportResult(reportNum, result);
+    reportResult(reportNum, num, commentNum, result);
 })
 
 $('#reportList').on('click','.denied', function(){
     let reportNum = $(this).attr('data-report-num');
+    let num = $(this).attr('data-board-num');
+    let commentNum = $(this).attr('data-comment-num');
     let result =  $(this).val();
-    reportResult(reportNum, result);
+    reportResult(reportNum, num, commentNum, result);
 })
 
 function reportAdd() {
@@ -22,19 +26,28 @@ function reportAdd() {
     
 }
 
-function reportResult(reportNum, result) {
+function reportResult(reportNum, num, commentNum, result) {
 
-
+    console.log('ddddddd');
     $.ajax({
         type : 'POST',
         url : '/report/result',
         data : {
             reportNum : reportNum,
-            reportedResult : result        
+            num : num,
+            commentNum : commentNum,
+            reportResult : result        
         },
-        success : ()=>{
-            alert('신고처리가 완료되었습니다');
-            location.href="/manage/list";
+        success : (data)=>{
+            if(data.trim() > 0) {
+                alert('신고처리가 완료되었습니다');
+                // location.href="/report/list";
+            }
+            else {
+                alert('신고처리 실패')
+            }
+            
+            
         }
     })
 }

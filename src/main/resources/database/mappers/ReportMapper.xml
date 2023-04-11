@@ -38,6 +38,12 @@
   		SELECT COUNT(REPORTNUM) FROM REPORT
   	</select>
   	
+  	<select id="getCommentList" parameterType="ReportDTO" resultType="CommentDTO">
+  		SELECT * FROM STORYCOMMENT
+  		WHERE NUM = #{num}
+  		ORDER BY STEP DESC
+  	</select>
+  	
   	<select id="getReportList" parameterType="Pager" resultType="ReportDTO">
   		SELECT * FROM	
 	  		(
@@ -54,6 +60,17 @@
   		UPDATE REPORT SET REPORTRESULT = #{reportResult}
   		WHERE REPORTNUM = #{reportNum}
   	</update>
+  	
+  	<update id="setBoardBlind" parameterType="BbsDTO">
+ 		UPDATE STORY SET TITLE = #{title}, CONTENTS = #{contents}
+  		WHERE NUM = #{num} 	
+  	</update>
+  	
+  	<update id="setCommentBlind" parameterType="BbsDTO">
+  	  	UPDATE STORYCOMMENT SET CONTENTS = #{contents}
+  		WHERE COMMENTNUM = #{commentNum} 
+  	</update>
+  	
   	
   	
   </mapper>

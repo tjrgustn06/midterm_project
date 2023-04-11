@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.camp.s1.board.BoardTypeDTO;
+import com.camp.s1.board.BbsDTO;
 import com.camp.s1.util.Pager;
 
 @Repository
@@ -43,6 +43,18 @@ public class ReportDAO {
 	
 	public int setReportResult(ReportDTO reportDTO) throws Exception {
 		return sqlSession.update(NAMESPACE + "setReportResult", reportDTO);
+	}
+	
+	public int setBoardBlind(BbsDTO bbsDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "setBoardBlind", bbsDTO);
+	}
+	
+	public int setCommentBlind(BbsDTO bbsDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "setCommentBlind", bbsDTO);
+	}
+	
+	public List<BbsDTO> getCommentList(ReportDTO reportDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getCommentList", reportDTO);
 	}
 	
 	

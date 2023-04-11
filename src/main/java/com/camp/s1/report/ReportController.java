@@ -72,8 +72,16 @@ public class ReportController {
 	public ModelAndView setReportResult(ReportDTO reportDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		int result = reportService.setReportResult(reportDTO);
 		
+		String msg = "처리 실패";
 		
+		if(result > 0) {
+			msg = "신고 처리가 정상적으로 완료되었습니다";
+		}
+		
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", result);
 		
 		return mv;
 	}

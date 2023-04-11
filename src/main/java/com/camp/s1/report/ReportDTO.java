@@ -17,7 +17,6 @@ public class ReportDTO {
 	private String reportedContents;
 	private Date reportDate;
 	
-	private BoardDTO boardDTO;
 	
 	public Long getReportNum() {
 		return reportNum;
@@ -74,12 +73,6 @@ public class ReportDTO {
 	}
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
-	}
-	public BoardDTO getBoardDTO() {
-		return boardDTO;
-	}
-	public void setBoardDTO(BoardDTO boardDTO) {
-		this.boardDTO = boardDTO;
 	}
 	public String getReportedContents() {
 		return reportedContents;

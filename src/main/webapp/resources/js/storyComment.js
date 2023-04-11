@@ -331,7 +331,7 @@ $('#'+boardName+'List').on('click','.subCommentMenu', function(){
     
     setSubCommentResetForm(commentNum);
     setResetForm(commentNum);
-    $('.commentMenu'+commentNum).hide();
+    $('.commentMenu').hide();
 
     commentNum = $(this).attr('data-comment-num');
 
@@ -383,7 +383,7 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
 $('#'+boardName+'List').on('click','.reportMenu', function(){
     commentNum = $(this).attr('data-comment-num');
     reportedUser = $(this).attr('data-comment-writer');
-    let reportedContents = $('contents'+commentNum).text();
+    let reportedContents = $('#contents'+commentNum).text();
     
     reportAdd(num, boardId+1, reportedUser, reportedContents, commentNum);
 })

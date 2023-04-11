@@ -34,8 +34,24 @@ public class ProductOrderService {
 		return result;
 	}
 	
-	// cartOrder 장바구니 주문
-	public int setCartOrderAdd(ProductOrderDTO productOrderDTO) throws Exception {
+	// cartEachOrder 장바구니 개별 주문
+	public int setCartEachOrderAdd(ProductOrderDTO productOrderDTO) throws Exception {
+		productOrderDTO.setOrderNum(productOrderDAO.getOrderNumber());
+		int result = productOrderDAO.setOrderNumber(productOrderDTO);
+		productOrderDTO.setAddress("");
+		result =productOrderDAO.setProductOrderAdd(productOrderDTO);
+		String gradeName=productOrderDTO.getName();
+		gradeName=gradeName.substring(gradeName.lastIndexOf("급")-1);
+		ProductGradeDTO productGradeDTO = new ProductGradeDTO();
+		productGradeDTO.setGradeName(gradeName);
+		productGradeDTO.setGradeNum(productOrderDTO.getGradeNum());
+		productGradeDTO.setGradeStock(productOrderDAO.getGradeStock(productGradeDTO).getGradeStock()-productOrderDTO.getAmount());
+		result = productOrderDAO.setGradeStockUpdate(productGradeDTO);
+		return result;
+	}
+	
+	// cartAllOrder 장바구니 전체 주문
+	public int setCartAllOrderAdd(ProductOrderDTO productOrderDTO) throws Exception {
 		productOrderDTO.setOrderNum(productOrderDAO.getOrderNumber());
 		int result = productOrderDAO.setOrderNumber(productOrderDTO);
 		productOrderDTO.setAddress("");

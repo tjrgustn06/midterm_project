@@ -55,7 +55,6 @@
 			ON(CS.CAMPNUM=CI.CAMPNUM)
 		WHERE CI.CAMPNUM=#{campNum}
 		
-		
 		<!-- FROM CAMPINFO CI
 			JOIN CAMPSITE CS
 			ON(CI.CAMPNUM = CS.CAMPNUM)
@@ -75,8 +74,8 @@
 	</select>
 	
 	<!-- setCampBookDelete -->
-	<delete id="setCampBookDelete">
-	
+	<delete id="setCampBookDelete" parameterType="CampBookDTO">
+		DELETE CAMPBOOK WHERE NUM=#{num}
 	</delete>
 	
 	

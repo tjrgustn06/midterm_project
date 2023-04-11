@@ -92,17 +92,36 @@ function calculationPrice(){
 
 }
 
+//돌아가기 버튼을 눌렀을 때 - bookSite.jsp
+$('#siteCancel').click(function(){
+  location.href="../detail?campNum="+$('input[name=campNum]').val()+"&viewType=1";
+  // let check = confirm("돌아가시겠습니까?");
+  // if(check){
+  // }
+})
 
-//예약 취소 버튼 눌렀을 때 - bookConfirm.jsp
+//돌아가기 버튼을 눌렀을 때 - bookConfirm.jsp
 $('#bksCancel').click(function(){
-    let check = confirm("정말 취소하시겠습니까? 입력된 정보가 사라집니다");
+    let check = confirm("사이트 목록으로 돌아가시겠습니까?\n입력된 정보가 사라집니다.");
     if(check){
         location.href="./site?campNum="+$('input[name=campNum]').val();
     }
 })
 
-
-//예약 버튼을 눌렀을 때 - bookConfirm.jsp
+//예약하기 버튼을 눌렀을 때 - bookConfirm.jsp
 $('#bksConfirm').click(function(){
     $('#confirmFrm').submit();
+})
+
+//예약취소 버튼을 눌렀을 때 - bookPayment.jsp
+$('#payCancel').click(function(){
+  let check = confirm("예약을 취소하시겠습니까?\n예약 내용이 사라집니다.");
+  if(check){
+    $('#paymentFrm').attr('action', './delete');
+    $('#paymentFrm').submit();
+  }
+  
+  //결제하기 버튼을 눌렀을 때 - bookPayment.jsp
+
+
 })

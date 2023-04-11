@@ -36,7 +36,8 @@
 
 	<!-- 파라미터 확인용 -->
 	--CN: ${siteDTO.campNum}--
-	--AN: ${siteDTO.areaNum}--
+	--AN: ${bookDTO.areaNum}--
+	--NUM: ${bookDTO.num}--
 
 	<!-- 시설배치도 / 임시로 막고 나중에 추가 -->
 	<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
@@ -82,8 +83,12 @@
 		<!-- CampBook 하나 완성 - 정보는 bookDTO에서 꺼내야 할거같음... -->
 		<!-- num, areaNum, id, indexCode, price, regDate, startDate, lastDate, account, status -->
 		<div id="bookSiteOne">
-			<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
-			<input type="hidden" name="campNum" value="${siteDTO.campNum}"> <!-- 돌아가기용 -->
+			<div>
+				<input type="hidden" name="num" value="${bookDTO.num}">
+				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
+				<input type="hidden" name="status" value="결제완료">
+				<!-- <input type="hidden" name="campNum" value="${siteDTO.campNum}"> -->
+			</div>
 			<div class="siteSize input-group mb-2">
 				<span class="input-group-text" id="siteName">사이트이름</span>
 				<input type="text" name="siteName" class="form-control" value="${bookDTO.siteName}" readonly>
@@ -102,13 +107,10 @@
 				<span class="input-group-text" id="price">이용 요금</span>
 				<input type="text" name="price" id="totalPrice" class="form-control" value="${bookDTO.price}" readonly>
 			</div>
-			<div>
-				<input type="hidden" name="status" value="결제완료">
-			</div>
 
 			<div class="d-flex justify-content-between my-2">
-				<button id="bksCancel" type="button" class="genric-btn primary">예약취소</button>
-				<button id="bksConfirm" type="button" class="genric-btn success">결제하기</button>
+				<button id="payCancel" type="button" class="genric-btn primary">예약취소</button>
+				<button id="payConfirm" type="button" class="genric-btn success">결제하기</button>
 			</div>
 		</div>
 	</form>

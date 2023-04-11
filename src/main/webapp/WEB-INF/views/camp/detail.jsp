@@ -162,7 +162,7 @@
 				<input type="hidden" name="campNum" value="${dto.campNum}">
 				<div class="d-flex justify-content-between my-2" id="userBtn">
 					<button id="detList" type="button" class="genric-btn primary">목록으로</button>
-					<button id="detBook" type="button" class="genric-btn success">예약하기</button>
+					<button id="detBook" type="button" class="genric-btn success">사이트선택</button>
 				</div>
 				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
 				<!-- <div class="d-flex justify-content-between my-2" id="adminBtn">

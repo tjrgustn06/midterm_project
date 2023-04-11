@@ -51,20 +51,23 @@
 			<c:when test="${not empty bookList}">
 				<c:forEach items="${bookList}" var="bookDTO" varStatus="i">
 					<!-- <form action="./confirmation" id="bookFrm${i.count}" method="get"> -->
-					<div id="bookOne${i.count}" class="my-2">
+					<div id="bookOne${i.count}" class="my-3">
 						<!-- <div class="d-flex justify-content-end mb-2">
 							<button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels genric-btn primary">Remove Site</button>
 							<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">Booking</button>
 						</div> -->
+						<p><i class="fa-solid fa-circle-info fa-sm"></i> 예약번호 ${bookDTO.orderNum}</p>
 						<div class="orderInfo input-group mb-2">
 							<span class="input-group-text" id="orderNum">주문번호</span>
 							<input type="text" name="orderNum" data-site-idx="orderNum${i.count}" class="form-control" value="${bookDTO.orderNum}" readonly>
-							<span class="input-group-text" id="price">금액</span>
-							<input type="text" name="price" data-site-idx="price${i.count}" class="form-control" value="${bookDTO.price}" readonly>
+							<!-- <span class="input-group-text" id="areaNum">사이트번호</span>
+							<input type="text" name="areaNum" data-site-idx="areaNum${i.count}" class="form-control" value="${bookDTO.areaNum}" readonly> -->
 						</div>
 						<div class="siteInfo input-group mb-2">
-							<span class="input-group-text" id="areaNum">사이트번호</span>
-							<input type="text" name="areaNum" data-site-idx="areaNum${i.count}" class="form-control" value="${bookDTO.areaNum}" readonly>
+							<span class="input-group-text" id="siteName">사이트이름</span>
+							<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${bookDTO.siteName}" readonly>
+						</div>
+						<div class="userInfo input-group mb-2">
 							<span class="input-group-text" id="id">예약자ID</span>
 							<input type="text" name="id" data-site-idx="id${i.count}" class="form-control" value="${bookDTO.id}" readonly>
 						</div>
@@ -74,7 +77,11 @@
 							<span class="input-group-text" id="lastDate">퇴실일</span>
 							<input type="text" name="lastDate" data-site-idx="lastDate${i.count}" class="form-control" value="${bookDTO.lastDate}" readonly>
 						</div>
-						<div class="useDate input-group mb-2">
+						<div class="priceInfo input-group mb-2">
+							<span class="input-group-text" id="price">금액</span>
+							<input type="text" name="price" data-site-idx="price${i.count}" class="form-control" value="${bookDTO.price}" readonly>
+						</div>
+						<div class="useStatus input-group mb-2">
 							<span class="input-group-text" id="status">상태</span>
 							<input type="text" name="status" data-site-idx="status${i.count}" class="form-control" value="${bookDTO.status}" readonly>
 						</div>

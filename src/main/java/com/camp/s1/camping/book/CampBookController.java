@@ -197,6 +197,25 @@ public class CampBookController {
 	public ModelAndView setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		//CampBookDTO로 site 조회
+		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
+		
+		//campSiteDTO로 camp 조회
+		CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
+		
+		//삭제실행
+		int result = campBookService.setCampBookDelete(campBookDTO);
+		
+		//결과출력
+		String message = "예약 정보를 삭제하지 못했습니다.";
+		if(result>0) {
+			message = "예약 정보를 삭제했습니다.";
+		}
+		
+		mv.setViewName("common/result");
+		mv.addObject("result", message);
+		mv.addObject("url", "../detail?campNum="+campDTO.getCampNum()+"&viewType=1");
+		
 		return mv;
 	}
 	

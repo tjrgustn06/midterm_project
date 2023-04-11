@@ -74,5 +74,9 @@ public class CampBookService {
 		return campBookDAO.getCampBookDetail(campBookDTO);
 	}
 	
+	//예약 취소(삭제)
+	public int setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
+		return campBookDAO.setCampBookDelete(campBookDTO);
+	}
 	
 }

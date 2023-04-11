@@ -113,8 +113,8 @@
 			</div>
 
 			<div class="d-flex justify-content-between mb-2">
-				<button id="bksConfirm" type="button" class="genric-btn success">예약</button>
-				<button id="bksCancel" type="button" class="genric-btn primary">취소</button>
+				<button id="bksCancel" type="button" class="genric-btn primary">돌아가기</button>
+				<button id="bksConfirm" type="button" class="genric-btn success">예약하기</button>
 			</div>
 		</div>
 	</form>

@@ -34,8 +34,7 @@
 	</div>
 
 	<!-- 파라미터 확인 -->
-	--CN: ${siteDTO.campNum}--
-	--AN: ${siteDTO.areaNum}--
+	--CN: ${campDTO.campNum}--
 
 	<!-- 시설배치도 -->
 	<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
@@ -63,11 +62,11 @@
 	</div>
 
 	<!-- 검색 시작 ajax로 해야할거같음 -->
-	<form action="./bksSearch" id="searchFrm" method="get">
-		<!-- <input type="hidden" id="bksCampNum" name="campNum" value="${dto.campNum}"> -->
-		<div class="d-flex justify-content-between my-2">
-			<button id="bksCancle" type="button" class="genric-btn primary">취소</button>
-			<button id="bksSearch" type="button" class="genric-btn success">검색</button>
+	<form action="./siteSearch" id="searchFrm" method="post">
+		<input type="hidden" name="campNum" value="${campDTO.campNum}">
+		<div class="d-flex justify-content-center my-2">
+			<button id="siteCancel" type="button" class="genric-btn primary">돌아가기</button>
+			<!-- <button id="siteSearch" type="button" class="genric-btn success">검색하기</button> -->
 		</div>
 		<div class="d-flex justify-content-center my-2">
 			<button id="bksConsoleSign" type="button" class="genric-btn primary">확인용</button>
@@ -95,16 +94,15 @@
 		<c:forEach items="${siteList}" var="siteDTO" varStatus="i">
 			<form action="./confirmation" id="bookFrm${i.count}" method="get">
 			<!-- 파라미터 확인 -->
-			--campNum: ${siteDTO.campNum}--<br>
 			--areaNum: ${siteDTO.areaNum}--
 			<div id="siteOne${i.count}">
 				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}" data-site-idx="area${i.count}">
-				<input type="hidden" name="campNum" value="${siteDTO.campNum}" data-site-idx="camp${i.count}">
+				<!-- <input type="hidden" name="campNum" value="${siteDTO.campNum}" data-site-idx="camp${i.count}"> -->
 				<input type="hidden" name="startDate" value="" data-site-idx="start${i.count}">
 				<input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">
 				<div class="d-flex justify-content-end mb-2">
 					<!-- <button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels genric-btn primary">Remove Site</button> -->
-					<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">예약</button>
+					<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">선택하기</button>
 				</div>
 				<div class="input-group mb-2">
 					<span class="input-group-text" id="siteName">사이트이름</span>

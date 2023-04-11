@@ -17,12 +17,18 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-			<h2 class="page-cover-tittle f_48">상품주문정보</h2>
+			<h2 class="page-cover-tittle f_48">PRODUCTORDER</h2>
+			<ol class="breadcrumb">
+				<li>주문한 상품의 상세 정보를 확인해주세요</li>
+			</ol>
 		</div>
 	</div>
 </section>
 <!--================Breadcrumb Area =================-->
 	<div class="container">
+		<div class="row md-7">
+			<p class="col-md-7 mx-auto text-center border-bottom border-dark pb-4"></p>
+		</div>
 		<div class="row justify-content-center">
 			<form id="paymentForm" class="col-md-7" action="./payment" method="post">
 				<div class="row input-group mb-3">
@@ -93,7 +99,7 @@
 				</div>
 				<div>
 					<c:if test="${dto.status eq '입금대기'}">
-						<button id="payment" type="button" class="btn btn-primary">결제하기</button>
+						<button id="payment" type="button" class="genric-btn success radius">결제하기</button>
 					</c:if>
 				</div>
 			</form>
@@ -102,7 +108,9 @@
 				<input type="hidden" name="amount" value="${dto.amount}">
 				<input type="hidden" name="name" value="${dto.name}">
 				<input type="hidden" name="num" value="${dto.num}">
-				<button id="delete" type="submit" class="btn btn-primary">주문취소</button>
+				<c:if test="${dto.status ne '결제완료'}">
+					<button id="delete" type="submit" class="genric-btn danger radius">주문취소</button>
+				</c:if>
 			</form>
 		</div>
 	</div>

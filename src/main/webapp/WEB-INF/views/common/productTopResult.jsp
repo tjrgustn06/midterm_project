@@ -4,8 +4,10 @@
 	<div class="container-fluid">
 		<c:forEach items="${list}" var="dto">
 			<div class="card" style="width: 17rem; display: inline-block">
-				<c:forEach items="${dto.productFileDTOs}" var="fileDTO">
-					<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+				<c:forEach items="${dto.productFileDTOs}" var="fileDTO" varStatus="i">
+					<c:if test="${i.first}">
+						<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+					</c:if>
 				</c:forEach>
 				
 				<div class="card-body">

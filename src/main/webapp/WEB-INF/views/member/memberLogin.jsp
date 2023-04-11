@@ -12,6 +12,16 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Banner Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+		<h2 class="page-cover-tittle">로그인</h2>
+		</div>
+	</div>
+</section>
+<!--================Banner Area =================-->
 <div class="container-fluid">
 	<div class="row justify-content-center">
 		<h1 class="col-md-7 my-5">Member Login</h1>
@@ -37,7 +47,7 @@
 </div>
 	<div class="mb-3 form-check">
 <a href="./findIdForm" id="findId" class="btn btn-warning">아이디 찾기</a>
-<a href="./findPw" id="findPw" class="btn btn-success">비밀번호 찾기</a><br>
+<a href="./findPw" id="findPw" class="btn btn-success">비밀번호 찾기</a>
 </div>
 <!-- <a href="./kakaoLogin"  class="btn btn-warning">카카오 로그인</a> -->
 	<div class="row">
@@ -45,7 +55,7 @@
 <a class="btn btn-warning" href="https://kauth.kakao.com/oauth/authorize?client_id=a68e05dc27f7fb4288530cb001c55c40&redirect_uri=http://localhost:80/member/kakaoLogin&response_type=code">
 	<!-- REST_API키 및 REDIRECT_URI는 본인걸로 수정하세요
 	본인걸로 수정 시 띄어쓰기 절대 하지 마세요. 오류납니다. -->
-	카카오 로그인</a> 
+	카카오 로그인</a>
 	</div>
 	</div>
 <c:import url="../template/footer.jsp"></c:import>

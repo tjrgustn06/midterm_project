@@ -13,9 +13,22 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-	<div class="container-fluid">
+	<!--================Breadcrumb Area =================-->
+	<section class="breadcrumb_area">
+		<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+		<div class="container">
+			<div class="page-cover text-center">
+				<h2 class="page-cover-tittle">RENT</h2>
+				<ol class="breadcrumb">
+					<li>대여할 장비를 추가해보세요</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+	<!--================Breadcrumb Area =================-->
+	<div class="container">
 		<div class="row md-7">
-			<h1 class="col-md-7 mx-auto text-center border-bottom border-dark pb-4">Product Add Page</h1>
+			<p class="col-md-7 mx-auto text-center border-bottom border-dark pb-4"></p>
 		</div>
 		<div class="row justify-content-center">
 			<form class="col-md-7" action="./add" method="post" enctype="multipart/form-data">
@@ -100,7 +113,7 @@
 	<script src="../resources/js/fileManager.js"></script>
 	<script>
 		setParam('addFiles')
-		setMax(1);
+		setMax(3);
 		$('#contents').summernote({focus:true, lang:'ko-KR',
 		callbacks:{
 			onImageUpload: function(image) {

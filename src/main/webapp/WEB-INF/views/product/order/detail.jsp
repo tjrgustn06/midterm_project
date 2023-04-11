@@ -93,7 +93,7 @@
 				</div>
 				<div>
 					<c:if test="${dto.status eq '입금대기'}">
-						<button id="payment" type="button" class="btn btn-primary">결제하기</button>
+						<button id="payment" type="button" class="genric-btn success radius">결제하기</button>
 					</c:if>
 				</div>
 			</form>
@@ -102,7 +102,9 @@
 				<input type="hidden" name="amount" value="${dto.amount}">
 				<input type="hidden" name="name" value="${dto.name}">
 				<input type="hidden" name="num" value="${dto.num}">
-				<button id="delete" type="submit" class="btn btn-primary">주문취소</button>
+				<c:if test="${dto.status ne '결제완료'}">
+					<button id="delete" type="submit" class="genric-btn danger radius">주문취소</button>
+				</c:if>
 			</form>
 		</div>
 	</div>

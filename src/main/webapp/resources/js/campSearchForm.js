@@ -47,7 +47,8 @@ $('#doName').change(function(){
 
 })
 
-$('#doName').input(function(){
+$('#doName').on('propertychange change keyup paste input',function(){
+    console.log('sdfdsfdsfdsfdsf')
     getSigunguList();
 })
 

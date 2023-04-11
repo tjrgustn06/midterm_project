@@ -136,8 +136,8 @@ $(function() {
                                 <li class="tt top_kwdSearch">
                                     <div class="input_search">
                                         <fieldset class="totalSearch">
-                                            <label for="name" class="skip">키워드 검색</label>
-                                            <input id="name" name="name" class="m_search_in" style="vertical-align: middle;" title="검색어를 입력하세요." placeholder="검색어를 입력하세요." type="text" value=""/></fieldset>
+                                            <label for="campName" class="skip">키워드 검색</label>
+                                            <input id="campName" name="campName" class="m_search_in" style="vertical-align: middle;" title="검색어를 입력하세요." placeholder="검색어를 입력하세요." type="text" value=""/></fieldset>
                                     </div>
                                 </li>                            
                                 <li class="tt top_kwdSearch">

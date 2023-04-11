@@ -11,40 +11,6 @@ let date = '';
 $('#doName').change(function(){
     getSigunguList();
 
-    // //이전값이 있을수도 있으니 초기값 셋팅
-    // $('#searchCampList').empty();
-    // $('#name').val('');
-    // $('#sigunguName').empty();    
-    // let str = '<option value="">전체</option>';
-
-    // $('#sigunguName').append(str);
-
-    
-    // //시/도가 선택됐을 때
-    // if($('#doName').val() != '') {
-    //     $.ajax({
-    //         type : 'GET',
-    //         url : '/camp/sigunguNameList',
-    //         data : {
-    //             doName : $('#doName').val()
-    //         },
-    //         dataType : 'JSON',
-    //         success : function(data){
-    //             $('#sigunguName').empty();
-    //             // let str = '<option value="">전체</option>';
-    //             $(data).each(function() {
-    //                 console.log(this.doName + this.sigunguName);
-    //                 str += '<option value="'+this.sigunguName+'">'+this.sigunguName+'</option>';
-    //             });
-    //             $('#sigunguName').append(str);
-    //         },
-    //         error : function(){
-    //             alert('Request Error!');
-    //         }
-    //     })
-    // }
-
-
 })
 
 $('#doName').on('propertychange change keyup paste input',function(){
@@ -101,7 +67,7 @@ $('#sigunguName').change(function(){
 })
 
 //캠핑장이름 입력창 값이 변경됐을 때
-$('#name').change(function(){
+$('#campName').change(function(){
     getSearchList();
 })
 
@@ -184,7 +150,7 @@ function getSearchList() {
         data : {
             doName : $('#doName').val(),
             sigunguName : $('#sigunguName').val(),
-            campName : $('#name').val()
+            campName : $('#campName').val()
         },
         dataType : 'JSON',
         success : function(data){

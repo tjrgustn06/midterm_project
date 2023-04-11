@@ -83,7 +83,6 @@
 		
 		<!-- CampBook 하나 완성 -->
 		<!-- num, areaNum, id, indexCode, price, regDate, startDate, lastDate, account, status -->
-	
 		<div id="bookSiteOne">
 			<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
 			<input type="hidden" name="campNum" value="${siteDTO.campNum}"> <!-- 돌아가기용 -->
@@ -120,13 +119,6 @@
 		</div>
 	</form>
 	<!-- form 끝 -->
-
-
-	<!-- form -->
-	<!-- <form action="./payment" id="paymentFrm" method="post"></form> -->
-	<!-- <form action="./cancel" id="cancelFrm" method="post"></form> -->
-	<!-- <input type="hidden" name="status" value="결제완료"> -->
-
 
 </div>
 

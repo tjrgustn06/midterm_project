@@ -9,62 +9,8 @@
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>Add Camp - The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/campCRUD.css">
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
-	<style>
-		a{
-			color: black;
-			text-decoration: none;
-		}
-		
-		.pic{
-			width: 80%;
-			height: 80%;
-		}
-
-		.introImage{
-			width: 30%;
-			height: 30%;
-		}
-
-		.campOne{
-			border: black, solid, 1px;
-			border-radius: 5%;
-		}
-		
-		.lineIntro{
-			font-weight: bold;
-		}
-		
-		.introBox{
-			/* 말줄임(...) */
-			width: auto;
-
-			white-space: normal;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-
-		ul, ol, li{
-			list-style: none;
-			font-size: 0.9rem;
-			margin: 1px 0px;
-		}
-
-		.infoNotice{
-			font-size: 0.8rem;
-			font-weight: bold;
-		}
-
-		.infoRed{
-			color: red;
-		}
-
-		.gray{
-			background-color: gray;
-		}
-	</style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>

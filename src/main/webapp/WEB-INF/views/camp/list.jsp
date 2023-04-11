@@ -9,52 +9,8 @@
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>CampList - The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
-	<script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
-	<style>
-		a{
-			color: black;
-			text-decoration: none;
-		}
-		
-		.imageBoxList{
-			width: 24rem;
-			height: 14rem;
-			/* width: 40%;
-			height: 35%; */
-		}
-
-		.innerImage{
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-	
-		.campOne{
-			border: black, solid, 1px;
-			border-radius: 5%;
-		}
-		
-		.lineIntro{
-			font-weight: bold;
-		}
-		
-		.introBox{
-			/* 말줄임(...) */
-			width: auto;
-
-			white-space: normal;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-
-		ul, ol, li{
-			list-style: none;
-			font-size: 0.9rem;
-			margin: 1px 0px;
-		}
-	</style>
+<link rel="stylesheet" href="/resources/css/campCRUD.css">
+<script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -72,10 +28,6 @@
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container-fluid col-lg-9 my-5">
-	<!-- <div class="row my-3">
-		<h1>CampList Page</h1>
-	</div> -->
-
 	<!-- search -->
 	<!-- 만들어뒀던거 쓸수는 있는데 select의 option 태그를 좀 바꿔야함 -->
 	<div class="d-flex justify-content-center">

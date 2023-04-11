@@ -51,30 +51,10 @@
 	</div>
 	<hr> -->
 
-	<!-- <div class="row my-2">
-		<div>
-			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 요금표</h5>
-			<p>*성수기 요금은 5~9월에 적용됩니다.</p>
-		</div>
-		<div class="input-group mb-2">
-			<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
-			<input type="text" name="offWeekdaysPrice" class="form-control" value="${siteDTO.offWeekdaysPrice}" readonly>
-			<span class="input-group-text" id="offWeekendsPrice">주말</span>
-			<input type="text" name="offWeekendsPrice" class="form-control" value="${siteDTO.offWeekendsPrice}" readonly>
-		</div>
-		<div class="input-group mb-2">
-			<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
-			<input type="text" name="peakWeekdaysPrice" class="form-control" value="${siteDTO.peakWeekdaysPrice}" readonly>
-			<span class="input-group-text" id="peakWeekendsPrice">주말</span>
-			<input type="text" name="peakWeekendsPrice" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
-		</div>
-	</div> -->
-
 	<hr>
 
 	<!-- form 시작 -->
 	<form action="./payment" id="paymentFrm" method="post">
-
 		<div class="row my-2">
 			<div class="col-10">
 				<h5><i class="fa-solid fa-circle-info fa-sm"></i> 예약 정보</h5>
@@ -84,9 +64,11 @@
 		<!-- CampBook 하나 완성 - 정보는 bookDTO에서 꺼내야 할거같음... -->
 		<!-- num, areaNum, id, indexCode, price, regDate, startDate, lastDate, account, status -->
 		<div id="bookSiteOne">
-			<div>
+			<p> 예약번호 ${bookDTO.orderNum}</p>
+			<div class="value">
 				<input type="hidden" name="num" value="${bookDTO.num}">
-				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
+				<input type="hidden" name="areaNum" value="${bookDTO.areaNum}">
+				<input type="hidden" name="orderNum" value="${bookDTO.orderNum}">
 				<input type="hidden" name="status" value="결제완료">
 				<!-- <input type="hidden" name="campNum" value="${siteDTO.campNum}"> -->
 			</div>
@@ -126,7 +108,7 @@
 
 <c:import url="../../template/footer.jsp"></c:import>
 <script src="../../resources/js/camp/book.js"></script>
-<script>
+<!-- <script>
 	// datePicker
 	$.datepicker.setDefaults({
 			dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
@@ -153,10 +135,44 @@
 				$('#startDate').datepicker('option', 'maxDate', selectedDate);
 			})
 		})
-</script>
+</script> -->
+<!-- <script>
+	요금 계산 함수 호출
+	calculationPrice();
+</script> -->
 <script>
-	//요금 계산 함수 호출
-	//calculationPrice();
+	$('#paymentFrm').click(()=>{
+		let payment = iamport()		
+	})
+
+	function iamport(){
+		//가맹점 식별코드
+		IMP.init('imp15251423');
+		IMP.request_pay({
+			pg : 'nice.nictest00m',
+			pay_method : 'card',
+			merchant_uid : 'merchant_' + $('#orderNum').val(),
+			name : $('#name').val() , //결제창에서 보여질 이름
+			amount : $('#price').val(), //실제 결제되는 가격
+		}, function(rsp) {
+			console.log(rsp);
+			if ( rsp.success ) {
+				let msg = '결제가 완료되었습니다.';
+				msg += '고유ID : ' + rsp.imp_uid;
+				msg += '상점 거래ID : ' + rsp.merchant_uid;
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				msg += '카드 승인번호 : ' + rsp.apply_num;
+				console.log('성공')
+				alert(msg);
+				$('#paymentForm').submit()
+			} else {
+				let msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+				console.log('실패')
+				alert(msg);
+			}
+		});
+	};
 </script>
 <c:import url="../../template/common_js.jsp"></c:import>
 </body>

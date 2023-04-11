@@ -40,7 +40,10 @@
 		<typeAlias type="com.camp.s1.camping.CampSiteDTO" alias="CampSiteDTO"/>
 		<typeAlias type="com.camp.s1.camping.ThumbnailDTO" alias="ThumbnailDTO"/>
 		<typeAlias type="com.camp.s1.camping.book.CampBookDTO" alias="CampBookDTO"/>
+		<typeAlias type="com.camp.s1.camping.book.BookPeriodDTO" alias="BookPeriodDTO"/>
 		<typeAlias type="com.camp.s1.camping.review.CampReviewDTO" alias="CampReviewDTO"/>
+		
+		<typeAlias type="com.camp.s1.payment.PaymentDTO" alias="PaymentDTO"/>
 		
 		
 		<typeAlias type="java.lang.Long" alias="Long"/>

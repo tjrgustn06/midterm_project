@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.camping.CampSiteDTO;
 import com.camp.s1.member.MemberDTO;
+import com.camp.s1.payment.PaymentDTO;
 
 @Repository
 public class CampBookDAO {
@@ -70,5 +71,14 @@ public class CampBookDAO {
 		return sqlSession.delete(NAMESPACE+"setCampBookDelete", campBookDTO);
 	}
 	
+	//결제하기
+	public int setCampBookPaymentAdd(PaymentDTO paymentDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCampBookPayment", paymentDTO);
+	}
+	
+	//결제 완료 후 예약상태 변경을 위한 업데이트.(결제 취소나 변경 등에도 사용할 수 있을거같음)
+	public int setCampBookUpdate(CampBookDTO campBookDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setCampBookUpdate", campBookDTO);
+	}
 	
 }

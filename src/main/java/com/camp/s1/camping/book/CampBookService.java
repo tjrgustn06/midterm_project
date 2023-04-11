@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.camping.CampSiteDTO;
 import com.camp.s1.member.MemberDTO;
+import com.camp.s1.payment.PaymentDTO;
 
 @Service
 public class CampBookService {
@@ -77,6 +78,19 @@ public class CampBookService {
 	//예약 취소(삭제)
 	public int setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
 		return campBookDAO.setCampBookDelete(campBookDTO);
+	}
+	
+	//결제
+	public int setCampBookPaymentAdd(PaymentDTO paymentDTO, CampBookDTO campBookDTO) throws Exception{
+		//결제 진행하고 campbookDTO에 예약상태 변경시키기
+		int result = campBookDAO.setCampBookPaymentAdd(paymentDTO);
+		
+		//결제 성공하면 예약상태 변경
+		if(result>0) {
+			result = campBookDAO.setCampBookUpdate(campBookDTO);
+		}
+		
+		return result;
 	}
 	
 }

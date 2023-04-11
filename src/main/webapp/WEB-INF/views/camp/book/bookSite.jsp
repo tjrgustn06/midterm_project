@@ -80,9 +80,6 @@
 		<div class="col-10">
 			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트 정보</h5>
 		</div>
-		<!-- <div class="col-2">
-			<button class="genric-btn success" id="siteAddBtn" type="button">추가</button>
-		</div> -->
 	</div>
 
 
@@ -120,12 +117,6 @@
 					<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 					<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
 				</div>
-				<!-- <div class="input-group mb-2">
-					<span class="input-group-text" id="startDate">사용 시작일</span>
-					<input type="text" name="startDate" id="startDate" class="datepicker" placeholder="사용 시작일" readonly>
-					<span class="input-group-text" id="lastDate">종료일</span>
-					<input type="text" name="lastDate" id="lastDate" class="datepicker" placeholder="사용 종료일" readonly>
-				</div> -->
 				<!-- <div class="form-check mb-2">
 					<input class="form-check-input" type="radio" name="status" id="bookable" value="예약가능">
 					<label class="form-check-label" for="bookable">예약가능</label>

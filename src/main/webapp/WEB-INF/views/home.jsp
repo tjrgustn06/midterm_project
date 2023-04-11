@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link rel="icon" href="/resources/images/Logo.png" type="image/png">
+    <link rel="icon" href="/resources/images/logo.png" type="image/png">
 	<title>The Camp</title>
 </head>
 <c:import url="./template/common_css.jsp"></c:import>
@@ -118,6 +118,7 @@
     </section>
     <!--================ 캠핑스토리 Area  =================-->
         
+</script>
 <c:import url="./template/footer.jsp"></c:import>        
 <script src="/resources/js/productListTop.js"></script>
 <script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>

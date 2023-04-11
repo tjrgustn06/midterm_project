@@ -54,6 +54,8 @@ public class ProductService {
 	
 	// CartBar 출력
 	public List<CartDTO> getCartBarList(Pager pager) throws Exception {
+		pager.setPerPage(6L);
+		pager.makeRow();
 		List<CartDTO> ar = productDAO.getCartBarList(pager);
 		for(CartDTO cartDTO:ar) {
 			cartDTO.setProductFileDTO(productDAO.getCartBarFileDetail(cartDTO));

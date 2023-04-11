@@ -63,13 +63,25 @@ public class ProductOrderController {
 		return mv;
 	}
 	
-	// cart 전체 order
-	@PostMapping("cartOrder")
-	public ModelAndView setCartOrderAdd(ProductOrderDTO productOrderDTO, HttpSession session) throws Exception {
+	// cartEachOrder
+	@PostMapping("cartEachOrder")
+	public ModelAndView setCartEachOrderAdd(ProductOrderDTO productOrderDTO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		productOrderDTO.setId(memberDTO.getId());
+		int result = productOrderService.setCartEachOrderAdd(productOrderDTO);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	// cartAllorder
+	@PostMapping("cartAllOrder")
+	public ModelAndView setCartAllOrderAdd(ProductOrderDTO productOrderDTO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		MemberDTO memberDTO=(MemberDTO)session.getAttribute("member");
 		productOrderDTO.setId(memberDTO.getId());
-		int result = productOrderService.setCartOrderAdd(productOrderDTO);
+		int result = productOrderService.setCartAllOrderAdd(productOrderDTO);
 		mv.addObject("result", result);
 		
 		mv.setViewName("common/ajaxResult");

@@ -187,6 +187,9 @@ public class CampBookController {
 	@PostMapping("payment")
 	public ModelAndView setCampBookPayment(HttpSession session, CampBookDTO campBookDTO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		memberDTO.setId(memberDTO.getId());
+		
 		
 		return mv;
 	}

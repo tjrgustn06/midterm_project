@@ -47,9 +47,6 @@
 		<div class="col-10">
 			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 사이트 예약 리스트</h5>
 		</div>
-		<!-- <div class="col-2">
-			<button class="genric-btn success" id="siteAddBtn" type="button">추가</button>
-		</div> -->
 	</div>
 
 	<!-- 해당 캠핑장의 모든 예약 리스트를 볼 수 있음 -->
@@ -59,19 +56,8 @@
 		<c:choose>
 			<c:when test="${not empty bookList}">
 				<c:forEach items="${bookList}" var="bookDTO" varStatus="i">
-					<!-- <form action="./confirmation" id="bookFrm${i.count}" method="get"> -->
 					<div id="bookOne${i.count}" class="my-3">
-						<!-- <div class="d-flex justify-content-end mb-2">
-							<button data-site-idx="siteIptDel${i.count}" type="button" class="siteDels genric-btn primary">Remove Site</button>
-							<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">Booking</button>
-						</div> -->
-						<p><i class="fa-solid fa-circle-info fa-sm"></i> 예약번호 ${bookDTO.orderNum}</p>
-						<div class="orderInfo input-group mb-2">
-							<span class="input-group-text" id="orderNum">주문번호</span>
-							<input type="text" name="orderNum" data-site-idx="orderNum${i.count}" class="form-control" value="${bookDTO.orderNum}" readonly>
-							<!-- <span class="input-group-text" id="areaNum">사이트번호</span>
-							<input type="text" name="areaNum" data-site-idx="areaNum${i.count}" class="form-control" value="${bookDTO.areaNum}" readonly> -->
-						</div>
+						<h6><i class="fa-solid fa-circle-info fa-sm"></i> 예약번호 ${bookDTO.orderNum}</h6>
 						<div class="siteInfo input-group mb-2">
 							<span class="input-group-text" id="siteName">사이트이름</span>
 							<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${bookDTO.siteName}" readonly>
@@ -95,7 +81,6 @@
 							<input type="text" name="status" data-site-idx="status${i.count}" class="form-control" value="${bookDTO.status}" readonly>
 						</div>
 					</div>
-					<!-- </form> -->
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
@@ -104,10 +89,7 @@
 		</c:choose>
 		<!-- 생성 끝날 부분 -->
 	</div>
-
-
-
-
+	
 </div>
 <c:import url="../../template/footer.jsp"></c:import>
 <script src="../../resources/js/camp/book.js"></script>

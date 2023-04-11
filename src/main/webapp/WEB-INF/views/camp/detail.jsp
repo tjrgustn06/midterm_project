@@ -21,9 +21,24 @@
 			height: 80%;
 		}
 
-		.introImage{
-			width: 30%;
-			height: 30%;
+		.imageBoxIntro{
+			width: 15rem;
+			height: 15rem;
+			overflow: hidden;
+			margin: 0 auto;
+		}
+
+		.imageBoxOther{
+			width: 20rem;
+			height: 20rem;
+			overflow: hidden;
+			margin: 0 auto;
+		}
+
+		.innerImage{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 	
 		.campOne{
@@ -214,8 +229,8 @@
 							<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="i">
 								<!-- 1~3번 이미지만 보이게 크기 등 나중에 수정-->
 								<c:if test="${i.index lt 3}">
-								<div class="introImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+								<div class="imageBoxIntro col-lg-4">
+									<img class="innerImage" alt="" src="../resources/upload/camp/${fileDTO.fileName}">
 								</div>
 								</c:if>
 							</c:forEach>
@@ -339,12 +354,12 @@
 
 					<!-- 인트로 이미지 3장을 제외한 나머지 이미지 -->
 					<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.campName}</h5>
-					<div class="otherImage">
+					<div class="row otherImage mb-3">
 						<c:if test="${not empty dto.campFileDTOs}">
 							<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="j">
 								<c:if test="${j.index ge 3}">
-								<div class="otherImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+								<div class="imageBoxOther col-lg-4">
+									<img class="innerImage" alt="" src="../resources/upload/camp/${fileDTO.fileName}">
 								</div>
 								</c:if>
 							</c:forEach>

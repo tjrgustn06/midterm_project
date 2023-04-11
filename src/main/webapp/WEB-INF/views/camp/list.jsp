@@ -16,9 +16,17 @@
 			text-decoration: none;
 		}
 		
-		.pic{
-			width: 40%;
-			height: 30%;
+		.imageBoxList{
+			width: 24rem;
+			height: 14rem;
+			/* width: 40%;
+			height: 35%; */
+		}
+
+		.innerImage{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 	
 		.campOne{
@@ -102,20 +110,20 @@
 	<!-- 카드형식 div / dto는 캠프정보 한개 -->
 	<c:forEach items="${list}" var="dto">
 		<div class="d-flex row campOne my-3">
-			<div class="row pic col-5">
+			<div class="row imageBoxList col-6">
 				<!-- thumbnailDTO에서 꺼내기 -->
 				<c:catch var="er">
 					<c:choose>
 						<c:when test="${not empty dto.thumbnailDTO}">
-							<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
+							<img class="innerImage" alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
 						</c:when>
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${not empty dto.thumbnail}">
-									<img alt="" src="${dto.thumbnail}">
+									<img class="innerImage" alt="" src="${dto.thumbnail}">
 								</c:when>
 								<c:otherwise>
-									<img alt="" src="../resources/images/empty.jpg">
+									<img class="innerImage" alt="" src="../resources/images/empty.jpg">
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -123,7 +131,7 @@
 				</c:catch>
 			</div>
 
-			<div class="row discription col-7">
+			<div class="row discription col-6">
 				<ul>
 					<li class="row-2 campName"><h5><a href="./detail?campNum=${dto.campNum}&viewType=1">[${dto.doName} ${dto.sigunguName}] ${dto.campName}</a></h5></li>
 					<hr class="my-1">

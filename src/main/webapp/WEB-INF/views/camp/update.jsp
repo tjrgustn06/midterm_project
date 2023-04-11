@@ -311,6 +311,7 @@
 
 						<!-- 이미지 추가 부분 / 인트로 이미지 3장을 제외한 나머지 이미지 표시 -->
 						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.campName} 사진 등록</h5>
+						<p>*체크박스에 체크시 사진을 삭제 할 수 있습니다.</p>
 						<div class="otherImage">
 							<!-- id=fileList인 부분에 js 작동 -->
 							<div id="fileList" class="row">					

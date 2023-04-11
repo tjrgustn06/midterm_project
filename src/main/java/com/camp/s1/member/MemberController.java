@@ -226,7 +226,7 @@ public class MemberController {
 		//Id 찾기
 		@PostMapping("findId")
 		public ModelAndView findId(HttpServletResponse response, MemberDTO memberDTO, ModelAndView mv)throws Exception{
-			
+			response.setCharacterEncoding("UTF-8");
 			memberDTO = memberService.findId(response, memberDTO);
 			
 			mv.addObject("id", memberDTO.getId());

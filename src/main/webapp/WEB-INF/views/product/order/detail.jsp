@@ -106,6 +106,7 @@
 			</form>
 		</div>
 	</div>
+	<c:import url="../../template/footer.jsp"></c:import>
 	<script>
 		$('#payment').click(()=>{
 			let payment = iamport()

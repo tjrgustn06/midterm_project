@@ -150,7 +150,7 @@
 
 </div>
 
-
+<c:import url="../../template/footer.jsp"></c:import>
 <script src="../../resources/js/camp/book.js"></script>
 <script>
 	// datePicker

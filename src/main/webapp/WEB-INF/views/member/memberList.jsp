@@ -115,6 +115,7 @@
 <div class="row col-auto">
 <input type="button" value="HOME" class="btn" onclick="location.href='/'">
 </div>
+<c:import url="../template/footer.jsp"></c:import>
 <c:import url="../template/common_js.jsp"></c:import>
 <script src="../resources/js/roleNameUpdate.js"></script>
 </body>

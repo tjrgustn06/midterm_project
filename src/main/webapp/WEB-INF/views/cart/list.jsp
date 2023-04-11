@@ -95,10 +95,12 @@
 		</div>
 
 	</div>
+	<c:import url="../template/footer.jsp"></c:import>
 	<script src="../resources/js/cartList.js"></script>
 	<script>
 		getAllCart()
 	</script>
+
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

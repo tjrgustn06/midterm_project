@@ -76,6 +76,7 @@
 		</form>
 	</div>
 </div>
+	<c:import url="../template/footer.jsp"></c:import>
 	<c:import url="../template/common_js.jsp"></c:import>
 	<script src="../resources/js/memberJoin.js"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

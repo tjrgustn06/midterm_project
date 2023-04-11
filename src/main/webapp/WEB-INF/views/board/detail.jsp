@@ -84,6 +84,7 @@
 
 	</div>
 </div>
+<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 	<script type="text/javascript" src="../resources/js/comment.js"></script>
 	<script>

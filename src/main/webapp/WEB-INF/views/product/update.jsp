@@ -69,6 +69,7 @@
 			</form>
 		</div>
 	</div>
+	<c:import url="../template/footer.jsp"></c:import>
 	<script src="../resources/js/fileManager.js"></script>
 	<script>
 		setParam('addFiles')

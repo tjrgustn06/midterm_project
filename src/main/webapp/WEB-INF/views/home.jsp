@@ -118,7 +118,6 @@
     </section>
     <!--================ 캠핑스토리 Area  =================-->
         
-</script>
 <c:import url="./template/footer.jsp"></c:import>        
 <script src="/resources/js/productListTop.js"></script>
 <script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>

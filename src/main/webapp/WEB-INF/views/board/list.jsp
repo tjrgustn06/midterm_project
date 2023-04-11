@@ -119,6 +119,7 @@
 		</div>
 		</div>
 	</div>
+	<c:import url="../template/footer.jsp"></c:import>	
 	<script>
 		let list = ${list}
 		for(let i=0; i<'${list.size()}'; i++) {

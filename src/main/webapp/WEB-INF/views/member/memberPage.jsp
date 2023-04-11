@@ -57,6 +57,7 @@
 			<button id="delete" class="btn btn-danger" type="submit">회원 탈퇴</button>
 			</div>
 	</div>
+<c:import url="../template/footer.jsp"></c:import>
 <c:import url="../template/common_js.jsp"></c:import>
 <script src="../resources/js/memberPage.js"></script>
 </body>

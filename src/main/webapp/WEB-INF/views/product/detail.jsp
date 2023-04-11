@@ -183,6 +183,7 @@
 			</div>
 		</c:if>
 	</div>
+	<c:import url="../template/footer.jsp"></c:import>
 	<script src="../resources/js/review.js"></script>
 	<script>
 		let price = 0;
@@ -256,6 +257,7 @@
 	
 	<script src="../resources/js/productDetail.js"></script>
 	<script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
+
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

@@ -49,7 +49,7 @@
 	
 	</div>
 	
-
+	<c:import url="../template/footer.jsp"></c:import>
 	<script src="../resources/js/scroll.js"></script>
 	<script src="../resources/js/story.js"></script>
 	<script src="../resources/js/storyComment.js"></script>

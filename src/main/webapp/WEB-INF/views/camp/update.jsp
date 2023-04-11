@@ -431,7 +431,7 @@
 	
 </div>
 
-
+<c:import url="../template/footer.jsp"></c:import>
 <script src="../resources/js/camp/selectBox.js"></script>
 <script src="../resources/js/camp/campCRUD.js"></script>
 <script src="../resources/js/camp/fileManager.js"></script>

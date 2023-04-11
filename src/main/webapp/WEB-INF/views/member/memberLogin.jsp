@@ -11,6 +11,7 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid">
 	<div class="row justify-content-center">
 		<h1 class="col-md-7 my-5">Member Login</h1>
@@ -47,5 +48,7 @@
 	카카오 로그인</a> 
 	</div>
 	</div>
+<c:import url="../template/footer.jsp"></c:import>
+<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

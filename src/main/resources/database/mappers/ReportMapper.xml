@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema 추가 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.camp.s1.report.reportDAO">
+  	<insert id="setReportAdd" parameterType="ReportDTO">
+  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT, REPORTEDCONTENTS)
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult}, #{reportedContents})
+  	</insert>
+  	
+	<insert id="setCommentReportAdd" parameterType="ReportDTO">
+  		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, COMMENTNUM, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT, REPORTEDCONTENTS)
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{commentNum}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult}, #{reportedContents})
+  	</insert>
+  	
+  	<select id="getReporterList" parameterType="ReportDTO" resultType="ReportDTO">
+  		SELECT REPORTER FROM REPORT
+		<where>
+			NUM = #{num}
+			<if test="commentNum != null">
+				AND COMMENTNUM = #{commentNum}
+			</if>	
+		</where>
+  	</select>
+  	
+<!--   	<select id="getBoardName" parameterType="ReportDTO" resultType="BoardTypeDTO">
+  		SELECT BT.BOARDNAME FROM REPORT R
+  		JOIN
+  		BOARDTYPE BT
+  		USING(BOARDID)
+  		WHERE boardId = #{boardId}
+  		
+  	</select> -->
+  	
+  	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+  		SELECT COUNT(REPORTNUM) FROM REPORT
+  	</select>
+  	
+  	<select id="getCommentList" parameterType="ReportDTO" resultType="CommentDTO">
+  		SELECT * FROM STORYCOMMENT
+  		WHERE NUM = #{num}
+  		ORDER BY STEP DESC
+  	</select>
+  	
+  	<select id="getReportList" parameterType="Pager" resultType="ReportDTO">
+  		SELECT * FROM	
+	  		(
+		  	SELECT ROWNUM R, S.* FROM
+				  	(
+				  	SELECT * FROM REPORT
+				  	ORDER BY REPORTNUM DESC
+				  	) S
+		  	)
+	  	WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<update id="setReportResult" parameterType="ReportDTO">
+  		UPDATE REPORT SET REPORTRESULT = #{reportResult}
+  		WHERE REPORTNUM = #{reportNum}
+  	</update>
+  	
+  	<update id="setBoardBlind" parameterType="BbsDTO">
+ 		UPDATE STORY SET TITLE = #{title}, CONTENTS = #{contents}
+  		WHERE NUM = #{num} 	
+  	</update>
+  	
+  	<update id="setCommentBlind" parameterType="BbsDTO">
+  	  	UPDATE STORYCOMMENT SET CONTENTS = #{contents}
+  		WHERE COMMENTNUM = #{commentNum} 
+  	</update>
+  	
+  	
+  	
+  </mapper>

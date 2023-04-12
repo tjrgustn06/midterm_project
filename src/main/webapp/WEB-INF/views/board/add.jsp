@@ -23,7 +23,7 @@
 				<div class="row mb-3">
 				  <label for="writer" class="col-sm-2 col-form-label">작성자</label>
 				  <div class="col-sm-10">
-				  	<input type="text" class="form-control" name="writer" id="writer" value="user01" readonly >
+				  	<input type="text" class="form-control" name="writer" id="writer" value="${member.id}" readonly >
 				  </div>
 				</div>
 				
@@ -55,6 +55,7 @@
 				<div class="row mt-5 mb-3 col-md-2 offset-md-10">
 					<button class="btn btn-primary " type="submit">글 쓰기</button>
 				</div>
+				<input type="hidden" name="boardId" value="${boardId}">
 			
 			</form>
 		</div>

@@ -8,6 +8,7 @@
   
   <select id="getTotalCount" resultType="Long">
   	SELECT COUNT(NUM) FROM STORY
+  	WHERE CONTENTS IS NOT NULL
   </select>
   
   <select id="getBoardList" parameterType="Pager" resultType="StoryDTO">
@@ -16,6 +17,7 @@
 		  	SELECT ROWNUM R, S.* FROM
 				  	(
 				  	SELECT * FROM STORY
+				  	WHERE CONTENTS IS NOT NULL
 				  	ORDER BY NUM DESC
 				  	) S
 		  	)
@@ -33,6 +35,7 @@
   
    <resultMap type="StoryDTO" id="storyDetailResult">
   	<id property="num" column="NUM"/>
+  	<id property="boardId" column="BOARDID"/>
   	<result property="writer" column="WRITER"/>
   	<result property="title" column="TITLE"/>
   	<result property="contents" column="CONTENTS"/>
@@ -63,8 +66,8 @@
   	<selectKey keyProperty="num" order="BEFORE" resultType="Long">
   		SELECT BOARDSEQ.NEXTVAL FROM DUAL
   	</selectKey>
-  	INSERT INTO STORY (NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT)
-  	VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  	INSERT INTO STORY (NUM, BOARDID, WRITER, TITLE, CONTENTS, REGDATE, HIT)
+  	VALUES (#{num}, #{boardId}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
   </insert>
   
   <insert id="setBoardFileAdd" parameterType="BoardFileDTO">

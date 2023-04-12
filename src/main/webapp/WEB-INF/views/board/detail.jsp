@@ -12,8 +12,11 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container-fluid">
+	<script>
+
+	</script>
 	<div class="row">
-			<div class="row" id="boardName" data-board-name="${boardName}">
+			<div class="row" id="boardName" data-board-name="${boardName}" data-board-id="${boardId}">
 				<h1> ${boardName} Detail Page</h1>
 			</div>
 			
@@ -40,14 +43,16 @@
 			<div class="row">
 				<div class="col-md-8">
 					<c:if test="${boardName ne 'notice'}">		
-						<a href="./reply?num=${dto.num}" class="btn btn-primary col-md-2 mx-2 my-2">답글</a>
+						<a href="./report?num=${dto.num}" class="btn btn-primary col-md-2 mx-2 my-2">답글</a>
+
 					</c:if>
+					
 				</div>		 
 			</div>
 	</div>
 
 	<c:if test="${boardName ne 'notice'}">
-		<div class="my-5">
+		<div class="my-5 comment">
 	  
 			
 			<div class="mb-3">
@@ -65,7 +70,7 @@
 
 
 	<div class="row">
-		<%-- <c:if test="${member.id eq dto.writer}"> --%>
+		 <c:if test="${member.id eq dto.writer}"> 
 			<div class="col-md-8">
 				<form action="./update" id="frm" method="GET">
 					<input type="hidden" name="num" value="${dto.num}">
@@ -76,7 +81,7 @@
 					<button type="button" class="btn btn-primary col-md-2 mx-2" id="delete" data-delete="${dto.num}">글 삭제</button>
 				</form>
 			</div>
-		<%-- </c:if> --%>
+		 </c:if> 
 		
 		<a href="./list" class="btn btn-primary col-md-2 mx-1">목록으로</a>	
 		
@@ -85,12 +90,18 @@
 	</div>
 </div>
 <c:import url="../template/footer.jsp"></c:import>
-	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
-	<script type="text/javascript" src="../resources/js/comment.js"></script>
-	<script>
-		// setBoardName('${boardName}');
-
-	</script>
+	<script src="../resources/js/boardForm.js"></script>
+	<script src="../resources/js/comment.js"></script>
+	<script src="../resources/js/calcDate.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
+	<script>
+			setWriter('${member.id}');
+			setNum('${dto.num}')
+		
+	</script>
+
 </body>
 </html>
+
+
+</script>

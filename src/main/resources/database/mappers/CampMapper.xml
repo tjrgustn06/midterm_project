@@ -30,7 +30,7 @@
   			<if test="sigunguName != null">
   				AND SIGUNGUNAME LIKE '%' || #{sigunguName} || '%'
   			</if>
-  			<if test="name != null">
+  			<if test="campName != null">
   				AND CAMPNAME LIKE '%' || #{campName} || '%'
   			</if>
   		</trim>

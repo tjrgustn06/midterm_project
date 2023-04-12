@@ -32,6 +32,7 @@ public class QnaController {
 	}
 	
 	
+	
 	@GetMapping("list")
 	public ModelAndView getBoardList(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();

@@ -92,6 +92,7 @@ public class StoryService implements BoardService {
 
 	@Override
 	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
+		
 		int result = storyDAO.setBoardUpdate(bbsDTO);
 		
 		if(result > 0) {

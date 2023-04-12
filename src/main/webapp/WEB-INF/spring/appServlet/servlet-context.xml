@@ -54,7 +54,7 @@
 			<exclude-mapping path="/member/memberAgree"/>
 			<exclude-mapping path="/member/memberJoin"/>
 			<exclude-mapping path="/member/memberLogin"/>
-			<exclude-mapping path="/member/findForm"/>
+			<exclude-mapping path="/member/findIdForm"/>
 			<exclude-mapping path="/member/findPw"/>
 			<exclude-mapping path="/member/kakaoLogin"/>
 			<exclude-mapping path="/product/list"/>

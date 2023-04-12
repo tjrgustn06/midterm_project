@@ -11,12 +11,22 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Banner Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+		<h2 class="page-cover-tittle">비밀변호 변경</h2>
+		</div>
+	</div>
+</section>
+<!--================Banner Area =================-->
 	<div class="container-fluid">
 	<div class="row justify-content-center">
 	<form id="pwForm" action="memberPwChange" method="post">	
 					<input type="hidden" name="id" value="${ member.id }">
 					<p>
-						<label>Password</label>
+						<label>현재 비밀번호</label>
 						<input class="w3-input" id="oldPw" name="oldPw" type="password" required>
 					</p>
 					<p>

@@ -9,62 +9,8 @@
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>Update ${dto.campName} - The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/campCRUD.css">
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
-	<style>
-		a{
-			color: black;
-			text-decoration: none;
-		}
-		
-		.pic{
-			width: 80%;
-			height: 80%;
-		}
-
-		.introImage{
-			width: 30%;
-			height: 30%;
-		}
-
-		.campOne{
-			border: black, solid, 1px;
-			border-radius: 5%;
-		}
-		
-		.lineIntro{
-			font-weight: bold;
-		}
-		
-		.introBox{
-			/* 말줄임(...) */
-			width: auto;
-
-			white-space: normal;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-
-		ul, ol, li{
-			list-style: none;
-			font-size: 0.9rem;
-			margin: 1px 0px;
-		}
-
-		.infoNotice{
-			font-size: 0.8rem;
-			font-weight: bold;
-		}
-
-		.infoRed{
-			color: red;
-		}
-
-		.gray{
-			background-color: gray;
-		}
-	</style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -84,7 +30,6 @@
 <div class="container col-lg-9 my-5">
 	<form action="./update" id="frm" method="post" enctype="multipart/form-data">
 	<input type="hidden" id="updCampNum" name="campNum" value="${dto.campNum}">
-
 	<div class="row my-3">
 		<h3>캠핑장 이름 등록</h3>
 		<input type="text" id="ChkName" name="campName" class="form-control my-1" value="${dto.campName}">
@@ -95,7 +40,7 @@
 	<!-- 대표사진 + 설명 div -->
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
-			<div class="row pic my-3 mx-auto">
+			<div class="row imageMain my-3 mx-auto">
 				<!-- 원래 사진 표시 -->
 				<c:choose>
 					<c:when test="${not empty dto.thumbnailDTO}">
@@ -311,6 +256,7 @@
 
 						<!-- 이미지 추가 부분 / 인트로 이미지 3장을 제외한 나머지 이미지 표시 -->
 						<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.campName} 사진 등록</h5>
+						<p>*체크박스에 체크시 사진을 삭제 할 수 있습니다.</p>
 						<div class="otherImage">
 							<!-- id=fileList인 부분에 js 작동 -->
 							<div id="fileList" class="row">					

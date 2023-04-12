@@ -83,7 +83,6 @@
 		
 		<!-- CampBook 하나 완성 -->
 		<!-- num, areaNum, id, indexCode, price, regDate, startDate, lastDate, account, status -->
-	
 		<div id="bookSiteOne">
 			<input type="hidden" name="areaNum" value="${siteDTO.areaNum}">
 			<input type="hidden" name="campNum" value="${siteDTO.campNum}"> <!-- 돌아가기용 -->
@@ -114,24 +113,17 @@
 			</div>
 
 			<div class="d-flex justify-content-between mb-2">
-				<button id="bksConfirm" type="button" class="genric-btn success">예약</button>
-				<button id="bksCancel" type="button" class="genric-btn primary">취소</button>
+				<button id="bksCancel" type="button" class="genric-btn primary">돌아가기</button>
+				<button id="bksConfirm" type="button" class="genric-btn success">예약하기</button>
 			</div>
 		</div>
 	</form>
 	<!-- form 끝 -->
 
-
-	<!-- form -->
-	<!-- <form action="./payment" id="paymentFrm" method="post"></form> -->
-	<!-- <form action="./cancel" id="cancelFrm" method="post"></form> -->
-	<!-- <input type="hidden" name="status" value="결제완료"> -->
-
-
 </div>
 
 
-<c:import url="../template/footer.jsp"></c:import>
+<c:import url="../../template/footer.jsp"></c:import>
 <script src="../../resources/js/camp/book.js"></script>
 <script>
 	// datePicker

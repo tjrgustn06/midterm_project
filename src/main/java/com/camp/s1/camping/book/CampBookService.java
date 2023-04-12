@@ -1,5 +1,7 @@
 package com.camp.s1.camping.book;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.camping.CampSiteDTO;
 import com.camp.s1.member.MemberDTO;
+import com.camp.s1.payment.PaymentDTO;
 
 @Service
 public class CampBookService {
@@ -73,6 +76,65 @@ public class CampBookService {
 	public CampBookDTO getCampBookDetail(CampBookDTO campBookDTO) throws Exception{
 		return campBookDAO.getCampBookDetail(campBookDTO);
 	}
+	
+	//예약 취소(삭제)
+	public int setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
+		return campBookDAO.setCampBookDelete(campBookDTO);
+	}
+	
+	//결제
+	public int setCampBookPaymentAdd(PaymentDTO paymentDTO, CampBookDTO campBookDTO) throws Exception{
+		//결제 진행하고 campbookDTO에 예약상태 변경시키기
+		int result = campBookDAO.setCampBookPaymentAdd(paymentDTO);
+		
+		//결제 성공하면 예약상태 변경
+		if(result>0) {
+			result = campBookDAO.setCampBookUpdate(campBookDTO);
+		}
+		
+		return result;
+	}
+	
+	//특정 기간에 에약이 없는 모든 사이트 조회
+	public List<CampSiteDTO> getAvailbleSiteList(CampBookDTO campBookDTO, String searchStartDate, String searchLastDate) throws Exception{
+		Long campNum = campBookDAO.getCampSiteDetail(campBookDTO.getAreaNum()).getCampNum();
+		
+		CampDTO campDTO = new CampDTO();
+		campDTO.setCampNum(campNum);
+		
+		//캠핑장의 모든 site 조회
+		List<CampSiteDTO> siteList = campBookDAO.getCampSiteList(campDTO);
+		
+		//이용 가능한 siteList를 담을 list 준비
+		List<CampSiteDTO> availableSiteList = new ArrayList<CampSiteDTO>();
+		
+		//전체 site중에서 이용가능한 사이트만 판별
+		for(CampSiteDTO siteDTO : siteList) {
+			//예약된 사이트만 조회, 판별을 위해 check를 true로
+			List<CampBookDTO> reservations = campBookDAO.getBookedSiteList(siteDTO);
+			boolean check = true;
+			
+			//날짜비교 compareTo
+			for(CampBookDTO reservation : reservations) {
+				if(reservation.getStartDate().compareTo(searchLastDate)<0 && reservation.getLastDate().compareTo(searchStartDate)>0) {
+					//compareTo는 비교대상이 작으면 음수, 같으면 0, 크면 양수 반환
+					//startDate가 searchLastDate보다 이전이고, lastDate가 searchStartDate보다 이후인 경우 참
+					check = false;
+					break;
+				}
+			}
+			
+			//check값을 통해 campSiteDTO를 담기 
+			if(check) {
+				availableSiteList.add(siteDTO);
+			}
+			
+		}
+		return availableSiteList;
+	}
+	
+	
+	
 	
 	
 }

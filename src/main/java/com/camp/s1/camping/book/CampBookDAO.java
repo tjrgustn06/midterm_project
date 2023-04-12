@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.camping.CampSiteDTO;
 import com.camp.s1.member.MemberDTO;
+import com.camp.s1.payment.PaymentDTO;
 
 @Repository
 public class CampBookDAO {
@@ -70,5 +71,24 @@ public class CampBookDAO {
 		return sqlSession.delete(NAMESPACE+"setCampBookDelete", campBookDTO);
 	}
 	
+	//결제하기
+	public int setCampBookPaymentAdd(PaymentDTO paymentDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCampBookPaymentAdd", paymentDTO);
+	}
+	
+	//결제 완료 후 예약상태 변경을 위한 업데이트.(결제 취소나 변경 등에도 사용할 수 있을거같음)
+	public int setCampBookUpdate(CampBookDTO campBookDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setCampBookUpdate", campBookDTO);
+	}
+	
+	//기간이 겹치지 않는 사이트 조회 - campNum으로 조회를 해야하긴함
+//	public List<CampSiteDTO> getAvailbleSiteList(Long campNum) throws Exception{
+//		return sqlSession.selectList(NAMESPACE+"getAvailbleSiteList", campNum);
+//	}
+	
+	//예약된 사이트 조회 - bookDTO의 areaNum으로
+	public List<CampBookDTO> getBookedSiteList(CampSiteDTO campSiteDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getBookedSiteList", campSiteDTO);
+	}
 	
 }

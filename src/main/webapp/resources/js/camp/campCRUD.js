@@ -188,12 +188,13 @@ if(viewType==4){
 
 //예약 버튼 작동 - detail.jsp
 $('#detBook').click(function(){
+    $('#bookFrm').submit();
     //db가서 캠핑장 정보 조회해오고 이거 기반으로 데이터 뿌리고 페이지 넘어가야할거같음
-    if(confirm('예약 페이지로 넘어가시겠습니까?')){
+    //if(confirm('예약 페이지로 넘어가시겠습니까?')){
         // $('#frm').attr('action', './book/site');
-        $('#bookFrm').submit();
+        //$('#bookFrm').submit();
         //파라미터 따로 안넣었는데 form 안에 campNum 넣으니까 알아서 들어가는거같음
-    }
+    //}
 })
 
 //리스트로 - detail.jsp
@@ -296,34 +297,6 @@ function updServiceCheck(){
     }
 
 }
-
-// //status로 받은 값이 checked로 되게끔 하기 - update.jsp
-// function updStatus(){
-//     //저장되어있는 status값 받아오기
-//     let status = $('input[name=status]').val();
-//     //status값에 맞는 라디오버튼 누르기
-//     $('input[name=status][value="'+status+'"]').prop("checked", true);
-// }
-
-// //status가 선택된 값이 checked로 되게끔 하기 - update.jsp
-// function setStatus2(){
-//     chkArray = new Array();
-//     let chkService = $('input[name="serv"]:checked');
-//     let serv ='';
-
-//     chkService.each(function(){
-//         let tmpVal = $(this).val();
-//         chkArray.push(tmpVal);
-//     })
-
-//     for(let i of chkArray){
-//         serv = serv + i +",";
-//     }
-
-//     service = serv.substring(0, serv.length-1);
-//     $('#serviceVal').val(service);
-// }
-
 
 //콘솔에 값 확인하고 싶을때 사용 - add.jsp/update.jsp(console 버튼)
 $('#consoleSign').click(function(){
@@ -431,7 +404,7 @@ function chkValidation(){
 
     //if문으로 빈값인지 체크
     //나중에 주석 해제(alert창, submit)
-    if(ChkName=null || ChkName==''){
+    if(ChkName==null || ChkName==''){
         //alert('캠핑장 이름을 입력하세요');
         return;
     }else if(chkArray.length<1){

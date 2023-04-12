@@ -55,7 +55,6 @@
 			ON(CS.CAMPNUM=CI.CAMPNUM)
 		WHERE CI.CAMPNUM=#{campNum}
 		
-		
 		<!-- FROM CAMPINFO CI
 			JOIN CAMPSITE CS
 			ON(CI.CAMPNUM = CS.CAMPNUM)
@@ -75,9 +74,29 @@
 	</select>
 	
 	<!-- setCampBookDelete -->
-	<delete id="setCampBookDelete">
-	
+	<delete id="setCampBookDelete" parameterType="CampBookDTO">
+		DELETE CAMPBOOK WHERE NUM=#{num}
 	</delete>
+	
+	<!-- setCampBookPaymentAdd - 결제 추가 -->
+	<insert id="setCampBookPaymentAdd" parameterType="PaymentDTO">
+		<selectKey keyProperty="payNum" order="BEFORE" resultType="Long">
+			SELECT PAYMENTSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO PAYMENT(PAYNUM, ORDERNUM, PAYMETHOD, PAYDATE)
+		VALUES(#{payNum}, #{orderNum}, #{payMethod}, SYSDATE)
+	</insert>
+	
+	<!-- setCampBookUpdate - 결제후 예약상태 변경 -->
+	<update id="setCampBookUpdate" parameterType="CampBookDTO">
+		UPDATE CAMPBOOK SET STATUS=#{status} WHERE NUM=#{num}
+	</update>
+	
+	<!-- getBookedSiteList - 예약된 사이트들을 조회 -->
+	<select id="getBookedSiteList" parameterType="CampBookDTO" resultType="CampBookDTO">
+		SELECT * FROM CAMPBOOK WHERE AREANUM=#{areaNum}
+	</select>
+	
 	
 	
 	</mapper>

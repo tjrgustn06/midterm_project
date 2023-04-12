@@ -9,62 +9,8 @@
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>${dto.campName} - The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/campCRUD.css">
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
-	<style>
-		a{
-			color: black;
-			text-decoration: none;
-		}
-		
-		.pic{
-			width: 80%;
-			height: 80%;
-		}
-
-		.introImage{
-			width: 30%;
-			height: 30%;
-		}
-	
-		.campOne{
-			border: black, solid, 1px;
-			border-radius: 5%;
-		}
-		
-		.lineIntro{
-			font-weight: bold;
-		}
-		
-		.introBox{
-			/* 말줄임(...) */
-			width: auto;
-
-			white-space: normal;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-
-		ul, ol, li{
-			list-style: none;
-			font-size: 0.9rem;
-			margin: 1px 0px;
-		}
-
-		.infoNotice{
-			font-size: 0.8rem;
-			font-weight: bold;
-		}
-
-		.infoRed{
-			color: red;
-		}
-
-		.gray{
-			background-color: gray;
-		}
-	</style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -95,7 +41,7 @@
 	
 	<!-- 대표사진 + 설명 div -->
 	<div class="d-flex row my-3">
-		<div class="row pic my-3 mx-auto">
+		<div class="row imageMain my-3 mx-auto">
 			<c:choose>
 				<c:when test="${not empty dto.thumbnailDTO}">
 					<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
@@ -163,7 +109,7 @@
 				<input type="hidden" name="campNum" value="${dto.campNum}">
 				<div class="d-flex justify-content-between my-2" id="userBtn">
 					<button id="detList" type="button" class="genric-btn primary">목록으로</button>
-					<button id="detBook" type="button" class="genric-btn success">예약하기</button>
+					<button id="detBook" type="button" class="genric-btn success">사이트선택</button>
 				</div>
 				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
 				<!-- <div class="d-flex justify-content-between my-2" id="adminBtn">
@@ -214,8 +160,8 @@
 							<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="i">
 								<!-- 1~3번 이미지만 보이게 크기 등 나중에 수정-->
 								<c:if test="${i.index lt 3}">
-								<div class="introImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+								<div class="imageBoxIntro col-lg-4">
+									<img class="innerImage" alt="" src="../resources/upload/camp/${fileDTO.fileName}">
 								</div>
 								</c:if>
 							</c:forEach>
@@ -339,12 +285,12 @@
 
 					<!-- 인트로 이미지 3장을 제외한 나머지 이미지 -->
 					<h5><i class="fa-solid fa-camera fa-sm"></i> ${dto.campName}</h5>
-					<div class="otherImage">
+					<div class="row otherImage mb-3">
 						<c:if test="${not empty dto.campFileDTOs}">
 							<c:forEach items="${dto.campFileDTOs}" var="fileDTO" varStatus="j">
 								<c:if test="${j.index ge 3}">
-								<div class="otherImage">
-									<img alt="" src="../resources/upload/camp/${fileDTO.fileName}">
+								<div class="imageBoxOther col-lg-4">
+									<img class="innerImage" alt="" src="../resources/upload/camp/${fileDTO.fileName}">
 								</div>
 								</c:if>
 							</c:forEach>

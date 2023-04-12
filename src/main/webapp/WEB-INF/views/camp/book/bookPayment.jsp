@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
-<title>bookConfimation - The Camp</title>
+<title>PAYMENT - The Camp</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>

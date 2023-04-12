@@ -93,12 +93,15 @@ $('#storyList').on('change', '.modalReplyContents', function(){
 $("#"+boardName+'List').on('click','.replyAdd',function(){
         
     board = $(this).parents('#'+boardName+$(this).attr('data-board-num'));
-    let contents = board.find('.replyContents').val();
 
-    num = $(this).attr('data-board-num')
-    
-    setCommentAdd(num, contents, writer, boardId);
+    let chk = chkValidation(board.find('.replyContents'));
+    if(chk) {
+        let contents = board.find('.replyContents').val();
+
+        num = $(this).attr('data-board-num')
         
+        setCommentAdd(num, contents, writer, boardId);
+    }  
 })
 
 //댓글 등록 이벤트
@@ -106,10 +109,15 @@ $('#'+boardName+'List').on('keydown','.replyContents', function(e){
     if(e.keyCode === 13) {
         e.preventDefault();
 
-        let contents = $(this).val();
-        num = $(this).attr('data-board-num')
+        let chk = chkValidation($(this));
 
-        setCommentAdd(num, contents, writer, boardId);
+        if(chk) {
+            let contents = $(this).val();
+            num = $(this).attr('data-board-num')
+    
+            setCommentAdd(num, contents, writer, boardId);
+        }
+
         
     }
 })
@@ -117,10 +125,15 @@ $('#'+boardName+'List').on('keydown','.replyContents', function(e){
 //모달 창 댓글 등록 이벤트
 $('#'+boardName+'List').on('click','.modalReplyAdd', function(e){
     board = $(this).parents('#'+boardName+$(this).attr('data-board-num'));
-    let contents = board.find('.modalReplyContents').val();
 
-    num = $(this).attr('data-board-num')
-    setCommentAdd(num, contents, writer, boardId);
+    let chk = chkValidation(board.find('.modalReplyContents'));
+    if(chk) {
+        let contents = board.find('.modalReplyContents').val();
+
+        num = $(this).attr('data-board-num')
+        setCommentAdd(num, contents, writer, boardId);
+    }
+
 
 })
 
@@ -129,11 +142,14 @@ $('#'+boardName+'List').on('keydown','.modalReplyContents', function(e){
     if(e.keyCode === 13) {
         e.preventDefault();
 
-        let contents = $(this).val();
-        num = $(this).attr('data-board-num')
+        let chk = chkValidation($(this));
 
-        setCommentAdd(num, contents, writer, boardId);
-        
+        if(chk) {
+            let contents = $(this).val();
+            num = $(this).attr('data-board-num')
+    
+            setCommentAdd(num, contents, writer, boardId);
+        }
     }
 
 })
@@ -257,26 +273,31 @@ $('#'+boardName+'List').on('click', '.commentCancle', function(){
 $('#'+boardName+'List').on('click', '.commentUpdate', function(){
     commentNum = $(this).attr('data-comment-num');
     
-    
-    $.ajax({
-        type : 'POST',
-        url : '../'+boardName+'Comment/update',
-        data : {
-            commentNum : commentNum,
-            contents : $('#commentContents'+commentNum).val()
-        },
-        success : function(response){
-            if(response.trim() > 0) {
-                alert('댓글이 수정되었습니다');
-                getCommentList(num, page);
-                
+    let chk = chkValidation($('#commentContents'+commentNum));
 
+    if(chk) {
+        $.ajax({
+            type : 'POST',
+            url : '../'+boardName+'Comment/update',
+            data : {
+                commentNum : commentNum,
+                contents : $('#commentContents'+commentNum).val()
+            },
+            success : function(response){
+                if(response.trim() > 0) {
+                    alert('댓글이 수정되었습니다');
+                    getCommentList(num, page);
+                    
+    
+                }
+                else {
+                    alert('댓글 수정 실패. 관리자에게 문의하세요');
+                }
             }
-            else {
-                alert('댓글 수정 실패. 관리자에게 문의하세요');
-            }
-        }
-    })
+        })
+    }
+    
+
 })
 
 
@@ -351,31 +372,35 @@ $('#'+boardName+'List').on('click','.subCommentCancle', function(){
 //대댓글 등록버튼
 $('#'+boardName+'List').on('click','.subCommentAdd', function(){
     commentNum = $(this).attr('data-comment-num');
-    contents = $('#subCommentContents'+commentNum).val();
+
+    let chk = chkValidation($('#subCommentContents'+commentNum));
+
+    if(chk) {
+
+        contents = $('#subCommentContents'+commentNum).val();
    
-
-    
-
-    $.ajax({
-        type : 'POST',
-        url : '../'+boardName+'Comment/subCommentAdd',
-        data : {
-            commentNum : commentNum,
-            contents : contents,
-            writer : writer,
-            boardId : boardId+1
-        },
-        success : function(repsonse) {
-            if(repsonse.trim()>0) {
-                alert('댓글이 등록되었습니다.');
-                getList(currentPage);
-                getCommentList(num,1);
+        $.ajax({
+            type : 'POST',
+            url : '../'+boardName+'Comment/subCommentAdd',
+            data : {
+                commentNum : commentNum,
+                contents : contents,
+                writer : writer,
+                boardId : boardId+1
+            },
+            success : function(repsonse) {
+                if(repsonse.trim()>0) {
+                    alert('댓글이 등록되었습니다.');
+                    getList(currentPage);
+                    getCommentList(num,1);
+                }
+                else {
+                    alert('댓글 등록 실패. 관리자에게 문의하세요');
+                }
             }
-            else {
-                alert('댓글 등록 실패. 관리자에게 문의하세요');
-            }
-        }
-    })
+        })
+    }
+
 })
 
 
@@ -415,6 +440,21 @@ function getSubCommentForm(commentNum) {
 
 function setSubCommentResetForm(commentNum) {
     $('#subCommentForm'+commentNum).remove();
+}
+
+function chkValidation(element){
+
+    let contents = element.val();
+
+    let chk = true;
+
+    if(contents == '') {
+        alert('댓글 내용을 입력해주세요')
+        chk = false;
+        return chk;
+    }
+    
+    return chk;
 }
 
 

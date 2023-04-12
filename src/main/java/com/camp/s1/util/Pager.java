@@ -8,6 +8,9 @@ public class Pager {
 	// 게시판 구분을 위한 변수
 	private String boardName;
 	
+	// 신고 처리 결과 구분을 위한 변수
+	private Long reportResult;
+	
 	// 검색
 	
 	
@@ -219,6 +222,19 @@ public class Pager {
 	public void setBoardName(String boardName) {
 		this.boardName = boardName;
 	}
+
+	public Long getReportResult() {
+		if(reportResult == null) {
+			reportResult = 1L;
+		}
+		return reportResult;
+	}
+
+	public void setReportResult(Long reportResult) {
+		this.reportResult = reportResult;
+	}
+	
+	
 	
 	
 	

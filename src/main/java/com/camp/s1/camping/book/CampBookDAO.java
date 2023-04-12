@@ -91,4 +91,9 @@ public class CampBookDAO {
 		return sqlSession.selectList(NAMESPACE+"getBookedSiteList", campSiteDTO);
 	}
 	
+	//특정 멤버의 예약서 목록을 조회
+	public List<CampBookDTO> getMyBookList(CampBookDTO campBookDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getMyBookList", campBookDTO);
+	}
+	
 }

@@ -51,14 +51,24 @@ $(function() {
 
 <body>
 <c:import url="../template/header.jsp"></c:import>
+	 <!--================Banner Area =================-->
+	 <section class="banner_area blog_banner d_flex align-items-center">
+		<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+		<div class="container">
+			<div class="banner_content text-center">
+				<h4>Dude You’re Getting <br />a Telescope</h4>
+				<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first</p>
+				<a href="#" class="btn white_btn button_hover">View More</a>
+			</div>
+		</div>
+	</section>
+	<!--================Banner Area =================-->
 <div class="container-fluid">
 
     <div class="row mb-4 border-bottom border-info">
         <h1 class="col-md-7 mx-auto text-center pb-3 fs-2">Story Add 페이지</h1><br>
     </div>
     
-    <!-- <form id="campSearchForm2" action="/bsite/camp/info/list.do" method="get" enctype="multipart/form-data">
-        <input type="hidden" name="listTy" value="LIST" /> -->
         <div class="row search_box">
 
             <div class="row col-md-8 mx-auto border-bottom ">

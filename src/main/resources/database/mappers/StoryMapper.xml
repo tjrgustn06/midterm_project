@@ -67,7 +67,7 @@
   		SELECT BOARDSEQ.NEXTVAL FROM DUAL
   	</selectKey>
   	INSERT INTO STORY (NUM, BOARDID, WRITER, TITLE, CONTENTS, REGDATE, HIT)
-  	VALUES (#{num}, #{boardId}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  	VALUES (#{num}, #{boardId}, #{writer}, #{title}, #{contents}, CURRENT_TIMESTAMP, 0)
   </insert>
   
   <insert id="setBoardFileAdd" parameterType="BoardFileDTO">

@@ -164,5 +164,15 @@ public class StoryController {
 		return mv;
 	}
 	
+	@GetMapping("storyListTop")
+	public ModelAndView getStoryTopResult(Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		pager.setPerPage(4L);
+		
+		mv.addObject("list", storyService.getBoardList(pager));
+		mv.setViewName("common/storyTopResult");
+		return mv;
+	}
+	
 	
 }

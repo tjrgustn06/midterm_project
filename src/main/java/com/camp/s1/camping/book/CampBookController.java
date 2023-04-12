@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.camp.s1.camping.CampDTO;
 import com.camp.s1.camping.CampSiteDTO;
+import com.camp.s1.member.AddressDTO;
 import com.camp.s1.member.MemberDTO;
 import com.camp.s1.payment.PaymentDTO;
 import com.camp.s1.util.Pager;
@@ -42,15 +43,6 @@ public class CampBookController {
 		mv.addObject("campDTO", campDTO);
 		mv.addObject("siteList", siteList);
 		mv.setViewName("camp/book/bookSite");
-		return mv;
-	}
-	
-	
-	//ajax로 기간 조회하는 메서드 만들어서 bookSite에서 아래에 뿌리기
-	//기간 중복되는 날짜는 javascript로 날짜 선택 못하게끔 해줘야할듯
-	public ModelAndView getCheckPeriod() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
 		return mv;
 	}
 	
@@ -103,20 +95,19 @@ public class CampBookController {
 		
 		int result = campBookService.setCampBookAdd(campBookDTO);
 		
-		//CampBookDTO로 site 조회
-		//CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
-		
-		//campSiteDTO로 camp 조회
-		//CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
-		
 		String message = "예약에 실패했습니다";
 		if(result>0) {
 			message = "예약에 성공했습니다";
 		}
 		
-//		mv.addObject("campDTO", campDTO);
-//		mv.addObject("siteDTO", campSiteDTO);
-//		mv.addObject("bookDTO", campBookDTO);
+		//멤버에 예약한 캠핑장의 주소넣기 - 물품대여할 때 필요
+		AddressDTO addressDTO = new AddressDTO();
+		CampDTO campDTO = campBookService.getCampDetail(campNum);
+		addressDTO.setAddress(campDTO.getAddress());
+		addressDTO.setAddressName(campDTO.getCampName());
+		memberDTO.getAddressDTOs().add(addressDTO);
+		
+		
 		mv.addObject("result", message);
 		mv.addObject("url", "../book/payment?num="+campBookDTO.getNum());
 		mv.setViewName("common/result");
@@ -125,20 +116,8 @@ public class CampBookController {
 	}
 	
 	
-	//예악관리페이지(bookManagement.jsp) 호출
-//	@GetMapping("management")
-//	public ModelAndView getCampBookManagement(CampDTO campDTO) throws Exception{
-//		//사이트 정보 수정(추가/수정/삭제, 예약가능여부(중복x), 금액 변동 등) 기능 제공 -> 글수정 할 때 가능하게 했던 내용들이긴 해서 참고하고 수정할 수 있도록
-//		ModelAndView mv = new ModelAndView();
-//		
-//		
-//		
-//		mv.setViewName("camp/book/bookManagement");
-//		return mv;
-//	}
-	
-	
 	//예약목록페이지(bookList.jsp) 호출
+	//해당 캠핑장의 사이트 예약목록을 불러옴
 	@GetMapping("list")
 	public ModelAndView getCampBookList(Long campNum) throws Exception{
 		//해당 캠핑장에서 예약된 사이트 전체를 보여주는 페이지. [사이트이름 / 사용기간 / 결제여부(입금대기,완료 등)]
@@ -150,14 +129,6 @@ public class CampBookController {
 		//캠핑장 정보 조회
 		CampDTO campDTO = campBookService.getCampDetail(campNum);
 		
-		
-//		System.out.println("List: "+bookList);
-//		
-//		
-//		for(CampBookDTO campBookDTO : bookList) {
-//			System.out.println(campBookDTO.getAreaNum());
-//		}
-		
 		mv.addObject("campDTO", campDTO);
 		mv.addObject("bookList", bookList);
 		mv.setViewName("camp/book/bookList");
@@ -166,31 +137,31 @@ public class CampBookController {
 	
 	
 	//예약 취소
-		@PostMapping("delete")
-		public ModelAndView setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
-			ModelAndView mv = new ModelAndView();
-			
-			//CampBookDTO로 site 조회
-			CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
-			
-			//campSiteDTO로 camp 조회
-			CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
-			
-			//삭제실행
-			int result = campBookService.setCampBookDelete(campBookDTO);
-			
-			//결과출력
-			String message = "예약 정보를 삭제하지 못했습니다.";
-			if(result>0) {
-				message = "예약 정보를 삭제했습니다.";
-			}
-			
-			mv.setViewName("common/result");
-			mv.addObject("result", message);
-			mv.addObject("url", "../detail?campNum="+campDTO.getCampNum()+"&viewType=1");
-			
-			return mv;
+	@PostMapping("delete")
+	public ModelAndView setCampBookDelete(CampBookDTO campBookDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//CampBookDTO로 site 조회
+		CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBookDTO.getAreaNum());
+		
+		//campSiteDTO로 camp 조회
+		CampDTO campDTO = campBookService.getCampDetail(campSiteDTO.getCampNum());
+		
+		//삭제실행
+		int result = campBookService.setCampBookDelete(campBookDTO);
+		
+		//결과출력
+		String message = "예약 정보를 삭제하지 못했습니다.";
+		if(result>0) {
+			message = "예약 정보를 삭제했습니다.";
 		}
+		
+		mv.setViewName("common/result");
+		mv.addObject("result", message);
+		mv.addObject("url", "../detail?campNum="+campDTO.getCampNum()+"&viewType=1");
+		
+		return mv;
+	}
 	
 	
 	//결제 페이지(bookPayment.jsp) 호출
@@ -235,16 +206,36 @@ public class CampBookController {
 	
 	
 	//특정 기간에 에약이 없는 모든 사이트 조회 - ajax
-	@GetMapping("availableSite")
-	public ModelAndView getAvailbleSiteList(CampBookDTO campBookDTO, String searchStartDate, String searchLastDate) throws Exception{
+	@PostMapping("availableSite")
+	public ModelAndView getAvailbleSiteList(CampDTO campDTO, String searchStartDate, String searchLastDate) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<CampSiteDTO> availableSiteList = campBookService.getAvailbleSiteList(campBookDTO, searchStartDate, searchLastDate);
+		List<CampSiteDTO> availableSiteList = campBookService.getAvailbleSiteList(campDTO, searchStartDate, searchLastDate);
 		
-		mv.addObject("result", availableSiteList);
-		mv.setViewName("common/ajaxResult");
+		mv.addObject("siteList", availableSiteList);
+		mv.setViewName("common/availableSiteList");
 		return mv;
 	}
 	
+	
+	//멤버의 예약 페이지(myBook.jsp) 호출
+	//특정 멤버의 예약서 목록을 조회
+	@GetMapping("myBook")
+	public ModelAndView getMyBookList(HttpSession session, CampBookDTO campBookDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//id정보밖에 없어서 회원정보 넣어주기
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		memberDTO = campBookService.getMemberDetail(memberDTO);
+		
+		campBookDTO.setId(memberDTO.getId());	
+		
+		List<CampBookDTO> myList = campBookService.getMyBookList(campBookDTO);
+		
+		mv.addObject("member", memberDTO);
+		mv.addObject("bookList", myList);
+		mv.setViewName("camp/book/myBook");
+		return mv;
+	}
 	
 	
 }

@@ -9,6 +9,62 @@ $('#bksConsoleSign').click(function(){
     //console.log('bookSite Page');
 })
 
+//예약 가능한 site만 불러오기 - bookSite.jsp
+//input 기간이 두개 다 변했을 때 이벤트 따로 걸기
+$('input[name=searchStartDate]').change(function(){
+  console.log("시작날짜 변경");
+  //두 기간의 값이 다 있을때 이벤트 실행
+  if($('input[name=searchStartDate]').val()!='' && $('input[name=searchLastDate]').val()!=''){
+    let campNum = $('input[name=campNum]').val();
+    let searchStartDate = $('input[name=searchStartDate]').val();
+    let searchLastDate = $('input[name=searchLastDate]').val();
+
+    $.ajax({
+      type : 'POST',
+      url : './availableSite',
+      data : {
+        campNum : campNum,
+        searchStartDate : searchStartDate,
+        searchLastDate : searchLastDate
+      },
+      success: function(response){
+        //ajax로 실행된 결과물을 id값이 siteList인 div 태그 내에 넣어줌
+        $('#siteList').html(response);
+      },
+      error: function(response){
+        console.log('error');
+      }
+    })
+  }
+})
+
+$('input[name=searchLastDate]').change(function(){
+  console.log("끝날짜 변경");
+   //두 기간의 값이 다 있을때 이벤트 실행
+   if($('input[name=searchStartDate]').val()!='' && $('input[name=searchLastDate]').val()!=''){
+    let campNum = $('input[name=campNum]').val();
+    let searchStartDate = $('input[name=searchStartDate]').val();
+    let searchLastDate = $('input[name=searchLastDate]').val();
+
+    $.ajax({
+      type : 'POST',
+      url : './availableSite',
+      data : {
+        campNum : campNum,
+        searchStartDate : searchStartDate,
+        searchLastDate : searchLastDate
+      },
+      success: function(response){
+        $('#siteList').html(response);
+      },
+      error: function(response){
+        console.log('error');
+      }
+    })
+   }
+
+})
+
 
 //선택하기버튼 작동 - bookSite.jsp
 $('#siteList').on('click', '.bookBtn', function(e){
@@ -31,6 +87,22 @@ $('#siteList').on('click', '.bookBtn', function(e){
     }else{
       $('#bookFrm'+siteIdx).submit();
     }
+})
+
+//결제/취소 버튼 작동 - myBook.jsp
+$('#myBookList').on('click', '.myBookBtn', function(e){
+  //
+  let siteIdx = $(e.target).attr('data-site-idx');
+
+  let num = $('input[name=num][data-site-idx='+siteIdx+']').val();
+
+  location.href="./payment?num="+num;
+
+})
+
+//돌아가기 버튼을 눌렀을 때 - myBook.jsp
+$('#myBookCancel').click(function(){
+  location.href="/";
 })
 
 //돌아가기 버튼을 눌렀을 때 - bookList.jsp
@@ -63,6 +135,13 @@ $('#payCancel').click(function(){
       $('#paymentFrm').attr('action', './delete');
       $('#paymentFrm').submit();
     }
+})
+
+//돌아가기 버튼을 눌렀을 때 - bookPayment.jsp
+$('.payReturn').click(function(){
+  $('#paymentFrm').attr('action', './myBook');
+  $('#paymentFrm').attr('method', 'GET');
+  $('#paymentFrm').submit();
 })
 
 //결제하기 버튼을 눌렀을 때 - bookPayment.jsp

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
-<title>book - The Camp</title>
+<title>BOOKING - The Camp</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -85,50 +85,48 @@
 
 	<div class="row my-2" id="siteList">
 		<!-- 조건에 맞는 내용 출력되게끔 원함 -->
-		<c:choose>
-			<c:when test="${not empty result}">
-				<div id="availableSite">
-
-				</div>
-			</c:when>
-			<c:otherwise>
-				<p>*기간을 먼저 조회해주세요</p>
-			</c:otherwise>
-		
-		</c:choose>
+		<p>*기간을 먼저 조회해주세요</p>
 
 		<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
-		<!-- <c:forEach items="${siteList}" var="siteDTO" varStatus="i">
-			<form action="./confirmation" id="bookFrm${i.count}" method="get">
-			--areaNum: ${siteDTO.areaNum}--
-			<div id="siteOne${i.count}">
-				<input type="hidden" name="areaNum" value="${siteDTO.areaNum}" data-site-idx="area${i.count}">
-				<input type="hidden" name="startDate" value="" data-site-idx="start${i.count}">
-				<input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">
-				<div class="d-flex justify-content-end mb-2">
-					<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">선택하기</button>
-				</div>
-				<div class="input-group mb-2">
-					<span class="input-group-text" id="siteName">사이트이름</span>
-					<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}" readonly>
-					<span class="input-group-text" id="siteSize">크기(m^2)</span>
-					<input type="text" name="siteSize" data-site-idx="siteSize${i.count}" class="form-control" value="${siteDTO.siteSize}" readonly>
-				</div>
-				<div class="input-group mb-2">
-					<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
-					<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice${i.count}" class="form-control" value="${siteDTO.offWeekdaysPrice}" readonly>
-					<span class="input-group-text" id="offWeekendsPrice">주말</span>
-					<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice${i.count}" class="form-control" value="${siteDTO.offWeekendsPrice}" readonly>
-				</div>
-				<div class="input-group mb-2">
-					<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
-					<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice${i.count}" class="form-control" value="${siteDTO.peakWeekdaysPrice}" readonly>
-					<span class="input-group-text" id="peakWeekendsPrice">주말</span>
-					<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
-				</div>
-			</div>
-			</form>
-		</c:forEach> -->
+		<!-- <c:choose>
+			<c:when test="${not empty siteList}">
+				<c:forEach items="${siteList}" var="siteDTO" varStatus="i">
+					<form action="./confirmation" id="bookFrm${i.count}" method="get">
+					--areaNum: ${siteDTO.areaNum}--
+					<div id="siteOne${i.count}">
+						<input type="hidden" name="areaNum" value="${siteDTO.areaNum}" data-site-idx="area${i.count}">
+						<input type="hidden" name="startDate" value="" data-site-idx="start${i.count}">
+						<input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">
+						<div class="d-flex justify-content-end mb-2">
+							<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">선택하기</button>
+						</div>
+						<div class="input-group mb-2">
+							<span class="input-group-text" id="siteName">사이트이름</span>
+							<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}" readonly>
+							<span class="input-group-text" id="siteSize">크기(m^2)</span>
+							<input type="text" name="siteSize" data-site-idx="siteSize${i.count}" class="form-control" value="${siteDTO.siteSize}" readonly>
+						</div>
+						<div class="input-group mb-2">
+							<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+							<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice${i.count}" class="form-control" value="${siteDTO.offWeekdaysPrice}" readonly>
+							<span class="input-group-text" id="offWeekendsPrice">주말</span>
+							<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice${i.count}" class="form-control" value="${siteDTO.offWeekendsPrice}" readonly>
+						</div>
+						<div class="input-group mb-2">
+							<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+							<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice${i.count}" class="form-control" value="${siteDTO.peakWeekdaysPrice}" readonly>
+							<span class="input-group-text" id="peakWeekendsPrice">주말</span>
+							<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
+						</div>
+					</div>
+					</form>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<p>*선택 기간 내 예약 가능한 사이트가 없습니다.</p>
+			</c:otherwise>
+		</c:choose> -->
+		
 		<!-- 생성 끝날 부분 -->
 	</div>
 

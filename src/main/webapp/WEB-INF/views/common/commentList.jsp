@@ -45,7 +45,7 @@
 													<button type="button" class="list-group-item list-group-item-action deleteMenu" data-comment-num='${dto.commentNum}'>삭제</button>
 												</c:if>
 												
-												<c:if test="${boardName eq 'story' && dto.writer ne member.id}">
+												<c:if test="${boardName eq 'story' && dto.writer ne member.id && not empty dto.writer}">
 													<button type="button" class="list-group-item list-group-item-action reportMenu" data-comment-num='${dto.commentNum}' data-comment-writer="${dto.writer}">신고하기</button>
 												</c:if>
 												

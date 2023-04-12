@@ -11,6 +11,19 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">CAMPBOOK</h2>
+				<ol class="breadcrumb">
+					<li>캠핑장을 자세히 알려드릴게요</li>
+				</ol>
+		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
 	<div class="container-fluid">
 	
 		<div class="row my-5">
@@ -24,7 +37,7 @@
 			      <th scope="col">글번호</th>
 			      <th scope="col">글제목</th>
 			      <th scope="col">작성자</th>
-			      <th scope="col">작성일</th>
+			      <th scope="col">작성시간</th>
 			      <th scope="col">조회수</th>
 			    </tr>
 			  </thead>
@@ -36,7 +49,14 @@
 						      <th scope="row">${dto.num}</th>
 						      <td><a href="./detail?num=${dto.num}">${dto.title}</a></td>
 						      <td>${dto.writer}</td>
-						      <td>${dto.regDate}</td>
+						      <td id="reg${dto.num}">
+								<script>
+									$(document).ready(function(){
+										let regDate = '${dto.regDate}';
+										$('#reg'+'${dto.num}').text(getDateDiff(regDate));
+									})
+								</script>
+							  </td>
 						      <td>${dto.hit}</td>
 						    </tr>
 					  	</c:forEach>
@@ -119,8 +139,9 @@
 		</div>
 		</div>
 	</div>
-	<c:import url="../template/footer.jsp"></c:import>	
 
+<c:import url="../template/footer.jsp"></c:import>	
 <c:import url="../template/common_js.jsp"></c:import>
+<script src="../resources/js/calcDate.js"></script>
 </body>
 </html>

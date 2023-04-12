@@ -95,6 +95,7 @@
 				</tbody>
 			</table>
 			<button type="button" class="genric-btn success" id="allForm" style="float: right;">전체 주문</button>
+			<br><br>
 		</div>
 
 	</div>

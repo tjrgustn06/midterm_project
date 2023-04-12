@@ -156,6 +156,9 @@
 	<script>
 		$('#addressSelect').change(function(){
 			$('#address').val($(this).val())
+			if($('#address').val()==null) {
+				$('#address').remove('readonly')
+			}
 		})
 	</script>
 	<c:import url="../../template/common_js.jsp"></c:import>

@@ -244,7 +244,7 @@
 			getAmount(gradeStock)
 			$('#nomalPrice').html('&nbsp;'+price);
 			price = price*$('#amount').val();
-			$('#totalPrice').html('&nbsp;'+price)
+			$('#totalPrice').html(price)
 			$('#price').val($('#totalPrice').html())
 			$('#gradeNum').val(gradeNum)
 			$('#name').val('${dto.name}'+" "+$('#gradeName').val())

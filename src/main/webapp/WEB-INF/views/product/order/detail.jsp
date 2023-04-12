@@ -8,7 +8,7 @@
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>The Camp</title>
 <c:import url="../../template/common_css.jsp"></c:import>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>

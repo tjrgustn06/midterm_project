@@ -183,6 +183,7 @@ function getSearchList() {
     })
 }
 
+//폼이 submit 됐을때 유효성 검사
 $('#addFrm').submit(function(e){
     e.preventDefault();
 
@@ -193,6 +194,7 @@ $('#addFrm').submit(function(e){
     }
 })
 
+//유효성 검사 함수
 function chkValidation(){
     //유효성 체크가 필요한 element가져오기
     let datepicker = $('#datepicker').val();

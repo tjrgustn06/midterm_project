@@ -49,17 +49,6 @@
 					<a href="./fileDown?fileNum=${fileDTO.fileNum}">${fileDTO.oriName}</a>
 				</c:forEach>
 			</c:if>
-			
-			
-			<div class="row">
-				<div class="col-md-8">
-					<c:if test="${boardName ne 'notice'}">		
-						<a href="./report?num=${dto.num}" class="btn btn-primary col-md-2 mx-2 my-2">답글</a>
-
-					</c:if>
-					
-				</div>		 
-			</div>
 	</div>
 
 	<c:if test="${boardName ne 'notice'}">
@@ -106,6 +95,9 @@
 	<script src="../resources/js/calcDate.js"></script>
 	<c:import url="../template/common_js.jsp"></c:import>
 	<script>
+		$(()=>{
+
+		})
 			setWriter('${member.id}');
 			setNum('${dto.num}')
 		

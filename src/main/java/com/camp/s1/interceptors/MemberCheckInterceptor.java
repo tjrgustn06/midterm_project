@@ -15,7 +15,7 @@ public class MemberCheckInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 		request.setAttribute("result", "로그인 후 이용해 주세요");
-		request.setAttribute("url", "../member/memberLogin");
+		request.setAttribute("url", "../../../member/memberLogin");
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
 		view.forward(request, response);
 		

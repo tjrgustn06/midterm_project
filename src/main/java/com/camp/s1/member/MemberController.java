@@ -117,12 +117,17 @@ public class MemberController {
 			response.addCookie(cookie);
 		}
 		
+		String msg ="로그인 실패";
 		if(memberDTO != null) {
 			session = request.getSession();
 			session.setAttribute("member", memberDTO);
+			msg="로그인 성공";
 		}
+
 		
-		mv.setViewName("redirect:../");
+		mv.addObject("result", msg);
+		mv.addObject("url", "/");
+		mv.setViewName("common/result");
 		return mv;
 	}
 	

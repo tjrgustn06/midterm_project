@@ -92,7 +92,10 @@
 		UPDATE CAMPBOOK SET STATUS=#{status} WHERE NUM=#{num}
 	</update>
 	
-	
+	<!-- getBookedSiteList - 예약된 사이트들을 조회 -->
+	<select id="getBookedSiteList" parameterType="CampBookDTO" resultType="CampBookDTO">
+		SELECT * FROM CAMPBOOK WHERE AREANUM=#{areaNum}
+	</select>
 	
 	
 	

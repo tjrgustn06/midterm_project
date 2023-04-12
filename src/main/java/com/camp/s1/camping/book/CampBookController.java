@@ -234,6 +234,15 @@ public class CampBookController {
 	}
 	
 	
+	//특정 기간에 에약이 없는 모든 사이트 조회 - ajax
+	@GetMapping("availableSite")
+	public ModelAndView getAvailbleSiteList(CampBookDTO campBookDTO, String searchStartDate, String searchLastDate) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		
+		return mv;
+	}
+	
 	
 	
 }

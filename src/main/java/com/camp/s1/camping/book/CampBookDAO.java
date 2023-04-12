@@ -81,4 +81,14 @@ public class CampBookDAO {
 		return sqlSession.update(NAMESPACE+"setCampBookUpdate", campBookDTO);
 	}
 	
+	//기간이 겹치지 않는 사이트 조회 - campNum으로 조회를 해야하긴함
+//	public List<CampSiteDTO> getAvailbleSiteList(Long campNum) throws Exception{
+//		return sqlSession.selectList(NAMESPACE+"getAvailbleSiteList", campNum);
+//	}
+	
+	//예약된 사이트 조회 - bookDTO의 areaNum으로
+	public List<CampBookDTO> getBookedSiteList(CampSiteDTO campSiteDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getBookedSiteList", campSiteDTO);
+	}
+	
 }

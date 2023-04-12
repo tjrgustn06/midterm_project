@@ -45,12 +45,13 @@ function reportResult(reportNum, num, commentNum, result) {
         },
         success : (data)=>{
             if(data.trim() > 0) {
-                alert('신고처리가 완료되었습니다');
-                // location.href="/report/list";
+                alert('처리가 완료되었습니다');
+                location.href = location.href;
             }
             else {
-                alert('신고처리 실패')
+                alert('처리 실패')
             }
+
             
             
         }

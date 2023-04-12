@@ -9,7 +9,7 @@ function setBoardId(bi) {
 
 
 $('#storyList').on('click', '.btnToggle', function(){
-
+    $('.boardMenu').hide();
    $(this).parents('#storyList').find('#boardMenu'+$(this).attr('data-board-num')).slideToggle();
 })
 

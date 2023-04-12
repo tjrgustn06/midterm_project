@@ -40,6 +40,7 @@
 										
 										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
 											<div class="list-group">
+											
 												<c:if test="${dto.writer eq member.id}">
 													<button type="button" class="list-group-item list-group-item-action updateMenu" data-comment-num='${dto.commentNum}'aria-current="true">수정</button>
 													<button type="button" class="list-group-item list-group-item-action deleteMenu" data-comment-num='${dto.commentNum}'>삭제</button>

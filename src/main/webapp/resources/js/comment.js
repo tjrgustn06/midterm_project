@@ -22,7 +22,7 @@ $('#replyAdd').click(function(){
         return;
     }
 
-    let chk = chkValidation($('#replyContents'))
+    let chk = chkValidation($('#replyContents').val())
 
     if(!chk) {
         alert("댓글 내용을 입력해주세요")
@@ -63,7 +63,6 @@ $('#replyAdd').click(function(){
 //리스트 가져오기
 function getList(page) {
 
-    console.log('BoardName : ' +boardName);
 
     $.ajax({
         type : 'GET',
@@ -139,7 +138,6 @@ $('#commentList').on('click', '.deleteMenu', function(){
 
 //댓글 업데이트폼 가져오기
 $('#commentList').on('click', '.updateMenu', function(){
-    // getList(1);
     setResetForm(commentNum);
     setSubCommentResetForm(commentNum);
     $('.commentMenu').hide();
@@ -160,9 +158,13 @@ $('#commentList').on('click', '.commentUpdate', function(){
 
 
     commentNum = $(this).attr('data-comment-num');
-    let chk = chkValidation($('#commentContents') + commentNum)
+    let chk = chkValidation($('#commentContents'+commentNum).val())
 
-    if(chk) {
+    if(!chk) {
+        alert("댓글 내용을 입력해주세요");
+        return;
+    }
+
         $.ajax({
             type : 'POST',
             url : '../'+boardName+'Comment/update',
@@ -181,7 +183,7 @@ $('#commentList').on('click', '.commentUpdate', function(){
                 }
             }
         })
-    }
+   
     
 
 })
@@ -193,10 +195,7 @@ function getUpdateForm(commentNum) {
     
     let text = $('#contents'+commentNum).text();
 
-    console.log('UpdateFormNum : ' + commentNum);
 
-
-    
     let htmls = '<section class="mb-5 mx-2" id="updateForm'+commentNum+'">';
     htmls += '<div class="card bg-light">';
     htmls += '<div class="d-flex">';
@@ -266,7 +265,7 @@ $('#commentList').on('click','.subCommentAdd', function(){
 
     commentNum = $(this).attr('data-comment-num');
 
-    let chk = chkValidation($('#subCommentContents'+commentNum));
+    let chk = chkValidation($('#subCommentContents'+commentNum).val());
 
     if(!chk) {
         alert("댓글 내용을 입력해주세요");
@@ -331,7 +330,7 @@ function chkValidation(element){
 
     let chk = true;
 
-    if(element.val() == '') {
+    if(element == '') {
         chk = false;
         return chk;
     }

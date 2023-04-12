@@ -16,10 +16,17 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-			<h2 class="page-cover-tittle">CAMPBOOK</h2>
+			<h2 class="page-cover-tittle">${boardName}</h2>
+			<c:if test="${boardName eq 'qna'}">
 				<ol class="breadcrumb">
-					<li>캠핑장을 자세히 알려드릴게요</li>
+					<li>자유로운 정보 나눔 마당</li>
 				</ol>
+			</c:if>
+			<c:if test="${boardName eq 'notice'}">
+					<ol class="breadcrumb">
+						<li>공지사항</li>
+					</ol>
+				</c:if>
 		</div>
 	</div>
 </section>

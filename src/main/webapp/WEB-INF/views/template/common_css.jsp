@@ -4,7 +4,7 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/resources/vendors/linericon/style.css">
     <script src="https://kit.fontawesome.com/3a0529c089.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/resources/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+    <!-- <link rel="stylesheet" href="/resources/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css"> -->
     <!-- <link rel="stylesheet" href="/resources/vendors/nice-select/css/nice-select.css"> -->
     <link rel="stylesheet" href="/resources/vendors/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/resources/css/style.css">

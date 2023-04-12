@@ -7,18 +7,67 @@
 //콘솔버튼 확인 - bookSite.jsp
 $('#bksConsoleSign').click(function(){
     //console.log('bookSite Page');
-    //고른 날짜가 실제 value로 들어가게끔(이건 미리 세팅하지 않고 예약 버튼 눌렀을 때 보내야함)
-    // console.log("start: "+$('input[name=searchStartDate]').val());
-    // console.log("last: "+$('input[name=searchLastDate').val());
-    // $('input[name=startDate]').val($('input[name=searchStartDate]').val());
-    // $('input[name=lastDate]').val($('input[name=searchLastDate').val());
+})
+
+//예약 가능한 site만 불러오기 - bookSite.jsp
+//input 기간이 두개 다 변했을 때 이벤트 따로 걸기
+$('input[name=searchStartDate]').change(function(){
+  console.log("시작날짜 변경");
+  //두 기간의 값이 다 있을때 이벤트 실행
+  if($('input[name=searchStartDate]').val()!='' && $('input[name=searchLastDate]').val()!=''){
+    let campNum = $('input[name=campNum]').val();
+    let searchStartDate = $('input[name=searchStartDate]').val();
+    let searchLastDate = $('input[name=searchLastDate]').val();
+
+    $.ajax({
+      type : 'POST',
+      url : './availableSite',
+      data : {
+        campNum : campNum,
+        searchStartDate : searchStartDate,
+        searchLastDate : searchLastDate
+      },
+      success: function(response){
+        //ajax로 실행된 결과물을 id값이 siteList인 div 태그 내에 넣어줌
+        $('#siteList').html(response);
+      },
+      error: function(response){
+        console.log('error');
+      }
+    })
+  }
+})
+
+$('input[name=searchLastDate]').change(function(){
+  console.log("끝날짜 변경");
+   //두 기간의 값이 다 있을때 이벤트 실행
+   if($('input[name=searchStartDate]').val()!='' && $('input[name=searchLastDate]').val()!=''){
+    let campNum = $('input[name=campNum]').val();
+    let searchStartDate = $('input[name=searchStartDate]').val();
+    let searchLastDate = $('input[name=searchLastDate]').val();
+
+    $.ajax({
+      type : 'POST',
+      url : './availableSite',
+      data : {
+        campNum : campNum,
+        searchStartDate : searchStartDate,
+        searchLastDate : searchLastDate
+      },
+      success: function(response){
+        $('#siteList').html(response);
+      },
+      error: function(response){
+        console.log('error');
+      }
+    })
+   }
+
 })
 
 
-//예약버튼 작동 - bookSite.jsp
+//선택하기버튼 작동 - bookSite.jsp
 $('#siteList').on('click', '.bookBtn', function(e){
-    //console.log('booking click');
-    
     //기간 설정 창에 입력한 기간 form에 넣어주기
     let sDate = $('input[name=searchStartDate]').val();
     let lDate = $('input[name=searchLastDate]').val();
@@ -30,19 +79,72 @@ $('#siteList').on('click', '.bookBtn', function(e){
         $('input[name=lastDate]').val(lDate);
     }
 
-
-
-    //let siteBtn = e.target.id; //버튼의 id 속성 사용
-    //let siteIdx = document.getElementById(siteBtn).getAttribute('data-site-idx');
-    //jQuery로 안되나????
-    
-    //특정 버튼 눌렀을 때, data-site-idx 속성 가져오기
-    //let siteBtn = $(e.target); //jQuery로 이벤트 타겟을 가져오기
     let siteIdx = $(e.target).attr('data-site-idx');
-    //console.log($('#bookFrm'+siteIdx).attr('id')); 잘들고온다
-    //속성 가져오고 해당 속성과 일치하는 form submit 시키기
-    $('#bookFrm'+siteIdx).submit();
+
+    //날짜 입력값 있는지 체크, 없으면 폼 넘기지말고 alert
+    if(sDate==null || sDate=='' || lDate==null || lDate==''){
+      alert('입실 날짜 / 퇴실 날짜를 선택해주세요');
+    }else{
+      $('#bookFrm'+siteIdx).submit();
+    }
 })
+
+//결제/취소 버튼 작동 - myBook.jsp
+$('#myBookList').on('click', '.myBookBtn', function(e){
+  //
+  let siteIdx = $(e.target).attr('data-site-idx');
+
+  let num = $('input[name=num][data-site-idx='+siteIdx+']').val();
+
+  location.href="./payment?num="+num;
+
+})
+
+//돌아가기 버튼을 눌렀을 때 - myBook.jsp
+$('#myBookCancel').click(function(){
+  location.href="/";
+})
+
+//돌아가기 버튼을 눌렀을 때 - bookList.jsp
+$('#listCancel').click(function(){
+    location.href="../detail?campNum="+$('input[name=campNum]').val()+"&viewType=1";
+})
+
+//돌아가기 버튼을 눌렀을 때 - bookSite.jsp
+$('#siteCancel').click(function(){
+    location.href="../detail?campNum="+$('input[name=campNum]').val()+"&viewType=1";
+})
+
+//돌아가기 버튼을 눌렀을 때 - bookConfirm.jsp
+$('#bksCancel').click(function(){
+    let check = confirm("사이트 목록으로 돌아가시겠습니까?\n입력된 정보가 사라집니다.");
+    if(check){
+        location.href="./site?campNum="+$('input[name=campNum]').val();
+    }
+})
+
+//예약하기 버튼을 눌렀을 때 - bookConfirm.jsp
+$('#bksConfirm').click(function(){
+    $('#confirmFrm').submit();
+})
+
+//예약취소 버튼을 눌렀을 때 - bookPayment.jsp
+$('#payCancel').click(function(){
+    let check = confirm("예약을 취소하시겠습니까?\n예약 내용이 사라집니다.");
+    if(check){
+      $('#paymentFrm').attr('action', './delete');
+      $('#paymentFrm').submit();
+    }
+})
+
+//돌아가기 버튼을 눌렀을 때 - bookPayment.jsp
+$('.payReturn').click(function(){
+  $('#paymentFrm').attr('action', './myBook');
+  $('#paymentFrm').attr('method', 'GET');
+  $('#paymentFrm').submit();
+})
+
+//결제하기 버튼을 눌렀을 때 - bookPayment.jsp
 
 
 //요금 계산 함수 - bookConfirmation.jsp
@@ -89,20 +191,17 @@ function calculationPrice(){
 
     // 총 합계 요금 출력
     $('#totalPrice').val(totalPrice);
-
 }
 
 
-//예약 취소 버튼 눌렀을 때 - bookConfirm.jsp
-$('#bksCancel').click(function(){
-    let check = confirm("정말 취소하시겠습니까? 입력된 정보가 사라집니다");
-    if(check){
-        location.href="./site?campNum="+$('input[name=campNum]').val();
-    }
-})
 
 
-//예약 버튼을 눌렀을 때 - bookConfirm.jsp
-$('#bksConfirm').click(function(){
-    $('#confirmFrm').submit();
-})
+
+
+
+
+//유효성 체크
+function chkValidation(){
+  //사이트 선택에서 입력 날짜가 비어있는지 확인
+  
+}

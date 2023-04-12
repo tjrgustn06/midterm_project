@@ -35,7 +35,8 @@
                             	<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MYPAGE</a>
                             	<ul class="dropdown-menu">
                                 	<li class="nav-item"><a class="nav-link" href="/member/memberPage">MYPAGE</a></li>
-                                	<li class="nav-item"><a class="nav-link" href="/product/order/list">PRODUCTORDER</a></li>
+									<li class="nav-item"><a class="nav-link" href="/camp/book/myBook">MYBOOK</a></li>
+                                	<li class="nav-item"><a class="nav-link" href="/product/order/list">MYRENT</a></li>
                                 	<li class="nav-item"><a class="nav-link" href="/cart/list">CART</a></li>
 									<c:if test="${member.roleName eq 'MANAGER' || member.roleName eq 'ADMIN'}">
 										<li class="nav-item"><a class="nav-link" href="/report/list">MANAGEMENT</a></li>

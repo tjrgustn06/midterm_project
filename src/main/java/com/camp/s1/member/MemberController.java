@@ -105,6 +105,8 @@ public class MemberController {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		memberDTO = memberService.getMemberLogin(memberDTO, response);
+		
 		if(remember!=null && remember.equals("remember")) {
 			Cookie cookie = new Cookie("rememberId", memberDTO.getId());
 			cookie.setMaxAge(-1);//초단위
@@ -114,13 +116,18 @@ public class MemberController {
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
-		memberDTO = memberService.getMemberLogin(memberDTO);
-		if(memberDTO != null) {
-				session = request.getSession();
-			session.setAttribute("member", memberDTO);
-		}
 		
-		mv.setViewName("redirect:../");
+		String msg ="로그인 실패";
+		if(memberDTO != null) {
+			session = request.getSession();
+			session.setAttribute("member", memberDTO);
+			msg="로그인 성공";
+		}
+
+		
+		mv.addObject("result", msg);
+		mv.addObject("url", "/");
+		mv.setViewName("common/result");
 		return mv;
 	}
 	

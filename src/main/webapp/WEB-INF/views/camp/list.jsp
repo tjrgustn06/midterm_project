@@ -9,44 +9,8 @@
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>CampList - The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
-	<script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
-	<style>
-		a{
-			color: black;
-			text-decoration: none;
-		}
-		
-		.pic{
-			width: 40%;
-			height: 30%;
-		}
-	
-		.campOne{
-			border: black, solid, 1px;
-			border-radius: 5%;
-		}
-		
-		.lineIntro{
-			font-weight: bold;
-		}
-		
-		.introBox{
-			/* 말줄임(...) */
-			width: auto;
-
-			white-space: normal;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-
-		ul, ol, li{
-			list-style: none;
-			font-size: 0.9rem;
-			margin: 1px 0px;
-		}
-	</style>
+<link rel="stylesheet" href="/resources/css/campCRUD.css">
+<script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -64,10 +28,6 @@
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container-fluid col-lg-9 my-5">
-	<!-- <div class="row my-3">
-		<h1>CampList Page</h1>
-	</div> -->
-
 	<!-- search -->
 	<!-- 만들어뒀던거 쓸수는 있는데 select의 option 태그를 좀 바꿔야함 -->
 	<div class="d-flex justify-content-center">
@@ -102,20 +62,20 @@
 	<!-- 카드형식 div / dto는 캠프정보 한개 -->
 	<c:forEach items="${list}" var="dto">
 		<div class="d-flex row campOne my-3">
-			<div class="row pic col-5">
+			<div class="row imageBoxList col-6">
 				<!-- thumbnailDTO에서 꺼내기 -->
 				<c:catch var="er">
 					<c:choose>
 						<c:when test="${not empty dto.thumbnailDTO}">
-							<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
+							<img class="innerImage" alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
 						</c:when>
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${not empty dto.thumbnail}">
-									<img alt="" src="${dto.thumbnail}">
+									<img class="innerImage" alt="" src="${dto.thumbnail}">
 								</c:when>
 								<c:otherwise>
-									<img alt="" src="../resources/images/empty.jpg">
+									<img class="innerImage" alt="" src="../resources/images/empty.jpg">
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -123,7 +83,7 @@
 				</c:catch>
 			</div>
 
-			<div class="row discription col-7">
+			<div class="row discription col-6">
 				<ul>
 					<li class="row-2 campName"><h5><a href="./detail?campNum=${dto.campNum}&viewType=1">[${dto.doName} ${dto.sigunguName}] ${dto.campName}</a></h5></li>
 					<hr class="my-1">

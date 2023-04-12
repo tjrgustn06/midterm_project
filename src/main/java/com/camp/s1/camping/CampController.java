@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,9 +73,9 @@ public class CampController {
 		ModelAndView mv = new ModelAndView();
 		int result = campService.setCampDelete(campDTO, session);
 		logger.info("param: "+params);
-		String message = "삭제 실패";
+		String message = "캠핑장 정보를 삭제하지 못했습니다.";
 		if(result>0) {
-			message = "삭제 성공";
+			message = "캠핑장 정보를 삭제했습니다.";
 		}
 		
 		mv.setViewName("common/result");

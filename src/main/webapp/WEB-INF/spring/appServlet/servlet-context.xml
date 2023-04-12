@@ -45,6 +45,7 @@
 			<exclude-mapping path="/story/storyfeed"/>
 			<exclude-mapping path="/story/list"/>
 			<exclude-mapping path="/story/listPage"/>
+			<exclude-mapping path="/story/storyListTop"/>
 			<exclude-mapping path="/qna/list"/>
 			<exclude-mapping path="/qna/detail"/>
 			<exclude-mapping path="/camp/list"/>

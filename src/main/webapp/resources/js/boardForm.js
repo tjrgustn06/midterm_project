@@ -25,3 +25,37 @@ $('#delete').click(function(){
         })
     }
 })
+
+$('#addFrm').submit(function(e){
+    e.preventDefault();
+
+    let chk = chkValidation();
+
+    if(chk) {
+        $(this).unbind('submit').submit();
+    }
+})
+
+function chkValidation(){
+    //유효성 체크가 필요한 element가져오기
+    let title = $('#title').val();
+    let contents = $('#contents').val();
+
+    let chk = true;
+
+
+
+    if(title == '') {
+        alert('제목을 입력해주세요');
+        chk = false;
+        return chk;
+    }
+
+    if(contents == '') {
+        alert('글 내용을 입력해주세요')
+        chk = false;
+        return chk;
+    }
+    
+    return chk;
+}

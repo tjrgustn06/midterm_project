@@ -7,12 +7,12 @@
   <mapper namespace="com.camp.s1.report.ReportDAO">
   	<insert id="setReportAdd" parameterType="ReportDTO">
   		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT, REPORTEDCONTENTS)
-  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult}, #{reportedContents})
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{reporter}, #{reportContents}, CURRENT_TIMESTAMP, #{reportedUser}, #{reportResult}, #{reportedContents})
   	</insert>
   	
 	<insert id="setCommentReportAdd" parameterType="ReportDTO">
   		INSERT INTO REPORT (REPORTNUM, NUM, BOARDID, COMMENTNUM, REPORTER, REPORTCONTENTS, REPORTDATE, REPORTEDUSER, REPORTRESULT, REPORTEDCONTENTS)
-  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{commentNum}, #{reporter}, #{reportContents}, SYSDATE, #{reportedUser}, #{reportResult}, #{reportedContents})
+  		VALUES (REPORTSEQ.NEXTVAL, #{num}, #{boardId}, #{commentNum}, #{reporter}, #{reportContents}, CURRENT_TIMESTAMP, #{reportedUser}, #{reportResult}, #{reportedContents})
   	</insert>
   	
   	<select id="getReporterList" parameterType="ReportDTO" resultType="ReportDTO">
@@ -36,6 +36,9 @@
   	
   	<select id="getTotalCount" parameterType="Pager" resultType="Long">
   		SELECT COUNT(REPORTNUM) FROM REPORT
+  		<if test="reportResult != null">
+  			WHERE REPORTRESULT = #{reportResult}
+  		</if>
   	</select>
   	
   	<select id="getCommentList" parameterType="ReportDTO" resultType="CommentDTO">
@@ -50,6 +53,9 @@
 		  	SELECT ROWNUM R, S.* FROM
 				  	(
 				  	SELECT * FROM REPORT
+			  	  		<if test="reportResult != null">
+				  			WHERE REPORTRESULT = #{reportResult}
+				  		</if>
 				  	ORDER BY REPORTNUM DESC
 				  	) S
 		  	)

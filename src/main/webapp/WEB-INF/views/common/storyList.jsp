@@ -21,16 +21,11 @@
 						<div class="" style="height: 30px;">
 							<span class="card-title" style="float: left;">${dto.writer}</span>
 							<span class="card-title calcDate"  style="float: right;" id="reg${dto.num}" data-board-num="${dto.num}">
-								${dto.regDate}
 								<script>
-
 									$(document).ready(function(){
 										let regDate = '${dto.regDate}';
 										$('#reg'+'${dto.num}').text(getDateDiff(regDate));
 									})
-
-								
-								
 								</script>
 							</span>
 						</div>
@@ -75,7 +70,6 @@
 					</c:if>
 
 					    <p class="card-text" id="contents${dto.num}">${dto.contents}</p>
-					    <p class="card-text"><small class="text-muted">${dto.regDate}</small></p>
 					  </div>
 
 
@@ -207,7 +201,7 @@
 							
 							
 
-								</div>
+							</div>
 
 
 

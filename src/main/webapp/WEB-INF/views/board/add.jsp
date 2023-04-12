@@ -11,6 +11,19 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">CAMPBOOK</h2>
+				<ol class="breadcrumb">
+					<li>캠핑장을 자세히 알려드릴게요</li>
+				</ol>
+		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
 	
 	<div class="container-fluid my-3">
 		
@@ -19,7 +32,7 @@
 		</div>
 		
 		<div class="row col-md-8 mx-auto border-bottom ">
-			<form action="./add" method="post" enctype="multipart/form-data">
+			<form action="./add" method="post" id="addFrm" enctype="multipart/form-data">
 				<div class="row mb-3">
 				  <label for="writer" class="col-sm-2 col-form-label">작성자</label>
 				  <div class="col-sm-10">
@@ -65,6 +78,7 @@
 	
 	<c:import url="../template/footer.jsp"></c:import>
 	<script src="../resources/js/fileManager.js"></script>
+	<script src="../resources/js/boardForm.js"></script>
 	<script>
 		setParam('files');
 		setMax(5);

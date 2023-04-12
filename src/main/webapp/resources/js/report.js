@@ -1,3 +1,8 @@
+
+let viewType = $('#viewType').attr('data-vieType');
+
+$('.viewType'+viewType).addClass("active");
+
 $('#reportList').on('click','.accept', function(){
     let reportNum = $(this).attr('data-report-num');
     let num = $(this).attr('data-board-num');

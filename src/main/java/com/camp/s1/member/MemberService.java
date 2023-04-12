@@ -70,17 +70,19 @@ public class MemberService {
 
 		MemberDTO result = memberDAO.getMemberLogin(memberDTO);
 		
+		
 		if(result != null && memberDTO.getPw().equals(result.getPw())) {
-			
+		
 			memberDTO.setPw(null);
 			memberDTO.setRoleName(result.getRoleName());
 			memberDTO.setAddressDTOs(result.getAddressDTOs());
 			return memberDTO;
 			
 		}else {
-			
+		
 			return null;
-		}	
+		}
+		
 	}
 	
 	//MemberPage
@@ -160,7 +162,7 @@ public class MemberService {
 				  // TLSv1.2 추가하여 신뢰성 확보
 				  Properties prop = new Properties();
 				  prop.put("mail.smtp.host", "smtp.gmail.com"); 
-				  prop.put("mail.smtp.port", 465); 
+				  prop.put("mail.smtp.port", 465);
 				  prop.put("mail.smtp.auth", "true"); 
 				  prop.put("mail.smtp.ssl.enable", "true"); 
 				  prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");

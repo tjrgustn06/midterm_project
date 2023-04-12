@@ -238,8 +238,10 @@ public class CampBookController {
 	@GetMapping("availableSite")
 	public ModelAndView getAvailbleSiteList(CampBookDTO campBookDTO, String searchStartDate, String searchLastDate) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		List<CampSiteDTO> availableSiteList = campBookService.getAvailbleSiteList(campBookDTO, searchStartDate, searchLastDate);
 		
-		
+		mv.addObject("result", availableSiteList);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	

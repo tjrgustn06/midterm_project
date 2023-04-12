@@ -15,8 +15,8 @@
 		<c:forEach items="${list}" var="dto">
 			<div class="col-md-8 mx-auto" id="${boardName}${dto.num}"  style="height: 100%;">
 
-				<div class="d-flex flex-column mb-3">
-					<div class="card col-md-5 mx-5">
+				<div class="d-flex justify-content-center mb-3">
+					<div class="card col-md-10">
 					  <div class="card-body">
 						<div class="" style="height: 30px;">
 							<span class="card-title" style="float: left;">${dto.writer}</span>
@@ -30,7 +30,7 @@
 							</span>
 						</div>
 						<div class="border border-bottom"></div>
-						<div class="col-md-12 my-1">
+						<div class="col-md-12 d-flex justify-content-between my-1">
 					    	<h5 class="card-title" style="display: inline; font-weight: bold; font-size: 16px;">${dto.title}</h5>
 							<span class="p-2 mb-3 float-right">
 								<button class="btnToggle" style="border : 0px; background-color: transparent;" data-board-num="${dto.num}">
@@ -43,13 +43,13 @@
 								<div class="carousel-inner">
 									<c:forEach items="${dto.boardFileDTOs}" var="fileDTO" varStatus="i">
 										<c:if test="${i.first}">
-											  <div class="carousel-item active" data-bs-interval="100000">
-												<img src="../resources/upload/${boardName}/${fileDTO.fileName}" class="d-block w-100" alt="...">
+											  <div class="carousel-item imageBoxOther active" data-bs-interval="100000">
+												<img src="../resources/upload/${boardName}/${fileDTO.fileName}" class="innerImage d-block w-100" alt="...">
 											  </div>
 										</c:if>
 										<c:if test="${!i.first}">
-											  <div class="carousel-item" data-bs-interval="100000">
-												<img src="../resources/upload/${boardName}/${fileDTO.fileName}" class="d-block w-100" alt="...">
+											  <div class="carousel-item imageBoxOther" data-bs-interval="100000">
+												<img src="../resources/upload/${boardName}/${fileDTO.fileName}" class="innerImage d-block w-100" alt="...">
 											  </div>
 										</c:if>
 

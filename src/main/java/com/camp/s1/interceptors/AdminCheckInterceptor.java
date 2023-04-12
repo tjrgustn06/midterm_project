@@ -1,5 +1,6 @@
-package com.camp.s1.interceptor;
+package com.camp.s1.interceptors;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,8 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 		}
 		request.setAttribute("result", "권한이 없습니다.");
 		request.setAttribute("url", "../");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
+		view.forward(request, response);
 		
 		return false;
 	}

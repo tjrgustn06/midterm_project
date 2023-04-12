@@ -22,9 +22,34 @@
 		<beans:property name="order" value="1"></beans:property>
 	</beans:bean>
 	
+	<beans:bean class="com.camp.s1.interceptors.MemberCheckInterceptor" id="memberCheckInterceptor"></beans:bean>
+	<beans:bean class="com.camp.s1.interceptors.AdminCheckInterceptor" id="adminCheckInterceptor"></beans:bean>
+	<beans:bean class="com.camp.s1.interceptors.ManagerCheckInterceptor" id="managerCheckInterceptor"></beans:bean>
+	
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"></beans:property>
 	</beans:bean>
+	
+	<!-- <interceptors>
+		<interceptor>
+			<mapping path="/notice/*"/>
+			<mapping path="/qna/*"/>
+			<exclude-mapping path="/notice/list"/>
+			<exclude-mapping path="/notice/detail"/>
+			<beans:ref bean="memberCheckInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/member/memberList"/>
+			<beans:ref bean="adminCheckInterceptor"/>
+		</interceptor>
+	</interceptors>
+	<interceptors>
+		<interceptor>
+			<mapping path="/report/*"/>
+			<exclude-mapping path="/report/report"/>
+			<beans:ref bean="managerCheckInterceptor"/>
+		</interceptor>
+	</interceptors> -->
 	
 	<context:component-scan base-package="com.camp.s1" />
 	

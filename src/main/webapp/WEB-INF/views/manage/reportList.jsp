@@ -99,15 +99,16 @@
                                 </div>
                             </div>
                             <div class="layout">
+                                <div id="viewType" data-viewType="${pager.reportResult}"></div>
                                 <ul class="navbar navbar-pills nav-fill" style="list-style: none;">
                                     <li class="nav-item" id="r_wait">
-                                        <a class="nav-link report report_wait active" aria-current="page" href="/report/list?reportResult=1">처리 대기</a>
+                                        <a class="nav-link report report_wait viewType1" aria-current="page" href="/report/list?reportResult=1">처리 대기</a>
                                     </li>
                                     <li class="nav-item" id="r_denied">
-                                        <a class="nav-link report report_denied" href="/report/list?reportResult=2">승인 거절</a>
+                                        <a class="nav-link report report_denied viewType2" href="/report/list?reportResult=2">승인 거절</a>
                                     </li>
                                     <li class="nav-item" id="r_accpet">
-                                        <a class="nav-link report report_accept" href="/report/list?reportResult=3">승인 완료</a>
+                                        <a class="nav-link report report_accept viewType3" href="/report/list?reportResult=3">승인 완료</a>
                                     </li>
                                 </ul>
                             </div>
@@ -120,6 +121,7 @@
 											<th scope="col">신고자</th>
 											<th scope="col">글 내용</th>
 											<th scope="col">글 작성자</th>
+											<th scope="col">처리 상태</th>
 											<th scope="col">신고일자</th>
 										</tr>
                                     </thead>
@@ -145,13 +147,47 @@
                                                     </script>
                                                 </td>
                                                 <td>${dto.reportedUser}</td>
-                                                <td>${dto.reportDate}</td>
-                                                 <td>
-                                                 	<button type="button" class="btn genric-btn success accept" value="3" data-report-num="${dto.reportNum}" data-board-num="${dto.num}" data-comment-num="${dto.commentNum}">승인</button>
-                                                 </td>
-                                                 <td>
-                                                    <button type="button" class="btn genric-btn primary denied" value="2" data-report-num="${dto.reportNum}" data-board-num="${dto.num}" data-comment-num="${dto.commentNum}">거절</button>
+                                                <td id="result${dto.reportNum}">
+                                                	<script>
+                                                        $(()=>{
+                                                            let result = '${dto.reportResult}';
+                                                            let num = '${dto.reportNum}'
+                                                            if(result == 1) {
+                                                                result = "처리 중";
+                                                            }
+                                                            else if(result == 2) {
+                                                                result = "승인 거부"
+                                                            }
+                                                            else {
+                                                                result = "승인 완료"	
+                                                            }
+                                                            $('#result'+num).text(result);
+                                                        })
+                                     
+                                                		
+                                                	</script>
                                                 </td>
+                                                <td>${dto.reportDate}</td>
+                                                <c:if test="${pager.reportResult eq 1}">
+	                                                 <td>
+	                                                 	<button type="button" class="btn genric-btn success accept" value="3" data-report-num="${dto.reportNum}" data-board-num="${dto.num}" data-comment-num="${dto.commentNum}">승인</button>
+	                                                 </td>
+	                                                 <td>
+	                                                    <button type="button" class="btn genric-btn primary denied" value="2" data-report-num="${dto.reportNum}" data-board-num="${dto.num}" data-comment-num="${dto.commentNum}">거절</button>
+	                                                </td>
+                                                </c:if>
+
+                                                <c:if test="${pager.reportResult eq 2}">
+	                                   			   	<td>
+	                                                 	<button type="button" class="btn genric-btn success accept" value="3" data-report-num="${dto.reportNum}" data-board-num="${dto.num}" data-comment-num="${dto.commentNum}">제재 처리</button>
+	                                                </td>
+                                                </c:if>
+                                                
+                                                <c:if test="${pager.reportResult eq 3}">
+   	                                                 <td>
+	                                                    <button type="button" class="btn genric-btn primary denied" value="2" data-report-num="${dto.reportNum}" data-board-num="${dto.num}" data-comment-num="${dto.commentNum}">제재 철회</button>
+	                                                </td>
+                                                </c:if>
                                             </tr>
 										</c:forEach>
                                     </tbody>

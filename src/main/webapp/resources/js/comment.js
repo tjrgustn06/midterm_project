@@ -17,30 +17,35 @@ getList(1);
 //댓글 등록
 $('#replyAdd').click(function(){
 
+    let chk = chkValidation($('#replyContents'))
 
-    $.ajax({
-        type : 'POST',
-        url : '../'+ boardName + 'Comment/add',
-        data : {
-            num : $('#replyAdd').attr('data-board-num'),
-            contents : $('#replyContents').val(),
-            writer : writer,
-        },
-        success : function(response) {
-            if(response.trim() == 1) {
-                alert('댓글이 등록되었습니다');
-                $('#replyContents').val('');
-                getList(1);
-            }
-            else {
-                alert('댓글 등록 실패');
-            }
-        },
+    if(chk) {
+        $.ajax({
+            type : 'POST',
+            url : '../'+ boardName + 'Comment/add',
+            data : {
+                num : $('#replyAdd').attr('data-board-num'),
+                contents : $('#replyContents').val(),
+                writer : writer,
+            },
+            success : function(response) {
+                if(response.trim() == 1) {
+                    alert('댓글이 등록되었습니다');
+                    $('#replyContents').val('');
+                    getList(1);
+                }
+                else {
+                    alert('댓글 등록 실패');
+                }
+            },
+    
+            error : ()=> {
+                alert("댓글 등록 실패. 관리자에게 문의하세요");
+            }  
+        })
+    }
 
-        error : ()=> {
-            alert("댓글 등록 실패. 관리자에게 문의하세요");
-        }  
-    })
+
 })
 
 
@@ -143,26 +148,33 @@ $('#commentList').on('click', '.commentCancle', function(){
 
 ////댓글 업데이트폼 확인버튼
 $('#commentList').on('click', '.commentUpdate', function(){
-    commentNum = $(this).attr('data-comment-num');
-    
-    $.ajax({
-        type : 'POST',
-        url : '../'+boardName+'Comment/update',
-        data : {
-            commentNum : commentNum,
-            contents : $('#commentContents'+commentNum).val()
-        },
-        success : function(response){
-            if(response.trim() > 0) {
-                alert('댓글이 수정되었습니다');
-                getList(page);
 
+
+    commentNum = $(this).attr('data-comment-num');
+    let chk = chkValidation($('#commentContents') + commentNum)
+
+    if(chk) {
+        $.ajax({
+            type : 'POST',
+            url : '../'+boardName+'Comment/update',
+            data : {
+                commentNum : commentNum,
+                contents : $('#commentContents'+commentNum).val()
+            },
+            success : function(response){
+                if(response.trim() > 0) {
+                    alert('댓글이 수정되었습니다');
+                    getList(page);
+    
+                }
+                else {
+                    alert('댓글 수정 실패. 관리자에게 문의하세요');
+                }
             }
-            else {
-                alert('댓글 수정 실패. 관리자에게 문의하세요');
-            }
-        }
-    })
+        })
+    }
+    
+
 })
 
 
@@ -237,29 +249,32 @@ $('#commentList').on('click','.subCommentCancle', function(){
 //대댓글 등록버튼
 $('#commentList').on('click','.subCommentAdd', function(){
     commentNum = $(this).attr('data-comment-num');
-    contents = $('#subCommentContents'+commentNum).val();
-    
 
-    
+    let chk = chkValidation($('#subCommentContents'+commentNum));
 
-    $.ajax({
-        type : 'POST',
-        url : '../'+boardName+'Comment/subCommentAdd',
-        data : {
-            commentNum : commentNum,
-            contents : contents,
-            writer : writer,
-        },
-        success : function(repsonse) {
-            if(repsonse.trim()>0) {
-                alert('댓글이 등록되었습니다.');
-                getList(page);
+    if(chk) {
+        contents = $('#subCommentContents'+commentNum).val();
+
+        $.ajax({
+            type : 'POST',
+            url : '../'+boardName+'Comment/subCommentAdd',
+            data : {
+                commentNum : commentNum,
+                contents : contents,
+                writer : writer,
+            },
+            success : function(repsonse) {
+                if(repsonse.trim()>0) {
+                    alert('댓글이 등록되었습니다.');
+                    getList(page);
+                }
+                else {
+                    alert('댓글 등록 실패. 관리자에게 문의하세요');
+                }
             }
-            else {
-                alert('댓글 등록 실패. 관리자에게 문의하세요');
-            }
-        }
-    })
+        })
+    }
+
 })
 
 
@@ -293,3 +308,17 @@ function setSubCommentResetForm(commentNum) {
 
 
 
+function chkValidation(element){
+
+    let chk = true;
+
+    let contents = element.val();
+
+    if(contents == '') {
+        alert('댓글 내용을 입력해주세요')
+        chk = false;
+        return chk;
+    }
+    
+    return chk;
+}

@@ -51,6 +51,18 @@ $(function() {
 
 <body>
 <c:import url="../template/header.jsp"></c:import>
+	 <!--================Banner Area =================-->
+	 <section class="banner_area blog_banner d_flex align-items-center">
+		<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+		<div class="container">
+			<div class="banner_content text-center">
+				<h4>Dude You’re Getting <br />a Telescope</h4>
+				<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first</p>
+				<a href="#" class="btn white_btn button_hover">View More</a>
+			</div>
+		</div>
+	</section>
+	<!--================Banner Area =================-->
 <div class="container-fluid">
 
     <div class="row mb-4 border-bottom border-info">
@@ -62,7 +74,7 @@ $(function() {
         <div class="row search_box">
 
             <div class="row col-md-8 mx-auto border-bottom ">
-                <form action="./add" method="post" enctype="multipart/form-data">
+                <form action="./add" method="post" enctype="multipart/form-data" id="addFrm">
                     <div class="row mb-3">
                         <label for="writer" class="col-sm-2 col-form-label">작성자</label>
                         <div class="col-sm-10">
@@ -217,7 +229,7 @@ $(function() {
             </div> 
 
             <div class="row mt-5 mb-3 col-md-2 offset-md-10">
-                <button class="btn btn-primary " type="submit">글 쓰기</button>
+                <button class="btn btn-primary" id="addStory" type="submit">글 쓰기</button>
             </div>
             <input type="hidden" name="boardId" value="${boardId}">
 

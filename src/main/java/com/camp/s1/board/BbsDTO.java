@@ -6,7 +6,7 @@ public class BbsDTO {
 	private Long num;
 	private String writer;
 	private String contents;
-	private Date regDate;
+	private String regDate;
 
 	
 	public Long getNum() {
@@ -27,10 +27,10 @@ public class BbsDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Date regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 

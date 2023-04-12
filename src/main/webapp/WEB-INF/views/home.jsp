@@ -113,6 +113,9 @@
                 <h2 class="title_w">캠핑스토리</h2>
                 <p>캠핑스토리를 올려보세요</p>
             </div>
+            <div id="storyList">
+
+            </div>
             
         </div>
     </section>
@@ -120,6 +123,8 @@
         
 <c:import url="./template/footer.jsp"></c:import>        
 <script src="/resources/js/productListTop.js"></script>
+<script src="/resources/js/calcDate.js"></script>
+<script src="/resources/js/storyListTop.js"></script>
 <script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
 <c:import url="./template/common_js.jsp"></c:import>
 </body>

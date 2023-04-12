@@ -37,7 +37,7 @@
   		</selectKey>
   	
   		INSERT INTO NOTICE(NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT) 
-  		VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, 0)
+  		VALUES (#{num}, #{writer}, #{title}, #{contents}, CURRENT_TIMESTAMP, 0)
   		
   	</insert>
  

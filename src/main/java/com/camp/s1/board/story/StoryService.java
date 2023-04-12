@@ -36,21 +36,22 @@ public class StoryService implements BoardService {
 		// file테이블과 join하는 쿼리문을 쓰면 파일 갯수만큼 rownum이 늘어나서 의도한 글 갯수만큼 불러오지 못함
 		
 		List<BbsDTO> bbsDTOs = storyDAO.getBoardList(pager);
+		
 	
 		
 		//특정 갯수의 글들을 먼저 가져오고 그다음 반복문으로 각 dto에 파일리스트를 넣어줌	
 		for (BbsDTO bbsDTO : bbsDTOs) {
 			//StoryDTO의 멤버변수 접근을 위해 형변환  
 			//참조변수간에는 형변환을 해도 주소값은 그대로이다
-//			 StoryDTO dto = (StoryDTO)bbsDTO;
+			
 			 ((StoryDTO)bbsDTO).setBoardFileDTOs(storyDAO.getBoardFileList(bbsDTO));;
 			 
 
-//			 dto.setBoardFileDTOs(storyDAO.getBoardFileList(dto));	 
+
 			 	
 		}
 		
-		//주소값은 그대로이므로 그대로 List<BbsDTO> 리턴
+		//주소값은 그대로임. List<BbsDTO> 그대로 리턴
 		return bbsDTOs; 
 	}
 

@@ -129,7 +129,10 @@ public class CampBookService {
 		return availableSiteList;
 	}
 	
-	
+	//특정 멤버의 예약서 목록을 조회
+	public List<CampBookDTO> getMyBookList(CampBookDTO campBookDTO) throws Exception{
+		return campBookDAO.getMyBookList(campBookDTO);
+	}
 	
 	
 	

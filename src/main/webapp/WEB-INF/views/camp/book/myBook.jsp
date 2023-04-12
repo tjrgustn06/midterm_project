@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
-<title>BOOKING - The Camp</title>
+<title>MYBOOK - The Camp</title>
 <c:import url="../../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -20,9 +20,9 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-			<h2 class="page-cover-tittle">BOOKING</h2>
+			<h2 class="page-cover-tittle">MYBOOK</h2>
 				<ol class="breadcrumb">
-					<li>캠핑장의 모든 예약 정보입니다</li>
+					<li>나의 캠핑장 예약정보에요</li>
 				</ol>
 		</div>
 	</div>
@@ -38,26 +38,29 @@
 
 	<!-- 돌아가기 버튼 -->
 	<div class="d-flex justify-content-center my-2">
-		<button id="listCancel" type="button" class="genric-btn primary">돌아가기</button>
+		<button id="myBookCancel" type="button" class="genric-btn primary">돌아가기</button>
 	</div>
 
 	<hr>
 
 	<div class="row my-2">
 		<div class="col-10">
-			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 사이트 예약 리스트</h5>
+			<h5><i class="fa-solid fa-circle-info fa-sm"></i> ${member.name} 님의 예약 리스트</h5>
 		</div>
 	</div>
 
 	<!-- 해당 캠핑장의 모든 예약 리스트를 볼 수 있음 -->
-	<div class="row my-2" id="bookList">
-		<input type="hidden" name="campNum" value="${campDTO.campNum}">
+	<div class="row my-2" id="myBookList">
 		<!-- index는 0부터 시작, count는 1부터 시작 -->
 		<c:choose>
 			<c:when test="${not empty bookList}">
 				<c:forEach items="${bookList}" var="bookDTO" varStatus="i">
 					<div id="bookOne${i.count}" class="my-3">
 						<h6><i class="fa-solid fa-circle-info fa-sm"></i> 예약번호 ${bookDTO.orderNum}</h6>
+						<input type="hidden" name="num" value="${bookDTO.num}" data-site-idx="${i.count}">
+						<div class="d-flex justify-content-end mb-2">
+							<button id="myBookBtn${i.count}" type="button" class="myBookBtn genric-btn success medium" data-site-idx="${i.count}">결제/취소</button>
+						</div>
 						<div class="siteInfo input-group mb-2">
 							<span class="input-group-text" id="siteName">사이트이름</span>
 							<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${bookDTO.siteName}" readonly>
@@ -84,7 +87,7 @@
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				<p>*해당 캠핑장의 예약 리스트가 없습니다.</p>
+				<p>*${member.name} 님의 예약 리스트가 없습니다.</p>
 			</c:otherwise>
 		</c:choose>
 		<!-- 생성 끝날 부분 -->

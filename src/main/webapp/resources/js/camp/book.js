@@ -89,6 +89,22 @@ $('#siteList').on('click', '.bookBtn', function(e){
     }
 })
 
+//결제/취소 버튼 작동 - myBook.jsp
+$('#myBookList').on('click', '.myBookBtn', function(e){
+  //
+  let siteIdx = $(e.target).attr('data-site-idx');
+
+  let num = $('input[name=num][data-site-idx='+siteIdx+']').val();
+
+  location.href="./payment?num="+num;
+
+})
+
+//돌아가기 버튼을 눌렀을 때 - myBook.jsp
+$('#myBookCancel').click(function(){
+  location.href="/";
+})
+
 //돌아가기 버튼을 눌렀을 때 - bookList.jsp
 $('#listCancel').click(function(){
     location.href="../detail?campNum="+$('input[name=campNum]').val()+"&viewType=1";
@@ -119,6 +135,13 @@ $('#payCancel').click(function(){
       $('#paymentFrm').attr('action', './delete');
       $('#paymentFrm').submit();
     }
+})
+
+//돌아가기 버튼을 눌렀을 때 - bookPayment.jsp
+$('.payReturn').click(function(){
+  $('#paymentFrm').attr('action', './myBook');
+  $('#paymentFrm').attr('method', 'GET');
+  $('#paymentFrm').submit();
 })
 
 //결제하기 버튼을 눌렀을 때 - bookPayment.jsp

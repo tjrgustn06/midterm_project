@@ -70,9 +70,9 @@
 							<input type="text" name="id" data-site-idx="id${i.count}" class="form-control" value="${bookDTO.id}" readonly>
 						</div>
 						<div class="useDate input-group mb-2">
-							<span class="input-group-text" id="startDate">입실일</span>
+							<span class="input-group-text" id="startDate">입실 날짜</span>
 							<input type="text" name="startDate" data-site-idx="startDate${i.count}" class="form-control" value="${bookDTO.startDate}" readonly>
-							<span class="input-group-text" id="lastDate">퇴실일</span>
+							<span class="input-group-text" id="lastDate">퇴실 날짜</span>
 							<input type="text" name="lastDate" data-site-idx="lastDate${i.count}" class="form-control" value="${bookDTO.lastDate}" readonly>
 						</div>
 						<div class="priceInfo input-group mb-2">

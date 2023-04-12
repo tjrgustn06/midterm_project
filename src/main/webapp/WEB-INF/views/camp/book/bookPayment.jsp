@@ -82,9 +82,9 @@
 				<input type="text" name="name" class="form-control" value="${bookDTO.name}" readonly>
 			</div>
 			<div class="useDate input-group mb-2">
-				<span class="input-group-text" for="startDate">사용 시작일</span>
+				<span class="input-group-text" for="startDate">입실 날짜</span>
 				<input type="text" name="startDate" id="startDate" class="form-control" value="${bookDTO.startDate}" style="background-color: #ffffcc;" readonly>
-				<span class="input-group-text" for="lastDate">사용 종료일</span>
+				<span class="input-group-text" for="lastDate">퇴실 날짜</span>
 				<input type="text" name="lastDate" id="lastDate" class="form-control" value="${bookDTO.lastDate}" style="background-color: #ffffcc;" readonly>
 			</div>
 			<div class="totalPrice input-group mb-2">

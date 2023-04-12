@@ -318,13 +318,13 @@
 										<input type="text" name="siteSize" data-site-idx="siteSize${i.count}" class="form-control" value="${siteDTO.siteSize}">
 									</div>
 									<div class="input-group mb-2">
-										<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+										<span class="input-group-text" id="offWeekdaysPrice">비수기 평일</span>
 										<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice${i.count}" class="form-control" value="${siteDTO.offWeekdaysPrice}">
 										<span class="input-group-text" id="offWeekendsPrice">주말</span>
 										<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice${i.count}" class="form-control" value="${siteDTO.offWeekendsPrice}">
 									</div>
 									<div class="input-group mb-2">
-										<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+										<span class="input-group-text" id="peakWeekdaysPrice">성수기 평일</span>
 										<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice${i.count}" class="form-control" value="${siteDTO.peakWeekdaysPrice}">
 										<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 										<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}">

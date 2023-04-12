@@ -280,13 +280,13 @@
 									<input type="text" name="siteSize" data-site-idx="siteSize1" class="form-control" placeholder="ex)6*11, 10*10">
 								</div>
 								<div class="input-group mb-2">
-									<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+									<span class="input-group-text" id="offWeekdaysPrice">비수기 평일</span>
 									<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice1" class="form-control" placeholder="요금 입력">
 									<span class="input-group-text" id="offWeekendsPrice">주말</span>
 									<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice1" class="form-control" placeholder="요금 입력">
 								</div>
 								<div class="input-group mb-2">
-									<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+									<span class="input-group-text" id="peakWeekdaysPrice">성수기 평일</span>
 									<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice1" class="form-control" placeholder="요금 입력">
 									<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 									<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice1" class="form-control" placeholder="요금 입력">

@@ -57,13 +57,13 @@
 			<p>*성수기 요금은 5~9월에 적용됩니다.</p>
 		</div>
 		<div class="input-group mb-2">
-			<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+			<span class="input-group-text" id="offWeekdaysPrice">비수기 평일</span>
 			<input type="text" name="offWeekdaysPrice" class="form-control" value="${siteDTO.offWeekdaysPrice}" readonly>
 			<span class="input-group-text" id="offWeekendsPrice">주말</span>
 			<input type="text" name="offWeekendsPrice" class="form-control" value="${siteDTO.offWeekendsPrice}" readonly>
 		</div>
 		<div class="input-group mb-2">
-			<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+			<span class="input-group-text" id="peakWeekdaysPrice">성수기 평일</span>
 			<input type="text" name="peakWeekdaysPrice" class="form-control" value="${siteDTO.peakWeekdaysPrice}" readonly>
 			<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 			<input type="text" name="peakWeekendsPrice" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
@@ -99,9 +99,9 @@
 				<input type="text" name="name" class="form-control" value="${dto.name}" readonly>
 			</div>
 			<div class="useDate input-group mb-2">
-				<span class="input-group-text" for="startDate">사용 시작일</span>
+				<span class="input-group-text" for="startDate">입실 날짜</span>
 				<input type="text" name="startDate" id="startDate" class="form-control" value="${siteDTO.startDate}" style="background-color: #ffffcc;" readonly>
-				<span class="input-group-text" for="lastDate">사용 종료일</span>
+				<span class="input-group-text" for="lastDate">퇴실 날짜</span>
 				<input type="text" name="lastDate" id="lastDate" class="form-control" value="${siteDTO.lastDate}" style="background-color: #ffffcc;" readonly>
 			</div>
 			<div class="totalPrice input-group mb-2">

@@ -11,6 +11,16 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<!--================Banner Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+		<h2 class="page-cover-tittle">정보 수정</h2>
+		</div>
+	</div>
+</section>
+<!--================Banner Area =================-->
 <div class="container-fluid">
 		<div class="row">
 			<h1>MemberUpdate Page</h1>

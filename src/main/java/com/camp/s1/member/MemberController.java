@@ -121,10 +121,7 @@ public class MemberController {
 			session = request.getSession();
 			session.setAttribute("member", memberDTO);
 		}
-		String msg ="로그인 실패";
-
 		
-		mv.addObject("result", msg);
 		mv.setViewName("redirect:../");
 		return mv;
 	}

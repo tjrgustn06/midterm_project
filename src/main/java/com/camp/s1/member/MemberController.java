@@ -105,7 +105,7 @@ public class MemberController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		memberDTO = memberService.getMemberLogin(memberDTO);
+		memberDTO = memberService.getMemberLogin(memberDTO, response);
 		
 		if(remember!=null && remember.equals("remember")) {
 			Cookie cookie = new Cookie("rememberId", memberDTO.getId());

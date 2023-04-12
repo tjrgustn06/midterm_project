@@ -96,11 +96,7 @@ public class CampBookService {
 	}
 	
 	//특정 기간에 에약이 없는 모든 사이트 조회
-	public List<CampSiteDTO> getAvailbleSiteList(CampBookDTO campBookDTO, String searchStartDate, String searchLastDate) throws Exception{
-		Long campNum = campBookDAO.getCampSiteDetail(campBookDTO.getAreaNum()).getCampNum();
-		
-		CampDTO campDTO = new CampDTO();
-		campDTO.setCampNum(campNum);
+	public List<CampSiteDTO> getAvailbleSiteList(CampDTO campDTO, String searchStartDate, String searchLastDate) throws Exception{
 		
 		//캠핑장의 모든 site 조회
 		List<CampSiteDTO> siteList = campBookDAO.getCampSiteList(campDTO);

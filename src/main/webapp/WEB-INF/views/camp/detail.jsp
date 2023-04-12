@@ -539,7 +539,6 @@ geocoder.addressSearch(resAdr, function(result, status) { //기본주소 '금천
 		}
 });    
 }catch(e){
-	
 }
 </script>
 </body>

@@ -13,6 +13,7 @@ public class CommentDTO extends BbsDTO{
 	public void setCommentNum(Long commentNum) {
 		this.commentNum = commentNum;
 	}
+	
 	public Long getRef() {
 		return ref;
 	}

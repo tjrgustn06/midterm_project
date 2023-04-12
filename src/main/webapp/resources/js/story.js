@@ -1,5 +1,10 @@
 let num = 0;
-let boardName = $('#boardName').attr('data-board-name');
+// let boardName = $('#boardName').attr('data-board-name');
+let boardId = 0;
+
+function setBoardId(bi) {
+    boardId = Number(bi);
+}
 
 
 
@@ -40,6 +45,37 @@ $('#storyList').on('click','.update', function(){
 
     location.href="./update?num="+num;
 })
+
+$('#storyList').on('click', '.report', function(){
+    num = $(this).attr('data-board-num');
+    let reportedUser = $(this).attr('data-board-writer');
+    let reportedContents = $('#contents'+num).text();
+    reportAdd(num, boardId, reportedUser, reportedContents);
+    
+})
+
+$('#storyList').on('click', '.btn-close', function(){
+    num = $(this).attr('data-board-num');
+
+    getCommentCount(num);
+})
+
+function getCommentCount(n) {
+
+    $.ajax({
+        url : '../'+boardName+'Comment/listCount',
+        type : 'GET',
+        data : {
+            num : n,
+        },
+        success : function(data){
+            $('#getDetail'+n).text('댓글' + data.trim() + '개 모두 보기');
+
+        }
+    })
+}
+
+
 
 
 

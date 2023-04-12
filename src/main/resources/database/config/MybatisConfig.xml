@@ -9,6 +9,7 @@
 		<typeAlias type="com.camp.s1.board.BoardDTO" alias="BoardDTO"/>
 		<typeAlias type="com.camp.s1.board.FileDTO" alias="FileDTO"/>
 		<typeAlias type="com.camp.s1.board.BoardFileDTO" alias="BoardFileDTO"/>
+		<typeAlias type="com.camp.s1.board.BoardTypeDTO" alias="BoardTypeDTO"/>
 		
 		<typeAlias type="com.camp.s1.board.notice.NoticeDTO" alias="NoticeDTO"/>
 		
@@ -18,8 +19,8 @@
 		<typeAlias type="com.camp.s1.board.story.StoryDTO" alias="StoryDTO"/>
 		<typeAlias type="com.camp.s1.board.story.StoryCommentDTO" alias="StoryCommentDTO"/>
 		
-		<!-- <typeAlias type="com.camp.s1.report.ReportDTO" alias="ReportDTO"/> -->
-		
+		<typeAlias type="com.camp.s1.report.ReportDTO" alias="ReportDTO"/> 
+	
 		<typeAlias type="com.camp.s1.product.ProductDTO" alias="ProductDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductGradeDTO" alias="ProductGradeDTO"/>
 		<typeAlias type="com.camp.s1.product.ProductFileDTO" alias="ProductFileDTO"/>

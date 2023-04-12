@@ -30,7 +30,6 @@ public class QnaCommentService implements CommentService {
 
 		return qnaCommentDAO.getBoardList(pager);
 	}
-
 	
 
 	@Override

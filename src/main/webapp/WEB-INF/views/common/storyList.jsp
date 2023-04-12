@@ -1,30 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+
+
+
+	$(function(){
+
+		setWriter('${member.id}');
+		setTotalPage('${pager.totalPage}')
+		setBoardId('${boardId}')
+	})
+</script>
 		<c:forEach items="${list}" var="dto">
-			<div class="col-md-8 mx-auto" style="height: 100%;">
+			<div class="col-md-8 mx-auto" id="${boardName}${dto.num}"  style="height: 100%;">
+
 				<div class="d-flex flex-column mb-3">
 					<div class="card col-md-5 mx-5">
 					  <div class="card-body">
 						<div class="" style="height: 30px;">
 							<span class="card-title" style="float: left;">${dto.writer}</span>
-							<span class="card-title calcDate"  style="float: right;"id="reg${dto.num}" data-board-num="${dto.num}">
+							<span class="card-title calcDate"  style="float: right;" id="reg${dto.num}" data-board-num="${dto.num}">
 								${dto.regDate}
 								<script>
-									function getDateDiff(d2) {
-										let now = new Date();									
-										let date2 = new Date(d2);
-		
-										let diffDate = now.getTime() - date2.getTime();
-										let currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
-										
-										return parseInt(diffDate/currDay);
-										}
 
 									$(document).ready(function(){
 										let regDate = '${dto.regDate}';
-										let date = getDateDiff(regDate);
-										$('#reg'+'${dto.num}').text(date + "일전");
+										$('#reg'+'${dto.num}').text(getDateDiff(regDate));
 									})
 
 								
@@ -72,7 +74,7 @@
 					
 					</c:if>
 
-					    <p class="card-text">${dto.contents}</p>
+					    <p class="card-text" id="contents${dto.num}">${dto.contents}</p>
 					    <p class="card-text"><small class="text-muted">${dto.regDate}</small></p>
 					  </div>
 
@@ -82,14 +84,32 @@
 							
 						</div> -->
 						<!-- Button trigger modal -->
-						<a type="button" class="getDetail" data-board-num="${dto.num}" data-bs-toggle="modal" data-bs-target="#exampleModal${dto.num}">
-							댓글 더 보기 
+						<a type="button" class="getDetail" id="getDetail${dto.num}" data-board-num="${dto.num}" data-bs-toggle="modal" data-bs-target="#exampleModal${dto.num}">
+							<script>
+								$(()=>{
+									$.ajax({
+										url : '../${boardName}Comment/listCount',
+										type : 'GET',
+										data : {
+											num : '${dto.num}',
+										},
+										success : function(data){
+											$("a[id='getDetail${dto.num}']").text('댓글' + data.trim() + '개 모두 보기');
+										}
+									})
+								})
+							</script>
 						</a >
 						
 						<div class="card-body my-1">							
-							<form action="../${boardName}Comment/add" method="Post">
-								<input type="hidden" name="writer" value="${member.id}">
-								<input class="border border-0" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+							<form action="../${boardName}Comment/add" method="post">
+								<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
+								<input type="hidden" name="num" value="${dto.num}">
+								<input type="hidden" name="boardId" value="${dto.boardId}">
+								
+									<input class="border border-0 replyContents"  id="replyContents" type="text" data-board-num="${dto.num}" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+									<a class="replyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
+								
 							</form>
 						</div>
 						
@@ -100,11 +120,11 @@
 						<!-- Modal -->
 						
 							<div class="modal fade" id="exampleModal${dto.num}" tabindex="-1" aria-labelledby="exampleModalLabel${dto.num}" aria-hidden="true">
-								<div class="modal-dialog">
+								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 								<div class="modal-content">
 									<div class="modal-header">
 									<h1 class="modal-title fs-5" id="exampleModalLabel${dto.num}">${dto.writer}님의 게시물</h1>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-board-num="${dto.num}"></button>
 									</div>
 									<div class="modal-body">
 										<div class="d-flex flex-column mb-3">
@@ -112,27 +132,17 @@
 												<div class="card-body">
 													<div class="" style="height: 30px;">
 														<span class="card-title" style="float: left;">${dto.writer}</span>
-														<span class="card-title calcDate"  style="float: right;"id="reg${dto.num}" data-board-num="${dto.num}">
+														<span class="card-title calcDate"  style="float: right;"id="modalReg${dto.num}" data-board-num="${dto.num}">
 															${dto.regDate}
 															<script>
-																function getDateDiff(d2) {
-																	let now = new Date();									
-																	let date2 = new Date(d2);
-									
-																	let diffDate = now.getTime() - date2.getTime();
-																	let currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
-																	
-																	return parseInt(diffDate/currDay);
-																	}
+
 								
 																$(document).ready(function(){
 																	let regDate = '${dto.regDate}';
-																	let date = getDateDiff(regDate);
-																	$('#reg'+'${dto.num}').text(date + "일전");
+																	$('#modalReg'+'${dto.num}').text(getDateDiff(regDate));
 																})
 								
-															
-															
+
 															</script>
 														</span>
 													</div>
@@ -173,15 +183,20 @@
 										
 										</div>
 
-										<div class="commentList">
+										<div id="commentList${dto.num}" data-board-name="${boardName}">
 
 										</div>
 
 										<div class="modal-footer">
 											<div class="card-body my-1">							
-												<form action="../${boardName}Comment/add" method="Post">
-													<input type="hidden" name="writer" value="${member.id}">
-													<input class="border border-0" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+												<form action="../${boardName}Comment/add" method="post">
+													<input class="replyWriter" type="hidden" name="writer" value="${member.id}">
+													<input type="hidden" name="num" value="${dto.num}">
+													<input type="hidden" name="boardId" value="${dto.boardId}">
+													
+														<input class="border border-0 modalReplyContents"  id="replyContents" data-board-num="${dto.num}" type="text" style="font-size: 13px;" name="contents" value="" placeholder="댓글 달기...">
+														<a class="modalReplyAdd" data-board-num="${dto.num}" id="replyAdd"></a>
+													
 												</form>
 											</div>
 										</div>
@@ -195,14 +210,6 @@
 								</div>
 
 
-						
-						
-
-						<!-- Modal
-						<div id="storyDetail${dto.num}">
-							
-						</div> -->
-
 
 
 					</div>
@@ -212,12 +219,20 @@
 								수정
 							</button>
 							<button type="button" class="list-group-item list-group-item-action delete" data-board-num="${dto.num}">삭제</button>
-							<button type="button" class="list-group-item list-group-item-action accuse" data-board-num="${dto.num}">신고하기</button>
+							<button type="button" class="list-group-item list-group-item-action report" data-board-num="${dto.num}" data-board-writer="${dto.writer}">신고하기</button>
 						</div>
 					</span>
 				</div>
 			</div>
 		</c:forEach> 		
+
+
+
+
 		
+
+		
+	
+
 	
 	

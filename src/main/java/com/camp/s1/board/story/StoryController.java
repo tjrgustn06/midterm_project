@@ -30,9 +30,15 @@ public class StoryController {
 		return "story";
 	}
 	
+	@ModelAttribute("boardId")
+	public Long getBoardId() {
+		return 3L;
+	}
+	
 	@GetMapping("list")
 	public ModelAndView getListPage(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
 		
 		
 		mv.setViewName("/story/list");

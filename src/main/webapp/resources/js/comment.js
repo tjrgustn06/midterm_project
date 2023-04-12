@@ -5,7 +5,11 @@ let writer = '';
 let num = 0;
 
 function setNum(n) {
-    num = n;
+    num = Number(n);
+}
+
+function setWriter(w) {
+    writer = w;
 }
 
 getList(1);
@@ -20,6 +24,7 @@ $('#replyAdd').click(function(){
         data : {
             num : $('#replyAdd').attr('data-board-num'),
             contents : $('#replyContents').val(),
+            writer : writer,
         },
         success : function(response) {
             if(response.trim() == 1) {
@@ -43,6 +48,8 @@ $('#replyAdd').click(function(){
 
 //리스트 가져오기
 function getList(page) {
+
+    console.log('BoardName : ' +boardName);
 
     $.ajax({
         type : 'GET',
@@ -72,14 +79,23 @@ $('#commentList').on('click', '.btnToggle', function(){
 
     // commentNum = $(this).attr('data-comment-num');
     // $('#commentMenu'+commentNum).slideToggle();
-   $(this).parent().next().slideToggle();
+//    $('#commentMenu'+$(this).attr('data-comment-num')).slideToggle();
+    if($('#commentMenu'+$(this).attr('data-comment-num')).is(':visible')) {
+        $('.commentMenu').slideUp();
+    }
+    else {
+        $('.commentMenu').hide();
+        $('#commentMenu'+$(this).attr('data-comment-num')).slideDown();
+}
+
+
 })
 
 //댓글 삭제
 $('#commentList').on('click', '.deleteMenu', function(){
     commentNum = $(this).attr('data-comment-num');
 
-    $('#commentMenu'+commentNum).hide();
+    $('.commentMenu').hide();
 
     let delConfirm = confirm('댓글을 삭제하시겠습니까?');
 
@@ -112,9 +128,9 @@ $('#commentList').on('click', '.updateMenu', function(){
     // getList(1);
     setResetForm(commentNum);
     setSubCommentResetForm(commentNum);
-    $('#commentMenu'+commentNum).hide();
+    $('.commentMenu').hide();
     commentNum = $(this).attr('data-comment-num');
-    $('#commentMenu'+commentNum).hide();
+
     getUpdateForm(commentNum);
 
 })
@@ -163,7 +179,7 @@ function getUpdateForm(commentNum) {
     let htmls = '<section class="mb-5 mx-2" id="updateForm'+commentNum+'">';
     htmls += '<div class="card bg-light">';
     htmls += '<div class="d-flex">';
-    htmls += '<span class="me-auto p-2 fw-bold">qwdfd';
+    htmls += '<span class="me-auto p-2 fw-bold">'+writer;
     htmls += '</span>';
     htmls += '<span class="p-2">';
     htmls += '<button class="btn btn-outline-danger commentCancle" data-comment-num="'+commentNum+'">취소</button>';
@@ -181,12 +197,12 @@ function getUpdateForm(commentNum) {
             
 
     $('#contents'+commentNum).replaceWith(htmls);
-    // $('#comments'+commentNum).replaceWith(htmls);
+    
 }
 
 ////업데이트폼 원래대로 돌려놓기
 function setResetForm(commentNum) {
-    console.log('ResetFormNum' + commentNum);
+    
     let htmls = '<div id="contents'+commentNum+'">'+$('#commentContents'+commentNum).text()+'';
     htmls += '</div>'
 
@@ -201,11 +217,10 @@ $('#commentList').on('click','.subCommentMenu', function(){
     
     setSubCommentResetForm(commentNum);
     setResetForm(commentNum);
-    $('#commentMenu'+commentNum).hide();
+    $('.commentMenu').hide();
 
     commentNum = $(this).attr('data-comment-num');
 
-    $('#commentMenu'+commentNum).hide();
     getSubCommentForm(commentNum);
 
   
@@ -223,9 +238,9 @@ $('#commentList').on('click','.subCommentCancle', function(){
 $('#commentList').on('click','.subCommentAdd', function(){
     commentNum = $(this).attr('data-comment-num');
     contents = $('#subCommentContents'+commentNum).val();
-    writer = "qwdfd1";
+    
 
-    console.log('Num : ' + num);
+    
 
     $.ajax({
         type : 'POST',
@@ -233,7 +248,7 @@ $('#commentList').on('click','.subCommentAdd', function(){
         data : {
             commentNum : commentNum,
             contents : contents,
-            writer : writer
+            writer : writer,
         },
         success : function(repsonse) {
             if(repsonse.trim()>0) {
@@ -248,11 +263,12 @@ $('#commentList').on('click','.subCommentAdd', function(){
 })
 
 
+
 function getSubCommentForm(commentNum) {
     let htmls = '<section class="mb-5 mx-2" id="subCommentForm'+commentNum+'">';
     htmls += '<div class="card bg-light">';
     htmls += '<div class="d-flex">';
-    htmls += '<span class="me-auto p-2 fw-bold">qwdfd';
+    htmls += '<span class="me-auto p-2 fw-bold">'+writer;
     htmls += '</span>';
     htmls += '<span class="p-2">';
     htmls += '<button class="btn btn-outline-danger subCommentCancle" data-comment-num="'+commentNum+'">취소</button>';
@@ -274,4 +290,6 @@ function getSubCommentForm(commentNum) {
 function setSubCommentResetForm(commentNum) {
     $('#subCommentForm'+commentNum).remove();
 }
+
+
 

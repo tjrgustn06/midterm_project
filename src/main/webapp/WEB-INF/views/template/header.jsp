@@ -38,8 +38,8 @@
 									<li class="nav-item"><a class="nav-link" href="/product/order/list">MYRESERVATION</a></li>
                                 	<li class="nav-item"><a class="nav-link" href="/product/order/list">MYRENT</a></li>
                                 	<li class="nav-item"><a class="nav-link" href="/cart/list">CART</a></li>
-									<c:if test="${member.roleName eq 'ADMIN'}">
-										<li class="nav-item"><a class="nav-link" href="/manage/list">MANAGEMENT</a></li>
+									<c:if test="${member.roleName eq 'MANAGER' || member.roleName eq 'ADMIN'}">
+										<li class="nav-item"><a class="nav-link" href="/report/list">MANAGEMENT</a></li>
 									</c:if>
                             	</ul>
                         	</li>

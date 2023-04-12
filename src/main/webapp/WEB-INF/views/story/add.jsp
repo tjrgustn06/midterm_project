@@ -66,7 +66,7 @@ $(function() {
                     <div class="row mb-3">
                         <label for="writer" class="col-sm-2 col-form-label">작성자</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="writer" id="writer" value="qwdfd1" readonly >
+                            <input type="text" class="form-control" name="writer" id="writer" value="${member.id}" readonly >
                         </div>
                     </div>
 
@@ -137,8 +137,8 @@ $(function() {
                                 <li class="tt top_kwdSearch">
                                     <div class="input_search">
                                         <fieldset class="totalSearch">
-                                            <label for="name" class="skip">키워드 검색</label>
-                                            <input id="name" name="name" class="m_search_in" style="vertical-align: middle;" title="검색어를 입력하세요." placeholder="검색어를 입력하세요." type="text" value=""/></fieldset>
+                                            <label for="campName" class="skip">키워드 검색</label>
+                                            <input id="campName" name="campName" class="m_search_in" style="vertical-align: middle;" title="검색어를 입력하세요." placeholder="검색어를 입력하세요." type="text" value=""/></fieldset>
                                     </div>
                                 </li>                            
                                 <li class="tt top_kwdSearch">
@@ -219,6 +219,7 @@ $(function() {
             <div class="row mt-5 mb-3 col-md-2 offset-md-10">
                 <button class="btn btn-primary " type="submit">글 쓰기</button>
             </div>
+            <input type="hidden" name="boardId" value="${boardId}">
 
 
             </form>

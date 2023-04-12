@@ -34,7 +34,7 @@
 	<div class="containermy-3">
 	
 		<div class="row mb-4 border-bottom border-info">
-			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2" id="boardName" data-board-name="${boardName}">${boardName} 페이지</h1><br>
+			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2" id="boardName" data-board-id="${boardId}" data-board-name="${boardName}">${boardName} 페이지</h1><br>
 		</div>
 		
 		<div id="storyList">
@@ -51,8 +51,14 @@
 	
 	<c:import url="../template/footer.jsp"></c:import>
 	<script src="../resources/js/scroll.js"></script>
+	<script src="../resources/js/calcDate.js"></script>
 	<script src="../resources/js/story.js"></script>
 	<script src="../resources/js/storyComment.js"></script>
+	<script src="../resources/js/report.js"></script>
+
+	
+	
+
 
 <c:import url="../template/common_js.jsp"></c:import>
 </body>

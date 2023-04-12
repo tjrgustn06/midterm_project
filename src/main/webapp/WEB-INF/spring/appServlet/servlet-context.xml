@@ -43,6 +43,7 @@
 			<exclude-mapping path="/notice/list"/>
 			<exclude-mapping path="/notice/detail"/>
 			<exclude-mapping path="/story/storyfeed"/>
+			<exclude-mapping path="/story/storyListTop"/>
 			<exclude-mapping path="/story/list"/>
 			<exclude-mapping path="/story/listPage"/>
 			<exclude-mapping path="/story/storyListTop"/>

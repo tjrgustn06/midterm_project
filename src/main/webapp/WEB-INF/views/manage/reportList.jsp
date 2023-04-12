@@ -24,8 +24,8 @@
     <link href="../resources/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../resources/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
     <!-- Custom CSS -->
-    <link href="../resources/css/style.min.css" rel="stylesheet">
     <link href="../resources/css/style_manage.min.css" rel="stylesheet">
+    <link href="../resources/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -97,6 +97,19 @@
                                         <option>July 2021</option>
                                     </select> -->
                                 </div>
+                            </div>
+                            <div class="layout">
+                                <ul class="navbar navbar-pills nav-fill" style="list-style: none;">
+                                    <li class="nav-item" id="r_wait">
+                                        <a class="nav-link report report_wait active" aria-current="page" href="/report/list?reportResult=1">처리 대기</a>
+                                    </li>
+                                    <li class="nav-item" id="r_denied">
+                                        <a class="nav-link report report_denied" href="/report/list?reportResult=2">승인 거절</a>
+                                    </li>
+                                    <li class="nav-item" id="r_accpet">
+                                        <a class="nav-link report report_accept" href="/report/list?reportResult=3">승인 완료</a>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="table-responsive">
                                 <table class="table no-wrap">

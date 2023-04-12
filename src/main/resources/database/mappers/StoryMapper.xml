@@ -8,6 +8,7 @@
   
   <select id="getTotalCount" resultType="Long">
   	SELECT COUNT(NUM) FROM STORY
+  	WHERE CONTENTS IS NOT NULL
   </select>
   
   <select id="getBoardList" parameterType="Pager" resultType="StoryDTO">
@@ -16,6 +17,7 @@
 		  	SELECT ROWNUM R, S.* FROM
 				  	(
 				  	SELECT * FROM STORY
+				  	WHERE CONTENTS IS NOT NULL
 				  	ORDER BY NUM DESC
 				  	) S
 		  	)

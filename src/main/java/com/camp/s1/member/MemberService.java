@@ -66,21 +66,28 @@ public class MemberService {
 	}
 	
 	//Login
-	public MemberDTO getMemberLogin(MemberDTO memberDTO)throws Exception{
+	public MemberDTO getMemberLogin(MemberDTO memberDTO, HttpServletResponse response)throws Exception{
 
 		MemberDTO result = memberDAO.getMemberLogin(memberDTO);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 		
 		if(result != null && memberDTO.getPw().equals(result.getPw())) {
-			
+		
 			memberDTO.setPw(null);
 			memberDTO.setRoleName(result.getRoleName());
 			memberDTO.setAddressDTOs(result.getAddressDTOs());
 			return memberDTO;
 			
 		}else {
-			
+			out.println("<script>");
+			out.println("alert('아이디 또는 비밀번호를 확인하세요.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
 			return null;
-		}	
+		}
+		
 	}
 	
 	//MemberPage
@@ -160,7 +167,7 @@ public class MemberService {
 				  // TLSv1.2 추가하여 신뢰성 확보
 				  Properties prop = new Properties();
 				  prop.put("mail.smtp.host", "smtp.gmail.com"); 
-				  prop.put("mail.smtp.port", 465); 
+				  prop.put("mail.smtp.port", 465);
 				  prop.put("mail.smtp.auth", "true"); 
 				  prop.put("mail.smtp.ssl.enable", "true"); 
 				  prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");

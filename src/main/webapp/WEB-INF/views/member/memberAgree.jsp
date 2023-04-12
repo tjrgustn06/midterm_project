@@ -16,7 +16,7 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-		<h2 class="page-cover-tittle">회원 목록</h2>
+		<h2 class="page-cover-tittle">약관 동의</h2>
 		</div>
 	</div>
 </section>

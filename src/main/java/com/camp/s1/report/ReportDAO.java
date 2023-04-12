@@ -15,7 +15,7 @@ public class ReportDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private final String NAMESPACE = "com.camp.s1.report.reportDAO.";
+	private final String NAMESPACE = "com.camp.s1.report.ReportDAO.";
 	
 	public int setReportAdd(ReportDTO reportDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE + "setReportAdd", reportDTO);

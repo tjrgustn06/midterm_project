@@ -8,6 +8,20 @@
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
 <title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<style>
+	.imageBoxOther{
+    width: 25rem;
+    height: 25rem;
+    overflow: hidden;
+    margin: 0 auto;
+	}
+	
+	.innerImage{
+	    width: 100%;
+	    /* height: 80%; */
+	    object-fit: cover;
+	}
+</style>
 <script>
 	
 	$(document).ready(function(){

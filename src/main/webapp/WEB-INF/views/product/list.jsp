@@ -61,9 +61,9 @@
 				
 				
 				<div class="card-body">
-				  <h5 class="card-title">${dto.name}</h5>
-				  <p class="card-text">${dto.summary}</p>
-				  <a href="./detail?productNum=${dto.productNum}" class="genric-btn success radius">상세보기</a>
+					<h5 class="card-title">${dto.name}</h5>
+					<p class="card-text">${dto.summary}</p>
+					<a href="./detail?productNum=${dto.productNum}" class="genric-btn success radius">상세보기</a>
 				</div>
 			</div>
 		</c:forEach>

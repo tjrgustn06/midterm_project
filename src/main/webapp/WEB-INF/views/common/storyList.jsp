@@ -209,11 +209,13 @@
 					</div>
 					<span class="p-2 boardMenu" id="boardMenu${dto.num}" style="display: none;">
 						<div class="list-group">
-							<button type="button" class="list-group-item list-group-item-action update" data-board-num="${dto.num}" aria-current="true">
-								수정
-							</button>
-							<button type="button" class="list-group-item list-group-item-action delete" data-board-num="${dto.num}">삭제</button>
-							<button type="button" class="list-group-item list-group-item-action report" data-board-num="${dto.num}" data-board-writer="${dto.writer}">신고하기</button>
+							<c:if test="${dto.writer eq member.id}">
+								<button type="button" class="list-group-item list-group-item-action update" data-board-num="${dto.num}" aria-current="true">수정</button>
+								<button type="button" class="list-group-item list-group-item-action delete" data-board-num="${dto.num}">삭제</button>
+							</c:if>
+							<c:if test="${dto.writer ne member.id}">
+								<button type="button" class="list-group-item list-group-item-action report" data-board-num="${dto.num}" data-board-writer="${dto.writer}">신고하기</button>
+							</c:if>
 						</div>
 					</span>
 				</div>

@@ -97,21 +97,16 @@ public class ReportService {
 				//해당 댓글의 부모글을 참조하는 댓글들을 전부 조회
 				List<BbsDTO> bbsDTOs = reportDAO.getCommentList(reportDTO);
 				CommentDTO commentDTO = null;
-				System.out.println("댓글 시작");
 				for (BbsDTO bbsDTO : bbsDTOs) {
 					
 					commentDTO = (CommentDTO)bbsDTO;
-					System.out.println("ReportDTO : " + reportDTO.getCommentNum() + " CommentDTO : " + commentDTO.getCommentNum());
 					if(reportDTO.getCommentNum().equals(commentDTO.getCommentNum())) {	
-						System.out.println("Step : " + commentDTO.getStep());
 						if(commentDTO.getStep() > 0) {
 							commentDTO.setContents("");
-							System.out.println("대댓글 들어옴");
 							break;
 						}
 						else {
 							commentDTO.setContents("");
-							System.out.println("댓글 들어옴");
 							break;
 
 						}

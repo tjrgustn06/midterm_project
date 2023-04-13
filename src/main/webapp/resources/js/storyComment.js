@@ -83,25 +83,17 @@ $('#storyList').on('change', '.modalReplyContents', function(){
 
 })
 
-
-
-    // getCommentList(1);
-
-
     
 //댓글 등록 이벤트
 $("#"+boardName+'List').on('click','.replyAdd',function(){
         
     board = $(this).parents('#'+boardName+$(this).attr('data-board-num'));
 
-    let chk = chkValidation(board.find('.replyContents'));
-    if(chk) {
-        let contents = board.find('.replyContents').val();
+    let contents = board.find('.replyContents').val();
 
-        num = $(this).attr('data-board-num')
-        
-        setCommentAdd(num, contents, writer, boardId);
-    }  
+    num = $(this).attr('data-board-num')
+    
+    setCommentAdd(num, contents, writer, boardId);
 })
 
 //댓글 등록 이벤트
@@ -109,16 +101,11 @@ $('#'+boardName+'List').on('keydown','.replyContents', function(e){
     if(e.keyCode === 13) {
         e.preventDefault();
 
-        let chk = chkValidation($(this));
+        let contents = $(this).val();
+        num = $(this).attr('data-board-num')
 
-        if(chk) {
-            let contents = $(this).val();
-            num = $(this).attr('data-board-num')
+        setCommentAdd(num, contents, writer, boardId);
     
-            setCommentAdd(num, contents, writer, boardId);
-        }
-
-        
     }
 })
 
@@ -126,13 +113,11 @@ $('#'+boardName+'List').on('keydown','.replyContents', function(e){
 $('#'+boardName+'List').on('click','.modalReplyAdd', function(e){
     board = $(this).parents('#'+boardName+$(this).attr('data-board-num'));
 
-    let chk = chkValidation(board.find('.modalReplyContents'));
-    if(chk) {
-        let contents = board.find('.modalReplyContents').val();
+    let contents = board.find('.modalReplyContents').val();
 
-        num = $(this).attr('data-board-num')
-        setCommentAdd(num, contents, writer, boardId);
-    }
+    num = $(this).attr('data-board-num')
+    setCommentAdd(num, contents, writer, boardId);
+
 
 
 })
@@ -141,15 +126,12 @@ $('#'+boardName+'List').on('click','.modalReplyAdd', function(e){
 $('#'+boardName+'List').on('keydown','.modalReplyContents', function(e){
     if(e.keyCode === 13) {
         e.preventDefault();
+   
+        let contents = $(this).val();
+        num = $(this).attr('data-board-num')
 
-        let chk = chkValidation($(this));
-
-        if(chk) {
-            let contents = $(this).val();
-            num = $(this).attr('data-board-num')
+        setCommentAdd(num, contents, writer, boardId);
     
-            setCommentAdd(num, contents, writer, boardId);
-        }
     }
 
 })
@@ -158,6 +140,18 @@ $('#'+boardName+'List').on('keydown','.modalReplyContents', function(e){
 
 //댓글 등록 함수
 function setCommentAdd(num, contents, writer, parentBoardId) {
+    if(writer == '') {
+        alert("로그인 후 이용해주세요");
+        return;
+    }
+
+    let chk = chkValidation(contents);
+
+    if(!chk) {
+        alert("댓글 내용을 입력해주세요");
+        return;
+    }  
+
     $.ajax({
         type : 'POST',
         url : '../'+ boardName + 'Comment/add',
@@ -273,29 +267,32 @@ $('#'+boardName+'List').on('click', '.commentCancle', function(){
 $('#'+boardName+'List').on('click', '.commentUpdate', function(){
     commentNum = $(this).attr('data-comment-num');
     
-    let chk = chkValidation($('#commentContents'+commentNum));
+    let chk = chkValidation($('#commentContents'+commentNum).val());
 
-    if(chk) {
-        $.ajax({
-            type : 'POST',
-            url : '../'+boardName+'Comment/update',
-            data : {
-                commentNum : commentNum,
-                contents : $('#commentContents'+commentNum).val()
-            },
-            success : function(response){
-                if(response.trim() > 0) {
-                    alert('댓글이 수정되었습니다');
-                    getCommentList(num, page);
-                    
-    
-                }
-                else {
-                    alert('댓글 수정 실패. 관리자에게 문의하세요');
-                }
-            }
-        })
+    if(!chk) {
+        alert("댓글 내용을 입력해주세요")  ;
+        return;
     }
+
+    $.ajax({
+        type : 'POST',
+        url : '../'+boardName+'Comment/update',
+        data : {
+            commentNum : commentNum,
+            contents : $('#commentContents'+commentNum).val()
+        },
+        success : function(response){
+            if(response.trim() > 0) {
+                alert('댓글이 수정되었습니다');
+                getCommentList(num, page);
+                
+
+            }
+            else {
+                alert('댓글 수정 실패. 관리자에게 문의하세요');
+            }
+        }
+    })
     
 
 })
@@ -350,6 +347,11 @@ function setResetForm(commentNum) {
 //대댓글 폼 가져오기
 $('#'+boardName+'List').on('click','.subCommentMenu', function(){
     
+    if(writer == '') {
+        alert("로그인 후 이용해주세요");
+        return;
+    }
+
     setSubCommentResetForm(commentNum);
     setResetForm(commentNum);
     $('.commentMenu').hide();
@@ -373,11 +375,14 @@ $('#'+boardName+'List').on('click','.subCommentCancle', function(){
 $('#'+boardName+'List').on('click','.subCommentAdd', function(){
     commentNum = $(this).attr('data-comment-num');
 
-    let chk = chkValidation($('#subCommentContents'+commentNum));
+    let chk = chkValidation($('#subCommentContents'+commentNum).val());
 
-    if(chk) {
+    if(!chk) {
+        alert("댓글 내용을 입력해주세요");
+        return;
+    }
 
-        contents = $('#subCommentContents'+commentNum).val();
+    contents = $('#subCommentContents'+commentNum).val();
    
         $.ajax({
             type : 'POST',
@@ -399,13 +404,20 @@ $('#'+boardName+'List').on('click','.subCommentAdd', function(){
                 }
             }
         })
-    }
 
 })
 
 
 //신고하기 버튼
 $('#'+boardName+'List').on('click','.reportMenu', function(){
+
+    let chk = chkValidation(writer);
+
+    if(!chk) {
+        alert("로그인 후 이용해주세요");
+        return;
+    }
+
     commentNum = $(this).attr('data-comment-num');
     reportedUser = $(this).attr('data-comment-writer');
     let reportedContents = $('#contents'+commentNum).text();
@@ -444,12 +456,10 @@ function setSubCommentResetForm(commentNum) {
 
 function chkValidation(element){
 
-    let contents = element.val();
 
     let chk = true;
 
-    if(contents == '') {
-        alert('댓글 내용을 입력해주세요')
+    if(element == '') {
         chk = false;
         return chk;
     }

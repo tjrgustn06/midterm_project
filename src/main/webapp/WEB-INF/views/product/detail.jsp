@@ -160,13 +160,13 @@
 					<form action="./update" id="frm" method="GET">
 						<input type="hidden" name="productNum" value="${dto.productNum}">
 						<c:if test="${not empty member.roleName and member.roleName ne 'MEMBER'}">
-							<button type="submit" class="genric-btn success radius" id="update">글 수정</button>
-							<button type="button" class="genric-btn danger radius" id="delete" data-delete="${dto.productNum}">글 삭제</button>
+							<button type="button" class="genric-btn danger" id="delete" data-delete="${dto.productNum}">삭제</button>
+							<button type="submit" class="genric-btn primary" id="update">수정</button>
 						</c:if>
 					</form>
 				</div>
 				<div>
-					<a href="./list" class="genric-btn success radius">목록으로</a>	
+					<a href="./list" class="genric-btn primary">목록으로</a>	
 				</div>
 			<!-- delete시엔 post방식 update시엔 get -->
 			</div>
@@ -201,21 +201,21 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<textarea id="reviewContents" class="form-control" name="contents" style="height: 200px" placeholder="내용을 입력해주세요"></textarea>
+						<textarea id="reviewContents" class="form-control" name="contents" style="height: 200px; resize:none;" placeholder="내용을 입력해주세요"></textarea>
 					</div>
 					<div id="picList">
-						<div class="mb-2" id="addPicDiv">
-							<button type="button" id="addPic" class="genric-btn success-border radius" style="float: right;">사진추가</button>
+						<div class="d-flex justify-content-center my-2" id="addPicDiv">
+							<button type="button" id="addPic" class="genric-btn primary small">사진추가</button>
 						</div>
 					</div>
-					<div>
-						<button type="button" id="addReview" class="genric-btn success-border radius" data-review-num="${dto.productNum}" data-review-name="product">리뷰작성</button>
+					<div class="d-flex justify-content-center">
+						<button type="button" id="addReview" class="genric-btn success small" data-review-num="${dto.productNum}" data-review-name="product">리뷰작성</button>
 					</div>
 				</form>
 			</div>
-			<div class="col-6 mx-auto">
-				<button id="reviewAdd" type="button" class="genric-btn success radius">리뷰쓰기</button>
-				<button id="reviewCancle" type="button" class="genric-btn primary radius">취소</button>
+			<div class="d-flex justify-content-center my-3">
+				<button id="reviewCancle" type="button" class="genric-btn danger medium" style="display: none;">취소</button>
+				<button id="reviewAdd" type="button" class="genric-btn success medium">작성</button>
 			</div>
 			<div class="row" id="reviewList">
 

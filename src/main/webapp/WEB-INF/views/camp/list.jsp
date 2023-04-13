@@ -56,7 +56,9 @@
 	
 	<!-- 캠프장 등록 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
 	<div class="d-flex justify-content-end">
-		<a class="genric-btn success" href="./add">등록</a>
+		<c:if test="${not empty member.roleName and member.roleName eq 'ADMIN' or member.roleName eq 'CAMPMANAGER'}">
+			<a class="genric-btn success" href="./add">등록</a>
+		</c:if>
 	</div>
 	
 	

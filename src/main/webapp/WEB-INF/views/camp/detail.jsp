@@ -34,7 +34,9 @@
 
 	<!-- 예약목록 확인 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
 	<div class="d-flex justify-content-end">
-		<a class="genric-btn success" href="./book/list?campNum=${dto.campNum}">예약목록 확인</a>
+		<c:if test="${not empty member.roleName and member.roleName eq 'ADMIN' or member.roleName eq 'CAMPMANAGER'}">
+			<a class="genric-btn success" href="./book/list?campNum=${dto.campNum}">예약목록 확인</a>
+		</c:if>
 	</div>
 	
 	<hr>
@@ -387,7 +389,7 @@
 				<!-- 후기 영역 -->
 				<c:if test="${viewType eq 4}">
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑&여행 후기</h5>
-					<div class="row col-5 mx-auto my-3" id="review" style="display: none;">
+					<div class="row col-8 mx-auto my-3" id="review" style="display: none;">
 						<form id="reviewForm" method="POST" enctype="multipart/form-data">
 							<input type="hidden" name="campNum" value="${dto.campNum}">
 							<div class="input-group mb-3">
@@ -415,22 +417,21 @@
 								</div>
 							</div>
 							<div class="input-group mb-3">
-								<textarea id="reviewContents" class="form-control" name="contents" style="height: 200px" placeholder="내용을 입력해주세요"></textarea>
+								<textarea id="reviewContents" class="form-control" name="contents" style="height: 200px; resize:none;" placeholder="내용을 입력해주세요"></textarea>
 							</div>
 							<div id="picList">
-								<div class="row mb-2" id="addPicDiv">
-									<button type="button" id="addPic" class="col-2 offset-md-10 genric-btn primary small">사진추가</button>
+								<div class="d-flex justify-content-center my-2" id="addPicDiv">
+									<button type="button" id="addPic" class="genric-btn primary small">사진추가</button>
 								</div>
 							</div>
-							<div>
+							<div class="d-flex justify-content-center">
 								<button type="button" id="addReview" class="genric-btn success small" data-review-num="${dto.campNum}" data-review-name="camp">리뷰작성</button>
 							</div>
 						</form>
 					</div>
-
-					<div class="d-flex justify-content-evenly my-3">
+					<div class="d-flex justify-content-center my-3">
+						<button id="reviewCancle" type="button" class="genric-btn danger medium" style="display: none;">취소</button>
 						<button id="reviewAdd" type="button" class="genric-btn success medium">작성</button>
-						<button id="reviewCancle" type="button" class="genric-btn danger medium">취소</button>
 					</div>
 
 					<div class="row" id="reviewList">
@@ -452,8 +453,10 @@
 				<input type="hidden" name="campNum" value="${dto.campNum}">
 				<div class="d-flex justify-content-between my-2" id="adminBtn">
 					<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
-					<button id="detDelete" type="button" class="genric-btn danger">삭제</button>
-					<button id="detUpdate" type="button" class="genric-btn primary">수정</button>
+					<c:if test="${not empty member.roleName and member.roleName eq 'ADMIN' or member.roleName eq 'CAMPMANAGER'}">
+						<button id="detDelete" type="button" class="genric-btn danger">삭제</button>
+						<button id="detUpdate" type="button" class="genric-btn primary">수정</button>
+					</c:if>
 				</div>
 			</form>
 		</div>

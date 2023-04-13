@@ -7,7 +7,7 @@
     <c:when test="${not empty siteList}">
         <c:forEach items="${siteList}" var="siteDTO" varStatus="i">
             <form action="./confirmation" id="bookFrm${i.count}" method="get">
-            <div id="siteOne${i.count}">
+            <div id="siteOne${i.count}" class="my-2">
                 <input type="hidden" name="areaNum" value="${siteDTO.areaNum}" data-site-idx="area${i.count}">
                 <input type="hidden" name="startDate" value="" data-site-idx="start${i.count}">
                 <input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">

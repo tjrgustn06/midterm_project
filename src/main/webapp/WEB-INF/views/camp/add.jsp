@@ -39,7 +39,7 @@
 	<!-- 대표사진 + 설명 div -->
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
-			<div class="row pic my-3 mx-auto">
+			<div class="row imageMain my-3 mx-auto">
 				<!-- 사진이 없는경우 empty.jpg 표시 -->
 				<h5><i class="fa-solid fa-camera fa-sm"></i> 대표 사진 등록</h5>
 				<div id="thumbnailImage" class="row">

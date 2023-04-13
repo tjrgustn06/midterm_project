@@ -18,7 +18,7 @@
 		<div class="page-cover text-center">
 			<h2 class="page-cover-tittle">JOIN US</h2>
 				<ol class="breadcrumb">
-					<li>함께 캠핑가요!</li>
+					<li>함께 캠핑갈래요?</li>
 				</ol>
 		</div>
 	</div>
@@ -412,7 +412,7 @@
 		</div>
 	
 		<div class="d-flex justify-content-center my-3">
-			<button id="agree" class="genric-btn success">회원가입</button>
+			<button id="agree" class="genric-btn success-border">회원가입</button>
 		</div>
 	
 	</div>

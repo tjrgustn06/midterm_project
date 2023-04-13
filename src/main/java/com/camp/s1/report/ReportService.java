@@ -55,6 +55,10 @@ public class ReportService {
 		return reportDAO.getReportList(pager);
 	}
 	
+	public ReportDTO getReportDetail(ReportDTO reportDTO) throws Exception {
+		return reportDAO.getReportDetail(reportDTO);
+	}
+	
 	public int setReportResult(ReportDTO reportDTO) throws Exception {
 		int result = 0;
 		

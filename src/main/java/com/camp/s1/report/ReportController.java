@@ -68,6 +68,16 @@ public class ReportController {
 		return mv;
 	}
 	
+	@GetMapping("detail")
+	public ModelAndView getReportDetail(ReportDTO reportDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/manage/detail");
+		mv.addObject("dto", reportService.getReportDetail(reportDTO));
+		
+		return mv;
+	}
+	
 	@PostMapping("result")
 	public ModelAndView setReportResult(ReportDTO reportDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();

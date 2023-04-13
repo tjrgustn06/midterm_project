@@ -110,7 +110,7 @@
   	
   	<!-- Update 물품 수정 -->
   	<update id="setProductUpdate" parameterType="ProductDTO">
-  		UPDATE PRODUCT SET NAME=#{name}, CONTENTS=#{contents}
+  		UPDATE PRODUCT SET NAME=#{name}, CONTENTS=#{contents}, SUMMARY=#{summary}
   		WHERE PRODUCTNUM=#{productNum}
   	</update>
   	

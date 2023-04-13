@@ -55,7 +55,7 @@
 			<div class="card" style="width: 16rem">
 				<c:forEach items="${dto.productFileDTOs}" var="fileDTO" varStatus="i">
 					<c:if test="${i.first}">
-						<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap">
+						<img class="card-img-top" src="../resources/upload/product/${fileDTO.fileName}" alt="Card image cap" style="height: 254px;">
 					</c:if>
 				</c:forEach>
 				

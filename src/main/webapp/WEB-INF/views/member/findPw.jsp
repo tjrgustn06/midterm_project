@@ -18,7 +18,10 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-		<h2 class="page-cover-tittle">비밀번호 찾기</h2>
+			<h2 class="page-cover-tittle">SUPPORT</h2>
+				<ol class="breadcrumb">
+					<li>무엇을 도와드릴까요?</li>
+				</ol>
 		</div>
 	</div>
 </section>
@@ -31,15 +34,15 @@
 			<div>
 				<p>
 					<label>ID</label>
-					<input class="w3-input" type="text" data-pw-id="${memberDTO.id}" id="id" name="id" required>
+					<input class="w3-input" type="text" data-pw-id="${memberDTO.id}" id="id" name="id" placeholder="아이디를 입력하세요" required>
 				</p>
 				<p>
 					<label>Email</label>
-					<input class="w3-input" type="text" id="email" data-pw-email="${memberDTO.email}" name="email" required>
+					<input class="w3-input" type="text" id="email" data-pw-email="${memberDTO.email}" name="email" placeholder="이메일을 입력하세요" required>
 				</p>
 				<p class="w3-center">
-					<button type="button" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>
-					<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
+					<button type="button" onclick="history.go(-1);" class="genric-btn danger-border">돌아가기</button>
+					<button type="button" id=findBtn class="genric-btn success-border">찾기</button>
 				</p>
 			</div>
 		</div>

@@ -33,9 +33,13 @@
 												
 									<span class="p-2 reviewMenu" id="reviewMenu${dto.num}" style="display: none;">
 										<div class="list-group">
-											<button type="button" class="list-group-item list-group-item-action updateMenu" data-review-num='${dto.num}'aria-current="true">수정</button>
-											<button type="button" class="list-group-item list-group-item-action deleteMenu" data-review-num='${dto.num}'>삭제</button>
-											<button type="button" class="list-group-item list-group-item-action accuseMenu" data-review-num='${dto.num}'>신고하기</button>
+											<c:if test="${dto.writer eq member.id}">
+												<button type="button" class="list-group-item list-group-item-action updateMenu" data-review-num='${dto.num}'aria-current="true">수정</button>
+												<button type="button" class="list-group-item list-group-item-action deleteMenu" data-review-num='${dto.num}'>삭제</button>
+											</c:if>
+											
+												<button type="button" class="list-group-item list-group-item-action accuseMenu" data-review-num='${dto.num}'>신고하기</button>
+										
 										</div>
 									</span>
 								</div>

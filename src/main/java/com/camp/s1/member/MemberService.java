@@ -172,8 +172,8 @@ public class MemberService {
 				//Email 발송
 				public void sendEmail(MemberDTO memberDTO, String div) throws Exception {
 					
-					final String user = "tjrgustn06@gmail.com"; 
-					final String password = "";
+					final String user = "yd930219@gmail.com"; 
+					final String password = "ygbyqagtaczpnpje";
 					
 				  // SMTP 서버 정보 설정
 				  // TLSv1.2 추가하여 신뢰성 확보

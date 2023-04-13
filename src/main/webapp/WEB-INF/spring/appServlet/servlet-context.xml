@@ -25,6 +25,8 @@
 	<beans:bean class="com.camp.s1.interceptors.MemberCheckInterceptor" id="memberCheckInterceptor"></beans:bean>
 	<beans:bean class="com.camp.s1.interceptors.AdminCheckInterceptor" id="adminCheckInterceptor"></beans:bean>
 	<beans:bean class="com.camp.s1.interceptors.ManagerCheckInterceptor" id="managerCheckInterceptor"></beans:bean>
+	<beans:bean class="com.camp.s1.interceptors.NotMemberCheckInterceptor" id="notMemberCheckInterceptor"></beans:bean>
+	<beans:bean class="com.camp.s1.interceptors.OwnerCheckInterceptor" id="ownerCheckInterceptor"></beans:bean>
 	
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"></beans:property>
@@ -34,7 +36,9 @@
 		<!-- <interceptor>
 			<mapping path="/notice/*"/>
 			<mapping path="/qna/*"/>
+			<mapping path="/qnaComment/*"/>
 			<mapping path="/story/*"/>
+			<mapping path="/storyComment"/>
 			<mapping path="/camp/**"/>
 			<mapping path="/cart/*"/>
 			<mapping path="/member/*"/>
@@ -42,40 +46,83 @@
 			<mapping path="/report/*"/>
 			<exclude-mapping path="/notice/list"/>
 			<exclude-mapping path="/notice/detail"/>
-			<exclude-mapping path="/story/storyfeed"/>
-			<exclude-mapping path="/story/storyListTop"/>
-			<exclude-mapping path="/story/list"/>
-			<exclude-mapping path="/story/listPage"/>
-			<exclude-mapping path="/story/storyListTop"/>
 			<exclude-mapping path="/qna/list"/>
 			<exclude-mapping path="/qna/detail"/>
+			<exclude-mapping path="/qnaComment/list"/>
+			<exclude-mapping path="/story/list"/>
+			<exclude-mapping path="/story/listPage"/>
+			<exclude-mapping path="/story/detail"/>
+			<exclude-mapping path="/story/storyfeed"/>
+			<exclude-mapping path="/story/storyListTop"/>
+			<exclude-mapping path="/storyComment/list"/>
+			<exclude-mapping path="/storyComment/listCount"/>
 			<exclude-mapping path="/camp/list"/>
 			<exclude-mapping path="/camp/detail"/>
-			<exclude-mapping path="/camp/review/*"/>
-			<exclude-mapping path="/member/memberAgree"/>
+			<exclude-mapping path="/camp/sigunguNameList"/>
+			<exclude-mapping path="/camp/searchCampList"/>
+			<exclude-mapping path="/camp/review/list"/>
+			<exclude-mapping path="/member/memberIdCheck"/>
 			<exclude-mapping path="/member/memberJoin"/>
 			<exclude-mapping path="/member/memberLogin"/>
+			<exclude-mapping path="/member/memberAgree"/>
 			<exclude-mapping path="/member/findIdForm"/>
+			<exclude-mapping path="/member/findId"/>
 			<exclude-mapping path="/member/findPw"/>
 			<exclude-mapping path="/member/kakaoLogin"/>
 			<exclude-mapping path="/product/list"/>
 			<exclude-mapping path="/product/cartBar"/>
 			<exclude-mapping path="/product/productListTop"/>
 			<exclude-mapping path="/product/detail"/>
-			<exclude-mapping path="/product/review/*"/>
+			<exclude-mapping path="/product/review/list"/>
 			<beans:ref bean="memberCheckInterceptor"/>
-		</interceptor> -->
+		</interceptor>
+		
 		<interceptor>
+			<mapping path="/member/roleNameUpdate"/>
 			<mapping path="/member/memberList"/>
 			<beans:ref bean="adminCheckInterceptor"/>
 		</interceptor>
-	</interceptors>
-	<interceptors>
+	
 		<interceptor>
-			<mapping path="/report/*"/>
-			<exclude-mapping path="/report/report"/>
+			<mapping path="/notice/add"/>
+			<mapping path="/notice/delete"/>
+			<mapping path="/notice/update"/>
+			<mapping path="/notice/boardFileDelete"/>
+			<mapping path="/product/add"/>
+			<mapping path="/product/update"/>
+			<mapping path="/product/boardFileDelete"/>
+			<mapping path="/product/delete"/>
+			<mapping path="/report/list"/>
+			<mapping path="/report/result"/>
 			<beans:ref bean="managerCheckInterceptor"/>
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/camp/delete"/>
+			<mapping path="/camp/add"/>
+			<mapping path="/camp/update"/>
+			<mapping path="/camp/campFileDelete"/>
+			<beans:ref bean="notMemberCheckInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/qnaComment/delete"/>
+			<mapping path="/qnaComment/update"/>
+			<mapping path="/qna/delete"/>
+			<mapping path="/qna/update"/>
+			<mapping path="/qna/boardFileDelete"/>
+			<mapping path="/story/delete"/>
+			<mapping path="/story/update"/>
+			<mapping path="/story/boardFileDelete"/>
+			<mapping path="/storyComment/update"/>
+			<mapping path="/storyComment/delete"/>
+			<mapping path="/camp/review/update"/>
+			<mapping path="/camp/review/delete"/>
+			<mapping path="/product/review/update"/>
+			<mapping path="/product/review/delete"/>
+			<beans:ref bean="ownerCheckInterceptor"/>
+		</interceptor>
+		
 	</interceptors>
 	
 	<context:component-scan base-package="com.camp.s1" />

@@ -431,7 +431,7 @@
 					</div>
 					<div class="d-flex justify-content-center my-3">
 						<button id="reviewCancle" type="button" class="genric-btn danger medium" style="display: none;">취소</button>
-						<button id="reviewAdd" type="button" class="genric-btn success medium">작성</button>
+						<button id="reviewAdd" type="button" class="genric-btn success medium">리뷰작성</button>
 					</div>
 
 					<div class="row" id="reviewList">

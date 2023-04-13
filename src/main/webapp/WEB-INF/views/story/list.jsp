@@ -17,8 +17,8 @@
 	}
 
 	.imageMain{
-		width: 49rem;
-		height: 30rem;
+		width: 54rem;
+		height: 32rem;
 		/* width: 80%;
 		height: 80%; */
 	}
@@ -38,9 +38,9 @@
 	}
 
 	.innerImage{
-		width: 49rem;
+		width: 46rem;
 		height: 30rem;
-		/* object-fit: fill; */
+		object-fit: cover;
 	}
 </style>
 <script>
@@ -74,8 +74,8 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-8" style="width: 75%; height : 50px; bottom: 0px; position: fixed; left: 50%; transform: translateX(-50%)">
-				<a href="./add" class="btn btn-primary btn-lg col-md-12" style="height: 100%" >스토리 쓰기</a>
+			<div class="col-md-8" style="width: 50%; height : 50px; bottom: 0px; position: fixed; left: 50%; transform: translateX(-50%)">
+				<a href="./add" class="genric-btn success mx-auto col-lg-12" style="height: 100%" >스토리 쓰기</a>
 			</div>
 		</div>
 	

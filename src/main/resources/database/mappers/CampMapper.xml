@@ -19,6 +19,10 @@
 	  		<if test="kind=='address'">
 	  			ADDRESS LIKE '%' || #{search} || '%'
 	  		</if>
+	  		<if test="kind=='doName'">
+	  			DONAME LIKE '%' || ${search} || '%'
+	  		</if>
+	  		<if test=""kind=='do"></if>
   		</where>
   	</sql>
   	

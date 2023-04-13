@@ -9,6 +9,7 @@ let date = '';
 
 //첫번째 지역(시/도)가 변경 됐을 때
 $('#doName').change(function(){
+    console.log('1')
     getSigunguList();
 
 })

@@ -78,6 +78,7 @@ public class ProductOrderService {
 	public ProductOrderDTO getProductOrderDetail(ProductOrderDTO productOrderDTO) throws Exception {
 		productOrderDTO=productOrderDAO.getProductOrderDetail(productOrderDTO);
 		productOrderDTO.setStartDate(productOrderDTO.getStartDate().substring(0, 10));
+		productOrderDTO.setLastDate(productOrderDTO.getLastDate().substring(0, 10));
 		return productOrderDTO;
 	}
 	

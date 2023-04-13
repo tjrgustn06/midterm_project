@@ -31,15 +31,23 @@
 												})
 											</script>
 										</span>
-										
-											<span class="p-2">
-												<button class="btnToggle" style="border : 0px; background-color: transparent;" data-comment-num="${dto.commentNum}">
-													<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
-												</button>
-											</span>
+											<c:choose>
+												<c:when test="${dto.depth eq 1 && dto.writer ne member.id && boardName ne 'story'}">
+													<span class="p-2">
+													</span>
+												</c:when>
+												<c:otherwise>
+													<span class="p-2">
+														<button class="btnToggle" style="border : 0px; background-color: transparent;" data-comment-num="${dto.commentNum}">
+															<img alt="토글 버튼" src="/resources/images/menu/kebobMenu.png" style="width:12px; height:12px;">
+														</button>
+													</span>
+												</c:otherwise>
+											</c:choose>
 										
 										<span class="p-2 commentMenu" id="commentMenu${dto.commentNum}" style="display: none;">
 											<div class="list-group">
+											
 												<c:if test="${dto.writer eq member.id}">
 													<button type="button" class="list-group-item list-group-item-action updateMenu" data-comment-num='${dto.commentNum}'aria-current="true">수정</button>
 													<button type="button" class="list-group-item list-group-item-action deleteMenu" data-comment-num='${dto.commentNum}'>삭제</button>

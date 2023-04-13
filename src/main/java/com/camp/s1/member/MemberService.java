@@ -52,6 +52,18 @@ public class MemberService {
 		return check;
 	}
 	
+	//EmailCheck
+	public boolean getMemberEmailCheck(MemberDTO memberDTO)throws Exception {
+		memberDTO = memberDAO.getMemberEmailCheck(memberDTO);
+		
+		boolean check = true;
+		
+		if(memberDTO != null) {
+			check = false;
+		}
+		return check;
+	}
+	
 	//Join
 	public int setMemberJoin(MemberDTO memberDTO)throws Exception{
 		

@@ -194,16 +194,46 @@ addr.addEventListener("blur", function(){
 })
 
 email.addEventListener("blur", function(){
-    if(email.value.length != 0){
-        emailResult.innerHTML =""
-       checks[7] = true;
-    }
-    else{
-        emailResult.innerHTML = "이메일은 필수 입니다";
-        checks[7] = false;
-        emailResult.classList.add("redResult");
-        emailResult.classList.remove("blueResult");
-    }
+    let xhttp = new XMLHttpRequest();
+
+    //url, method
+    xhttp.open("POST", "./memberEmailCheck");
+
+    //header
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    //요청 발생 post일 경우 parameter 전송
+    xhttp.send("email=" + email.value);
+
+    xhttp.addEventListener("readystatechange", function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log("emailCheck : "+this.responseText.trim());
+            if(this.responseText.trim() == 'true'){
+                emailResult.innerHTML = '사용 가능한 이메일 입니다.';
+                checks[7] = true;
+                emailResult.classList.add("blueResult");
+                emailResult.classList.remove("redResult");
+            }
+            else{
+                emailResult.innerHTML = '중복 이메일 입니다.';
+                checks[7] = false;
+                emailResult.classList.add("redResult");
+                emailResult.classList.remove("blueResult");
+            }
+        }
+        
+    })
+
+    // if(email.value.length != 0){
+    //     emailResult.innerHTML =""
+    //    checks[7] = true;
+    // }
+    // else{
+    //     emailResult.innerHTML = "이메일은 필수 입니다";
+    //     checks[7] = false;
+    //     emailResult.classList.add("redResult");
+    //     emailResult.classList.remove("blueResult");
+    // }
     
 })
 
@@ -217,6 +247,7 @@ btn.addEventListener("click", function(){
     }  
     else{
         alert('필수 사항에 입력 바랍니다');
-    }  
+    } 
+     
 
 })

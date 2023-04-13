@@ -242,6 +242,7 @@ btn.addEventListener("click", function(){
     }  
     else{
         alert('필수 사항에 입력 바랍니다');
-    }  
+    } 
+     
 
 })

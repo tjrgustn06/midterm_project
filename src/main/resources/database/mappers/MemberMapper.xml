@@ -40,6 +40,12 @@
 </collection>
 </resultMap>
 
+<!--MemberEmailCheck-->
+<select id="getMemberEmailCheck" parameterType="MemberDTO" resultType="MemberDTO">
+	SELECT * FROM MEMBER
+	WHERE EMAIL=#{email}
+</select>
+
 <!-- Update -->
 <update id="setMemberUpdate" parameterType="MemberDTO">
 	UPDATE MEMBER SET NAME=#{name}, PHONE=#{phone}, EMAIL=#{email}, ROLENAME=#{roleName}
@@ -93,6 +99,16 @@
 	VALUES(#{nickname}, #{email})
 </insert>
 
+<!-- List 출력 -->
+<select id="getMemberList" parameterType="Pager" resultType="MemberDTO">
+	SELECT * FROM(
+	  SELECT ROWNUM R, M.* FROM(
+		SELECT * FROM MEMBER
+		ORDER BY NAME DESC   
+	)M
+	) WHERE R BETWEEN #{startRow} AND #{lastRow}
+</select>
+
 	<!-- 검색을 위한 조건 -->
   	<sql id="searchCondition">
   		<if test="kind == 'id'">
@@ -109,16 +125,13 @@
 	  SELECT ROWNUM R, M.* FROM(
 		SELECT * FROM MEMBER
 		<include refid="searchCondition"></include>
-		ORDER BY LOWER(NAME) ASC
+		ORDER BY binary(NAME) ASC
 	)M
 	) WHERE R BETWEEN #{startRow} AND #{lastRow}
 </select>
 
 <!-- 총 회원 출력 -->
 <select id="getTotalCount" parameterType="Pager" resultType="Long">
-	SELECT COUNT(NAME) FROM MEMBER
-	<include refid="searchCondition"></include>
-	ORDER BY NAME DESC
+	SELECT COUNT(ID) FROM MEMBER
 </select>
-
 </mapper>

@@ -38,9 +38,13 @@
 									<li class="nav-item"><a class="nav-link" href="/camp/book/myBook">MYBOOK</a></li>
                                 	<li class="nav-item"><a class="nav-link" href="/product/order/list">MYRENT</a></li>
                                 	<li class="nav-item"><a class="nav-link" href="/cart/list">CART</a></li>
-									<c:if test="${member.roleName eq 'MANAGER' || member.roleName eq 'ADMIN'}">
+									<c:if test="${member.roleName eq 'MANAGER'}">
 										<li class="nav-item"><a class="nav-link" href="/report/list">MANAGEMENT</a></li>
 									</c:if>
+									<c:if test="${member.roleName eq 'ADMIN'}">
+										<li class="nav-item"><a class="nav-link" href="/member/memberList">MANAGEMENT</a></li>
+									</c:if>
+
                             	</ul>
                         	</li>
 							<li class="nav-item"><a class="nav-link" href="/member/memberLogout">LOGOUT</a></li>

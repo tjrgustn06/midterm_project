@@ -65,14 +65,14 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <div class="page-breadcrumb bg-white">
+            <!-- <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Dashboard</h4>
                     </div>
-                </div>
+                </div> -->
                 <!-- /.col-lg-12 -->
-            </div>
+            <!-- </div> -->
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -117,6 +117,7 @@
                                     <thead>
                                        <tr>
 											<th scope="col">신고 번호</th>
+											<th scope="col">신고 유형</th>
 											<th scope="col">신고 사유</th>
 											<th scope="col">신고자</th>
 											<th scope="col">글 내용</th>
@@ -129,6 +130,7 @@
                                      	<c:forEach items="${list}" var="dto" varStatus="i">
 											<tr>
                                                 <td>${dto.reportNum}</td>
+                                                <td>${dto.reportType}</td>
                                                 <td>${dto.reportContents}</td>
                                                 <td>${dto.reporter}</td>
                                                 <td id="reportedContents${dto.reportNum}">
@@ -198,25 +200,25 @@
 									<nav aria-label="Page navigation example">
 									  <ul class="pagination justify-content-center">
 									   <li class="page-item ${pager.before ? 'disabled':''}">
-									      <a class="page-link" aria-label="Previous" href="./memberList?page=1">
+									      <a class="page-link" aria-label="Previous" href="./list?page=1&reportResult=${pager.reportResult}">
 									      	<span aria-hidden="true">&laquo;</span>
 									      </a>
 									   	</li>
 									    <li class="page-item ${pager.before ? 'disabled':''}">
-						   			      <a class="page-link" aria-label="Previous" href="./memberList?page=${pager.startNum-1}">
+						   			      <a class="page-link" aria-label="Previous" href="./list?page=${pager.startNum-1}&reportResult=${pager.reportResult}">
 									      	<span aria-hidden="true">&lsaquo;</span>
 									      </a>
 									   	</li>
 									   	<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-									    <li class="page-item"><a class="page-link" href="./memberList?page=${i}">${i}</a></li>
+									    <li class="page-item"><a class="page-link" href="./list?page=${i}&reportResult=${pager.reportResult}">${i}</a></li>
 									    </c:forEach>
 									    <li class="page-item ${pager.after ? 'disabled':''}">
-						   			      <a class="page-link" aria-label="Previous" href="./memberList?page=${pager.lastNum+1}">
+						   			      <a class="page-link" aria-label="Previous" href="./list?page=${pager.lastNum+1}&reportResult=${pager.reportResult}">
 									      	<span aria-hidden="true">&rsaquo;</span>
 									      </a>
 									   	</li>
 						 			    <li class="page-item ${pager.after ? 'disabled':''}">
-						   			      <a class="page-link" aria-label="Previous" href="./memberList?page=${pager.totalPage}">
+						   			      <a class="page-link" aria-label="Previous" href="./list?page=${pager.totalPage}&reportResult=${pager.reportResult}">
 									      	<span aria-hidden="true">&raquo;</span>
 									      </a>
 									   	</li>
@@ -226,17 +228,20 @@
 								
 								<!-- 검색창 -->
 								<div class="row">
-									<form class="row col-md-7 mx-auto" action="./memberList" method="get">
+									<form class="row col-md-7 mx-auto" action="./list" method="get">
 										<div class="col-auto">
 											<label for="kind" class="visually-hidden">Kind</label> 
 											<select class="form-select" name="kind" id="kind" aria-label="Default select example">
-												<option value="name" ${pager.kind eq 'name' ? 'selected' : ''}>회원 이름</option>
-												<option value="id" ${pager.kind eq 'id' ? 'selected' : ''}>회원 아이디</option> </select>						
+												<option value="reportType" ${pager.kind eq 'reportType' ? 'selected' : ''}>신고유형</option>
+												<option value="reportContents" ${pager.kind eq 'reportContents' ? 'selected' : ''}>신고 사유</option> 
+												<option value="reporter" ${pager.kind eq 'reporter' ? 'selected' : ''}>신고자</option> 
+                                            </select>						
 										</div>
 										<div class="col-auto">
 											<label for="search" class="visually-hidden">Search</label>
 											<input type="text" class="form-control" id="search" name="search" placeholder="검색어를 입력하세요">
 										</div>
+                                            <input type="hidden" name="reportResult" value="${pager.reportResult}">
 										<div class="col-auto">
 											<button type="submit" class="btn btn-success mb-3">검색</button>
 										</div>

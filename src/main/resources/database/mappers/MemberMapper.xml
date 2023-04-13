@@ -109,12 +109,6 @@
 	) WHERE R BETWEEN #{startRow} AND #{lastRow}
 </select>
 
-<!-- 총 회원 출력 -->
-<select id="getTotalCount" parameterType="Pager" resultType="Long">
-	SELECT COUNT(ID) FROM MEMBER
-</select>
-
-
 	<!-- 검색을 위한 조건 -->
   	<sql id="searchCondition">
   		<if test="kind == 'id'">
@@ -136,5 +130,8 @@
 	) WHERE R BETWEEN #{startRow} AND #{lastRow}
 </select>
 
-
+<!-- 총 회원 출력 -->
+<select id="getTotalCount" parameterType="Pager" resultType="Long">
+	SELECT COUNT(ID) FROM MEMBER
+</select>
 </mapper>

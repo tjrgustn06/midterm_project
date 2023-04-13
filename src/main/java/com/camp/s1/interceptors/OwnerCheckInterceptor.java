@@ -35,11 +35,12 @@ public class OwnerCheckInterceptor extends HandlerInterceptorAdapter {
 		uri = uri.substring(1,uri.lastIndexOf("/"));
 		BbsDTO bbsDTO = new BbsDTO();
 		bbsDTO.setNum(num);
+		System.out.println(uri);
 		if(uri.equals("notice")) {
 			bbsDTO = noticeDAO.getBoardDetail(bbsDTO);
 		} else if(uri.equals("qna")) {
 			bbsDTO = qnaDAO.getBoardDetail(bbsDTO);
-		} else if(uri.equals("camp")) {
+		} else if(uri.equals("camp/review")) {
 			bbsDTO = campReviewDAO.getBoardDetail(bbsDTO);
 		} else {
 			bbsDTO = productReviewDAO.getBoardDetail(bbsDTO);

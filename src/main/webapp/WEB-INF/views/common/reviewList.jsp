@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="col-6 offset-md-3">
+<div class="col-8 mx-auto">
 		
 		
 			<c:choose>
 			  		<c:when test="${not empty reviewList}">
-					<div>
-						<p>평점 평균</p>
-						<div class="starRate" id="starAvg">
+					<div class="d-flex justify-content-end" style="margin-right: 10px;">
+						<p>평점 평균 :&nbsp;</p>
+						<div class="starRate" id="starAvg" style="display: none;">
 							<span class="starMark">★</span>
 							<span class="starMark">★</span>
 							<span class="starMark">★</span>
@@ -19,7 +19,7 @@
 						<p id="reviewAvg"></p>
 					</div>
 					  	<c:forEach items="${reviewList}" var="dto">
-							<div>
+							<div class="my-2">
 								<div class="d-flex">
 									<span class="flex-shrink-0" id="comments${dto.num}"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></span>
 									<span class="me-auto p-2 fw-bold" id="reviewWriter">${dto.writer}</span>

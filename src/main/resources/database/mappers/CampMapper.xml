@@ -10,7 +10,7 @@
   	<sql id="searchCondition">
   		<where>
   			<!-- CAMPNUM = #{campNum} AND / site 옵션 쓸 때 써야하려나 -->
-	  		<if test="kind=='name'">
+	  		<if test="kind=='campName'">
 	  			CAMPNAME LIKE '%' || #{search} || '%'
 	  		</if>
 			<if test="kind=='phone'">
@@ -19,10 +19,12 @@
 	  		<if test="kind=='address'">
 	  			ADDRESS LIKE '%' || #{search} || '%'
 	  		</if>
-	  		<if test="kind=='doName'">
-	  			DONAME LIKE '%' || ${search} || '%'
+	  		<!-- <if test="kind=='doName'">
+	  			DONAME LIKE '%' || #{search} || '%'
 	  		</if>
-	  		<if test=""kind=='do"></if>
+	  		<if test="kind=='sigunguName'">
+	  			SIGUNGUNAME LIKE '%' || #{search} || '%'
+	  		</if> -->
   		</where>
   	</sql>
   	

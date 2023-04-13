@@ -39,7 +39,8 @@
 					<option value="campName" ${pager.kind eq 'campName'? 'selected':''}>캠핑장명</option>
 					<option value="phone" ${pager.kind eq 'phone'? 'selected':''}>전화번호</option>
 					<option value="address" ${pager.kind eq 'address'? 'selected':''}>주소</option>
-					<%-- <option value="contents" ${pager.kind eq 'contents'? 'selected':''}>상세내용</option> --%>
+					<!-- <option value="doName" ${pager.kind eq 'doName'? 'selected':''}>시/도</option>
+					<option value="sigunguName" ${pager.kind eq 'sigunguName'? 'selected':''}>시/군/구</option> -->
 				</select>
 			</div>
 			<div class="col-5">

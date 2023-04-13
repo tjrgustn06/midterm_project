@@ -248,6 +248,25 @@
 		DELETE THUMBNAIL WHERE THUMBNUM=#{thumbNum}
 	</delete>
 	
+	<!-- layout -->
+	<!-- layoutDetail -->
+	<select id="getLayoutDetail" parameterType="CampDTO" resultType="LayoutDTO">
+		SELECT * FROM LAYOUT WHERE CAMPNUM=#{campNum}
+	</select>
+	
+	<!-- layoutAdd -->
+	<insert id="setLayoutAdd" parameterType="LayoutDTO">
+		<selectKey keyProperty="layoutNum" order="BEFORE" resultType="Long">
+			SELECT CAMPSEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO LAYOUT(LAYOUTNUM, CAMPNUM, LAYOUTNAME)
+		VALUES(#{layoutNum}, #{campNum}, #{layoutName})
+	</insert>
+	
+	<!-- layoutDelete -->
+	
+	
+	
 	<!-- board용 -->
 	<select id="getSigunguNameList" parameterType="CampDTO" resultType="CampDTO">
 		SELECT DISTINCT SIGUNGUNAME FROM CAMPINFO

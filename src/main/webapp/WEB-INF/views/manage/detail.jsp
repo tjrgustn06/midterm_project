@@ -85,14 +85,14 @@
 					
 					<div class="row col-md-8 mx-auto">
 							<div class="row mb-3">
-							  <label for="writer" class="col-sm-2 col-form-label">신고자</label>
+							  <label for="reporter" class="col-sm-2 col-form-label">신고자</label>
 							  <div class="col-sm-10">
 							  	<p>${dto.reporter}</p>
 							  </div>
 							</div>
 							
 							<div class="row mb-3">
-							  <label for="title" class="col-sm-2 col-form-label">신고유형</label>
+							  <label for="reportType" class="col-sm-2 col-form-label">신고유형</label>
 								  <div class="col-sm-10">
 								  	<p>${dto.reportType}</p>
 								  </div>

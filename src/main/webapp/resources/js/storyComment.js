@@ -310,7 +310,7 @@ function getUpdateForm(commentNum) {
     
     let htmls = '<section class="mb-5 mx-2" id="updateForm'+commentNum+'">';
     htmls += '<div class="card bg-light">';
-    htmls += '<div class="d-flex">';
+    htmls += '<div class="d-flex mt-2">';
     htmls += '<span class="me-auto p-2 fw-bold">'+writer;
     htmls += '</span>';
     htmls += '<span class="p-2">';
@@ -324,7 +324,7 @@ function getUpdateForm(commentNum) {
     htmls += '<textarea class="form-control mb-3" rows="3" id="commentContents'+commentNum+'" name="contents" placeholder="댓글 입력">'+text+'</textarea>' ;
     htmls += '</div>';
     htmls += '<div class="mb-3">';
-    htmls += '<button class="btn btn-outline-primary col-auto offset-md-11 commentUpdate" data-comment-num="'+commentNum+'">수정</button>';
+    htmls += '<button class="btn btn-outline-primary col-auto offset-md-10 commentUpdate" data-comment-num="'+commentNum+'">수정</button>';
     htmls += '</div></section>';
             
 
@@ -430,7 +430,7 @@ function getSubCommentForm(commentNum) {
     let htmls = '<section class="mb-5 mx-2" id="subCommentForm'+commentNum+'">';
     htmls += '<div class="card bg-light">';
     htmls += '<input class="replyWriter" type="hidden" name="writer" value="${member.id}">';
-    htmls += '<div class="d-flex">';
+    htmls += '<div class="d-flex mt-2">';
     htmls += '<span class="me-auto p-2 fw-bold">'+writer;
     htmls += '</span>';
     htmls += '<span class="p-2">';
@@ -444,7 +444,7 @@ function getSubCommentForm(commentNum) {
     htmls += '<textarea class="form-control mb-3" rows="3" id="subCommentContents'+commentNum+'" name="contents" placeholder="댓글 입력"></textarea>' ;
     htmls += '</div>';
     htmls += '<div class="mb-3">';
-    htmls += '<button class="btn btn-outline-primary col-auto offset-md-11 subCommentAdd" data-comment-num="'+commentNum+'">작성</button>';
+    htmls += '<button class="btn btn-outline-primary col-auto offset-md-10 subCommentAdd" data-comment-num="'+commentNum+'">작성</button>';
     htmls += '</div></section>';
 
     $('#contents'+commentNum).after(htmls);

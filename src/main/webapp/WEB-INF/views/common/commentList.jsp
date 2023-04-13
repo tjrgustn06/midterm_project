@@ -6,18 +6,24 @@
 
 			<c:forEach var="dto" items="${commentList}">
 		
-							<div id="${boardName}Comment${dto.num}"></div>
+							<div  id="${boardName}Comment${dto.num}"></div>
 							<!-- Comment with nested comments-->
-							<div class="d-flex mb-4 offset-md-1">
+							<div class="d-flex mb-4">
 							<c:if test="${not empty dto.contents}">
 							<c:forEach begin="1" end="${dto.depth}" varStatus="s">
 											<div class="d-flex mt-2">
-												<div class="flex-shrink-0" style="width: 50px; height: 50px;"></div>
+												<div class="flex-shrink-0" style="width: 60px; height: 50px;"></div>
 											</div>
 									</c:forEach> 
 								<!-- Parent comment-->
 								<div class="flex-shrink-0" ><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-								<div class="ms-2 col-md-7">
+								<c:if test="${dto.depth eq 0}">
+									<div class="ms-2 col-md-10">
+								</c:if>
+								<c:if test="${dto.depth ne 0}">
+									<div class="ms-2 col-md-9">
+								</c:if>
+
 									<div class="d-flex">
 										<span class="me-auto p-2 fw-bold">
 											${dto.writer}
@@ -64,13 +70,11 @@
 										</span>
 									</div>
 									<div id="contents${dto.commentNum}">${dto.contents}</div>
-						
-						
 								</div>
 							</c:if>
 							<c:if test="${empty dto.contents && dto.depth eq 0}">
 								<div class="flex-shrink-0" ><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-								<div class="ms-2 col-md-7">
+								<div class="ms-2 col-md-10">
 								
 									<div class="d-flex">
 										

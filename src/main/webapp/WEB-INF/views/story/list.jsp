@@ -9,17 +9,38 @@
 <title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <style>
-	.imageBoxOther{
-    width: 25rem;
-    height: 25rem;
-    overflow: hidden;
-    margin: 0 auto;
+	.imageBoxList{
+		width: 24rem;
+		height: 14rem;
+		/* width: 40%;
+		height: 35%; */
 	}
-	
+
+	.imageMain{
+		width: 54rem;
+		height: 32rem;
+		/* width: 80%;
+		height: 80%; */
+	}
+
+	.imageBoxIntro{
+		width: 15rem;
+		height: 15rem;
+		overflow: hidden;
+		margin: 0 auto;
+	}
+
+	.imageBoxOther{
+		width: 20rem;
+		height: 20rem;
+		overflow: hidden;
+		margin: 0 auto;
+	}
+
 	.innerImage{
-	    width: 100%;
-	    /* height: 80%; */
-	    object-fit: cover;
+		width: 46rem;
+		height: 30rem;
+		object-fit: cover;
 	}
 </style>
 <script>
@@ -44,19 +65,17 @@
 	</section>
 	<!--================Banner Area =================-->
 
-	<div class="containermy-3">
+	<div class="container col-lg-9 my-3">
 	
-		<div class="row mb-4 border-bottom border-info">
-			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2" id="boardName" data-board-id="${boardId}" data-board-name="${boardName}">${boardName} 페이지</h1><br>
-		</div>
+		<div class="col-md-7 mx-auto text-center pb-3 fs-2" id="boardName" data-board-id="${boardId}" data-board-name="${boardName}"></div><br>
 		
 		<div id="storyList">
 
 		</div>
 
 		<div class="row">
-			<div class="col-md-8" style="width: 75%; height : 50px; bottom: 0px; position: fixed; left: 50%; transform: translateX(-50%)">
-				<a href="./add" class="btn btn-primary btn-lg col-md-12" style="height: 100%" >스토리 쓰기</a>
+			<div class="col-md-8" style="width: 50%; height : 50px; bottom: 0px; position: fixed; left: 50%; transform: translateX(-50%)">
+				<a href="./add" class="genric-btn success mx-auto col-lg-12" style="height: 100%" >스토리 쓰기</a>
 			</div>
 		</div>
 	

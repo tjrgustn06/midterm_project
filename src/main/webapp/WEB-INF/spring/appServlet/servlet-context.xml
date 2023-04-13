@@ -27,6 +27,7 @@
 	<beans:bean class="com.camp.s1.interceptors.ManagerCheckInterceptor" id="managerCheckInterceptor"></beans:bean>
 	<beans:bean class="com.camp.s1.interceptors.NotMemberCheckInterceptor" id="notMemberCheckInterceptor"></beans:bean>
 	<beans:bean class="com.camp.s1.interceptors.OwnerCheckInterceptor" id="ownerCheckInterceptor"></beans:bean>
+	<beans:bean class="com.camp.s1.interceptors.CommentOwnerCheckInterceptor" id="commentOwnerCheckInterceptor"></beans:bean>
 	
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"></beans:property>
@@ -106,23 +107,25 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/qnaComment/delete"/>
-			<mapping path="/qnaComment/update"/>
 			<mapping path="/qna/delete"/>
 			<mapping path="/qna/update"/>
 			<mapping path="/qna/boardFileDelete"/>
 			<mapping path="/story/delete"/>
 			<mapping path="/story/update"/>
 			<mapping path="/story/boardFileDelete"/>
-			<mapping path="/storyComment/update"/>
-			<mapping path="/storyComment/delete"/>
 			<mapping path="/camp/review/update"/>
 			<mapping path="/camp/review/delete"/>
 			<mapping path="/product/review/update"/>
 			<mapping path="/product/review/delete"/>
 			<beans:ref bean="ownerCheckInterceptor"/>
 		</interceptor>
-		
+		<interceptor>
+			<mapping path="/qnaComment/delete"/>
+			<mapping path="/qnaComment/update"/>
+			<mapping path="/storyComment/update"/>
+			<mapping path="/storyComment/delete"/>
+			<beans:ref bean="commentOwnerCheckInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 	<context:component-scan base-package="com.camp.s1" />

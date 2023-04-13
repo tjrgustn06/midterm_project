@@ -31,7 +31,7 @@
 	</beans:bean>
 	
 	<interceptors>
-		<interceptor>
+		<!-- <interceptor>
 			<mapping path="/notice/*"/>
 			<mapping path="/qna/*"/>
 			<mapping path="/story/*"/>
@@ -64,7 +64,7 @@
 			<exclude-mapping path="/product/detail"/>
 			<exclude-mapping path="/product/review/*"/>
 			<beans:ref bean="memberCheckInterceptor"/>
-		</interceptor>
+		</interceptor> -->
 		<interceptor>
 			<mapping path="/member/memberList"/>
 			<beans:ref bean="adminCheckInterceptor"/>

@@ -24,8 +24,8 @@
     <link href="../resources/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../resources/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
     <!-- Custom CSS -->
-    <link href="../resources/css/style_manage.min.css" rel="stylesheet">
     <link href="../resources/css/style.min.css" rel="stylesheet">
+    <link href="../resources/css/style_manage.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -87,7 +87,7 @@
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
                             <div class="d-md-flex mb-3">
-                                <h3 class="box-title mb-0">회원 등급 관리</h3>
+                                <h3 class="box-title mb-0">신고 내역 관리</h3>
                                 <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
                   <!--                   <select class="form-select shadow-none row border-top">
                                         <option>March 2021</option>
@@ -133,20 +133,22 @@
                                                 <td>${dto.reportType}</td>
                                                 <td>${dto.reportContents}</td>
                                                 <td>${dto.reporter}</td>
-                                                <td id="reportedContents${dto.reportNum}">
-                                                    <script>
-                                                        $(function(){
-                                                            let contents = '${dto.reportedContents}';
-                                                            let maxStr = 10;
+                                                <td>
+                                                    <a href="./detail?reportNum=${dto.reportNum}" id="reportedContents${dto.reportNum}">
+                                                        <script>
+                                                            $(function(){
+                                                                let contents = '${dto.reportedContents}';
+                                                                let maxStr = 7;
 
-                                                            if(contents.length >= maxStr) {
-                                                                contents = contents.substring(0,maxStr)+' ...';
-                                                            }
+                                                                if(contents.length >= maxStr) {
+                                                                    contents = contents.substring(0,maxStr)+'...';
+                                                                }
 
-                                                            $('#reportedContents'+'${dto.reportNum}').text(contents);
-                                                        })
-                                                        
-                                                    </script>
+                                                                $('#reportedContents'+'${dto.reportNum}').text(contents);
+                                                            })
+                                                            
+                                                        </script>
+                                                    </a>
                                                 </td>
                                                 <td>${dto.reportedUser}</td>
                                                 <td id="result${dto.reportNum}">

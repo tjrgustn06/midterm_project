@@ -39,7 +39,7 @@
 	<!-- 대표사진 + 설명 div -->
 		<!-- 썸네일 사진 추가 -->
 		<div class="d-flex row my-3">
-			<div class="row imageMain my-3 mx-auto">
+			<div class="row pic my-3 mx-auto">
 				<!-- 사진이 없는경우 empty.jpg 표시 -->
 				<h5><i class="fa-solid fa-camera fa-sm"></i> 대표 사진 등록</h5>
 				<div id="thumbnailImage" class="row">
@@ -301,8 +301,8 @@
 						<hr>
 
 						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
 						<div class="row layout my-3 mx-auto">
-							<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
 							<div id="layoutImage" class="row">
 								<div class="row mb-3">
 									<input type="file" id="layout" name="layoutFile" class="form-control">

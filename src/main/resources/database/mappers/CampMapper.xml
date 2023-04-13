@@ -264,7 +264,9 @@
 	</insert>
 	
 	<!-- layoutDelete -->
-	
+	<delete id="setLayoutDelete" parameterType="Long">
+		DELETE LAYOUT WHERE LAYOUTNUM=#{layoutNum}
+	</delete>
 	
 	
 	<!-- board용 -->

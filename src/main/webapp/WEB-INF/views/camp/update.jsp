@@ -339,6 +339,29 @@
 						
 						<hr>
 
+
+						
+
+						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+						<div class="row layout my-3 mx-auto">
+							<!-- 원래 시설배치도 표시 -->
+							<c:choose>
+								<c:when test="${not empty dto.layoutDTO}">
+									<img alt="" src="../resources/upload/camp/layout/${dto.layoutDTO.layoutName}">
+								</c:when>
+								<c:otherwise>
+									<img alt="" src="../resources/images/empty.jpg">
+								</c:otherwise>
+							</c:choose>
+							<!-- 시설배치도 추가항목 -->
+							<div id="layoutImage" class="row">
+								<div class="row mb-3">
+									<input type="file" id="layout" name="layoutFile" class="form-control">
+								</div>
+							</div>
+						</div>
+
 						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
 						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
 							<div class="row mb-3">

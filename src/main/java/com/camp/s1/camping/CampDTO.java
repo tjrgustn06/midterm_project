@@ -14,24 +14,21 @@ public class CampDTO {
 	private String induty;
 	private String doName;
 	private String sigunguName;
-	private Double mapX;
-	private Double mapY;
 	private String glampFacility;
 	private String caravFacility;
 	private String service;
 	private String posblFacility;
-	private String theme;
 	private String petAllow;
 	private String useInfo;
 	private String homePage;
 	private String thumbnail;
-	private String layout;
 	private String regDate; //date
 	private String modiDate; //date
 	private Long hit;
 	private List<CampFileDTO> campFileDTOs;
 	private List<CampSiteDTO> campSiteDTOs;
 	private ThumbnailDTO thumbnailDTO;
+	private LayoutDTO layoutDTO;
 	
 	public CampDTO() {
 		
@@ -117,22 +114,6 @@ public class CampDTO {
 		this.sigunguName = sigunguName;
 	}
 
-	public Double getMapX() {
-		return mapX;
-	}
-
-	public void setMapX(Double mapX) {
-		this.mapX = mapX;
-	}
-
-	public Double getMapY() {
-		return mapY;
-	}
-
-	public void setMapY(Double mapY) {
-		this.mapY = mapY;
-	}
-
 	public String getGlampFacility() {
 		return glampFacility;
 	}
@@ -163,14 +144,6 @@ public class CampDTO {
 
 	public void setPosblFacility(String posblFacility) {
 		this.posblFacility = posblFacility;
-	}
-
-	public String getTheme() {
-		return theme;
-	}
-
-	public void setTheme(String theme) {
-		this.theme = theme;
 	}
 
 	public String getPetAllow() {
@@ -205,14 +178,6 @@ public class CampDTO {
 		this.thumbnail = thumbnail;
 	}
 
-	public String getLayout() {
-		return layout;
-	}
-
-	public void setLayout(String layout) {
-		this.layout = layout;
-	}
-
 	public String getRegDate() {
 		return regDate;
 	}
@@ -230,9 +195,6 @@ public class CampDTO {
 	}
 
 	public Long getHit() {
-		if(this.hit==null) {
-			this.hit = 0L;
-		}
 		return hit;
 	}
 
@@ -263,5 +225,13 @@ public class CampDTO {
 	public void setThumbnailDTO(ThumbnailDTO thumbnailDTO) {
 		this.thumbnailDTO = thumbnailDTO;
 	}
+
+	public LayoutDTO getLayoutDTO() {
+		return layoutDTO;
+	}
+
+	public void setLayoutDTO(LayoutDTO layoutDTO) {
+		this.layoutDTO = layoutDTO;
+	}	
 	
 }

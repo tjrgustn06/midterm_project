@@ -304,6 +304,19 @@
 							<c:otherwise><li>*안내사항이 없습니다.</li></c:otherwise>
 						</c:choose>
 					<hr>
+
+					<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+					<div class="row layout my-3 mx-auto">		
+						<c:choose>
+							<c:when test="${not empty dto.layoutDTO}">
+								<img alt="" src="../resources/upload/camp/layout/${dto.layoutDTO.layoutName}">
+							</c:when>
+							<c:otherwise>
+								<img alt="" src="../resources/images/empty.jpg">
+							</c:otherwise>
+						</c:choose>
+					</div>
 						
 					<!-- 요금구분 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트별 요금 안내</h5>
@@ -350,16 +363,6 @@
 					</div>
 					<hr>
 
-					<!-- 시설배치도 - book페이지에서 보여주기 -->
-					<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-						<div class="row mb-3">
-							<c:if test="${not empty dto.campFileDTOs}">
-								<div class="facilityImage">
-									<img alt="" src="../resources/upload/camp/-">
-								</div>
-							</c:if>
-						</div>
-					<hr> -->
 				</div> <!-- 이용안내 영역 종료 -->
 				</c:if>
 

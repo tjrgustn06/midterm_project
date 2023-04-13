@@ -68,7 +68,7 @@ public class CampService {
 	}
 	
 	//add
-	public int setCampAdd(CampDTO campDTO, MultipartFile[] files, MultipartFile thumbFile, HttpSession session) throws Exception{
+	public int setCampAdd(CampDTO campDTO, MultipartFile[] files, MultipartFile thumbFile, MultipartFile layoutFile, HttpSession session) throws Exception{
 		//캠프장 하나 추가
 		int result = campDAO.setCampAdd(campDTO);
 		
@@ -114,7 +114,7 @@ public class CampService {
 			//1. file을 HDD에 저장.
 			String savePath = "resources/upload/camp/thumbnail";
 			String thumbRealPath = session.getServletContext().getRealPath(savePath);
-			System.out.println("thumbFiles: "+thumbRealPath);
+			//System.out.println("thumbFiles: "+thumbRealPath);
 			String thumbName = fileManager.fileSave(thumbFile, thumbRealPath);
 			
 			//2. DB에 저장
@@ -127,11 +127,28 @@ public class CampService {
 		}
 		//thumbFile end
 		
+		//시설배치도 저장 - layoutFile
+		if(layoutFile.getSize()!=0) {
+			//1. file을 HDD에 저장.
+			String saveLayoutPath = "resources/upload/camp/layout";
+			String layoutRealPath = session.getServletContext().getRealPath(saveLayoutPath);
+			//System.out.println("thumbFiles: "+layoutRealPath);
+			String layoutName = fileManager.fileSave(layoutFile, layoutRealPath);
+			
+			//2. DB에 저장
+			LayoutDTO layoutDTO = new LayoutDTO();
+			layoutDTO.setCampNum(campDTO.getCampNum());
+			layoutDTO.setLayoutName(layoutName);
+			
+			result = campDAO.setLayoutAdd(layoutDTO);
+		}
+		//layoutFile end
+		
 		return result;
 	}
 		
 	//update
-	public int setCampUpdate(CampDTO campDTO, MultipartFile[] files, MultipartFile thumbFile, HttpSession session) throws Exception{
+	public int setCampUpdate(CampDTO campDTO, MultipartFile[] files, MultipartFile thumbFile, MultipartFile layoutFile, HttpSession session) throws Exception{
 		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트(CampDTO-campNum), 2.썸네일 업데이트(CampDTO-thumbnailDTO-thumbNum), 3.파일 업데이트(CampDTO-fileDTOs-fileNum), 4.사이트 업데이트(CampDTO-siteDTOs-areaNum)
 		//서비스에서 처리해야할 내용
 		//1.글내용 업데이트 메서드 실행, 2.썸네일 업데이트 메서드 실행, 3.파일 업데이트 메서드 실행, 4.사이트 업데이트 메서드 실행
@@ -151,6 +168,11 @@ public class CampService {
 			thumbNum = campDAO.getThumbnailDetail(campDTO).getThumbNum();
 		}
 		
+		//layout 번호 조회
+		Long layoutNum = 0L;
+		if(campDAO.getLayoutDetail(campDTO)!=null) {
+			layoutNum = campDAO.getLayoutDetail(campDTO).getLayoutNum();
+		}
 		
 		//글내용 업데이트
 		int result = campDAO.setCampUpdate(campDTO);
@@ -213,6 +235,28 @@ public class CampService {
 				thumbnailDTO.setThumbName(thumbName);
 				
 				result = campDAO.setThumbnailAdd(thumbnailDTO);	
+			}
+			
+			//layoutFile(삭제 및 추가)
+			if(layoutFile.getSize()!=0) { //layoytFile의 크기가 0인경우 기존 썸네일을 삭제하지 않고 그대로 냅둠. 크기가 0이 아닌경우 기존 썸네일 삭제 + 새 썸네일 추가
+				//기존 레이아웃 삭제 - 레이아웃번호(파일)가 있는경우 지우고 없으면 넘어가기.
+				if(layoutNum!=null || layoutNum!=0) {
+					result = campDAO.setLayoutDelete(layoutNum);
+				}
+				
+				//새 레이아웃 저장
+				//1. file을 HDD에 저장.
+				String saveLayoutPath = "resources/upload/camp/layout";
+				String layoutRealPath = session.getServletContext().getRealPath(saveLayoutPath);
+				//System.out.println("thumbFiles: "+layoutRealPath);
+				String layoutName = fileManager.fileSave(layoutFile, layoutRealPath);
+				
+				//2. DB에 저장
+				LayoutDTO layoutDTO = new LayoutDTO();
+				layoutDTO.setCampNum(campDTO.getCampNum());
+				layoutDTO.setLayoutName(layoutName);
+				
+				result = campDAO.setLayoutAdd(layoutDTO);
 			}
 		}
 		return result;

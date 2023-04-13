@@ -50,7 +50,7 @@
 			
 			<h3>글 내용 : ${dto.contents}</h3>
 			
-			<c:if test="${!empty dto.boardFileDTOs}">
+			<c:if test="${not empty dto.boardFileDTOs}">
 				<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
 					<img src="../resources/upload/${boardName}/${fileDTO.fileName}">
 					<a href="./fileDown?fileNum=${fileDTO.fileNum}">${fileDTO.oriName}</a>

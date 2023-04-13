@@ -140,8 +140,8 @@
 															</script>
 														</span>
 													</div>
-													<c:if test="${!empty dto.boardFileDTOs}">
-														<div id="carouselExampleInterval${dto.num}" class="carousel slide" data-bs-ride="carousel">
+													<c:if test="${not empty dto.boardFileDTOs}">
+														<div id="carouselModalInterval${dto.num}" class="carousel slide" data-bs-ride="carousel">
 															<div class="carousel-inner">
 																<c:forEach items="${dto.boardFileDTOs}" var="fileDTO" varStatus="i">
 																	<c:if test="${i.first}">
@@ -156,17 +156,18 @@
 																	</c:if>
 								
 																</c:forEach>
+																<button class="carousel-control-prev" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselModalInterval${dto.num}" data-bs-slide="prev">
+																	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+																	<span class="visually-hidden">Previous</span>
+																</button>
+																<button class="carousel-control-next" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselModalInterval${dto.num}" data-bs-slide="next">
+																	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+																	<span class="visually-hidden">Next</span>
+																</button>
 															</div>
 													</div>
 													
-														<button class="carousel-control-prev" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="prev">
-															<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-															<span class="visually-hidden">Previous</span>
-														</button>
-														<button class="carousel-control-next" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="next">
-															<span class="carousel-control-next-icon" aria-hidden="true"></span>
-															<span class="visually-hidden">Next</span>
-														</button>
+
 													
 												
 												</c:if>

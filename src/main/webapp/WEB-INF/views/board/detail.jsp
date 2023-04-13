@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <c:import url="../template/common_css.jsp"></c:import>
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>The Camp</title>
 </head>
 <body>
@@ -31,38 +33,58 @@
 	</div>
 </section>
 <!--================Breadcrumb Area =================-->
-<div class="container-fluid">
-	
-	<div class="row">
-			<div class="row" id="boardName" data-board-name="${boardName}" data-board-id="${boardId}">
-				<h1> ${boardName} Detail Page</h1>
-			</div>
+<div class="container col-lg-9 my-5">
+	<!-- ============================================================== -->
+	<!-- RECENT SALES -->
+	<!-- ============================================================== -->
+
+
+
+		
+		<div class="row col-md-12 mx-auto">
+
+				<div class="row mb-3">
+					<div class="col-sm-10">
+						<h2>${dto.title}</h2>
+					</div>
+				</div>
+				
+				<div class="row mb-3">
+				  <label for="writer" class="col-sm-2 col-form-label">작성자</label>
+				  <div class="col-sm-10">
+					<c:choose>
+						<c:when test="${boardName eq 'notice'}">
+							<h3>관리자</h3>	
+						</c:when>
+						<c:otherwise>
+							<p>${dto.writer}</p>
+						</c:otherwise>
+					</c:choose>
+				  </div>
+				</div>
+				
+
+				
+				<div class="mb-5">
+				  <label for="reportedContents" class="form-label">글 내용</label>
+				  <p name="contents" id="contents">${dto.contents}</p>
+				</div>
+				<hr>
+				
+				
 			
-			<h3>제목 : ${dto.title}</h3>
-			<c:choose>
-				<c:when test="${boardName eq 'notice'}">
-					<h3>작성자 : 관리자</h3>	
-				</c:when>
-				<c:otherwise>
-					<h3>작성자 : ${dto.writer}</h3>
-				</c:otherwise>
-			</c:choose>
-			
-			<h3>글 내용 : ${dto.contents}</h3>
-			
-			<c:if test="${!empty dto.boardFileDTOs}">
-				<c:forEach items="${dto.boardFileDTOs}" var="fileDTO">
-					<img src="../resources/upload/${boardName}/${fileDTO.fileName}">
-					<a href="./fileDown?fileNum=${fileDTO.fileNum}">${fileDTO.oriName}</a>
-				</c:forEach>
-			</c:if>
-	</div>
+
+		</div>
+	<!-- ============================================================== -->
+	<!-- Recent Comments -->
+	<!-- ============================================================== -->
+
 
 	<c:if test="${boardName ne 'notice'}">
-		<div class="my-5 comment">
+		<div class="my-3 comment">
 	  
 			
-			<div class="mb-3">
+		<div class="mb-3">
 				<textarea class="form-control" id="replyContents" rows="3" name="contents" ></textarea>
 			</div>
 			<div class="mb-3">
@@ -96,6 +118,7 @@
 
 	</div>
 </div>
+
 <c:import url="../template/footer.jsp"></c:import>
 	<script src="../resources/js/boardForm.js"></script>
 	<script src="../resources/js/comment.js"></script>

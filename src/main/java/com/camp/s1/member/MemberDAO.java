@@ -38,6 +38,11 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE+"getMemberLogin", memberDTO);
 	}
 	
+	//EmailCheck
+	public MemberDTO getMemberEmailCheck(MemberDTO memberDTO)throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getMemberEmailCheck", memberDTO);
+	}
+	
 	//Update
 	public int setMemberUpdate(MemberDTO memberDTO)throws Exception{
 		

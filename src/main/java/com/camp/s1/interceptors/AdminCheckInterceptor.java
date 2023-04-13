@@ -21,7 +21,7 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 		request.setAttribute("result", "권한이 없습니다.");
-		request.setAttribute("url", "../");
+		request.setAttribute("url", "../../../");
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
 		view.forward(request, response);
 		

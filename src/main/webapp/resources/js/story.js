@@ -9,8 +9,14 @@ function setBoardId(bi) {
 
 
 $('#storyList').on('click', '.btnToggle', function(){
-    $('.boardMenu').hide();
-   $(this).parents('#storyList').find('#boardMenu'+$(this).attr('data-board-num')).slideToggle();
+
+    if($('#boardMenu'+$(this).attr('data-board-num')).is(':visible')) {
+        $('.boardMenu').slideUp();
+    }
+    else {
+        $('.boardMenu').hide();
+        $('#boardMenu'+$(this).attr('data-board-num')).slideDown();
+    }
 })
 
 $('#storyList').on('click', '.delete', function(){

@@ -33,7 +33,6 @@ function reportAdd() {
 
 function reportResult(reportNum, num, commentNum, result) {
 
-    console.log('ddddddd');
     $.ajax({
         type : 'POST',
         url : '/report/result',

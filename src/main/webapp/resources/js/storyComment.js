@@ -89,18 +89,11 @@ $("#"+boardName+'List').on('click','.replyAdd',function(){
         
     board = $(this).parents('#'+boardName+$(this).attr('data-board-num'));
 
-    // let chk = chkValidation(board.find('.replyContents').val());
-
-    // if(!chk) {
-    //     alert("댓글 내용을 입력해주세요");
-    //     return;
-    // }  
-
     let contents = board.find('.replyContents').val();
 
-        num = $(this).attr('data-board-num')
-        
-        setCommentAdd(num, contents, writer, boardId);
+    num = $(this).attr('data-board-num')
+    
+    setCommentAdd(num, contents, writer, boardId);
 })
 
 //댓글 등록 이벤트
@@ -108,21 +101,11 @@ $('#'+boardName+'List').on('keydown','.replyContents', function(e){
     if(e.keyCode === 13) {
         e.preventDefault();
 
-        // let chk = chkValidation($(this).val());
+        let contents = $(this).val();
+        num = $(this).attr('data-board-num')
 
-        // if(!chk) {
-        //     alert("댓글 내용을 입력해주세요");
-        //     return;
-        // }  
-
-  
-            let contents = $(this).val();
-            num = $(this).attr('data-board-num')
+        setCommentAdd(num, contents, writer, boardId);
     
-            setCommentAdd(num, contents, writer, boardId);
-     
-
-        
     }
 })
 
@@ -130,19 +113,11 @@ $('#'+boardName+'List').on('keydown','.replyContents', function(e){
 $('#'+boardName+'List').on('click','.modalReplyAdd', function(e){
     board = $(this).parents('#'+boardName+$(this).attr('data-board-num'));
 
-    // let chk = chkValidation(board.find('.modalReplyContents').val());
+    let contents = board.find('.modalReplyContents').val();
 
-    // if(!chk) {
-    //     alert("댓글 내용을 입력해주세요");
-    //     return;
-    // }  
+    num = $(this).attr('data-board-num')
+    setCommentAdd(num, contents, writer, boardId);
 
-  
-        let contents = board.find('.modalReplyContents').val();
-
-        num = $(this).attr('data-board-num')
-        setCommentAdd(num, contents, writer, boardId);
-    
 
 
 })
@@ -151,20 +126,12 @@ $('#'+boardName+'List').on('click','.modalReplyAdd', function(e){
 $('#'+boardName+'List').on('keydown','.modalReplyContents', function(e){
     if(e.keyCode === 13) {
         e.preventDefault();
+   
+        let contents = $(this).val();
+        num = $(this).attr('data-board-num')
 
-        // let chk = chkValidation($(this).val());
-
-        // if(!chk) {
-        //     alert("댓글 내용을 입력해주세요");
-        //     return;
-        // }  
-
-       
-            let contents = $(this).val();
-            num = $(this).attr('data-board-num')
+        setCommentAdd(num, contents, writer, boardId);
     
-            setCommentAdd(num, contents, writer, boardId);
-       
     }
 
 })

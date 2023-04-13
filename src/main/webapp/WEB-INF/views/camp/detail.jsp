@@ -371,16 +371,16 @@
 				<div class="campMap my-3" id="campMap">
 					<!-- 찾아오시는 길 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5>
-						<!--================Contact Area =================-->
-						<p style="margin-top:-4px">
-							<em class="link">
-								<a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-									혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
-								</a>
-							</em>
-						</p>
-						<div id="map" style="width:100%;height:350px;"></div>
-						<!--================Contact Area =================-->
+					<!--================Contact Area =================-->
+					<p style="margin-top:-4px">
+						<em class="link">
+							<a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+								혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+							</a>
+						</em>
+					</p>
+					<div id="map" style="width:100%;height:350px;"></div>
+					<!--================Contact Area =================-->
 				</div>
 				</c:if>
 

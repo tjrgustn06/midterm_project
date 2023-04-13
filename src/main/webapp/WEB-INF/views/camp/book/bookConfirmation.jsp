@@ -29,26 +29,24 @@
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
-	<p>BankBookDTO 만들어서 db에 저장, orders에 ordernum 저장</p>
-	<p>예약 정보 표시, 최종 결제, 예약취소 기능</p>
+	<!-- <p>BankBookDTO 만들어서 db에 저장, orders에 ordernum 저장</p>
+	<p>예약 정보 표시, 최종 결제, 예약취소 기능</p> -->
 	<div class="row my-3">
 		<h1>${campDTO.campName}</h1>
 	</div>
 
-	<!-- 파라미터 확인용 -->
-	--CN: ${siteDTO.campNum}--
-	--AN: ${siteDTO.areaNum}--
-
 	<!-- 시설배치도 -->
 	<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-	<!-- 임시로 막아놓고 나중에 추가해보기 ㅠㅠ -->
-	<!-- <div class="row mb-3">
-		<c:if test="${not empty fileDTO.campFileDTOs}">
-			<div class="layout">
-				<img alt="" src="">
-			</div>
-		</c:if>
-	</div> -->
+	<div class="row layout my-3 mx-auto">		
+		<c:choose>
+			<c:when test="${not empty campDTO.layoutDTO}">
+				<img alt="" src="../../resources/upload/camp/layout/${campDTO.layoutDTO.layoutName}">
+			</c:when>
+			<c:otherwise>
+				<img alt="" src="../../resources/images/empty.jpg">
+			</c:otherwise>
+		</c:choose>
+	</div>
 	<hr>
 
 	<div class="row my-2">

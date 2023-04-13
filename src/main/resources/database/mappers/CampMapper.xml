@@ -100,12 +100,15 @@
   	<select id="getCampDetail" parameterType="CampDTO" resultMap="getCampDetailResult">
   		<!-- SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum} -->
   		SELECT * FROM CAMPINFO CI
-  			LEFT OUTER JOIN
+			LEFT OUTER JOIN
 			CAMPSITE CS
 			ON(CI.CAMPNUM=CS.CAMPNUM)
 			LEFT OUTER JOIN
 			THUMBNAIL TH
 			ON(CI.CAMPNUM=TH.CAMPNUM)
+			LEFT OUTER JOIN
+			LAYOUT LO 
+			ON(CI.CAMPNUM=LO.CAMPNUM)
 			LEFT OUTER JOIN
 			CAMPFILES CF
 			ON(CI.CAMPNUM=CF.CAMPNUM)		
@@ -151,6 +154,11 @@
   		<collection property="thumbnailDTO" javaType="ThumbnailDTO">
   			<id column="THUMBNUM" property="thumbNum"/>
   			<result column="THUMBNAME" property="thumbName"/>
+  		</collection>
+  		
+  		<collection property="layoutDTO" javaType="LayoutDTO">
+  			<id column="LAYOUTNUM" property="layoutNum"/>
+  			<result column="LAYOUTNAME" property="layoutName"/>
   		</collection>
   		
   		<collection property="campFileDTOs" javaType="List" ofType="CampFileDTO">

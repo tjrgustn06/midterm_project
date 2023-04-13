@@ -81,11 +81,10 @@
 						<col style="width: 70%;"/>
 					</colgroup>
 					<tbody>
-						<!-- 셀렉트박스로 권역 / 도 / 시군구 구분 -->
+						<!-- 셀렉트박스로 도 / 시군구 구분 -->
 						<tr>
 							<th scope="col my-auto">시/도, 시/군/구</th>
 							<td>
-								<!-- <select name="regionName" id="addressRegion"></select> -->
 								<select name="doName" id="addressDo">
 									<option value="${dto.doName}" selected>${dto.doName}</option>
 								</select>
@@ -339,9 +338,6 @@
 						
 						<hr>
 
-
-						
-
 						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
 						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
 						<div class="row layout my-3 mx-auto">
@@ -361,17 +357,8 @@
 								</div>
 							</div>
 						</div>
+						<hr>
 
-						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
-						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-							<div class="row mb-3">
-								<c:if test="${not empty dto.campFileDTOs}">
-									<div class="facilityImage">
-										<img alt="" src="../resources/upload/camp/-">
-									</div>
-								</c:if>
-							</div>
-						<hr> -->
 					</div> <!-- 이용안내 영역 종료 -->
 
 					

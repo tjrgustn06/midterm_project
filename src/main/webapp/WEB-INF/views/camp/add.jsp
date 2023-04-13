@@ -60,11 +60,10 @@
 						<col style="width: 70%;"/>
 					</colgroup>
 					<tbody>
-						<!-- 셀렉트박스로 권역 / 도 / 시군구 구분 -->
+						<!-- 셀렉트박스로 도 / 시군구 구분 -->
 						<tr>
 							<th scope="col my-auto">시/도, 시/군/구</th>
 							<td>
-								<!-- <select name="regionName" id="addressRegion"></select> -->
 								<select name="doName" id="addressDo" class="nice-select"></select>
 								<select name="sigunguName" id="addressSigungu" class="nice-select"></select>
 							</td>

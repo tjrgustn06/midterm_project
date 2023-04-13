@@ -52,11 +52,21 @@ public class MemberController {
 		
 		
 		boolean check = memberService.getMemberIdCheck(memberDTO);
-
+		
 		mv.addObject("result", check);
 		mv.setViewName("common/ajaxResult");
 		return mv;
 		
+	}
+	
+	@PostMapping("memberEmailCheck")
+	public ModelAndView getMemberEmailCheck (ModelAndView mv, MemberDTO memberDTO)throws Exception {
+		
+		boolean check = memberService.getMemberEmailCheck(memberDTO);
+		
+		mv.addObject("result", check);
+		mv.setViewName("common/ajaxResult");
+		return mv;
 	}
 	
 	@RequestMapping(value = "memberAgree", method = RequestMethod.GET)
@@ -323,7 +333,4 @@ public class MemberController {
 			return mv;
 		}
 		
-	
-
-
 }

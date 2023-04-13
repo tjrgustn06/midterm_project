@@ -33,7 +33,7 @@
 	</beans:bean>
 	
 	<interceptors>
-		<interceptor>
+		<!-- <interceptor>
 			<mapping path="/notice/*"/>
 			<mapping path="/qna/*"/>
 			<mapping path="/qnaComment/*"/>

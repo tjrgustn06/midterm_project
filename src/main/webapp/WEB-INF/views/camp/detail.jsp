@@ -46,7 +46,7 @@
 		<div class="row imageMain my-3 mx-auto">
 			<c:choose>
 				<c:when test="${not empty dto.thumbnailDTO}">
-					<img alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
+					<img class="innerImage" alt="" src="../resources/upload/camp/thumbnail/${dto.thumbnailDTO.thumbName}">
 				</c:when>
 				<c:otherwise>
 					<c:choose>

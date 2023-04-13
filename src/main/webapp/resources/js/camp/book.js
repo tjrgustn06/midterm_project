@@ -1,18 +1,6 @@
-
-
-
-
-
-
-//콘솔버튼 확인 - bookSite.jsp
-$('#bksConsoleSign').click(function(){
-    //console.log('bookSite Page');
-})
-
 //예약 가능한 site만 불러오기 - bookSite.jsp
 //input 기간이 두개 다 변했을 때 이벤트 따로 걸기
 $('input[name=searchStartDate]').change(function(){
-  console.log("시작날짜 변경");
   //두 기간의 값이 다 있을때 이벤트 실행
   if($('input[name=searchStartDate]').val()!='' && $('input[name=searchLastDate]').val()!=''){
     let campNum = $('input[name=campNum]').val();
@@ -39,7 +27,6 @@ $('input[name=searchStartDate]').change(function(){
 })
 
 $('input[name=searchLastDate]').change(function(){
-  console.log("끝날짜 변경");
    //두 기간의 값이 다 있을때 이벤트 실행
    if($('input[name=searchStartDate]').val()!='' && $('input[name=searchLastDate]').val()!=''){
     let campNum = $('input[name=campNum]').val();

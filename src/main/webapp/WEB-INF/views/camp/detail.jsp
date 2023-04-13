@@ -111,13 +111,6 @@
 					<button id="detList" type="button" class="genric-btn primary">목록으로</button>
 					<button id="detBook" type="button" class="genric-btn success">사이트선택</button>
 				</div>
-				<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
-				<!-- <div class="d-flex justify-content-between my-2" id="adminBtn">
-					<button id="detBookList" type="button" class="genric-btn primary medium">예약목록</button>
-					<button id="detManagement" type="button" class="genric-btn warning medium">siteModify</button>
-					<button id="detDelete" type="button" class="genric-btn danger">삭제</button>
-					<button id="detUpdate" type="button" class="genric-btn primary">수정</button>
-				</div> -->
 			</form>
 		</div>
 	</div>
@@ -170,13 +163,6 @@
 					
 					<hr>
 
-					<!-- 기존 비교용 -->
-					<!-- <ul>
-						<li class="col_03 img_box"><img src="/upload/camp/6946/thumb/thumb_384_79574q9oF5qyMDKogFY3fpqS.jpeg" class="imgFit" alt="캠핑장소개 이미지"></li>
-						<li class="col_03 img_box"><img src="/upload/camp/6946/thumb/thumb_384_5247YvzPpFQ61vEyftpAXW7L.jpg" class="imgFit" alt="캠핑장소개 이미지"></li>
-						<li class="col_03 img_box"><img src="/upload/camp/6946/thumb/thumb_384_2062kfPltpg3GTiPfTbr4Wp4.jpg" class="imgFit" alt="캠핑장소개 이미지"></li>
-					</ul> -->
-
 					<!-- 인트로 텍스트, 정보수정일 출력 -->
 					<p class="camp_intro_txt">
 						<ul>
@@ -227,9 +213,7 @@
 												<!-- 일단 사이트 이름, 크기만 출력 -->
 												<ul>
 													<c:forEach items="${dto.campSiteDTOs}" var="siteDTO" varStatus="i">
-														<%-- <c:if test="${siteDTO.status eq '예약가능'}"> --%>
 														<li>${siteDTO.siteName}: ${siteDTO.siteSize}</li>
-														<%-- </c:if> --%>
 													</c:forEach>
 												</ul> 
 											</td>
@@ -276,7 +260,7 @@
 						<!-- 경고 안내사항 -->
 						<p class="campIntroTxt">
 							<span class="infoNotice">
-								&nbsp;* TheCamping에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span class="infoRed">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다.
+								&nbsp;* TheCamp에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span class="infoRed">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다.
 							</span> 
 						</p>
 					</section>
@@ -299,7 +283,7 @@
 
 					<!-- 저작권 안내 -->
 					<div style="margin-top: 0px; margin-bottom: 30px;">
-						※ 모든 컨텐츠의 저작권은 TheCamping에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
+						※ 모든 컨텐츠의 저작권은 TheCamp에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
 					</div>
 				</div> <!-- 캠핑장 소개 영역 종료 -->
 				</c:if>
@@ -320,6 +304,19 @@
 							<c:otherwise><li>*안내사항이 없습니다.</li></c:otherwise>
 						</c:choose>
 					<hr>
+
+					<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
+					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+					<div class="row layout my-3 mx-auto">		
+						<c:choose>
+							<c:when test="${not empty dto.layoutDTO}">
+								<img alt="" src="../resources/upload/camp/layout/${dto.layoutDTO.layoutName}">
+							</c:when>
+							<c:otherwise>
+								<img alt="" src="../resources/images/empty.jpg">
+							</c:otherwise>
+						</c:choose>
+					</div>
 						
 					<!-- 요금구분 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 캠핑 사이트별 요금 안내</h5>
@@ -336,14 +333,14 @@
 							<thead>
 								<tr>
 									<th rowspan="2" scope="col">사이트이름(크기)</th>
-									<th colspan="2" scope="colgroup">평상시</th>
+									<th colspan="2" scope="colgroup">비수기</th>
 									<th colspan="2" scope="colgroup">성수기</th>
 								</tr>
 
 								<tr>
-									<th scope="col" class="gray">주중</th>
+									<th scope="col" class="gray">평일</th>
 									<th scope="col" class="gray">주말</th>
-									<th scope="col" class="gray">주중</th>
+									<th scope="col" class="gray">평일</th>
 									<th scope="col" class="gray">주말</th>
 								</tr>
 							</thead>
@@ -351,15 +348,13 @@
 								<!-- siteDTO가 있으면 있는대로 테이블 만들기 -->
 								<c:if test="${not empty dto.campSiteDTOs}">
 									<c:forEach items="${dto.campSiteDTOs}" var="siteDTO">
-										<%-- <c:if test="${siteDTO.status eq '예약가능'}"> --%>
 										<tr>
 											<th scope="col">${siteDTO.siteName}(${siteDTO.siteSize})</th>
-											<td data-cell-header="평상시 주중：">${siteDTO.offWeekdaysPrice}</td>
-											<td data-cell-header="평상시 주말：">${siteDTO.offWeekendsPrice}</td>
-											<td data-cell-header="성수기 주중：">${siteDTO.peakWeekdaysPrice}</td>
+											<td data-cell-header="비수기 평일：">${siteDTO.offWeekdaysPrice}</td>
+											<td data-cell-header="비수기 주말：">${siteDTO.offWeekendsPrice}</td>
+											<td data-cell-header="성수기 평일：">${siteDTO.peakWeekdaysPrice}</td>
 											<td data-cell-header="성수기 주말：">${siteDTO.peakWeekendsPrice}</td>
 										</tr>
-										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 								<!-- 테이블 끝 -->
@@ -368,16 +363,6 @@
 					</div>
 					<hr>
 
-					<!-- 시설배치도 - book페이지에서 보여주기 -->
-					<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-						<div class="row mb-3">
-							<c:if test="${not empty dto.campFileDTOs}">
-								<div class="facilityImage">
-									<img alt="" src="../resources/upload/camp/-">
-								</div>
-							</c:if>
-						</div>
-					<hr> -->
 				</div> <!-- 이용안내 영역 종료 -->
 				</c:if>
 
@@ -386,16 +371,16 @@
 				<div class="campMap my-3" id="campMap">
 					<!-- 찾아오시는 길 -->
 					<h5><i class="fa-solid fa-circle-info fa-sm"></i> 찾아오시는 길</h5>
-						<!--================Contact Area =================-->
-						<p style="margin-top:-4px">
-							<em class="link">
-								<a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-									혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
-								</a>
-							</em>
-						</p>
-						<div id="map" style="width:100%;height:350px;"></div>
-						<!--================Contact Area =================-->
+					<!--================Contact Area =================-->
+					<p style="margin-top:-4px">
+						<em class="link">
+							<a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+								혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+							</a>
+						</em>
+					</p>
+					<div id="map" style="width:100%;height:350px;"></div>
+					<!--================Contact Area =================-->
 				</div>
 				</c:if>
 
@@ -465,12 +450,6 @@
 			<form action="./update" id="frm" method="get">
 				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 				<input type="hidden" name="campNum" value="${dto.campNum}">
-				<!-- <div class="d-flex justify-content-between my-2" id="userBtn">
-					<button id="detList" type="button" class="genric-btn primary">목록으로</button>
-					<button id="detBook" type="button" class="genric-btn success">예약하기</button>
-					<button id="detBookList" type="button" class="genric-btn primary medium">예약목록</button>
-					<button id="detManagement" type="button" class="genric-btn warning medium">siteModify</button>
-				</div> -->
 				<div class="d-flex justify-content-between my-2" id="adminBtn">
 					<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
 					<button id="detDelete" type="button" class="genric-btn danger">삭제</button>

@@ -1,5 +1,6 @@
 package com.camp.s1.camping.book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -231,8 +232,17 @@ public class CampBookController {
 		
 		List<CampBookDTO> myList = campBookService.getMyBookList(campBookDTO);
 		
+		
+//		List<CampSiteDTO> siteList = new ArrayList<CampSiteDTO>();
+//		//bookDTO로 CampSiteDTO 정보 조회
+//		for(CampBookDTO campBook : myList) {
+//			CampSiteDTO campSiteDTO = campBookService.getCampSiteDetail(campBook.getAreaNum());
+//			siteList.add(campSiteDTO);
+//		}
+		
 		mv.addObject("member", memberDTO);
 		mv.addObject("bookList", myList);
+//		mv.addObject("siteList", siteList);
 		mv.setViewName("camp/book/myBook");
 		return mv;
 	}

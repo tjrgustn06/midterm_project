@@ -11,8 +11,6 @@
 <c:import url="../../template/common_css.jsp"></c:import>
 <script src="https://kit.fontawesome.com/f0f05cd699.js" crossorigin="anonymous"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script> -->
 </head>
 <body>
 <c:import url="../../template/header.jsp"></c:import>
@@ -30,29 +28,25 @@
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
-	<p>BankBookDTO 만들어서 db에 저장, orders에 ordernum 저장</p>
-	<p>예약 정보 표시, 최종 결제, 예약취소 기능</p>
+	<!-- <p>BankBookDTO 만들어서 db에 저장, orders에 ordernum 저장</p>
+	<p>예약 정보 표시, 최종 결제, 예약취소 기능</p> -->
 	<div class="row my-3">
 		<h1>${campDTO.campName}</h1>
 	</div>
 
-	<!-- 파라미터 확인용 -->
-	--CN: ${siteDTO.campNum}--
-	--AN: ${bookDTO.areaNum}--
-	--NUM: ${bookDTO.num}--
-
-	<!-- 시설배치도 / 임시로 막고 나중에 추가 -->
+	<!-- 시설배치도 -->
 	<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-	<div class="row mb-3">
-		<c:if test="${not empty fileDTO.campFileDTOs}">
-			<div class="layout">
-				<img alt="" src="">
-			</div>
-		</c:if>
+	<div class="row layout my-3 mx-auto">		
+		<c:choose>
+			<c:when test="${not empty campDTO.layoutDTO}">
+				<img alt="" src="../../resources/upload/camp/layout/${campDTO.layoutDTO.layoutName}">
+			</c:when>
+			<c:otherwise>
+				<img alt="" src="../../resources/images/empty.jpg">
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<hr> -->
-
-	<hr>
 
 	<!-- form 시작 -->
 	<form action="./payment" id="paymentFrm" method="post">
@@ -82,9 +76,9 @@
 				<input type="text" name="name" class="form-control" value="${bookDTO.name}" readonly>
 			</div>
 			<div class="useDate input-group mb-2">
-				<span class="input-group-text" for="startDate">사용 시작일</span>
+				<span class="input-group-text" for="startDate">입실 날짜</span>
 				<input type="text" name="startDate" id="startDate" class="form-control" value="${bookDTO.startDate}" style="background-color: #ffffcc;" readonly>
-				<span class="input-group-text" for="lastDate">사용 종료일</span>
+				<span class="input-group-text" for="lastDate">퇴실 날짜</span>
 				<input type="text" name="lastDate" id="lastDate" class="form-control" value="${bookDTO.lastDate}" style="background-color: #ffffcc;" readonly>
 			</div>
 			<div class="totalPrice input-group mb-2">
@@ -110,48 +104,12 @@
 	</form>
 	<!-- form 끝 -->
 
-	
-	<!-- <form action="./cancel" id="cancelFrm" method="post"></form> -->
-
-
 </div>
 
 
 <c:import url="../../template/footer.jsp"></c:import>
 <script src="../../resources/js/camp/book.js"></script>
-<!-- <script>
-	// datePicker
-	$.datepicker.setDefaults({
-			dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-            monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-            yearSuffix: '년',
-            dateFormat: 'yy-mm-dd',
-            showMonthAfterYear:true,
-            constrainInput: true,
-			minDate: 0
-		});
-
-		$('.datepicker').datepicker();
-
-		$('#startDate').datepicker('option', 'maxDate', $('#lastDate').val());
-		$('#startDate').datepicker('option','onClose', (selectedDate)=>{
-			$('#lastDate').datepicker('option', 'minDate', selectedDate);
-		});
-
-		$('#startDate').change(()=>{	
-			$('#lastDate').datepicker('option', 'minDate', $('#startDate').val());
-			$('#lastDate').datepicker('option', 'onClose', (selectedDate)=>{
-				$('#startDate').datepicker('option', 'maxDate', selectedDate);
-			})
-		})
-</script> -->
-<!-- <script>
-	요금 계산 함수 호출
-	calculationPrice();
-	//IMP.init('imp77504767');
-</script> -->
+<!-- IMP.init('imp77504767'); -->
 <script>
 	$('#payConfirm').click(()=>{
 		let payment = iamport()		

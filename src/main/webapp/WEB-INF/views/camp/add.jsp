@@ -60,11 +60,10 @@
 						<col style="width: 70%;"/>
 					</colgroup>
 					<tbody>
-						<!-- 셀렉트박스로 권역 / 도 / 시군구 구분 -->
+						<!-- 셀렉트박스로 도 / 시군구 구분 -->
 						<tr>
 							<th scope="col my-auto">시/도, 시/군/구</th>
 							<td>
-								<!-- <select name="regionName" id="addressRegion"></select> -->
 								<select name="doName" id="addressDo" class="nice-select"></select>
 								<select name="sigunguName" id="addressSigungu" class="nice-select"></select>
 							</td>
@@ -280,13 +279,13 @@
 									<input type="text" name="siteSize" data-site-idx="siteSize1" class="form-control" placeholder="ex)6*11, 10*10">
 								</div>
 								<div class="input-group mb-2">
-									<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+									<span class="input-group-text" id="offWeekdaysPrice">비수기 평일</span>
 									<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice1" class="form-control" placeholder="요금 입력">
 									<span class="input-group-text" id="offWeekendsPrice">주말</span>
 									<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice1" class="form-control" placeholder="요금 입력">
 								</div>
 								<div class="input-group mb-2">
-									<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+									<span class="input-group-text" id="peakWeekdaysPrice">성수기 평일</span>
 									<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice1" class="form-control" placeholder="요금 입력">
 									<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 									<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice1" class="form-control" placeholder="요금 입력">
@@ -301,15 +300,16 @@
 						<hr>
 
 						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
-						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-							<div class="row mb-3">
-								<c:if test="${not empty dto.campFileDTOs}">
-									<div class="facilityImage">
-										<img alt="" src="../resources/upload/camp/-">
-									</div>
-								</c:if>
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+						<div class="row layout my-3 mx-auto">
+							<div id="layoutImage" class="row">
+								<div class="row mb-3">
+									<input type="file" id="layout" name="layoutFile" class="form-control">
+								</div>
 							</div>
-						<hr> -->
+						</div>
+
+						<hr>
 					</div> <!-- 이용안내 영역 종료 -->
 
 
@@ -326,9 +326,6 @@
 							<button id="addCancel" class="genric-btn primary" type="button">취소</button>
 							<button id="addReg" class="genric-btn success" type="button">등록</button>
 						</div>
-						<!-- <div class="d-flex justify-content-evenly my-2">
-							<button id="consoleSign" class="genric-btn info" type="button">console</button>
-						</div> -->
 					</div>
 
 

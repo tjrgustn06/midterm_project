@@ -94,7 +94,7 @@ public class CampController {
 	
 	//add-post
 	@PostMapping("add")
-	public ModelAndView setCampAdd(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, HttpSession session, 
+	public ModelAndView setCampAdd(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, MultipartFile layoutFile, HttpSession session, 
 			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
@@ -118,7 +118,7 @@ public class CampController {
 		//만든 siteList CampDTO에 저장
 		campDTO.setCampSiteDTOs(ar);
 		
-		int result = campService.setCampAdd(campDTO, files, thumbFile, session);
+		int result = campService.setCampAdd(campDTO, files, thumbFile, layoutFile, session);
 		logger.info("param: "+params);
 		
 		String message = "캠핑장 등록 실패. 관리자에게 문의하세요";
@@ -148,7 +148,7 @@ public class CampController {
 	
 	//update-post
 	@PostMapping("update")
-	public ModelAndView setCampUpdate(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, HttpSession session, 
+	public ModelAndView setCampUpdate(@RequestParam HashMap<String, String> params, CampDTO campDTO, MultipartFile [] files, MultipartFile thumbFile, MultipartFile layoutFile, HttpSession session, 
 			String[] siteName, String[] siteSize, Long[] offWeekdaysPrice, Long[] offWeekendsPrice, Long[] peakWeekdaysPrice, Long[] peakWeekendsPrice) throws Exception{
 		//업데이트시 적용되어야할 내용 - 1.글 내용 업데이트(CampDTO-campNum), 2.썸네일 업데이트(CampDTO-thumbnailDTO-thumbNum), 3.파일 업데이트(CampDTO-fileDTOs-fileNum), 4.사이트 업데이트(CampDTO-siteDTOs-areaNum)
 		//컨트롤러에서 처리해야할 내용 - 4.사이트를 DTO로 만들어서 CampDTO에 입력해주는거 까지 해야함.
@@ -175,7 +175,7 @@ public class CampController {
 		
 		//update 실행
 		//areaNum은 siteDTO 지우기 위해 필요
-		int result = campService.setCampUpdate(campDTO, files, thumbFile, session);
+		int result = campService.setCampUpdate(campDTO, files, thumbFile, layoutFile, session);
 		logger.info("param: "+params);
 		
 		String message ="수정 실패";

@@ -29,24 +29,24 @@
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
-	<p>기간 설정, 예약 가능 사이트 확인, 금액 확인, 예약하기 기능</p>
+	<!-- <p>기간 설정, 예약 가능 사이트 확인, 금액 확인, 예약하기 기능</p> -->
 	<div class="row my-3">
 		<h1>${campDTO.campName}</h1>
 	</div>
 
-	<!-- 파라미터 확인 -->
-	--CN: ${campDTO.campNum}--
 
 	<!-- 시설배치도 -->
 	<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-		<!-- 임시로 막아놓고 나중에 추가해보기 ㅠㅠ -->
-		<!-- <div class="row mb-3">
-			<c:if test="${not empty dto.campFileDTOs}">
-				<div class="layout">
-					<img alt="" src="">
-				</div>
-			</c:if>
-		</div> -->
+	<div class="row layout my-3 mx-auto">		
+		<c:choose>
+			<c:when test="${not empty campDTO.layoutDTO}">
+				<img alt="" src="../../resources/upload/camp/layout/${campDTO.layoutDTO.layoutName}">
+			</c:when>
+			<c:otherwise>
+				<img alt="" src="../../resources/images/empty.jpg">
+			</c:otherwise>
+		</c:choose>
+	</div>
 	<hr>
 
 	<!-- datePicker -->
@@ -67,7 +67,6 @@
 		<input type="hidden" name="campNum" value="${campDTO.campNum}">
 		<div class="d-flex justify-content-center my-2">
 			<button id="siteCancel" type="button" class="genric-btn primary">돌아가기</button>
-			<!-- <button id="siteSearch" type="button" class="genric-btn success">검색하기</button> -->
 		</div>
 	</form>
 	<!-- 검색 끝 -->
@@ -86,51 +85,8 @@
 	<div class="row my-2" id="siteList">
 		<!-- 조건에 맞는 내용 출력되게끔 원함 -->
 		<p>*기간을 먼저 조회해주세요</p>
-
-		<!-- siteDTO - 버튼 누르면 생성될 부분 / 최소 한개의 site는 필수 -->
-		<!-- <c:choose>
-			<c:when test="${not empty siteList}">
-				<c:forEach items="${siteList}" var="siteDTO" varStatus="i">
-					<form action="./confirmation" id="bookFrm${i.count}" method="get">
-					--areaNum: ${siteDTO.areaNum}--
-					<div id="siteOne${i.count}">
-						<input type="hidden" name="areaNum" value="${siteDTO.areaNum}" data-site-idx="area${i.count}">
-						<input type="hidden" name="startDate" value="" data-site-idx="start${i.count}">
-						<input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">
-						<div class="d-flex justify-content-end mb-2">
-							<button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">선택하기</button>
-						</div>
-						<div class="input-group mb-2">
-							<span class="input-group-text" id="siteName">사이트이름</span>
-							<input type="text" name="siteName" data-site-idx="siteName${i.count}" class="form-control" value="${siteDTO.siteName}" readonly>
-							<span class="input-group-text" id="siteSize">크기(m^2)</span>
-							<input type="text" name="siteSize" data-site-idx="siteSize${i.count}" class="form-control" value="${siteDTO.siteSize}" readonly>
-						</div>
-						<div class="input-group mb-2">
-							<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
-							<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice${i.count}" class="form-control" value="${siteDTO.offWeekdaysPrice}" readonly>
-							<span class="input-group-text" id="offWeekendsPrice">주말</span>
-							<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice${i.count}" class="form-control" value="${siteDTO.offWeekendsPrice}" readonly>
-						</div>
-						<div class="input-group mb-2">
-							<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
-							<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice${i.count}" class="form-control" value="${siteDTO.peakWeekdaysPrice}" readonly>
-							<span class="input-group-text" id="peakWeekendsPrice">주말</span>
-							<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}" readonly>
-						</div>
-					</div>
-					</form>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<p>*선택 기간 내 예약 가능한 사이트가 없습니다.</p>
-			</c:otherwise>
-		</c:choose> -->
-		
-		<!-- 생성 끝날 부분 -->
+		<!-- siteDTO -->
 	</div>
-
-
 
 
 </div>

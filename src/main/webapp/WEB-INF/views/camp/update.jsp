@@ -81,11 +81,10 @@
 						<col style="width: 70%;"/>
 					</colgroup>
 					<tbody>
-						<!-- 셀렉트박스로 권역 / 도 / 시군구 구분 -->
+						<!-- 셀렉트박스로 도 / 시군구 구분 -->
 						<tr>
 							<th scope="col my-auto">시/도, 시/군/구</th>
 							<td>
-								<!-- <select name="regionName" id="addressRegion"></select> -->
 								<select name="doName" id="addressDo">
 									<option value="${dto.doName}" selected>${dto.doName}</option>
 								</select>
@@ -318,13 +317,13 @@
 										<input type="text" name="siteSize" data-site-idx="siteSize${i.count}" class="form-control" value="${siteDTO.siteSize}">
 									</div>
 									<div class="input-group mb-2">
-										<span class="input-group-text" id="offWeekdaysPrice">평상시 주중</span>
+										<span class="input-group-text" id="offWeekdaysPrice">비수기 평일</span>
 										<input type="text" name="offWeekdaysPrice" data-site-idx="siteOwkPrice${i.count}" class="form-control" value="${siteDTO.offWeekdaysPrice}">
 										<span class="input-group-text" id="offWeekendsPrice">주말</span>
 										<input type="text" name="offWeekendsPrice" data-site-idx="siteOwdPrice${i.count}" class="form-control" value="${siteDTO.offWeekendsPrice}">
 									</div>
 									<div class="input-group mb-2">
-										<span class="input-group-text" id="peakWeekdaysPrice">성수기 주중</span>
+										<span class="input-group-text" id="peakWeekdaysPrice">성수기 평일</span>
 										<input type="text" name="peakWeekdaysPrice" data-site-idx="sitePwkPrice${i.count}" class="form-control" value="${siteDTO.peakWeekdaysPrice}">
 										<span class="input-group-text" id="peakWeekendsPrice">주말</span>
 										<input type="text" name="peakWeekendsPrice" data-site-idx="sitePwdPrice${i.count}" class="form-control" value="${siteDTO.peakWeekendsPrice}">
@@ -340,15 +339,26 @@
 						<hr>
 
 						<!-- 시설배치도 / 일단 주석처리하고, 나중에 추가해보기 -->
-						<!-- <h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
-							<div class="row mb-3">
-								<c:if test="${not empty dto.campFileDTOs}">
-									<div class="facilityImage">
-										<img alt="" src="../resources/upload/camp/-">
-									</div>
-								</c:if>
+						<h5><i class="fa-solid fa-circle-info fa-sm"></i> 시설 배치도</h5>
+						<div class="row layout my-3 mx-auto">
+							<!-- 원래 시설배치도 표시 -->
+							<c:choose>
+								<c:when test="${not empty dto.layoutDTO}">
+									<img alt="" src="../resources/upload/camp/layout/${dto.layoutDTO.layoutName}">
+								</c:when>
+								<c:otherwise>
+									<img alt="" src="../resources/images/empty.jpg">
+								</c:otherwise>
+							</c:choose>
+							<!-- 시설배치도 추가항목 -->
+							<div id="layoutImage" class="row">
+								<div class="row mb-3">
+									<input type="file" id="layout" name="layoutFile" class="form-control">
+								</div>
 							</div>
-						<hr> -->
+						</div>
+						<hr>
+
 					</div> <!-- 이용안내 영역 종료 -->
 
 					

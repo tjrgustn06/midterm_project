@@ -95,6 +95,22 @@ public class CampDAO {
 	public int setThumbnailDelete(Long thumbNum) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setThumbnailDelete", thumbNum);
 	}
+	
+	//layout
+	public LayoutDTO getLayoutDetail(CampDTO campDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getLayoutDetail", campDTO);
+	}
+	
+	//layoutAdd
+	public int setLayoutAdd(LayoutDTO layoutDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setLayoutAdd", layoutDTO);
+	}
+	
+	//layoutDelete
+	public int setLayoutDelete(Long layoutNum) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setLayoutDelete", layoutNum);
+	}
+	
 	//
 	public List<CampDTO> getSigunguNameList(CampDTO campDTO) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "getSigunguNameList", campDTO);

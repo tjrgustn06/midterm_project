@@ -64,9 +64,44 @@
 	</select>
 	
 	<!-- getCampDetail -->
-	<select id="getCampDetail" parameterType="Long" resultType="CampDTO">
-		SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum}
+	<select id="getCampDetail" parameterType="Long" resultMap="getCampDetailResult">
+		<!-- SELECT * FROM CAMPINFO WHERE CAMPNUM=#{campNum} -->
+		SELECT * FROM CAMPINFO CI
+			LEFT OUTER JOIN
+			LAYOUT LO 
+			ON(CI.CAMPNUM=LO.CAMPNUM)
+		WHERE CI.CAMPNUM=#{campNum}
 	</select>
+	<resultMap type="CampDTO" id="getCampDetailResult">
+  		<id column="CAMPNUM" property="campNum"/>
+  		<result column="CAMPNAME" property="campName"/>
+  		<result column="PHONE" property="phone"/>
+  		<result column="ADDRESS" property="address"/>
+  		<result column="LINEINTRO" property="lineIntro"/>
+  		<result column="INTRO" property="intro"/>
+  		<result column="FEATURE" property="feature"/>
+  		<result column="INDUTY" property="induty"/>
+  		<result column="DONAME" property="doName"/>
+  		<result column="SIGUNGUNAME" property="sigunguName"/>
+  		<result column="MAPX" property="mapX"/>
+  		<result column="MAPY" property="mapY"/>
+  		<result column="GLAMPFACILITY" property="glampFacility"/>
+  		<result column="CARAVFACILITY" property="caravFacility"/>
+  		<result column="SERVICE" property="service"/>
+  		<result column="POSBLFACILITY" property="posblFacility"/>
+  		<result column="THEME" property="theme"/>
+  		<result column="PETALLOW" property="petAllow"/>
+  		<result column="USEINFO" property="useInfo"/>
+  		<result column="HOMEPAGE" property="homePage"/>
+  		<result column="THUMBNAIL" property="thumbnail"/>
+  		<result column="REGDATE" property="regDate"/>
+  		<result column="MODIDATE" property="modiDate"/>	
+  		
+  		<association property="layoutDTO" javaType="LayoutDTO">
+  			<id column="LAYOUTNUM" property="layoutNum"/>
+  			<result column="LAYOUTNAME" property="layoutName"/>
+  		</association>
+  	  </resultMap>
 	
 	<!-- getCampBookDetail -->
 	<select id="getCampBookDetail" parameterType="CampBookDTO" resultType="CampBookDTO">

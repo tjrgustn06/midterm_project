@@ -29,9 +29,10 @@
 </section>
 <!--================Breadcrumb Area =================-->
 <div class="container col-lg-9 my-5">
-	<p>해당 캠핑장에서 예약된 사이트 전체를 보여줌, 사이트이름, 사용기간, 결제여부 확인(입금대기/결제완료)</p>
+	<!-- <p>해당 캠핑장에서 예약된 사이트 전체를 보여줌, 사이트이름, 사용기간, 결제여부 확인(입금대기/결제완료)</p> -->
 	<div class="row my-3">
-		<h1>${campDTO.campName}</h1>
+		<h3>${member.name} 님의 예약 리스트</h3>
+		<!-- <i class="fa-solid fa-circle-info fa-sm"></i> -->
 	</div>
 
 	<hr>
@@ -43,11 +44,11 @@
 
 	<hr>
 
-	<div class="row my-2">
+	<!-- <div class="row my-2">
 		<div class="col-10">
-			<h5><i class="fa-solid fa-circle-info fa-sm"></i> ${member.name} 님의 예약 리스트</h5>
+			<h5><i class="fa-solid fa-circle-info fa-sm"></i> 사이트 예약 리스트</h5>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- 해당 캠핑장의 모든 예약 리스트를 볼 수 있음 -->
 	<div class="row my-2" id="myBookList">
@@ -70,9 +71,9 @@
 							<input type="text" name="id" data-site-idx="id${i.count}" class="form-control" value="${bookDTO.id}" readonly>
 						</div>
 						<div class="useDate input-group mb-2">
-							<span class="input-group-text" id="startDate">입실일</span>
+							<span class="input-group-text" id="startDate">입실 날짜</span>
 							<input type="text" name="startDate" data-site-idx="startDate${i.count}" class="form-control" value="${bookDTO.startDate}" readonly>
-							<span class="input-group-text" id="lastDate">퇴실일</span>
+							<span class="input-group-text" id="lastDate">퇴실 날짜</span>
 							<input type="text" name="lastDate" data-site-idx="lastDate${i.count}" class="form-control" value="${bookDTO.lastDate}" readonly>
 						</div>
 						<div class="priceInfo input-group mb-2">

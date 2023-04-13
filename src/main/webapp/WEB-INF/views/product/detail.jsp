@@ -113,12 +113,20 @@
 								</div>
 							</div>
 							<div class="input-group mb-3">
+								<span class="input-group-text" style="width: 122px;">기본 금액</span>
+								<div class="row my-auto" id="nomalPrice">
+								</div>
+								<div class="row">
+									<p class="my-auto">&nbsp;원</p>
+								</div>
+							</div>
+							<div class="input-group mb-3">
 								<span class="input-group-text" for="amount" style="width: 122px;">대여수량</span>
 								<div class="row" id="amountChange">
 								</div>
 							</div>
 							<div class="input-group mb-3">
-								<span class="input-group-text" style="width: 122px;">금액</span>
+								<span class="input-group-text" style="width: 122px;">결제 금액</span>
 								<div class="row my-auto" id="totalPrice">
 								</div>
 								<div class="row">
@@ -234,7 +242,7 @@
 			$('#amountChange').empty();
 			
 			getAmount(gradeStock)
-
+			$('#nomalPrice').html('&nbsp;'+price);
 			price = price*$('#amount').val();
 			$('#totalPrice').html(price)
 			$('#price').val($('#totalPrice').html())

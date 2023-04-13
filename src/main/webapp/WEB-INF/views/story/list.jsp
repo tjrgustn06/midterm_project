@@ -9,17 +9,38 @@
 <title>The Camp</title>
 <c:import url="../template/common_css.jsp"></c:import>
 <style>
-	.imageBoxOther{
-    width: 25rem;
-    height: 25rem;
-    overflow: hidden;
-    margin: 0 auto;
+	.imageBoxList{
+		width: 24rem;
+		height: 14rem;
+		/* width: 40%;
+		height: 35%; */
 	}
-	
+
+	.imageMain{
+		width: 49rem;
+		height: 30rem;
+		/* width: 80%;
+		height: 80%; */
+	}
+
+	.imageBoxIntro{
+		width: 15rem;
+		height: 15rem;
+		overflow: hidden;
+		margin: 0 auto;
+	}
+
+	.imageBoxOther{
+		width: 20rem;
+		height: 20rem;
+		overflow: hidden;
+		margin: 0 auto;
+	}
+
 	.innerImage{
-	    width: 100%;
-	    /* height: 80%; */
-	    object-fit: cover;
+		width: 49rem;
+		height: 30rem;
+		/* object-fit: fill; */
 	}
 </style>
 <script>
@@ -44,11 +65,9 @@
 	</section>
 	<!--================Banner Area =================-->
 
-	<div class="containermy-3">
+	<div class="container col-lg-9 my-3">
 	
-		<div class="row mb-4 border-bottom border-info">
-			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2" id="boardName" data-board-id="${boardId}" data-board-name="${boardName}">${boardName} 페이지</h1><br>
-		</div>
+		<div class="col-md-7 mx-auto text-center pb-3 fs-2" id="boardName" data-board-id="${boardId}" data-board-name="${boardName}"></div><br>
 		
 		<div id="storyList">
 

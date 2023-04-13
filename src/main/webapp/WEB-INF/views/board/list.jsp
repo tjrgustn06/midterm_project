@@ -11,24 +11,28 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="page-cover text-center">
-	<h2 class="page-cover-tittle">${boardName}</h2>
-	<c:if test="${boardName eq 'qna'}">
-		<ol class="breadcrumb">
-			<li>자유로운 정보 나눔 마당</li>
-		</ol>
-	</c:if>
-	<c:if test="${boardName eq 'notice'}">
-			<ol class="breadcrumb">
-				<li>공지사항</li>
-			</ol>
-		</c:if>
-</div>
-	<div class="container-fluid">
-	
-		<div class="row my-5">
-			<h1>${boardName} Page</h1>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">${boardName}</h2>
+			<c:if test="${boardName eq 'qna'}">
+				<ol class="breadcrumb">
+					<li>자유로운 정보 나눔 마당</li>
+				</ol>
+			</c:if>
+			<c:if test="${boardName eq 'notice'}">
+					<ol class="breadcrumb">
+						<li>공지사항</li>
+					</ol>
+				</c:if>
 		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
+	<div class="container col-lg-9 my-5">
+	
 	
 		<div class="row my-6">
 			<table class="table table-striped">

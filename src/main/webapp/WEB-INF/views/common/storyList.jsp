@@ -13,7 +13,7 @@
 	})
 </script>
 		<c:forEach items="${list}" var="dto">
-			<div class="col-md-8 mx-auto" id="${boardName}${dto.num}"  style="height: 100%;">
+			<div class="col-md-12 mx-auto" id="${boardName}${dto.num}"  style="height: 100%;">
 
 				<div class="d-flex justify-content-center mb-3">
 					<div class="card col-md-10">
@@ -40,31 +40,33 @@
 						</div>
 						<c:if test="${!empty dto.boardFileDTOs}">
 							<div id="carouselExampleInterval${dto.num}" class="carousel slide" data-bs-ride="carousel">
-								<div class="carousel-inner">
+								<div class="carousel-inner imageMain">
 									<c:forEach items="${dto.boardFileDTOs}" var="fileDTO" varStatus="i">
 										<c:if test="${i.first}">
-											  <div class="carousel-item imageBoxOther active" data-bs-interval="100000">
+											  <div class="carousel-item active" data-bs-interval="100000">
 												<img src="../resources/upload/${boardName}/${fileDTO.fileName}" class="innerImage d-block w-100" alt="...">
 											  </div>
 										</c:if>
 										<c:if test="${!i.first}">
-											  <div class="carousel-item imageBoxOther" data-bs-interval="100000">
+											  <div class="carousel-item " data-bs-interval="100000">
 												<img src="../resources/upload/${boardName}/${fileDTO.fileName}" class="innerImage d-block w-100" alt="...">
 											  </div>
 										</c:if>
+		
 
 									</c:forEach>
+									<button class="carousel-control-prev" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Previous</span>
+									  </button>
+									  <button class="carousel-control-next" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Next</span>
+									  </button>
 								</div>
 						  </div>
 						
-							<button class="carousel-control-prev" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Previous</span>
-							  </button>
-							  <button class="carousel-control-next" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Next</span>
-							  </button>
+
 						  
 					
 					</c:if>
@@ -78,7 +80,7 @@
 							
 						</div> -->
 						<!-- Button trigger modal -->
-						<a type="button" class="getDetail" id="getDetail${dto.num}" data-board-num="${dto.num}" data-bs-toggle="modal" data-bs-target="#exampleModal${dto.num}">
+						<a type="button" class="mx-3 getDetail" id="getDetail${dto.num}" data-board-num="${dto.num}" data-bs-toggle="modal" data-bs-target="#exampleModal${dto.num}">
 							<script>
 								$(()=>{
 									$.ajax({
@@ -114,7 +116,7 @@
 						<!-- Modal -->
 						
 							<div class="modal fade" id="exampleModal${dto.num}" tabindex="-1" aria-labelledby="exampleModalLabel${dto.num}" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+								<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
 								<div class="modal-content">
 									<div class="modal-header">
 									<h1 class="modal-title fs-5" id="exampleModalLabel${dto.num}">${dto.writer}님의 게시물</h1>
@@ -122,7 +124,7 @@
 									</div>
 									<div class="modal-body">
 										<div class="d-flex flex-column mb-3">
-											<div class="card col-md-5 mx-5">
+											<div class="card col-md-10 mx-auto">
 												<div class="card-body">
 													<div class="" style="height: 30px;">
 														<span class="card-title" style="float: left;">${dto.writer}</span>
@@ -178,7 +180,7 @@
 										
 										</div>
 
-										<div id="commentList${dto.num}" data-board-name="${boardName}">
+										<div class="col-md-10 mx-auto" id="commentList${dto.num}" data-board-name="${boardName}">
 
 										</div>
 

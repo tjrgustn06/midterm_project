@@ -99,7 +99,7 @@ pw.addEventListener("keyup", function(){
         pwResult.classList.add("redResult");
         pwResult.classList.remove("blueResult");
     }
-    console.log(checks)
+   
 })
 
 pw.addEventListener("blur", function(){
@@ -115,7 +115,7 @@ pw.addEventListener("blur", function(){
         pwResult.classList.remove("blueResult");
         
     }
-    console.log(checks)
+   
 })
 
 pw.addEventListener("change", function(){
@@ -141,7 +141,7 @@ pwCheck.addEventListener("blur", function(){
         pwCheckResult.classList.add("redResult");
         pwCheckResult.classList.remove("blueResult");
     }
-    console.log(checks)
+    
 })
 
 na.addEventListener("blur", function(){
@@ -155,7 +155,7 @@ na.addEventListener("blur", function(){
         nameResult.classList.add("redResult");
         nameResult.classList.remove("blueResult");
     }
-    console.log(checks)
+   
 })
 na.addEventListener("focus", function(){
     if(na.value.length != 0){
@@ -176,7 +176,7 @@ phone.addEventListener("blur", function(){
         phoneResult.classList.add("redResult");
         phoneResult.classList.remove("blueResult");
     }
-    console.log(checks)
+    
 })
 
 addr.addEventListener("blur", function(){
@@ -190,7 +190,7 @@ addr.addEventListener("blur", function(){
         addrResult.classList.add("redResult");
         addrResult.classList.remove("blueResult");
     }
-    console.log(checks)
+    
 })
 
 email.addEventListener("blur", function(){
@@ -204,7 +204,7 @@ email.addEventListener("blur", function(){
         emailResult.classList.add("redResult");
         emailResult.classList.remove("blueResult");
     }
-    console.log(checks)
+    
 })
 
 //form 전송

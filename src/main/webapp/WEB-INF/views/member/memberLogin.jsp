@@ -41,7 +41,7 @@
 			  	<label class="form-check-label" for="remember">ID 기억하기</label>
 			</div>
 	  		<button type="submit" class="btn btn-success">로그인</button>
-	  		<a href="./memberJoin" class="btn btn-info">회원 가입</a>
+	  		<a href="./memberAgree" class="btn btn-info">회원 가입</a>
 		</form>
 	</div>
 </div>

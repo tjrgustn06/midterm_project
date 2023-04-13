@@ -236,18 +236,18 @@ function getUpdateForm(reviewNum){
     console.log(mark)
     console.log('updateFormNum : '+reviewNum);
 
-    let child = '<section class="mb-5 mx-2" id="updateForm'+reviewNum+'">';
-    child = child + '<div class="card bg-light">';
-    child = child + '<div class="d-flex">';
+    let child = '<section class="mx-2" id="updateForm'+reviewNum+'">';
+    child = child + '<div class="card bg-light my-2">';
+    child = child + '<div class="d-flex" style="margin-left: 10px;">';
     child = child + '<span class="me-auto p-2 fw-bold">'+writer;
     child = child + '</span>'
-    child = child + '<span class="p-2">';
-    child = child + '<button class="genric-btn primary radius updateCancle" data-review-num="'+reviewNum+'">취소</button>';
-    child = child + '</span>';
+    // child = child + '<span class="p-2">';
+    // child = child + '<button class="genric-btn primary radius updateCancle" data-review-num="'+reviewNum+'">취소</button>';
+    // child = child + '</span>';
     child = child + '</div>';
 
     //평점 넣는 자리
-    child = child + '<div class="input-group mb-3">';
+    child = child + '<div class="input-group" style="margin-left: 15px;">';
     child = child + '<div><span>평점 : </span></div>';
     child = child + '<div class="updateMark" id="uptStar" data-update-mark="'+mark+'">';
     child = child + '<span class="updateStar">★</span><span class="updateStar">★</span>';
@@ -255,10 +255,11 @@ function getUpdateForm(reviewNum){
     child = child + '<span class="updateStar">★</span></div></div>';
 
     child = child + '<div class="card-body">';
-    child = child + '<textarea class="form-control mb-3" rows="3" id="reviewContents'+reviewNum+'">'+text.trim()+'</textarea>';
+    child = child + '<textarea class="form-control" rows="3" style="resize: none;" id="reviewContents'+reviewNum+'">'+text.trim()+'</textarea>';
     child = child + '</div>'
-    child = child + '<div class="mb-3">';
-    child = child + '<button class="genric-btn success radius col-auto offset-md-10 reviewUpdate" data-review-num="'+reviewNum+'">수정</button>';
+    child = child + '<div class="d-flex justify-content-around mb-3">';
+    child = child + '<button class="genric-btn primary small updateCancle" data-review-num="'+reviewNum+'">취소</button>';
+    child = child + '<button class="genric-btn success small reviewUpdate" data-review-num="'+reviewNum+'">수정</button>';
     child = child + '</div></section>'
     $('#contents'+reviewNum).replaceWith(child);
     $('.updateStar').each((index, item)=>{
@@ -296,3 +297,12 @@ function updateRating(score){
     })
 }
 
+$('#reviewAdd').click(function(){
+    $(this).hide();
+    $('#reviewCancle').show();
+})
+
+$('#reviewCancle').click(function(){
+    $(this).hide();
+    $('#reviewAdd').show();
+})

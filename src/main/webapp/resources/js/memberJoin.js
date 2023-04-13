@@ -32,7 +32,6 @@ let checks = [false, false, false, false, false, false, false, false]
 
 //id 검증
 id.addEventListener("blur", function(){
-    
     //중복 검사
     let xhttp = new XMLHttpRequest();
 
@@ -51,22 +50,21 @@ id.addEventListener("blur", function(){
         if(this.readyState == 4 && this.status == 200){
             console.log("idCheck : "+this.responseText.trim());
             if(this.responseText.trim() == 'true'){
-                idResult.innerHTML = '사용 가능한 아이디';
+                idResult.innerHTML = '사용 가능한 아이디 입니다.';
                 checks[0] = true;
                 idResult.classList.add("blueResult");
                 idResult.classList.remove("redResult");
-                
             }
             else{
-                idResult.innerHTML = '중복 아이디';
+                idResult.innerHTML = '중복 아이디 입니다.';
                 checks[0] = false;
                 idResult.classList.add("redResult");
                 idResult.classList.remove("blueResult");
-                
             }
         }
         
     })
+});
 
 //     if(id.value.length != 0){
 //         // idCheck = true;
@@ -82,11 +80,10 @@ id.addEventListener("blur", function(){
 //         idResult.classList.remove("greenResult");
 //     }
 // })
-});
 
 pw.addEventListener("keyup", function(){
     if(pw.value.length > 5 && pw.value.length < 13){
-        pwResult.innerHTML = '정상 비밀번호';
+        pwResult.innerHTML = '정상 비밀번호 입니다.';
         // pwLengthCheck = true;
         checks[1] = true;
         pwResult.classList.add("blueResult");
@@ -121,14 +118,14 @@ pw.addEventListener("blur", function(){
 pw.addEventListener("change", function(){
     checks[3] = false;
     pwCheck.value = '';
-    pwCheckResult.innerHTML = '비밀번호 불일치';
+    pwCheckResult.innerHTML = '비밀번호 불일치 입니다.';
     pwResult.classList.add("redResult");
    
 })
 
 pwCheck.addEventListener("blur", function(){
     if(pwCheck.value == pw.value){
-        pwCheckResult.innerHTML = "동일한 비밀번호";
+        pwCheckResult.innerHTML = "동일한 비밀번호 입니다.";
         // pwEqualCheck = true;
         checks[3] = true;
         pwCheckResult.classList.add("blueResult");
@@ -136,7 +133,7 @@ pwCheck.addEventListener("blur", function(){
         
     }
     else{
-        pwCheckResult.innerHTML = "불일치 비밀번호";
+        pwCheckResult.innerHTML = "불일치 비밀번호 입니다.";
         checks[3] = false;
         pwCheckResult.classList.add("redResult");
         pwCheckResult.classList.remove("blueResult");

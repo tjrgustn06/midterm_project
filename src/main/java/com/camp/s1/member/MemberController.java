@@ -52,7 +52,7 @@ public class MemberController {
 		
 		
 		boolean check = memberService.getMemberIdCheck(memberDTO);
-
+		
 		mv.addObject("result", check);
 		mv.setViewName("common/ajaxResult");
 		return mv;
@@ -323,7 +323,4 @@ public class MemberController {
 			return mv;
 		}
 		
-	
-
-
 }

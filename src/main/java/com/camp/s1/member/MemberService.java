@@ -382,17 +382,5 @@ public class MemberService {
 			
 			return ar;
 		}
-		
-		public List<MemberDTO> getMemberListTop(Pager pager) throws Exception {
-			pager.setPerPage(20L);
-			pager.makeRow();
-			
-			List<MemberDTO> ar = memberDAO.getMemberList(pager);
-			
-			return ar;
-		}
-
-
-
-			
+	
 }

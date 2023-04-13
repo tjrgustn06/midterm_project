@@ -374,9 +374,6 @@
 							<button id="updCancel" class="genric-btn danger" type="button">취소</button>
 							<button id="updReg" class="genric-btn success" type="button">등록</button>
 						</div>
-						<!-- <div class="d-flex justify-content-center my-2">
-							<button id="consoleSign" class="genric-btn warning" type="button">console</button>
-						</div> -->
 					</div>
 
 				</div>

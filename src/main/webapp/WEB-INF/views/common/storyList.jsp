@@ -40,7 +40,7 @@
 						</div>
 						<c:if test="${!empty dto.boardFileDTOs}">
 							<div id="carouselExampleInterval${dto.num}" class="carousel slide" data-bs-ride="carousel">
-								<div class="carousel-inner">
+								<div class="carousel-inner" style="width: 100%; height: auto;">
 									<c:forEach items="${dto.boardFileDTOs}" var="fileDTO" varStatus="i">
 										<c:if test="${i.first}">
 											  <div class="carousel-item imageBoxOther active" data-bs-interval="100000">
@@ -54,17 +54,18 @@
 										</c:if>
 
 									</c:forEach>
+									<button class="carousel-control-prev" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Previous</span>
+									  </button>
+									  <button class="carousel-control-next" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Next</span>
+									  </button>
 								</div>
 						  </div>
 						
-							<button class="carousel-control-prev" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Previous</span>
-							  </button>
-							  <button class="carousel-control-next" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Next</span>
-							  </button>
+
 						  
 					
 					</c:if>
@@ -121,8 +122,8 @@
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-board-num="${dto.num}"></button>
 									</div>
 									<div class="modal-body">
-										<div class="d-flex flex-column mb-3">
-											<div class="card col-md-5 mx-5">
+										<div class=" mb-3">
+											<div class="card col-md-10 mx-5">
 												<div class="card-body">
 													<div class="" style="height: 30px;">
 														<span class="card-title" style="float: left;">${dto.writer}</span>
@@ -141,7 +142,7 @@
 														</span>
 													</div>
 													<c:if test="${!empty dto.boardFileDTOs}">
-														<div id="carouselExampleInterval${dto.num}" class="carousel slide" data-bs-ride="carousel">
+														<div id="carouselModalInterval${dto.num}" class="carousel slide" data-bs-ride="carousel">
 															<div class="carousel-inner">
 																<c:forEach items="${dto.boardFileDTOs}" var="fileDTO" varStatus="i">
 																	<c:if test="${i.first}">
@@ -159,11 +160,11 @@
 															</div>
 													</div>
 													
-														<button class="carousel-control-prev" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="prev">
+														<button class="carousel-control-prev" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselModalInterval${dto.num}" data-bs-slide="prev">
 															<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 															<span class="visually-hidden">Previous</span>
 														</button>
-														<button class="carousel-control-next" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselExampleInterval${dto.num}" data-bs-slide="next">
+														<button class="carousel-control-next" style="width: auto; height: auto; margin: 0 10px;" type="button" data-bs-target="#carouselModalInterval${dto.num}" data-bs-slide="next">
 															<span class="carousel-control-next-icon" aria-hidden="true"></span>
 															<span class="visually-hidden">Next</span>
 														</button>

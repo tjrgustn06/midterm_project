@@ -77,6 +77,11 @@
 	  	WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
+  	<select id="getReportDetail" parameterType="ReportDTO" resultType="ReportDTO">
+  		SELECT * FROM REPORT
+  		WHERE REPORTNUM = #{reportNum}
+  	</select>
+  	
   	<update id="setReportResult" parameterType="ReportDTO">
   		UPDATE REPORT SET REPORTRESULT = #{reportResult}
   		WHERE REPORTNUM = #{reportNum}
@@ -91,6 +96,8 @@
   	  	UPDATE STORYCOMMENT SET CONTENTS = #{contents}
   		WHERE COMMENTNUM = #{commentNum} 
   	</update>
+  	
+  	
   	
   	
   	

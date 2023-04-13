@@ -37,6 +37,10 @@ public class ReportDAO {
 		return sqlSession.selectList(NAMESPACE + "getReportList", pager);
 	}
 	
+	public ReportDTO getReportDetail(ReportDTO reportDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getReportDetail", reportDTO);
+	}
+	
 	public Long getTotalCount(Pager pager) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getTotalCount", pager);
 	}

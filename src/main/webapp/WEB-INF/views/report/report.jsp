@@ -36,7 +36,14 @@
 				  </div>
 				</div>
 				
-				
+				<div class="col-auto">
+					<label for="kind" class="visually">신고 유형</label> 
+					<select class="form-select" name="reportType" id="reportType" aria-label="Default select example">
+						<option value="욕설/비방" selected>욕설/비방</option>
+						<option value="도배">도배</option> 					
+						<option value="광고">광고</option> 
+					</select>						
+				</div>
 				
 				<div class="mb-5">
 				  <label for="contents" class="form-label">신고 사유</label>

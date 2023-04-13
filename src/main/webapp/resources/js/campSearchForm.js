@@ -14,7 +14,6 @@ $('#doName').change(function(){
 })
 
 $('#doName').on('propertychange change keyup paste input',function(){
-    console.log('sdfdsfdsfdsfdsf')
     getSigunguList();
 })
 
@@ -40,7 +39,6 @@ function getSigunguList(){
                 success : function(data){
                     $('#sigunguName').empty();
                     $(data).each(function() {
-                        console.log(this.doName + this.sigunguName);
                         str += '<option value="'+this.sigunguName+'">'+this.sigunguName+'</option>';
                     });
                     $('#sigunguName').append(str);
@@ -183,38 +181,43 @@ function getSearchList() {
     })
 }
 
+//폼이 submit 됐을때 유효성 검사
 $('#addFrm').submit(function(e){
     e.preventDefault();
 
-    let chk = chkValidation();
+    let chk = chkValidation($('#datepicker').val());
 
-    if(chk) {
-        $(this).unbind('submit').submit();
+    if(!chk) {
+        alert('캠핑 일자를 선택해주세요');
+        return;
     }
+
+    chk = chkValidation($('#title').val());
+
+    if(!chk) {
+        alert('제목을 입력해주세요');
+        return;
+    }
+
+    chk = chkValidation($('#contents').val());
+
+    if(!chk) {
+        alert('글 내용을 입력해주세요')
+        return;
+    }
+
+
+    $(this).unbind('submit').submit();
+ 
 })
 
-function chkValidation(){
+//유효성 검사 함수
+function chkValidation(element){
     //유효성 체크가 필요한 element가져오기
-    let datepicker = $('#datepicker').val();
-    let title = $('#title').val();
-    let contents = $('#contents').val();
 
     let chk = true;
 
-    if(datepicker == '') {
-        alert('캠핑 일자를 선택해주세요');
-        chk = false;
-        return chk;
-    }
-
-    if(title == '') {
-        alert('제목을 입력해주세요');
-        chk = false;
-        return chk;
-    }
-
-    if(contents == '') {
-        alert('글 내용을 입력해주세요')
+    if(element == '') {
         chk = false;
         return chk;
     }

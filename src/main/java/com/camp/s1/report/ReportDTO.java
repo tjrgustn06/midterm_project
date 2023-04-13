@@ -15,6 +15,7 @@ public class ReportDTO {
 	private String reportedUser;
 	private String reportContents;
 	private String reportedContents;
+	private String reportType;
 	private Date reportDate;
 	
 	
@@ -80,6 +81,13 @@ public class ReportDTO {
 	public void setReportedContents(String reportedContents) {
 		this.reportedContents = reportedContents;
 	}
+	public String getReportType() {
+		return reportType;
+	}
+	public void setReportType(String reportType) {
+		this.reportType = reportType;
+	}
+	
 	
 
 	

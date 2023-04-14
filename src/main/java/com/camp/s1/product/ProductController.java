@@ -59,6 +59,7 @@ public class ProductController {
 	@GetMapping("productListTop")
 	public ModelAndView getProductListTop(Pager pager) throws Exception {
 		ModelAndView mv =new ModelAndView();
+		pager.setPerPage(4L);
 		List<ProductDTO> ar = productService.getProductList(pager);
 		mv.addObject("list", ar);
 		mv.setViewName("common/productTopResult");

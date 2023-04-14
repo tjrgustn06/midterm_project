@@ -39,7 +39,6 @@ public class ProductService {
 	
 	// productListTop 출력
 	public List<ProductDTO> getProductListTop(Pager pager) throws Exception {
-		pager.setPerPage(4L);
 		pager.makeRow();
 		
 		List<ProductDTO> ar = productDAO.getProductList(pager);

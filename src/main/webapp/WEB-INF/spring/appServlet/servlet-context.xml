@@ -109,10 +109,8 @@
 		<interceptor>
 			<mapping path="/qna/delete"/>
 			<mapping path="/qna/update"/>
-			<mapping path="/qna/boardFileDelete"/>
 			<mapping path="/story/delete"/>
 			<mapping path="/story/update"/>
-			<mapping path="/story/boardFileDelete"/>
 			<mapping path="/camp/review/update"/>
 			<mapping path="/camp/review/delete"/>
 			<mapping path="/product/review/update"/>

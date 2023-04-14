@@ -203,6 +203,7 @@ email.addEventListener("keyup", function(){
 
     xhttp.addEventListener("readystatechange", function(){
         if(this.readyState == 4 && this.status == 200){
+            console.log(this.responseText.trim())
             if(this.responseText.trim() == 'true'){
                 emailResult.innerHTML = '사용 가능한 이메일 입니다.';
                 checks[7] = true;
@@ -218,6 +219,7 @@ email.addEventListener("keyup", function(){
         }
         
     })
+
 })
     email.addEventListener("keyup", function(){
     if(email.value.length != 0){

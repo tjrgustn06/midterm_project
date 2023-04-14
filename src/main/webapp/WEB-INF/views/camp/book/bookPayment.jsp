@@ -88,15 +88,15 @@
 
 			<c:if test="${bookDTO.status eq '입금대기'}">
 				<div class="d-flex justify-content-between my-2">
-					<button type="button" class="payReturn genric-btn primary">돌아가기</button>
-					<button id="payCancel" type="button" class="genric-btn primary">예약취소</button>
-					<button id="payConfirm" type="button" class="genric-btn success">결제하기</button>
+					<button type="button" class="payReturn genric-btn primary-border">돌아가기</button>
+					<button id="payCancel" type="button" class="genric-btn primary-border">예약취소</button>
+					<button id="payConfirm" type="button" class="genric-btn success-border">결제하기</button>
 				</div>
 			</c:if>
 			<c:if test="${bookDTO.status eq '결제완료'}">
 				<div class="d-flex justify-content-between my-2">
-					<button type="button" class="payReturn genric-btn primary">돌아가기</button>
-					<button id="payRollback" type="button" class="genric-btn danger">결제취소</button>
+					<button type="button" class="payReturn genric-btn primary-border">돌아가기</button>
+					<button id="payRollback" type="button" class="genric-btn danger-border">결제취소</button>
 				</div>
 			</c:if>
 			

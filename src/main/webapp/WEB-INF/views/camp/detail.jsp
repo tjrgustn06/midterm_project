@@ -35,7 +35,7 @@
 	<!-- 예약목록 확인 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
 	<div class="d-flex justify-content-end">
 		<c:if test="${not empty member.roleName and member.roleName eq 'ADMIN' or member.roleName eq 'CAMPMANAGER'}">
-			<a class="genric-btn success" href="./book/list?campNum=${dto.campNum}">예약목록 확인</a>
+			<a class="genric-btn success-border" href="./book/list?campNum=${dto.campNum}">예약목록 확인</a>
 		</c:if>
 	</div>
 	
@@ -110,8 +110,8 @@
 				<!-- name은 파라미터 이름, value는 파라미터의 값 -->
 				<input type="hidden" name="campNum" value="${dto.campNum}">
 				<div class="d-flex justify-content-between my-2" id="userBtn">
-					<button id="detList" type="button" class="genric-btn primary">목록으로</button>
-					<button id="detBook" type="button" class="genric-btn success">사이트선택</button>
+					<button id="detList" type="button" class="genric-btn primary-border">목록으로</button>
+					<button id="detBook" type="button" class="genric-btn success-border">사이트선택</button>
 				</div>
 			</form>
 		</div>
@@ -430,8 +430,8 @@
 						</form>
 					</div>
 					<div class="d-flex justify-content-center my-3">
-						<button id="reviewCancle" type="button" class="genric-btn danger medium" style="display: none;">취소</button>
-						<button id="reviewAdd" type="button" class="genric-btn success medium">리뷰작성</button>
+						<button id="reviewCancle" type="button" class="genric-btn danger-border medium" style="display: none;">취소</button>
+						<button id="reviewAdd" type="button" class="genric-btn success-border medium">리뷰작성</button>
 					</div>
 
 					<div class="row" id="reviewList">
@@ -454,8 +454,8 @@
 				<div class="d-flex justify-content-between my-2" id="adminBtn">
 					<!-- 차후에 권한이 있으면 update, delete 버튼 나타내기 + 백엔드에서 검증까지 -->
 					<c:if test="${not empty member.roleName and member.roleName eq 'ADMIN' or member.roleName eq 'CAMPMANAGER'}">
-						<button id="detDelete" type="button" class="genric-btn danger">삭제</button>
-						<button id="detUpdate" type="button" class="genric-btn primary">수정</button>
+						<button id="detDelete" type="button" class="genric-btn danger-border">삭제</button>
+						<button id="detUpdate" type="button" class="genric-btn primary-border">수정</button>
 					</c:if>
 				</div>
 			</form>

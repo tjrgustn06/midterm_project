@@ -26,6 +26,7 @@
 	</div>
 </section>
 <!--================Banner Area =================-->
+<div class="container-fluid col-lg-9 my-5">
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
@@ -40,13 +41,15 @@
 					<label>Email</label>
 					<input class="w3-input" type="text" id="email" data-pw-email="${memberDTO.email}" name="email" placeholder="이메일을 입력하세요" required>
 				</p>
-				<p class="w3-center">
+				<div class="d-flex justify-content-between my-3">
 					<button type="button" onclick="history.go(-1);" class="genric-btn danger-border">돌아가기</button>
 					<button type="button" id=findBtn class="genric-btn success-border">찾기</button>
-				</p>
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
 <c:import url="../template/footer.jsp"></c:import>
 <c:import url="../template/common_js.jsp"></c:import>
 	<script>

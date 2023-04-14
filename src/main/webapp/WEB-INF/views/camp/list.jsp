@@ -48,7 +48,7 @@
 				<input type="text" class="form-control" name="search" value="${pager.search}" id="search" placeholder="검색어를 입력하세요">
 			</div>
 			<div class="col-4">
-				<button type="submit" class="genric-btn primary mb-3">검색</button>
+				<button type="submit" class="genric-btn primary-border mb-3">검색</button>
 			</div>
 		</form>	
 	</div>
@@ -57,7 +57,7 @@
 	<!-- 캠프장 등록 버튼 --> <!-- 차후 멤버등급 관련해서 조건문 추가 필요 -->
 	<div class="d-flex justify-content-end">
 		<c:if test="${not empty member.roleName and member.roleName eq 'ADMIN' or member.roleName eq 'CAMPMANAGER'}">
-			<a class="genric-btn success" href="./add">등록</a>
+			<a class="genric-btn success-border" href="./add">등록</a>
 		</c:if>
 	</div>
 	

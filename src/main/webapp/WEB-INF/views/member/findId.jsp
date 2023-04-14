@@ -27,6 +27,7 @@
 	</div>
 </section>
 <!--================Banner Area =================-->
+<div class="container-fluid col-lg-9 my-5">
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<form action="../member/findId" method="post">
@@ -34,15 +35,17 @@
 					<h3>${id}</h3>
 				</div>
 				<div>
-					<p class="w3-center">
-						<a type="button" href="./memberLogin" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Login</a>
-						<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
-					</p>
+					<div class="d-flex justify-content-between my-3">
+						<button type="button" onclick="history.go(-1);" class="genric-btn danger-border">돌아가기</button>
+						<a type="button" href="./memberLogin" class="genric-btn success-border">로그인</a>
+					</div>
 				</div>
 			</form>
 		</div>
 	</div>
-	<c:import url="../template/footer.jsp"></c:import>
+</div>
+
+<c:import url="../template/footer.jsp"></c:import>
 <c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

@@ -39,7 +39,7 @@
 
 	<!-- 돌아가기 버튼 -->
 	<div class="d-flex justify-content-center my-2">
-		<button id="myBookCancel" type="button" class="genric-btn primary">돌아가기</button>
+		<button id="myBookCancel" type="button" class="genric-btn primary-border">돌아가기</button>
 	</div>
 
 	<hr>
@@ -60,7 +60,7 @@
 						<h6><i class="fa-solid fa-circle-info fa-sm"></i> 예약번호 ${bookDTO.orderNum}</h6>
 						<input type="hidden" name="num" value="${bookDTO.num}" data-site-idx="${i.count}">
 						<div class="d-flex justify-content-end mb-2">
-							<button id="myBookBtn${i.count}" type="button" class="myBookBtn genric-btn success medium" data-site-idx="${i.count}">결제/취소</button>
+							<button id="myBookBtn${i.count}" type="button" class="myBookBtn genric-btn success-border medium" data-site-idx="${i.count}">결제/취소</button>
 						</div>
 						<div class="siteInfo input-group mb-2">
 							<span class="input-group-text" id="siteName">사이트이름</span>

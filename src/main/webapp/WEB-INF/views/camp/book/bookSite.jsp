@@ -66,7 +66,7 @@
 	<form action="./siteSearch" id="searchFrm" method="post">
 		<input type="hidden" name="campNum" value="${campDTO.campNum}">
 		<div class="d-flex justify-content-center my-2">
-			<button id="siteCancel" type="button" class="genric-btn primary">돌아가기</button>
+			<button id="siteCancel" type="button" class="genric-btn primary-border">돌아가기</button>
 		</div>
 	</form>
 	<!-- 검색 끝 -->

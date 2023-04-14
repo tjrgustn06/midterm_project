@@ -12,16 +12,18 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-
 <!--================Banner Area =================-->
-<section class="breadcrumb_area blog_banner_two">
+<!-- <section class="breadcrumb_area blog_banner_two">
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-		<h2 class="page-cover-tittle">회원 목록</h2>
+			<h2 class="page-cover-tittle">ADMIN</h2>
+				<ol class="breadcrumb">
+					<li>회원관리 페이지에요</li>
+				</ol>
 		</div>
 	</div>
-</section>
+</section> -->
 <!--================Banner Area =================-->
 
 <table class="table table-striped">

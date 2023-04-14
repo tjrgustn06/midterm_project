@@ -99,7 +99,7 @@
 
 
 	<div class="row">
-		 <c:if test="${member.id eq dto.writer}"> 
+		 <c:if test="${member.id eq dto.writer || member.roleName eq 'MANAGER' || member.roleName eq 'ADMIN'}"> 
 			<div class="col-md-8">
 				<form action="./update" id="frm" method="GET">
 					<input type="hidden" name="num" value="${dto.num}">

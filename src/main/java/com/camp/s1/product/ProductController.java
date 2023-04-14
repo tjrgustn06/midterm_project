@@ -40,6 +40,7 @@ public class ProductController {
 		@GetMapping("cartBar")
 		public ModelAndView getcartBarList(Pager pager, HttpSession session) throws Exception {
 			ModelAndView mv = new ModelAndView();
+			pager.setPerPage(2L);
 			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 			if(memberDTO==null) {
 				mv.addObject("cartList", memberDTO);

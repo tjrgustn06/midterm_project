@@ -24,7 +24,6 @@ public class ProductService {
 	
 	// List출력
 	public List<ProductDTO> getProductList(Pager pager) throws Exception {
-		pager.setPerPage(12L);
 		pager.makeRow();
 		
 		
@@ -40,7 +39,6 @@ public class ProductService {
 	
 	// productListTop 출력
 	public List<ProductDTO> getProductListTop(Pager pager) throws Exception {
-		pager.setPerPage(4L);
 		pager.makeRow();
 		
 		List<ProductDTO> ar = productDAO.getProductList(pager);
@@ -54,7 +52,6 @@ public class ProductService {
 	
 	// CartBar 출력
 	public List<CartDTO> getCartBarList(Pager pager) throws Exception {
-		pager.setPerPage(2L);
 		pager.makeRow();
 		List<CartDTO> ar = productDAO.getCartBarList(pager);
 		for(CartDTO cartDTO:ar) {

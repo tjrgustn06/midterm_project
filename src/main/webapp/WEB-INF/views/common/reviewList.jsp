@@ -60,7 +60,7 @@
 				  	</c:when>
 				 	<c:otherwise>
 				 		<tr height="200px">
-				 			<td class="align-middle text-center" colspan="20">검색 결과가 없습니다.</td>
+				 			<td class="align-middle text-center" colspan="20">등록된 리뷰가 존재하지 않습니다.</td>
 				 		</tr>
 				 	</c:otherwise>
 			  	</c:choose>

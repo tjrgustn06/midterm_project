@@ -18,7 +18,7 @@
 		<div class="page-cover text-center">
 			<h2 class="page-cover-tittle">MYPAGE</h2>
 				<ol class="breadcrumb">
-					<li>회원님의 소중한 정보에요</li>
+					<li>${dto.name}님 환영해요!</li>
 				</ol>
 		</div>
 	</div>
@@ -28,42 +28,43 @@
 <!--================Member 정보 =================-->
 <div class="container-fluid col-lg-9 my-5">
 	<!-- <div class="row text-center"> -->
+		<h3><i class="fa-solid fa-circle-info fa-sm"></i> ${dto.name} 님의 정보</h3>
 		<div class="mb-3">
 			<label for="name" class="form-label fw-bold">아이디</label> 
-			<input type="text" name="id" class="form-control" id="name" value="${dto.id}">
+			<input type="text" name="id" class="form-control" id="name" value="${dto.id}" readonly>
 		</div>
 	
 		<div class="mb-3">
 			<label for="phone" class="form-label fw-bold">전화번호</label> 
-			<input type="tel" name="phone" class="form-control" id="phone" value="${dto.phone}">
+			<input type="tel" name="phone" class="form-control" id="phone" value="${dto.phone}" readonly>
 		</div>
 		
 		<div class="mb-3">
 			<label for="email" class="form-label fw-bold ">이메일</label> 
-			<input type="email" name="email" class="form-control" id="email" value="${dto.email}">
+			<input type="email" name="email" class="form-control" id="email" value="${dto.email}" readonly>
 		</div>
 		
 		<div class="mb-3">
-			<label for="roleName" class="form-label fw-bold ">roleName</label> 
-			<input type="text" readonly name="roleName" class="form-control" id="roleName" value="${dto.roleName}">
+			<label for="roleName" class="form-label fw-bold ">권한등급</label> 
+			<input type="text" readonly name="roleName" class="form-control" id="roleName" value="${dto.roleName}" readonly>
 		</div>
 		
 		<div class="mb-3" id="addressList">
 			<label for="address" class="form-label fw-bold">주소</label>
-			<button type="button" id="addressAdd">주소추가</button>
+			<!-- <button type="button" id="addressAdd">주소추가</button> -->
 			<c:forEach items="${dto.addressDTOs}" var="addressDTO">
 				<div id="oldAddress${addressDTO.addressNum}">	
 					<p>${addressDTO.addressName}</p>
 					<input type="text" class="form-control" value="${addressDTO.address}" readonly>
 					<input type="text" class="form-control" value="${addressDTO.addressDetail}" readonly>
 				</div>
-				<button type="button" id="addressUpdate${addressDTO.addressNum}" class="addressUpdate" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}" data-address-address="${addressDTO.address}" data-address-detail="${addressDTO.addressDetail}">${addressDTO.addressName}주소 수정</button>
-				<button type="button" id="addressDelete${addressDTO.addressNum}" class="addressDelete" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}">${addressDTO.addressName}주소 삭제</button>
+				<!-- <button type="button" id="addressUpdate${addressDTO.addressNum}" class="addressUpdate" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}" data-address-address="${addressDTO.address}" data-address-detail="${addressDTO.addressDetail}">${addressDTO.addressName}주소 수정</button>
+				<button type="button" id="addressDelete${addressDTO.addressNum}" class="addressDelete" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}">${addressDTO.addressName}주소 삭제</button> -->
 			</c:forEach>
 		</div>
 
 
-		<h3 id="id" class="id">ID : ${dto.id}</h3>
+		<!-- <h3 id="id" class="id">ID : ${dto.id}</h3>
 		<h3>Name : ${dto.name}</h3>
 		<h3>Phone : ${dto.phone}</h3>
 		<h3>Email : ${dto.email}</h3>
@@ -71,8 +72,7 @@
 		<c:forEach items="${dto.addressDTOs}" var="addressDTO">
 			<h3>AddressName : ${addressDTO.addressName}</h3>
 			<h3>Address : ${addressDTO.address} ${addressDTO.addressDetail}</h3>
-		</c:forEach>
-		<!-- </div> -->
+		</c:forEach> -->
 		
 		<!-- <script>
 			let addressName = '';

@@ -62,7 +62,7 @@ $(function() {
 		</div>
 	</section>
 	<!--================Banner Area =================-->
-<div class="container-fluid">
+<div class="container-fluid col-lg-9 my-5">
 
     <div class="row mb-4 border-bottom border-info">
         <h1 class="col-md-7 mx-auto text-center pb-3 fs-2">Story Add 페이지</h1><br>

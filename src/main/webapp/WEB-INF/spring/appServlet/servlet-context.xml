@@ -66,6 +66,7 @@
 			<exclude-mapping path="/member/memberJoin"/>
 			<exclude-mapping path="/member/memberLogin"/>
 			<exclude-mapping path="/member/memberAgree"/>
+			<exclude-mapping path="/member/memberEmailCheck"/>
 			<exclude-mapping path="/member/findIdForm"/>
 			<exclude-mapping path="/member/findId"/>
 			<exclude-mapping path="/member/findPw"/>

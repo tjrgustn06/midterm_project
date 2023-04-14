@@ -85,10 +85,10 @@
 	  
 			
 		<div class="mb-3">
-				<textarea class="form-control" id="replyContents" rows="3" name="contents" ></textarea>
+				<textarea class="form-control" id="replyContents" rows="3" name="contents" style="resize: none;"></textarea>
 			</div>
-			<div class="mb-3">
-					<button class="btn btn-primary col-md-2 offset-md-10" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
+			<div class="d-flex justify-content-end my-2">
+					<button class="genric-btn success-border small" data-board-num="${dto.num}" id="replyAdd">댓글 작성</button>
 			</div>
 			<div class="row col-md-10 offset-md-1" id="commentList">
 			</div>
@@ -98,21 +98,25 @@
 
 
 
-	<div class="row">
+	<div class="">
+		<div class="d-flex justify-content-center my-2">
+			<a href="./list" class="genric-btn primary-border">목록으로</a>	
+		</div>
 		 <c:if test="${member.id eq dto.writer || member.roleName eq 'MANAGER' || member.roleName eq 'ADMIN'}"> 
-			<div class="col-md-8">
+			<div class="my-2">
 				<form action="./update" id="frm" method="GET">
 					<input type="hidden" name="num" value="${dto.num}">
 						
-					<!-- delete시엔 post방식 update시엔 get -->
-					<button type="submit" class="btn btn-primary col-md-2 mx-2" id="update">글 수정</button>
+					<div class="d-flex justify-content-between">
+						<!-- delete시엔 post방식 update시엔 get -->
+						<button type="button" class="genric-btn danger-border" id="delete" data-delete="${dto.num}">삭제하기</button>
+						<button type="submit" class="genric-btn primary-border" id="update">수정하기</button>
+					</div>
 					
-					<button type="button" class="btn btn-primary col-md-2 mx-2" id="delete" data-delete="${dto.num}">글 삭제</button>
 				</form>
 			</div>
 		 </c:if> 
 		
-		<a href="./list" class="btn btn-primary col-md-2 mx-1">목록으로</a>	
 		
 
 

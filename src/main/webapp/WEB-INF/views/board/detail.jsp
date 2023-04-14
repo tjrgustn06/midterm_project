@@ -42,7 +42,7 @@
 
 		
 		<div class="row col-md-12 mx-auto">
-
+				<div id="boardName" data-board-name="${boardName}"></div>
 				<div class="row mb-3">
 					<div class="col-sm-10">
 						<h2>${dto.title}</h2>

@@ -52,7 +52,12 @@
 						    <tr>
 						      <th scope="row">${dto.num}</th>
 						      <td><a href="./detail?num=${dto.num}">${dto.title}</a></td>
-						      <td>${dto.writer}</td>
+							  <c:if test="${boardName eq 'notice'}">
+								<td>관리자</td>	
+							  </c:if>
+							  <c:if test="${boardName ne 'notice'}">
+								<td>${dto.writer}</td>
+							  </c:if>
 						      <td id="reg${dto.num}">
 								<script>
 									$(document).ready(function(){

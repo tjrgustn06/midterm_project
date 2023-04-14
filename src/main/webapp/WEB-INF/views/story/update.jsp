@@ -62,15 +62,15 @@ $(function() {
 		</div>
 	</section>
 	<!--================Banner Area =================-->
-<div class="container-fluid">
+<div class="container-fluid col-lg-9 my-5">
 
-    <div class="row mb-4 border-bottom border-info">
+    <!-- <div class="row mb-4 border-bottom border-info">
         <h1 class="col-md-7 mx-auto text-center pb-3 fs-2">Story Add 페이지</h1><br>
-    </div>
+    </div> -->
     
         <div class="row search_box">
 
-            <div class="row col-md-8 mx-auto border-bottom ">
+            <div class="row col-md-8 mx-auto border-bottom">
                 <form action="./update" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="num" value="${dto.num}">
                     <div class="row mb-3">
@@ -82,68 +82,69 @@ $(function() {
 
                     <div class="row mb-3">
                         <div class="form_w">
-                            <strong class="title">지역</strong>
-                            <ul style="list-style-type: none;">
-                                <li class="tt">
-                                    <div class="select_box">
-                                        <label for="doName">도/특별시</label>
-                                        <select id="doName" name="doName" class="detail_select" title="도/특별시">
-                                            <option value="">전체</option>
-                                            <option value="서울">서울시</option>
-                                            <option value="부산">부산시</option>
-                                            <option value="대구">대구시</option>
-                                            <option value="인천">인천시</option>
-                                            <option value="광주">광주시</option>
-                                            <option value="대전">대전시</option>
-                                            <option value="울산">울산시</option>
-                                            <option value="세종">세종시</option>
-                                            <option value="경기">경기도</option>
-                                            <option value="강원">강원도</option>
-                                            <option value="충청북">충청북도</option>
-                                            <option value="충청남">충청남도</option>
-                                            <option value="전라북">전라북도</option>
-                                            <option value="전라남">전라남도</option>
-                                            <option value="경상북">경상북도</option>
-                                            <option value="경상남">경상남도</option>
-                                            <option value="제주">제주도</option>
+                            <strong>지역</strong>
+                            <div class="mx-auto">
+                                <ul style="list-style-type: none;">
+                                    <li class="tt">
+                                        <div class="select_box">
+                                            <label for="doName">도/특별시</label>
+                                            <select id="doName" name="doName" class="detail_select" title="도/특별시">
+                                                <option value="">전체</option>
+                                                <option value="서울">서울시</option>
+                                                <option value="부산">부산시</option>
+                                                <option value="대구">대구시</option>
+                                                <option value="인천">인천시</option>
+                                                <option value="광주">광주시</option>
+                                                <option value="대전">대전시</option>
+                                                <option value="울산">울산시</option>
+                                                <option value="세종">세종시</option>
+                                                <option value="경기">경기도</option>
+                                                <option value="강원">강원도</option>
+                                                <option value="충청북">충청북도</option>
+                                                <option value="충청남">충청남도</option>
+                                                <option value="전라북">전라북도</option>
+                                                <option value="전라남">전라남도</option>
+                                                <option value="경상북">경상북도</option>
+                                                <option value="경상남">경상남도</option>
+                                                <option value="제주">제주도</option>
 
-                                        </select>
-                                    </div>
-                                    </li>
-                                <li>
-                                    <div class="select_box">
-                                        <label for="sigunguName">시/군/지역</label>
-                                        <select id="sigunguName" name="sigunguName" class="detail_select" title="시/군/지역">
-                                            <option value="">전체</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <!-- <li class="tt"><strong class="title">위치</strong>
-                                <div class="select_box">
-                                    <label for="r_select03">전체</label> <select class="detail_select" id="r_select03">
-                                        <option selected="selected">선택1</option>
-                                        <option>선택2</option>
-                                        <option>선택3</option>
-                                        <option>선택4</option>
-                                    </select>
-                                </div></li> -->
-                                <!-- <li class="tt"><strong class="title">테마</strong>
-                                    <div class="select_box them">
-                                        <label for="searchLctCl">전체</label> <select class="detail_select" name="searchLctCl" id="searchLctCl" title="테마선택">
-                                            <option value="">전체테마</option>
-                                            <option value="47" >해변</option>
-                                            <option value="48" >섬</option>
-                                            <option value="49" >산</option>
-                                            <option value="50" >숲</option>
-                                            <option value="51" >계곡</option>
-                                            <option value="52" >강</option>
-                                            <option value="53" >호수</option>
-                                            <option value="54" >도심</option>
                                             </select>
-                                    </div>
-                                </li> -->
-                            </ul>
-                            <ul style="list-style-type: none;">
+                                        </div>
+                                        </li>
+                                    <li>
+                                        <div class="select_box">
+                                            <label for="sigunguName">시/군/지역</label>
+                                            <select id="sigunguName" name="sigunguName" class="detail_select" title="시/군/지역">
+                                                <option value="">전체</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <!-- <li class="tt"><strong class="title">위치</strong>
+                                    <div class="select_box">
+                                        <label for="r_select03">전체</label> <select class="detail_select" id="r_select03">
+                                            <option selected="selected">선택1</option>
+                                            <option>선택2</option>
+                                            <option>선택3</option>
+                                            <option>선택4</option>
+                                        </select>
+                                    </div></li> -->
+                                    <!-- <li class="tt"><strong class="title">테마</strong>
+                                        <div class="select_box them">
+                                            <label for="searchLctCl">전체</label> <select class="detail_select" name="searchLctCl" id="searchLctCl" title="테마선택">
+                                                <option value="">전체테마</option>
+                                                <option value="47" >해변</option>
+                                                <option value="48" >섬</option>
+                                                <option value="49" >산</option>
+                                                <option value="50" >숲</option>
+                                                <option value="51" >계곡</option>
+                                                <option value="52" >강</option>
+                                                <option value="53" >호수</option>
+                                                <option value="54" >도심</option>
+                                                </select>
+                                        </div>
+                                    </li> -->
+                                </ul>
+                                <ul style="list-style-type: none;">
                                 <li class="tt top_kwdSearch">
                                     <div class="input_search">
                                         <fieldset class="totalSearch">
@@ -154,10 +155,11 @@ $(function() {
                                 <li class="tt top_kwdSearch">
                                     <div class="input_search">
                                         <fieldset class="totalSearch">
-                                            <button class="btn btn-primary" style="vertical-align: middle;" type="button" id="searchBtn">검색</button>
+                                            <button class="genric-btn success-border small" style="vertical-align: middle;" type="button" id="searchBtn">검색</button>
                                         </fieldset>
                                     </div>
                                 </li>
+                            </div>
 
 
                                 <!-- <li class="fw_2li">
@@ -212,10 +214,10 @@ $(function() {
                         
             <div class="mb-5">
                 <label for="contents" class="form-label">내용</label>
-                <textarea class="form-control" name="contents" id="contents" rows="8">${dto.contents }</textarea>
+                <textarea class="form-control" name="contents" id="contents" rows="8" style="resize: none;">${dto.contents}</textarea>
             </div>
 
-            <div id="fileList" class="row my-3">
+            <div id="fileList" class="row mx-auto col-3 my-3">
                 <!-- <div class="row mb-2" id="d+idx">
                     <label for="" class="col-sm-1 col-form-label">Image</label>
                     <div class="input-group mb-2 col-sm-10">
@@ -232,11 +234,11 @@ $(function() {
                     </div>
                 </c:forEach>
 
-                <button class="col-md-1 offset-md-11 btn btn-primary" type="button" id="addBtn">Add</button>
+                <button class="genric-btn primary-border small" type="button" id="addBtn">사진등록</button>
             </div> 
 
-            <div class="row mt-5 mb-3 col-md-2 offset-md-10">
-                <button class="btn btn-primary " type="submit">수정하기</button>
+            <div class="d-flex justify-content-center my-3"">
+                <button class="genric-btn success-border" type="submit">수정하기</button>
             </div>
 
 

@@ -16,12 +16,18 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-		<h2 class="page-cover-tittle">비밀변호 변경</h2>
+			<h2 class="page-cover-tittle">MYPAGE</h2>
+				<ol class="breadcrumb">
+					<li>${dto.name}님 환영해요!</li>
+				</ol>
 		</div>
 	</div>
 </section>
 <!--================Banner Area =================-->
-	<div class="container-fluid">
+	<div class="container-fluid col-lg-9 my-5">
+		<div class="row">
+			<h3><i class="fa-solid fa-circle-info fa-sm"></i> ${dto.name} 님의 정보</h3>
+		</div>
 	<div class="row justify-content-center">
 	<form id="pwForm" action="memberPwChange" method="post">	
 					<input type="hidden" name="id" value="${ member.id }">
@@ -37,8 +43,8 @@
 						<label>새 비밀번호 확인</label>
 						<input class="w3-input" type="password" id="pw2" type="password" required>
 					</p>
-					<p class="w3-center">
-						<button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">비밀번호 변경</button>
+					<p class="d-flex justify-content-center">
+						<button type="submit" id="joinBtn" class="genric-btn success-border">비밀번호 변경</button>
 	</p>
 	</form>
 	</div>

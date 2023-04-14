@@ -19,7 +19,10 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-		<h2 class="page-cover-tittle">아이디 찾기 결과</h2>
+			<h2 class="page-cover-tittle">SUPPORT</h2>
+				<ol class="breadcrumb">
+					<li>무엇을 도와드릴까요?</li>
+				</ol>
 		</div>
 	</div>
 </section>

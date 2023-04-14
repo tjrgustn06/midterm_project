@@ -23,11 +23,11 @@
                 </div>
             </div>
         </div>
-        <div class="hotel_booking_area position">
+        <!-- <div class="hotel_booking_area position">
             <div class="container">
                 <div class="hotel_booking_table">
                     <div class="col-md-3">
-                        <h2>캠핑장<br>예약</h2>
+                        <h2>캠핑장<br>검색</h2>
                     </div>
                     <div class="col-md-9">
                         <div class="boking_table">
@@ -35,11 +35,27 @@
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
                                         <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker1'>
-                                                <input type='text' class="form-control" placeholder="떠나는 날짜"/>
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                </span>
+                                            <div class='input-group date' id='selectDo'>
+                                                <select name="doName" id="doName" class="form-select">
+                                                    <option value="">전체</option>
+                                                    <option value="서울">서울시</option>
+                                                    <option value="부산">부산시</option>
+                                                    <option value="대구">대구시</option>
+                                                    <option value="인천">인천시</option>
+                                                    <option value="광주">광주시</option>
+                                                    <option value="대전">대전시</option>
+                                                    <option value="울산">울산시</option>
+                                                    <option value="세종">세종시</option>
+                                                    <option value="경기">경기도</option>
+                                                    <option value="강원">강원도</option>
+                                                    <option value="충청북">충청북도</option>
+                                                    <option value="충청남">충청남도</option>
+                                                    <option value="전라북">전라북도</option>
+                                                    <option value="전라남">전라남도</option>
+                                                    <option value="경상북">경상북도</option>
+                                                    <option value="경상남">경상남도</option>
+                                                    <option value="제주">제주도</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -47,38 +63,16 @@
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
                                         <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker11'>
-                                                <input type='text' class="form-control" placeholder="도착날짜"/>
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                </span>
+                                            <div class='input-group date' id='selectSigungu'>
+                                                <select name="sigunguName" id="sigunguName" class="form-select">
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-4">
-                                    <div class="book_tabel_item">
-                                        <div class="input-group">
-                                            <select class="wide">
-                                                <option data-display="인원">인원</option>
-                                                <option value="1">2</option>
-                                                <option value="2">4</option>
-                                                <option value="3">6</option>
-                                            </select>
-                                        </div>
-                                        <div class="input-group">
-                                            <select class="wide">
-                                                <option data-display="유형">유형</option>
-                                                <option value="1">캠핌</option>
-                                                <option value="2">글램핑</option>
-                                                <option value="3">카라반</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="col-md-4">
                                     <div class="book_tabel_item">
-                                        <a class="book_now_btn button_hover success" href="#">예약하기</a>
+                                        <a class="book_now_btn button_hover success" href="#">검색하기</a>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +80,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
     <!--================Banner Area =================-->
     
@@ -126,6 +120,7 @@
 <script src="/resources/js/calcDate.js"></script>
 <script src="/resources/js/storyListTop.js"></script>
 <script src="/resources/vendors/nice-select/js/jquery.nice-select.js"></script>
+<script src="/resources/js/campSearchForm.js"></script>
 <c:import url="./template/common_js.jsp"></c:import>
 </body>
 </html>

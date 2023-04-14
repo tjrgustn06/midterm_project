@@ -7,32 +7,39 @@
 <meta charset="UTF-8">
 <c:import url="../template/common_css.jsp"></c:import>
 <link rel="icon" href="/resources/images/logo.png" type="image/png">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>The Camp</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<div class="page-cover text-center">
-	<h2 class="page-cover-tittle">${boardName}</h2>
-	<c:if test="${boardName eq 'qna'}">
-		<ol class="breadcrumb">
-			<li>자유로운 정보 나눔 마당</li>
-		</ol>
-	</c:if>
-	<c:if test="${boardName eq 'notice'}">
-			<ol class="breadcrumb">
-				<li>공지사항</li>
-			</ol>
-		</c:if>
-</div>
-	
-	<div class="container-fluid my-3">
-		
-		<div class="row mb-4 border-bottom border-info">
-			<h1 class="col-md-7 mx-auto text-center pb-3 fs-2">${boardName} 페이지</h1><br>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+	<div class="container">
+		<div class="page-cover text-center">
+			<h2 class="page-cover-tittle">${boardName}</h2>
+			<c:if test="${boardName eq 'qna'}">
+				<ol class="breadcrumb">
+					<li>자유로운 정보 나눔 마당</li>
+				</ol>
+			</c:if>
+			<c:if test="${boardName eq 'notice'}">
+					<ol class="breadcrumb">
+						<li>공지사항</li>
+					</ol>
+				</c:if>
 		</div>
+	</div>
+</section>
+<!--================Breadcrumb Area =================-->
+	
+	<div class="container col-lg-9 my-5">
+		
 		
 		<div class="row col-md-8 mx-auto border-bottom ">
 			<form action="./add" method="post" id="addFrm" enctype="multipart/form-data">
+				
 				<div class="row mb-3">
 				  <label for="writer" class="col-sm-2 col-form-label">작성자</label>
 				  <div class="col-sm-10">
@@ -80,8 +87,9 @@
 	<script src="../resources/js/fileManager.js"></script>
 	<script src="../resources/js/boardForm.js"></script>
 	<script>
-		setParam('files');
+		setParam('addFiles');
 		setMax(5);
+		$('#contents').summernote();
 	</script>
 	<c:import url="../template/common_js.jsp"></c:import>	
 	

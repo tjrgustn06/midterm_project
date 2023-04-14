@@ -127,6 +127,7 @@ public class ProductController {
 	@PostMapping("update")
 	public ModelAndView setProductUpdate(ProductDTO productDTO, String [] gradeName, Integer [] gradeStock, Long [] price, MultipartFile [] addFiles, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		System.out.println(productDTO.getSummary());
 		ArrayList<ProductGradeDTO> productGradeDTOs = new ArrayList<ProductGradeDTO>();
 		for (int i = 0;i<gradeName.length;i++) {
 			ProductGradeDTO productGradeDTO = new ProductGradeDTO();

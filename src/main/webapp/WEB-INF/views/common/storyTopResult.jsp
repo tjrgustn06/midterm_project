@@ -22,7 +22,7 @@
 					<div class="col-md-12 my-1">
 						<h5 class="card-title" style="display: inline; font-weight: bold; font-size: 16px;">${dto.title}</h5>		
 					</div>
-					<c:if test="${!empty dto.boardFileDTOs}">
+					<c:if test="${not empty dto.boardFileDTOs}">
 						<div id="carouselExampleInterval${dto.num}" class="carousel slide" data-bs-ride="carousel">
 							<div class="carousel-inner">
 								<c:forEach items="${dto.boardFileDTOs}" var="fileDTO" varStatus="i">

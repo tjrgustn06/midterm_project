@@ -32,6 +32,11 @@
 </section>
 <!--================Breadcrumb Area =================-->
 	<div class="container col-lg-9 my-5">
+		<c:if test="${not empty member.roleName and member.roleName eq 'ADMIN' or member.roleName eq 'MANAGER'}">
+			<div class="d-flex justify-content-end">
+				<a href="./add" class="genric-btn success-border"> 글 쓰기</a>
+			</div>
+		</c:if>
 	
 	
 		<div class="row my-6">
@@ -115,9 +120,9 @@
 				<!-- 검색창  -->
 		<div class="row">
 			
-			<form class="row g-3" action="./list" method="get" id="searchForm">
+			<form class="row" action="./list" method="get" id="searchForm">
 				<input type="hidden" name="page" id="page" value="1">
-				<div class="row justify-content-center my-5">
+				<div class="row justify-content-center my-2">
 				 <div class="col-auto">
 					 <label for="kind" class="visually-hidden">Kind</label>
 					<select class="form-select" name="kind" id="kind" aria-label="Default select example">
@@ -134,18 +139,14 @@
 			    <input type="text" class="form-control" value="${pager.search}" name="search" id="search" placeholder="검색어를 입력하세요">
 			  </div>
 			  <div class="col-auto">
-			    <button type="submit" class="btn btn-primary mb-3">검색</button>
+			    <button type="submit" class="genric-btn primary-border mb-3">검색</button>
 			  </div>
 			  </div>
 			
 			</form>
 		
 		
-		<div class="row">
-			<div class="col-auto offset-md-10">
-				<a href="./add" class="btn btn-primary"> 글 쓰기</a>
-			</div>		
-		</div>
+				
 		</div>
 	</div>
 

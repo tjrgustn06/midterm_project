@@ -10,6 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.camp.s1.board.BbsDTO;
 import com.camp.s1.board.notice.NoticeDAO;
 import com.camp.s1.board.qna.QnaDAO;
+import com.camp.s1.board.story.StoryDAO;
 import com.camp.s1.camping.review.CampReviewDAO;
 import com.camp.s1.member.MemberDTO;
 import com.camp.s1.product.review.ProductReviewDAO;
@@ -20,6 +21,8 @@ public class OwnerCheckInterceptor extends HandlerInterceptorAdapter {
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private QnaDAO qnaDAO;
+	@Autowired
+	private StoryDAO storyDAO;
 	@Autowired
 	private CampReviewDAO campReviewDAO;
 	@Autowired
@@ -39,7 +42,9 @@ public class OwnerCheckInterceptor extends HandlerInterceptorAdapter {
 			bbsDTO = noticeDAO.getBoardDetail(bbsDTO);
 		} else if(uri.equals("qna")) {
 			bbsDTO = qnaDAO.getBoardDetail(bbsDTO);
-		} else if(uri.equals("camp/review")) {
+		} else if(uri.equals("story")) {
+			bbsDTO = storyDAO.getBoardDetail(bbsDTO);
+		}  else if(uri.equals("camp/review")) {
 			bbsDTO = campReviewDAO.getBoardDetail(bbsDTO);
 		} else {
 			bbsDTO = productReviewDAO.getBoardDetail(bbsDTO);

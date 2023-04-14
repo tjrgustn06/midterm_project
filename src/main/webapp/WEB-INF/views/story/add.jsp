@@ -65,7 +65,7 @@ $(function() {
 <div class="container-fluid col-lg-9 my-5">
 
     <div class="row mb-4 border-bottom border-info">
-        <h1 class="col-md-7 mx-auto text-center pb-3 fs-2">Story Add 페이지</h1><br>
+        <h1 class="col-md-7 mx-auto text-center pb-3 fs-2">캠핑 기록 남기기</h1><br>
     </div>
     
     <!-- <form id="campSearchForm2" action="/bsite/camp/info/list.do" method="get" enctype="multipart/form-data">
@@ -82,10 +82,11 @@ $(function() {
                     </div>
 
                     <div class="row mb-3">
-                        <div class="form_w">
-                            <strong class="title">지역</strong>
-                            <ul style="list-style-type: none;">
-                                <li class="tt">
+                        <div class="form_w row">
+                                <strong>지역</strong>
+                                <div></div>
+                                <ul style="list-style-type: none;">
+                                    <li class="tt">
                                     <div class="select_box">
                                         <label for="doName">도/특별시</label>
                                         <select id="doName" name="doName" class="detail_select" title="도/특별시">
@@ -155,7 +156,7 @@ $(function() {
                                 <li class="tt top_kwdSearch">
                                     <div class="input_search">
                                         <fieldset class="totalSearch">
-                                            <button class="btn btn-primary" style="vertical-align: middle;" type="button" id="searchBtn">검색</button>
+                                            <button class="genric-btn success-border small" style="vertical-align: middle;" type="button" id="searchBtn">검색</button>
                                         </fieldset>
                                     </div>
                                 </li>
@@ -200,7 +201,7 @@ $(function() {
                 <div class="row mb-3">
                     <label for="title" class="col-sm-2 col-form-label">캠핑 일자</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" id="datepicker" >
+                        <input type="text" class="form-control" name="" id="datepicker" readonly>
                     </div>
                 </div>
                     
@@ -213,10 +214,10 @@ $(function() {
                         
             <div class="mb-5">
                 <label for="contents" class="form-label">내용</label>
-                <textarea class="form-control" name="contents" id="contents" rows="8"></textarea>
+                <textarea class="form-control" name="contents" id="contents" rows="8" style="resize: none;"></textarea>
             </div>
 
-            <div id="fileList" class="row my-3">
+            <div id="fileList" class="d-flex justify-content-end my-3">
                 <!-- <div class="row mb-2" id="d+idx">
                     <label for="" class="col-sm-1 col-form-label">Image</label>
                     <div class="input-group mb-2 col-sm-10">
@@ -224,11 +225,11 @@ $(function() {
                         <button class="dels btn btn-outline-danger" type="button" data-delete-id="idx">X</button>
                     </div>
                 </div>	 -->
-                <button class="col-md-1 offset-md-11 btn btn-primary" type="button" id="addBtn">Add</button>
+                <button class="genric-btn primary-border small" type="button" id="addBtn">사진등록</button>
             </div> 
 
-            <div class="row mt-5 mb-3 col-md-2 offset-md-10">
-                <button class="btn btn-primary" id="addStory" type="submit">글 쓰기</button>
+            <div class="d-flex justify-content-center my-3">
+                <button class="genric-btn success-border" id="addStory" type="submit">글 쓰기</button>
             </div>
             <input type="hidden" name="boardId" value="${boardId}">
 

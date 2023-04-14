@@ -16,14 +16,17 @@
 	<div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
 	<div class="container">
 		<div class="page-cover text-center">
-		<h2 class="page-cover-tittle">정보 수정</h2>
+			<h2 class="page-cover-tittle">MYPAGE</h2>
+				<ol class="breadcrumb">
+					<li>${dto.name}님 환영해요!</li>
+				</ol>
 		</div>
 	</div>
 </section>
 <!--================Banner Area =================-->
-<div class="container-fluid">
+<div class="container-fluid col-lg-9 my-5">
 		<div class="row">
-			<h1>MemberUpdate Page</h1>
+			<h3><i class="fa-solid fa-circle-info fa-sm"></i> ${dto.name} 님의 정보</h3>
 		</div>
 		
 		<div class="row">
@@ -50,17 +53,22 @@
 					<input type="text" readonly name="roleName" class="form-control" id="roleName" value="${dto.roleName}">
 				</div>
 				
-				<div class="mb-3" id="addressList">
+				<div class="mb-3" id="addressList" class="d-flex justify-content-between">
 					<label for="address" class="form-label fw-bold">주소</label>
-					<button type="button" id="addressAdd">주소추가</button>
+					<button type="button" id="addressAdd" class="genric-btn success-border small">주소추가</button>
+				<!-- </div>
+				<div> -->
 					<c:forEach items="${dto.addressDTOs}" var="addressDTO">
 						<div id="oldAddress${addressDTO.addressNum}">	
 							<p>${addressDTO.addressName}</p>
 							<input type="text" class="form-control" value="${addressDTO.address}" readonly>
 							<input type="text" class="form-control" value="${addressDTO.addressDetail}" readonly>
 						</div>
-						<button type="button" id="addressUpdate${addressDTO.addressNum}" class="addressUpdate" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}" data-address-address="${addressDTO.address}" data-address-detail="${addressDTO.addressDetail}">${addressDTO.addressName}주소 수정</button>
-						<button type="button" id="addressDelete${addressDTO.addressNum}" class="addressDelete" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}">${addressDTO.addressName}주소 삭제</button>
+						<div class="d-flex justify-content-between my-2">
+							<button type="button" id="addressDelete${addressDTO.addressNum}" class="addressDelete genric-btn danger-border small" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}">${addressDTO.addressName}주소 삭제</button>
+							<button type="button" id="addressUpdate${addressDTO.addressNum}" class="addressUpdate genric-btn primary-border small" data-address-num="${addressDTO.addressNum}" data-address-name="${addressDTO.addressName}" data-address-address="${addressDTO.address}" data-address-detail="${addressDTO.addressDetail}">${addressDTO.addressName}주소 수정</button>
+
+						</div>
 						<!--<input type="text" name="postCode" id="postcode" placeholder="우편번호">
 							<input type="button" name="addr" id="addr" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 							<input type="text" name="address" id="address" placeholder="주소" readonly><br>
@@ -72,9 +80,10 @@
 			<div class="mb-3">
 			</div>
 				
-				<div class="mb-3">
-				<button class="btn btn-outline-success fw-bold" type="submit">확인</button>
-				<a href="./memberPwChange" class="btn btn-warning">비밀번호 변경</a>
+				<div class="d-flex justify-content-between my-3">
+					<button type="button" onclick="history.go(-1);" class="genric-btn danger-border">돌아가기</button>
+					<a href="./memberPwChange" class="genric-btn primary-border">비밀번호 변경</a>
+					<button class="genric-btn success-border fw-bold" type="submit">확인</button>
 			</div>
 				
 			</form>		

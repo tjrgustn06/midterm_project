@@ -8,8 +8,8 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="single-footer-widget">
-					<h6 class="footer_title">소개글</h6>
-					<p>좋은말을 적어주세요</p>
+					<h6 class="footer_title">Intro</h6>
+					<p>Do our best for your comfortable rest.</p>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6">

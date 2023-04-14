@@ -38,7 +38,7 @@
 
 	<!-- 돌아가기 버튼 -->
 	<div class="d-flex justify-content-center my-2">
-		<button id="listCancel" type="button" class="genric-btn primary">돌아가기</button>
+		<button id="listCancel" type="button" class="genric-btn primary-border">돌아가기</button>
 	</div>
 
 	<hr>

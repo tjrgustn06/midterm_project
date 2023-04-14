@@ -12,7 +12,7 @@
                 <input type="hidden" name="startDate" value="" data-site-idx="start${i.count}">
                 <input type="hidden" name="lastDate" value="" data-site-idx="last${i.count}">
                 <div class="d-flex justify-content-end mb-2">
-                    <button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success medium" data-site-idx="${i.count}">선택하기</button>
+                    <button id="bookBtn${i.count}" type="button" class="bookBtn genric-btn success-border medium" data-site-idx="${i.count}">선택하기</button>
                 </div>
                 <div class="input-group mb-2">
                     <span class="input-group-text" id="siteName">사이트이름</span>
